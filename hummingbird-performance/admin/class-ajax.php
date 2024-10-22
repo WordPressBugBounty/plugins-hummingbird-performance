@@ -528,6 +528,9 @@ class AJAX {
 			wp_send_json_success( array( 'finished' => false ) );
 		}
 
+		$autoloaded_options_size = Utils::get_autoloaded_options_size();
+		$autoloaded_health       = Utils::get_autoloaded_health();
+
 		$now = time();
 		if ( $now >= ( $started_at + 15 ) ) {
 			$mobile  = '-';
@@ -538,15 +541,19 @@ class AJAX {
 				Performance::set_doing_report( false );
 				wp_send_json_success(
 					array(
-						'finished'            => true,
-						'mobileScore'         => $mobile,
-						'desktopScore'        => $desktop,
-						'HBSmushFeatures'     => Utils::get_active_features(),
-						'hbPerformanceMetric' => Utils::get_performance_metric_for_mp(),
-						'aoStatus'            => Utils::is_ao_processing() ? 'incomplete' : 'complete',
-						'getLCPSubmetrics'    => Performance::get_lcp_submetrics_for_mp(),
-						'getAudits'           => Performance::get_audits_for_mp(),
-						'hasError'            => 'we’re over 1 minute - timeout',
+						'finished'             => true,
+						'mobileScore'          => $mobile,
+						'desktopScore'         => $desktop,
+						'HBSmushFeatures'      => Utils::get_active_features(),
+						'hbPerformanceMetric'  => Utils::get_performance_metric_for_mp(),
+						'aoStatus'             => Utils::is_ao_processing() ? 'incomplete' : 'complete',
+						'getLCPSubmetrics'     => Performance::get_lcp_submetrics_for_mp(),
+						'getAudits'            => Performance::get_audits_for_mp(),
+						'coreWebVitalsMobile'  => Performance::core_web_vitals_status( 'mobile' ),
+						'coreWebVitalsDesktop' => Performance::core_web_vitals_status(),
+						'hasError'             => 'we’re over 1 minute - timeout',
+						'autoloaderSize'       => $autoloaded_options_size,
+						'autoloaderHealth'     => $autoloaded_health,
 					)
 				);
 			}
@@ -592,15 +599,19 @@ class AJAX {
 
 			wp_send_json_success(
 				array(
-					'finished'            => true,
-					'mobileScore'         => $mobile,
-					'desktopScore'        => $desktop,
-					'HBSmushFeatures'     => Utils::get_active_features(),
-					'hbPerformanceMetric' => Utils::get_performance_metric_for_mp(),
-					'aoStatus'            => Utils::is_ao_processing() ? 'incomplete' : 'complete',
-					'getLCPSubmetrics'    => Performance::get_lcp_submetrics_for_mp(),
-					'getAudits'           => Performance::get_audits_for_mp(),
-					'hasError'            => Performance::get_performance_report_error( $report ),
+					'finished'             => true,
+					'mobileScore'          => $mobile,
+					'desktopScore'         => $desktop,
+					'HBSmushFeatures'      => Utils::get_active_features(),
+					'hbPerformanceMetric'  => Utils::get_performance_metric_for_mp(),
+					'aoStatus'             => Utils::is_ao_processing() ? 'incomplete' : 'complete',
+					'getLCPSubmetrics'     => Performance::get_lcp_submetrics_for_mp(),
+					'getAudits'            => Performance::get_audits_for_mp(),
+					'coreWebVitalsMobile'  => Performance::core_web_vitals_status( 'mobile' ),
+					'coreWebVitalsDesktop' => Performance::core_web_vitals_status(),
+					'hasError'             => Performance::get_performance_report_error( $report ),
+					'autoloaderSize'       => $autoloaded_options_size,
+					'autoloaderHealth'     => $autoloaded_health,
 				)
 			);
 		}
@@ -1575,6 +1586,7 @@ class AJAX {
 		$old_critical_css_type                  = $minify_options['critical_css_type'];
 		$old_critical_css_remove_type           = $minify_options['critical_css_remove_type'];
 		$old_critical_css_manual_include        = Minify::get_css( 'manual-critical' );
+		$old_above_fold_load_stylesheet_method  = $minify_options['above_fold_load_stylesheet_method'];
 
 		if ( ! empty( $form['critical_css_option'] ) ) {
 			Minify::save_css( $form['critical_css_advanced'], 'manual-critical' );
@@ -1634,12 +1646,15 @@ class AJAX {
 			}
 		}
 
+		$above_fold_load_stylesheet_method = $form['above_fold_load_stylesheet_method'];
+
 		Settings::update_setting( 'critical_css', $critical_css_option, 'minify' );
 		Settings::update_setting( 'critical_css_type', $critical_css_type, 'minify' );
 		Settings::update_setting( 'critical_css_remove_type', $critical_css_remove_type, 'minify' );
 		Settings::update_setting( 'critical_page_types', $critical_page_types, 'minify' );
 		Settings::update_setting( 'critical_skipped_custom_post_types', $critical_skipped_custom_post_types, 'minify' );
 		Settings::update_setting( 'critical_css_mode', $critical_css_mode, 'minify' );
+		Settings::update_setting( 'above_fold_load_stylesheet_method', $above_fold_load_stylesheet_method, 'minify' );
 
 		// In Case of toggle changes generate critical css enabled, clear the data otherwise.
 		if ( $old_critical_css_option !== $critical_css_option || $old_critical_css_type !== $critical_css_type ) {
@@ -1672,7 +1687,7 @@ class AJAX {
 		$critical_css_update_type  = ! empty( $critical_css_option ) ? 'activate' : 'deactivate';
 
 		if ( ! empty( $critical_css_option ) && $old_critical_css_option === $critical_css_option ) {
-			if ( $old_critical_css_type !== $critical_css_type || $old_critical_css_remove_type !== $critical_css_remove_type ) {
+			if ( $old_critical_css_type !== $critical_css_type || $old_critical_css_remove_type !== $critical_css_remove_type || $old_above_fold_load_stylesheet_method !== $above_fold_load_stylesheet_method ) {
 				$is_critical_value_updated = true;
 				$critical_css_update_type  = 'modified';
 			}
@@ -1695,11 +1710,11 @@ class AJAX {
 
 		// Track the mode for mixpanel.
 		if ( 'asynchronously' === $critical_css_type ) {
-			$critical_mode = 'abovefold_async';
+			$critical_mode = 'load_stylesheet_on_user_interaction' === $above_fold_load_stylesheet_method ? 'abovefold_delay' : 'abovefold_async';
 		} elseif ( 'remove_unused' === $critical_css_remove_type ) {
 			$critical_mode = 'fullpage_remove';
 		} else {
-			$critical_mode = 'fullpage_ui';
+			$critical_mode = 'fullpage_delay';
 		}
 
 		// Track the location for mixpanel.

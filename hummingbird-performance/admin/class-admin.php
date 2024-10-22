@@ -106,6 +106,10 @@ class Admin {
 
 		add_action( 'admin_head', array( $this, 'wphb_style_upgrade_pro_upsell' ) );
 
+		// Deactivation survey.
+		add_action( 'admin_footer-plugins.php', array( $this, 'load_deactivation_survey_modal' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 		// Triggered when Hummingbird Admin is loaded.
 		do_action( 'wphb_admin_loaded' );
 	}
@@ -515,5 +519,38 @@ class Admin {
 		}
 
 		Utils::get_api()->hosting->has_fast_cgi_header( true );
+	}
+
+	/**
+	 * Load deactivation survey modal.
+	 */
+	public function load_deactivation_survey_modal() {
+		$deactivation_survey_template_file = WPHB_DIR_PATH . 'admin/modals/deactivation-survey-modal.php';
+		if ( file_exists( $deactivation_survey_template_file ) ) {
+			include $deactivation_survey_template_file;
+		}
+	}
+
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @param string $hook  Hook from where the call is made.
+	 */
+	public function enqueue_scripts( $hook ) {
+		if ( 'plugins.php' !== $hook ) {
+			return;
+		}
+
+		// Styles.
+		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/wphb-app.min.css', array(), WPHB_VERSION );
+
+		// Scripts.
+		wp_enqueue_script(
+			'wphb-wpmudev-sui',
+			WPHB_DIR_URL . 'admin/assets/js/wphb-sui.min.js',
+			array( 'jquery', 'clipboard' ),
+			WPHB_VERSION,
+			true
+		);
 	}
 }

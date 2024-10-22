@@ -272,6 +272,13 @@
             font-size: 14px;
         }
     }
+
+    .wphb-tag-recommended {
+        margin-left: 5px !important;
+        min-height: 18px !important;
+        line-height: 15px !important;
+        padding: 2px 10px !important;
+    }
 }
 
 #critical_css_file_exclude .sui-table .sui-box-body .sui-label + .wphb-dash-table-row {
@@ -297,7 +304,8 @@
 }
 
 #font_optimization_preload_box,
-#font_display_settings {
+#font_display_settings,
+#critical_css_file_exclude {
     margin-left: 44px;
     .sui-notice.sui-notice-grey .sui-notice-message {
         strong, p, .font_display_safe_helper, .font_display_performant_helper {

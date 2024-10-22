@@ -38,6 +38,7 @@ return array(
     'Hummingbird\\Core\\Api\\Request\\WPMUDEV' => $baseDir . '/core/api/request/class-wpmudev.php',
     'Hummingbird\\Core\\Api\\Rest' => $baseDir . '/core/api/class-rest.php',
     'Hummingbird\\Core\\Api\\Service\\Cloudflare' => $baseDir . '/core/api/service/class-cloudflare.php',
+    'Hummingbird\\Core\\Api\\Service\\CriticalCss' => $baseDir . '/core/api/service/class-criticalcss.php',
     'Hummingbird\\Core\\Api\\Service\\Hosting' => $baseDir . '/core/api/service/class-hosting.php',
     'Hummingbird\\Core\\Api\\Service\\Minify' => $baseDir . '/core/api/service/class-minify.php',
     'Hummingbird\\Core\\Api\\Service\\Performance' => $baseDir . '/core/api/service/class-performance.php',

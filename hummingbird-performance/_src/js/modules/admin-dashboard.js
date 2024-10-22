@@ -95,11 +95,9 @@ import Fetcher from '../utils/fetcher';
 		/**
 		 * Hide upgrade summary modal.
 		 *
-		 * @param {Object} event   Event.
 		 * @param {Object} element Target button that was clicked.
 		 */
-		 hideUpgradeSummary: ( e, element ) => {
-			e.preventDefault();
+		 hideUpgradeSummary: ( element ) => {
 			window.SUI.closeModal();
 			Fetcher.common.call( 'wphb_hide_upgrade_summary' ).then( () => {
 				const trackAction = element.getAttribute( 'data-track-action' );

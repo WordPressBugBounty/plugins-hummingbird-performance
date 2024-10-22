@@ -11,6 +11,7 @@ namespace Hummingbird\Core\Modules;
 use Hummingbird\Core\Filesystem;
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Modules\Minify\Fonts;
+use Hummingbird\Core\Modules\Caching\Fast_CGI;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Settings;
@@ -375,7 +376,7 @@ class Critical_Css extends Module {
 		$type = $singular_type ?: $type;
 
 		// Setup file variables.
-		$used_css_path   = $this->used_css_path( $type );
+		$used_css_path   = $this->used_css_path( $this->maybe_get_critical_css_path_for_mobile( $type ) );
 		$used_css_exists = file_exists( $used_css_path );
 
 		// If Used CSS File exists.
@@ -390,7 +391,11 @@ class Critical_Css extends Module {
 					$html = $this->remove_used_css_from_html( $html );
 				}
 			} elseif ( 'asynchronously' === $options['critical_css_type'] ) {
-				$html = $this->make_css_async( $html );
+				if ( 'load_stylesheet_on_user_interaction' === $options['above_fold_load_stylesheet_method'] ) {
+					$html = $this->load_stylesheet_on_user_interaction( $html );
+				} else {
+					$html = $this->make_css_async( $html );
+				}
 			}
 
 			// Print used css inline after first title tag.
@@ -399,7 +404,7 @@ class Critical_Css extends Module {
 			if ( false !== $pos ) {
 				// IF critical css is generated.
 				$generated_critical = apply_filters( 'wphb_generated_used_css', file_get_contents( $used_css_path ) );
-				$used_css_output    = $this->get_used_css_markup( $type, $generated_critical );
+				$used_css_output    = $this->get_used_css_markup( $this->maybe_get_critical_css_path_for_mobile( $type ), $generated_critical );
 				$html               = substr_replace( $html, '</title>' . $used_css_output, $pos, 8 );
 				$html               = $this->fonts->add_preload_to_fonts_in_used_css( $html, $generated_critical );
 			}
@@ -442,7 +447,7 @@ class Critical_Css extends Module {
 		 */
 		$stylesheet_pattern = apply_filters(
 			'wphb_css_stylesheet_pattern',
-			'/(?=<link[^>]*\s(id\s*=\s*[\'"](.*)["\']))(?=<link[^>]*\s(rel\s*=\s*[\'"]stylesheet["\']))<link[^>]*\shref\s*=\s*[\'"]([^\'"]+)[\'"](.*)>/iU'
+			'/(?=<link[^>]*\s(rel\s*=\s*[\'"]stylesheet[\'"]))(?:<link[^>]*\shref\s*=\s*[\'"]([^\'"]+)[\'"](.*)>)/iU'
 		);
 
 		preg_match_all( $stylesheet_pattern, $html, $stylesheets, PREG_SET_ORDER );
@@ -462,7 +467,11 @@ class Critical_Css extends Module {
 
 		if ( ! empty( $stylesheets ) ) {
 			foreach ( $stylesheets as $stylesheet ) {
-				$style_href = trim( $stylesheet[4] );
+				if ( ! apply_filters( 'wphb_should_load_stylesheet_on_user_interaction', true, $stylesheet ) ) {
+					continue;
+				}
+
+				$style_href = trim( $stylesheet[2] );
 				$new_link   = preg_replace( '#href=([\'"]).+?\1#', 'data-wphbdelayedstyle="' . $style_href . '"', $stylesheet[0] );
 				$html       = str_replace( $stylesheet[0], $new_link, $html );
 			}
@@ -523,17 +532,20 @@ class Critical_Css extends Module {
 			$noscripts = '<noscript>';
 
 			foreach ( $stylesheets as $stylesheet ) {
-				if ( preg_match( '/media\s*=\s*[\'"]print[\'"]/i', $stylesheet[0] ) ) {
+				// Skip stylesheets with media="print".
+				if ( stripos( $stylesheet[0], 'media="print"' ) !== false || stripos( $stylesheet[0], "media='print'" ) !== false ) {
 					continue;
 				}
 
-				$preload    = str_replace( 'stylesheet', 'preload', $stylesheet[3] );
-				$onload     = preg_replace( '~' . preg_quote( $stylesheet[5], '~' ) . '~iU', ' as="style" onload="" ' . $stylesheet[5] . '>', $stylesheet[5] );
-				$tag        = str_replace( $stylesheet[5] . '>', $onload, $stylesheet[0] );
-				$tag        = str_replace( $stylesheet[3], $preload, $tag );
-				$tag        = str_replace( 'onload=""', 'onload="this.onload=null;this.rel=\'stylesheet\'"', $tag );
-				$tag        = preg_replace( '/(id\s*=\s*[\"\'](?:[^\"\']*)*[\"\'])/i', '', $tag );
-				$html       = str_replace( $stylesheet[0], $tag, $html );
+				// Prepare the replacements.
+				$preload        = str_replace( 'stylesheet', 'preload', $stylesheet[1] );
+				$onload         = str_replace( $stylesheet[3] . '>', ' as="style" onload="" ' . $stylesheet[3] . '>', $stylesheet[0] );
+				$onload         = str_replace( 'onload=""', 'onload="this.onload=null;this.rel=\'stylesheet\'"', $onload );
+				$stylesheet_tag = str_replace( $stylesheet[1], $preload, $onload );
+				$stylesheet_tag = preg_replace( '/\s*id\s*=\s*[\'"][^\'"]*[\'"]/', '', $stylesheet_tag );
+
+				// Replace the original stylesheet tag in the HTML.
+				$html       = str_replace( $stylesheet[0], $stylesheet_tag, $html );
 				$noscripts .= $stylesheet[0];
 			}
 
@@ -1004,12 +1016,7 @@ class Critical_Css extends Module {
 			return;
 		}
 
-		$urls = null;
-
-		foreach ( $queue as $hash => $item ) {
-			$urls[ $hash ] = $item->url;
-		}
-
+		$urls    = null;
 		$api     = Utils::get_api();
 		$options = Utils::get_module( 'minify' )->get_options();
 
@@ -1019,7 +1026,15 @@ class Critical_Css extends Module {
 			$api_call_type = 'CRITICAL';
 		}
 
-		$response      = $api->performance->generate_critical_css( $urls, $api_call_type );
+		foreach ( $queue as $hash => $item ) {
+			$urls[ $hash ] = $this->get_item_data_for_critical_calculate_api( $item );
+
+			if ( $this->is_mobile_critical_css_allowed() ) {
+				$urls[ $hash . '-mobile' ] = $this->get_item_data_for_critical_calculate_api( $item, true );
+			}
+		}
+
+		$response      = $api->critical_css->generate_critical_css( $urls, $api_call_type );
 		$is_type_error = true;
 
 		if ( ! is_wp_error( $response ) && ! empty( $response ) ) {
@@ -1030,6 +1045,8 @@ class Critical_Css extends Module {
 			if ( $success ) {
 				// Fetch the id.
 				$response_id = ! empty( $response->id ) ? $response->id : false;
+
+				Utils::get_module( 'minify' )->log( 'Response ID from the calculate critical endpoint - ' . $response_id );
 
 				// Update Queue.
 				$is_type_error = false;
@@ -1078,12 +1095,12 @@ class Critical_Css extends Module {
 		}
 
 		$api      = Utils::get_api();
-		$response = $api->performance->get_generated_critical_css( $id );
+		$response = $api->critical_css->get_generated_critical_css( $id );
 
 		if ( ! is_wp_error( $response ) ) {
 			$response      = json_decode( wp_remote_retrieve_body( (array) $response ) );
 			$status        = isset( $response->status ) ? $response->status : '';
-			$urls          = isset( $response->urls ) ? $response->urls : '';
+			$urls          = isset( $response->items ) ? $response->items : '';
 			$error_message = ! empty( $response->errorMessage ) ? $response->errorMessage : '';
 			$error_code    = ! empty( $response->errorCode ) ? $response->errorCode : '';
 
@@ -1092,13 +1109,22 @@ class Critical_Css extends Module {
 				foreach ( $critical_css as $hash => $css_value ) {
 					$hash_object = $this->get_queue_item_by_hash( $hash );
 					if ( ! empty( $css_value ) && ! empty( $hash_object ) ) {
-
 						$type     = ! empty( $hash_object->type ) ? $hash_object->type : '';
 						$singular = ! empty( $hash_object->singular ) ? $hash_object->singular : '';
 
 						$used_css_path = $this->used_css_path( $type );
 						// Create the css file.
 						$status_file = $fs->write( $used_css_path, apply_filters( 'wphb_used_css', $css_value ) );
+
+						// Create the css file for mobile.
+						if ( 'asynchronously' === $this->get_critical_css_type() ) {
+							$mobile_css_key = $hash . '-mobile';
+							$mobile_css     = isset( $critical_css->$mobile_css_key ) ? $critical_css->$mobile_css_key : '';
+							if ( ! empty( $mobile_css ) ) {
+								$used_css_path_mobile = $this->used_css_path( $type . '-mobile' );
+								$fs->write( $used_css_path_mobile, apply_filters( 'wphb_mobile_used_css', $mobile_css ) );
+							}
+						}
 
 						// If singular page.
 						if ( ! empty( $singular ) ) {
@@ -1226,23 +1252,37 @@ class Critical_Css extends Module {
 	 * Delete a generated critical css file.
 	 *
 	 * @param string $type Post type.
-	 * @param int $post_id Post ID.
+	 * @param int    $post_id Post ID.
 	 */
 	public function unlink_generated_critical_css_file( $type, $post_id ) {
-		$used_css_path           = $this->used_css_path( $type );
-		$is_hb_critical_css_path = false !== strpos( $used_css_path, 'wphb-cache' ) && false !== strpos( $used_css_path, 'critical-css' );
+		$css_paths = array(
+			$this->used_css_path( $type ),
+			$this->used_css_path( $type . '-mobile' ),
+		);
 
-		if ( file_exists( $used_css_path ) && $is_hb_critical_css_path ) {
-			unlink( $used_css_path );
+		$clear_cache = false;
 
-			if ( $post_id ) {
-				do_action( 'wphb_clear_page_cache', $post_id ); // Clear page cache for the supplied post.
+		foreach ( $css_paths as $css_path ) {
+			if ( $this->is_hb_critical_css_path( $css_path ) && file_exists( $css_path ) ) {
+				unlink( $css_path );
+				$clear_cache = true;
 			}
-
-			return true;
 		}
 
-		return false;
+		if ( $clear_cache && $post_id ) {
+			do_action( 'wphb_clear_page_cache', $post_id ); // Clear page cache for the supplied post.
+		}
+	}
+
+	/**
+	 * Check if the path is a critical css path.
+	 *
+	 * @param string $path Path.
+	 *
+	 * @return bool
+	 */
+	public function is_hb_critical_css_path( $path ) {
+		return false !== strpos( $path, 'wphb-cache' ) && false !== strpos( $path, 'critical-css' );
 	}
 
 	/**
@@ -1338,10 +1378,38 @@ class Critical_Css extends Module {
 			)
 		);
 
+		$excluded_post_types = $this->get_excluded_post_types();
+
+		// Remove excluded post types from the retrieved ones.
+		$post_types = array_diff( $post_types, $excluded_post_types );
+
+		// Sanitize the post types for safe SQL use.
+		$post_types = esc_sql( $post_types );
+		$post_types = "'" . implode( "','", $post_types ) . "'";
+
+		// Retrieve the most recent post ID per post type.
+		$query = "SELECT MAX(ID) as ID, post_type
+			FROM (
+				SELECT ID, post_type
+				FROM $wpdb->posts
+				WHERE post_type IN ( $post_types )
+				AND post_status = 'publish'
+				ORDER BY post_date DESC
+			) AS posts
+			GROUP BY post_type";
+
+		$results = $wpdb->get_results( $query );
+
+		// Return results or an empty array if there's an error.
+		return ! is_wp_error( $results ) ? $results : array();
+	}
+
+	/**
+	 * Gets all public post types that needs to be excluded.
+	 */
+	public function get_excluded_post_types() {
 		/**
-		 * Exclude the post types.
-		 *
-		 * @return array
+		 * List of post types to be excluded.
 		 */
 		$excluded_post_types = array(
 			'blocks',
@@ -1360,30 +1428,12 @@ class Critical_Css extends Module {
 			'xlwcty_thankyou',
 		);
 
-		// Apply Filter.
-		$excluded_post_types = (array) apply_filters( 'wphb_css_excluded_post_types', $excluded_post_types );
-
-		$post_types = array_diff( $post_types, $excluded_post_types );
-		$post_types = esc_sql( $post_types );
-		$post_types = "'" . implode( "','", $post_types ) . "'";
-
-		$result = $wpdb->get_results(
-			"SELECT MAX(ID) as ID, post_type
-			FROM (
-				SELECT ID, post_type
-				FROM $wpdb->posts
-				WHERE post_type IN ( $post_types )
-				AND post_status = 'publish'
-				ORDER BY post_date DESC
-			) AS posts
-			GROUP BY post_type"
-		);
-
-		if ( ! is_wp_error( $result ) ) {
-			return $result;
-		}
-
-		return array();
+		/**
+		 * Filter the excluded post types.
+		 *
+		 * @param array $excluded_post_types Excluded post types.
+		 */
+		return (array) apply_filters( 'wphb_css_excluded_post_types', $excluded_post_types );
 	}
 
 	/**
@@ -1392,13 +1442,43 @@ class Critical_Css extends Module {
 	private function get_public_taxonomies() {
 		global $wpdb;
 
-		$taxonomies = get_taxonomies(
+		$available_taxonomies = get_taxonomies(
 			array(
 				'public'             => true,
 				'publicly_queryable' => true,
 			)
 		);
 
+		$excluded_taxonomies = $this->get_excluded_taxonomies();
+
+		// Remove excluded taxonomies from the available list.
+		$filtered_taxonomies = array_diff( $available_taxonomies, $excluded_taxonomies );
+
+		// Sanitize and format the remaining taxonomies for SQL query.
+		$sanitized_taxonomies = esc_sql( $filtered_taxonomies );
+		$taxonomy_list        = "'" . implode( "','", $sanitized_taxonomies ) . "'";
+
+		// Build the query to fetch the term with the highest term_id per taxonomy.
+		$query = "SELECT MAX( term_id ) AS ID, taxonomy
+			FROM (
+				SELECT term_id, taxonomy
+				FROM $wpdb->term_taxonomy
+				WHERE taxonomy IN ( $taxonomy_list )
+				AND count > 0
+			) AS taxonomies
+			GROUP BY taxonomy";
+
+		// Execute the query and return the results.
+		$results = $wpdb->get_results( $query );
+
+		// Return results or an empty array if there's an error.
+		return ! is_wp_error( $results ) ? $results : array();
+	}
+
+	/**
+	 * Gets all public taxonomies that needs to be excluded.
+	 */
+	public function get_excluded_taxonomies() {
 		$excluded_taxonomies = array(
 			'attachment_category',
 			'coupon_campaign',
@@ -1409,31 +1489,13 @@ class Critical_Css extends Module {
 			'product_shipping_class',
 			'truethemes-gallery-category',
 		);
-		$excluded_taxonomies = (array) apply_filters(
-			'wphb_css_excluded_taxonomies',
-			$excluded_taxonomies
-		);
 
-		$taxonomies = array_diff( $taxonomies, $excluded_taxonomies );
-		$taxonomies = esc_sql( $taxonomies );
-		$taxonomies = "'" . implode( "','", $taxonomies ) . "'";
-
-		$result = $wpdb->get_results(
-			"SELECT MAX( term_id ) AS ID, taxonomy
-			FROM (
-				SELECT term_id, taxonomy
-				FROM $wpdb->term_taxonomy
-				WHERE taxonomy IN ( $taxonomies )
-				AND count > 0
-			) AS taxonomies
-			GROUP BY taxonomy"
-		);
-
-		if ( ! is_wp_error( $result ) ) {
-			return $result;
-		}
-
-		return array();
+		/**
+		 * Filter the excluded taxonomies.
+		 *
+		 * @param array $excluded_taxonomies Excluded taxonomies.
+		 */
+		return (array) apply_filters( 'wphb_css_excluded_taxonomies', $excluded_taxonomies );
 	}
 
 	/**
@@ -1695,5 +1757,62 @@ class Critical_Css extends Module {
 		}
 
 		return $error_code;
+	}
+
+	/**
+	 * Get the critical css type.
+	 */
+	public function get_critical_css_type() {
+		$options = Utils::get_module( 'minify' )->get_options();
+
+		return ! empty( $options['critical_css_type'] ) ? $options['critical_css_type'] : 'remove';
+	}
+
+	/**
+	 * Check if critical css for mobile is exist for current page.
+	 *
+	 * @param string $type Type.
+	 */
+	public function maybe_get_critical_css_path_for_mobile( $type ) {
+		if ( ! $this->is_mobile_critical_css_allowed() ) {
+			return $type;
+		}
+
+		// Check if the request is coming from a mobile device.
+		if ( Page_Cache::is_mobile_agent() ) {
+			$file_name_for_mobile = $type . '-mobile';
+			$critical_css_path    = $this->used_css_path( $file_name_for_mobile );
+
+			// If a mobile-specific CSS file exists, just return the name.
+			$critical_css_content = file_exists( $critical_css_path );
+			if ( $critical_css_content ) {
+				return $file_name_for_mobile;
+			}
+		}
+
+		return $type;
+	}
+
+	/**
+	 * Check if mobile critical CSS is allowed.
+	 *
+	 * @return bool
+	 */
+	public function is_mobile_critical_css_allowed() {
+		return 'asynchronously' === $this->get_critical_css_type() && ! Fast_CGI::is_fast_cgi_enabled();
+	}
+
+	/**
+	 * Get item for critical calculate api.
+	 *
+	 * @param object $item      Item.
+	 * @param bool   $is_mobile Is mobile.
+	 */
+	public function get_item_data_for_critical_calculate_api( $item, $is_mobile = false ) {
+		return array(
+			'url'    => $item->url,
+			'width'  => $is_mobile ? 414 : 1920,
+			'height' => $is_mobile ? 915 : 1080,
+		);
 	}
 }

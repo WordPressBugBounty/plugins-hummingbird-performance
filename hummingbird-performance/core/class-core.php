@@ -280,7 +280,14 @@ class Core {
 
 		global $pagenow;
 		if ( is_admin() && ! $is_hb_page && 'post.php' !== $pagenow && 'post-new.php' !== $pagenow ) {
-			wp_localize_script( 'wphb-global', 'wphb', Utils::get_tracking_data() );
+			$args = array(
+				'nonces' => array(
+					'HBFetchNonce' => wp_create_nonce( 'wphb-fetch' ),
+				),
+			);
+
+			$args = array_merge_recursive( $args, Utils::get_tracking_data() );
+			wp_localize_script( 'wphb-global', 'wphb', $args );
 		}
 	}
 

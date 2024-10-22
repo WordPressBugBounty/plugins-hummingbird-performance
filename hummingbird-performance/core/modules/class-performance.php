@@ -549,4 +549,35 @@ class Performance extends Module {
 
 		return 'na';
 	}
+
+	/**
+	 * Returns the core web vitals status.
+	 *
+	 * @since 3.10.0
+	 *
+	 * @param string $device Device type.
+	 *
+	 * @return bool
+	 */
+	public static function core_web_vitals_status( $device = 'desktop' ) {
+		$report     = self::get_last_report();
+		$field_data = isset( $report->data->{$device}->field_data ) ? $report->data->{$device}->field_data : null;
+
+		if ( empty( $field_data ) ) {
+			return 'na';
+		}
+
+		// Get the relevant metrics.
+		$lcp = ! empty( $field_data->LARGEST_CONTENTFUL_PAINT_MS->percentile ) ? $field_data->LARGEST_CONTENTFUL_PAINT_MS->percentile : null;
+		$inp = ! empty( $field_data->INTERACTION_TO_NEXT_PAINT->percentile ) ? $field_data->INTERACTION_TO_NEXT_PAINT->percentile : null;
+		$cls = ! empty( $field_data->CUMULATIVE_LAYOUT_SHIFT_SCORE->percentile ) ? $field_data->CUMULATIVE_LAYOUT_SHIFT_SCORE->percentile / 100 : null;
+
+		// Thresholds for passing Core Web Vitals.
+		$lcp_pass = null === $lcp ? true : $lcp <= 2500;
+		$inp_pass = null === $inp ? true : $inp <= 200;
+		$cls_pass = null === $cls ? true : $cls <= 0.1;
+
+		// Return true if all metrics pass, false otherwise.
+		return $lcp_pass && $inp_pass && $cls_pass ? 'pass' : 'fail';
+	}
 }

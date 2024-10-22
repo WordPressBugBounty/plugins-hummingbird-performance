@@ -1,5 +1,7 @@
 /* global wphbGlobal */
 
+import HBDeactivationSurvey from './hb-deactivation-survey';
+
 ( function() {
 	'use strict';
 
@@ -12,6 +14,22 @@
 			this.registerClearCloudflare();
 			this.registerSafeModeActions();
 			this.registerSwitchCriticalCSS();
+			this.registerDeactivationSurvey();
+		},
+
+		/**
+		 * Track deactivation survey.
+		 *
+		 * @since 3.10.0
+		 */
+		registerDeactivationSurvey() {
+			const deactivatePluginLink = document.querySelector( 'a[id^="deactivate-hummingbird-pro"]' ) || document.querySelector( 'a[id^="deactivate-hummingbird-performance"]' );
+			if ( ! deactivatePluginLink ) {
+				return;
+			}
+
+			// Deactivation survey modal.
+			( new HBDeactivationSurvey() ).init();
 		},
 
 		/**

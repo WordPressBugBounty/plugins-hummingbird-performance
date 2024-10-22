@@ -338,12 +338,12 @@ class Minify {
 			if ( 'fonts' !== $action ) {
 				// Prevent fatal error.
 				$assets_scripts = ( empty( $assets['scripts'] ) || ! is_array( $assets['scripts'] ) ) ? array() : $assets['scripts'];
-				$diff_scripts   = array_diff( $assets_scripts, $options[ $action ]['scripts'] );
+				$diff_scripts   = array_diff( $assets_scripts, $this->hb_is_array( $options[ $action ], 'scripts' ) );
 				$this->clear_out_group( $diff_scripts, 'scripts' );
 
 				// Prevent fatal error.
 				$assets_styles = ( empty( $assets['styles'] ) || ! is_array( $assets['styles'] ) ) ? array() : $assets['styles'];
-				$diff_styles   = array_diff( $assets_styles, $options[ $action ]['styles'] );
+				$diff_styles   = array_diff( $assets_styles, $this->hb_is_array( $options[ $action ], 'styles' ) );
 				$this->clear_out_group( $diff_styles, 'styles' );
 			}
 
@@ -360,6 +360,18 @@ class Minify {
 
 		// Clear all the page cache.
 		do_action( 'wphb_clear_page_cache' );
+	}
+
+	/**
+	 * Helper function to check if the key exists and is an array.
+	 *
+	 * @param array  $data Data array.
+	 * @param string $key  Key to check.
+	 *
+	 * @return array
+	 */
+	public function hb_is_array( $data, $key ) {
+		return isset( $data[ $key ] ) && is_array( $data[ $key ] ) ? $data[ $key ] : array();
 	}
 
 	public function minify_save_safe_mode_settings() {
@@ -478,11 +490,13 @@ class Minify {
 	 * @return array
 	 */
 	public function flatten_array( $arr ) {
-		foreach ( $arr as $type => $values ) {
-			if ( in_array( $type, array( 'scripts', 'styles' ), true ) ) {
-				$arr[ $type ] = array_values( $values );
-			} else {
-				$arr = array_values( $arr );
+		if ( is_array( $arr ) ) {
+			foreach ( $arr as $type => $values ) {
+				if ( in_array( $type, array( 'scripts', 'styles' ), true ) ) {
+					$arr[ $type ] = array_values( $values );
+				} else {
+					$arr = array_values( $arr );
+				}
 			}
 		}
 
@@ -601,5 +615,4 @@ class Minify {
 		unset( $options['font_swap'] );
 		return $options;
 	}
-
 }

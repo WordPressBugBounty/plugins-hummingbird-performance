@@ -27,6 +27,11 @@ class Installer {
 			define( 'WPHB_ACTIVATING', true );
 		}
 
+		// Save plugin activated date time.
+		$version = get_site_option( 'wphb_version' );
+		$action  = ! empty( $version ) ? 'plugin_activated' : 'plugin_installed';
+		self::save_plugin_timestamps( $action );
+
 		update_site_option( 'wphb_version', WPHB_VERSION );
 		update_site_option( 'wphb-notice-uptime-info-show', 'yes' ); // Add uptime notice.
 
@@ -137,6 +142,9 @@ class Installer {
 				define( 'WPHB_UPGRADING', true );
 			}
 
+			// Save plugin upgraded time.
+			self::save_plugin_timestamps( 'plugin_upgraded' );
+
 			if ( version_compare( $version, '2.6.0', '<' ) ) {
 				self::upgrade_2_6_0();
 			}
@@ -206,6 +214,10 @@ class Installer {
 
 			if ( version_compare( $version, '3.9.3', '<' ) ) {
 				self::upgrade_3_9_3_0();
+			}
+
+			if ( version_compare( $version, '3.10.0', '<' ) ) {
+				self::upgrade_3_10_0();
 			}
 
 			update_site_option( 'wphb_version', WPHB_VERSION );
@@ -723,5 +735,24 @@ class Installer {
 
 		// Summary upgrade modal.
 		add_site_option( 'wphb_show_upgrade_summary', true );
+	}
+
+	/**
+	 * Handle Summary upgrade modal display.
+	 *
+	 * @since 3.10.0
+	 *
+	 * @return void
+	 */
+	private static function upgrade_3_10_0() {
+		// Summary upgrade modal.
+		add_site_option( 'wphb_show_upgrade_summary', true );
+	}
+
+	private static function save_plugin_timestamps( $action ) {
+		$option_key            = 'wphb_plugin_timestamps';
+		$timestamps            = get_site_option( $option_key, array() );
+		$timestamps[ $action ] = time();
+		update_site_option( $option_key, $timestamps );
 	}
 }

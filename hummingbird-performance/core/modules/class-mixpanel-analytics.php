@@ -14,6 +14,7 @@ use Hummingbird\Core\Utils;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Module_Server;
 use WPMUDEV_Analytics_V2;
+use WPMUDEV_Dashboard;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -47,6 +48,7 @@ class Mixpanel_Analytics extends Module {
 	public function init() {
 		add_filter( 'wp_hummingbird_is_active_module_mixpanel_analytics', array( $this, 'module_status' ) );
 		add_action( 'wphb_mixpanel_usage_tracking_value_update', array( $this, 'wphb_track_opt_toggle' ), 10, 2 );
+		add_action( 'wp_ajax_wphb_track_deactivation', array( $this, 'wphb_track_deactivation' ) );
 	}
 
 	/**
@@ -188,18 +190,62 @@ class Mixpanel_Analytics extends Module {
 	public function get_super_properties() {
 		global $wpdb, $wp_version;
 
-		return array(
-			'plugin'         => 'Hummingbird',
-			'plugin_type'    => Utils::is_member() ? 'pro' : 'free',
-			'plugin_version' => WPHB_VERSION,
-			'wp_version'     => $wp_version,
-			'wp_type'        => is_multisite() ? 'multisite' : 'single',
-			'locale'         => get_locale(),
-			'active_theme'   => wp_get_theme()->get( 'Name' ),
-			'php_version'    => PHP_VERSION,
-			'mysql_version'  => $wpdb->db_version(),
-			'server_type'    => Module_Server::get_server_type(),
+		$super_properties = array(
+			'plugin'            => 'Hummingbird',
+			'plugin_type'       => Utils::is_member() ? 'pro' : 'free',
+			'plugin_version'    => WPHB_VERSION,
+			'wp_version'        => $wp_version,
+			'wp_type'           => is_multisite() ? 'multisite' : 'single',
+			'locale'            => get_locale(),
+			'active_theme'      => wp_get_theme()->get( 'Name' ),
+			'php_version'       => PHP_VERSION,
+			'mysql_version'     => $wpdb->db_version(),
+			'server_type'       => Module_Server::get_server_type(),
+			'whitelabel_status' => Utils::is_whitelabel_enabled() ? 'enabled' : 'disabled',
+			'hosting_status'    => Utils::is_site_hosted_on_wpmudev() ? 'hosted' : 'not-hosted',
+			'nulled_status'     => $this->wphb_get_nulled_status(),
 		);
+
+		return array_merge( $super_properties, $this->get_date_time_properties() );
+	}
+
+	/**
+	 * Return date time properties.
+	 *
+	 * @return array
+	 */
+	private function get_date_time_properties() {
+		$properties  = array();
+		$timestamps  = get_site_option( 'wphb_plugin_timestamps', array() );
+		$time_events = array(
+			'plugin_installed' => 'Installation Date',
+			'plugin_activated' => 'Activation Date',
+			'plugin_upgraded'  => 'Last Updated',
+		);
+
+		foreach ( $time_events as $event_key => $event_name ) {
+			if ( ! empty( $timestamps[ $event_key ] ) ) {
+				$properties[ $event_name ] = date( 'c', $timestamps[ $event_key ] );
+			}
+		}
+
+		return $properties;
+	}
+
+	/**
+	 * Get nulled status.
+	 *
+	 * @return string
+	 */
+	private function wphb_get_nulled_status() {
+		$plugin_type = 'free';
+
+		if ( Utils::is_member() ) {
+			$user_can_install_hb = class_exists( 'WPMUDEV_Dashboard' ) && method_exists( \WPMUDEV_Dashboard::$upgrader, 'user_can_install' ) ? \WPMUDEV_Dashboard::$upgrader->user_can_install( 1081721, true ) : false;
+			$plugin_type         = ! $user_can_install_hb ? 'nulled' : 'pro';
+		}
+
+		return $plugin_type;
 	}
 
 	/**
@@ -306,5 +352,58 @@ class Mixpanel_Analytics extends Module {
 				'Location'               => 'setup_wizard',
 			)
 		);
+	}
+
+	/**
+	 * Track HB deactivation.
+	 */
+	public function wphb_track_deactivation() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) { // Input var okay.
+			die();
+		}
+
+		$event_name = $this->get_event_name();
+		$properties = array_merge(
+			$this->get_event_properties( $event_name ),
+			array(
+				'active_features' => Utils::get_active_features(),
+				'active_plugins'  => $this->get_active_plugins(),
+			)
+		);
+
+		$this->track( $event_name, $properties );
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Get lists of active features.
+	 *
+	 * @return array
+	 */
+	private function get_active_plugins() {
+		// Retrieve unique list of active plugin files (both network and single site).
+		$active_plugin_files = is_multisite() ? wp_get_active_network_plugins() : array();
+		$active_plugin_files = array_merge( $active_plugin_files, wp_get_active_and_valid_plugins() );
+
+		// Map the plugin files to their names and filter out empty names.
+		$active_plugins = array_filter( array_map( array( $this, 'get_plugin_name' ), $active_plugin_files ) );
+
+		return $active_plugins;
+	}
+
+	/**
+	 * Get plugin name.
+	 *
+	 * @param string $plugin_file Plugin file.
+	 *
+	 * @return string
+	 */
+	private function get_plugin_name( $plugin_file ) {
+		$plugin_data = get_plugin_data( $plugin_file );
+
+		return ! empty( $plugin_data['Name'] ) ? $plugin_data['Name'] : ''; // Return plugin name if available, otherwise empty string.
 	}
 }

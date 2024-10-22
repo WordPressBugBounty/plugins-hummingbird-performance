@@ -939,7 +939,7 @@ class Page_Cache extends Module {
 	 * @used-by Page_Cache::should_cache_request()
 	 * @return bool
 	 */
-	private static function is_mobile_agent() {
+	public static function is_mobile_agent() {
 		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? strtolower( stripslashes( $_SERVER['HTTP_USER_AGENT'] ) ) : ''; // Input var ok.
 
 		$result = array_filter(

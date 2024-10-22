@@ -337,19 +337,24 @@ export default class Wizard extends React.Component {
 										checked={ this.props.settings.aoSpeedy }
 										description={ __( 'Our automatic solution for optimization, the Speedy compression will auto-compress and auto-combine smaller files together. This can help to decrease the number of requests made when a page is loaded.', 'wphb' ) } />
 								} /> }
-						{ this.props.isMember &&
-							<SettingsRow
-								classes="sui-flushed"
-								content={
-									<Toggle
-										id="aoCdn"
-										onChange={ this.props.updateSettings }
-										text={ __( 'WPMU DEV CDN', 'wphb' ) }
-										checked={ this.props.settings.aoCdn }
-										description={ __( 'WPMU DEV CDN will serve your CSS, JS and other compatible files from our external CDN, effectively taking the load off your server so that pages load faster for your visitors.', 'wphb' ) } />
-								} /> }
+						<SettingsRow
+							classes="sui-flushed"
+							content={
+								<Toggle
+									id="aoCdn"
+									onChange={ this.props.updateSettings }
+									text={ this.props.isMember ? __( 'WPMU DEV CDN', 'wphb' ) : createInterpolateElement(
+										__( 'WPMU DEV CDN <span>PRO</span>', 'wphb' ),
+										{
+											span: <span className="sui-tag sui-tag-pro" />
+										}
+									) }
+									checked={ this.props.settings.aoCdn }
+									disabled={ ! this.props.isMember }
+									description={ __( 'WPMU DEV CDN will serve your CSS, JS and other compatible files from our external CDN, effectively taking the load off your server so that pages load faster for your visitors.', 'wphb' ) } />
+							} />
 					</div> }
-
+				{ this.eoSettings() }
 				{ this.state.scanning &&
 					<React.Fragment>
 						<div className="wphb-progress-wrapper">
@@ -360,6 +365,78 @@ export default class Wizard extends React.Component {
 						</p>
 					</React.Fragment> }
 			</React.Fragment>
+		);
+	}
+
+	/**
+	 * Extra optimization settings tab.
+	 *
+	 * @return {JSX.Element} Tab content.
+	 */
+	eoSettings() {
+		if ( ! this.props.settings.aoEnable || this.state.scanning || this.props.isNetworkAdmin ) {
+			return null;
+		}
+
+		return (
+			<>
+			<p className='sui-description' style={{ textAlign: 'left', marginTop: '15px', fontWeight: 700 }}>
+				{ __( 'Extra Optimization', 'wphb' ) }
+			</p>
+			<div className='sui-border-frame' style={{ marginTop: '15px' }}>
+				<SettingsRow
+					classes="sui-flushed"
+					content={
+						<Toggle
+							id="delayJS"
+							onChange={ this.props.updateSettings }
+							text={ this.props.isMember ? __( 'Delay JavaScript Execution', 'wphb' ) : createInterpolateElement(
+								__( 'Delay JavaScript Execution <span>PRO</span>', 'wphb' ),
+								{
+									span: <span className="sui-tag sui-tag-pro" />
+								}
+							) }
+							checked={ this.props.settings.delayJS }
+							disabled={ ! this.props.isMember }
+							description={ __( 'Improve performance by delaying the loading of non-critical JavaScript files above the fold until user interaction (e.g. scroll, click).', 'wphb' ) } />
+					} />
+				<SettingsRow
+					classes="sui-flushed"
+					content={
+						<Toggle
+							id="criticalCSS"
+							onChange={ this.props.updateSettings }
+							text={ this.props.isMember ? __( 'Generate Critical CSS', 'wphb' ) : createInterpolateElement(
+								__( 'Generate Critical CSS <span>PRO</span>', 'wphb' ),
+								{
+									span: <span className="sui-tag sui-tag-pro" />
+								}
+							) }
+							checked={ this.props.settings.criticalCSS }
+							disabled={ ! this.props.isMember }
+							description={ __( 'Drastically reduce your page load time and eliminate render-blocking resources by automatically generating the critical CSS required to load your above-the-fold content.', 'wphb' ) } />
+					} />
+				<SettingsRow
+					classes="sui-flushed"
+					content={
+						<Toggle
+							id="fontSwap"
+							onChange={ this.props.updateSettings }
+							text={ __( 'Swap Web Fonts', 'wphb' ) }
+							checked={ this.props.settings.fontSwap }
+							description={ __( 'Apply a similar fallback font that visitors will temporarily see until the primary font loads, to improve text visibility.', 'wphb' ) } />
+					} />
+			</div>
+			<p className='sui-description' style={{ textAlign: 'left', marginTop: '10px' }}>
+				{
+					createInterpolateElement(
+						__( "<strong>Note:</strong> You can tweak these settings further under Assets Optimization > Extra Optimization.", 'wphb' ),
+						{
+							strong: <strong />
+						}
+					) 
+				}
+			</p></>
 		);
 	}
 
@@ -522,6 +599,29 @@ export default class Wizard extends React.Component {
 								{ this.props.settings.aoCdn && this.props.isMember &&
 									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
 								{ ! this.props.settings.aoCdn && this.props.isMember &&
+									<Tag type="grey sui-tag-sm" value={ __( 'Disabled', 'wphb' ) } /> }
+							</td>
+						</tr> }
+					{ this.props.settings.aoEnable && ! this.props.isNetworkAdmin &&
+						<tr>
+							<td className="sui-table-item-title">{ __( 'Extra Optimization', 'wphb' ) }</td>
+							<td>
+								{ __( 'Delay JS Executions', 'wphb' ) }<br />
+								{ __( 'Generate Critical CSS', 'wphb' ) }<br />
+								{ __( 'Swap Web Fonts', 'wphb' ) }
+							</td>
+							<td>
+								{ this.props.settings.delayJS && this.props.isMember &&
+									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
+								{ ! this.props.settings.delayJS &&
+									<Tag type="grey sui-tag-sm" value={ __( 'Disabled', 'wphb' ) } /> }
+								{ this.props.settings.criticalCSS && this.props.isMember &&
+									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
+								{ ! this.props.settings.criticalCSS &&
+									<Tag type="grey sui-tag-sm" value={ __( 'Disabled', 'wphb' ) } /> }
+								{ this.props.settings.fontSwap &&
+									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
+								{ ! this.props.settings.fontSwap &&
 									<Tag type="grey sui-tag-sm" value={ __( 'Disabled', 'wphb' ) } /> }
 							</td>
 						</tr> }
@@ -754,6 +854,7 @@ export default class Wizard extends React.Component {
 	continueToNextStep() {
 		if ( 2 === this.props.step && this.props.settings.aoEnable && ! this.props.isNetworkAdmin ) {
 			this.setState( { scanning: true } );
+			this.props.scanning();
 		} else {
 			this.props.nextStep();
 		}

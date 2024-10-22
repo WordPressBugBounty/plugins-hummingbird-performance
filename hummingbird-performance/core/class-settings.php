@@ -91,6 +91,7 @@ class Settings {
 				'critical_css_mode'                  => '',
 				'critical_page_types'                => array(),
 				'critical_skipped_custom_post_types' => array(),
+				'above_fold_load_stylesheet_method'  => 'load_stylesheet_on_user_interaction',
 				'font_optimization'                  => false,
 				'preload_fonts'                      => '',
 				'font_swap'                          => false,
@@ -290,7 +291,7 @@ class Settings {
 
 		$options = array(
 			'caching'     => array( 'expiry_css', 'expiry_javascript', 'expiry_media', 'expiry_images' ),
-			'minify'      => array( 'minify_blog', 'view', 'type', 'do_assets', 'block', 'dont_minify', 'dont_combine', 'position', 'defer', 'inline', 'nocdn', 'fonts', 'preload', 'async', 'ao_completed_time', 'delay_js', 'delay_js_exclusions', 'delay_js_exclusion_list', 'delay_js_timeout', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'font_optimization', 'preload_fonts', 'font_swap', 'font_display_value', 'preload_fonts_mode' ),
+			'minify'      => array( 'minify_blog', 'view', 'type', 'do_assets', 'block', 'dont_minify', 'dont_combine', 'position', 'defer', 'inline', 'nocdn', 'fonts', 'preload', 'async', 'ao_completed_time', 'delay_js', 'delay_js_exclusions', 'delay_js_exclusion_list', 'delay_js_timeout', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'font_optimization', 'above_fold_load_stylesheet_method', 'preload_fonts', 'font_swap', 'font_display_value', 'preload_fonts_mode' ),
 			'page_cache'  => array( 'cache_blog' ),
 			'performance' => array( 'dismissed', 'reports' ),
 			'advanced'    => array( 'query_string', 'viewport_meta', 'emoji', 'post_revisions', 'prefetch', 'preconnect', 'cart_fragments' ),

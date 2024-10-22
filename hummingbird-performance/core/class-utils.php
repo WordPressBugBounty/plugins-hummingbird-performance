@@ -691,9 +691,10 @@ class Utils {
 	 * @return string
 	 */
 	public static function get_link( $link_for, $campaign = 'hummingbird_pro_modal_upgrade', $hub_campaign = '' ) {
-		$domain   = 'https://wpmudev.com';
-		$wp_org   = 'https://wordpress.org';
-		$utm_tags = "?utm_source=hummingbird&utm_medium=plugin&utm_campaign=$campaign";
+		$domain       = 'https://wpmudev.com';
+		$wp_org       = 'https://wordpress.org';
+		$utm_tags     = "?utm_source=hummingbird&utm_medium=plugin&utm_campaign=$campaign";
+		$pro_utm_tags = "?utm_source=hummingbird-pro&utm_medium=plugin&utm_campaign=$campaign";
 
 		if ( defined( 'WPMUDEV_CUSTOM_API_SERVER' ) && WPMUDEV_CUSTOM_API_SERVER ) {
 			$domain = WPMUDEV_CUSTOM_API_SERVER;
@@ -761,7 +762,10 @@ class Utils {
 				$link = self::connect_url( $domain, ltrim( $utm_tags, '?' ) );
 				break;
 			case 'expert-services':
-				$link = "$domain/hub2/services/?utm_source=hummingbird-pro&utm_medium=plugin&utm_campaign=$campaign";
+				$link = "$domain/hub2/services/$pro_utm_tags";
+				break;
+			case 'get-support':
+				$link = "$domain/hub2/support/$pro_utm_tags";
 				break;
 			default:
 				$link = '';
@@ -1230,9 +1234,9 @@ class Utils {
 		// Critical CSS.
 		if ( self::get_module( 'minify' )->is_active() && ! empty( $minify_options['critical_css'] ) ) {
 			if ( 'remove' === $minify_options['critical_css_type'] ) {
-				$active_features[] = 'user_interaction_with_remove' === $minify_options['critical_css_remove_type'] ? 'criticalcss_fullpage_interaction' : 'criticalcss_fullpage_remove';
+				$active_features[] = 'user_interaction_with_remove' === $minify_options['critical_css_remove_type'] ? 'criticalcss_fullpage_delay' : 'criticalcss_fullpage_remove';
 			} elseif ( 'asynchronously' === $minify_options['critical_css_type'] ) {
-				$active_features[] = 'criticalcss_abovefold_async';
+				$active_features[] = 'load_stylesheet_on_user_interaction' === $minify_options['above_fold_load_stylesheet_method'] ? 'criticalcss_abovefold_delay' : 'criticalcss_abovefold_async';
 			}
 		}
 
@@ -1634,5 +1638,59 @@ class Utils {
 	 */
 	public static function is_subsite() {
 		return is_multisite() && ! is_network_admin();
+	}
+
+	/**
+	 * Determines whether the mobile preload is allowed or not.
+	 *
+	 * @since 3.10.0
+	 *
+	 * @return bool True if the mobile preload is allowed, false otherwise.
+	 */
+	public static function is_mobile_preload_allowed() {
+		$settings = self::get_module( 'page_cache' )->get_settings();
+
+		return ! empty( $settings['settings']['mobile'] ) && ! Fast_CGI::is_fast_cgi_enabled();
+	}
+
+	/**
+	 * Returns total amount of autoloaded data.
+	 *
+	 * @since 3.10.0
+	 *
+	 * @return int Autoloaded data in bytes.
+	 */
+	public static function get_autoloaded_options_size() {
+		if ( class_exists( '\WP_Site_Health' ) && method_exists( '\WP_Site_Health', 'get_instance' ) ) {
+			$site_health = \WP_Site_Health::get_instance();
+			if ( method_exists( $site_health, 'get_autoloaded_options_size' ) ) {
+				$bytes = $site_health->get_autoloaded_options_size();
+
+				return $bytes > 0 ? number_format_i18n( $bytes / KB_IN_BYTES ) : 0;
+			}
+		}
+
+		return 'na';
+	}
+
+	/**
+	 * Returns autoloaded health status.
+	 *
+	 * @since 3.10.0
+	 *
+	 * @return string
+	 */
+	public static function get_autoloaded_health() {
+		if ( class_exists( '\WP_Site_Health' ) && method_exists( '\WP_Site_Health', 'get_instance' ) ) {
+			$site_health = \WP_Site_Health::get_instance();
+			if ( method_exists( $site_health, 'get_test_autoloaded_options' ) ) {
+				$result = $site_health->get_test_autoloaded_options();
+				$status = isset( $result['status'] ) ? $result['status'] : 'na';
+
+				return 'critical' === $status ? 'fail' : ( 'good' === $status ? 'pass' : 'na' );
+			}
+		}
+
+		return 'na';
 	}
 }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit728436b4cb924d5773e70f2b7ec78bb6
+class ComposerStaticInit1c4477b0f02966043864433801c5b189
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -66,6 +66,7 @@ class ComposerStaticInit728436b4cb924d5773e70f2b7ec78bb6
         'Hummingbird\\Core\\Api\\Request\\WPMUDEV' => __DIR__ . '/../..' . '/core/api/request/class-wpmudev.php',
         'Hummingbird\\Core\\Api\\Rest' => __DIR__ . '/../..' . '/core/api/class-rest.php',
         'Hummingbird\\Core\\Api\\Service\\Cloudflare' => __DIR__ . '/../..' . '/core/api/service/class-cloudflare.php',
+        'Hummingbird\\Core\\Api\\Service\\CriticalCss' => __DIR__ . '/../..' . '/core/api/service/class-criticalcss.php',
         'Hummingbird\\Core\\Api\\Service\\Hosting' => __DIR__ . '/../..' . '/core/api/service/class-hosting.php',
         'Hummingbird\\Core\\Api\\Service\\Minify' => __DIR__ . '/../..' . '/core/api/service/class-minify.php',
         'Hummingbird\\Core\\Api\\Service\\Performance' => __DIR__ . '/../..' . '/core/api/service/class-performance.php',
@@ -410,9 +411,9 @@ class ComposerStaticInit728436b4cb924d5773e70f2b7ec78bb6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit728436b4cb924d5773e70f2b7ec78bb6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit728436b4cb924d5773e70f2b7ec78bb6::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit728436b4cb924d5773e70f2b7ec78bb6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1c4477b0f02966043864433801c5b189::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1c4477b0f02966043864433801c5b189::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1c4477b0f02966043864433801c5b189::$classMap;
 
         }, null, ClassLoader::class);
     }

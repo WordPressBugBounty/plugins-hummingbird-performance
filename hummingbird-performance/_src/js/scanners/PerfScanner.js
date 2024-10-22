@@ -134,6 +134,10 @@ class PerfScanner extends Scanner {
 			audits_diagnostics_mobile: response.getAudits.diagnostics.mobile,
 			audits_passed_desktop: response.getAudits.passed.desktop,
 			audits_passed_mobile: response.getAudits.passed.mobile,
+			core_web_vitals_mobile: response.coreWebVitalsMobile,
+			core_web_vitals_desktop: response.coreWebVitalsDesktop,
+			autoloader_health: response.autoloaderHealth,
+			autoloader_size: response.autoloaderSize,
 		} );
 
 		if ( '' !== response.hasError ) {

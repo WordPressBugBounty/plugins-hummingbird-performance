@@ -31,6 +31,7 @@ class Setup {
 		add_action( 'wp_ajax_wphb_react_cancel_wizard', array( $this, 'cancel' ) );
 		add_action( 'wp_ajax_wphb_react_complete_wizard', array( $this, 'complete' ) );
 		add_action( 'wp_ajax_wphb_react_settings', array( $this, 'update_settings' ) );
+		add_action( 'wp_ajax_wphb_react_track_user_consent_toggle', array( $this, 'track_user_consent_toggle' ) );
 	}
 
 	/**
@@ -168,12 +169,7 @@ class Setup {
 
 		// Tracking (make sure it's always updated).
 		if ( is_admin() || ( is_multisite() && is_network_admin() ) ) {
-			$tracking_value = Settings::get_setting( 'tracking', 'settings' );
-			$tracking       = isset( $settings['tracking'] ) && $settings['tracking'];
-			if ( $tracking && $tracking_value !== $tracking ) {
-				do_action( 'wphb_mixpanel_usage_tracking_value_update', true, $tracking );
-			}
-
+			$tracking = isset( $settings['tracking'] ) && $settings['tracking'];
 			Settings::update_setting( 'tracking', $tracking, 'settings' );
 		}
 
@@ -187,10 +183,16 @@ class Setup {
 			if ( isset( $settings['enable'] ) && $settings['enable'] ) {
 				$options = Settings::get_settings( 'minify' );
 
-				$options['type']    = isset( $settings['aoSpeedy'] ) && $settings['aoSpeedy'] ? 'speedy' : 'basic';
-				$options['use_cdn'] = isset( $settings['aoCdn'] ) && $settings['aoCdn'];
+				$options['type']      = isset( $settings['aoSpeedy'] ) && $settings['aoSpeedy'] ? 'speedy' : 'basic';
+				$options['use_cdn']   = isset( $settings['aoCdn'] ) && $settings['aoCdn'];
+				$options['delay_js']  = isset( $settings['delayJS'] ) && $settings['delayJS'];
+				$options['font_swap'] = isset( $settings['delayJS'] ) && $settings['fontSwap'];
 
 				Settings::update_settings( $options, 'minify' );
+
+				// Enable/disable critical CSS and generate it if enabled.
+				$critical_css = isset( $settings['criticalCSS'] ) && $settings['criticalCSS'];
+				Utils::get_module( 'critical_css' )->toggle_critical_css( $critical_css );
 			} elseif ( ! Utils::is_ajax_network_admin() ) {
 				Utils::get_module( 'minify' )->disable();
 			}
@@ -251,6 +253,33 @@ class Setup {
 			$options['emoji']          = isset( $settings['removeEmoji'] ) && $settings['removeEmoji'];
 
 			Settings::update_settings( $options, 'advanced' );
+		}
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Track user consent toggle.
+	 *
+	 * @since 3.10.0
+	 *
+	 * @return void
+	 */
+	public function track_user_consent_toggle() {
+		check_ajax_referer( 'wphb-fetch' );
+
+		// Check permission.
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
+		$tracking       = filter_input( INPUT_POST, 'data', FILTER_UNSAFE_RAW );
+		$tracking       = json_decode( html_entity_decode( $tracking ), true );
+		$tracking_value = Settings::get_setting( 'tracking', 'settings' );
+
+		if ( $tracking_value !== $tracking ) {
+			Settings::update_setting( 'tracking', $tracking, 'settings' );
+			do_action( 'wphb_mixpanel_usage_tracking_value_update', true, $tracking );
 		}
 
 		wp_send_json_success();

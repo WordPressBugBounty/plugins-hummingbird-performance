@@ -13,6 +13,7 @@ use Hummingbird\Core\Api\Service\Minify;
 use Hummingbird\Core\Api\Service\Performance;
 use Hummingbird\Core\Api\Service\Uptime;
 use Hummingbird\Core\Api\Service\Varnish;
+use Hummingbird\Core\Api\Service\CriticalCss;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -81,14 +82,22 @@ class API {
 	public $hosting;
 
 	/**
+	 * CriticalCss API.
+	 *
+	 * @var CriticalCss
+	 */
+	public $critical_css;
+
+	/**
 	 * API constructor.
 	 */
 	public function __construct() {
-		$this->uptime      = new Uptime();
-		$this->performance = new Performance();
-		$this->cloudflare  = new Cloudflare();
-		$this->minify      = new Minify();
-		$this->varnish     = new Varnish();
+		$this->uptime       = new Uptime();
+		$this->performance  = new Performance();
+		$this->cloudflare   = new Cloudflare();
+		$this->minify       = new Minify();
+		$this->varnish      = new Varnish();
+		$this->critical_css = new CriticalCss();
 
 		// Init Hub endpoints.
 		$this->hub = new Hub();
@@ -98,5 +107,4 @@ class API {
 
 		$this->hosting = new Hosting();
 	}
-
 }

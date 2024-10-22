@@ -5,27 +5,28 @@
  * @since 1.8
  * @package Hummingbird
  *
- * @var string $css                            Above the fold CSS.
- * @var string $manual_inclusion               Manual Inclusion critical css
- * @var bool   $is_member                      Is user a Pro Member.
- * @var bool   $delay_js                       Delay JS status.
- * @var string $delay_js_timeout               Delay JS Timeout.
- * @var string $delay_js_excludes              Delay JS Exclusion lists.
- * @var bool   $font_optimization              Font Optimization.
- * @var string $preload_fonts                  Preload Fonts.
- * @var bool   $font_swap                      Font swap
- * @var string $font_display_value             Font display.
- * @var string $critical_css                   Critical CSS.
- * @var string $critical_css_mode              Critical CSS Mode.
- * @var string $critical_css_type              Critical CSS type.
- * @var string $critical_css_remove_type       Critical CSS remove type.
- * @var string $critical_css_generation_notice Critical css completion notice.
- * @var string $critical_css_status            Critical css status for queue.
- * @var array  $pages                          Page Types.
- * @var bool   $blog_is_frontpage              If blog is front page.
- * @var array  $custom_post_types              Custom post types.
- * @var array  $settings                       Settings data.
- * @var string $preload_fonts_mode             Preload Fonts Mode.
+ * @var string $css                               Above the fold CSS.
+ * @var string $manual_inclusion                  Manual Inclusion critical css
+ * @var bool   $is_member                         Is user a Pro Member.
+ * @var bool   $delay_js                          Delay JS status.
+ * @var string $delay_js_timeout                  Delay JS Timeout.
+ * @var string $delay_js_excludes                 Delay JS Exclusion lists.
+ * @var bool   $font_optimization                 Font Optimization.
+ * @var string $preload_fonts                     Preload Fonts.
+ * @var bool   $font_swap                         Font swap
+ * @var string $font_display_value                Font display.
+ * @var string $critical_css                      Critical CSS.
+ * @var string $critical_css_mode                 Critical CSS Mode.
+ * @var string $critical_css_type                 Critical CSS type.
+ * @var string $critical_css_remove_type          Critical CSS remove type.
+ * @var string $critical_css_generation_notice    Critical css completion notice.
+ * @var string $critical_css_status               Critical css status for queue.
+ * @var array  $pages                             Page Types.
+ * @var bool   $blog_is_frontpage                 If blog is front page.
+ * @var array  $custom_post_types                 Custom post types.
+ * @var array  $settings                          Settings data.
+ * @var string $preload_fonts_mode                Preload Fonts Mode.
+ * @var string $above_fold_load_stylesheet_method Above the fold load stylesheet method.
  */
 
 use Hummingbird\Core\Utils;
@@ -76,58 +77,57 @@ if ( ! $critical_css_mode ) {
 				</label>
 				<?php Utils::unlock_now_link( 'eo_settings', 'hummingbird_delay_js_ao_extra', 'delayjs', true, true ); ?>
 			<?php endif; ?>
-		</div>
-		<?php
-		$delay_js_exclude_classes = array( 'sui-description', 'sui-toggle-description' );
-
-		if ( ! $is_site_delay_js_enabled ) {
-			$delay_js_exclude_classes[] = 'sui-hidden';
-		}
-		?>
-		<span class="<?php echo implode( ' ', $delay_js_exclude_classes ); ?>" style="margin-top: 10px" id="delay_js_file_exclude">
-
-			<label class="sui-label" for="delay_js_exclude" style="margin-top: 15px">
-				<?php esc_html_e( 'Timeout', 'wphb' ); ?>
-			</label>
-			<span class="sui-description sui-toggle-description">
-				<?php esc_html_e( 'Set a timeout in seconds that the scripts will be loaded if no user interaction has been detected.', 'wphb' ); ?>
-			</span>
-			<select name="delay_js_timeout" id="delay_js_timeout">
-				<?php
-				$delay_js_timeout_options = array(
-					5  => __( '5 seconds', 'wphb' ),
-					10 => __( '10 seconds', 'wphb' ),
-					15 => __( '15 seconds', 'wphb' ),
-					20 => __( '20 seconds (Recommended minimum)', 'wphb' ),
-					25 => __( '25 seconds', 'wphb' ),
-					30 => __( '30 seconds', 'wphb' ),
-				);
-
-				$selected_time = $delay_js_timeout ? $delay_js_timeout : 20;
-
-				?>
-				<?php foreach ( $delay_js_timeout_options as $dts_time => $dvalue ) : ?>
-					<option value="<?php echo esc_attr( $dts_time ); ?>" <?php selected( $dts_time, $selected_time ); ?>>
-						<?php echo esc_html( ucfirst( $dvalue ) ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
-
-			<label class="sui-label" for="delay_js_exclude" style="margin-top: 15px">
-				<?php esc_html_e( 'Excluded JavaScript Files ', 'wphb' ); ?>
-			</label>
-			<textarea class="sui-form-control" id="delay_js_exclude" name="delay_js_exclude" placeholder="/wp-content/themes/some-theme/jsfile.js
-jsfile
-script id"><?php echo esc_html( $delay_js_excludes ); ?></textarea>
 			<?php
-			printf( /* translators: %1$s - jsfile, %2$s - jsfile with url, %3$s - script id */
-				esc_html__( 'Specify the URLs or keywords that should be excluded from delaying execution (one per line). E.g. %1$s or %2$s or %3$s', 'wphb' ),
-				'<b>jsfile</b>',
-				'<b>/wp-content/themes/some-theme/jsfile.js</b>',
-				'<b>script id</b>'
-			);
+			$delay_js_exclude_classes = array( 'sui-description', 'sui-toggle-description' );
+
+			if ( ! $is_site_delay_js_enabled ) {
+				$delay_js_exclude_classes[] = 'sui-hidden';
+			}
 			?>
-		</span>
+			<span class="<?php echo implode( ' ', $delay_js_exclude_classes ); ?>" style="margin-left: 44px;" id="delay_js_file_exclude">
+				<label class="sui-label" for="delay_js_exclude" style="margin-top: 15px">
+					<?php esc_html_e( 'Timeout', 'wphb' ); ?>
+				</label>
+				<span class="sui-description sui-toggle-description">
+					<?php esc_html_e( 'Set a timeout in seconds that the scripts will be loaded if no user interaction has been detected.', 'wphb' ); ?>
+				</span>
+				<select name="delay_js_timeout" id="delay_js_timeout">
+					<?php
+					$delay_js_timeout_options = array(
+						5  => __( '5 seconds', 'wphb' ),
+						10 => __( '10 seconds', 'wphb' ),
+						15 => __( '15 seconds', 'wphb' ),
+						20 => __( '20 seconds (Recommended minimum)', 'wphb' ),
+						25 => __( '25 seconds', 'wphb' ),
+						30 => __( '30 seconds', 'wphb' ),
+					);
+
+					$selected_time = $delay_js_timeout ? $delay_js_timeout : 20;
+
+					?>
+					<?php foreach ( $delay_js_timeout_options as $dts_time => $dvalue ) : ?>
+						<option value="<?php echo esc_attr( $dts_time ); ?>" <?php selected( $dts_time, $selected_time ); ?>>
+							<?php echo esc_html( ucfirst( $dvalue ) ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+
+				<label class="sui-label" for="delay_js_exclude" style="margin-top: 15px">
+					<?php esc_html_e( 'Excluded JavaScript Files ', 'wphb' ); ?>
+				</label>
+				<textarea class="sui-form-control" id="delay_js_exclude" name="delay_js_exclude" placeholder="/wp-content/themes/some-theme/jsfile.js
+	jsfile
+	script id"><?php echo esc_html( $delay_js_excludes ); ?></textarea>
+				<?php
+				printf( /* translators: %1$s - jsfile, %2$s - jsfile with url, %3$s - script id */
+					esc_html__( 'Specify the URLs or keywords that should be excluded from delaying execution (one per line). E.g. %1$s or %2$s or %3$s', 'wphb' ),
+					'<b>jsfile</b>',
+					'<b>/wp-content/themes/some-theme/jsfile.js</b>',
+					'<b>script id</b>'
+				);
+				?>
+			</span>
+		</div>
 	</div>
 </div>
 
@@ -184,156 +184,169 @@ script id"><?php echo esc_html( $delay_js_excludes ); ?></textarea>
 				</label>
 				<?php Utils::unlock_now_link( 'eo_settings', 'hummingbird_criticalcss_ao_extra', 'critical_css', true, true ); ?>
 			<?php endif; ?>
-		</div>
-		<?php
-		$critical_css_exclude_classes = array( 'sui-description', 'sui-toggle-description' );
-		if ( ! $is_site_critical_css_enabled ) {
-			$critical_css_exclude_classes[] = 'sui-hidden';
-		}
-		?>
-		<span class="<?php echo esc_attr( implode( ' ', $critical_css_exclude_classes ) ); ?>" style="margin-top: 10px" id="critical_css_file_exclude">
-		<div class="sui-form-field">
-			<label class="sui-label" for="critical_css_type" style="margin-top: 15px">
-				<?php esc_html_e( 'Choose how to load critical CSS.', 'wphb' ); ?>
-			</label>
-			<select name="critical_css_type" id="critical_css_type">
-				<?php
-				$critical_css_type_options = array(
-					'remove'         => __( 'Full Page CSS Optimization (Recommended)', 'wphb' ),
-					'asynchronously' => __( 'Above the fold CSS Optimization', 'wphb' ),
-				);
-
-				$selected_cs_type = $critical_css_type ? $critical_css_type : 'remove';
-				?>
-				<?php foreach ( $critical_css_type_options as $cs_option => $cs_value ) : ?>
-					<option value="<?php echo esc_attr( $cs_option ); ?>" <?php echo 'on_user_interaction' === $cs_option ? 'disabled' : ''; ?> <?php selected( $cs_option, $selected_cs_type ); ?>>
-						<?php echo esc_html( $cs_value ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
 			<?php
-			$selected_css_type_classes = array();
-			foreach ( $critical_css_type_options as $key => $val ) {
-				if ( $key === $selected_cs_type ) {
-					$selected_css_type_classes[ $key ] = '';
-				} else {
-					$selected_css_type_classes[ $key ] = 'sui-hidden';
-				}
+			$critical_css_exclude_classes = array( 'sui-description', 'sui-toggle-description' );
+			if ( ! $is_site_critical_css_enabled ) {
+				$critical_css_exclude_classes[] = 'sui-hidden';
 			}
 			?>
-			<div class="sui-description sui-toggle-description load_cs_options load_asynchronously <?php echo esc_attr( $selected_css_type_classes['asynchronously'] ); ?>">
-				<?php esc_html_e( 'Inline above-the-fold CSS, load the rest asynchronously.', 'wphb' ); ?>
-			</div>
-			<div class="sui-description sui-toggle-description load_cs_options load_remove <?php echo esc_attr( $selected_css_type_classes['remove'] ); ?>">
-				<?php esc_html_e( 'Inline all used CSS, delay/remove the rest.', 'wphb' ); ?>
-			</div>
-		</div>
-		<div class="sui-form-field load_cs_options load_remove <?php echo esc_attr( $selected_css_type_classes['remove'] ); ?>" role="radiogroup">
-			<div class="sui-description">
-				<?php esc_html_e( 'How to handle the Unused CSS', 'wphb' ); ?>
-			</div>
-			<label for="user_interaction_with_remove" class="sui-radio">
-				<input type="radio" value="user_interaction_with_remove" <?php checked( $critical_css_remove_type, 'user_interaction_with_remove' ); ?> name="critical_css_remove_type" id="user_interaction_with_remove" aria-labelledby="user_interaction_with_remove_label">
-				<span aria-hidden="true"></span>
-				<span id="user_interaction_with_remove_label"><?php esc_html_e( 'Load on User Interaction', 'wphb' ); ?></span>
+			<span class="<?php echo esc_attr( implode( ' ', $critical_css_exclude_classes ) ); ?>" id="critical_css_file_exclude">
+				<label class="sui-label" for="critical_css_type">
+					<?php esc_html_e( 'Choose how to load critical CSS.', 'wphb' ); ?>
+				</label>
+				<select name="critical_css_type" id="critical_css_type">
+					<?php
+					$critical_css_type_options = array(
+						'remove'         => __( 'Full Page CSS Optimization (Recommended)', 'wphb' ),
+						'asynchronously' => __( 'Above-the-fold CSS Optimization', 'wphb' ),
+					);
 
-			</label>
-			<label for="remove_unused" class="sui-radio">
-				<input type="radio" value="remove_unused" <?php checked( $critical_css_remove_type, 'remove_unused' ); ?> name="critical_css_remove_type" id="remove_unused" aria-labelledby="remove_unused_label">
-				<span aria-hidden="true"></span>
-				<span id="remove_unused_label"><?php esc_html_e( 'Remove Unused', 'wphb' ); ?></span>
+					$selected_cs_type = $critical_css_type ? $critical_css_type : 'remove';
+					?>
+					<?php foreach ( $critical_css_type_options as $cs_option => $cs_value ) : ?>
+						<option value="<?php echo esc_attr( $cs_option ); ?>" <?php echo 'on_user_interaction' === $cs_option ? 'disabled' : ''; ?> <?php selected( $cs_option, $selected_cs_type ); ?>>
+							<?php echo esc_html( $cs_value ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+				<?php
+				$selected_css_type_classes = array();
+				foreach ( $critical_css_type_options as $key => $val ) {
+					if ( $key === $selected_cs_type ) {
+						$selected_css_type_classes[ $key ] = '';
+					} else {
+						$selected_css_type_classes[ $key ] = 'sui-hidden';
+					}
+				}
+				?>
+				<div class="sui-description sui-toggle-description load_cs_options load_asynchronously <?php echo esc_attr( $selected_css_type_classes['asynchronously'] ); ?>">
+					<?php esc_html_e( 'Inline above-the-fold CSS, delay the rest or load asynchronously.', 'wphb' ); ?>
+				</div>
+				<div class="sui-description sui-toggle-description load_cs_options load_remove <?php echo esc_attr( $selected_css_type_classes['remove'] ); ?>">
+					<?php esc_html_e( 'Inline all used CSS, delay/remove the rest.', 'wphb' ); ?>
+				</div>
+				<div class="sui-form-field wphb-mt-15px wphb-mb-15px load_cs_options load_remove <?php echo esc_attr( $selected_css_type_classes['remove'] ); ?>" role="radiogroup">
+					<div class="sui-description">
+						<?php esc_html_e( 'How to handle the Unused CSS', 'wphb' ); ?>
+					</div>
+					<label for="user_interaction_with_remove" class="sui-radio">
+						<input type="radio" value="user_interaction_with_remove" <?php checked( $critical_css_remove_type, 'user_interaction_with_remove' ); ?> name="critical_css_remove_type" id="user_interaction_with_remove" aria-labelledby="user_interaction_with_remove_label">
+						<span aria-hidden="true"></span>
+						<span id="user_interaction_with_remove_label"><?php esc_html_e( 'Load on User Interaction', 'wphb' ); ?><span class="sui-tag sui-tag-blue wphb-tag-recommended"><?php esc_html_e( 'Recommended', 'wphb' ); ?></span></span>
 
-			</label>
-		</div>
-		<?php
-		$cs_type_remove_notice_classes = array();
+					</label>
+					<label for="remove_unused" class="sui-radio">
+						<input type="radio" value="remove_unused" <?php checked( $critical_css_remove_type, 'remove_unused' ); ?> name="critical_css_remove_type" id="remove_unused" aria-labelledby="remove_unused_label">
+						<span aria-hidden="true"></span>
+						<span id="remove_unused_label"><?php esc_html_e( 'Remove Unused', 'wphb' ); ?></span>
 
-		if ( 'remove' === $selected_cs_type ) {
-			$cs_type_remove_notice_classes[] = 'sui-hidden';
-		}
-		?>
-		<!-- Begin -->
-		<table class="sui-table sui-accordion">
-			<tbody>
-				<tr class="sui-accordion-item sui-table-item-first">
-					<td class="sui-table-item-title">
-						<?php esc_html_e( 'Post type', 'wphb' ); ?>
-						<span class="sui-accordion-open-indicator" aria-label="Expand">
-							<span class="sui-icon-chevron-down" aria-hidden="true"></span>
-						</span>
-					</td>
-				</tr>
-				<tr class="sui-accordion-item-content">
-					<td>
-						<div class="sui-box" tabindex="0">
-							<div class="sui-box-body">
-								<label class="sui-label">
-									<?php esc_html_e( 'Toggling on will include the Critical CSS generation for these pages', 'wphb' ); ?>
-								</label>
-								<?php
-								foreach ( $pages as $page_type => $page_name ) :
-									?>
-									<div class="wphb-dash-table-row">
-										<div><?php echo esc_html( $page_name ); ?></div>
-										<?php if ( 'home' === $page_type && $blog_is_frontpage ) : ?>
-											<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Your blog is your frontpage', 'wphb' ); ?></span>
-										<?php else : ?>
-											<span class="sub"><?php echo esc_html( $page_type ); ?></span>
-											<label class="sui-toggle">
-												<input type="checkbox" name="critical_page_types[<?php echo esc_attr( $page_type ); ?>]" id="<?php echo esc_attr( $page_type ); ?>" <?php checked( in_array( $page_type, $settings['critical_page_types'], true ) ); ?>>
-												<span class="sui-toggle-slider"></span>
-											</label>
-										<?php endif; ?>
-									</div>
-								<?php endforeach; ?>
-								<?php foreach ( $custom_post_types  as $custom_post_type ) : ?>
-									<div class="wphb-dash-table-row">
-										<div><?php echo esc_html( $custom_post_type->label ); ?></div>
-										<span class="sub"><?php echo esc_html( $custom_post_type->name ); ?></span>
-										<input type="hidden" name="critical_skipped_custom_post_types[<?php echo esc_attr( $custom_post_type->name ); ?>]" value="1">
-										<label class="sui-toggle">
-											<input type="checkbox" name="critical_skipped_custom_post_types[<?php echo esc_attr( $custom_post_type->name ); ?>]" id="<?php echo esc_attr( $custom_post_type->name ); ?>" <?php checked( ! in_array( $custom_post_type->name, $settings['critical_skipped_custom_post_types'], true ) ); ?> value="0">
-											<span class="sui-toggle-slider"></span>
+					</label>
+				</div>
+				<div class="sui-form-field wphb-mt-15px wphb-mb-15px load_cs_options load_asynchronously <?php echo esc_attr( $selected_css_type_classes['asynchronously'] ); ?>" role="radiogroup">
+					<div class="sui-description">
+						<?php esc_html_e( 'How to handle below-the-fold CSS', 'wphb' ); ?>
+					</div>
+					<label for="load_stylesheet_on_user_interaction" class="sui-radio">
+						<input type="radio" value="load_stylesheet_on_user_interaction" <?php checked( $above_fold_load_stylesheet_method, 'load_stylesheet_on_user_interaction' ); ?> name="above_fold_load_stylesheet_method" id="load_stylesheet_on_user_interaction" aria-labelledby="load_stylesheet_on_user_interaction_label">
+						<span aria-hidden="true"></span>
+						<span id="load_stylesheet_on_user_interaction_label"><?php esc_html_e( 'Load on User Interaction', 'wphb' ); ?><span class="sui-tag sui-tag-blue wphb-tag-recommended"><?php esc_html_e( 'Fastest', 'wphb' ); ?></span>
+					</label>
+					<label for="load_stylesheet_async" class="sui-radio">
+						<input type="radio" value="load_stylesheet_async" <?php checked( $above_fold_load_stylesheet_method, 'load_stylesheet_async' ); ?> name="above_fold_load_stylesheet_method" id="load_stylesheet_async" aria-labelledby="load_stylesheet_async_label">
+						<span aria-hidden="true"></span>
+						<span id="load_stylesheet_async_label"><?php esc_html_e( 'Load Asynchronously', 'wphb' ); ?></span>
+					</label>
+				</div>
+				<?php
+				$cs_type_remove_notice_classes = array();
+
+				if ( 'remove' === $selected_cs_type ) {
+					$cs_type_remove_notice_classes[] = 'sui-hidden';
+				}
+				?>
+				<!-- Begin -->
+				<table class="sui-table sui-accordion">
+					<tbody>
+						<tr class="sui-accordion-item sui-table-item-first">
+							<td class="sui-table-item-title">
+								<?php esc_html_e( 'Post type', 'wphb' ); ?>
+								<span class="sui-accordion-open-indicator" aria-label="Expand">
+									<span class="sui-icon-chevron-down" aria-hidden="true"></span>
+								</span>
+							</td>
+						</tr>
+						<tr class="sui-accordion-item-content">
+							<td>
+								<div class="sui-box" tabindex="0">
+									<div class="sui-box-body">
+										<label class="sui-label">
+											<?php esc_html_e( 'Toggling on will include the Critical CSS generation for these pages', 'wphb' ); ?>
 										</label>
+										<?php
+										foreach ( $pages as $page_type => $page_name ) :
+											?>
+											<div class="wphb-dash-table-row">
+												<div><?php echo esc_html( $page_name ); ?></div>
+												<?php if ( 'home' === $page_type && $blog_is_frontpage ) : ?>
+													<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Your blog is your frontpage', 'wphb' ); ?></span>
+												<?php else : ?>
+													<span class="sub"><?php echo esc_html( $page_type ); ?></span>
+													<label class="sui-toggle">
+														<input type="checkbox" name="critical_page_types[<?php echo esc_attr( $page_type ); ?>]" id="<?php echo esc_attr( $page_type ); ?>" <?php checked( in_array( $page_type, $settings['critical_page_types'], true ) ); ?>>
+														<span class="sui-toggle-slider"></span>
+													</label>
+												<?php endif; ?>
+											</div>
+										<?php endforeach; ?>
+										<?php foreach ( $custom_post_types  as $custom_post_type ) : ?>
+											<div class="wphb-dash-table-row">
+												<div><?php echo esc_html( $custom_post_type->label ); ?></div>
+												<span class="sub"><?php echo esc_html( $custom_post_type->name ); ?></span>
+												<input type="hidden" name="critical_skipped_custom_post_types[<?php echo esc_attr( $custom_post_type->name ); ?>]" value="1">
+												<label class="sui-toggle">
+													<input type="checkbox" name="critical_skipped_custom_post_types[<?php echo esc_attr( $custom_post_type->name ); ?>]" id="<?php echo esc_attr( $custom_post_type->name ); ?>" <?php checked( ! in_array( $custom_post_type->name, $settings['critical_skipped_custom_post_types'], true ) ); ?> value="0">
+													<span class="sui-toggle-slider"></span>
+												</label>
+											</div>
+										<?php endforeach; ?>
 									</div>
-								<?php endforeach; ?>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="sui-table sui-accordion">
-			<tbody>
-				<tr class="sui-accordion-item">
-					<td class="sui-table-item-title">
-						<?php esc_html_e( 'Manual Inclusions (Advanced)', 'wphb' ); ?>
-						<span class="sui-accordion-open-indicator" aria-label="Expand">
-							<span class="sui-icon-chevron-down" aria-hidden="true"></span>
-						</span>
-					</td>
-				</tr>
-				<tr class="sui-accordion-item-content">
-					<td>
-						<div class="sui-box" tabindex="0">
-							<div class="sui-box-body">
-								<textarea class="sui-form-control" id="critical_css_advanced" name="critical_css_advanced" placeholder="<?php esc_attr_e( 'Add CSS here', 'wphb' ); ?>"><?php echo esc_html( $manual_inclusion ); ?></textarea>
-								<div class="sui-description">
-									<?php
-									$this->admin_notices->show_inline(
-										__( 'Only use this option if you see a broken element on your site to add the critical elements manually. This might affect your PageSpeed negatively.', 'wphb' ),
-										'warning'
-									);
-									?>
 								</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- End 1-->
-		</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="sui-table sui-accordion">
+					<tbody>
+						<tr class="sui-accordion-item">
+							<td class="sui-table-item-title">
+								<?php esc_html_e( 'Manual Inclusions (Advanced)', 'wphb' ); ?>
+								<span class="sui-accordion-open-indicator" aria-label="Expand">
+									<span class="sui-icon-chevron-down" aria-hidden="true"></span>
+								</span>
+							</td>
+						</tr>
+						<tr class="sui-accordion-item-content">
+							<td>
+								<div class="sui-box" tabindex="0">
+									<div class="sui-box-body">
+										<textarea class="sui-form-control" id="critical_css_advanced" name="critical_css_advanced" placeholder="<?php esc_attr_e( 'Add CSS here', 'wphb' ); ?>"><?php echo esc_html( $manual_inclusion ); ?></textarea>
+										<div class="sui-description">
+											<?php
+											$this->admin_notices->show_inline(
+												__( 'Only use this option if you see a broken element on your site to add the critical elements manually. This might affect your PageSpeed negatively.', 'wphb' ),
+												'warning'
+											);
+											?>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- End 1-->
+			</span>
+		</div>
 	</div>
 </div>
 

@@ -1216,6 +1216,10 @@ class Minify extends Module {
 	 * @return bool
 	 */
 	public function minify_module_status( $current ) {
+		if ( ! apply_filters( 'wphb_should_minify_on_page', true ) ) {
+			return false;
+		}
+
 		$options = $this->get_options();
 
 		if ( false === $options['enabled'] ) {

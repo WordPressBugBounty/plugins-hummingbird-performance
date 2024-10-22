@@ -42,6 +42,7 @@ class SetupWizard extends React.Component {
 			isMember: this.props.wphbData.isMember,
 			hasUptime: this.props.wphbData.hasUptime,
 			loading: false,
+			checkDocumentation: false,
 			/**
 			 * Steps:
 			 * 1. Start of setup
@@ -52,6 +53,7 @@ class SetupWizard extends React.Component {
 			 * 6. Finish
 			 */
 			step: 1,
+			scanning: false,
 			issues: {
 				advCacheFile: false
 			},
@@ -60,6 +62,9 @@ class SetupWizard extends React.Component {
 				aoEnable: true,
 				aoSpeedy: true,
 				aoCdn: Boolean( this.props.wphbData.isMember ),
+				delayJS: Boolean( this.props.wphbData.isMember ),
+				criticalCSS: Boolean( this.props.wphbData.isMember ),
+				fontSwap: true,
 				uptimeEnable: Boolean( this.props.wphbData.hasUptime ),
 				cacheEnable: true,
 				fastCGI: Boolean( this.props.wphbData.isFastCGISupported ) ? true : false,
@@ -85,6 +90,7 @@ class SetupWizard extends React.Component {
 		this.updateSettings = this.updateSettings.bind( this );
 		this.toggleModule = this.toggleModule.bind( this );
 		this.quitWizard = this.quitWizard.bind( this );
+		this.scanning = this.scanning.bind( this );
 	}
 
 	/**
@@ -171,6 +177,7 @@ class SetupWizard extends React.Component {
 			goToPage = 'pluginDash';
 		}
 
+		this.trackSetupEvents( goToPage );
 		this.state.api
 			.post( 'complete_wizard', goToPage )
 			.then( () => {
@@ -243,6 +250,10 @@ class SetupWizard extends React.Component {
 		const settings = { ...this.state.settings };
 		settings[ e.target.id ] = e.target.checked;
 
+		if ( 'tracking' === e.target.id ) {
+			this.trackUserConsentToggle( e.target.checked );
+		}
+
 		this.setState( { settings } );
 	}
 
@@ -269,9 +280,109 @@ class SetupWizard extends React.Component {
 	 */
 	quitWizard() {
 		this.setState( { loading: true } );
-
+		this.trackSetupEvents();
 		this.state.api.post( 'cancel_wizard' )
-			.then( () => window.location.href = getLink( 'pluginDash' ) )
+			.then( () => {
+				window.location.href = getLink( 'pluginDash' );
+			})
+			.catch((error) => window.console.log( error ));
+	}
+
+	/**
+	 * Set scanning state.
+	 */
+	scanning() {
+		this.setState( { scanning: true } );
+	}
+
+	/**
+	 * Track setup wizard events.
+	 *
+	 * @param {string} action
+	 */
+	trackSetupEvents( action = 'quit' ) {
+		const actionMap = {
+			configs: 'apply_configs',
+			runPerf: 'performance_test',
+			pluginDash: 'complete_dashboard'
+		};
+		action = actionMap[ action ] || action;
+
+		const stepMap = {
+			1: this.state.issues.advCacheFile ? 'conflict' : 'tracking',
+			2: this.state.scanning ? 'ao_progress' : 'ao_settings',
+			3: 'uptime',
+			4: 'page_caching',
+			5: 'advanced_tools'
+		};
+		const quitStep = stepMap[ this.state.step ] || 'na';
+		const conflict = this.state.issues.advCacheFile ? 'yes' : 'no';
+
+		const aoSettings = {
+			aoSpeedy: 'speedy',
+			aoCdn: 'cdn',
+			delayJS: 'js_delay',
+			criticalCSS: 'critical_css',
+			fontSwap: 'font_swap',
+		};
+		const enabledAoFeatures = this.state.settings.aoEnable ? this.mapSettings( aoSettings ) : 'disabled';
+
+		const advancedSettings = {
+			queryStrings: 'remove_query_strings',
+			cartFragments: 'disable_cart_fragments',
+			removeEmoji: 'remove_emoji',
+		};
+		const advancedFeaturesStatus = this.mapSettings( advancedSettings );
+
+		const uptime = this.state.settings.uptimeEnable ? 'enabled' : 'disabled';
+		const enabledAdvancedFeatures = advancedFeaturesStatus.length > 0 ? advancedFeaturesStatus : 'all_disabled';
+
+		let cacheSettings = 'disabled';
+		if ( this.state.settings.cacheEnable ) {
+			if ( this.state.settings.fastCGI ) {
+				cacheSettings = ! this.state.settings.clearOnComment || ! this.state.settings.clearCacheButton ? 'ssc_modified' : 'ssc_defaults';
+			} else {
+				cacheSettings = ! this.state.settings.cacheOnMobile || ! this.state.settings.clearOnComment || ! this.state.settings.cacheHeader || ! this.state.settings.clearCacheButton ? 'local_modified' : 'local_defaults';
+			}
+		}
+
+		if ( this.state.settings.tracking ) {
+			window.wphbMixPanel.optIn();
+		}
+
+		window.wphbMixPanel.track( 'Setup Wizard', {
+			Action: action,
+			'Quit Step': quitStep,
+			Conflict: conflict,
+			'AO Settings': this.state.step > 2 ? enabledAoFeatures : 'na',
+			Uptime: uptime,
+			'Cache Settings': this.state.step > 4 ? cacheSettings : 'na',
+			'Advanced Settings': this.state.step > 5 ? enabledAdvancedFeatures : 'na',
+			Documentation: this.state.checkDocumentation ? 'clicked' : 'not_clicked',
+		} );
+	}
+
+	/**
+	 * Map settings to their respective names.
+	 *
+	 * @param {string} settingsMap
+	 */
+	mapSettings( settingsMap ) {
+		return Object.keys( settingsMap ).filter( key => this.state.settings[ key ] ).map( key => settingsMap[ key ] );
+	}
+
+	trackDocumentation() {
+		this.setState( { checkDocumentation: true } );
+	}
+
+	/**
+	 * Take action on user consent toggle.
+	 *
+	 * @param {string} tracking
+	 */
+	trackUserConsentToggle( tracking ) {
+		this.state.api
+			.post( 'track_user_consent_toggle', tracking )
 			.catch( ( error ) => window.console.log( error ) );
 	}
 
@@ -322,6 +433,7 @@ class SetupWizard extends React.Component {
 						icon="sui-icon-academy"
 						target="blank"
 						url={ getLink( 'docs' ) }
+						onClick={ () => this.trackDocumentation() }
 						text={ __( 'Documentation', 'wphb' ) } />
 				</div>
 			</div>
@@ -346,6 +458,7 @@ class SetupWizard extends React.Component {
 					nextStep={ this.nextStep }
 					prevStep={ this.prevStep }
 					finish={ this.finish }
+					scanning={ this.scanning }
 					skipConflicts={ this.skipConflicts }
 					isMember={ this.state.isMember }
 					isNetworkAdmin={ this.props.wphbData.isNetworkAdmin }

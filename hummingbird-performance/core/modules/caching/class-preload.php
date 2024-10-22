@@ -10,6 +10,7 @@ namespace Hummingbird\Core\Modules\Caching;
 
 use Hummingbird\Core\Filesystem;
 use Hummingbird\Core\Settings;
+use Hummingbird\Core\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -44,17 +45,44 @@ class Preload extends Background_Process {
 	 * @return bool
 	 */
 	protected function task( $item ) {
+		if ( is_array( $item ) ) {
+			$is_mobile = $item['is_mobile'];
+			$url       = $item['url'];
+		} else {
+			// Handle the case when $item is not an array.
+			$is_mobile = false;
+			$url       = $item;
+		}
+
 		$args = array(
 			'timeout'    => 0.01,
 			'blocking'   => false,
-			'user-agent' => 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader',
+			'user-agent' => $is_mobile ? $this->get_mobile_user_agent() : 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader',
 			'sslverify'  => false,
 		);
 
-		wp_remote_get( esc_url_raw( $item ), $args );
+		wp_remote_get( esc_url_raw( $url ), $args );
 		usleep( 500000 );
 
 		return false;
+	}
+
+	/**
+	 * Get mobile user agent.
+	 *
+	 * @return string
+	 */
+	private function get_mobile_user_agent() {
+		$mobile_user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1';
+
+		/**
+		 * Filter the user agent used for preloading, ensuring the HTTP request is detected as coming from a mobile device.
+		 *
+		 * @param string $mobile_user_agent The mobile user agent.
+		 */
+		$mobile_user_agent = apply_filters( 'wphb_mobile_user_agent', $mobile_user_agent );
+
+		return 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader ' . $mobile_user_agent;
 	}
 
 	/**
@@ -131,7 +159,7 @@ class Preload extends Background_Process {
 
 		if ( isset( $types['on_clear'] ) && $types['on_clear'] && ! $this->is_process_running() ) {
 			$url = get_option( 'home' ) . $path;
-			$this->preload( $url );
+			$this->preload( $this->get_preload_request( $url ) );
 		}
 	}
 
@@ -145,7 +173,22 @@ class Preload extends Background_Process {
 			return;
 		}
 
-		$this->preload( get_option( 'home' ) );
+		$this->preload( $this->get_preload_request( get_option( 'home' ) ) );
+		if ( Utils::is_mobile_preload_allowed() ) {
+			$this->preload( $this->get_preload_request( get_option( 'home' ), true ) );
+		}
 	}
 
+	/**
+	 * Get preload request data.
+	 *
+	 * @param string $url        URL of the page to preload.
+	 * @param bool   $is_mobile  Is preload for mobile device.
+	 */
+	public function get_preload_request( $url, $is_mobile = false ) {
+		return array(
+			'url'       => $url,
+			'is_mobile' => $is_mobile,
+		);
+	}
 }

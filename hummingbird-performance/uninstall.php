@@ -99,6 +99,7 @@ if ( $settings['remove_data'] ) {
 	delete_site_option( 'wphb-caching-data' );
 	delete_site_option( 'wphb-gzip-data' );
 	delete_site_option( 'wphb_compression_type' );
+	delete_site_option( 'wphb_plugin_timestamps' );
 
 	delete_option( 'wphb-last-report' );
 	delete_site_option( 'wphb-last-report' );

@@ -10,7 +10,6 @@ import Fetcher from './utils/fetcher';
 		 */
 		optIn() {
 			wphb.mixpanel.enabled = true;
-			this.track( 'Opt In' );
 		},
 
 		/**
@@ -23,6 +22,23 @@ import Fetcher from './utils/fetcher';
 			this.track( 'plugin_deactivate', {
 				reason,
 				feedback,
+			} );
+		},
+
+		/**
+		 * Track HB Upsell events.
+		 *
+		 * @param {string} feature  Feature name.
+		 * @param {string} location Location.
+		 * @param {string} action   Action.
+		 * @param {string} utmLink  UTM link.
+		 */
+		trackHBUpsell( feature, location, action, utmLink ) {
+			this.track( 'hb_upsell_triggered', {
+				Feature: feature,
+				Location: location,
+				'User Action': action,
+				'UTM Link': utmLink,
 			} );
 		},
 

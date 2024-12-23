@@ -1887,101 +1887,103 @@ class Minify extends Module {
 		}
 
 		foreach ( $collection as $type => $assets ) {
-			foreach ( $assets as $handle => $asset ) {
-				/**
-				 * Filter minification enqueued files items displaying.
-				 *
-				 * @param bool   $display  If set to true, display the item. Default false.
-				 * @param array  $item     Item data.
-				 * @param string $type     Type of the current item (scripts|styles).
-				 */
-				if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $asset, $type ) ) {
-					unset( $collection[ $type ][ $handle ] );
-					continue;
-				}
-
-				// Remove unused fields.
-				unset( $asset['args'] );
-				unset( $asset['deps'] );
-				unset( $asset['extra'] );
-				unset( $asset['textdomain'] );
-				unset( $asset['translations_path'] );
-				unset( $asset['ver'] );
-
-				$settings = array(
-					'component' => '',
-					'extension' => 'OTHER',
-					'filter'    => '',
-					'isLocal'   => Minify\Minify_Group::is_src_local( $asset['src'] ),
-				);
-
-				$asset['compressedSize'] = isset( $asset['compressed_size'] ) ? $asset['compressed_size'] : false;
-				unset( $asset['compressed_size'] );
-
-				// Get original file size for local files that don't have it set for some reason.
-				if ( ! isset( $asset['original_size'] ) && file_exists( Utils::src_to_path( $asset['src'] ) ) ) {
-					$asset['original_size'] = number_format_i18n( filesize( Utils::src_to_path( $asset['src'] ) ) / 1000, 1 );
-				}
-
-				// With remote assets we can't easily get the file size without doing extra remote queries.
-				if ( isset( $asset['original_size'] ) ) {
-					$asset['originalSize'] = $asset['original_size'];
-					unset( $asset['original_size'] );
-				} else {
-					$asset['originalSize'] = false;
-				}
-
-				if ( isset( $asset['file_url'] ) ) {
-					$asset['fileUrl'] = empty( $asset['file_url'] )
-						? ''
-						: $asset['file_url'];
-					unset( $asset['file_url'] );
-				}
-
-				$settings['disableSwitchers'] = $this->get_disabled_switchers( $asset, $type );
-
-				if ( preg_match( '/wp-content\/themes\/(.*)\//', $asset['src'], $matches ) ) {
-					$settings['component'] = 'theme';
-					$settings['filter']    = $theme->get( 'Name' );
-				} elseif ( preg_match( '/wp-content\/plugins\/([\w\-_]*)\//', $asset['src'], $matches ) ) {
-					if ( ! function_exists( 'get_plugin_data' ) ) {
-						include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			if ( is_array( $assets ) || is_object( $assets ) ) {
+				foreach ( $assets as $handle => $asset ) {
+					/**
+					 * Filter minification enqueued files items displaying.
+					 *
+					 * @param bool   $display  If set to true, display the item. Default false.
+					 * @param array  $item     Item data.
+					 * @param string $type     Type of the current item (scripts|styles).
+					 */
+					if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $asset, $type ) ) {
+						unset( $collection[ $type ][ $handle ] );
+						continue;
 					}
-
-					// The source comes from a plugin.
-					foreach ( $plugins as $active_plugin ) {
-						if ( stristr( $active_plugin, $matches[1] ) ) {
-							// It seems that we found the plugin but let's double-check.
-							$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $active_plugin );
-							if ( $plugin_data['Name'] ) {
-								// Found plugin, add it as a filter.
-								$settings['filter'] = $plugin_data['Name'];
-							}
-							break;
+	
+					// Remove unused fields.
+					unset( $asset['args'] );
+					unset( $asset['deps'] );
+					unset( $asset['extra'] );
+					unset( $asset['textdomain'] );
+					unset( $asset['translations_path'] );
+					unset( $asset['ver'] );
+	
+					$settings = array(
+						'component' => '',
+						'extension' => 'OTHER',
+						'filter'    => '',
+						'isLocal'   => Minify\Minify_Group::is_src_local( $asset['src'] ),
+					);
+	
+					$asset['compressedSize'] = isset( $asset['compressed_size'] ) ? $asset['compressed_size'] : false;
+					unset( $asset['compressed_size'] );
+	
+					// Get original file size for local files that don't have it set for some reason.
+					if ( ! isset( $asset['original_size'] ) && file_exists( Utils::src_to_path( $asset['src'] ) ) ) {
+						$asset['original_size'] = number_format_i18n( filesize( Utils::src_to_path( $asset['src'] ) ) / 1000, 1 );
+					}
+	
+					// With remote assets we can't easily get the file size without doing extra remote queries.
+					if ( isset( $asset['original_size'] ) ) {
+						$asset['originalSize'] = $asset['original_size'];
+						unset( $asset['original_size'] );
+					} else {
+						$asset['originalSize'] = false;
+					}
+	
+					if ( isset( $asset['file_url'] ) ) {
+						$asset['fileUrl'] = empty( $asset['file_url'] )
+							? ''
+							: $asset['file_url'];
+						unset( $asset['file_url'] );
+					}
+	
+					$settings['disableSwitchers'] = $this->get_disabled_switchers( $asset, $type );
+	
+					if ( preg_match( '/wp-content\/themes\/(.*)\//', $asset['src'], $matches ) ) {
+						$settings['component'] = 'theme';
+						$settings['filter']    = $theme->get( 'Name' );
+					} elseif ( preg_match( '/wp-content\/plugins\/([\w\-_]*)\//', $asset['src'], $matches ) ) {
+						if ( ! function_exists( 'get_plugin_data' ) ) {
+							include_once ABSPATH . 'wp-admin/includes/plugin.php';
 						}
+	
+						// The source comes from a plugin.
+						foreach ( $plugins as $active_plugin ) {
+							if ( stristr( $active_plugin, $matches[1] ) ) {
+								// It seems that we found the plugin but let's double-check.
+								$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $active_plugin );
+								if ( $plugin_data['Name'] ) {
+									// Found plugin, add it as a filter.
+									$settings['filter'] = $plugin_data['Name'];
+								}
+								break;
+							}
+						}
+	
+						$settings['component'] = 'plugin';
 					}
-
-					$settings['component'] = 'plugin';
-				}
-
-				$extension = pathinfo( $asset['src'], PATHINFO_EXTENSION );
-				if ( false !== strpos( $asset['src'], 'fonts.googleapis.com' ) ) {
-					$settings['extension'] = 'FONT';
-				} elseif ( $extension && preg_match( '/(css)\??[a-zA-Z=0-9]*/', $extension ) ) {
-					$settings['extension'] = 'CSS';
-				} elseif ( $extension && preg_match( '/(js)\??[a-zA-Z=0-9]*/', $extension ) ) {
-					$settings['extension'] = 'JS';
-				}
-
-				// Add settings to the asset.
-				$asset['settings'] = $settings;
-
-				// If this is a Google font - move to fonts section.
-				if ( 'FONT' === $settings['extension'] ) {
-					unset( $collection[ $type ][ $handle ] );
-					$collection['fonts'][ $handle ] = $asset;
-				} else {
-					$collection[ $type ][ $handle ] = $asset;
+	
+					$extension = pathinfo( $asset['src'], PATHINFO_EXTENSION );
+					if ( false !== strpos( $asset['src'], 'fonts.googleapis.com' ) ) {
+						$settings['extension'] = 'FONT';
+					} elseif ( $extension && preg_match( '/(css)\??[a-zA-Z=0-9]*/', $extension ) ) {
+						$settings['extension'] = 'CSS';
+					} elseif ( $extension && preg_match( '/(js)\??[a-zA-Z=0-9]*/', $extension ) ) {
+						$settings['extension'] = 'JS';
+					}
+	
+					// Add settings to the asset.
+					$asset['settings'] = $settings;
+	
+					// If this is a Google font - move to fonts section.
+					if ( 'FONT' === $settings['extension'] ) {
+						unset( $collection[ $type ][ $handle ] );
+						$collection['fonts'][ $handle ] = $asset;
+					} else {
+						$collection[ $type ][ $handle ] = $asset;
+					}
 				}
 			}
 		}

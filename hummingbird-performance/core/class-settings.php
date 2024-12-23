@@ -82,75 +82,84 @@ class Settings {
 	public static function get_default_settings() {
 		$defaults = array(
 			'minify'      => array(
-				'enabled'                            => false,
-				'use_cdn'                            => true,
-				'delay_js'                           => false,
-				'critical_css'                       => false,
-				'critical_css_type'                  => 'remove',
-				'critical_css_remove_type'           => 'user_interaction_with_remove',
-				'critical_css_mode'                  => '',
-				'critical_page_types'                => array(),
-				'critical_skipped_custom_post_types' => array(),
-				'above_fold_load_stylesheet_method'  => 'load_stylesheet_on_user_interaction',
-				'font_optimization'                  => false,
-				'preload_fonts'                      => '',
-				'font_swap'                          => false,
-				'font_display_value'                 => 'swap',
-				'preload_fonts_mode'                 => 'automatic',
-				'log'                                => false,
-				'file_path'                          => '',
+				'enabled'                               => false,
+				'use_cdn'                               => true,
+				'delay_js'                              => false,
+				'critical_css'                          => false,
+				'critical_css_type'                     => 'remove',
+				'critical_css_remove_type'              => 'user_interaction_with_remove',
+				'critical_css_mode'                     => '',
+				'critical_page_types'                   => array(),
+				'critical_skipped_custom_post_types'    => array(),
+				'above_fold_load_stylesheet_method'     => 'load_stylesheet_on_user_interaction',
+				'critical_css_files_exclusion'          => array(),
+				'critical_css_post_urls_exclusion'      => array(),
+				'critical_css_plugins_themes_exclusion' => array(),
+				'critical_css_keywords'                 => array(),
+				'font_optimization'                     => false,
+				'preload_fonts'                         => '',
+				'font_swap'                             => false,
+				'font_display_value'                    => 'swap',
+				'preload_fonts_mode'                    => 'automatic',
+				'log'                                   => false,
+				'file_path'                             => '',
 				// Only for multisites. Toggles minification in a subsite
 				// By default is true as if 'minify'-'enabled' is set to false, this option has no meaning.
-				'minify_blog'                        => false,
-				'view'                               => 'basic', // Accepts: 'basic' or 'advanced'.
-				'type'                               => 'speedy', // Accepts: 'speedy' or 'basic'.
-				'do_assets'                          => array( // Assets to optimize.
+				'minify_blog'                           => false,
+				'view'                                  => 'basic', // Accepts: 'basic' or 'advanced'.
+				'type'                                  => 'speedy', // Accepts: 'speedy' or 'basic'.
+				'do_assets'                             => array( // Assets to optimize.
 					'styles'  => true,
 					'scripts' => true,
 					'fonts'   => true,
 				),
 				// Only for multisite.
-				'block'                              => array(
+				'block'                                 => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'dont_minify'                        => array(
+				'dont_minify'                           => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'dont_combine'                       => array(
+				'dont_combine'                          => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'position'                           => array( // Move to footer.
+				'position'                              => array( // Move to footer.
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'defer'                              => array(
+				'defer'                                 => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'inline'                             => array(
+				'inline'                                => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'nocdn'                              => array(
+				'nocdn'                                 => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'delay_js_exclusions'                => '',
-				'delay_js_exclusion_list'            => false,
-				'delay_js_timeout'                   => 20,
-				'fonts'                              => array(),
-				'preload'                            => array(
+				'delay_js_exclusions'                   => '',
+				'delay_js_exclusion_list'               => false,
+				'delay_js_timeout'                      => 20,
+				'fonts'                                 => array(),
+				'delay_js_files_exclusion'              => array(),
+				'delay_js_post_types_exclusion'         => array(),
+				'delay_js_post_urls_exclusion'          => array(),
+				'delay_js_plugins_themes_exclusion'     => array(),
+				'delay_js_ads_tracker_exclusion'        => array(),
+				'preload'                               => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'async'                              => array(
+				'async'                                  => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'ao_completed_time'                  => '',
+				'ao_completed_time'                      => '',
 			),
 			'uptime'      => array(
 				'enabled'       => false,
@@ -291,7 +300,7 @@ class Settings {
 
 		$options = array(
 			'caching'     => array( 'expiry_css', 'expiry_javascript', 'expiry_media', 'expiry_images' ),
-			'minify'      => array( 'minify_blog', 'view', 'type', 'do_assets', 'block', 'dont_minify', 'dont_combine', 'position', 'defer', 'inline', 'nocdn', 'fonts', 'preload', 'async', 'ao_completed_time', 'delay_js', 'delay_js_exclusions', 'delay_js_exclusion_list', 'delay_js_timeout', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'font_optimization', 'above_fold_load_stylesheet_method', 'preload_fonts', 'font_swap', 'font_display_value', 'preload_fonts_mode' ),
+			'minify'      => array( 'minify_blog', 'view', 'type', 'do_assets', 'block', 'dont_minify', 'dont_combine', 'position', 'defer', 'inline', 'nocdn', 'fonts', 'preload', 'async', 'ao_completed_time', 'delay_js', 'delay_js_exclusions', 'delay_js_exclusion_list', 'delay_js_timeout', 'delay_js_files_exclusion', 'delay_js_post_types_exclusion', 'delay_js_post_urls_exclusion', 'delay_js_plugins_themes_exclusion', 'delay_js_ads_tracker_exclusion', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'font_optimization', 'above_fold_load_stylesheet_method', 'critical_css_files_exclusion', 'critical_css_post_urls_exclusion', 'critical_css_plugins_themes_exclusion', 'critical_css_keywords', 'preload_fonts', 'font_swap', 'font_display_value', 'preload_fonts_mode' ),
 			'page_cache'  => array( 'cache_blog' ),
 			'performance' => array( 'dismissed', 'reports' ),
 			'advanced'    => array( 'query_string', 'viewport_meta', 'emoji', 'post_revisions', 'prefetch', 'preconnect', 'cart_fragments' ),

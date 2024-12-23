@@ -43,7 +43,7 @@ $this->admin_notices->show_inline(
 );
 ?>
 
-<?php if ( $audit->details->items ) : ?>
+<?php if ( isset( $audit->details ) && isset( $audit->details->items ) ) : ?>
 	<table class="sui-table">
 		<thead>
 		<tr>

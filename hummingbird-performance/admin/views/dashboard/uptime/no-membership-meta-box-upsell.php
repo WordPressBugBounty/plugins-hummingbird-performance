@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="sui-notice-message">
 					<span class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></span>
 					<p><?php esc_html_e( 'Performance improvements hardly matter if your website isn’t accessible. Monitor your uptime and downtime with WPMU DEV’s Uptime Monitoring website management tool.', 'wphb' ); ?></p>
-					<p><a class="sui-button sui-button-purple" target="_blank" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dash_uptime_upsell_link' ) ); ?>">
+					<p><a class="sui-button sui-button-purple" target="_blank" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dash_uptime_upsell_link' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'dash_widget', 'cta_clicked', this.href, 'hb_uptime_upsell' );">
 							<?php esc_html_e( 'UNLOCK NOW WITH PRO', 'wphb' ); ?>
 						</a></p>
 				</div>

@@ -442,6 +442,17 @@ function Fetcher() {
 				const action = actionPrefix + 'react_minify_toggle_critical_css';
 				return request( action, { data }, 'POST' );
 			},
+
+			/**
+			 * Reset Exclusions.
+			 *
+			 * @param {string} value Reset exclusion option value.
+			 * @param {string} type  Reset exclusion option type.
+			 */
+			resetExclusions: ( value, type ) => {
+				const action = actionPrefix + 'reset_exclusions';
+				return request( action, { value, type }, 'POST' );
+			},
 		},
 
 		/**

@@ -23,12 +23,19 @@ class Delayjs extends Module {
 
 	use ModuleContract;
 
-    /**
-     * Must exclude from delay js script.
-     *
-     * @var array
-     */
-    private $must_excluded = array( 'wphb-add-delay' );
+	/**
+	 * Must exclude from delay js script.
+	 *
+	 * @var array
+	 */
+	private $must_excluded = array( 'wphb-add-delay' );
+
+	/**
+	 * Holds excluded script IDs.
+	 *
+	 * @var array
+	 */
+	public $excluded_script_ids = array();
 
 	/**
 	 * Initialize module.
@@ -53,8 +60,8 @@ class Delayjs extends Module {
 
 		// Fetch exclusion list on plugin activation.
 		add_action( 'admin_init', array( $this, 'wphb_prelaod_exclusion_lists' ) );
-
 		add_action( 'wphb_load_exclusion_list_schedule_single_event', array( $this, 'wphb_load_exclusion_list_first_time_from_api' ) );
+		add_filter( 'wphb_minify_resource', array( $this, 'filter_resource_minify' ), 10, 4 );
 	}
 
 	/**
@@ -130,6 +137,14 @@ class Delayjs extends Module {
 		}
 
 		if ( $avoid_delayjs || ( defined( 'WPHBDONOTDELAYJS' ) && WPHBDONOTDELAYJS ) || Utils::is_amp() || Utils::wphb_is_page_builder() || is_preview() || is_customize_preview() ) {
+			return false;
+		}
+
+		if ( Utils::get_module( 'exclusions' )->is_current_post_type_excluded() ) {
+			return false;
+		}
+
+		if ( Utils::get_module( 'exclusions' )->is_current_page_excluded() ) {
 			return false;
 		}
 
@@ -228,6 +243,19 @@ class Delayjs extends Module {
 			return $html;
 		}
 
+		return $this->add_delay_to_scripts( $html );
+	}
+
+	/**
+	 * Adds delay JS attribute to the page html.
+	 *
+	 * @since 3.11.0
+	 *
+	 * @param string $html Html for the page.
+	 *
+	 * @return string
+	 */
+	public function add_delay_to_scripts( $html ) {
 		$replaced_html = preg_replace_callback(
 			'/<\s*script\s*(?<attr>[^>]*?)?>(?<content>.*?)?<\s*\/\s*script\s*>/ims',
 			array(
@@ -270,38 +298,33 @@ class Delayjs extends Module {
 	 * @return array
 	 */
 	public function wphb_find_delay_js_exclude() {
-		$options             = Utils::get_module( 'minify' )->get_options();
-		$delay_js_exclusions = $options['delay_js_exclusions'];
-
-		if ( ! is_array( $delay_js_exclusions ) ) {
-			$delay_js_exclusions = explode( "\n", $delay_js_exclusions );
-		}
-
-		$delay_js_exclusions = array_filter( $delay_js_exclusions );
-
-		if ( ! $delay_js_exclusions ) {
-			$delay_js_exclusions = array();
-		}
-
-		$excluded = (array) $this->get_pre_defined_exclusion_list();
-		$excluded = array_unique( array_merge( $excluded, $delay_js_exclusions ) );
-		$excluded = apply_filters( 'wphb_delay_js_exclusions', $excluded );
-		$excluded = array_map( array( $this, 'wphb_clean_scripts' ), $excluded );
-
-		return $excluded;
+		return Utils::get_module( 'exclusions' )->get_combined_asset_path_exclusion_list_for_delay_js();
 	}
 
 	/**
-	 * Cleans JS scripts.
+	 * Filter minified resources.
 	 *
-	 * @since 3.5.0
+	 * @param bool   $value   Current value.
+	 * @param string $handle  Resource handle.
+	 * @param string $type    Script or style.
+	 * @param string $url     Script URL.
 	 *
-	 * @param array $value Script src value.
-	 *
-	 * @return string
+	 * @return bool
 	 */
-	public function wphb_clean_scripts( $value ) {
-		return trim( str_replace( array( '+', '?ver', '#' ), array( '\+', '\?ver', '\#' ), $value ) );
+	public function filter_resource_minify( $value, $handle, $type, $url ) {
+		if ( $this->is_delay_enable() && 'scripts' === $type ) {
+			$patterns = Utils::get_module( 'exclusions' )->get_combined_asset_path_exclusion_list_for_delay_js();
+			if ( empty( $patterns ) ) {
+				return $value;
+			}
+
+			$combined_pattern = '#(' . implode( '|', array_map( 'preg_quote', $patterns ) ) . ')#i';
+			if ( preg_match( $combined_pattern, $url ) ) {
+				$this->excluded_script_ids[] = $handle;
+			}
+		}
+
+		return $value;
 	}
 
 	/**
@@ -314,12 +337,23 @@ class Delayjs extends Module {
 	 * @return string
 	 */
 	public function wphb_replace_scripts( $matches ) {
-		$excluded = $this->wphb_find_delay_js_exclude();
+		$excluded_patterns = $this->wphb_find_delay_js_exclude();
+		$excluded_ids      = $this->excluded_script_ids;
 
-		foreach ( $excluded as $pattern ) {
-			if ( preg_match( "#{$pattern}#i", $matches[0] ) ) {
+		// Merge patterns and IDs into a single list.
+		$exclusions = array_merge(
+			$excluded_patterns,
+			$excluded_ids
+		);
+
+		foreach ( $exclusions as $item ) {
+			if ( preg_match( "#{$item}#i", $matches[0] ) ) {
 				return $matches[0];
 			}
+		}
+
+		if ( apply_filters( 'wphb_do_not_delay_inline_scripts', false ) && isset( $matches['attr'] ) && ! preg_match( '/src=["\']?([^"\'>]+)/', $matches['attr'] ) ) {
+			return $matches[0];
 		}
 
 		$matches['attr'] = trim( $matches['attr'] );

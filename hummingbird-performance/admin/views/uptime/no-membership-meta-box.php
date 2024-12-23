@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</p>
 
-	<a class="sui-button sui-button-purple" role="button" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_uptime_upgrade_button' ) ); ?>" target="_blank">
+	<a class="sui-button sui-button-purple" role="button" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_uptime_upgrade_button' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'uptime_page', 'cta_clicked', this.href, 'hb_uptime_upsell' );" target="_blank">
 		<?php esc_html_e( 'Upgrade to Pro', 'wphb' ); ?>
 	</a>
 </div>

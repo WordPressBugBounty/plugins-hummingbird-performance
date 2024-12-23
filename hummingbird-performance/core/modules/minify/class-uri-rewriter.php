@@ -127,7 +127,7 @@ class URI_Rewriter {
 		}
 
 		// analyze URI (non root-relative).
-		if ( '/' !== $uri[0]                          // root-relative.
+		if ( isset( $uri[0] ) && '/' !== $uri[0]                          // root-relative.
 			&& false === strpos( $uri, '//' )  // protocol (non-data).
 			&& 0 !== strpos( $uri, 'data:' )   // data protocol.
 		) {
@@ -146,7 +146,7 @@ class URI_Rewriter {
 					$uri           = $root . self::remove_dots( $root_relative );
 				}
 			}
-		} elseif ( '/' === $uri[0]                            // root-relative.
+		} elseif ( isset( $uri[0] ) && '/' !== $uri[0]                            // root-relative.
 					&& false === strpos( $uri, '//' )  // protocol (non-data).
 					&& 0 !== strpos( $uri, 'data:' )   // data protocol.
 					&& null !== self::$prepend_path

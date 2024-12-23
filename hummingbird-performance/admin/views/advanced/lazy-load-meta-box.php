@@ -342,7 +342,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- Smush not installed -->
 	<?php if ( $can_install_plugin && ! $is_smush_installed ) : ?>
 		<?php $show_smush_box = true; ?>
-		<a style="display: block; color: #17A8E3; margin-top: 10px;" href="<?php echo esc_url( Utils::get_link( 'smush' ) ); ?>" class="upsell-action-link" id="smush-install">
+		<a style="display: block; color: #17A8E3; margin-top: 10px;" href="<?php echo esc_url( Utils::get_link( 'smush' ) ); ?>" class="upsell-action-link" id="smush-install" onclick="window.WPHB_Admin.dashboard.trackSmushUpsell( event, this, 'advanced_tools_lazy_load_install' );">
 			<?php
 			/* translators: %s - plugin name */
 			printf( esc_html__( 'Install %s', 'wphb' ), esc_attr( $smush_plugin_name ) );
@@ -353,7 +353,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		$show_smush_box = true;
 		?>
-		<a style="display: block; color: #17A8E3; margin-top: 10px;" href="<?php echo esc_url( $smush_activate_url ); ?>" class="upsell-action-link" id="smush-activate">
+		<a style="display: block; color: #17A8E3; margin-top: 10px;" href="<?php echo esc_url( $smush_activate_url ); ?>" class="upsell-action-link" id="smush-activate" onclick="window.WPHB_Admin.dashboard.trackSmushUpsell( event, this, 'advanced_tools_lazy_load_activate' );">
 			<?php
 			/* translators: %s - Plugin name */
 			printf( esc_html__( 'Activate %s', 'wphb' ), esc_attr( $smush_installed_plugin_name ) );

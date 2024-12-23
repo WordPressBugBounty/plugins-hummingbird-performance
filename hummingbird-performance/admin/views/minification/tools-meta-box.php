@@ -42,6 +42,7 @@ if ( ! $critical_css_mode ) {
 	$critical_css_mode = ( $css ? 'manual_css' : 'critical_css' );
 }
 
+$this->modal( 'reset-exclusions' );
 ?>
 
 <input type="hidden" name="critical_css_mode" id="critical_css_mode" value="<?php echo esc_attr( $critical_css_mode ); ?>" />
@@ -88,9 +89,6 @@ if ( ! $critical_css_mode ) {
 				<label class="sui-label" for="delay_js_exclude" style="margin-top: 15px">
 					<?php esc_html_e( 'Timeout', 'wphb' ); ?>
 				</label>
-				<span class="sui-description sui-toggle-description">
-					<?php esc_html_e( 'Set a timeout in seconds that the scripts will be loaded if no user interaction has been detected.', 'wphb' ); ?>
-				</span>
 				<select name="delay_js_timeout" id="delay_js_timeout">
 					<?php
 					$delay_js_timeout_options = array(
@@ -111,21 +109,99 @@ if ( ! $critical_css_mode ) {
 						</option>
 					<?php endforeach; ?>
 				</select>
-
-				<label class="sui-label" for="delay_js_exclude" style="margin-top: 15px">
-					<?php esc_html_e( 'Excluded JavaScript Files ', 'wphb' ); ?>
+				<span class="sui-description sui-toggle-description">
+					<?php esc_html_e( 'Set a timeout in seconds that the scripts will be loaded if no user interaction has been detected.', 'wphb' ); ?>
+				</span>
+				<?php $exclusion_settings = Utils::get_module( 'exclusions' )->get_delay_js_exclusion_settings(); ?>
+				<label class="sui-label sui-margin-top">
+					<?php esc_html_e( 'Exclusions', 'wphb' ); ?>
 				</label>
-				<textarea class="sui-form-control" id="delay_js_exclude" name="delay_js_exclude" placeholder="/wp-content/themes/some-theme/jsfile.js
-	jsfile
-	script id"><?php echo esc_html( $delay_js_excludes ); ?></textarea>
-				<?php
-				printf( /* translators: %1$s - jsfile, %2$s - jsfile with url, %3$s - script id */
-					esc_html__( 'Specify the URLs or keywords that should be excluded from delaying execution (one per line). E.g. %1$s or %2$s or %3$s', 'wphb' ),
-					'<b>jsfile</b>',
-					'<b>/wp-content/themes/some-theme/jsfile.js</b>',
-					'<b>script id</b>'
-				);
-				?>
+				<table class="sui-table sui-accordion wphb-mt-5px">
+					<tbody>
+						<tr class="sui-accordion-item">
+							<td class="sui-table-item-title">
+								<?php esc_html_e( 'Delay JS Exclusions', 'wphb' ); ?>
+								<span class="sui-accordion-open-indicator" aria-label="Expand">
+									<span class="sui-icon-chevron-down" aria-hidden="true"></span>
+								</span>
+							</td>
+						</tr>
+						<tr class="sui-accordion-item-content">
+							<td>
+								<div class="sui-box" tabindex="0">
+									<div class="sui-box-body">
+										<div class="sui-description wphb-mb-15px"><?php esc_html_e( 'Certain sensitive resources are skipped from optimizations by default. Add custom exclusions only if necessary.', 'wphb' ); ?></div>
+										<div class="sui-form-field flex wphb-exclusion-type" style="margin-bottom: 5px;">
+											<label class="sui-label" for="delay_js_exclusion_options" style="margin-top: 15px">
+												<?php esc_html_e( 'Exclusion Type ', 'wphb' ); ?>
+											</label>
+											<select id="delay_js_exclusion_options" name="delay_js_exclusion_options" class="sui-select sui-select-inline" data-width="270px">
+												<?php
+												foreach ( $exclusion_settings as $option_key => $val ) {
+													echo '<option data-hb-exclusion-type="' . esc_attr( $val['exclusion_name'] ) . '" value="' . esc_attr( $option_key ) . '">' . esc_html( $val['title'] ) . '</option>'; // WPCS: XSS ok.
+												}
+												?>
+											</select>
+											<a href="#" class="sui-button sui-button-ghost sui-button-red sui-button-icon-left reset-delay-exclusion-modal" id="delay_js" style="float: right;margin-top: 3px;" onclick="WPHB_Admin.minification.confirmReset( this )">
+												<span class="sui-icon-undo" aria-hidden="true"></span>
+												<?php esc_html_e( 'Reset', 'wphb' ); ?>
+											</a>
+										</div>
+										<label class="sui-label wphb-mt-10px">
+											<?php esc_html_e( 'Active Exclusions', 'wphb' ); ?>
+										</label>
+										<?php
+										foreach ( $exclusion_settings as $key => $setting_data ) {
+											// Switch based on type.
+											switch ( $setting_data['type'] ) {
+												case 'all_exclusion':
+													?>
+													<div id="<?php echo esc_attr( $key ); ?>" class="js_exclusion_container sui-form-field <?php echo esc_attr( $setting_data['class'] ); ?>" bis_skin_checked="1">
+														<select name="<?php echo esc_attr( $key ); ?>[]" id="item_<?php echo esc_attr( $key ); ?>" class="sui-select" multiple="">
+															<?php
+															if ( ! empty( $setting_data['value'] ) ) {
+																foreach ( $setting_data['value'] as $label => $values ) {
+																	foreach ( $values as $option_key => $val ) {
+																		$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
+																		$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
+																		echo '<option data-hb-exclusion-type="' . esc_attr( $label ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
+																	}
+																}
+															}
+															?>
+														</select>
+														<p id="<?php echo esc_attr( $key ); ?>-helper" class="sui-description"><?php echo esc_html( $setting_data['description'] ); ?></p>
+													</div>
+													<?php
+													break;
+												case 'select':
+													?>
+													<div id="<?php echo esc_attr( $key ); ?>" class="js_exclusion_container sui-form-field <?php echo esc_attr( $setting_data['class'] ); ?>" bis_skin_checked="1">
+														<select name="<?php echo esc_attr( $key ); ?>[]" id="item_<?php echo esc_attr( $key ); ?>" class="sui-select" multiple="multiple">
+															<?php
+															if ( ! empty( $setting_data['value'] ) ) {
+																foreach ( $setting_data['value'] as $option_key => $val ) {
+																	$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
+																	$option_key      = 'delay_js_exclusions' === $key ? $val : $option_key;
+																	$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
+																	echo '<option data-hb-exclusion-type="' . esc_attr( $setting_data['exclusion_name'] ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
+																}
+															}
+															?>
+														</select>
+														<p id="<?php echo esc_attr( $key ); ?>-helper" class="sui-description"><?php echo esc_html( $setting_data['description'] ); ?></p>
+													</div>
+													<?php
+													break;
+											}
+										}
+										?>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</span>
 		</div>
 	</div>
@@ -264,12 +340,15 @@ if ( ! $critical_css_mode ) {
 					$cs_type_remove_notice_classes[] = 'sui-hidden';
 				}
 				?>
-				<!-- Begin -->
-				<table class="sui-table sui-accordion">
+				<?php $exclusion_settings = Utils::get_module( 'exclusions' )->get_critical_css_exclusion_settings(); ?>
+				<label class="sui-label sui-margin-top">
+					<?php esc_html_e( 'Exclusions/Inclusions', 'wphb' ); ?>
+				</label>
+				<table class="sui-table sui-accordion wphb-mt-5px">
 					<tbody>
-						<tr class="sui-accordion-item sui-table-item-first">
+						<tr class="sui-accordion-item">
 							<td class="sui-table-item-title">
-								<?php esc_html_e( 'Post type', 'wphb' ); ?>
+								<?php esc_html_e( 'Critical CSS Exclusions', 'wphb' ); ?>
 								<span class="sui-accordion-open-indicator" aria-label="Expand">
 									<span class="sui-icon-chevron-down" aria-hidden="true"></span>
 								</span>
@@ -279,36 +358,72 @@ if ( ! $critical_css_mode ) {
 							<td>
 								<div class="sui-box" tabindex="0">
 									<div class="sui-box-body">
-										<label class="sui-label">
-											<?php esc_html_e( 'Toggling on will include the Critical CSS generation for these pages', 'wphb' ); ?>
+										<div class="sui-description wphb-mb-15px"><?php esc_html_e( 'Certain sensitive resources are skipped from optimizations by default. Add custom exclusions only if necessary.', 'wphb' ); ?></div>
+										<div class="sui-form-field flex wphb-exclusion-type" style="margin-bottom: 5px;">
+											<label class="sui-label" for="critical_css_exclusion_options" style="margin-top: 15px">
+												<?php esc_html_e( 'Exclusion Type ', 'wphb' ); ?>
+											</label>
+											<select id="critical_css_exclusion_options" name="critical_css_exclusion_options" class="sui-select sui-select-inline" data-width="270px">
+												<?php
+												foreach ( $exclusion_settings as $option_key => $val ) {
+													echo '<option data-hb-exclusion-type="' . esc_attr( $val['exclusion_name'] ) . '" value="' . esc_attr( $option_key ) . '">' . esc_html( $val['title'] ) . '</option>'; // WPCS: XSS ok.
+												}
+												?>
+											</select>
+											<a href="#" class="sui-button sui-button-ghost sui-button-red sui-button-icon-left reset-critical-exclusion-modal" id="critical_css" style="float: right;margin-top: 3px;" onclick="WPHB_Admin.minification.confirmReset( this )">
+												<span class="sui-icon-undo" aria-hidden="true"></span>
+												<?php esc_html_e( 'Reset', 'wphb' ); ?>
+											</a>
+										</div>
+										<label class="sui-label wphb-mt-10px">
+											<?php esc_html_e( 'Active Exclusions', 'wphb' ); ?>
 										</label>
 										<?php
-										foreach ( $pages as $page_type => $page_name ) :
-											?>
-											<div class="wphb-dash-table-row">
-												<div><?php echo esc_html( $page_name ); ?></div>
-												<?php if ( 'home' === $page_type && $blog_is_frontpage ) : ?>
-													<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Your blog is your frontpage', 'wphb' ); ?></span>
-												<?php else : ?>
-													<span class="sub"><?php echo esc_html( $page_type ); ?></span>
-													<label class="sui-toggle">
-														<input type="checkbox" name="critical_page_types[<?php echo esc_attr( $page_type ); ?>]" id="<?php echo esc_attr( $page_type ); ?>" <?php checked( in_array( $page_type, $settings['critical_page_types'], true ) ); ?>>
-														<span class="sui-toggle-slider"></span>
-													</label>
-												<?php endif; ?>
-											</div>
-										<?php endforeach; ?>
-										<?php foreach ( $custom_post_types  as $custom_post_type ) : ?>
-											<div class="wphb-dash-table-row">
-												<div><?php echo esc_html( $custom_post_type->label ); ?></div>
-												<span class="sub"><?php echo esc_html( $custom_post_type->name ); ?></span>
-												<input type="hidden" name="critical_skipped_custom_post_types[<?php echo esc_attr( $custom_post_type->name ); ?>]" value="1">
-												<label class="sui-toggle">
-													<input type="checkbox" name="critical_skipped_custom_post_types[<?php echo esc_attr( $custom_post_type->name ); ?>]" id="<?php echo esc_attr( $custom_post_type->name ); ?>" <?php checked( ! in_array( $custom_post_type->name, $settings['critical_skipped_custom_post_types'], true ) ); ?> value="0">
-													<span class="sui-toggle-slider"></span>
-												</label>
-											</div>
-										<?php endforeach; ?>
+										foreach ( $exclusion_settings as $key => $setting_data ) {
+											// Switch based on type.
+											switch ( $setting_data['type'] ) {
+												case 'all_exclusion':
+													?>
+													<div id="<?php echo esc_attr( $key ); ?>" class="critical_css_exclusion_container sui-form-field <?php echo esc_attr( $setting_data['class'] ); ?>" bis_skin_checked="1">
+														<select name="<?php echo esc_attr( $key ); ?>[]" id="item_<?php echo esc_attr( $key ); ?>" class="sui-select" multiple="">
+															<?php
+															if ( ! empty( $setting_data['value'] ) ) {
+																foreach ( $setting_data['value'] as $label => $values ) {
+																	foreach ( $values as $option_key => $val ) {
+																		$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
+																		$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
+																		echo '<option data-hb-exclusion-type="' . esc_attr( $label ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
+																	}
+																}
+															}
+															?>
+														</select>
+														<p id="<?php echo esc_attr( $key ); ?>-helper" class="sui-description"><?php echo esc_html( $setting_data['description'] ); ?></p>
+													</div>
+													<?php
+													break;
+												case 'select':
+													?>
+													<div id="<?php echo esc_attr( $key ); ?>" class="critical_css_exclusion_container sui-form-field <?php echo esc_attr( $setting_data['class'] ); ?>" bis_skin_checked="1">
+														<select name="<?php echo esc_attr( $key ); ?>[]" id="item_<?php echo esc_attr( $key ); ?>" class="sui-select" multiple="">
+															<?php
+															if ( ! empty( $setting_data['value'] ) ) {
+																foreach ( $setting_data['value'] as $option_key => $val ) {
+																	$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
+																	$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
+																	$option_key      = 'critical_css_keywords' === $key ? $val : $option_key;
+																	echo '<option data-hb-exclusion-type="' . esc_attr( $setting_data['exclusion_name'] ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
+																}
+															}
+															?>
+														</select>
+														<p id="<?php echo esc_attr( $key ); ?>-helper" class="sui-description"><?php echo esc_html( $setting_data['description'] ); ?></p>
+													</div>
+													<?php
+													break;
+											}
+										}
+										?>
 									</div>
 								</div>
 							</td>

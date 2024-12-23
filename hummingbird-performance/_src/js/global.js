@@ -125,9 +125,9 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 				require( './mixpanel' );
 			}
 
-			upsellSubmenuLink.addEventListener( 'click', () => {
-				window.wphbMixPanel.trackProUpsell( 'pro_upsell', 'cta_clicked' );
-			});	
+			upsellSubmenuLink.addEventListener( 'click', ( event ) => {
+				window.wphbMixPanel.trackHBUpsell( 'pro_general', 'submenu', 'cta_clicked', event.currentTarget.href, 'hb_pro_upsell' );
+			});
 		},
 
 		/**

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
+<p><?php echo esc_html( Utils::get_page_cache_description() ); ?></p>
 
 <?php
 $notice = Utils::is_member() ? esc_html__( 'Static Server Cache is currently active.', 'wphb' ) : esc_html__( 'Static Server Cache is currently active. If you wish to update settings or switch to Local Page Cache, please ensure you are connected to the WPMU DEV Dashboard plugin.', 'wphb' );

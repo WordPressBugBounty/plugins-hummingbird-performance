@@ -45,7 +45,7 @@ domReady( function() {
 			<TutorialsSlider
 				category="11234"
 				title={ __( 'Tutorials', 'wphb' ) }
-				viewAll="https://wpmudev.com/blog/tutorials/tutorial-category/hummingbird-pro/"
+				viewAll={ getLink( 'tutorialsUTM' ) }
 				onCloseClick={ hideTutorials }
 			/>,
 			tutorialsDiv

@@ -80,7 +80,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<p>
 						<?php esc_html_e( 'Stay on top of potential performance issues with scheduled automatic reports, sent directly to your inbox. Get reports as part of a WPMU DEV membership. Unlock now with Pro.', 'wphb' ); ?>
 						<br/>
-						<a href="<?php echo esc_url( Utils::get_link( 'plugin', 'notifications' ) ); ?>" class="sui-button sui-button-purple" style="margin-top: 10px" target="_blank">
+						<a href="<?php echo esc_url( Utils::get_link( 'plugin', 'notifications' ) ); ?>" class="sui-button sui-button-purple" style="margin-top: 10px" target="_blank" onclick="window.wphbMixPanel.trackHBUpsell( 'notifications', 'notifications_page', 'cta_clicked', this.href, 'hb_notifications_upsell' );">
 							<?php esc_html_e( 'Upgrade to Pro', 'wphb' ); ?>
 						</a>
 					</p>

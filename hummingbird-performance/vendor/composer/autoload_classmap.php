@@ -77,6 +77,7 @@ return array(
     'Hummingbird\\Core\\Modules\\Cloudflare' => $baseDir . '/core/modules/class-cloudflare.php',
     'Hummingbird\\Core\\Modules\\Critical_Css' => $baseDir . '/core/modules/class-critical-css.php',
     'Hummingbird\\Core\\Modules\\Delayjs' => $baseDir . '/core/modules/class-delayjs.php',
+    'Hummingbird\\Core\\Modules\\Exclusions' => $baseDir . '/core/modules/class-exclusions.php',
     'Hummingbird\\Core\\Modules\\Gravatar' => $baseDir . '/core/modules/class-gravatar.php',
     'Hummingbird\\Core\\Modules\\Gzip' => $baseDir . '/core/modules/class-gzip.php',
     'Hummingbird\\Core\\Modules\\Minify' => $baseDir . '/core/modules/class-minify.php',

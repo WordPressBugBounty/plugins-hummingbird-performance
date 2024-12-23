@@ -32,9 +32,10 @@ import Fetcher from './utils/fetcher';
 		 * @param {string} location Location.
 		 * @param {string} action   Action.
 		 * @param {string} utmLink  UTM link.
+		 * @param {string} evenName Event name.
 		 */
-		trackHBUpsell( feature, location, action, utmLink ) {
-			this.track( 'hb_upsell_triggered', {
+		trackHBUpsell( feature, location, action, utmLink, evenName = 'hb_upsell_triggered' ) {
+			this.track( evenName, {
 				Feature: feature,
 				Location: location,
 				'User Action': action,
@@ -103,7 +104,8 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track Font Optimization event.
 		 *
-		 * @param {object} properties Properties.
+		 * @param {string} updateType Properties.
+		 * @param {string} feature    Feature.
 		 */
 		trackFontOptimizationEvent( updateType, feature ) {
 			if ( 'activate' === updateType ) {
@@ -118,20 +120,18 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track Critical Upsell event.
 		 *
-		 * @param {string} updateType       Update type.
-		 * @param {string} location         Location.
-		 * @param {string} mode             Mode.
-		 * @param {string} settingsModified Settings modified.
-		 * @param {string} settingsDefault  Settings default.
+		 * @param {object} properties Properties.
 		 */
-		trackCriticalCSSEvent( updateType, location, mode, settingsModified, settingsDefault ) {
-			if ( 'activate' === updateType ) {
+		trackCriticalCSSEvent( properties ) {
+			if ( 'activate' === properties.update_type ) {
 				this.enableFeature( 'Critical Css' );
 			}
 
-			if ( 'deactivate' === updateType ) {
+			if ( 'deactivate' === properties.update_type ) {
 				this.disableFeature( 'Critical Css' );
 			}
+
+			this.track( 'critical_css_updated', properties );
 
 			this.track( 'critical_css_updated', {
 				'update_type': updateType,

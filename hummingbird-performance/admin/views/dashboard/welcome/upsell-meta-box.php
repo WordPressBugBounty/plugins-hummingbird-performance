@@ -33,6 +33,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <br>
 
-<a href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dashboard_upsellwidget_button' ) ); ?>" class="sui-button sui-button-purple" target="_blank">
+<a href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dashboard_upsellwidget_button' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'pro_general', 'dash_widget', 'cta_clicked', this.href, 'hb_pro_upsell' );" class="sui-button sui-button-purple" target="_blank">
 	<?php esc_html_e( 'UNLOCK NOW WITH PRO', 'wphb' ); ?>
 </a>

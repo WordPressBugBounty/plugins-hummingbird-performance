@@ -136,7 +136,7 @@ class Minification extends Page {
 						'chat'  => Utils::get_link( 'chat' ),
 						'forum' => Utils::get_link( 'support' ),
 					),
-					'cdnUpsell'      => Utils::get_link( 'plugin', 'hummingbird_topsummary_cdnbutton' ),
+					'cdnUpsell'      => Utils::get_link( 'plugin', 'hummingbird_ao_summary_cdn_button' ),
 					'delayUpsell'    => Utils::get_link( 'plugin', 'hummingbird_delay_js_ao_summary' ),
 					'criticalUpsell' => Utils::get_link( 'plugin', 'hummingbird_criticalcss_ao_summary' ),
 					'isEoPage'       => 'tools' === $current_page ? true : false,

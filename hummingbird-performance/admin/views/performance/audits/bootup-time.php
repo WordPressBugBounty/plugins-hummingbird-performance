@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$this->admin_notices->show_inline(
 		sprintf( /* translators: %s - number of seconds */
 			esc_html__( 'Your JavaScript bootup time is %s. Following are the scripts behind the high bootup time.', 'wphb' ),
-			esc_html( $audit->displayValue )
+			isset( $audit->displayValue ) ? esc_html( $audit->displayValue ) : 'NA'
 		),
 		\Hummingbird\Core\Modules\Performance::get_impact_class( $score )
 	);

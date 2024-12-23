@@ -58,8 +58,8 @@ class Sources_Collector {
 	 */
 	public function save_collection() {
 		if ( $this->collection_updated ) {
-			update_option( self::$styles_option, $this->collected['styles'] );
-			update_option( self::$scripts_option, $this->collected['scripts'] );
+			update_option( self::$styles_option, $this->collected['styles'], 'no' );
+			update_option( self::$scripts_option, $this->collected['scripts'], 'no' );
 		}
 	}
 
@@ -133,8 +133,8 @@ class Sources_Collector {
 
 		unset( $collection[ $type ][ $handle ] );
 
-		update_option( self::$styles_option, $collection['styles'] );
-		update_option( self::$scripts_option, $collection['scripts'] );
+		update_option( self::$styles_option, $collection['styles'], 'no' );
+		update_option( self::$scripts_option, $collection['scripts'], 'no' );
 	}
 
 }

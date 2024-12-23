@@ -27,6 +27,25 @@ class Divi {
 			add_filter( 'wphb_combine_resource', array( $this, 'wphb_et_maybe_exclude_divi_essential_scripts' ), 10, 3 );
 			add_filter( 'wphb_minification_display_enqueued_file', array( $this, 'wphb_et_maybe_exclude_divi_essential_scripts' ), 10, 3 );
 			add_filter( 'wphb_post_cache_purged', array( $this, 'wphb_post_cache_purged' ), 10, 2 );
+			add_action( 'wphb_ajax_get_comments_template', array( $this, 'wphb_maybe_load_divi_core_builder_functions' ) );
+		}
+	}
+
+	/**
+	 * Load Divi Core builder functions file if not already loaded.
+	 */
+	public function wphb_maybe_load_divi_core_builder_functions() {
+		if ( function_exists( 'et_custom_comments_display' ) ) {
+			return;
+		}
+
+		if ( ! defined( 'ET_BUILDER_DIR' ) ) {
+			return;
+		}
+
+		$target_file = ET_BUILDER_DIR . 'functions.php';
+		if ( file_exists( $target_file ) ) {
+			require_once $target_file;
 		}
 	}
 

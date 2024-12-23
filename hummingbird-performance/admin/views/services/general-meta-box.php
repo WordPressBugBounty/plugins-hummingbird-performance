@@ -26,13 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php esc_html_e( 'Optimize your site effortlessly with our Speed Optimization experts. Achieve top scores quickly, saving you time and ensuring peak performance for you or your clients. Enjoy faster load times, enhanced site performance, and a superior user experience.', 'wphb' ); ?>
 	</p>
 
-	<a href="<?php echo esc_url( Utils::get_link( 'expert-services', 'hummingbird_services_submenu_upsell' ) ); ?>" target="_blank" class="sui-button sui-button-blue" onclick="wphbMixPanel.trackProUpsell( 'expert_services_upsell', 'cta_clicked' )">
+	<a href="<?php echo esc_url( Utils::get_link( 'expert-services', 'hummingbird_services_submenu_upsell' ) ); ?>" target="_blank" class="sui-button sui-button-blue" onclick="window.wphbMixPanel.trackHBUpsell( 'expert_services_performance', 'submenu', 'cta_clicked', this.href, 'expert_services_upsell' );">
 		<?php esc_html_e( 'Learn More', 'wphb' ); ?>
 		<span class="sui-icon-open-new-window" aria-hidden="true" style="margin-left: -3px;"></span>
 	</a>
 </div>
 <script>
 	jQuery(document).ready( function() {
-		window.wphbMixPanel.trackProUpsell( 'expert_services_upsell', 'page_viewed' );
+		window.wphbMixPanel.trackHBUpsell( 'expert_services_performance', 'submenu', 'page_viewed', "<?php echo esc_url( Utils::get_link( 'expert-services', 'hummingbird_services_submenu_upsell' ) ); ?>", 'expert_services_upsell' );
 	} );
 </script>

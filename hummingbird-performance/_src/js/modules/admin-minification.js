@@ -1,5 +1,6 @@
 /* global WPHB_Admin */
 /* global wphb */
+/* global ajaxurl */
 
 /**
  * Asset Optimization scripts.
@@ -14,8 +15,8 @@ import MinifyScanner from '../scanners/MinifyScanner';
 /**
  * External dependencies
  */
- let criticalAjaxInterval;
- const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
+let criticalAjaxInterval;
+const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 
 ( function( $ ) {
 	'use strict';
@@ -25,10 +26,40 @@ import MinifyScanner from '../scanners/MinifyScanner';
 		$checkFilesResultsContainer: null,
 		checkURLSList: null,
 		checkedURLS: 0,
+		SELECTORS: [
+			'#item_delay_js_post_urls_exclusion',
+			'#item_delay_js_all_exclusions',
+			'#item_delay_js_plugins_themes_exclusion',
+			'#item_delay_js_post_types_exclusion',
+			'#item_delay_js_files_exclusion',
+			'#item_delay_js_exclusions',
+			'#item_delay_js_ads_tracker_exclusion',
+			'#item_delay_js_default_exclusions',
+			'#item_critical_css_all_exclusions',
+			'#item_critical_css_files_exclusion',
+			'#item_critical_css_post_types_exclusion',
+			'#item_critical_css_post_urls_exclusion',
+			'#item_critical_css_plugins_themes_exclusion',
+			'#item_critical_css_keywords',
+		],
+		EXCLUSION_SELECTORS: [
+			'#item_delay_js_all_exclusions',
+			'#item_critical_css_all_exclusions'
+		],
+		CONTAINER_CLASSES: {
+			delayJs: '.js_exclusion_container',
+			criticalCss: '.critical_css_exclusion_container'
+		},
+		ALL_EXCLUSIONS: {
+			delayJs: 'delay_js_all_exclusions',
+			criticalCss: 'critical_css_all_exclusions'
+		},
+
+		exclusionType: 'delay_js',
 
 		init() {
 			const self = this;
-			if ('undefined' !== typeof wphb.minification.criticalStatusForQueue.status && ( 'pending' === wphb.minification.criticalStatusForQueue.status || 'processing' === wphb.minification.criticalStatusForQueue.status ) ) {
+			if ( 'undefined' !== typeof wphb.minification.criticalStatusForQueue.status && ( 'pending' === wphb.minification.criticalStatusForQueue.status || 'processing' === wphb.minification.criticalStatusForQueue.status ) ) {
 				criticalAjaxInterval = setInterval( this.criticalUpdateStatusNotice, ajaxExecutionInterval );
 			}
 
@@ -38,10 +69,17 @@ import MinifyScanner from '../scanners/MinifyScanner';
 				wphb.minification.get.currentScanStep
 			);
 
+			// Initialize exclusion selectors and event handlers.
+			this.initializeSelectorsAndEventHandlers();
+
 			// Check files button.
 			$( '#check-files' ).on( 'click', function( e ) {
 				e.preventDefault();
 				$( document ).trigger( 'check-files' );
+			} );
+
+			$( '#hb_cdn_upsell' ).on( 'click', function( e ) {
+				window.wphbMixPanel.trackHBUpsell( 'cdn', 'ao_settings_link', 'cta_clicked', e.target.href, 'hb_cdn_upsell' );
 			} );
 
 			$( document ).on( 'check-files', function() {
@@ -162,14 +200,20 @@ import MinifyScanner from '../scanners/MinifyScanner';
 					.then( ( response ) => {
 						spinner.removeClass( 'visible' );
 						if ( 'undefined' !== typeof response && response.success ) {
-							const eventUpdateSummary = new Event("reloadSummary");
-							document.getElementById("wphb-minification-tools-form").dispatchEvent(eventUpdateSummary);
+							const eventUpdateSummary = new Event( 'reloadSummary' );
+							document.getElementById( 'wphb-minification-tools-form' ).dispatchEvent( eventUpdateSummary );
 							if ( response.is_delay_value_updated ) {
 								window.wphbMixPanel.trackDelayJSEvent( {
-									'update_type': response.delay_js_update_type,
-									'Location': 'eo_settings',
-									'Timeout': response.delay_js_timeout,
-									'Excluded Files': (response.delay_js_exclude) ? 'yes' : 'no',
+									update_type: response.delay_js_update_type,
+									Location: 'eo_settings',
+									Timeout: response.delay_js_timeout,
+									'Excluded Files': ( response.delay_js_exclude ) ? 'yes' : 'no',
+									exclusions_files: response.delayJsMixpanelValues.exclusions_files,
+									exclusions_posttypes: response.delayJsMixpanelValues.exclusions_posttypes,
+									exclusions_urls: response.delayJsMixpanelValues.exclusions_urls,
+									exclusions_plugins: response.delayJsMixpanelValues.exclusions_plugins,
+									exclusions_trackers: response.delayJsMixpanelValues.exclusions_trackers,
+									exclusions_keywords: response.delayJsMixpanelValues.exclusions_keywords,
 								} );
 							}
 
@@ -182,7 +226,19 @@ import MinifyScanner from '../scanners/MinifyScanner';
 							}
 
 							if ( response.isCriticalValueUpdated ) {
-								window.wphbMixPanel.trackCriticalCSSEvent( response.updateType, response.location, response.mode, response.settingsModified, response.settingsDefault );
+								window.wphbMixPanel.trackCriticalCSSEvent( {
+									update_type: response.updateType,
+									Location: response.location,
+									mode: response.mode,
+									settings_modified: response.settingsModified,
+									settings_default: response.settingsDefault,
+									exclusions_files: response.criticalCssMixpanelValues.exclusions_files,
+									exclusions_posttypes: response.criticalCssMixpanelValues.exclusions_posttypes,
+									exclusions_urls: response.criticalCssMixpanelValues.exclusions_urls,
+									exclusions_plugins: response.criticalCssMixpanelValues.exclusions_plugins,
+									exclusions_keywords: response.criticalCssMixpanelValues.exclusions_keywords,
+									manual_inclusions: response.manualInclusion,
+								} );
 							}
 
 							if ( response.isStatusTagNeedsUpdate ) {
@@ -367,26 +423,335 @@ import MinifyScanner from '../scanners/MinifyScanner';
 		},
 
 		/**
+		 * Initialize selectors and set up event handlers for exclusions.
+		 */
+		initializeSelectorsAndEventHandlers() {
+			const self = this;
+			// Initialize all selectors
+			$( this.SELECTORS.join( ', ' ) ).each( function() {
+				// eslint-disable-next-line no-nested-ternary
+				const config = this.id.includes( 'delay_js_exclusions' ) || this.id.includes( 'critical_css_keywords' ) ? self.getSelect2ConfigForTag() : this.id.includes( 'post_urls' ) ? self.getAjaxSelectConfig() : self.getCommonSelect2Config();
+				const $select = $( this ).SUIselect2( config );
+				// Add data-hb-exclusion-type to the selected option
+				$select.on( 'select2:select select2:unselect', function( e ) {
+					const isCriticalCss = this.id.includes( 'critical_css' );
+					const $allExclusions = $( isCriticalCss ? '#item_critical_css_all_exclusions' : '#item_delay_js_all_exclusions' );
+					self.toggleSelectBoxOption( $allExclusions, e, e.type === 'select2:select' );
+					self.enableDisableResetButton();
+					$( this ).SUIselect2( 'open' );
+				} );
+			} );
+
+			// Set up event handlers
+			this.EXCLUSION_SELECTORS.forEach( ( selector ) => {
+				const containerClass = selector === '#item_delay_js_all_exclusions' ? this.CONTAINER_CLASSES.delayJs : this.CONTAINER_CLASSES.criticalCss;
+				// Combine all exclusions
+				self.combineAllExclusions( selector, containerClass );
+				// Bind select and unselect events to each exclusion selector
+				$( selector ).on( 'select2:select select2:unselect', function( e ) {
+					const isAdding = e.type === 'select2:select';
+					self.synchronizeExclusionValues( e.params.data.id, isAdding, containerClass, e );
+				} );
+			} );
+
+			$( '#delay_js_exclusion_options, #critical_css_exclusion_options' ).SUIselect2( {
+				templateSelection: ( data ) => this.formatSelectResult( data, false ),
+				templateResult: ( data ) => this.formatSelectResult( data, false ),
+				minimumResultsForSearch: Infinity,
+			} );
+
+			self.enableDisableResetButton();
+			$( 'select[name=delay_js_exclusion_options], select[name=critical_css_exclusion_options]' ).on( 'change', self.toggleExclusionBox.bind( self ) );
+		},
+
+		/**
+		 * Select or unselect a value in a select box.
+		 *
+		 * @param {jQuery}  $box         - The select box to update.
+		 * @param {Object}  element      - The selected or unselected element.
+		 * @param {boolean} shouldSelect - True to select the value, false to unselect it.
+		 */
+		toggleSelectBoxOption( $box, element, shouldSelect = true ) {
+			const selectedValue = element.id || element.params?.data?.id;
+			const text = element.text || element.params?.data?.text;
+			const hbExclusionType = element?.element?.dataset?.hbExclusionType ?? element.params?.data?.element?.dataset?.hbExclusionType ?? element.params?.data?.hbExclusionType;
+			// Check if the option exists; if not, add it with the necessary attributes
+			let $option = $box.find( `option[value="${ selectedValue }"]` );
+			if ( $option.length === 0 ) {
+				$option = $( new Option( text, selectedValue ) ).attr( 'data-hb-exclusion-type', hbExclusionType );
+				$box.append( $option );
+			}
+
+			// Toggle selection state only if there's a mismatch with shouldSelect
+			if ( $option.prop( 'selected' ) !== shouldSelect ) {
+				$option.prop( 'selected', shouldSelect );
+				$box.trigger( 'change' );
+			}
+		},
+
+		/**
+		 * Synchronize a value across all relevant exclusion boxes, adding or removing it as specified.
+		 *
+		 * @param {string}  value         - The ID of the value to be synchronized across exclusion boxes.
+		 * @param {boolean} isAdding      - True to add the value, false to remove it.
+		 * @param {string}  containerType - The type of container to target (e.g., `.js_exclusion_container`).
+		 * @param {Object}  element       - The selected or unselected element.
+		 */
+		synchronizeExclusionValues( value, isAdding = true, containerType = '.js_exclusion_container', element ) {
+			const exclusionType = element?.element?.dataset?.hbExclusionType ?? element.params?.data?.element?.dataset?.hbExclusionType ?? element.params?.data?.hbExclusionType;
+			const targetBoxId = this.getExclusionTypeData( exclusionType );
+			// Determine the correct box to target
+			const $box = containerType.includes( 'critical_css' ) ? $( `#${ targetBoxId.criticalCssBox }` ) : $( `#${ targetBoxId.delayBox }` );
+
+			// If the box doesn't exist, exit early
+			if ( ! $box.length ) {
+				return;
+			}
+
+			const currentValues = $box.val() || [];
+
+			if ( isAdding ) {
+				// Add the value if it's not already present
+				if ( ! currentValues.includes( value ) ) {
+					const $option = $box.find( `option[value="${ value }"]` );
+					$option.prop( 'selected', true );
+					$box.trigger( 'change' );
+				}
+			} else {
+				// Remove the value if it exists
+				const updatedValues = currentValues.filter( ( val ) => val !== value );
+				$box.val( updatedValues ).trigger( 'change.select2' );
+			}
+		},
+
+		/**
+		 * Get common select2 configuration.
+		 */
+		getCommonSelect2Config() {
+			return {
+				templateSelection: this.formatSelectResult.bind( this ),
+				templateResult: this.formatSelectResult.bind( this ),
+				closeOnSelect: false,
+			};
+		},
+
+		/**
+		 * Get common select2 configuration.
+		 */
+		getSelect2ConfigForTag() {
+			return {
+				...this.getCommonSelect2Config(),
+				tags: true,
+				createTag: ( params ) => {
+					// Format the newly created tag
+					const term = params.term.trim();
+					if ( term === '' ) {
+						return null;
+					}
+
+					return {
+						id: term,
+						text: term,
+						isNew: true,
+						hbExclusionType: 'keywords'
+					};
+				},
+				tokenSeparators: [ ',', ' ' ],
+				language: {
+					noResults() {
+						return wphb.strings.select2Tags;
+					}
+				},
+			};
+		},
+
+		/**
+		 * Get ajax select configuration.
+		 */
+		getAjaxSelectConfig() {
+			return {
+				...this.getCommonSelect2Config(),
+				minimumInputLength: 3,
+				ajax: {
+					url: ajaxurl,
+					method: 'POST',
+					dataType: 'json',
+					delay: 250,
+					data: ( params ) => ( {
+						action: 'wphb_search_posts',
+						nonce: wphb.nonces.HBFetchNonce,
+						query: params.term,
+					} ),
+					processResults: ( data ) => ( {
+						results: data.data.map( ( item ) => ( {
+							text: item.name,
+							id: item.id,
+							hbExclusionType: item.label,
+						} ) ),
+					} ),
+				},
+			};
+		},
+
+		/**
+		 * Toggle the exclusion box based on the selected option.
+		 *
+		 * @param {Event} e
+		 * @since 3.11.0
+		 */
+		toggleExclusionBox( e ) {
+			const { value, name } = e.target;
+			const isDelayJs = name === 'delay_js_exclusion_options';
+			const containerClass = isDelayJs ? this.CONTAINER_CLASSES.delayJs : this.CONTAINER_CLASSES.criticalCss;
+
+			$( containerClass ).addClass( 'sui-hidden' );
+			$( '#' + value ).removeClass( 'sui-hidden' );
+
+			this.enableDisableResetButton();
+		},
+
+		/**
+		 * Enable or disable the reset button based on the selected option.
+		 */
+		enableDisableResetButton() {
+			const options = [
+				{
+					selector: '#delay_js_exclusion_options', modal: '.reset-delay-exclusion-modal'
+				},
+				{
+					selector: '#critical_css_exclusion_options', modal: '.reset-critical-exclusion-modal'
+				}
+			];
+
+			options.forEach( ( { selector, modal } ) => {
+				const exclusionData = $( `#item_${ $( selector ).val() }` ).val() || '';
+				$( modal ).toggleClass( 'disabled', exclusionData.length === 0 );
+			} );
+		},
+
+		/**
+		 * Format data for select2.
+		 *
+		 * @param {Object}  data
+		 * @param {boolean} includeChevron - Whether to include the chevron icon in the label.
+		 */
+		formatSelectResult( data, includeChevron = true ) {
+			if ( ! data.id ) {
+				return data.text;
+			}
+
+			const key = data?.hbExclusionType || $( data.element ).data( 'hb-exclusion-type' );
+			const item = this.getExclusionTypeData( key );
+			let selectLabel = data.text;
+
+			if ( item ) {
+				selectLabel = item.icon + data.text;
+				if ( includeChevron ) {
+					selectLabel = item.icon + item.name + this.getIcon( 'chevron-right' ) + data.text;
+				}
+			}
+
+			return $( '<span></span>' ).html( selectLabel );
+		},
+
+		/**
+		 * Get name or icon for the key.
+		 *
+		 * @param {string} key
+		 */
+		getExclusionTypeData( key ) {
+			const dataMap = {
+				files: { name: wphb.strings.exclusionFiles, icon: this.getIcon( 'page' ), delayBox: 'item_delay_js_files_exclusion', criticalCssBox: 'item_critical_css_files_exclusion' },
+				posts: { name: wphb.strings.exclusionPostTypes, icon: this.getIcon( 'post-pin' ), delayBox: 'item_delay_js_post_types_exclusion', criticalCssBox: 'item_critical_css_post_types_exclusion' },
+				urls: { name: wphb.strings.exclusionPostUrls, icon: this.getIcon( 'link' ), delayBox: 'item_delay_js_post_urls_exclusion', criticalCssBox: 'item_critical_css_post_urls_exclusion' },
+				plugins: { name: wphb.strings.exclusionPluginThemes, icon: this.getIcon( 'plugin-2' ), delayBox: 'item_delay_js_plugins_themes_exclusion', criticalCssBox: 'item_critical_css_plugins_themes_exclusion' },
+				keywords: { name: wphb.strings.exclusionKeywords, icon: this.getIcon( 'key' ), delayBox: 'item_delay_js_exclusions', criticalCssBox: 'item_critical_css_keywords' },
+				default: { name: wphb.strings.exclusionDefault, icon: this.getIcon( 'key' ), delayBox: 'item_delay_js_exclusions', criticalCssBox: null },
+				ads: { name: wphb.strings.exclusionAds, icon: this.getIcon( 'graph-line' ), delayBox: 'item_delay_js_ads_tracker_exclusion', criticalCssBox: null },
+				default_exclusions: { name: wphb.strings.exclusionDefault, icon: this.getIcon( 'widget-settings-config' ), delayBox: null, criticalCssBox: null },
+				all_exclusions: { name: wphb.strings.exclusionAll, icon: this.getIcon( 'thumbnails' ), delayBox: null, criticalCssBox: null },
+			};
+
+			return dataMap[ key ] || null;
+		},
+
+		/**
+		 * Helper function to get icon markup.
+		 *
+		 * @param {string} iconName
+		 */
+		getIcon( iconName ) {
+			return `<span class="sui-icon sui-icon-${ iconName }" aria-hidden="true"></span>`;
+		},
+
+		/**
+		 * Combine exclusion to all exclusion box.
+		 *
+		 * @param {string} itemAllExclusionsSelector
+		 * @param {string} exclusionContainerSelector
+		 */
+		combineAllExclusions( itemAllExclusionsSelector, exclusionContainerSelector ) {
+			const self = this;
+			const itemAllExclusions = $( itemAllExclusionsSelector );
+
+			// Gather selected options from each exclusion box except the All Exclusions box
+			$( exclusionContainerSelector + ' > select' ).not( `${ itemAllExclusionsSelector }, #item_delay_js_default_exclusions` ).each( function() {
+				const $this = $( this );
+				$this.SUIselect2( 'data' ).forEach( ( option ) => {
+					if ( $this.val().includes( option.id ) ) {
+						self.toggleSelectBoxOption( itemAllExclusions, option );
+					}
+				} );
+			} );
+		},
+
+		/**
+		 * Parse confirm exclusion reset from the modal.
+		 *
+		 * @param {Object} element
+		 */
+		confirmReset( element ) {
+			this.exclusionType = [ 'delay_js', 'critical_css' ].includes( element.id ) ? element.id : null;
+			if ( this.exclusionType ) {
+				$( '[id$="_reset_modal_content"]' ).addClass( 'sui-hidden' );
+				$( `#${ this.exclusionType }_reset_modal_content` ).removeClass( 'sui-hidden' );
+				window.SUI.openModal( 'wphb-reset-exclusions-modal', 'wpbody-content' );
+			}
+		},
+
+		/**
+		 * Make an ajax call to reset the exclusion.
+		 */
+		resetExclusion() {
+			const exclusionOptions = $( `select[name=${ this.exclusionType }_exclusion_options]` ).val();
+			if ( exclusionOptions ) {
+				Fetcher.minification.resetExclusions( exclusionOptions, this.exclusionType ).then( () => {
+					window.location.reload();
+				} );
+			}
+		},
+
+		/**
 		 * Call ajax to get the critical css status for queue.
 		 *
 		 * @param {string} statusHtml
 		 */
-		 triggerCriticalStatusUpdateAjax( statusHtml ) {
+		triggerCriticalStatusUpdateAjax( statusHtml ) {
 			criticalAjaxInterval = setInterval( this.criticalUpdateStatusNotice, ajaxExecutionInterval );
 			this.criticalUpdateStatusTag( statusHtml );
-		 },
+		},
 
 		/**
 		 * Call ajax to get the critical css status for queue.
 		 */
 		criticalUpdateStatusNotice() {
 			Fetcher.minification
-			.getCriticalStatusForQueue()
-			.then( ( response ) => {
-				if ( 'undefined' !== typeof response.criticalStatusForQueue.status && 'complete' === response.criticalStatusForQueue.status ) {
-					clearInterval( criticalAjaxInterval );
-					WPHB_Admin.minification.criticalUpdateStatusTag( response.htmlForStatusTag );
-					const criticalDisplayError = 'critical_display_error_message';
+				.getCriticalStatusForQueue()
+				.then( ( response ) => {
+					if ( 'undefined' !== typeof response.criticalStatusForQueue.status && 'complete' === response.criticalStatusForQueue.status ) {
+						clearInterval( criticalAjaxInterval );
+						WPHB_Admin.minification.criticalUpdateStatusTag( response.htmlForStatusTag );
+						const criticalDisplayError = 'critical_display_error_message';
 
 					if ( 'COMPLETE' === response.criticalStatusForQueue.result ) {
 						WPHB_Admin.notices.show( getString( 'criticalGeneratedNotice' ), 'success', false );
@@ -395,6 +760,7 @@ import MinifyScanner from '../scanners/MinifyScanner';
 						window.SUI.closeNotice( 'wphb-ajax-update-notice' );
 						const errorMessage = response.criticalStatusForQueue.error_message;
 						window.wphbMixPanel.track( 'critical_css_error', {
+							mode: response.criticalMode,
 							'Error Type': response.errorCode,
 							'Error Message': errorMessage.length > 256 ? errorMessage.substring( 0, 256 ) + '...' : errorMessage
 						} );
@@ -402,7 +768,7 @@ import MinifyScanner from '../scanners/MinifyScanner';
 						document.getElementById( 'critical_error_message_tag' ).innerHTML = response.criticalErrorMessage;
 					}
 				}
-			} );
+			});
 		},
 
 		/**

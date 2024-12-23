@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				printf(
 					/* translators: %1$s: opening a tag, %2$s: closing a tag */
 					esc_html__( 'Requires %1$sWPMU DEV Hosting%2$s', 'wphb' ),
-					'<a href="' . esc_attr( Utils::get_link( 'hosting-upsell', 'dash_widget_ssc_hosting_upsell' ) ) . '" target="_blank" onclick="wphbMixPanel.trackProUpsell( \'hosting_ssc_upsell\', \'cta_clicked\', \'dash_widget\' )">',
+					'<a href="' . esc_attr( Utils::get_link( 'hosting-upsell', 'dash_widget_ssc_hosting_upsell' ) ) . '" target="_blank" onclick="window.wphbMixPanel.trackHBUpsell( \'hosting_static_cache\', \'dash_widget\', \'cta_clicked\', this.href, \'hb_hosting_upsell\' );">',
 					'<span class="sui-icon-open-new-window sui-info" aria-hidden="true"></span></a>'
 				);
 			?>

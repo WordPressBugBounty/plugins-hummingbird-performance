@@ -383,6 +383,11 @@ class SetupWizard extends React.Component {
 	trackUserConsentToggle( tracking ) {
 		this.state.api
 			.post( 'track_user_consent_toggle', tracking )
+			.then( () => {
+				if ( tracking ) {
+					window.wphbMixPanel.optIn();
+				}
+			} )
 			.catch( ( error ) => window.console.log( error ) );
 	}
 
@@ -415,6 +420,9 @@ class SetupWizard extends React.Component {
 								classes={ [ 'sui-button', 'sui-button-purple' ] }
 								target="blank"
 								url={ getLink( 'upsell' ) }
+								onClick={ ( event ) => {
+									window.wphbMixPanel.trackHBUpsell( 'pro_general', 'wizard', 'cta_clicked', event.target.href, 'hb_pro_upsell' );
+								} }
 								text={ __( 'UPGRADE TO PRO', 'wphb' ) } />
 						</Tooltip>
 					}

@@ -444,26 +444,26 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/modules/minify.jsx:54
 	__( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:400
+	// Reference: _src/react/modules/setup.jsx:405
 	__( 'Setup wizard', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:406
+	// Reference: _src/react/modules/setup.jsx:411
 	__( 'Hummingbird', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:407
+	// Reference: _src/react/modules/setup.jsx:412
 	__( 'Wizard', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:412
+	// Reference: _src/react/modules/setup.jsx:417
 	__( 'Get Hummingbird Pro for our full WordPress speed optimization suite, including uptime monitoring and enhanced CDN.', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:418
-	// Reference: _src/react/views/minify/summary.jsx:355
+	// Reference: _src/react/modules/setup.jsx:426
+	// Reference: _src/react/views/minify/summary.jsx:361
 	__( 'UPGRADE TO PRO', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:429
+	// Reference: _src/react/modules/setup.jsx:437
 	__( 'Quit wizard', 'wphb' ),
 
-	// Reference: _src/react/modules/setup.jsx:437
+	// Reference: _src/react/modules/setup.jsx:445
 	__( 'Documentation', 'wphb' ),
 
 	// Reference: _src/react/modules/tutorials.jsx:29
@@ -907,65 +907,65 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/configurations.jsx:91
 	__( 'Enable this option to optimize the delivery of your fonts so they don\'t trigger the "Eliminate render-blocking resources" recommendation in your performance tests.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:266
+	// Reference: _src/react/views/minify/summary.jsx:272
 	__( 'All assets are auto-compressed', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:276
+	// Reference: _src/react/views/minify/summary.jsx:282
 	__( 'Compression savings', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:278
+	// Reference: _src/react/views/minify/summary.jsx:284
 	__( 'Total Files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:280
+	// Reference: _src/react/views/minify/summary.jsx:286
 	__( 'Optimizing assets, this could take a while, please hold on.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:282
+	// Reference: _src/react/views/minify/summary.jsx:288
 	__( 'Optimizing', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:286
+	// Reference: _src/react/views/minify/summary.jsx:292
 	__( 'Last Generated:', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:290
+	// Reference: _src/react/views/minify/summary.jsx:296
 	__( 'Optimized', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:308
+	// Reference: _src/react/views/minify/summary.jsx:314
 	__( 'Unlock now  ', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:339
+	// Reference: _src/react/views/minify/summary.jsx:345
 	__( 'Files are compressed', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:349
+	// Reference: _src/react/views/minify/summary.jsx:355
 	__( 'Enable WPMU DEV CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:354
+	// Reference: _src/react/views/minify/summary.jsx:360
 	__( 'Host your files on WPMU DEV’s blazing-fast CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:360
+	// Reference: _src/react/views/minify/summary.jsx:366
 	__( 'The Network Admin has the WPMU DEV CDN turned on', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:365
+	// Reference: _src/react/views/minify/summary.jsx:371
 	__( 'The Network Admin has the WPMU DEV CDN turned off', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:366
+	// Reference: _src/react/views/minify/summary.jsx:372
 	// Reference: _src/react/views/setup/wizard.jsx:707
 	__( 'Disabled', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:394
+	// Reference: _src/react/views/minify/summary.jsx:400
 	__( 'Filesize reductions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:399
+	// Reference: _src/react/views/minify/summary.jsx:405
 	// Reference: _src/react/views/setup/wizard.jsx:346
 	__( 'WPMU DEV CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:410
+	// Reference: _src/react/views/minify/summary.jsx:416
 	// Reference: _src/react/views/setup/wizard.jsx:393
 	__( 'Delay JavaScript Execution', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:417
+	// Reference: _src/react/views/minify/summary.jsx:423
 	// Reference: _src/react/views/setup/wizard.jsx:610
 	__( 'Generate Critical CSS', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:418
+	// Reference: _src/react/views/minify/summary.jsx:424
 	// Reference: _src/react/views/setup/wizard.jsx:139
 	__( 'Pro', 'wphb' ),
 
@@ -1180,10 +1180,10 @@ $generated_i18n_strings = array(
 	__( 'Continue', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:839
-	__( 'Run Performance Test', 'wphb' ),
+	__( 'Go to Dashboard', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:844
-	__( 'Go to Dashboard', 'wphb' ),
+	__( 'Run Performance Test', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:876
 	__( 'Checking status', 'wphb' ),

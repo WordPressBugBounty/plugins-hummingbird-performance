@@ -136,7 +136,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 			<span class="sui-list-label"><?php esc_html_e( 'Last Down', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
 				<?php if ( ! Utils::is_member() ) : ?>
-					<a class="sui-button sui-button-purple" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dash_summary_pro_tag' ) ); ?>" target="_blank">
+					<a class="sui-button sui-button-purple" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dash_summary_pro_tag' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'dash_summary', 'cta_clicked', this.href, 'hb_uptime_upsell' );" target="_blank">
 						<?php esc_html_e( 'PRO', 'wphb' ); ?>
 					</a>
 				<?php elseif ( is_wp_error( $uptime_report ) || ( ! $uptime_active ) ) : ?>

@@ -1,14 +1,14 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.10.0
+Version: 3.11.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
 Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 3.10.0
+Stable tag: 3.11.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -207,6 +207,16 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 4. Use suggestions to make improvements and speed up your site.
 
 == Changelog ==
+
+= 3.11.0 ( 2024-12-23 )
+- New: Granular asset exclusion controls for Delay JS and Critical CSS, allowing easier adjustments and fine-tuning.
+- Improved: Enhanced asset optimization and Critical CSS generation by ignoring empty URLs and commented CSS, reducing errors.
+- Improved: Prioritized Critical CSS generation before other CSS optimizations to prevent unexpected visual behavior.
+- Improved: Removed certain autoload options to boost overall performance.
+- Improved: Optimized API interactions with WPMU DEV hosting’s Static Server Cache for smoother integration.
+- Fixed: Debug log errors when running a Performance Test.
+- Fixed: Fatal error occurring when using Lazy Comments with Divi.
+- Fixed: Ensured compatibility with WordPress 6.7
 
 = 3.10.0 ( 2024-10-22 ) =
 - New: Option to delay below-the-fold Critical CSS until user interaction for better performance

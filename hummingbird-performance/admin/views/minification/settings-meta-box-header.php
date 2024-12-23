@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php if ( ! \Hummingbird\Core\Utils::is_member() ) : ?>
 	<div class="sui-actions-right">
-		<a class="sui-button sui-button-green" href="<?php echo \Hummingbird\Core\Utils::get_link( 'plugin', 'hummingbird_assetoptimization_settings_upgrade_button' ); ?>" target="_blank">
+		<a class="sui-button sui-button-green" onclick="window.wphbMixPanel.trackHBUpsell( 'cdn', 'ao_settings_button', 'cta_clicked', this.href, 'hb_cdn_upsell' );" href="<?php echo \Hummingbird\Core\Utils::get_link( 'plugin', 'hummingbird_ao_settings_cdn_button' ); ?>" target="_blank">
 			<?php _e( 'Upgrade to PRO', 'wphb' ); ?>
 		</a>
 	</div>

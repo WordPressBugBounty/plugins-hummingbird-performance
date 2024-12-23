@@ -666,34 +666,34 @@ msgid ""
 "next time someone visits your website."
 msgstr ""
 
-#: _src/react/modules/setup.jsx:400
+#: _src/react/modules/setup.jsx:405
 msgid "Setup wizard"
 msgstr ""
 
-#: _src/react/modules/setup.jsx:406
+#: _src/react/modules/setup.jsx:411
 msgid "Hummingbird"
 msgstr ""
 
-#: _src/react/modules/setup.jsx:407
+#: _src/react/modules/setup.jsx:412
 msgid "Wizard"
 msgstr ""
 
-#: _src/react/modules/setup.jsx:412
+#: _src/react/modules/setup.jsx:417
 msgid ""
 "Get Hummingbird Pro for our full WordPress speed optimization suite, "
 "including uptime monitoring and enhanced CDN."
 msgstr ""
 
-#: _src/react/modules/setup.jsx:418
-#: _src/react/views/minify/summary.jsx:355
+#: _src/react/modules/setup.jsx:426
+#: _src/react/views/minify/summary.jsx:361
 msgid "UPGRADE TO PRO"
 msgstr ""
 
-#: _src/react/modules/setup.jsx:429
+#: _src/react/modules/setup.jsx:437
 msgid "Quit wizard"
 msgstr ""
 
-#: _src/react/modules/setup.jsx:437
+#: _src/react/modules/setup.jsx:445
 msgid "Documentation"
 msgstr ""
 
@@ -1415,83 +1415,83 @@ msgid ""
 "performance tests."
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:266
+#: _src/react/views/minify/summary.jsx:272
 msgid "All assets are auto-compressed"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:276
+#: _src/react/views/minify/summary.jsx:282
 msgid "Compression savings"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:278
+#: _src/react/views/minify/summary.jsx:284
 msgid "Total Files"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:280
+#: _src/react/views/minify/summary.jsx:286
 msgid "Optimizing assets, this could take a while, please hold on."
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:282
+#: _src/react/views/minify/summary.jsx:288
 msgid "Optimizing"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:286
+#: _src/react/views/minify/summary.jsx:292
 msgid "Last Generated:"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:290
+#: _src/react/views/minify/summary.jsx:296
 msgid "Optimized"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:308
+#: _src/react/views/minify/summary.jsx:314
 msgid "Unlock now  "
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:339
+#: _src/react/views/minify/summary.jsx:345
 msgid "Files are compressed"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:349
+#: _src/react/views/minify/summary.jsx:355
 msgid "Enable WPMU DEV CDN"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:354
+#: _src/react/views/minify/summary.jsx:360
 msgid "Host your files on WPMU DEV’s blazing-fast CDN"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:360
+#: _src/react/views/minify/summary.jsx:366
 msgid "The Network Admin has the WPMU DEV CDN turned on"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:365
+#: _src/react/views/minify/summary.jsx:371
 msgid "The Network Admin has the WPMU DEV CDN turned off"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:366
+#: _src/react/views/minify/summary.jsx:372
 #: _src/react/views/setup/wizard.jsx:707
 msgid "Disabled"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:394
+#: _src/react/views/minify/summary.jsx:400
 msgid "Filesize reductions"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:399
+#: _src/react/views/minify/summary.jsx:405
 #: _src/react/views/setup/wizard.jsx:346
 msgid "WPMU DEV CDN"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:410
+#: _src/react/views/minify/summary.jsx:416
 #: _src/react/views/setup/wizard.jsx:393
 msgid "Delay JavaScript Execution"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:417
+#: _src/react/views/minify/summary.jsx:423
 #: _src/react/views/setup/wizard.jsx:610
 msgid "Generate Critical CSS"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:418
+#: _src/react/views/minify/summary.jsx:424
 #: _src/react/views/setup/wizard.jsx:139
 msgid "Pro"
 msgstr ""
@@ -1837,11 +1837,11 @@ msgid "Continue"
 msgstr ""
 
 #: _src/react/views/setup/wizard.jsx:839
-msgid "Run Performance Test"
+msgid "Go to Dashboard"
 msgstr ""
 
 #: _src/react/views/setup/wizard.jsx:844
-msgid "Go to Dashboard"
+msgid "Run Performance Test"
 msgstr ""
 
 #: _src/react/views/setup/wizard.jsx:876

@@ -833,15 +833,15 @@ export default class Wizard extends React.Component {
 					{ 6 === this.props.step &&
 						<React.Fragment>
 							<Button
-								onClick={ () => this.props.finish( 'runPerf' ) }
-								type="button"
-								classes={ [ 'sui-button', 'sui-button-ghost' ] }
-								text={ __( 'Run Performance Test', 'wphb' ) } />
-							<Button
 								onClick={ this.props.finish }
 								type="button"
-								classes={ [ 'sui-button', 'sui-button-blue' ] }
+								classes={ [ 'sui-button', 'sui-button-ghost' ] }
 								text={ __( 'Go to Dashboard', 'wphb' ) } />
+							<Button
+								onClick={ () => this.props.finish( 'runPerf' ) }
+								type="button"
+								classes={ [ 'sui-button', 'sui-button-blue' ] }
+								text={ __( 'Run Performance Test', 'wphb' ) } />
 						</React.Fragment> }
 				</div>
 			</React.Fragment>

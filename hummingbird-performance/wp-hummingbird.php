@@ -12,7 +12,7 @@
  * Plugin Name:       Hummingbird
  * Plugin URI:        https://wpmudev.com/project/wp-hummingbird/
  * Description:       Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
- * Version:           3.10.0
+ * Version:           3.11.0
  * Requires PHP:      7.4
  * Author:            WPMU DEV
  * Author URI:        https://profiles.wordpress.org/wpmudev/
@@ -44,7 +44,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 namespace Hummingbird;
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '3.10.0' );
+	define( 'WPHB_VERSION', '3.11.0' );
 }
 
 if ( ! defined( 'WPHB_SUI_VERSION' ) ) {
@@ -158,16 +158,15 @@ if ( ! class_exists( 'Hummingbird\\WP_Hummingbird' ) ) {
 
 			$this->maybe_disable_free_version();
 
-			$this->init();
-			$this->init_pro();
-
-			$this->load_textdomain();
+			add_action( 'init', array( $this, 'init' ), 0 );
+			add_action( 'init', array( $this, 'init_pro' ), 0 );
+			add_action( 'init', array( $this, 'load_textdomain' ) );
 		}
 
 		/**
 		 * Initialize the plugin.
 		 */
-		private function init() {
+		public function init() {
 			// Initialize the plugin core.
 			$this->core = new Core\Core();
 
@@ -185,7 +184,7 @@ if ( ! class_exists( 'Hummingbird\\WP_Hummingbird' ) ) {
 		 *
 		 * @since 1.7.2
 		 */
-		private function init_pro() {
+		public function init_pro() {
 			// Overwriting in wp-config.php file to exclude PRO.
 			if ( defined( 'WPHB_LOAD_PRO' ) && false === WPHB_LOAD_PRO ) {
 				return;
@@ -256,7 +255,7 @@ if ( ! class_exists( 'Hummingbird\\WP_Hummingbird' ) ) {
 		/**
 		 * Load translations
 		 */
-		private function load_textdomain() {
+		public function load_textdomain() {
 			load_plugin_textdomain( 'wphb', false, 'wp-hummingbird/languages/' );
 		}
 

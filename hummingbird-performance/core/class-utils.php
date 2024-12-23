@@ -214,12 +214,22 @@ class Utils {
 				'criticalGeneratedNotice' => __( 'Critical CSS generated. Please visit the site and let the cache build up before running a test.', 'wphb' ),
 				'errorCriticalCssPurge'   => __( 'There was an error during the critical css files purge. Check folder permissions are 755 for /wp-content/wphb-cache/critical-css or delete directory manually.', 'wphb' ),
 				'enableCriticalCss'       => __( 'Settings updated. Generating Critical CSS, this could take about a minute.', 'wphb' ),
+				'select2Tags'             => __( 'Please type any keywords and press Enter', 'wphb' ),
+				'exclusionFiles'          => __( 'Files', 'wphb' ),
+				'exclusionPostTypes'      => __( 'Post Types', 'wphb' ),
+				'exclusionPostUrls'       => __( 'Post URLs', 'wphb' ),
+				'exclusionPluginThemes'   => __( 'Plugins/Themes', 'wphb' ),
+				'exclusionKeywords'       => __( 'Keywords', 'wphb' ),
+				'exclusionDefault'        => __( 'Default Exclusion', 'wphb' ),
+				'exclusionAds'            => __( 'Ads/Trackers', 'wphb' ),
+				'exclusionAll'            => __( 'All Exclusion', 'wphb' ),
 			),
 			'links'      => array(
 				'audits'         => self::get_admin_menu_url( 'performance' ),
 				'eoUrl'          => self::get_admin_menu_url( 'minification' ) . '&view=tools',
 				'cachingPageURL' => self::get_admin_menu_url( 'caching' ),
 				'tutorials'      => self::get_admin_menu_url( 'tutorials' ),
+				'tutorialsUTM'   => self::get_link( 'tutorials', 'hummingbird_dashboard_tutorials' ),
 				'notifications'  => self::get_admin_menu_url( 'notifications' ),
 				'disableUptime'  => add_query_arg(
 					array(
@@ -1099,28 +1109,33 @@ class Utils {
 		// Get files count.
 		$collection = $minify_module->get_resources_collection();
 		// Remove those assets that we don't want to display.
-		foreach ( $collection['styles'] as $key => $item ) {
-			if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' ) ) {
-				unset( $collection['styles'][ $key ] );
-			}
+		if ( is_array( $collection['styles'] ) ) {
+			foreach ( $collection['styles'] as $key => $item ) {
+				if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' ) ) {
+					unset( $collection['styles'][ $key ] );
+				}
 
-			// Keep only minified files.
-			if ( $only_minified && ! preg_match( '/\.min\.(css|js)/', basename( $item['src'] ) ) ) {
-				unset( $collection['styles'][ $key ] );
-			}
-		}
-		foreach ( $collection['scripts'] as $key => $item ) {
-			if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'scripts' ) ) {
-				unset( $collection['scripts'][ $key ] );
-			}
-
-			// Kepp only minified files.
-			if ( $only_minified && ! preg_match( '/\.min\.(css|js)/', basename( $item['src'] ) ) ) {
-				unset( $collection['scripts'][ $key ] );
+				// Keep only minified files.
+				if ( $only_minified && ! preg_match( '/\.min\.(css|js)/', basename( $item['src'] ) ) ) {
+					unset( $collection['styles'][ $key ] );
+				}
 			}
 		}
 
-		return ( count( $collection['scripts'] ) + count( $collection['styles'] ) );
+		if ( is_array( $collection['scripts'] ) ) {
+			foreach ( $collection['scripts'] as $key => $item ) {
+				if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'scripts' ) ) {
+					unset( $collection['scripts'][ $key ] );
+				}
+
+				// Keep only minified files.
+				if ( $only_minified && ! preg_match( '/\.min\.(css|js)/', basename( $item['src'] ) ) ) {
+					unset( $collection['scripts'][ $key ] );
+				}
+			}
+		}
+
+		return ( self::hb_count( $collection['scripts'] ) + self::hb_count( $collection['styles'] ) );
 	}
 
 	/**
@@ -1171,16 +1186,20 @@ class Utils {
 		$collection    = $minify_module->get_resources_collection();
 
 		// Remove those assets that we don't want to display.
-		foreach ( $collection['styles'] as $key => $item ) {
-			if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' )
-				|| ! isset( $item['original_size'], $item['compressed_size'] ) ) {
-				unset( $collection['styles'][ $key ] );
+		if ( is_array( $collection['styles'] ) ) {
+			foreach ( $collection['styles'] as $key => $item ) {
+				if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' )
+					|| ! isset( $item['original_size'], $item['compressed_size'] ) ) {
+					unset( $collection['styles'][ $key ] );
+				}
 			}
 		}
-		foreach ( $collection['scripts'] as $key => $item ) {
-			if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'scripts' )
-				|| ! isset( $item['original_size'], $item['compressed_size'] ) ) {
-				unset( $collection['scripts'][ $key ] );
+		if ( is_array( $collection['scripts'] ) ) {
+			foreach ( $collection['scripts'] as $key => $item ) {
+				if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'scripts' )
+					|| ! isset( $item['original_size'], $item['compressed_size'] ) ) {
+					unset( $collection['scripts'][ $key ] );
+				}
 			}
 		}
 
@@ -1666,7 +1685,7 @@ class Utils {
 			if ( method_exists( $site_health, 'get_autoloaded_options_size' ) ) {
 				$bytes = $site_health->get_autoloaded_options_size();
 
-				return $bytes > 0 ? number_format_i18n( $bytes / KB_IN_BYTES ) : 0;
+				return $bytes > 0 ? intval( $bytes / KB_IN_BYTES ) : 0;
 			}
 		}
 
@@ -1692,5 +1711,31 @@ class Utils {
 		}
 
 		return 'na';
+	}
+
+	/**
+	 * Returns page cache description.
+	 *
+	 * @since 3.11.0
+	 *
+	 * @return string
+	 */
+	public static function get_page_cache_description() {
+		return Fast_CGI::is_fast_cgi_enabled() ? __( 'Page Caching stores static HTML copies of your pages and posts to decrease page load time. Server-side page caching allows for an average of 10 times more concurrent visitors than regular page caching.', 'wphb' ) : __( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' );
+	}
+
+	/**
+	 * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+	 *
+	 * @param string|array $data Data to sanitize.
+	 *
+	 * @return string|array
+	 */
+	public static function wphb_sanitize_data( $data ) {
+		if ( is_array( $data ) ) {
+			return array_map( array( self::class, 'wphb_sanitize_data' ), $data );
+		} else {
+			return is_scalar( $data ) ? sanitize_text_field( $data ) : $data;
+		}
 	}
 }

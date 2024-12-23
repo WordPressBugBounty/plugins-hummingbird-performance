@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<!-- No plugin is installed -->
 	<?php if ( ! $is_installed ) : ?>
-		<a href="<?php echo esc_url( Utils::get_link( 'smush' ) ); ?>" class="sui-button sui-button-blue" id="smush-install">
+		<a href="<?php echo esc_url( Utils::get_link( 'smush' ) ); ?>" class="sui-button sui-button-blue" id="smush-install" onclick="window.WPHB_Admin.dashboard.trackSmushUpsell( event, this, 'dash_widget_install' );">
 			<?php
 			if ( Utils::is_member() ) {
 				esc_html_e( 'Install Smush Pro', 'wphb' );
@@ -46,11 +46,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		);
 		?>
 		<?php if ( $is_pro ) : ?>
-			<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="smush-activate">
+			<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="smush-activate" onclick="window.WPHB_Admin.dashboard.trackSmushUpsell( event, this, 'dash_widget_activate' );">
 				<?php esc_html_e( 'Activate Smush Pro', 'wphb' ); ?>
 			</a>
 		<?php else : ?>
-			<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="smush-activate">
+			<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-blue" id="smush-activate" onclick="window.WPHB_Admin.dashboard.trackSmushUpsell( event, this, 'dash_widget_activate' );">
 				<?php esc_html_e( 'Activate Smush', 'wphb' ); ?>
 			</a>
 		<?php endif; ?>

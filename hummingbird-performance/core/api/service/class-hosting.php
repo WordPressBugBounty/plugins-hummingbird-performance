@@ -179,11 +179,11 @@ class Hosting extends Service {
 	public function has_fast_cgi() {
 		$site_id = $this->get_site_id();
 
-		if ( $site_id ) {
-			$hosting = $this->get_info( $site_id );
-			if ( is_object( $hosting ) && property_exists( $hosting, 'static_cache' ) ) {
-				Fast_CGI::update_fast_cgi_status( $hosting->static_cache->is_active );
-				return $hosting->static_cache->is_active;
+		if ( $site_id && function_exists( 'wpmudev_hosting_features' ) ) {
+			$hosting_details = wpmudev_hosting_features();
+			if ( isset( $hosting_details['static_cache'] ) ) {
+				Fast_CGI::update_fast_cgi_status( $hosting_details['static_cache'] );
+				return $hosting_details['static_cache'];
 			}
 		}
 

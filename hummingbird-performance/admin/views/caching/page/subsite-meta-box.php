@@ -11,12 +11,14 @@
  * @var bool          $minify_active     Asset optimization status.
  */
 
+use Hummingbird\Core\Utils;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 ?>
-<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
+<p><?php echo esc_html( Utils::get_page_cache_description() ); ?></p>
 <div class="sui-box-settings-row">
 	<?php
 	if ( is_wp_error( $error ) ) {

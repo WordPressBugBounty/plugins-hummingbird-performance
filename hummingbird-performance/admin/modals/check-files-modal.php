@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'info',
 						sprintf( /* translators: %1$s - opening a tag, %2$s -  closing a tag */
 							esc_html__( '%1$sLearn more%2$s', 'wphb' ),
-							'<a href="' . esc_url( Utils::get_link( 'plugin' ) ) . '" target="_blank">',
+							'<a href="' . esc_url( Utils::get_link( 'plugin', 'hummingbird_ao_scanner_cdn_link' ) ) . '" target="_blank" onclick="window.wphbMixPanel.trackHBUpsell( \'cdn\', \'ao_scanner\', \'cta_clicked\', this.href, \'hb_cdn_upsell\' );">',
 							'</a>'
 						)
 					);

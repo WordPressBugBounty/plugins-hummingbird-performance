@@ -225,6 +225,10 @@ class AJAX {
 		add_action( 'wp_ajax_wphb_react_minify_toggle_critical_css', array( $this, 'minify_toggle_critical_css' ) );
 		// Switch critical CSS.
 		add_action( 'wp_ajax_wphb_switch_to_critical_css_from_legacy', array( $this, 'wphb_switch_to_critical_css_from_legacy' ) );
+		// Search posts.
+		add_action( 'wp_ajax_wphb_search_posts', array( $this, 'wphb_search_posts' ) );
+		// Reset exclusions.
+		add_action( 'wp_ajax_wphb_reset_exclusions', array( $this, 'reset_exclusions' ) );
 	}
 
 	/**
@@ -1594,14 +1598,94 @@ class AJAX {
 
 		$status = Minify::save_css( $form['critical_css'] );
 
-		$delay_js         = ! empty( $form['delay_js'] );
-		$delay_js_exclude = $form['delay_js_exclude'];
-		$delay_js_exclude = html_entity_decode( $delay_js_exclude );
-		$delay_js_timeout = (int) $form['delay_js_timeout'];
+		$delay_js            = ! empty( $form['delay_js'] );
+		$delay_js_exclusions = isset( $form['delay_js_exclusions'] ) ? $form['delay_js_exclusions'] : '';
+		$delay_js_exclude    = is_array( $delay_js_exclusions ) ? implode( "\n", $delay_js_exclusions ) : '';
+		$delay_js_exclude    = html_entity_decode( $delay_js_exclude );
+		$delay_js_timeout    = (int) $form['delay_js_timeout'];
 
 		Settings::update_setting( 'delay_js', $delay_js, 'minify' );
 		Settings::update_setting( 'delay_js_exclusions', $delay_js_exclude, 'minify' );
 		Settings::update_setting( 'delay_js_timeout', $delay_js_timeout, 'minify' );
+
+		// DelayJS exclusion rules.
+		$delay_exclusion_types = array(
+			'exclusions_files'     => 'delay_js_files_exclusion',
+			'exclusions_posttypes' => 'delay_js_post_types_exclusion',
+			'exclusions_urls'      => 'delay_js_post_urls_exclusion',
+			'exclusions_plugins'   => 'delay_js_plugins_themes_exclusion',
+			'exclusions_trackers'  => 'delay_js_ads_tracker_exclusion',
+		);
+
+		$delay_js_update_type                            = false;
+		$is_delay_value_updated                          = false;
+		$exclusion_value_updated                         = false;
+		$delay_js_mixpanel_values['exclusions_keywords'] = ! empty( $delay_js_exclusions ) ? $delay_js_exclusions : 'na';
+
+		foreach ( $delay_exclusion_types as $key => $type ) {
+			$old_exclusions                   = $minify_options[ $type ] ?? array();
+			$new_exclusions                   = isset( $form[ $type ] ) ? Utils::wphb_sanitize_data( $form[ $type ] ) : array();
+			$delay_js_mixpanel_values[ $key ] = 'exclusions_urls' === $key ? ( $new_exclusions ? array_map( 'get_permalink', $new_exclusions ) : 'na' ) : ( $new_exclusions ? $new_exclusions : 'na' );
+			if ( $old_exclusions !== $new_exclusions ) {
+				$exclusion_value_updated = true;
+			}
+
+			Settings::update_setting( $type, $new_exclusions, 'minify' );
+		}
+
+		// Track DelayJS modified values.
+		if ( ! empty( $delay_js ) && $prev_delay_value === $delay_js ) {
+			$is_modified = $prev_delay_js_exclusions !== $delay_js_exclude || $prev_delay_js_timeout !== $delay_js_timeout || $exclusion_value_updated;
+
+			if ( $is_modified ) {
+				$delay_js_update_type   = 'modified';
+				$is_delay_value_updated = true;
+			}
+		}
+
+		// Critical CSS exclusion rules.
+		$critical_css_settings = array(
+			'critical_css_files_exclusion'          => array(
+				'value'        => Utils::wphb_sanitize_data( $form['critical_css_files_exclusion'] ?? array() ),
+				'mixpanel_key' => 'exclusions_files',
+			),
+			'critical_css_post_urls_exclusion'      => array(
+				'value' => Utils::wphb_sanitize_data( $form['critical_css_post_urls_exclusion'] ?? array() ),
+				'mixpanel_key' => 'exclusions_urls',
+			),
+			'critical_css_plugins_themes_exclusion' => array(
+				'value'        => Utils::wphb_sanitize_data( $form['critical_css_plugins_themes_exclusion'] ?? array() ),
+				'mixpanel_key' => 'exclusions_plugins',
+			),
+			'critical_css_keywords'                 => array(
+				'value'        => Utils::wphb_sanitize_data( $form['critical_css_keywords'] ?? array() ),
+				'mixpanel_key' => 'exclusions_keywords',
+			),
+			'critical_page_types'                   => array(
+				'value'        => array_diff( Page_Cache::get_page_types( true ), Utils::wphb_sanitize_data( $form['critical_css_post_types_exclusion'] ?? array() ) ),
+				'mixpanel_key' => 'exclusions_posttypes',
+			),
+			'critical_skipped_custom_post_types'    => array(
+				'value'        => array_diff( Utils::wphb_sanitize_data( $form['critical_css_post_types_exclusion'] ?? array() ), Page_Cache::get_page_types( true ) ),
+				'mixpanel_key' => 'exclusions_posttypes',
+			),
+		);
+
+		$critical_css_mixpanel_values         = array();
+		$critical_css_exclusion_value_updated = false;
+
+		foreach ( $critical_css_settings as $setting_name => $setting_data ) {
+			$new_exclusions                                = $setting_data['value'];
+			$mixpanel_key                                  = $setting_data['mixpanel_key'];
+			$old_exclusions                                = $minify_options[ $setting_name ] ?? array();
+			$mixpanel_values                               = 'exclusions_urls' === $mixpanel_key ? ( $new_exclusions ? array_map( 'get_permalink', $new_exclusions ) : 'na' ) : ( $new_exclusions ? $new_exclusions : 'na' );
+			$critical_css_mixpanel_values[ $mixpanel_key ] = 'critical_skipped_custom_post_types' === $setting_name ? ( $form['critical_css_post_types_exclusion'] ?? 'na' ) : $mixpanel_values;
+			if ( $old_exclusions !== $new_exclusions ) {
+				$critical_css_exclusion_value_updated = true;
+			}
+
+			Settings::update_setting( $setting_name, $new_exclusions, 'minify' );
+		}
 
 		// Preload fonts.
 		$prev_font_optimization = Settings::get_setting( 'font_optimization', 'minify' );
@@ -1631,28 +1715,11 @@ class AJAX {
 		$critical_css_remove_type   = ! empty( $form['critical_css_remove_type'] ) ? $form['critical_css_remove_type'] : '';
 		$is_status_tag_needs_update = false;
 
-		$critical_page_types                = array();
-		$critical_skipped_custom_post_types = array();
-
-		if ( isset( $form['critical_page_types'] ) && is_array( $form['critical_page_types'] ) ) { // Input var ok.
-			$critical_page_types = array_keys( wp_unslash( $form['critical_page_types'] ) ); // Input var ok.
-		}
-		if ( isset( $form['critical_skipped_custom_post_types'] ) && is_array( $form['critical_skipped_custom_post_types'] ) ) { // Input var ok.
-			$custom_post_types_data = wp_unslash( $form['critical_skipped_custom_post_types'] ); // Input var ok.
-			foreach ( $custom_post_types_data as $custom_post_type => $value ) {
-				if ( $value ) {
-					$critical_skipped_custom_post_types[] = $custom_post_type;
-				}
-			}
-		}
-
 		$above_fold_load_stylesheet_method = $form['above_fold_load_stylesheet_method'];
 
 		Settings::update_setting( 'critical_css', $critical_css_option, 'minify' );
 		Settings::update_setting( 'critical_css_type', $critical_css_type, 'minify' );
 		Settings::update_setting( 'critical_css_remove_type', $critical_css_remove_type, 'minify' );
-		Settings::update_setting( 'critical_page_types', $critical_page_types, 'minify' );
-		Settings::update_setting( 'critical_skipped_custom_post_types', $critical_skipped_custom_post_types, 'minify' );
 		Settings::update_setting( 'critical_css_mode', $critical_css_mode, 'minify' );
 		Settings::update_setting( 'above_fold_load_stylesheet_method', $above_fold_load_stylesheet_method, 'minify' );
 
@@ -1668,20 +1735,10 @@ class AJAX {
 		// This will require a clear cache call.
 		Utils::get_module( 'page_cache' )->clear_cache();
 
-		// Track delay js modified values.
-		$is_delay_value_updated = $prev_delay_value !== $delay_js;
-		$delay_js_update_type   = ! empty( $delay_js ) ? 'activate' : 'deactivate';
-
-		if ( ! empty( $delay_js ) && $prev_delay_value === $delay_js ) {
-			if ( $prev_delay_js_exclusions !== $delay_js_exclude || $prev_delay_js_timeout !== $delay_js_timeout ) {
-				$delay_js_update_type   = 'modified';
-				$is_delay_value_updated = true;
-			}
-		}
-
 		// Track critical css modified values.
 		$settings_modified = array();
 		$settings_default  = array();
+		$manual_inclusion  = 'na';
 
 		$is_critical_value_updated = $old_critical_css_option !== $critical_css_option;
 		$critical_css_update_type  = ! empty( $critical_css_option ) ? 'activate' : 'deactivate';
@@ -1692,10 +1749,10 @@ class AJAX {
 				$critical_css_update_type  = 'modified';
 			}
 
-			if ( $old_critical_page_types !== $critical_page_types || $old_critical_skipped_custom_post_types !== $critical_skipped_custom_post_types ) {
-				$settings_modified[] = 'post_type';
+			if ( $critical_css_exclusion_value_updated ) {
+				$settings_modified[] = 'exclusions';
 			} else {
-				$settings_default[] = 'post_type';
+				$settings_default[] = 'exclusions';
 			}
 
 			if ( $old_critical_css_manual_include !== $form['critical_css_advanced'] ) {
@@ -1703,19 +1760,12 @@ class AJAX {
 			} else {
 				$settings_default[] = 'inclusions';
 			}
+
+			$manual_inclusion = ! empty( $form['critical_css_advanced'] ) ? 'active' : 'inactive';
 		}
 
 		$critical_css_update_type  = ! empty( $settings_modified ) ? 'modified' : $critical_css_update_type;
 		$is_critical_value_updated = ! empty( $settings_modified ) ? true : $is_critical_value_updated;
-
-		// Track the mode for mixpanel.
-		if ( 'asynchronously' === $critical_css_type ) {
-			$critical_mode = 'load_stylesheet_on_user_interaction' === $above_fold_load_stylesheet_method ? 'abovefold_delay' : 'abovefold_async';
-		} elseif ( 'remove_unused' === $critical_css_remove_type ) {
-			$critical_mode = 'fullpage_remove';
-		} else {
-			$critical_mode = 'fullpage_delay';
-		}
 
 		// Track the location for mixpanel.
 		$location = 'eo_settings';
@@ -1730,12 +1780,16 @@ class AJAX {
 				'is_delay_value_updated'     => $is_delay_value_updated,
 				'delay_js_timeout'           => $delay_js_timeout,
 				'delay_js_exclude'           => $delay_js_exclude,
+				'delayJsMixpanelValues'      => $delay_js_mixpanel_values,
+				'excludedFiles'              => ! empty( $delay_js_exclude ) ? explode( '\n', $delay_js_exclude ) : '',
 				'updateType'                 => $critical_css_update_type,
 				'isCriticalValueUpdated'     => $is_critical_value_updated,
 				'critical_css'               => $critical_css_option,
 				'settingsModified'           => implode( ',', $settings_modified ),
 				'settingsDefault'            => implode( ',', $settings_default ),
-				'mode'                       => $critical_mode,
+				'criticalCssMixpanelValues'  => $critical_css_mixpanel_values,
+				'manualInclusion'            => $manual_inclusion,
+				'mode'                       => Utils::get_module( 'critical_css' )->get_critical_mode_for_mp(),
 				'location'                   => $location,
 				'success'                    => $status['success'],
 				'message'                    => $message,
@@ -2659,6 +2713,7 @@ class AJAX {
 				'criticalErrorMessage'   => $error_message,
 				'errorCode'              => Utils::get_module( 'critical_css' )->get_error_code_from_log(),
 				'htmlForStatusTag'       => Utils::get_module( 'critical_css' )->get_html_for_status_tag(),
+				'criticalMode'           => Utils::get_module( 'critical_css' )->get_critical_mode_for_mp(),
 			)
 		);
 	}
@@ -2707,7 +2762,7 @@ class AJAX {
 			array(
 				'criticalCss'      => $value ? 'activate' : 'deactivate',
 				'htmlForStatusTag' => Utils::get_module( 'critical_css' )->get_html_for_status_tag(),
-				'mode'             => Settings::get_setting( 'critical_css_type', 'minify' ),
+				'mode'             => Utils::get_module( 'critical_css' )->get_critical_mode_for_mp(),
 			)
 		);
 	}
@@ -2726,6 +2781,41 @@ class AJAX {
 		if ( Utils::is_member() ) {
 			Utils::get_module( 'critical_css' )->toggle_critical_css( true );
 		}
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Search posts for exclusions.
+	 */
+	public function wphb_search_posts() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) { // Input var okay.
+			die();
+		}
+
+		$query   = filter_input( INPUT_POST, 'query', FILTER_UNSAFE_RAW );
+		$results = Utils::get_module( 'exclusions' )->search_posts( $query );
+
+		wp_send_json_success( $results );
+	}
+
+	/**
+	 * Reset exclusions.
+	 *
+	 * @since 3.11.0
+	 */
+	public function reset_exclusions() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
+		$exclusions = filter_input( INPUT_POST, 'value', FILTER_UNSAFE_RAW );
+		$type       = filter_input( INPUT_POST, 'type', FILTER_UNSAFE_RAW );
+		$results    = Utils::get_module( 'exclusions' )->reset_exclusion_to_defaults( $exclusions, $type );
 
 		wp_send_json_success();
 	}

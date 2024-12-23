@@ -151,9 +151,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					</div>
 					<div class="sui-box-footer">
-						<button type="button" class="sui-button-blue sui-button wphb-submit-feedback-deactivate-button"><?php esc_html_e( 'Submit & Deactivate', 'wphb' ); ?></button>
+						<button type="button" class="sui-button-ghost sui-button wphb-deactivate-without-feedback-button"><?php esc_html_e( 'Skip & Deactivate', 'wphb' ); ?></button>
 						<div class="sui-actions-right">
-							<button type="button" class="sui-button-ghost sui-button wphb-deactivate-without-feedback-button"><?php esc_html_e( 'Skip & Deactivate', 'wphb' ); ?></button>
+							<button type="button" class="sui-button-blue sui-button wphb-submit-feedback-deactivate-button"><?php esc_html_e( 'Submit & Deactivate', 'wphb' ); ?></button>
 						</div>
 					</div>
 				</div>

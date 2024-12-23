@@ -24,7 +24,7 @@ use Hummingbird\Core\Utils;
 			<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 		</a>
 		<span class="spinner standalone"></span>
-		<?php if ( Utils::is_site_hosted_with_whitelabel_disabled() ) { ?>
+		<?php if ( ! Utils::is_whitelabel_enabled() ) { ?>
 			<div class="sui-notice sui-notice-blue" style="margin-top: 10px;">
 				<div class="sui-notice-content">
 					<div class="sui-notice-message">
@@ -33,7 +33,7 @@ use Hummingbird\Core\Utils;
 							<?php
 							printf( /* translators: %1$s - opening <a> tag, %2$s - closing </a> tag */
 								esc_html__( 'Deactivation of Uptime is not recommended if the %1$sProactive Monitoring%2$s service is enabled.', 'wphb' ),
-								'<a href="' . esc_url( 'https://wpmudev.com/hub2/services' ) . '" target="_blank">',
+								'<a href="' . esc_url( Utils::get_link( 'expert-services', 'hummingbird_services_uptime_settings_notice' ) ) . '" target="_blank" onclick="window.wphbMixPanel.trackHBUpsell( \'expert_services_uptime\', \'uptime_settings\', \'cta_clicked\', this.href, \'expert_services_upsell\' );">',
 								'</a>'
 							)
 							?>

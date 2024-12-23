@@ -5,12 +5,14 @@
  * @package Hummingbird
  */
 
+use Hummingbird\Core\Utils;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 ?>
-<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
+<p><?php echo esc_html( Utils::get_page_cache_description() ); ?></p>
 <?php
 	$this->admin_notices->show_inline( esc_html__( 'Static Server Cache is currently active. By default your subsite inherits your network admin’s cache settings.', 'wphb' ) );
 ?>

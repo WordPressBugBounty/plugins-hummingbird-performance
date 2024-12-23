@@ -236,7 +236,13 @@ export const MinifySummary = ( props ) => {
 
 		api.post( 'minify_toggle_critical_css', e.target.checked )
 			.then( ( response ) => {
-				window.wphbMixPanel.trackCriticalCSSEvent( response.criticalCss, 'ao_summary', response.mode, '', '' );
+				window.wphbMixPanel.trackCriticalCSSEvent( {
+					update_type: response.criticalCss,
+					Location: 'ao_summary',
+					mode: response.mode,
+					settings_modified: '',
+					settings_default: '',
+				} );
 
 				dispatch( STORE_NAME ).invalidateResolution( 'getOptions' );
 				if ( 'activate' === response.criticalCss ) {
@@ -352,7 +358,7 @@ export const MinifySummary = ( props ) => {
 			} else {
 				cdnDetails =
 					<Tooltip text={ __( 'Host your files on WPMU DEV’s blazing-fast CDN', 'wphb' ) } classes={ [ 'sui-tooltip-top-right' ] }>
-						<Button url={ props.wphbData.links.cdnUpsell } target="blank" text={ __( 'UPGRADE TO PRO', 'wphb' ) } classes={ [ 'sui-button', 'sui-button-purple' ] } />
+						<Button url={ props.wphbData.links.cdnUpsell } onClick={ trackCDNUpsell } target="blank" text={ __( 'UPGRADE TO PRO', 'wphb' ) } classes={ [ 'sui-button', 'sui-button-purple' ] } />
 					</Tooltip>;
 			}
 		} else if ( cdn && props.wphbData.isMember ) {
@@ -425,6 +431,17 @@ export const MinifySummary = ( props ) => {
 		}
 
 		return <List elements={ elements } />;
+	};
+
+	/**
+	 * Track CDN upsell.
+	 *
+	 * @since 3.11.0
+	 *
+	 * @param {Object} element
+	 */
+	const trackCDNUpsell = ( element ) => {
+		window.wphbMixPanel.trackHBUpsell( 'cdn', 'ao_summary', 'cta_clicked', element.target.href, 'hb_cdn_upsell' );
 	};
 
 	if ( ! loading ) {

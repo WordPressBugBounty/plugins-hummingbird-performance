@@ -444,7 +444,7 @@ class Performance extends Module {
 		$performance_audit = array();
 		if ( ! empty( $get_audits ) ) {
 			foreach ( $get_audits as $key => $value ) {
-				$performance_audit[] = $value->title;
+				$performance_audit[] = $key;
 			}
 		}
 

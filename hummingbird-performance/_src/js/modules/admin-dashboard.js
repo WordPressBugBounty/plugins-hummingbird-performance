@@ -52,7 +52,13 @@ import Fetcher from '../utils/fetcher';
 				// Update Critical CSS status.
 				const criticalValue = $( this ).is( ':checked' );
 				Fetcher.minification.toggleCriticalCss( criticalValue ).then( ( response ) => {
-					window.wphbMixPanel.trackCriticalCSSEvent( response.criticalCss, 'dash_widget', response.mode, '', '' );
+					window.wphbMixPanel.trackCriticalCSSEvent( {
+						update_type: response.criticalCss,
+						Location: 'dash_widget',
+						mode: response.mode,
+						settings_modified: '',
+						settings_default: '',
+					} );
 					if ( criticalValue && wphb.links.eoUrl ) {
 						window.location.href = wphb.links.eoUrl;
 					} else {
@@ -112,6 +118,22 @@ import Fetcher from '../utils/fetcher';
 				}
 			} );
 
+			return false;
+		},
+
+		/**
+		 * Track SMUSH Upsell events.
+		 *
+		 * @param {object} event    Event.
+		 * @param {object} element  Feature name.
+		 * @param {string} location Location.
+		 */
+		trackSmushUpsell: ( event, element, location ) => {
+			event.preventDefault();
+			const ctaLink = element.href.includes( 'https://wpmudev.com' ) ? element.href : 'na';
+			window.wphbMixPanel.trackHBUpsell( 'smush_upsell', location, 'cta_clicked', ctaLink, 'hb_smush_upsell' );
+
+			window.location.href = element.href;
 			return false;
 		},
 	};

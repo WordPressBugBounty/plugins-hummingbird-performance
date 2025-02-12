@@ -151,6 +151,8 @@ class Settings {
 				'delay_js_post_urls_exclusion'          => array(),
 				'delay_js_plugins_themes_exclusion'     => array(),
 				'delay_js_ads_tracker_exclusion'        => array(),
+				'delay_js_exclude_inline_js'            => false,
+				'delay_js_keywords_advanced_view'       => false,
 				'preload'                               => array(
 					'scripts' => array(),
 					'styles'  => array(),
@@ -300,7 +302,7 @@ class Settings {
 
 		$options = array(
 			'caching'     => array( 'expiry_css', 'expiry_javascript', 'expiry_media', 'expiry_images' ),
-			'minify'      => array( 'minify_blog', 'view', 'type', 'do_assets', 'block', 'dont_minify', 'dont_combine', 'position', 'defer', 'inline', 'nocdn', 'fonts', 'preload', 'async', 'ao_completed_time', 'delay_js', 'delay_js_exclusions', 'delay_js_exclusion_list', 'delay_js_timeout', 'delay_js_files_exclusion', 'delay_js_post_types_exclusion', 'delay_js_post_urls_exclusion', 'delay_js_plugins_themes_exclusion', 'delay_js_ads_tracker_exclusion', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'font_optimization', 'above_fold_load_stylesheet_method', 'critical_css_files_exclusion', 'critical_css_post_urls_exclusion', 'critical_css_plugins_themes_exclusion', 'critical_css_keywords', 'preload_fonts', 'font_swap', 'font_display_value', 'preload_fonts_mode' ),
+			'minify'      => array( 'minify_blog', 'view', 'type', 'do_assets', 'block', 'dont_minify', 'dont_combine', 'position', 'defer', 'inline', 'nocdn', 'fonts', 'preload', 'async', 'ao_completed_time', 'delay_js', 'delay_js_exclusions', 'delay_js_exclusion_list', 'delay_js_timeout', 'delay_js_files_exclusion', 'delay_js_post_types_exclusion', 'delay_js_post_urls_exclusion', 'delay_js_plugins_themes_exclusion', 'delay_js_ads_tracker_exclusion', 'delay_js_keywords_advanced_view', 'delay_js_exclude_inline_js', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'font_optimization', 'above_fold_load_stylesheet_method', 'critical_css_files_exclusion', 'critical_css_post_urls_exclusion', 'critical_css_plugins_themes_exclusion', 'critical_css_keywords', 'preload_fonts', 'font_swap', 'font_display_value', 'preload_fonts_mode' ),
 			'page_cache'  => array( 'cache_blog' ),
 			'performance' => array( 'dismissed', 'reports' ),
 			'advanced'    => array( 'query_string', 'viewport_meta', 'emoji', 'post_revisions', 'prefetch', 'preconnect', 'cart_fragments' ),

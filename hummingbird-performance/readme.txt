@@ -1,6 +1,6 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.11.0
+Version: 3.12.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 3.11.0
+Stable tag: 3.12.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -207,6 +207,21 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 4. Use suggestions to make improvements and speed up your site.
 
 == Changelog ==
+
+= 3.12.0 ( 2025-02-12 ) =
+- New: Option to clear Static Server Cache when a post/page is updated
+- New: UI option to exclude inline JS from the Delay JS feature
+- Improvement: Exclude Elementor assets from Asset Optimization (AO)
+- Improvement: Better compatibility with The Events Calendar plugin
+- Improvement: New option to switch back to the legacy textarea for Exclusion Optimization (EO) exclusion keywords
+- Improvement: New constant to completely skip the Asset Optimization (AO) module and use Exclusion Optimization (EO) only
+- Improvement: Core WP files are now marked clearly in Exclusion Optimization (EO) exclusions
+- Improvement: Compatibility check added for WPML
+- Fix: Critical CSS toggle in the Summary Box was not updating
+- Fix: Delay JS Exclusions and Critical CSS Exclusions Keyword not cleared when hitting enter
+- Fix: Manual Inclusions textarea expander not working on Critical CSS
+- Fix: Taxonomies not excluded from Critical CSS when Categories are excluded
+- Fix: Exclude files, plugins/themes and keywords from Critical CSS generation when they are added to exclusions
 
 = 3.11.0 ( 2024-12-23 )
 - New: Granular asset exclusion controls for Delay JS and Critical CSS, allowing easier adjustments and fine-tuning.

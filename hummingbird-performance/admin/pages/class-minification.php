@@ -489,7 +489,9 @@ class Minification extends Page {
 				'pages'                             => Page_Cache::get_page_types(),
 				'critical_css_status'               => Utils::get_module( 'critical_css' )->critical_css_status_for_queue(),
 				'critical_css_generation_notice'    => Utils::get_module( 'critical_css' )->critical_css_generation_complete_notice(),
+				'delay_js_keywords_advanced_view'   => Settings::get_setting( 'delay_js_keywords_advanced_view', 'minify' ),
 				'above_fold_load_stylesheet_method' => Settings::get_setting( 'above_fold_load_stylesheet_method', 'minify' ),
+				'delay_js_exclude_inline_js'        => Settings::get_setting( 'delay_js_exclude_inline_js', 'minify' ),
 				'custom_post_types'                 => get_post_types(
 					array(
 						'public'   => true,

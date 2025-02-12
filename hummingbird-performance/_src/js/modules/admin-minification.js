@@ -105,6 +105,8 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 				} );
 			} );
 
+			$( '#delay_js_keywords_advanced_view' ).on( 'change', () => this.toggleAdvancedKeywordsView() );
+
 			// Delay Js Execution checkbox update status.
 			$( 'input[type=checkbox][name=delay_js]' ).on(
 				'change',
@@ -542,6 +544,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 			return {
 				...this.getCommonSelect2Config(),
 				tags: true,
+				closeOnSelect: true,
 				createTag: ( params ) => {
 					// Format the newly created tag
 					const term = params.term.trim();
@@ -556,7 +559,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 						hbExclusionType: 'keywords'
 					};
 				},
-				tokenSeparators: [ ',', ' ' ],
+				tokenSeparators: [ ',', ' ', '\n' ],
 				language: {
 					noResults() {
 						return wphb.strings.select2Tags;
@@ -608,6 +611,105 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 			$( '#' + value ).removeClass( 'sui-hidden' );
 
 			this.enableDisableResetButton();
+
+			const advancedViewLabel = $( '#delay_js_keywords_advanced_view_label' );
+			const delayJsExclusions = $( '#delay_js_legacy_keywords_container' );
+
+			if ( isDelayJs && value === 'delay_js_exclusions' ) {
+				this.copySelect2ToTextarea();
+				this.toggleAdvancedKeywordsView();
+				advancedViewLabel.removeClass( 'sui-hidden' );
+			} else {
+				if ( value === 'delay_js_all_exclusions' ) {
+					this.syncTextareaSelectData( ! this.isAdvancedViewChecked() );
+				}
+				advancedViewLabel.addClass( 'sui-hidden' );
+				delayJsExclusions.addClass( 'sui-hidden' );
+			}
+		},
+
+		/**
+		 * Toggle advanced view for keywords.
+		 */
+		toggleAdvancedKeywordsView() {
+			const isAdvancedView = this.isAdvancedViewChecked();
+			this.syncTextareaSelectData( isAdvancedView );
+			const delayJsExclusions = $( '#delay_js_exclusions' );
+			const legacyKeywords = $( '#delay_js_legacy_keywords_container' );
+
+			delayJsExclusions.toggleClass( 'sui-hidden', isAdvancedView );
+			legacyKeywords.toggleClass( 'sui-hidden', ! isAdvancedView );
+		},
+
+		/**
+		 * Checks if the advanced view toggle is checked.
+		 *
+		 * @return {boolean} True if the advanced view is enabled, otherwise false.
+		 */
+		isAdvancedViewChecked() {
+			return $( '#delay_js_keywords_advanced_view' ).is( ':checked' );
+		},
+
+		/**
+		 * Syncs data between the textarea and the select2 component based on the view.
+		 *
+		 * @param {boolean} isAdvancedView - Whether the advanced view is active.
+		 */
+		syncTextareaSelectData( isAdvancedView ) {
+			// eslint-disable-next-line no-unused-expressions
+			isAdvancedView ? this.copySelect2ToTextarea() : this.copyTextareaToSelect2();
+		},
+
+		/**
+		 * Copy textarea data to select2.
+		 */
+		copyTextareaToSelect2() {
+			const textareaData = $( '#delay_js_legacy_keywords' ).val();
+			const tags = textareaData.split( '\n' ).map( ( line ) => line.trim() ).filter( ( line ) => line );
+			const select2Element = $( '#item_delay_js_exclusions' );
+			const allExclusionsBox = $( '#item_delay_js_all_exclusions' );
+
+			if ( select2Element.length && select2Element.data( 'select2' ) ) {
+				const existingOptions = select2Element.find( 'option' ).map( ( _, option ) => option.value ).get();
+				const allExclusionsOptions = allExclusionsBox.find( 'option' ).map( ( _, option ) => option.value ).get();
+
+				tags.forEach( ( tag ) => {
+					const $option = select2Element.find( `option[value="${ tag }"]` );
+					if ( $option.length === 0 ) {
+						const newOption = $( new Option( tag, tag, true, true ) ).attr( 'data-hb-exclusion-type', 'keywords' );
+						select2Element.append( newOption );
+
+						if ( ! allExclusionsOptions.includes( tag ) ) {
+							this.toggleSelectBoxOption( allExclusionsBox, { id: tag, text: tag, element: newOption[ 0 ] }, true );
+						}
+					} else {
+						$option.prop( 'selected', true );
+						this.toggleSelectBoxOption( allExclusionsBox, { id: tag, text: tag, element: $option[ 0 ] }, true );
+					}
+				} );
+
+				existingOptions.forEach( ( existingValue ) => {
+					if ( ! tags.includes( existingValue ) ) {
+						const $existingOption = select2Element.find( `option[value="${ existingValue }"]` );
+						$existingOption.prop( 'selected', false );
+
+						if ( allExclusionsOptions.includes( existingValue ) ) {
+							this.toggleSelectBoxOption( allExclusionsBox, { id: existingValue, text: existingValue }, false );
+						}
+					}
+				} );
+
+				select2Element.trigger( 'change' );
+			}
+		},
+
+		/**
+		 * Copy select2 data to textarea.
+		 */
+		copySelect2ToTextarea() {
+			const tags = $( '#item_delay_js_exclusions' ).val() || [];
+			const trimmedTags = tags.map( ( tag ) => tag.trim() );
+			$( '#delay_js_legacy_keywords' ).val( trimmedTags.join( '\n' ) );
 		},
 
 		/**
@@ -662,6 +764,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 		getExclusionTypeData( key ) {
 			const dataMap = {
 				files: { name: wphb.strings.exclusionFiles, icon: this.getIcon( 'page' ), delayBox: 'item_delay_js_files_exclusion', criticalCssBox: 'item_critical_css_files_exclusion' },
+				core_file: { name: wphb.strings.exclusionWpFile, icon: this.getIcon( 'page' ), delayBox: 'item_delay_js_files_exclusion', criticalCssBox: 'item_critical_css_files_exclusion' },
 				posts: { name: wphb.strings.exclusionPostTypes, icon: this.getIcon( 'post-pin' ), delayBox: 'item_delay_js_post_types_exclusion', criticalCssBox: 'item_critical_css_post_types_exclusion' },
 				urls: { name: wphb.strings.exclusionPostUrls, icon: this.getIcon( 'link' ), delayBox: 'item_delay_js_post_urls_exclusion', criticalCssBox: 'item_critical_css_post_urls_exclusion' },
 				plugins: { name: wphb.strings.exclusionPluginThemes, icon: this.getIcon( 'plugin-2' ), delayBox: 'item_delay_js_plugins_themes_exclusion', criticalCssBox: 'item_critical_css_plugins_themes_exclusion' },

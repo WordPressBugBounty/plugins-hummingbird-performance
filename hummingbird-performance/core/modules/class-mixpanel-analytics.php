@@ -9,12 +9,11 @@
 namespace Hummingbird\Core\Modules;
 
 use Hummingbird\Core\Module;
+use Hummingbird\Core\Module_Server;
+use Hummingbird\Core\Settings;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Utils;
-use Hummingbird\Core\Settings;
-use Hummingbird\Core\Module_Server;
-use WPMUDEV_Analytics_V2;
-use WPMUDEV_Dashboard;
+use WPMUDEV_Analytics_V4;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -36,7 +35,7 @@ class Mixpanel_Analytics extends Module {
 	/**
 	 * WPMUDEV Analytics class.
 	 *
-	 * @var WPMUDEV_Analytics
+	 * @var WPMUDEV_Analytics_V4
 	 */
 	private $analytics;
 
@@ -64,7 +63,7 @@ class Mixpanel_Analytics extends Module {
 	 * Track Mixpanel event when user toggles the tracking option.
 	 *
 	 * @param bool $is_mixpanel_value_updated Mixpanel value updated.
-	 * @param bool $opted_value               Opted value.
+	 * @param bool $opted_value Opted value.
 	 */
 	public function wphb_track_opt_toggle( $is_mixpanel_value_updated, $opted_value ) {
 		if ( $is_mixpanel_value_updated ) {
@@ -88,8 +87,8 @@ class Mixpanel_Analytics extends Module {
 	/**
 	 * Track Mixpanel event.
 	 *
-	 * @param string $event      Mixpanel event name.
-	 * @param array  $properties Mixpanel event properties.
+	 * @param string $event Mixpanel event name.
+	 * @param array $properties Mixpanel event properties.
 	 *
 	 * @return array
 	 */
@@ -100,7 +99,7 @@ class Mixpanel_Analytics extends Module {
 	/**
 	 * Returns WPMUDEV Analytics instance.
 	 *
-	 * @return WPMUDEV_Analytics_V2
+	 * @return WPMUDEV_Analytics_V4
 	 */
 	private function get_analytics() {
 		if ( is_null( $this->analytics ) ) {
@@ -113,14 +112,14 @@ class Mixpanel_Analytics extends Module {
 	/**
 	 * Initialize WPMUDEV Analytics tracking.
 	 *
-	 * @return WPMUDEV_Analytics_V2
+	 * @return WPMUDEV_Analytics_V4
 	 */
 	private function initialize_analytics_tracking() {
-		if ( ! class_exists( 'WPMUDEV_Analytics_V2' ) ) {
+		if ( ! class_exists( 'WPMUDEV_Analytics_V4' ) ) {
 			require_once WPHB_DIR_PATH . 'core/externals/wpmudev-analytics/autoload.php';
 		}
 
-		$mixpanel = new WPMUDEV_Analytics_V2( 'hummingbird', 'Hummingbird', 55, $this->get_token() );
+		$mixpanel = new WPMUDEV_Analytics_V4( 'hummingbird', 'Hummingbird', 55, $this->get_token() );
 		$mixpanel->identify( $this->get_unique_id() );
 		$mixpanel->registerAll( $this->get_super_properties() );
 
@@ -281,7 +280,7 @@ class Mixpanel_Analytics extends Module {
 		if ( ! empty( $event_name ) && ! empty( $properties ) ) {
 			$this->track(
 				$event_name,
-				$properties,
+				$properties
 			);
 		}
 	}

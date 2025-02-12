@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	$this->admin_notices->show_inline(
 		sprintf( /* translators: %d - number of resources */
-			esc_html__( 'Your page is serving following %d resources with an inefficient cache policy.', 'wphb' ),
+			esc_html__( 'Your page is serving the following %d resources with an inefficient cache policy.', 'wphb' ),
 			absint( count( $audit->details->items ) )
 		),
 		\Hummingbird\Core\Modules\Performance::get_impact_class( $audit->score )

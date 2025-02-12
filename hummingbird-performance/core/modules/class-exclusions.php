@@ -603,7 +603,7 @@ class Exclusions extends Module {
 			$delay_js_exclusions = explode( "\n", $delay_js_exclusions );
 		}
 
-		$delay_js_exclusions = array_filter( $delay_js_exclusions );
+		$delay_js_exclusions = array_map( 'trim', array_filter( $delay_js_exclusions ) );
 
 		if ( ! $delay_js_exclusions ) {
 			$delay_js_exclusions = array();
@@ -713,5 +713,72 @@ class Exclusions extends Module {
 		 * @param array $exclusions The list of exclusions.
 		 */
 		return apply_filters( 'wphb_critical_css_exclusions', $exclusions );
+	}
+
+	/**
+	 * Get excluded files for critical CSS.
+	 *
+	 * @return array
+	 */
+	public function get_excluded_files_for_critical_css() {
+		$ignored_files = $this->get_exclusion_setting( 'critical_css_files_exclusion' );
+		$styles        = $this->get_assets( 'styles' );
+
+		return $this->get_excluded_src_values( $styles, $ignored_files );
+	}
+
+	/**
+	 * Get src values from the CSS file.
+	 *
+	 * @param array $css_file      CSS file.
+	 * @param array $ignored_files Keys.
+	 *
+	 * @return array
+	 */
+	public function get_excluded_src_values( $css_file, $ignored_files ) {
+		$src_values = array();
+
+		foreach ( $ignored_files as $key ) {
+			if ( isset( $css_file[ $key ] ) && isset( $css_file[ $key ]['src'] ) ) {
+				$src_values[] = $this->ensure_full_url( $css_file[ $key ]['src'] );
+			}
+		}
+
+		return $src_values;
+	}
+
+	/**
+	 * Ensure full URL.
+	 *
+	 * @param string $url URL.
+	 *
+	 * @return string
+	 */
+	public function ensure_full_url( $url ) {
+		if ( strpos( $url, '/' ) === 0 || ( strpos( $url, 'http://' ) === false && strpos( $url, 'https://' ) === false ) ) {
+			$url = site_url( $url );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Get ignored assets for critical API.
+	 *
+	 * @return array
+	 */
+	public function get_ignored_files_for_critical_api() {
+		$ignored_files = array_merge(
+			$this->get_excluded_files_for_critical_css(),
+			$this->get_exclusion_setting( 'critical_css_keywords' ),
+			$this->get_formatted_theme_plugin_exclusions( 'critical_css_plugins_themes_exclusion' ),
+		);
+
+		/**
+		 * Filter the list of all ignored files for critical API.
+		 *
+		 * @param array $ignored_files An array of ignored files.
+		 */
+		return apply_filters( 'wphb_ignored_files_for_critical_api', $ignored_files );
 	}
 }

@@ -306,6 +306,10 @@
     .sui-notice-icon.sui-warning-icon.sui-icon-info:before {
         color: #FF6D6D;
     }
+
+    #critical_css_advanced {
+        min-height: 180px;
+    }
 }
 
 #critical_css_file_exclude .sui-table .sui-box-body .sui-label + .wphb-dash-table-row {
@@ -350,7 +354,6 @@
     .select2-selection--multiple {
         min-height: 175px;
         .select2-selection__rendered {
-            min-width: 250px !important;
 	        overflow-y: auto;
         }
     }

@@ -27,6 +27,8 @@
  * @var array  $settings                          Settings data.
  * @var string $preload_fonts_mode                Preload Fonts Mode.
  * @var string $above_fold_load_stylesheet_method Above the fold load stylesheet method.
+ * @var bool   $delay_js_exclude_inline_js        Delay JS Exclude Inline JS.
+ * @var bool   $delay_js_keywords_advanced_view   If keyword is in advanced view.
  */
 
 use Hummingbird\Core\Utils;
@@ -116,7 +118,7 @@ $this->modal( 'reset-exclusions' );
 				<label class="sui-label sui-margin-top">
 					<?php esc_html_e( 'Exclusions', 'wphb' ); ?>
 				</label>
-				<table class="sui-table sui-accordion wphb-mt-5px">
+				<table class="sui-table sui-accordion wphb-mt-5px wphb-mb-15px">
 					<tbody>
 						<tr class="sui-accordion-item">
 							<td class="sui-table-item-title">
@@ -147,9 +149,29 @@ $this->modal( 'reset-exclusions' );
 												<?php esc_html_e( 'Reset', 'wphb' ); ?>
 											</a>
 										</div>
-										<label class="sui-label wphb-mt-10px">
+										<label class="sui-label wphb-mt-5px" style="display: inline-block;">
 											<?php esc_html_e( 'Active Exclusions', 'wphb' ); ?>
 										</label>
+										<label id="delay_js_keywords_advanced_view_label" for="delay_js_keywords_advanced_view" class="sui-checkbox sui-hidden" style="float: right;">
+											<input type="checkbox" name="delay_js_keywords_advanced_view" id="delay_js_keywords_advanced_view" aria-labelledby="label-delay_js_keywords_advanced_view" <?php checked( $delay_js_keywords_advanced_view ); ?> />
+											<span aria-hidden="true"></span>
+											<span id="label-delay_js_keywords_advanced_view"><?php esc_html_e( 'Advanced View', 'wphb' ); ?></span>
+										</label>
+										<div id="delay_js_legacy_keywords_container" class="sui-hidden">
+											<textarea class="sui-form-control" id="delay_js_legacy_keywords" name="delay_js_exclude" placeholder="/wp-content/themes/some-theme/jsfile.js
+jsfile
+script id"><?php echo esc_html( $delay_js_excludes ); ?></textarea>
+											<span class="sui-description">
+												<?php
+												printf( /* translators: %1$s - jsfile, %2$s - jsfile with url, %3$s - script id */
+													esc_html__( 'Specify the URLs or keywords that should be excluded from delaying execution (one per line). E.g. %1$s or %2$s or %3$s', 'wphb' ),
+													'<b>jsfile</b>',
+													'<b>/wp-content/themes/some-theme/jsfile.js</b>',
+													'<b>script id</b>'
+												);
+												?>
+											</span>
+										</div>
 										<?php
 										foreach ( $exclusion_settings as $key => $setting_data ) {
 											// Switch based on type.
@@ -162,6 +184,7 @@ $this->modal( 'reset-exclusions' );
 															if ( ! empty( $setting_data['value'] ) ) {
 																foreach ( $setting_data['value'] as $label => $values ) {
 																	foreach ( $values as $option_key => $val ) {
+																		$label           = ( isset( $val['src'] ) && preg_match( '#/(wp-includes|wp-admin)/#', $val['src'] ) ) ? 'core_file' : $label;
 																		$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
 																		$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
 																		echo '<option data-hb-exclusion-type="' . esc_attr( $label ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
@@ -181,10 +204,11 @@ $this->modal( 'reset-exclusions' );
 															<?php
 															if ( ! empty( $setting_data['value'] ) ) {
 																foreach ( $setting_data['value'] as $option_key => $val ) {
+																	$label           = ( isset( $val['src'] ) && preg_match( '#/(wp-includes|wp-admin)/#', $val['src'] ) ) ? 'core_file' : $setting_data['exclusion_name'];
 																	$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
 																	$option_key      = 'delay_js_exclusions' === $key ? $val : $option_key;
 																	$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
-																	echo '<option data-hb-exclusion-type="' . esc_attr( $setting_data['exclusion_name'] ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
+																	echo '<option data-hb-exclusion-type="' . esc_attr( $label ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
 																}
 															}
 															?>
@@ -202,6 +226,15 @@ $this->modal( 'reset-exclusions' );
 						</tr>
 					</tbody>
 				</table>
+				<div class="sui-form-field">
+					<label for="delay_js_exclude_inline_js" class="sui-toggle">
+						<input type="hidden" name="delay_js_exclude_inline_js" value="0">
+						<input type="checkbox" name="delay_js_exclude_inline_js" id="delay_js_exclude_inline_js" value="1" aria-labelledby="delay_js_exclude_inline_js-label" <?php checked( $delay_js_exclude_inline_js ); ?>>
+						<span class="sui-toggle-slider" aria-hidden="true"></span>
+						<span id="delay_js_exclude_inline_js-label" class="sui-toggle-label"><?php esc_html_e( 'Exclude inline JavaScript from being delayed', 'wphb' ); ?></span>
+						<span class="sui-description sui-toggle-description"><?php esc_html_e( 'Enable this option if you have critical inline scripts that need to execute immediately for proper page functionality.', 'wphb' ); ?></span>
+					</label>
+				</div>
 			</span>
 		</div>
 	</div>
@@ -390,6 +423,7 @@ $this->modal( 'reset-exclusions' );
 															if ( ! empty( $setting_data['value'] ) ) {
 																foreach ( $setting_data['value'] as $label => $values ) {
 																	foreach ( $values as $option_key => $val ) {
+																		$label           = ( isset( $val['src'] ) && preg_match( '#/(wp-includes|wp-admin)/#', $val['src'] ) ) ? 'core_file' : $label;
 																		$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
 																		$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
 																		echo '<option data-hb-exclusion-type="' . esc_attr( $label ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
@@ -409,10 +443,11 @@ $this->modal( 'reset-exclusions' );
 															<?php
 															if ( ! empty( $setting_data['value'] ) ) {
 																foreach ( $setting_data['value'] as $option_key => $val ) {
+																	$label           = ( isset( $val['src'] ) && preg_match( '#/(wp-includes|wp-admin)/#', $val['src'] ) ) ? 'core_file' : $setting_data['exclusion_name'];
 																	$val             = isset( $val['src'] ) ? "{$val['handle']} ({$val['src']})" : ( $val['title'] ?? $val );
 																	$selected_values = is_array( $setting_data['selected_values'] ) ? $setting_data['selected_values'] : array();
 																	$option_key      = 'critical_css_keywords' === $key ? $val : $option_key;
-																	echo '<option data-hb-exclusion-type="' . esc_attr( $setting_data['exclusion_name'] ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
+																	echo '<option data-hb-exclusion-type="' . esc_attr( $label ) . '" value="' . esc_attr( $option_key ) . '"' . selected( in_array( $option_key, $selected_values ), true, false ) . '>' . esc_html( $val ) . '</option>'; // WPCS: XSS ok.
 																}
 															}
 															?>

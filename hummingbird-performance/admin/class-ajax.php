@@ -774,6 +774,7 @@ class AJAX {
 		$module->update_options( $options );
 		$settings                              = $module->get_settings();
 		$settings['settings']['comment_clear'] = isset( $data['settings']['comment_clear'] ) && $data['settings']['comment_clear'];
+		$settings['settings']['clear_update']  = isset( $data['settings']['clear_update'] ) && $data['settings']['clear_update'];
 		$module->save_settings( $settings );
 
 		if ( ! empty( $settings_modified ) ) {
@@ -1598,15 +1599,23 @@ class AJAX {
 
 		$status = Minify::save_css( $form['critical_css'] );
 
-		$delay_js            = ! empty( $form['delay_js'] );
-		$delay_js_exclusions = isset( $form['delay_js_exclusions'] ) ? $form['delay_js_exclusions'] : '';
-		$delay_js_exclude    = is_array( $delay_js_exclusions ) ? implode( "\n", $delay_js_exclusions ) : '';
-		$delay_js_exclude    = html_entity_decode( $delay_js_exclude );
-		$delay_js_timeout    = (int) $form['delay_js_timeout'];
+		$delay_js                        = ! empty( $form['delay_js'] );
+		$delay_js_keywords_advanced_view = ! empty( $form['delay_js_keywords_advanced_view'] );
+		$delay_js_exclude_inline_js      = ! empty( $form['delay_js_exclude_inline_js'] );
+		if ( $delay_js_keywords_advanced_view ) {
+			$delay_js_exclude = html_entity_decode( $form['delay_js_exclude'] ?? '' );
+		} else {
+			$delay_js_exclusions = $form['delay_js_exclusions'] ?? '';
+			$delay_js_exclude    = html_entity_decode( is_array( $delay_js_exclusions ) ? implode( "\n", array_map( 'trim', $delay_js_exclusions ) ) : $delay_js_exclusions );
+		}
+
+		$delay_js_timeout = (int) $form['delay_js_timeout'];
 
 		Settings::update_setting( 'delay_js', $delay_js, 'minify' );
 		Settings::update_setting( 'delay_js_exclusions', $delay_js_exclude, 'minify' );
 		Settings::update_setting( 'delay_js_timeout', $delay_js_timeout, 'minify' );
+		Settings::update_setting( 'delay_js_exclude_inline_js', $delay_js_exclude_inline_js, 'minify' );
+		Settings::update_setting( 'delay_js_keywords_advanced_view', $delay_js_keywords_advanced_view, 'minify' );
 
 		// DelayJS exclusion rules.
 		$delay_exclusion_types = array(

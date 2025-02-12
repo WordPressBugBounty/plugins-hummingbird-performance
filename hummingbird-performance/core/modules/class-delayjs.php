@@ -10,6 +10,7 @@ namespace Hummingbird\Core\Modules;
 
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Traits\Module as ModuleContract;
+use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -352,7 +353,7 @@ class Delayjs extends Module {
 			}
 		}
 
-		if ( apply_filters( 'wphb_do_not_delay_inline_scripts', false ) && isset( $matches['attr'] ) && ! preg_match( '/src=["\']?([^"\'>]+)/', $matches['attr'] ) ) {
+		if ( $this->should_exclude_inline_script_from_delay() && isset( $matches['attr'] ) && ! preg_match( '/src=["\']?([^"\'>]+)/', $matches['attr'] ) ) {
 			return $matches[0];
 		}
 
@@ -377,5 +378,19 @@ class Delayjs extends Module {
 		}
 
 		return str_ireplace( '<script', '<script type="wphb-delay-type"', $delay_js );
+	}
+
+	/**
+	 * Check if inline script should not be delayed.
+	 *
+	 * @return bool
+	 */
+	public function should_exclude_inline_script_from_delay() {
+		static $delay_js_exclude_inline_js = null;
+		if ( null === $delay_js_exclude_inline_js ) {
+			$delay_js_exclude_inline_js = Settings::get_setting( 'delay_js_exclude_inline_js', 'minify' );
+		}
+
+		return $delay_js_exclude_inline_js || apply_filters( 'wphb_do_not_delay_inline_scripts', false );
 	}
 }

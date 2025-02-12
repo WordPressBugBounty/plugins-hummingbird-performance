@@ -237,7 +237,7 @@ class Critical_Css extends Module {
 		foreach ( $taxonomies as $taxonomy ) {
 			$get_term_url = get_term_link( (int) $taxonomy->ID );
 			if ( ! empty( $get_term_url ) && substr( $get_term_url, 0, $site_url_length ) === get_site_url() ) {
-				if ( ! $this->skip_page_type( $taxonomy->taxonomy ) ) {
+				if ( ! $this->skip_page_type( 'category' ) ) {
 					$this->add_item( $get_term_url, $taxonomy->taxonomy );
 				}
 			}
@@ -762,11 +762,11 @@ class Critical_Css extends Module {
 			$type = get_post_type() !== false ? get_post_type() : 'single';
 		} elseif ( $wp_query->is_category ) {
 			$type = 'category';
-		} elseif ( $wp_query->is_tag ) {
-			$type = 'post_tag';
 		} elseif ( $wp_query->is_tax ) {
 			$term = get_queried_object();
 			$type = $term->taxonomy;
+		} elseif ( $wp_query->is_tag ) {
+			$type = 'post_tag';
 		} elseif ( $wp_query->is_archive ) {
 			$type = $wp_query->is_day ? 'day' : ( $wp_query->is_month ? 'month' : ( $wp_query->is_year ? 'year' : ( $wp_query->is_author ? 'author' : 'archive' ) ) );
 		}
@@ -1103,7 +1103,8 @@ class Critical_Css extends Module {
 			}
 		}
 
-		$response      = $api->critical_css->generate_critical_css( $urls, $api_call_type );
+		$ignored_files = Utils::get_module( 'exclusions' )->get_ignored_files_for_critical_api();
+		$response      = $api->critical_css->generate_critical_css( $urls, $api_call_type, $ignored_files );
 		$is_type_error = true;
 
 		if ( ! is_wp_error( $response ) && ! empty( $response ) ) {
@@ -1416,6 +1417,10 @@ class Critical_Css extends Module {
 			}
 
 			if ( in_array( $type, $all_pages_type, true ) && ! in_array( $type, $critical_page_types, true ) ) {
+				return true;
+			}
+
+			if ( taxonomy_exists( $type ) && ! in_array( 'category', $critical_page_types, true ) ) {
 				return true;
 			}
 		}

@@ -132,14 +132,6 @@ import Fetcher from './utils/fetcher';
 			}
 
 			this.track( 'critical_css_updated', properties );
-
-			this.track( 'critical_css_updated', {
-				'update_type': updateType,
-				'Location': location,
-				'mode': mode,
-				'settings_modified': settingsModified,
-				'settings_default': settingsDefault,
-			} );
 		},
 
 		/**

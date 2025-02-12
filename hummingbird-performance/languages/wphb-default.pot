@@ -1,14 +1,14 @@
-# Copyright (C) 2024 WPMU DEV
+# Copyright (C) 2025 WPMU DEV
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 3.11.0\n"
+"Project-Id-Version: Hummingbird 3.12.0\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2024-12-18 15:20:25+00:00\n"
+"POT-Creation-Date: 2025-02-12 11:34:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
@@ -39,12 +39,12 @@ msgstr ""
 msgid "Speedy"
 msgstr ""
 
-#: admin/ajax/class-minify.php:525 admin/class-ajax.php:1866
+#: admin/ajax/class-minify.php:525 admin/class-ajax.php:1875
 msgid "Error removing asset file."
 msgstr ""
 
-#: admin/ajax/class-minify.php:549 admin/class-ajax.php:1578
-#: admin/class-ajax.php:2293 admin/class-ajax.php:2736 core/class-utils.php:190
+#: admin/ajax/class-minify.php:549 admin/class-ajax.php:1579
+#: admin/class-ajax.php:2302 admin/class-ajax.php:2745 core/class-utils.php:190
 #: core/modules/class-minify.php:1705
 msgid "Settings updated"
 msgstr ""
@@ -185,7 +185,7 @@ msgstr ""
 msgid "Setup Wizard"
 msgstr ""
 
-#: admin/class-admin.php:276 admin/pages/class-minification.php:551
+#: admin/class-admin.php:276 admin/pages/class-minification.php:553
 #: admin/views/advanced/general-meta-box.php:46
 msgid "NEW"
 msgstr ""
@@ -194,95 +194,95 @@ msgstr ""
 msgid "Cache purged."
 msgstr ""
 
-#: admin/class-ajax.php:1146
+#: admin/class-ajax.php:1147
 msgid ""
 "Cannot process the form. Please define either the Email/API key or the API "
 "token."
 msgstr ""
 
-#: admin/class-ajax.php:1558
+#: admin/class-ajax.php:1559
 #. translators: %s - number of assets
 msgid "%s assets found!"
 msgstr ""
 
-#: admin/class-ajax.php:1731 core/class-utils.php:216
+#: admin/class-ajax.php:1740 core/class-utils.php:216
 msgid "Settings updated. Generating Critical CSS, this could take about a minute."
 msgstr ""
 
-#: admin/class-ajax.php:2005
+#: admin/class-ajax.php:2014
 msgid "Invalid type specified."
 msgstr ""
 
-#: admin/class-ajax.php:2016
+#: admin/class-ajax.php:2025
 msgid "Error deleting data."
 msgstr ""
 
-#: admin/class-ajax.php:2024
+#: admin/class-ajax.php:2033
 #. translators: %d: number of database entries
 msgid "%d database entries were deleted successfully."
 msgstr ""
 
-#: admin/class-ajax.php:2228
+#: admin/class-ajax.php:2237
 msgid "Module not found"
 msgstr ""
 
-#: admin/class-ajax.php:2239
+#: admin/class-ajax.php:2248
 msgid "Log file not found or empty"
 msgstr ""
 
-#: admin/class-ajax.php:2247
+#: admin/class-ajax.php:2256
 msgid "Log file purged"
 msgstr ""
 
-#: admin/class-ajax.php:2406
+#: admin/class-ajax.php:2415
 msgid "Import failed - No settings file has been submitted."
 msgstr ""
 
-#: admin/class-ajax.php:2415
+#: admin/class-ajax.php:2424
 msgid "Import failed - Something went wrong on uploading settings file."
 msgstr ""
 
-#: admin/class-ajax.php:2423 admin/class-ajax.php:2431
+#: admin/class-ajax.php:2432 admin/class-ajax.php:2440
 msgid "Import failed - You selected wrong settings file."
 msgstr ""
 
-#: admin/class-ajax.php:2440
+#: admin/class-ajax.php:2449
 msgid "Import failed - Settings data is empty."
 msgstr ""
 
-#: admin/class-ajax.php:2449
+#: admin/class-ajax.php:2458
 msgid "Import failed - Asset optimization settings data not found."
 msgstr ""
 
-#: admin/class-ajax.php:2458
+#: admin/class-ajax.php:2467
 msgid "Settings imported and configured successfully."
 msgstr ""
 
-#: admin/class-ajax.php:2525
+#: admin/class-ajax.php:2534
 msgid "Missing config ID"
 msgstr ""
 
-#: admin/class-ajax.php:2586 admin/class-ajax.php:2626
+#: admin/class-ajax.php:2595 admin/class-ajax.php:2635
 msgid "There was some error in generating Critical CSS"
 msgstr ""
 
-#: admin/class-ajax.php:2588
+#: admin/class-ajax.php:2597
 msgid "Critical CSS is being generated"
 msgstr ""
 
-#: admin/class-ajax.php:2590
+#: admin/class-ajax.php:2599
 msgid "Critical CSS generated"
 msgstr ""
 
-#: admin/class-ajax.php:2622
+#: admin/class-ajax.php:2631
 msgid "Critical CSS is being re-generated"
 msgstr ""
 
-#: admin/class-ajax.php:2628
+#: admin/class-ajax.php:2637
 msgid "Critical CSS re-generated"
 msgstr ""
 
-#: admin/class-ajax.php:2658
+#: admin/class-ajax.php:2667
 msgid "Critical CSS file deleted successfully"
 msgstr ""
 
@@ -1770,7 +1770,7 @@ msgstr ""
 #: admin/pages/class-caching.php:106 admin/pages/class-caching.php:115
 #: admin/pages/class-caching.php:324
 #: admin/views/dashboard/welcome/subsite-meta-box.php:112
-#: core/class-utils.php:1624 languages/react.php:363
+#: core/class-utils.php:1625 languages/react.php:363
 msgid "Page Caching"
 msgstr ""
 
@@ -2168,7 +2168,7 @@ msgstr ""
 
 #: admin/views/advanced/db-meta-box.php:44
 #: admin/views/caching/page/meta-box.php:318
-#: admin/views/minification/settings-meta-box.php:207 core/class-core.php:200
+#: admin/views/minification/settings-meta-box.php:207 core/class-core.php:202
 msgid "Clear"
 msgstr ""
 
@@ -2701,8 +2701,8 @@ msgstr ""
 
 #: admin/views/caching/gravatar/meta-box.php:27
 #: admin/views/caching/gravatar/meta-box.php:35
-#: admin/views/caching/page/fast-cgi-meta-box.php:167
-#: admin/views/caching/page/fast-cgi-meta-box.php:177
+#: admin/views/caching/page/fast-cgi-meta-box.php:179
+#: admin/views/caching/page/fast-cgi-meta-box.php:189
 #: admin/views/caching/page/meta-box.php:513
 #: admin/views/caching/page/meta-box.php:524
 #: admin/views/caching/page/subsite-meta-box.php:60
@@ -2818,88 +2818,100 @@ msgid "The page cache will be cleared after each comment made on a post."
 msgstr ""
 
 #: admin/views/caching/page/fast-cgi-meta-box.php:97
+#: admin/views/caching/page/meta-box.php:290
+msgid "Clear full cache when post/page is updated"
+msgstr ""
+
+#: admin/views/caching/page/fast-cgi-meta-box.php:100
+#: admin/views/caching/page/meta-box.php:293
+msgid ""
+"If one of your pages or posts gets updated, turning this setting on will "
+"also regenerate all cached archives and taxonomies for all post types."
+msgstr ""
+
+#: admin/views/caching/page/fast-cgi-meta-box.php:109
 msgid "Allow Caching Query String (Params)"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:99
+#: admin/views/caching/page/fast-cgi-meta-box.php:111
 msgid "Specify any query string you want to cache"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:110
+#: admin/views/caching/page/fast-cgi-meta-box.php:122
 msgid "Enter query string one per line"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:112
+#: admin/views/caching/page/fast-cgi-meta-box.php:124
 msgid ""
 "All query strings added to this list will be cached. Enter one string per "
 "line."
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:120
+#: admin/views/caching/page/fast-cgi-meta-box.php:132
 msgid "Exclude Urls From Caching"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:122
+#: admin/views/caching/page/fast-cgi-meta-box.php:134
 #: admin/views/caching/page/meta-box.php:450
 msgid "Specify any particular URLs you don’t want to cache at all."
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:133
+#: admin/views/caching/page/fast-cgi-meta-box.php:145
 msgid "Enter relative URLs here, one per line"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:135
+#: admin/views/caching/page/fast-cgi-meta-box.php:147
 msgid ""
 "Allows excluding URLs or URL strings from Static Site Cache. E.g., if you "
 "add /blog it will also exclude /blog/samplepost or parentpage/blog from the "
 "cache."
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:143
+#: admin/views/caching/page/fast-cgi-meta-box.php:155
 msgid "Cache Lifetime"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:145
+#: admin/views/caching/page/fast-cgi-meta-box.php:157
 msgid "Change the expiry of the static server cache if needed."
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:152
+#: admin/views/caching/page/fast-cgi-meta-box.php:164
 #: core/modules/class-caching.php:289
 msgid "1 hour"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:153
+#: admin/views/caching/page/fast-cgi-meta-box.php:165
 #: core/modules/class-caching.php:291 core/modules/class-cloudflare.php:677
 msgid "4 hours"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:154
+#: admin/views/caching/page/fast-cgi-meta-box.php:166
 #: core/modules/class-cloudflare.php:679
 msgid "8 hours"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:155
+#: admin/views/caching/page/fast-cgi-meta-box.php:167
 #: core/modules/class-caching.php:294 core/modules/class-cloudflare.php:680
 msgid "12 hours"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:156
+#: admin/views/caching/page/fast-cgi-meta-box.php:168
 msgid "24 hours"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:159
+#: admin/views/caching/page/fast-cgi-meta-box.php:171
 msgid "Specify the duration for which the static server cache will be valid."
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:169
+#: admin/views/caching/page/fast-cgi-meta-box.php:181
 msgid "You can deactivate Static Server Cache at any time. "
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:182
+#: admin/views/caching/page/fast-cgi-meta-box.php:194
 msgid "Deactivating"
 msgstr ""
 
-#: admin/views/caching/page/fast-cgi-meta-box.php:186
+#: admin/views/caching/page/fast-cgi-meta-box.php:198
 msgid ""
 "Note: You won’t lose any site data by deactivating. Only the cached pages "
 "will be removed and will no longer be served to your site visitors. "
@@ -3106,16 +3118,6 @@ msgid ""
 "your server."
 msgstr ""
 
-#: admin/views/caching/page/meta-box.php:290
-msgid "Clear full cache when post/page is updated"
-msgstr ""
-
-#: admin/views/caching/page/meta-box.php:293
-msgid ""
-"If one of your pages or posts gets updated, turning this setting on will "
-"also regenerate all cached archives and taxonomies for all post types."
-msgstr ""
-
 #: admin/views/caching/page/meta-box.php:303
 #: admin/views/minification/settings-meta-box.php:192
 msgid "Enable debug log"
@@ -3148,9 +3150,9 @@ msgstr ""
 #: admin/views/dashboard/minification/module-meta-box.php:99
 #: admin/views/dashboard/uptime/module-meta-box-header.php:20
 #: admin/views/dashboard/welcome/upsell-meta-box-header.php:19
-#: admin/views/minification/tools-meta-box.php:53
-#: admin/views/minification/tools-meta-box.php:235
-#: admin/views/minification/tools-meta-box.php:638
+#: admin/views/minification/tools-meta-box.php:55
+#: admin/views/minification/tools-meta-box.php:268
+#: admin/views/minification/tools-meta-box.php:673
 #: admin/views/notifications/configure-meta-box.php:40
 #: admin/views/notifications/configure-meta-box.php:49
 #: admin/views/notifications/configure-meta-box.php:58
@@ -3220,7 +3222,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/caching/page/meta-box.php:448
-#: admin/views/minification/tools-meta-box.php:117 languages/react.php:884
+#: admin/views/minification/tools-meta-box.php:119 languages/react.php:884
 msgid "Exclusions"
 msgstr ""
 
@@ -3531,7 +3533,7 @@ msgstr ""
 #: admin/views/dashboard/minification/network-module-meta-box.php:59
 #: admin/views/performance/summary-meta-box.php:176
 #: admin/views/uptime/summary-meta-box.php:103
-#: admin/views/uptime/summary-meta-box.php:118 core/class-utils.php:550
+#: admin/views/uptime/summary-meta-box.php:118 core/class-utils.php:551
 #: languages/react.php:951
 msgid "Disabled"
 msgstr ""
@@ -3698,14 +3700,14 @@ msgstr ""
 
 #: admin/views/dashboard/minification/module-meta-box.php:79
 #: admin/views/dashboard/welcome/upsell-meta-box.php:23
-#: admin/views/minification/tools-meta-box.php:76
+#: admin/views/minification/tools-meta-box.php:78
 #: admin/views/wphb-upgrade-page.php:54 languages/react.php:962
 msgid "Delay JavaScript Execution"
 msgstr ""
 
 #: admin/views/dashboard/minification/module-meta-box.php:97
-#: admin/views/minification/tools-meta-box.php:250
-#: admin/views/minification/tools-meta-box.php:258
+#: admin/views/minification/tools-meta-box.php:283
+#: admin/views/minification/tools-meta-box.php:291
 #: admin/views/wphb-upgrade-page.php:49 languages/react.php:966
 msgid "Generate Critical CSS"
 msgstr ""
@@ -4272,8 +4274,8 @@ msgid "Use this button to wipe any existing settings and return to defaults."
 msgstr ""
 
 #: admin/views/minification/settings-meta-box.php:229
-#: admin/views/minification/tools-meta-box.php:147
-#: admin/views/minification/tools-meta-box.php:375
+#: admin/views/minification/tools-meta-box.php:149
+#: admin/views/minification/tools-meta-box.php:408
 #: admin/views/settings/data-meta-box.php:44
 msgid "Reset"
 msgstr ""
@@ -4307,188 +4309,209 @@ msgstr ""
 msgid "Regenerate Critical CSS"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:51
+#: admin/views/minification/tools-meta-box.php:53
 msgid "Delay JavaScript"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:57 languages/react.php:1033
+#: admin/views/minification/tools-meta-box.php:59 languages/react.php:1033
 msgid ""
 "Improve performance by delaying the loading of non-critical JavaScript "
 "files above the fold until user interaction (e.g. scroll, click)."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:68
+#: admin/views/minification/tools-meta-box.php:70
 msgid "Enable Delay JavaScript"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:90
+#: admin/views/minification/tools-meta-box.php:92
 msgid "Timeout"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:95
+#: admin/views/minification/tools-meta-box.php:97
 msgid "5 seconds"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:96
+#: admin/views/minification/tools-meta-box.php:98
 msgid "10 seconds"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:97
+#: admin/views/minification/tools-meta-box.php:99
 msgid "15 seconds"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:98
+#: admin/views/minification/tools-meta-box.php:100
 msgid "20 seconds (Recommended minimum)"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:99
+#: admin/views/minification/tools-meta-box.php:101
 msgid "25 seconds"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:100
+#: admin/views/minification/tools-meta-box.php:102
 msgid "30 seconds"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:113
+#: admin/views/minification/tools-meta-box.php:115
 msgid ""
 "Set a timeout in seconds that the scripts will be loaded if no user "
 "interaction has been detected."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:123
+#: admin/views/minification/tools-meta-box.php:125
 msgid "Delay JS Exclusions"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:133
-#: admin/views/minification/tools-meta-box.php:361
+#: admin/views/minification/tools-meta-box.php:135
+#: admin/views/minification/tools-meta-box.php:394
 msgid ""
 "Certain sensitive resources are skipped from optimizations by default. Add "
 "custom exclusions only if necessary."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:136
-#: admin/views/minification/tools-meta-box.php:364
+#: admin/views/minification/tools-meta-box.php:138
+#: admin/views/minification/tools-meta-box.php:397
 msgid "Exclusion Type "
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:151
-#: admin/views/minification/tools-meta-box.php:379
+#: admin/views/minification/tools-meta-box.php:153
+#: admin/views/minification/tools-meta-box.php:412
 msgid "Active Exclusions"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:213
+#: admin/views/minification/tools-meta-box.php:158
+msgid "Advanced View"
+msgstr ""
+
+#: admin/views/minification/tools-meta-box.php:167
+#. translators: %1$s - jsfile, %2$s - jsfile with url, %3$s - script id
+msgid ""
+"Specify the URLs or keywords that should be excluded from delaying "
+"execution (one per line). E.g. %1$s or %2$s or %3$s"
+msgstr ""
+
+#: admin/views/minification/tools-meta-box.php:234
+msgid "Exclude inline JavaScript from being delayed"
+msgstr ""
+
+#: admin/views/minification/tools-meta-box.php:235
+msgid ""
+"Enable this option if you have critical inline scripts that need to execute "
+"immediately for proper page functionality."
+msgstr ""
+
+#: admin/views/minification/tools-meta-box.php:246
 msgid "Critical CSS encounter an issue!"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:233
+#: admin/views/minification/tools-meta-box.php:266
 msgid "Critical CSS"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:239
+#: admin/views/minification/tools-meta-box.php:272
 msgid ""
 "Drastically reduce your page load time and eliminate render-blocking CSS by "
 "automatically generating the critical CSS required to load your page."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:271
+#: admin/views/minification/tools-meta-box.php:304
 msgid "Choose how to load critical CSS."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:276
+#: admin/views/minification/tools-meta-box.php:309
 msgid "Full Page CSS Optimization (Recommended)"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:277
+#: admin/views/minification/tools-meta-box.php:310
 msgid "Above-the-fold CSS Optimization"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:299
+#: admin/views/minification/tools-meta-box.php:332
 msgid "Inline above-the-fold CSS, delay the rest or load asynchronously."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:302
+#: admin/views/minification/tools-meta-box.php:335
 msgid "Inline all used CSS, delay/remove the rest."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:306
+#: admin/views/minification/tools-meta-box.php:339
 msgid "How to handle the Unused CSS"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:311
-#: admin/views/minification/tools-meta-box.php:328
+#: admin/views/minification/tools-meta-box.php:344
+#: admin/views/minification/tools-meta-box.php:361
 msgid "Load on User Interaction"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:311 languages/react.php:732
+#: admin/views/minification/tools-meta-box.php:344 languages/react.php:732
 msgid "Recommended"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:317
+#: admin/views/minification/tools-meta-box.php:350
 msgid "Remove Unused"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:323
+#: admin/views/minification/tools-meta-box.php:356
 msgid "How to handle below-the-fold CSS"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:328
+#: admin/views/minification/tools-meta-box.php:361
 msgid "Fastest"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:333
+#: admin/views/minification/tools-meta-box.php:366
 msgid "Load Asynchronously"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:345
+#: admin/views/minification/tools-meta-box.php:378
 msgid "Exclusions/Inclusions"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:351
+#: admin/views/minification/tools-meta-box.php:384
 msgid "Critical CSS Exclusions"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:437
+#: admin/views/minification/tools-meta-box.php:472
 msgid "Manual Inclusions (Advanced)"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:447
-#: admin/views/minification/tools-meta-box.php:514
+#: admin/views/minification/tools-meta-box.php:482
+#: admin/views/minification/tools-meta-box.php:549
 msgid "Add CSS here"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:451
+#: admin/views/minification/tools-meta-box.php:486
 msgid ""
 "Only use this option if you see a broken element on your site to add the "
 "critical elements manually. This might affect your PageSpeed negatively."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:470
+#: admin/views/minification/tools-meta-box.php:505
 msgid "CSS Above the fold"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:473
+#: admin/views/minification/tools-meta-box.php:508
 msgid ""
 "Paste your Manual critical CSS and remove render-blocking CSS from your "
 "site. Drastically reduce your page load time by moving all of your "
 "stylesheets to the footer to force them to load after your content."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:484
+#: admin/views/minification/tools-meta-box.php:519
 #. translators: %1$s - opening span tag, %2$s - closing </span> tag
 msgid "%1$sPro%2$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:492
+#: admin/views/minification/tools-meta-box.php:527
 #. translators: %1$s - opening span tag, %2$s - closing </span> tag
 msgid "%1$sNEW%2$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:498
+#: admin/views/minification/tools-meta-box.php:533
 #. translators: %1$s - opening a tag, %2$s - closing a tag
 msgid "%1$sSwitch now%2$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:505
+#: admin/views/minification/tools-meta-box.php:540
 #. translators: %1$s: opening span tag, %2$s: closing span tag, %3$s: pro tag,
 #. %4$s: switch critical mode href link, %5$s: closing a tag
 msgid ""
@@ -4497,60 +4520,60 @@ msgid ""
 "automatically migrated as Manual Inclusions. %2$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:512
+#: admin/views/minification/tools-meta-box.php:547
 msgid "CSS to insert into your <head> area"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:515
+#: admin/views/minification/tools-meta-box.php:550
 msgid "Directions:"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:518
+#: admin/views/minification/tools-meta-box.php:553
 msgid ""
 "Add critical layout and styling CSS here. We will insert into <style> tags "
 "in your <head> section of each page."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:521
+#: admin/views/minification/tools-meta-box.php:556
 msgid ""
 "Next, switch to the manual mode in asset optimization and move all of your "
 "CSS files to the footer area."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:529
+#: admin/views/minification/tools-meta-box.php:564
 msgid "Font Optimization"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:532
+#: admin/views/minification/tools-meta-box.php:567
 msgid ""
 "Improve performance, PageSpeed, and user experience by preloading critical "
 "fonts and enabling fallbacks."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:542 languages/react.php:1102
+#: admin/views/minification/tools-meta-box.php:577 languages/react.php:1102
 msgid "Swap Web Fonts"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:545
+#: admin/views/minification/tools-meta-box.php:580
 msgid ""
 "Apply a similar fallback font that visitors will temporarily see until the "
 "primary font loads."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:558
-#: admin/views/minification/tools-meta-box.php:630
+#: admin/views/minification/tools-meta-box.php:593
+#: admin/views/minification/tools-meta-box.php:665
 msgid "Choose Method"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:564
+#: admin/views/minification/tools-meta-box.php:599
 msgid "Safe"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:569
+#: admin/views/minification/tools-meta-box.php:604
 msgid "Performant"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:578
+#: admin/views/minification/tools-meta-box.php:613
 #. translators: %1$s - Opening <strong> tag, %2$s - Closing </strong> tag, %3$s
 #. - New line, %4$s - Opening <span> tag, %4$s - Closing </span> tag
 msgid ""
@@ -4559,7 +4582,7 @@ msgid ""
 "%3$s(Uses %4$sfont-display: swap%5$s attribute)%6$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:591
+#: admin/views/minification/tools-meta-box.php:626
 #. translators: %1$s - Opening <strong> tag, %2$s - Closing </strong> tag, %3$s
 #. - New line, %4$s - Opening <span> tag, %4$s - Closing </span> tag
 msgid ""
@@ -4569,25 +4592,25 @@ msgid ""
 "optional%5$s attribute)%6$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:613
+#: admin/views/minification/tools-meta-box.php:648
 msgid "Preload Fonts"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:616
+#: admin/views/minification/tools-meta-box.php:651
 msgid ""
 "Instruct browsers to preload fonts that are critical to your site's user "
 "experience (e.g., content users are likely to interact with first)."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:636
+#: admin/views/minification/tools-meta-box.php:671
 msgid "Automatic (Needs Critical CSS)"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:644
+#: admin/views/minification/tools-meta-box.php:679
 msgid "Manual Only"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:653
+#: admin/views/minification/tools-meta-box.php:688
 #. translators: %1$s - Opening <bold> tag, %2$s - Closing </bold> tag
 msgid ""
 "Fetches critical fonts from the generated Critical CSS and preloads them in "
@@ -4595,18 +4618,18 @@ msgid ""
 "regressions if your site uses a large number of fonts.%2$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:662
+#: admin/views/minification/tools-meta-box.php:697
 #. translators: %1$s - Opening <bold> tag, %2$s - Closing </bold> tag
 msgid ""
 "Only preloads the fonts which are specified manually in the given field. "
 "%1$sMore suitable for sites with a large number of fonts.%2$s"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:674
+#: admin/views/minification/tools-meta-box.php:709
 msgid "Enter the URLs of the font files you wish to preload (one per line)."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:679
+#: admin/views/minification/tools-meta-box.php:714
 msgid ""
 "The domain component of the URL will be removed automatically if included. "
 "Accepted font extensions: otf, ttf, svg, woff, and woff2."
@@ -5731,7 +5754,7 @@ msgstr ""
 #: admin/views/performance/audits/uses-long-cache-ttl.php:37
 #. translators: %d - number of resources
 msgid ""
-"Your page is serving following %d resources with an inefficient cache "
+"Your page is serving the following %d resources with an inefficient cache "
 "policy."
 msgstr ""
 
@@ -6931,32 +6954,32 @@ msgstr ""
 msgid "Cache control in admin bar"
 msgstr ""
 
-#: core/class-core.php:184
+#: core/class-core.php:186
 msgid "Clear all cache"
 msgstr ""
 
-#: core/class-core.php:193
+#: core/class-core.php:195
 msgid "Clear Cloudflare cache"
 msgstr ""
 
-#: core/class-core.php:210
+#: core/class-core.php:212
 msgid "Clear page cache on all subsites"
 msgstr ""
 
-#: core/class-core.php:218
+#: core/class-core.php:220
 msgid "See this page minified"
 msgstr ""
 
-#: core/class-core.php:218
+#: core/class-core.php:220
 msgid "See this page unminified"
 msgstr ""
 
-#: core/class-core.php:321
+#: core/class-core.php:323
 #. translators: %1$s - Text, %2$s - Link to privacy policy page
 msgid "Third parties"
 msgstr ""
 
-#: core/class-core.php:324
+#: core/class-core.php:326
 #. translators: %1$s - opening a tag, %2$s - closing a tag
 msgid ""
 "Hummingbird uses the Stackpath Content Delivery Network (CDN). Stackpath "
@@ -6966,29 +6989,29 @@ msgid ""
 "your own. Stackpath’s privacy policy can be found %1$shere%2$s."
 msgstr ""
 
-#: core/class-core.php:399
+#: core/class-core.php:401
 #: core/externals/free-dashboard/classes/notices/class-email.php:95
 #: core/externals/free-dashboard/classes/notices/class-email.php:213
 msgid "Get Fast!"
 msgstr ""
 
-#: core/class-core.php:454
+#: core/class-core.php:456
 msgid "Go Back"
 msgstr ""
 
-#: core/class-core.php:458
+#: core/class-core.php:460
 msgid "Copy Test Link"
 msgstr ""
 
-#: core/class-core.php:459
+#: core/class-core.php:461
 msgid "Link Copied"
 msgstr ""
 
-#: core/class-core.php:461 languages/react.php:777
+#: core/class-core.php:463 languages/react.php:777
 msgid "Publish"
 msgstr ""
 
-#: core/class-core.php:464
+#: core/class-core.php:466
 msgid ""
 "You are currently viewing the frontend of your website in Safe Mode "
 "preview. Check for any errors in your browser's console or broken UI. You "
@@ -7233,110 +7256,114 @@ msgstr ""
 msgid "All Exclusion"
 msgstr ""
 
-#: core/class-utils.php:275
+#: core/class-utils.php:226
+msgid "WP File"
+msgstr ""
+
+#: core/class-utils.php:276
 msgid ""
 "Your changes have been published. Note: Files queued for compression will "
 "generate once someone visits your homepage."
 msgstr ""
 
-#: core/class-utils.php:599
+#: core/class-utils.php:600
 #. translators: %d: year
 msgid "%d year"
 msgid_plural "%d years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:602
+#: core/class-utils.php:603
 #. translators: %d: month
 msgid "%d month"
 msgid_plural "%d months"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:605
+#: core/class-utils.php:606
 #. translators: %d: day
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:608
+#: core/class-utils.php:609
 #. translators: %d: hour
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:611
+#: core/class-utils.php:612
 #. translators: %d: minute
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:614
+#: core/class-utils.php:615
 #. translators: %d: second
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:872
+#: core/class-utils.php:873
 msgid "Still having trouble? "
 msgstr ""
 
-#: core/class-utils.php:876 languages/react.php:178
+#: core/class-utils.php:877 languages/react.php:178
 msgid "Start a live chat."
 msgstr ""
 
-#: core/class-utils.php:880 languages/react.php:181
+#: core/class-utils.php:881 languages/react.php:181
 msgid "Open a support ticket."
 msgstr ""
 
-#: core/class-utils.php:997
+#: core/class-utils.php:998
 msgid "Page Cache"
 msgstr ""
 
-#: core/class-utils.php:998 languages/react.php:203
+#: core/class-utils.php:999 languages/react.php:203
 msgid "Cloudflare"
 msgstr ""
 
-#: core/class-utils.php:999
+#: core/class-utils.php:1000
 msgid "Gravatar Cache"
 msgstr ""
 
-#: core/class-utils.php:1000
+#: core/class-utils.php:1001
 msgid "Asset Optimization Cache"
 msgstr ""
 
-#: core/class-utils.php:1001
+#: core/class-utils.php:1002
 msgid "Redis Cache"
 msgstr ""
 
-#: core/class-utils.php:1463
+#: core/class-utils.php:1464
 msgid "Unlock now for Peak Performance  ️⚡️ - 80% Off!"
 msgstr ""
 
-#: core/class-utils.php:1463
+#: core/class-utils.php:1464
 msgid "Unlock now"
 msgstr ""
 
-#: core/class-utils.php:1621
+#: core/class-utils.php:1622
 msgid "Page Caching - Static Server Cache"
 msgstr ""
 
-#: core/class-utils.php:1624
+#: core/class-utils.php:1625
 msgid "Page Caching - Local Page Cache"
 msgstr ""
 
-#: core/class-utils.php:1724
+#: core/class-utils.php:1725
 msgid ""
 "Page Caching stores static HTML copies of your pages and posts to decrease "
 "page load time. Server-side page caching allows for an average of 10 times "
 "more concurrent visitors than regular page caching."
 msgstr ""
 
-#: core/class-utils.php:1724
+#: core/class-utils.php:1725
 msgid ""
 "Hummingbird stores static HTML copies of your pages and posts to decrease "
 "page load time."
@@ -7697,57 +7724,57 @@ msgstr ""
 msgid "2 hours"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1134
+#: core/modules/class-critical-css.php:1135
 #. translators: %1$s - page type, %2$s - Used css content, %3$s - manual
 #. critical css
 msgid "HB critical unknown error"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1643
+#: core/modules/class-critical-css.php:1648
 msgid "<em> Error: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1646
+#: core/modules/class-critical-css.php:1651
 #. translators: %1$s = error message.
 msgid "<br />%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1668
+#: core/modules/class-critical-css.php:1673
 #. translators: %1$s = message.
 msgid ""
 "Critical CSS generation failed. Please review the below error to "
 "troubleshoot.%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1746
+#: core/modules/class-critical-css.php:1751
 msgid "Optimizing "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1749
+#: core/modules/class-critical-css.php:1754
 msgid "Generating Critical CSS, this could take about a minute."
 msgstr ""
 
-#: core/modules/class-critical-css.php:1752 languages/react.php:929
+#: core/modules/class-critical-css.php:1757 languages/react.php:929
 msgid "Optimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1752
+#: core/modules/class-critical-css.php:1757
 msgid "Error"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1755
+#: core/modules/class-critical-css.php:1760
 msgid "Last Generated: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1757
+#: core/modules/class-critical-css.php:1762
 msgid "Unoptimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1760
+#: core/modules/class-critical-css.php:1765
 msgid "Select settings and saves changes to generate Critical CSS"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1765
+#: core/modules/class-critical-css.php:1770
 #. translators: %1$s = tooltip text, %2$s = sui tag, %3$s = info icon, %4$s =
 #. text for tag.
 msgid ""

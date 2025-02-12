@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit86125fb4f9bb741c1f58bd38761c57a2
+class ComposerStaticInit816c807cab1f77229cfc403e675a9bbf
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -81,12 +81,14 @@ class ComposerStaticInit86125fb4f9bb741c1f58bd38761c57a2
         'Hummingbird\\Core\\Integration\\Builders' => __DIR__ . '/../..' . '/core/integration/class-builders.php',
         'Hummingbird\\Core\\Integration\\Defender' => __DIR__ . '/../..' . '/core/integration/class-defender.php',
         'Hummingbird\\Core\\Integration\\Divi' => __DIR__ . '/../..' . '/core/integration/class-divi.php',
+        'Hummingbird\\Core\\Integration\\Elementor' => __DIR__ . '/../..' . '/core/integration/class-elementor.php',
         'Hummingbird\\Core\\Integration\\Google_Site_Kit' => __DIR__ . '/../..' . '/core/integration/class-google-site-kit.php',
         'Hummingbird\\Core\\Integration\\Gtranslate' => __DIR__ . '/../..' . '/core/integration/class-gtranslate.php',
         'Hummingbird\\Core\\Integration\\Gutenberg' => __DIR__ . '/../..' . '/core/integration/class-gutenberg.php',
         'Hummingbird\\Core\\Integration\\Opcache' => __DIR__ . '/../..' . '/core/integration/class-opcache.php',
         'Hummingbird\\Core\\Integration\\OxygenBuilder' => __DIR__ . '/../..' . '/core/integration/class-oxygenbuilder.php',
         'Hummingbird\\Core\\Integration\\SiteGround' => __DIR__ . '/../..' . '/core/integration/class-siteground.php',
+        'Hummingbird\\Core\\Integration\\The_Events_Calendar' => __DIR__ . '/../..' . '/core/integration/class-the-events-calendar.php',
         'Hummingbird\\Core\\Integration\\WCML' => __DIR__ . '/../..' . '/core/integration/class-wcml.php',
         'Hummingbird\\Core\\Integration\\WPH' => __DIR__ . '/../..' . '/core/integration/class-wph.php',
         'Hummingbird\\Core\\Integration\\WPMUDev' => __DIR__ . '/../..' . '/core/integration/class-wpmudev.php',
@@ -412,9 +414,9 @@ class ComposerStaticInit86125fb4f9bb741c1f58bd38761c57a2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit86125fb4f9bb741c1f58bd38761c57a2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit86125fb4f9bb741c1f58bd38761c57a2::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit86125fb4f9bb741c1f58bd38761c57a2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit816c807cab1f77229cfc403e675a9bbf::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit816c807cab1f77229cfc403e675a9bbf::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit816c807cab1f77229cfc403e675a9bbf::$classMap;
 
         }, null, ClassLoader::class);
     }

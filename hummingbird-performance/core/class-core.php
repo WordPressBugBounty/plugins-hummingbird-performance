@@ -98,6 +98,8 @@ class Core {
 		new Integration\WooCommerce();
 		new Integration\WCML();
 		new Integration\Gtranslate();
+		new Integration\Elementor();
+		new Integration\The_Events_Calendar();
 	}
 
 	/**

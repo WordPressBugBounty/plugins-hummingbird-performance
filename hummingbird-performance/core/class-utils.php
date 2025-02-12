@@ -223,6 +223,7 @@ class Utils {
 				'exclusionDefault'        => __( 'Default Exclusion', 'wphb' ),
 				'exclusionAds'            => __( 'Ads/Trackers', 'wphb' ),
 				'exclusionAll'            => __( 'All Exclusion', 'wphb' ),
+				'exclusionWpFile'         => __( 'WP File', 'wphb' ),
 			),
 			'links'      => array(
 				'audits'         => self::get_admin_menu_url( 'performance' ),

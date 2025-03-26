@@ -37,6 +37,13 @@ class Utils {
 	 */
 	const HB_PLUGIN_DISCOUNT = 80;
 
+	/**
+	 * Cached membership status.
+	 *
+	 * @var bool|null
+	 */
+	private static $is_member = null;
+
 	/***************************
 	 *
 	 * I. General helper functions
@@ -62,11 +69,11 @@ class Utils {
 	 * @return bool
 	 */
 	public static function is_member() {
-		if ( class_exists( 'WPMUDEV_Dashboard' ) && method_exists( \WPMUDEV_Dashboard::$upgrader, 'user_can_install' ) ) {
-			return \WPMUDEV_Dashboard::$upgrader->user_can_install( 1081721, true );
+		if ( null === self::$is_member ) {
+			self::$is_member = class_exists( 'WPMUDEV_Dashboard' ) && method_exists( \WPMUDEV_Dashboard::$upgrader, 'user_can_install' ) && \WPMUDEV_Dashboard::$upgrader->user_can_install( 1081721, true );
 		}
 
-		return false;
+		return self::$is_member;
 	}
 
 	/**

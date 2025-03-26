@@ -295,7 +295,8 @@ export const ManualAssets = ( props ) => {
 
 				const isReverseOption = window.lodash.includes( [ 'dont_minify', 'dont_combine' ], action );
 				if ( ( ! bulk[ action ] && ! isReverseOption ) || ( isReverseOption && bulk[ action ] ) ) {
-					newOptions[ action ][ type ] = window.lodash.difference( newOptions[ action ][ type ], selected[ type ] );
+					newOptions[ action ] = newOptions[ action ] || {};
+					newOptions[ action ][ type ] = window.lodash.difference( Array.isArray( newOptions[ action ][ type ] ) ? newOptions[ action ][ type ] : [], selected[ type ] );
 				} else {
 					newOptions[ action ][ type ] = window.lodash.union( newOptions[ action ][ type ], selected[ type ] );
 				}

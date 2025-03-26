@@ -348,9 +348,11 @@ class Critical_Css extends Module {
 	/**
 	 * Determines if we can add critical css.
 	 *
+	 * @param string $html HTML page buffer.
+	 *
 	 * @return boolean
 	 */
-	public function should_add_critical_css() {
+	public function should_add_critical_css( $html ) {
 		if ( isset( $_GET['hb_doing_critical'] ) && 1 === absint( $_GET['hb_doing_critical'] ) ) {
 			return false;
 		}
@@ -360,6 +362,10 @@ class Critical_Css extends Module {
 		}
 
 		if ( ! apply_filters( 'wphb_should_add_critical_css', true ) ) {
+			return false;
+		}
+
+		if ( ! $this->is_html( $html ) ) {
 			return false;
 		}
 
@@ -382,7 +388,7 @@ class Critical_Css extends Module {
 	 * @return string
 	 */
 	public function add_critical_css( $html ) {
-		if ( ! $this->should_add_critical_css() ) {
+		if ( ! $this->should_add_critical_css( $html ) ) {
 			return $html;
 		}
 		// Only known url types.
@@ -1931,5 +1937,15 @@ class Critical_Css extends Module {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Checks if a given string contains a complete HTML document.
+	 *
+	 * @param string $buffer The string content to check.
+	 * @return bool Returns `true` if the string contains both `<html>` and `</html>`, otherwise `false`.
+	 */
+	public function is_html( $buffer ) {
+		return stripos( $buffer, '<html' ) !== false && stripos( $buffer, '</html>' ) !== false;
 	}
 }

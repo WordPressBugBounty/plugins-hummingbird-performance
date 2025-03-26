@@ -12,13 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$url = add_query_arg(
-	array(
-		'enable-advanced-settings' => 'true',
-		'_wpnonce'                 => wp_create_nonce( 'wphb-enable-advanced-settings' ),
-	),
-	\Hummingbird\Core\Utils::get_admin_menu_url( 'minification' )
-);
+$url = \Hummingbird\Core\Utils::get_admin_menu_url( 'minification' );
 
 ?>
 

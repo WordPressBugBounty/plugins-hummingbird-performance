@@ -1,8 +1,8 @@
 <?php
 /**
- * Defer unused CSS audit.
+ * Avoid large layout shifts.
  *
- * @since 2.0.0
+ * @since 3.11.0
  * @package Hummingbird
  *
  * @var stdClass $audit  Audit object.
@@ -31,15 +31,12 @@ $url = \Hummingbird\Core\Utils::get_admin_menu_url( 'minification' );
 }
 ?>
 <?php if ( isset( $audit->score ) && 1 === $audit->score ) : ?>
-	<?php $this->admin_notices->show_inline( esc_html__( 'Nice! Your site is not loading any unused CSS.', 'wphb' ) ); ?>
+	<?php $this->admin_notices->show_inline( esc_html__( 'Nice! you have passed the audit.', 'wphb' ) ); ?>
 <?php else : ?>
 	<?php
 	$this->admin_notices->show_inline(
-		sprintf( /* translators: %s - properly formatted bytes value */
-			esc_html__( 'You can save %s by defering the following CSS files.', 'wphb' ),
-			esc_html( \Hummingbird\Core\Utils::format_bytes( $audit->details->overallSavingsBytes, 0 ) )
-		),
-		\Hummingbird\Core\Modules\Performance::get_impact_class( $audit->score )
+		esc_html__( 'Avoid large layout shifts.', 'wphb' ),
+		\Hummingbird\Core\Modules\Performance::get_impact_class( $audit->score ?? 0 )
 	);
 	?>
 
@@ -48,21 +45,26 @@ $url = \Hummingbird\Core\Utils::get_admin_menu_url( 'minification' );
 			<thead>
 			<tr>
 				<th><?php esc_html_e( 'URL', 'wphb' ); ?></th>
-				<th><?php esc_html_e( 'Size', 'wphb' ); ?></th>
-				<th><?php esc_html_e( 'Savings', 'wphb' ); ?></th>
+				<th><?php esc_html_e( 'Cause', 'wphb' ); ?></th>
 			</tr>
 			</thead>
 			<tbody>
 			<?php foreach ( $audit->details->items as $item ) : ?>
-				<tr>
-					<td>
-						<a href="<?php echo esc_html( $item->url ); ?>" target="_blank">
-							<?php echo esc_html( $item->url ); ?>
-						</a>
-					</td>
-					<td><?php echo esc_html( \Hummingbird\Core\Utils::format_bytes( $item->totalBytes ) ); ?></td>
-					<td><?php echo esc_html( \Hummingbird\Core\Utils::format_bytes( $item->wastedBytes ) ); ?></td>
-				</tr>
+				<?php if ( isset( $item->subItems->items ) && is_array( $item->subItems->items ) ) : ?>
+					<?php foreach ( $item->subItems->items as $sub_item ) : ?>
+						<tr>
+							<td>
+								<?php
+									$item_link = $sub_item->extra->value ?? $sub_item->extra->snippet ?? '';
+								?>
+								<a href="<?php echo esc_url( $item_link ); ?>" target="_blank">
+									<?php echo esc_html( $item_link ); ?>
+								</a>
+							</td>
+							<td><?php echo esc_html( $sub_item->cause ); ?></td>
+						</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			<?php endforeach; ?>
 			</tbody>
 		</table>

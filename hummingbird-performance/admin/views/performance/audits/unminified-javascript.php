@@ -74,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p><?php esc_html_e( 'Use the Hummingbird Asset Optimization module to compress your JavaScript files. To minify, locate the JavaScript files in the assets page and click the compress button on the right.', 'wphb' ); ?></p>
 		<?php endif; ?>
 		<?php if ( $url = \Hummingbird\Core\Utils::get_admin_menu_url( 'minification' ) ) : ?>
-			<a href="<?php echo esc_url( $url ); ?>" class="wphb-button-link">
+			<a href="<?php echo esc_url( $url ); ?>" class="sui-button">
 				<?php esc_html_e( 'Configure Asset Optimization', 'wphb' ); ?>
 			</a>
 		<?php endif; ?>

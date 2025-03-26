@@ -12,17 +12,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$url = add_query_arg(
+	array(
+		'view' => 'tools',
+	),
+	\Hummingbird\Core\Utils::get_admin_menu_url( 'minification' )
+);
 ?>
 
 <h4><?php esc_html_e( 'Overview', 'wphb' ); ?></h4>
 <p>
-	<?php
-	printf(
-		/* translators: %s - preload tag */
-		esc_html__( 'The late-discovery of critical resources hidden in CSS or JS files can delay the first render, the rendering of text, or loading of critical parts of a page. Use %s to tell the browser to fetch critical resources earlier.', 'wphb' ),
-		'<strong>&lt;link rel=preload&gt;</strong>'
-	);
-	?>
+	<?php esc_html_e( 'When a browser loads a webpage, it discovers resources like CSS, JavaScript, and fonts as it parses the HTML. Sometimes, important resources are discovered late, delaying their loading and impacting how quickly the page displays. "Preloading" tells the browser to fetch these key resources earlier in the loading process, improving metrics like Largest Contentful Paint (LCP) and First Contentful Paint (FCP).', 'wphb' ); ?>
 </p>
 
 <h4><?php esc_html_e( 'Status', 'wphb' ); ?></h4>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <?php if ( ( isset( $audit->score ) && 1 === $audit->score ) || empty( $audit->details->items ) ) : ?>
-	<?php $this->admin_notices->show_inline( esc_html__( "Nice! We couldn't find any resource which needs to use preload declarative.", 'wphb' ) ); ?>
+	<?php $this->admin_notices->show_inline( esc_html__( "You're effectively using preloading to prioritize key resources! This helps your website load faster.", 'wphb' ) ); ?>
 <?php else : ?>
 	<?php
 	$this->admin_notices->show_inline(
@@ -86,4 +86,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		);
 		?>
 	</p>
+	<?php if ( $url ) : ?>
+		<a href="<?php echo esc_url( $url ); ?>" class="wphb-button-link">
+			<?php esc_html_e( 'Configure Fonts Preload', 'wphb' ); ?>
+		</a>
+	<?php endif; ?>
 <?php endif; ?>

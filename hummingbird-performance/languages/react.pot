@@ -470,7 +470,7 @@ msgid ""
 msgstr ""
 
 #: _src/react/modules/configs.jsx:108
-#: _src/react/views/minify/assets-manual.jsx:343
+#: _src/react/views/minify/assets-manual.jsx:344
 msgid "Apply"
 msgstr ""
 
@@ -1159,121 +1159,121 @@ msgstr ""
 msgid "Safe mode has been disabled!"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:322
+#: _src/react/views/minify/assets-manual.jsx:323
 msgid "Compress"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:323
+#: _src/react/views/minify/assets-manual.jsx:324
 msgid "Combine"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:324
+#: _src/react/views/minify/assets-manual.jsx:325
 msgid "Inline"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:325
+#: _src/react/views/minify/assets-manual.jsx:326
 msgid "Async"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:330
+#: _src/react/views/minify/assets-manual.jsx:331
 msgid "Move to Footer"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:331
+#: _src/react/views/minify/assets-manual.jsx:332
 msgid "Preload"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:332
+#: _src/react/views/minify/assets-manual.jsx:333
 msgid "Defer"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:351
+#: _src/react/views/minify/assets-manual.jsx:352
 msgid ""
 "Choose what bulk update actions you’d like to apply to the selected files. "
 "You still have to publish your changes before they will be set live."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:370
+#: _src/react/views/minify/assets-manual.jsx:371
 msgid "Discard"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:382
+#: _src/react/views/minify/assets-manual.jsx:383
 msgid "Publish"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:389
+#: _src/react/views/minify/assets-manual.jsx:390
 msgid "Unpublished changes"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:390
+#: _src/react/views/minify/assets-manual.jsx:391
 msgid ""
 "There are unpublished changes made in safe mode. Do you want to publish the "
 "changes to live or discard them?"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:577
+#: _src/react/views/minify/assets-manual.jsx:578
 msgid ""
 "Test different settings in a safe environment without affecting visitors' "
 "experience. The changes done in the safe mode will be only visible to you "
 "(as an admin)."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:580
+#: _src/react/views/minify/assets-manual.jsx:581
 msgid "Safe mode"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:596
+#: _src/react/views/minify/assets-manual.jsx:597
 msgid "All"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:602
+#: _src/react/views/minify/assets-manual.jsx:603
 msgid "Hosted"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:608
+#: _src/react/views/minify/assets-manual.jsx:609
 msgid "External"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:617
+#: _src/react/views/minify/assets-manual.jsx:618
 msgid ""
 "Preview your changes on the front-end, then publish to live if no errors "
 "are found."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:623
+#: _src/react/views/minify/assets-manual.jsx:624
 msgid "Preview"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:630
+#: _src/react/views/minify/assets-manual.jsx:631
 #: _src/react/views/minify/configurations.jsx:54
 msgid "Publish changes"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:644
+#: _src/react/views/minify/assets-manual.jsx:645
 msgid "Bulk update"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:660
+#: _src/react/views/minify/assets-manual.jsx:661
 msgid "Display files"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:673
+#: _src/react/views/minify/assets-manual.jsx:674
 msgid "Sort by"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:674
+#: _src/react/views/minify/assets-manual.jsx:675
 msgid "Choose plugin or theme"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:681
+#: _src/react/views/minify/assets-manual.jsx:682
 msgid "Search by name or extension"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:691
+#: _src/react/views/minify/assets-manual.jsx:692
 msgid "Clear filters"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:883
+#: _src/react/views/minify/assets-manual.jsx:884
 msgid ""
 "We've completed the file check but haven't been able to load the files. "
 "Please try clearing your object cache, refresh the page and wait a few "
@@ -1281,11 +1281,11 @@ msgid ""
 "to show."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:899
+#: _src/react/views/minify/assets-manual.jsx:900
 msgid "Visit homepage"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:926
+#: _src/react/views/minify/assets-manual.jsx:927
 msgid ""
 "You are currently using <strong>safe mode</strong> which enables you to "
 "test different settings without affecting your website visitors' "
@@ -1298,7 +1298,7 @@ msgid ""
 "to avoid page load issues.</span>"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:952
+#: _src/react/views/minify/assets-manual.jsx:953
 #: _src/react/views/minify/configurations.jsx:90
 msgid "Fonts"
 msgstr ""

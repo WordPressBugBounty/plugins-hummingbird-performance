@@ -128,6 +128,9 @@ class Page_Cache extends Module {
 		// Clear cache when defender updating security headers settings.
 		add_action( 'wd_save_setting_security_headers', array( $this, 'clear_cache' ) );
 
+		// Clear cache when menu updated through Block editor.
+		add_action( 'save_post_wp_navigation', array( $this, 'wphb_save_post_wp_navigation_menu' ), 10, 3 );
+
 		// Only cache pages when there are no errors.
 		if ( ! is_wp_error( $this->error ) ) {
 			$this->init_caching();
@@ -540,7 +543,7 @@ class Page_Cache extends Module {
 			'exclude'           => array(
 				'url_strings' => array( 'wp-.*\.php', 'index\.php', 'xmlrpc\.php', 'sitemap[^\/.]*\.xml' ),
 				'user_agents' => array( 'bot', 'is_archive', 'slurp', 'crawl', 'spider', 'Yandex' ),
-				'cookies'     => array( 'wp_woocommerce_session_' ),
+				'cookies'     => array( 'wp_woocommerce_session_', 'wpdef_lockout_' ),
 			),
 		);
 	}
@@ -2281,6 +2284,17 @@ class Page_Cache extends Module {
 	 * @param array $menu_data An array of menu data.
 	 */
 	public function clear_cache_after_menu_update( $menu_id, $menu_data = array() ) {
+		$this->clear_cache();
+	}
+
+	/**
+	 * Clear the page cache after menu item updated through block editor.
+	 *
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an existing post being updated.
+	 */
+	public function wphb_save_post_wp_navigation_menu( $post_id, $post, $update ) {
 		$this->clear_cache();
 	}
 }

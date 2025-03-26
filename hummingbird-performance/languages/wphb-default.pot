@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 3.12.0\n"
+"Project-Id-Version: Hummingbird 3.13.0\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2025-02-12 11:34:37+00:00\n"
+"POT-Creation-Date: 2025-03-25 16:45:29+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,8 +44,8 @@ msgid "Error removing asset file."
 msgstr ""
 
 #: admin/ajax/class-minify.php:549 admin/class-ajax.php:1579
-#: admin/class-ajax.php:2302 admin/class-ajax.php:2745 core/class-utils.php:190
-#: core/modules/class-minify.php:1705
+#: admin/class-ajax.php:2302 admin/class-ajax.php:2745 core/class-utils.php:197
+#: core/modules/class-minify.php:1712
 msgid "Settings updated"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "%s assets found!"
 msgstr ""
 
-#: admin/class-ajax.php:1740 core/class-utils.php:216
+#: admin/class-ajax.php:1740 core/class-utils.php:223
 msgid "Settings updated. Generating Critical CSS, this could take about a minute."
 msgstr ""
 
@@ -310,7 +310,7 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: admin/class-notices.php:435 admin/class-notices.php:655
-#: admin/pages/class-minification.php:297 core/class-utils.php:198
+#: admin/pages/class-minification.php:297 core/class-utils.php:205
 #: core/externals/free-dashboard/classes/notices/class-rating.php:82
 #: core/externals/plugin-notice/notice.php:485
 msgid "Dismiss"
@@ -835,7 +835,7 @@ msgid ""
 "current backup just in case."
 msgstr ""
 
-#: admin/modals/database-cleanup-modal.php:38 core/class-utils.php:192
+#: admin/modals/database-cleanup-modal.php:38 core/class-utils.php:199
 msgid "Delete permanently"
 msgstr ""
 
@@ -1017,7 +1017,7 @@ msgstr ""
 msgid "Hide API token"
 msgstr ""
 
-#: admin/modals/integration-cloudflare-modal.php:143 core/class-utils.php:204
+#: admin/modals/integration-cloudflare-modal.php:143 core/class-utils.php:211
 msgid "Need help getting your Global API key?"
 msgstr ""
 
@@ -1088,7 +1088,7 @@ msgstr ""
 msgid "Select Zone"
 msgstr ""
 
-#: admin/modals/integration-cloudflare-modal.php:260 core/class-utils.php:186
+#: admin/modals/integration-cloudflare-modal.php:260 core/class-utils.php:193
 #: languages/react.php:225
 msgid "Select zone"
 msgstr ""
@@ -1770,7 +1770,7 @@ msgstr ""
 #: admin/pages/class-caching.php:106 admin/pages/class-caching.php:115
 #: admin/pages/class-caching.php:324
 #: admin/views/dashboard/welcome/subsite-meta-box.php:112
-#: core/class-utils.php:1625 languages/react.php:363
+#: core/class-utils.php:1632 languages/react.php:363
 msgid "Page Caching"
 msgstr ""
 
@@ -1803,7 +1803,7 @@ msgstr ""
 
 #: admin/pages/class-caching.php:826
 #: admin/views/caching/gravatar/meta-box-header.php:21
-#: core/modules/class-page-cache.php:1994 languages/react.php:293
+#: core/modules/class-page-cache.php:1997 languages/react.php:293
 msgid "Clear cache"
 msgstr ""
 
@@ -2318,7 +2318,7 @@ msgid "Remove the default Emoji JS & CSS files"
 msgstr ""
 
 #: admin/views/advanced/general-meta-box.php:197
-#: core/modules/class-advanced.php:326
+#: core/modules/class-advanced.php:327
 msgid "Post Revisions"
 msgstr ""
 
@@ -3533,7 +3533,7 @@ msgstr ""
 #: admin/views/dashboard/minification/network-module-meta-box.php:59
 #: admin/views/performance/summary-meta-box.php:176
 #: admin/views/uptime/summary-meta-box.php:103
-#: admin/views/uptime/summary-meta-box.php:118 core/class-utils.php:551
+#: admin/views/uptime/summary-meta-box.php:118 core/class-utils.php:558
 #: languages/react.php:951
 msgid "Disabled"
 msgstr ""
@@ -3607,29 +3607,43 @@ msgstr ""
 #: admin/views/dashboard/gzip/module-meta-box.php:55
 #: admin/views/notifications/configure-meta-box.php:27
 #: admin/views/performance/audits/bootup-time.php:22
+#: admin/views/performance/audits/critical-request-chains.php:29
 #: admin/views/performance/audits/dom-size.php:22
 #: admin/views/performance/audits/duplicated-javascript.php:28
 #: admin/views/performance/audits/efficient-animated-content.php:22
 #: admin/views/performance/audits/font-display.php:29
 #: admin/views/performance/audits/largest-contentful-paint-element.php:30
 #: admin/views/performance/audits/layout-shift-elements.php:26
+#: admin/views/performance/audits/layout-shifts.php:24
+#: admin/views/performance/audits/lcp-lazy-loaded.php:24
+#: admin/views/performance/audits/legacy-javascript.php:30
+#: admin/views/performance/audits/long-tasks.php:29
 #: admin/views/performance/audits/mainthread-work-breakdown.php:22
 #: admin/views/performance/audits/modern-image-formats.php:23
+#: admin/views/performance/audits/no-document-write.php:30
+#: admin/views/performance/audits/non-composited-animations.php:30
 #: admin/views/performance/audits/offscreen-images.php:23
+#: admin/views/performance/audits/prioritize-lcp-image.php:30
 #: admin/views/performance/audits/redirects.php:22
-#: admin/views/performance/audits/render-blocking-resources.php:33
+#: admin/views/performance/audits/render-blocking-resources.php:27
 #: admin/views/performance/audits/server-response-time.php:25
+#: admin/views/performance/audits/third-party-facades.php:30
+#: admin/views/performance/audits/third-party-summary.php:29
 #: admin/views/performance/audits/total-byte-weight.php:23
 #: admin/views/performance/audits/unminified-css.php:22
 #: admin/views/performance/audits/unminified-javascript.php:22
-#: admin/views/performance/audits/unused-css-rules.php:30
+#: admin/views/performance/audits/unsized-images.php:30
+#: admin/views/performance/audits/unused-css-rules.php:24
+#: admin/views/performance/audits/unused-javascript.php:29
+#: admin/views/performance/audits/user-timings.php:30
 #: admin/views/performance/audits/uses-long-cache-ttl.php:22
 #: admin/views/performance/audits/uses-optimized-images.php:23
+#: admin/views/performance/audits/uses-passive-event-listeners.php:30
 #: admin/views/performance/audits/uses-rel-preconnect.php:28
 #: admin/views/performance/audits/uses-rel-preload.php:28
 #: admin/views/performance/audits/uses-responsive-images.php:23
 #: admin/views/performance/audits/uses-text-compression.php:22
-#: languages/react.php:267
+#: admin/views/performance/audits/viewport.php:24 languages/react.php:267
 msgid "Status"
 msgstr ""
 
@@ -4642,6 +4656,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/notifications/configure-meta-box.php:26
+#: admin/views/performance/audits/user-timings.php:45
 msgid "Type"
 msgstr ""
 
@@ -4699,39 +4714,53 @@ msgstr ""
 msgid "Next scheduled reporting"
 msgstr ""
 
-#: admin/views/performance/audit-template.php:60
+#: admin/views/performance/audit-template.php:74
 #. translators: %s - number of ms
 msgid "Potential savings of %s ms"
 msgstr ""
 
-#: admin/views/performance/audit-template.php:67 languages/react.php:302
+#: admin/views/performance/audit-template.php:81 languages/react.php:302
 msgid "Open item"
 msgstr ""
 
 #: admin/views/performance/audits/bootup-time.php:17
+#: admin/views/performance/audits/critical-request-chains.php:24
 #: admin/views/performance/audits/dom-size.php:17
 #: admin/views/performance/audits/duplicated-javascript.php:19
 #: admin/views/performance/audits/efficient-animated-content.php:17
 #: admin/views/performance/audits/font-display.php:17
 #: admin/views/performance/audits/largest-contentful-paint-element.php:17
 #: admin/views/performance/audits/layout-shift-elements.php:17
+#: admin/views/performance/audits/layout-shifts.php:19
+#: admin/views/performance/audits/lcp-lazy-loaded.php:19
+#: admin/views/performance/audits/legacy-javascript.php:25
+#: admin/views/performance/audits/long-tasks.php:24
 #: admin/views/performance/audits/mainthread-work-breakdown.php:17
 #: admin/views/performance/audits/modern-image-formats.php:18
+#: admin/views/performance/audits/no-document-write.php:25
+#: admin/views/performance/audits/non-composited-animations.php:25
 #: admin/views/performance/audits/offscreen-images.php:18
+#: admin/views/performance/audits/prioritize-lcp-image.php:25
 #: admin/views/performance/audits/redirects.php:17
-#: admin/views/performance/audits/render-blocking-resources.php:25
+#: admin/views/performance/audits/render-blocking-resources.php:19
 #: admin/views/performance/audits/server-response-time.php:20
+#: admin/views/performance/audits/third-party-facades.php:25
+#: admin/views/performance/audits/third-party-summary.php:24
 #: admin/views/performance/audits/total-byte-weight.php:18
 #: admin/views/performance/audits/unminified-css.php:17
 #: admin/views/performance/audits/unminified-javascript.php:17
-#: admin/views/performance/audits/unused-css-rules.php:25
+#: admin/views/performance/audits/unsized-images.php:25
+#: admin/views/performance/audits/unused-css-rules.php:19
+#: admin/views/performance/audits/unused-javascript.php:24
+#: admin/views/performance/audits/user-timings.php:25
 #: admin/views/performance/audits/uses-long-cache-ttl.php:17
 #: admin/views/performance/audits/uses-optimized-images.php:18
+#: admin/views/performance/audits/uses-passive-event-listeners.php:25
 #: admin/views/performance/audits/uses-rel-preconnect.php:17
-#: admin/views/performance/audits/uses-rel-preload.php:17
+#: admin/views/performance/audits/uses-rel-preload.php:23
 #: admin/views/performance/audits/uses-responsive-images.php:18
 #: admin/views/performance/audits/uses-text-compression.php:17
-#: languages/react.php:261
+#: admin/views/performance/audits/viewport.php:19 languages/react.php:261
 msgid "Overview"
 msgstr ""
 
@@ -4745,28 +4774,43 @@ msgid ""
 msgstr ""
 
 #: admin/views/performance/audits/bootup-time.php:25
+#: admin/views/performance/audits/critical-request-chains.php:32
 #: admin/views/performance/audits/dom-size.php:26
 #: admin/views/performance/audits/duplicated-javascript.php:32
 #: admin/views/performance/audits/efficient-animated-content.php:26
 #: admin/views/performance/audits/font-display.php:33
 #: admin/views/performance/audits/largest-contentful-paint-element.php:34
 #: admin/views/performance/audits/layout-shift-elements.php:30
+#: admin/views/performance/audits/layout-shifts.php:27
+#: admin/views/performance/audits/lcp-lazy-loaded.php:27
+#: admin/views/performance/audits/legacy-javascript.php:33
+#: admin/views/performance/audits/long-tasks.php:32
 #: admin/views/performance/audits/mainthread-work-breakdown.php:25
 #: admin/views/performance/audits/modern-image-formats.php:27
+#: admin/views/performance/audits/no-document-write.php:33
+#: admin/views/performance/audits/non-composited-animations.php:33
 #: admin/views/performance/audits/offscreen-images.php:26
+#: admin/views/performance/audits/prioritize-lcp-image.php:33
 #: admin/views/performance/audits/redirects.php:25
-#: admin/views/performance/audits/render-blocking-resources.php:36
+#: admin/views/performance/audits/render-blocking-resources.php:30
 #: admin/views/performance/audits/server-response-time.php:28
+#: admin/views/performance/audits/third-party-facades.php:33
+#: admin/views/performance/audits/third-party-summary.php:32
 #: admin/views/performance/audits/total-byte-weight.php:27
 #: admin/views/performance/audits/unminified-css.php:25
 #: admin/views/performance/audits/unminified-javascript.php:25
-#: admin/views/performance/audits/unused-css-rules.php:33
+#: admin/views/performance/audits/unsized-images.php:33
+#: admin/views/performance/audits/unused-css-rules.php:27
+#: admin/views/performance/audits/unused-javascript.php:32
+#: admin/views/performance/audits/user-timings.php:33
 #: admin/views/performance/audits/uses-long-cache-ttl.php:25
 #: admin/views/performance/audits/uses-optimized-images.php:27
+#: admin/views/performance/audits/uses-passive-event-listeners.php:33
 #: admin/views/performance/audits/uses-rel-preconnect.php:31
 #: admin/views/performance/audits/uses-rel-preload.php:31
 #: admin/views/performance/audits/uses-responsive-images.php:27
 #: admin/views/performance/audits/uses-text-compression.php:25
+#: admin/views/performance/audits/viewport.php:27
 #. translators: %s - error message
 msgid "Error: %s"
 msgstr ""
@@ -4788,17 +4832,27 @@ msgid ""
 msgstr ""
 
 #: admin/views/performance/audits/bootup-time.php:58
+#: admin/views/performance/audits/critical-request-chains.php:52
 #: admin/views/performance/audits/efficient-animated-content.php:50
+#: admin/views/performance/audits/layout-shifts.php:47
+#: admin/views/performance/audits/legacy-javascript.php:53
+#: admin/views/performance/audits/long-tasks.php:52
 #: admin/views/performance/audits/modern-image-formats.php:50
 #: admin/views/performance/audits/offscreen-images.php:49
+#: admin/views/performance/audits/prioritize-lcp-image.php:53
 #: admin/views/performance/audits/redirects.php:48
-#: admin/views/performance/audits/render-blocking-resources.php:59
+#: admin/views/performance/audits/render-blocking-resources.php:53
+#: admin/views/performance/audits/third-party-facades.php:55
+#: admin/views/performance/audits/third-party-summary.php:55
 #: admin/views/performance/audits/total-byte-weight.php:58
 #: admin/views/performance/audits/unminified-css.php:48
 #: admin/views/performance/audits/unminified-javascript.php:48
-#: admin/views/performance/audits/unused-css-rules.php:56
+#: admin/views/performance/audits/unsized-images.php:53
+#: admin/views/performance/audits/unused-css-rules.php:50
+#: admin/views/performance/audits/unused-javascript.php:55
 #: admin/views/performance/audits/uses-long-cache-ttl.php:48
 #: admin/views/performance/audits/uses-optimized-images.php:50
+#: admin/views/performance/audits/uses-passive-event-listeners.php:53
 #: admin/views/performance/audits/uses-rel-preconnect.php:54
 #: admin/views/performance/audits/uses-rel-preload.php:55
 #: admin/views/performance/audits/uses-responsive-images.php:50
@@ -4819,27 +4873,41 @@ msgid "Total"
 msgstr ""
 
 #: admin/views/performance/audits/bootup-time.php:81
+#: admin/views/performance/audits/critical-request-chains.php:85
 #: admin/views/performance/audits/dom-size.php:101
 #: admin/views/performance/audits/duplicated-javascript.php:81
 #: admin/views/performance/audits/efficient-animated-content.php:71
 #: admin/views/performance/audits/font-display.php:72
 #: admin/views/performance/audits/layout-shift-elements.php:68
+#: admin/views/performance/audits/layout-shifts.php:73
+#: admin/views/performance/audits/lcp-lazy-loaded.php:60
+#: admin/views/performance/audits/legacy-javascript.php:71
+#: admin/views/performance/audits/long-tasks.php:73
 #: admin/views/performance/audits/mainthread-work-breakdown.php:70
 #: admin/views/performance/audits/modern-image-formats.php:72
+#: admin/views/performance/audits/no-document-write.php:76
+#: admin/views/performance/audits/non-composited-animations.php:72
 #: admin/views/performance/audits/offscreen-images.php:71
+#: admin/views/performance/audits/prioritize-lcp-image.php:72
 #: admin/views/performance/audits/redirects.php:72
-#: admin/views/performance/audits/render-blocking-resources.php:80
+#: admin/views/performance/audits/render-blocking-resources.php:74
 #: admin/views/performance/audits/server-response-time.php:54
+#: admin/views/performance/audits/third-party-facades.php:78
+#: admin/views/performance/audits/third-party-summary.php:78
 #: admin/views/performance/audits/total-byte-weight.php:77
 #: admin/views/performance/audits/unminified-css.php:69
 #: admin/views/performance/audits/unminified-javascript.php:70
-#: admin/views/performance/audits/unused-css-rules.php:77
+#: admin/views/performance/audits/unsized-images.php:70
+#: admin/views/performance/audits/unused-css-rules.php:71
+#: admin/views/performance/audits/unused-javascript.php:76
 #: admin/views/performance/audits/uses-long-cache-ttl.php:77
 #: admin/views/performance/audits/uses-optimized-images.php:71
+#: admin/views/performance/audits/uses-passive-event-listeners.php:72
 #: admin/views/performance/audits/uses-rel-preconnect.php:73
 #: admin/views/performance/audits/uses-rel-preload.php:74
 #: admin/views/performance/audits/uses-responsive-images.php:71
 #: admin/views/performance/audits/uses-text-compression.php:69
+#: admin/views/performance/audits/viewport.php:43
 msgid "How to fix"
 msgstr ""
 
@@ -4852,12 +4920,13 @@ msgid ""
 msgstr ""
 
 #: admin/views/performance/audits/bootup-time.php:87
+#: admin/views/performance/audits/layout-shifts.php:80
 #: admin/views/performance/audits/mainthread-work-breakdown.php:76
-#: admin/views/performance/audits/render-blocking-resources.php:89
+#: admin/views/performance/audits/render-blocking-resources.php:83
 #: admin/views/performance/audits/total-byte-weight.php:83
 #: admin/views/performance/audits/unminified-css.php:77
 #: admin/views/performance/audits/unminified-javascript.php:78
-#: admin/views/performance/audits/unused-css-rules.php:84
+#: admin/views/performance/audits/unused-css-rules.php:78
 msgid "Configure Asset Optimization"
 msgstr ""
 
@@ -4917,6 +4986,95 @@ msgstr ""
 msgid ""
 "Continue using the theme or plugin. This may be a perfectly valid option "
 "for services you just can't live without."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:26
+msgid ""
+"When your website loads, some resources are essential for the initial "
+"display of the page (like HTML, CSS, and key JavaScript files). These are "
+"called critical requests. Sometimes, these critical requests depend on each "
+"other, creating a chain where one resource can't load until the one before "
+"it is finished. Long chains of critical requests can significantly delay "
+"how quickly your page displays, affecting metrics like Largest Contentful "
+"Paint (LCP) and First Contentful Paint (FCP)."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:39
+msgid ""
+"Your site has efficiently managed critical request chains, leading to "
+"faster initial page loads."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:43
+msgid ""
+"Hummingbird has detected critical request chains that could be optimized to "
+"improve your page load speed."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:53
+#: admin/views/performance/audits/efficient-animated-content.php:51
+#: admin/views/performance/audits/modern-image-formats.php:51
+#: admin/views/performance/audits/offscreen-images.php:50
+#: admin/views/performance/audits/render-blocking-resources.php:54
+#: admin/views/performance/audits/third-party-facades.php:56
+#: admin/views/performance/audits/total-byte-weight.php:59
+#: admin/views/performance/audits/unminified-css.php:49
+#: admin/views/performance/audits/unminified-javascript.php:49
+#: admin/views/performance/audits/unused-css-rules.php:51
+#: admin/views/performance/audits/unused-javascript.php:56
+#: admin/views/performance/audits/uses-long-cache-ttl.php:50
+#: admin/views/performance/audits/uses-optimized-images.php:51
+#: admin/views/performance/audits/uses-responsive-images.php:51
+#: admin/views/performance/audits/uses-text-compression.php:49
+msgid "Size"
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:54
+#: admin/views/performance/audits/long-tasks.php:53
+#: admin/views/performance/audits/user-timings.php:46
+msgid "Start Time"
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:55
+msgid "End Time"
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:90
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Remove Unused CSS:%2$s Unused CSS refers to styles that aren’t needed "
+"on a page, making files larger and slowing down load times. Use tools like "
+"PurifyCSS to scan your site, remove unnecessary CSS, and optimize "
+"performance."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:99
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Preload Key Requests for Faster Loading:%2$s Preloading critical "
+"resources (e.g., scripts, fonts, stylesheets) ensures they load earlier, "
+"reducing delays and improving page speed."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:108
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Optimize Web Font Loading with font-display:%2$s Use the font-display "
+"property in CSS to control how web fonts load and render, improving page "
+"performance and user experience."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:117
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Minify CSS & JavaScript for Faster Loading:%2$s Minification removes "
+"unnecessary characters (e.g., spaces, comments, and line breaks) from CSS "
+"and JavaScript files without affecting functionality. This reduces file "
+"size, shortens critical request chains, and improves page speed."
+msgstr ""
+
+#: admin/views/performance/audits/critical-request-chains.php:126
+msgid "Configure Delay JS, Critical CSS, & Fonts"
 msgstr ""
 
 #: admin/views/performance/audits/dom-size.php:19
@@ -5001,6 +5159,7 @@ msgid "Library"
 msgstr ""
 
 #: admin/views/performance/audits/duplicated-javascript.php:51
+#: admin/views/performance/audits/third-party-summary.php:56
 msgid "Transfer Size"
 msgstr ""
 
@@ -5034,29 +5193,18 @@ msgid ""
 "MPEG4/WebM videos."
 msgstr ""
 
-#: admin/views/performance/audits/efficient-animated-content.php:51
-#: admin/views/performance/audits/modern-image-formats.php:51
-#: admin/views/performance/audits/offscreen-images.php:50
-#: admin/views/performance/audits/render-blocking-resources.php:60
-#: admin/views/performance/audits/total-byte-weight.php:59
-#: admin/views/performance/audits/unminified-css.php:49
-#: admin/views/performance/audits/unminified-javascript.php:49
-#: admin/views/performance/audits/unused-css-rules.php:57
-#: admin/views/performance/audits/uses-long-cache-ttl.php:50
-#: admin/views/performance/audits/uses-optimized-images.php:51
-#: admin/views/performance/audits/uses-responsive-images.php:51
-#: admin/views/performance/audits/uses-text-compression.php:49
-msgid "Size"
-msgstr ""
-
 #: admin/views/performance/audits/efficient-animated-content.php:52
 #: admin/views/performance/audits/font-display.php:54
+#: admin/views/performance/audits/legacy-javascript.php:54
 #: admin/views/performance/audits/modern-image-formats.php:52
 #: admin/views/performance/audits/offscreen-images.php:51
-#: admin/views/performance/audits/render-blocking-resources.php:61
+#: admin/views/performance/audits/prioritize-lcp-image.php:54
+#: admin/views/performance/audits/render-blocking-resources.php:55
+#: admin/views/performance/audits/third-party-facades.php:57
 #: admin/views/performance/audits/unminified-css.php:50
 #: admin/views/performance/audits/unminified-javascript.php:50
-#: admin/views/performance/audits/unused-css-rules.php:58
+#: admin/views/performance/audits/unused-css-rules.php:52
+#: admin/views/performance/audits/unused-javascript.php:57
 #: admin/views/performance/audits/uses-optimized-images.php:52
 #: admin/views/performance/audits/uses-rel-preconnect.php:55
 #: admin/views/performance/audits/uses-rel-preload.php:56
@@ -5184,6 +5332,8 @@ msgstr ""
 
 #: admin/views/performance/audits/largest-contentful-paint-element.php:50
 #: admin/views/performance/audits/layout-shift-elements.php:48
+#: admin/views/performance/audits/lcp-lazy-loaded.php:47
+#: admin/views/performance/audits/non-composited-animations.php:53
 msgid "Element"
 msgstr ""
 
@@ -5221,6 +5371,190 @@ msgid ""
 "Learn how to avoid sudden layout shifts to improve user experience in this "
 "amazing in-depth article by Google: %1$sOptimize Cumulative Layout "
 "Shift%2$s."
+msgstr ""
+
+#: admin/views/performance/audits/layout-shifts.php:21
+#: admin/views/performance/audits/unused-css-rules.php:21
+msgid ""
+"By default, a browser must download, parse, and process all the external "
+"stylesheets it encounters before it can be rendered on a user's screen. "
+"Removing or deferring unused rules in your stylesheet makes it load faster."
+msgstr ""
+
+#: admin/views/performance/audits/layout-shifts.php:34
+msgid "Nice! you have passed the audit."
+msgstr ""
+
+#: admin/views/performance/audits/layout-shifts.php:38
+msgid "Avoid large layout shifts."
+msgstr ""
+
+#: admin/views/performance/audits/layout-shifts.php:48
+msgid "Cause"
+msgstr ""
+
+#: admin/views/performance/audits/layout-shifts.php:75
+#: admin/views/performance/audits/unused-css-rules.php:73
+msgid "Use Hummingbird's Asset Optimization module to move critical styles inline."
+msgstr ""
+
+#: admin/views/performance/audits/layout-shifts.php:76
+#: admin/views/performance/audits/unused-css-rules.php:74
+msgid ""
+"Combine non-critical styles, compress your stylesheets, and move them into "
+"the footer."
+msgstr ""
+
+#: admin/views/performance/audits/lcp-lazy-loaded.php:21
+msgid ""
+"Lazy loading is a technique that defers the loading of images until they "
+"are needed (typically when they are about to scroll into view). This can "
+"improve initial page load time. However, if you lazy load your Largest "
+"Contentful Paint (LCP) image, which is usually the most prominent image "
+"above the fold, it can actually delay the LCP and make your page feel "
+"slower."
+msgstr ""
+
+#: admin/views/performance/audits/lcp-lazy-loaded.php:34
+msgid "Your LCP image is not lazily loaded, which helps it render quickly."
+msgstr ""
+
+#: admin/views/performance/audits/lcp-lazy-loaded.php:38
+msgid ""
+"Your LCP image is being lazily loaded. This can negatively impact your LCP "
+"score."
+msgstr ""
+
+#: admin/views/performance/audits/lcp-lazy-loaded.php:65
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Identify your LCP image:%2$s Use browser developer tools to determine "
+"which image is the LCP element on your page."
+msgstr ""
+
+#: admin/views/performance/audits/lcp-lazy-loaded.php:74
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Remove lazy loading:%2$s If your LCP image has a `loading=\"lazy\"` "
+"attribute in the `<img>` tag, remove it."
+msgstr ""
+
+#: admin/views/performance/audits/lcp-lazy-loaded.php:83
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Eager load the LCP image:%2$s Ensure your LCP image is loaded normally "
+"(without lazy loading) so it's prioritized by the browser"
+msgstr ""
+
+#: admin/views/performance/audits/legacy-javascript.php:27
+msgid ""
+"Modern browsers support the latest JavaScript features, while older "
+"browsers often need extra code (polyfills and transforms) to understand "
+"them. Serving this extra code to modern browsers is inefficient and can "
+"slow down your page load time. By using a modern script deployment "
+"strategy, you can send only the necessary code to each browser, improving "
+"performance for users with modern browsers."
+msgstr ""
+
+#: admin/views/performance/audits/legacy-javascript.php:40
+msgid ""
+"Your site is using a modern script deployment strategy, delivering "
+"optimized JavaScript code to modern browsers."
+msgstr ""
+
+#: admin/views/performance/audits/legacy-javascript.php:44
+msgid ""
+"Your site is serving legacy JavaScript code to modern browsers. This can "
+"slow down page load times. Consider implementing a modern script deployment "
+"strategy to deliver optimized code to different browsers."
+msgstr ""
+
+#: admin/views/performance/audits/legacy-javascript.php:76
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Use module/nomodule pattern:%2$s This involves creating two versions "
+"of your JavaScript files: one with modern code (using type=\"module\") and "
+"one with legacy code and polyfills (using type=\"nomodule\"). Modern "
+"browsers will only load the modern version, while older browsers will load "
+"the legacy version."
+msgstr ""
+
+#: admin/views/performance/audits/legacy-javascript.php:85
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Differential serving:%2$s Use a build tool or bundler to create "
+"separate bundles for modern and legacy browsers and configure your server "
+"to serve the appropriate bundle based on the user's browser."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:26
+msgid ""
+"Every website has a \"main thread\" where the browser handles tasks like "
+"rendering the page, running JavaScript code, and responding to user "
+"interactions. When tasks on this main thread take too long, it can lead to "
+"delays and a sluggish feeling for your visitors, especially when they try "
+"to interact with your site. This audit helps pinpoint those long tasks so "
+"you can optimize them."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:39
+msgid ""
+"Your site has minimal long tasks on the main thread, which is great for "
+"responsiveness! ----- Excellent! Your site is keeping main thread tasks "
+"short and sweet, which means a smoother experience for your users."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:43
+msgid ""
+"Some tasks on the main thread are taking a long time to complete, which can "
+"negatively impact user experience. -------- Hummingbird has detected some "
+"long tasks on the main thread that could be slowing down your site and "
+"making it less responsive."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:54
+#: admin/views/performance/audits/user-timings.php:47
+msgid "Duration"
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:78
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Minimize Heavy JavaScript Execution:%2$s Use defer and async "
+"attributes, reduce third-party scripts, and break long-running JS tasks."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:87
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Optimize CSS & Reduce Render-Blocking Styles:%2$s Minify, inline "
+"critical CSS, and remove unused styles."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:96
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Optimize Images & Lazy Load:%2$s Use WebP, lazy load images/videos, "
+"and serve responsive images."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:105
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Reduce Heavy Database Queries:%2$s Optimize WP queries, enable object "
+"caching, and disable unnecessary cron jobs."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:114
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Use a CDN for Faster Asset Delivery:%2$s Deliver assets from a CDN to "
+"reduce load times."
+msgstr ""
+
+#: admin/views/performance/audits/long-tasks.php:123
+#: admin/views/performance/audits/third-party-summary.php:119
+msgid "Configure Delay JS & Critical CSS"
 msgstr ""
 
 #: admin/views/performance/audits/mainthread-work-breakdown.php:19
@@ -5330,6 +5664,115 @@ msgstr ""
 msgid "%1$sLearn More%2$s"
 msgstr ""
 
+#: admin/views/performance/audits/no-document-write.php:27
+msgid ""
+"document.write() is an outdated method for adding content to a webpage. "
+"While it might seem convenient, it can cause serious performance issues, "
+"especially for users with slow connections. When document.write() is used "
+"to inject external scripts, it can block the page from rendering until "
+"those scripts are downloaded and executed, leading to significant delays "
+"and a poor user experience."
+msgstr ""
+
+#: admin/views/performance/audits/no-document-write.php:40
+msgid "Your site is not using document.write(), which is great for performance!"
+msgstr ""
+
+#: admin/views/performance/audits/no-document-write.php:44
+msgid ""
+"Hummingbird has detected the use of document.write() on your site. Consider "
+"removing or replacing it to improve page load times."
+msgstr ""
+
+#: admin/views/performance/audits/no-document-write.php:53
+msgid "Source"
+msgstr ""
+
+#: admin/views/performance/audits/no-document-write.php:81
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Avoid injecting external scripts with document.write():%2$s If you're "
+"using document.write() to add external scripts, find alternative methods "
+"such as adding the <script> tag directly in your HTML or using asynchronous "
+"loading techniques."
+msgstr ""
+
+#: admin/views/performance/audits/no-document-write.php:90
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Use modern methods for adding content:%2$s Instead of "
+"document.write(), use modern DOM manipulation techniques like innerHTML or "
+"appendChild to add content to your page."
+msgstr ""
+
+#: admin/views/performance/audits/no-document-write.php:99
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Review third-party scripts:%2$s Some third-party scripts might use "
+"document.write(). If possible, find alternative scripts or contact the "
+"provider to see if they offer a version that avoids this method."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:27
+msgid ""
+"Compositing is a technique browsers use to render animations smoothly. When "
+"animations are not composited, they can appear jerky or cause unexpected "
+"shifts in the page layout, leading to a poor user experience. This can "
+"negatively impact your Cumulative Layout Shift (CLS) score, which measures "
+"the visual stability of your page."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:40
+msgid ""
+"All animations on your site are composited! This means smoother animations "
+"and a better user experience."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:44
+msgid ""
+"Some animations on your site are not composited, which could lead to jerky "
+"animations and affect your CLS score."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:54
+#: admin/views/performance/audits/user-timings.php:44
+msgid "Name"
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:77
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Use transform animations:%2$s Animations that use the transform "
+"property (e.g., translate, scale, rotate) are generally composited by "
+"default."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:86
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Promote elements to their own layers:%2$s You can force an element to "
+"be composited by using the will-change CSS property. However, use this "
+"property sparingly as it can increase memory usage."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:95
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Avoid animating properties that trigger layout changes:%2$s Animating "
+"properties like width, height, or margin can cause the browser to "
+"recalculate the layout, leading to non-composited animations. Instead, try "
+"animating properties that only affect the paint or composite steps, such as "
+"opacity or transform."
+msgstr ""
+
+#: admin/views/performance/audits/non-composited-animations.php:104
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Keep animations simple:%2$s Complex animations are more likely to be "
+"non-composited. Try to simplify your animations or break them down into "
+"smaller, more manageable parts."
+msgstr ""
+
 #: admin/views/performance/audits/offscreen-images.php:20
 msgid ""
 "In other words, deferring images below the fold means visitors can start "
@@ -5361,6 +5804,43 @@ msgstr ""
 
 #: admin/views/performance/audits/offscreen-images.php:91
 msgid "Configure Lazy load in Smush"
+msgstr ""
+
+#: admin/views/performance/audits/prioritize-lcp-image.php:27
+msgid ""
+"The Largest Contentful Paint (LCP) image is often the most prominent visual "
+"element on your page, and its loading time significantly impacts how "
+"quickly users perceive your page as loaded. If this image is added "
+"dynamically (meaning it's not immediately present in the HTML), the browser "
+"might not prioritize its loading. By preloading the LCP image, you instruct "
+"the browser to fetch it early on, improving your LCP score and overall user "
+"experience."
+msgstr ""
+
+#: admin/views/performance/audits/prioritize-lcp-image.php:40
+msgid ""
+"You're preloading your LCP image! This helps it load quickly and improves "
+"how fast your page feels."
+msgstr ""
+
+#: admin/views/performance/audits/prioritize-lcp-image.php:44
+msgid ""
+"Your LCP image is not being preloaded. Preloading it can significantly "
+"improve your LCP score."
+msgstr ""
+
+#: admin/views/performance/audits/prioritize-lcp-image.php:77
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Identify the LCP Image:%2$s Use browser developer tools to determine "
+"which image is the LCP element on your page."
+msgstr ""
+
+#: admin/views/performance/audits/prioritize-lcp-image.php:86
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Preload the Image in HTML:%2$s Add the following <link> tag inside the "
+"<head> of your HTML file:"
 msgstr ""
 
 #: admin/views/performance/audits/redirects.php:19
@@ -5399,24 +5879,24 @@ msgid ""
 "a time can help you find the culprit."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:27
+#: admin/views/performance/audits/render-blocking-resources.php:21
 msgid ""
 "Render-blocking resources are CSS, JS, or font files that are loading "
 "before the rest of the content on your page. This can add seconds to your "
 "page load time."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:30
+#: admin/views/performance/audits/render-blocking-resources.php:24
 msgid ""
 "Improve page load speed by deferring all non-critical style scripts and "
 "loading critical scripts first."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:43
+#: admin/views/performance/audits/render-blocking-resources.php:37
 msgid "No render blocking resources found."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:48
+#: admin/views/performance/audits/render-blocking-resources.php:42
 #. translators: %d - number of ms
 msgid ""
 "First paint of your page is not rendered without waiting for the following "
@@ -5424,20 +5904,20 @@ msgid ""
 "resources."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:81
+#: admin/views/performance/audits/render-blocking-resources.php:75
 msgid ""
 "Hummingbird helps you move render-blocking scripts to your footer, and "
 "combines blocking CSS in your header. Follow the steps below to improve "
 "this score:"
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:83
+#: admin/views/performance/audits/render-blocking-resources.php:77
 msgid ""
 "Jump over to the Hummingbird / Asset Optimization tab and run a fresh file "
 "check."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:84
+#: admin/views/performance/audits/render-blocking-resources.php:78
 msgid ""
 "After making any initial optimization, switch to the \"Inline CSS\" option "
 "to inline the styles which are critical for first paint of your page. "
@@ -5445,17 +5925,17 @@ msgid ""
 "then move them to the footer."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:85
+#: admin/views/performance/audits/render-blocking-resources.php:79
 msgid ""
 "Move critical scripts to the footer and defer the non-critical scripts "
 "using the option \"Force load this file after the page has loaded\"."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:93
+#: admin/views/performance/audits/render-blocking-resources.php:87
 msgid "Note: It can be tough to get a perfect score for this rule."
 msgstr ""
 
-#: admin/views/performance/audits/render-blocking-resources.php:94
+#: admin/views/performance/audits/render-blocking-resources.php:88
 msgid ""
 "Some plugins and themes are not able to handle deferred scripts. If the "
 "combine and minify all CSS option does not work on your setup, we recommend "
@@ -5565,6 +6045,104 @@ msgid ""
 "intensive. Test the performance impact of your plugins by using a plugin "
 "like %1$sQuery Monitor%2$s, then remove the worst offenders, or replace "
 "them with a suitable alternative."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-facades.php:27
+msgid ""
+"Third-party embeds (like YouTube videos or social media posts) can be heavy "
+"and slow down your page load. A facade is a lightweight placeholder that is "
+"displayed instead of the actual embed until the user interacts with it "
+"(e.g., clicks on it). This can significantly improve initial page load time."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-facades.php:41
+msgid ""
+"Great! You're already using facades to lazy load third-party resources, "
+"which improves initial page load time."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-facades.php:46
+msgid ""
+"Some of your third-party embeds could be lazy loaded using facades to "
+"improve initial page load time."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-facades.php:83
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Identify Third-Party Resources to Lazy Load:%2$s Look for third-party "
+"embeds that are not critical for the initial page load (e.g., videos below "
+"the fold)."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-facades.php:92
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Replace Direct Embeds with Static Placeholders:%2$s Instead of loading "
+"the third-party resource immediately, use a static placeholder (image, "
+"button, or div) that loads the actual resource only when needed."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:26
+msgid ""
+"Third-party resources are external files like scripts, stylesheets, and "
+"iframes that load from a different domain than your website. These can "
+"include things like analytics trackers, social media widgets, and ad "
+"networks. While they can add valuable functionality, they can also "
+"significantly slow down your website, especially if you have many of them."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:39
+msgid "Your site has minimal third-party resources, which is great for performance!"
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:44
+#. translators: %s - properly formatted bytes value
+msgid ""
+"Your site loads %s third-party resources. Consider reducing this number or "
+"optimizing how they load to improve performance."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:57
+msgid "Blocking Time"
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:83
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Delay the Loading of Third-Party Scripts:%2$s Use the async or defer "
+"attributes in HTML to load third-party scripts without slowing down your "
+"website."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:92
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Self-Host Critical Third-Party JavaScript Files:%2$s Hosting "
+"third-party scripts on your own server gives you greater control over their "
+"loading behavior. This reduces DNS lookups and round-trip times, improves "
+"HTTP caching, and enables advanced optimizations like HTTP/2 server push."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:101
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Remove Unnecessary Third-Party Scripts:%2$s If a third-party script "
+"doesn’t provide clear value to your site or users, consider removing it. "
+"Many WordPress themes and plugins load unnecessary scripts that may not be "
+"essential, impacting performance without benefit. Regularly audit and "
+"eliminate such scripts to keep your site lean and fast."
+msgstr ""
+
+#: admin/views/performance/audits/third-party-summary.php:110
+#. translators: %1$s -  opening <strong> tag, %3$s - closing </strong> tag
+msgid ""
+"%1$s Lazy-Load Third-Party JavaScript:%2$s Embedded third-party elements "
+"like ads and videos can significantly impact performance, especially if "
+"they come from poorly optimized sources. To improve page load speed, "
+"lazy-load these resources so they only load when needed. For example, if "
+"you display ads in the footer, you can lazy-load them to load only when the "
+"user scrolls down, reducing initial load time and improving user experience."
 msgstr ""
 
 #: admin/views/performance/audits/total-byte-weight.php:20
@@ -5712,30 +6290,111 @@ msgid ""
 "essential plugins or themes when the files can't be altered."
 msgstr ""
 
-#: admin/views/performance/audits/unused-css-rules.php:27
+#: admin/views/performance/audits/unsized-images.php:27
 msgid ""
-"By default, a browser must download, parse, and process all the external "
-"stylesheets it encounters before it can be rendered on a user's screen. "
-"Removing or deferring unused rules in your stylesheet makes it load faster."
+"When images load on a webpage, they take up space. If the browser doesn't "
+"know the exact dimensions of an image beforehand, it might have to "
+"rearrange the page layout once the image loads, causing content to jump "
+"around. This is called a layout shift, and it can be frustrating for users. "
+"By specifying the width and height of your images in your HTML code, you "
+"give the browser the information it needs to reserve the correct space, "
+"preventing these shifts and improving your CLS score."
 msgstr ""
 
-#: admin/views/performance/audits/unused-css-rules.php:40
+#: admin/views/performance/audits/unsized-images.php:40
+msgid ""
+"All your images have explicit width and height attributes! This helps "
+"create a smoother, more stable user experience."
+msgstr ""
+
+#: admin/views/performance/audits/unsized-images.php:44
+msgid ""
+"Some of your images are missing width and height attributes. This could "
+"lead to layout shifts and negatively impact your CLS score."
+msgstr ""
+
+#: admin/views/performance/audits/unsized-images.php:75
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Specify Width & Height for Images/Videos:%2$s Define both width and "
+"height attributes for images and videos to ensure proper spacing and "
+"prevent layout shifts."
+msgstr ""
+
+#: admin/views/performance/audits/unused-css-rules.php:34
 msgid "Nice! Your site is not loading any unused CSS."
 msgstr ""
 
-#: admin/views/performance/audits/unused-css-rules.php:45
+#: admin/views/performance/audits/unused-css-rules.php:39
 #. translators: %s - properly formatted bytes value
 msgid "You can save %s by defering the following CSS files."
 msgstr ""
 
-#: admin/views/performance/audits/unused-css-rules.php:79
-msgid "Use Hummingbird's Asset Optimization module to move critical styles inline."
+#: admin/views/performance/audits/unused-javascript.php:26
+msgid ""
+"JavaScript files are essential for interactive features on websites, but "
+"unused JavaScript code wastes bandwidth and slows down your page load time. "
+"This is because the browser still needs to download, parse, and execute the "
+"code, even if it's not used. By identifying and removing unused JavaScript, "
+"you can significantly improve your website's performance, especially for "
+"metrics like Largest Contentful Paint (LCP) and First Contentful Paint "
+"(FCP)."
 msgstr ""
 
-#: admin/views/performance/audits/unused-css-rules.php:80
+#: admin/views/performance/audits/unused-javascript.php:39
 msgid ""
-"Combine non-critical styles, compress your stylesheets, and move them into "
-"the footer."
+"Your site has minimal unused JavaScript! This means faster loading times "
+"and a better user experience."
+msgstr ""
+
+#: admin/views/performance/audits/unused-javascript.php:44
+#. translators: %s - properly formatted bytes value
+msgid "You can save %s by defering or delaying the following JS files."
+msgstr ""
+
+#: admin/views/performance/audits/unused-javascript.php:81
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Optimize Performance by Delaying JavaScript:%2$s Delaying JavaScript "
+"execution helps improve page load speed by preventing unnecessary scripts "
+"from loading immediately. Instead, scripts are loaded only when a user "
+"interacts with the page (e.g., scrolling, clicking, or tapping). This "
+"reduces initial load time, improves Core Web Vitals, and boosts PageSpeed "
+"Insights scores."
+msgstr ""
+
+#: admin/views/performance/audits/unused-javascript.php:90
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Load JavaScript Only When Needed:%2$s Many WordPress themes and "
+"plugins load JavaScript files across your entire site, even when they are "
+"only required on specific pages. This unnecessary loading increases page "
+"size, slows down performance, and affects Core Web Vitals. By conditionally "
+"loading JavaScript, you ensure that scripts are only executed when they are "
+"actually needed. This reduces HTTP requests, improves load times, and "
+"optimizes your site's performance."
+msgstr ""
+
+#: admin/views/performance/audits/unused-javascript.php:99
+msgid "Configure Delay JS"
+msgstr ""
+
+#: admin/views/performance/audits/user-timings.php:27
+msgid ""
+" The User Timing API allows you to measure the timing of specific events or "
+"interactions within your web application. This provides valuable insights "
+"into how users experience your site in the real world, beyond standard "
+"metrics like LCP or CLS. By setting marks and measures for key user flows "
+"(e.g., time to complete a form, time to load a critical section), you can "
+"identify performance bottlenecks and optimize your site for a better user "
+"experience."
+msgstr ""
+
+#: admin/views/performance/audits/user-timings.php:66
+#. translators: %1$s - opening a tag, %2$s - closing a tag
+msgid ""
+"Note: This Audit is purely informative but you can %1$slearn more about it "
+"here%2$s."
 msgstr ""
 
 #: admin/views/performance/audits/uses-long-cache-ttl.php:19
@@ -5844,6 +6503,46 @@ msgstr ""
 msgid "Optimize Images"
 msgstr ""
 
+#: admin/views/performance/audits/uses-passive-event-listeners.php:27
+msgid ""
+"When you interact with a webpage (like scrolling or touching), the browser "
+"uses event listeners to trigger JavaScript functions that respond to those "
+"interactions. By default, these listeners can sometimes block the browser "
+"from smoothly scrolling the page, especially on touch devices. Marking your "
+"event listeners as 'passive' tells the browser that your JavaScript won't "
+"prevent the page from scrolling, allowing for a smoother and more "
+"responsive experience."
+msgstr ""
+
+#: admin/views/performance/audits/uses-passive-event-listeners.php:40
+msgid "Your event listeners are optimized for smooth scrolling!"
+msgstr ""
+
+#: admin/views/performance/audits/uses-passive-event-listeners.php:44
+msgid ""
+"Some of your event listeners are not marked as passive, which could "
+"potentially hinder smooth scrolling on your page."
+msgstr ""
+
+#: admin/views/performance/audits/uses-passive-event-listeners.php:54
+msgid "Location"
+msgstr ""
+
+#: admin/views/performance/audits/uses-passive-event-listeners.php:77
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Identify touch and wheel listeners:%2$s Review your JavaScript code "
+"and identify event listeners that are attached to touch or wheel events "
+"(e.g., touchstart, touchmove, wheel)."
+msgstr ""
+
+#: admin/views/performance/audits/uses-passive-event-listeners.php:86
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"%1$s Add the passive option:%2$s To fix this audit, add a passive: true "
+"flag to every flagged event listener"
+msgstr ""
+
 #: admin/views/performance/audits/uses-rel-preconnect.php:22
 #. translators: % - preload tag
 msgid ""
@@ -5883,16 +6582,20 @@ msgid ""
 "resources from this origin."
 msgstr ""
 
-#: admin/views/performance/audits/uses-rel-preload.php:22
-#. translators: %s - preload tag
+#: admin/views/performance/audits/uses-rel-preload.php:25
 msgid ""
-"The late-discovery of critical resources hidden in CSS or JS files can "
-"delay the first render, the rendering of text, or loading of critical parts "
-"of a page. Use %s to tell the browser to fetch critical resources earlier."
+"When a browser loads a webpage, it discovers resources like CSS, "
+"JavaScript, and fonts as it parses the HTML. Sometimes, important resources "
+"are discovered late, delaying their loading and impacting how quickly the "
+"page displays. \"Preloading\" tells the browser to fetch these key "
+"resources earlier in the loading process, improving metrics like Largest "
+"Contentful Paint (LCP) and First Contentful Paint (FCP)."
 msgstr ""
 
 #: admin/views/performance/audits/uses-rel-preload.php:38
-msgid "Nice! We couldn't find any resource which needs to use preload declarative."
+msgid ""
+"You're effectively using preloading to prioritize key resources! This helps "
+"your website load faster."
 msgstr ""
 
 #: admin/views/performance/audits/uses-rel-preload.php:43
@@ -5913,6 +6616,10 @@ msgid ""
 "helps to set the priority accordingly. A few common values for the %1$s "
 "attribute are script, style, font, image. Click %2$shere%3$s to see the "
 "complete list."
+msgstr ""
+
+#: admin/views/performance/audits/uses-rel-preload.php:91
+msgid "Configure Fonts Preload"
 msgstr ""
 
 #: admin/views/performance/audits/uses-responsive-images.php:20
@@ -5979,6 +6686,40 @@ msgid ""
 "You can easily enable GZIP compression for any local files using the GZIP "
 "Compression tab. For any externally hosted resources, you'll have to make "
 "sure the provider enables the compression there."
+msgstr ""
+
+#: admin/views/performance/audits/viewport.php:21
+msgid ""
+"The <meta name=\"viewport\"> tag tells browsers how to scale your website "
+"on different devices, especially important for mobile phones. Without it, "
+"your site might appear zoomed in or out on smaller screens, making it "
+"difficult to navigate and interact with. This tag also helps prevent a "
+"delay in how quickly your site responds to user input, like taps."
+msgstr ""
+
+#: admin/views/performance/audits/viewport.php:34
+msgid ""
+"Your site has a correctly configured <meta name=\"viewport\"> tag! This "
+"ensures your site looks good and responds quickly on all devices."
+msgstr ""
+
+#: admin/views/performance/audits/viewport.php:38
+msgid ""
+"Your site is missing the <meta name=\"viewport\"> tag or it's not "
+"configured correctly. This can lead to a poor user experience on mobile "
+"devices and slow down how quickly your site reacts to user actions."
+msgstr ""
+
+#: admin/views/performance/audits/viewport.php:48
+#. translators: %1$s -  opening <strong> tag, %2$s - closing </strong> tag
+msgid ""
+"You can add the <meta name=\"viewport\"> tag in your in your page's <head> "
+"like %1$s <meta name=\"viewport\" content=\"width=device-width, "
+"initial-scale=1\"> %2$s"
+msgstr ""
+
+#: admin/views/performance/audits/viewport.php:57
+msgid "Configure Viewport"
 msgstr ""
 
 #: admin/views/performance/audits-meta-box.php:23
@@ -6274,7 +7015,7 @@ msgstr ""
 msgid "Keep"
 msgstr ""
 
-#: admin/views/settings/data-meta-box.php:62 core/class-utils.php:172
+#: admin/views/settings/data-meta-box.php:62 core/class-utils.php:179
 msgid "Remove"
 msgstr ""
 
@@ -6437,8 +7178,8 @@ msgid ""
 msgstr ""
 
 #: admin/views/uptime/downtime-meta-box.php:30
-#: admin/views/uptime/meta-box.php:79 core/modules/class-advanced.php:682
-#: core/modules/class-advanced.php:691 core/modules/class-advanced.php:692
+#: admin/views/uptime/meta-box.php:79 core/modules/class-advanced.php:683
+#: core/modules/class-advanced.php:692 core/modules/class-advanced.php:693
 msgid "Unknown"
 msgstr ""
 
@@ -7066,304 +7807,304 @@ msgstr ""
 msgid "Could not write file %s"
 msgstr ""
 
-#: core/class-utils.php:173
+#: core/class-utils.php:180
 msgid "You"
 msgstr ""
 
-#: core/class-utils.php:174
+#: core/class-utils.php:181
 msgid "Running speed test..."
 msgstr ""
 
-#: core/class-utils.php:175
+#: core/class-utils.php:182
 msgid "Analyzing data and preparing report..."
 msgstr ""
 
-#: core/class-utils.php:176
+#: core/class-utils.php:183
 msgid "Test is taking a little longer than expected, hang in there…"
 msgstr ""
 
-#: core/class-utils.php:177
+#: core/class-utils.php:184
 msgid "Test complete! Reloading..."
 msgstr ""
 
-#: core/class-utils.php:179
+#: core/class-utils.php:186
 msgid ""
 "There was an error during the cache purge. Check folder permissions are 755 "
 "for /wp-content/wphb-cache or delete directory manually."
 msgstr ""
 
-#: core/class-utils.php:180
+#: core/class-utils.php:187
 msgid "Gravatar cache purged."
 msgstr ""
 
-#: core/class-utils.php:181
+#: core/class-utils.php:188
 msgid "Page cache purged."
 msgstr ""
 
-#: core/class-utils.php:182
+#: core/class-utils.php:189
 msgid "There was an error re-checking the caching status, please try again later."
 msgstr ""
 
-#: core/class-utils.php:183
+#: core/class-utils.php:190
 msgid "Browser caching status updated."
 msgstr ""
 
-#: core/class-utils.php:184 languages/react.php:188
+#: core/class-utils.php:191 languages/react.php:188
 msgid ""
 "Cloudflare cache successfully purged. Please wait 30 seconds for the purge "
 "to complete."
 msgstr ""
 
-#: core/class-utils.php:185
+#: core/class-utils.php:192
 msgid "Your cache has been cleared."
 msgstr ""
 
-#: core/class-utils.php:188
+#: core/class-utils.php:195
 msgid "Error updating settings"
 msgstr ""
 
-#: core/class-utils.php:189
+#: core/class-utils.php:196
 msgid "Error: Please enter your name"
 msgstr ""
 
-#: core/class-utils.php:191
+#: core/class-utils.php:198
 msgid "Delete All Permanently"
 msgstr ""
 
-#: core/class-utils.php:193
+#: core/class-utils.php:200
 msgid "Clear draft posts"
 msgstr ""
 
-#: core/class-utils.php:194
+#: core/class-utils.php:201
 msgid "Are you sure you wish to delete"
 msgstr ""
 
-#: core/class-utils.php:195
+#: core/class-utils.php:202
 msgid ""
 "Are you sure you want to clear draft posts and move them to the trash? "
 "Trashed posts can be permanently deleted below."
 msgstr ""
 
-#: core/class-utils.php:196
+#: core/class-utils.php:203
 msgid "database entries"
 msgstr ""
 
-#: core/class-utils.php:197
+#: core/class-utils.php:204
 msgid "Make sure you have a current backup just in case."
 msgstr ""
 
-#: core/class-utils.php:199
+#: core/class-utils.php:206
 msgid "Preload cache purged successfully."
 msgstr ""
 
-#: core/class-utils.php:200
+#: core/class-utils.php:207
 msgid ""
 "All database data and Custom Post Type information related to Asset "
 "Optimization has been cleared successfully."
 msgstr ""
 
-#: core/class-utils.php:201
+#: core/class-utils.php:208
 msgid "Database entries removed successfully."
 msgstr ""
 
-#: core/class-utils.php:203
+#: core/class-utils.php:210
 msgid "Need help getting your API token?"
 msgstr ""
 
-#: core/class-utils.php:206
+#: core/class-utils.php:213
 msgid "Remove recipient"
 msgstr ""
 
-#: core/class-utils.php:207
+#: core/class-utils.php:214
 msgid ""
 "You've not added the users. In order to activate the notification you need "
 "to add users first."
 msgstr ""
 
-#: core/class-utils.php:208
+#: core/class-utils.php:215
 msgid ""
 "You've removed all recipients. If you save without a recipient, we'll "
 "automatically turn off notifications."
 msgstr ""
 
-#: core/class-utils.php:209
+#: core/class-utils.php:216
 msgid "Recipient already exists."
 msgstr ""
 
-#: core/class-utils.php:210
+#: core/class-utils.php:217
 msgid "Awaiting confirmation"
 msgstr ""
 
-#: core/class-utils.php:211
+#: core/class-utils.php:218
 msgid "Resend invite email"
 msgstr ""
 
-#: core/class-utils.php:212
+#: core/class-utils.php:219
 msgid "Add recipient"
 msgstr ""
 
-#: core/class-utils.php:213
+#: core/class-utils.php:220
 msgid "Cache purged. Regenerating Critical CSS, this could take about a minute."
 msgstr ""
 
-#: core/class-utils.php:214
+#: core/class-utils.php:221
 msgid ""
 "Critical CSS generated. Please visit the site and let the cache build up "
 "before running a test."
 msgstr ""
 
-#: core/class-utils.php:215
+#: core/class-utils.php:222
 msgid ""
 "There was an error during the critical css files purge. Check folder "
 "permissions are 755 for /wp-content/wphb-cache/critical-css or delete "
 "directory manually."
 msgstr ""
 
-#: core/class-utils.php:217
+#: core/class-utils.php:224
 msgid "Please type any keywords and press Enter"
 msgstr ""
 
-#: core/class-utils.php:218 core/modules/class-exclusions.php:118
+#: core/class-utils.php:225 core/modules/class-exclusions.php:118
 #: languages/react.php:881
 msgid "Files"
 msgstr ""
 
-#: core/class-utils.php:219 core/modules/class-exclusions.php:128
+#: core/class-utils.php:226 core/modules/class-exclusions.php:128
 msgid "Post Types"
 msgstr ""
 
-#: core/class-utils.php:220 core/modules/class-exclusions.php:138
+#: core/class-utils.php:227 core/modules/class-exclusions.php:138
 msgid "Post URLs"
 msgstr ""
 
-#: core/class-utils.php:221 core/modules/class-exclusions.php:148
+#: core/class-utils.php:228 core/modules/class-exclusions.php:148
 msgid "Plugins/Themes"
 msgstr ""
 
-#: core/class-utils.php:222 core/modules/class-exclusions.php:158
+#: core/class-utils.php:229 core/modules/class-exclusions.php:158
 msgid "Keywords"
 msgstr ""
 
-#: core/class-utils.php:223
+#: core/class-utils.php:230
 msgid "Default Exclusion"
 msgstr ""
 
-#: core/class-utils.php:224 core/modules/class-exclusions.php:171
+#: core/class-utils.php:231 core/modules/class-exclusions.php:171
 msgid "Ads/Trackers"
 msgstr ""
 
-#: core/class-utils.php:225
+#: core/class-utils.php:232
 msgid "All Exclusion"
 msgstr ""
 
-#: core/class-utils.php:226
+#: core/class-utils.php:233
 msgid "WP File"
 msgstr ""
 
-#: core/class-utils.php:276
+#: core/class-utils.php:283
 msgid ""
 "Your changes have been published. Note: Files queued for compression will "
 "generate once someone visits your homepage."
 msgstr ""
 
-#: core/class-utils.php:600
+#: core/class-utils.php:607
 #. translators: %d: year
 msgid "%d year"
 msgid_plural "%d years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:603
+#: core/class-utils.php:610
 #. translators: %d: month
 msgid "%d month"
 msgid_plural "%d months"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:606
+#: core/class-utils.php:613
 #. translators: %d: day
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:609
+#: core/class-utils.php:616
 #. translators: %d: hour
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:612
+#: core/class-utils.php:619
 #. translators: %d: minute
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:615
+#: core/class-utils.php:622
 #. translators: %d: second
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/class-utils.php:873
+#: core/class-utils.php:880
 msgid "Still having trouble? "
 msgstr ""
 
-#: core/class-utils.php:877 languages/react.php:178
+#: core/class-utils.php:884 languages/react.php:178
 msgid "Start a live chat."
 msgstr ""
 
-#: core/class-utils.php:881 languages/react.php:181
+#: core/class-utils.php:888 languages/react.php:181
 msgid "Open a support ticket."
 msgstr ""
 
-#: core/class-utils.php:998
+#: core/class-utils.php:1005
 msgid "Page Cache"
 msgstr ""
 
-#: core/class-utils.php:999 languages/react.php:203
+#: core/class-utils.php:1006 languages/react.php:203
 msgid "Cloudflare"
 msgstr ""
 
-#: core/class-utils.php:1000
+#: core/class-utils.php:1007
 msgid "Gravatar Cache"
 msgstr ""
 
-#: core/class-utils.php:1001
+#: core/class-utils.php:1008
 msgid "Asset Optimization Cache"
 msgstr ""
 
-#: core/class-utils.php:1002
+#: core/class-utils.php:1009
 msgid "Redis Cache"
 msgstr ""
 
-#: core/class-utils.php:1464
+#: core/class-utils.php:1471
 msgid "Unlock now for Peak Performance  ️⚡️ - 80% Off!"
 msgstr ""
 
-#: core/class-utils.php:1464
+#: core/class-utils.php:1471
 msgid "Unlock now"
 msgstr ""
 
-#: core/class-utils.php:1622
+#: core/class-utils.php:1629
 msgid "Page Caching - Static Server Cache"
 msgstr ""
 
-#: core/class-utils.php:1625
+#: core/class-utils.php:1632
 msgid "Page Caching - Local Page Cache"
 msgstr ""
 
-#: core/class-utils.php:1725
+#: core/class-utils.php:1732
 msgid ""
 "Page Caching stores static HTML copies of your pages and posts to decrease "
 "page load time. Server-side page caching allows for an average of 10 times "
 "more concurrent visitors than regular page caching."
 msgstr ""
 
-#: core/class-utils.php:1725
+#: core/class-utils.php:1732
 msgid ""
 "Hummingbird stores static HTML copies of your pages and posts to decrease "
 "page load time."
@@ -7474,8 +8215,8 @@ msgid "Clear %s post cache"
 msgstr ""
 
 #: core/integration/class-gutenberg.php:138
-#: core/modules/class-page-cache.php:1908
-#: core/modules/class-page-cache.php:2010
+#: core/modules/class-page-cache.php:1911
+#: core/modules/class-page-cache.php:2013
 #. translators: %s - Cache expiration time, %s - Cache old time
 msgid "Cache for post has been cleared."
 msgstr ""
@@ -7512,134 +8253,134 @@ msgstr ""
 msgid "Every %d Minutes"
 msgstr ""
 
-#: core/modules/class-advanced.php:327
+#: core/modules/class-advanced.php:328
 msgid ""
 "Historic versions of your posts and pages. If you don't need to revert to "
 "older versions, delete these entries"
 msgstr ""
 
-#: core/modules/class-advanced.php:330
+#: core/modules/class-advanced.php:331
 msgid "Draft Posts"
 msgstr ""
 
-#: core/modules/class-advanced.php:331
+#: core/modules/class-advanced.php:332
 msgid ""
 "Draft posts are auto-saved versions of your posts and pages. If you don't "
 "use drafts, you can clear those entries here and move them to trash. "
 "Trashed posts can be permanently deleted below."
 msgstr ""
 
-#: core/modules/class-advanced.php:334
+#: core/modules/class-advanced.php:335
 msgid "Trashed Posts"
 msgstr ""
 
-#: core/modules/class-advanced.php:335
+#: core/modules/class-advanced.php:336
 msgid "Posts or pages you've marked as trash but haven't permanently deleted yet"
 msgstr ""
 
-#: core/modules/class-advanced.php:338
+#: core/modules/class-advanced.php:339
 msgid "Spam Comments"
 msgstr ""
 
-#: core/modules/class-advanced.php:339
+#: core/modules/class-advanced.php:340
 msgid "Comments marked as spam that haven't been deleted yet"
 msgstr ""
 
-#: core/modules/class-advanced.php:342
+#: core/modules/class-advanced.php:343
 msgid "Trashed Comments"
 msgstr ""
 
-#: core/modules/class-advanced.php:343
+#: core/modules/class-advanced.php:344
 msgid "Comments you've marked as trash but haven't permanently deleted yet"
 msgstr ""
 
-#: core/modules/class-advanced.php:346
+#: core/modules/class-advanced.php:347
 msgid "Expired Transients"
 msgstr ""
 
-#: core/modules/class-advanced.php:347
+#: core/modules/class-advanced.php:348
 msgid ""
 "Cached data that themes and plugins have stored, except these ones have "
 "expired and can be deleted"
 msgstr ""
 
-#: core/modules/class-advanced.php:350
+#: core/modules/class-advanced.php:351
 msgid "All Transients"
 msgstr ""
 
-#: core/modules/class-advanced.php:351
+#: core/modules/class-advanced.php:352
 msgid ""
 "Cached data that themes and plugins have stored, but may still be in use. "
 "Note: the next page to load could take a bit longer due to WordPress "
 "regenerating transients."
 msgstr ""
 
-#: core/modules/class-advanced.php:606
+#: core/modules/class-advanced.php:607
 msgid "Version"
 msgstr ""
 
-#: core/modules/class-advanced.php:640
+#: core/modules/class-advanced.php:641
 msgid "Error Reporting"
 msgstr ""
 
-#: core/modules/class-advanced.php:643
+#: core/modules/class-advanced.php:644
 msgid "Extensions"
 msgstr ""
 
-#: core/modules/class-advanced.php:791
+#: core/modules/class-advanced.php:792
 msgid "Software Name"
 msgstr ""
 
-#: core/modules/class-advanced.php:792
+#: core/modules/class-advanced.php:793
 msgid "Software Version"
 msgstr ""
 
-#: core/modules/class-advanced.php:793
+#: core/modules/class-advanced.php:794
 msgid "Server IP"
 msgstr ""
 
-#: core/modules/class-advanced.php:793 core/modules/class-advanced.php:794
-#: core/modules/class-advanced.php:795 core/modules/class-advanced.php:815
+#: core/modules/class-advanced.php:794 core/modules/class-advanced.php:795
+#: core/modules/class-advanced.php:796 core/modules/class-advanced.php:816
 msgid "undefined"
 msgstr ""
 
-#: core/modules/class-advanced.php:794
+#: core/modules/class-advanced.php:795
 msgid "Server Hostname"
 msgstr ""
 
-#: core/modules/class-advanced.php:795
+#: core/modules/class-advanced.php:796
 msgid "Server Admin"
 msgstr ""
 
-#: core/modules/class-advanced.php:796
+#: core/modules/class-advanced.php:797
 msgid "Server local time"
 msgstr ""
 
-#: core/modules/class-advanced.php:797
+#: core/modules/class-advanced.php:798
 msgid "Operating System"
 msgstr ""
 
-#: core/modules/class-advanced.php:798
+#: core/modules/class-advanced.php:799
 msgid "OS Hostname"
 msgstr ""
 
-#: core/modules/class-advanced.php:799
+#: core/modules/class-advanced.php:800
 msgid "OS Version"
 msgstr ""
 
-#: core/modules/class-advanced.php:822
+#: core/modules/class-advanced.php:823
 msgid "FALSE"
 msgstr ""
 
-#: core/modules/class-advanced.php:824
+#: core/modules/class-advanced.php:825
 msgid "TRUE"
 msgstr ""
 
-#: core/modules/class-advanced.php:1123
+#: core/modules/class-advanced.php:1124
 msgid "We could not validate the request, try reloading the page."
 msgstr ""
 
-#: core/modules/class-advanced.php:1129
+#: core/modules/class-advanced.php:1130
 msgid ""
 "Something went wrong. Try reloading the page to see if the comments load "
 "for you."
@@ -7724,57 +8465,57 @@ msgstr ""
 msgid "2 hours"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1135
+#: core/modules/class-critical-css.php:1141
 #. translators: %1$s - page type, %2$s - Used css content, %3$s - manual
 #. critical css
 msgid "HB critical unknown error"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1648
+#: core/modules/class-critical-css.php:1654
 msgid "<em> Error: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1651
+#: core/modules/class-critical-css.php:1657
 #. translators: %1$s = error message.
 msgid "<br />%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1673
+#: core/modules/class-critical-css.php:1679
 #. translators: %1$s = message.
 msgid ""
 "Critical CSS generation failed. Please review the below error to "
 "troubleshoot.%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1751
+#: core/modules/class-critical-css.php:1757
 msgid "Optimizing "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1754
+#: core/modules/class-critical-css.php:1760
 msgid "Generating Critical CSS, this could take about a minute."
 msgstr ""
 
-#: core/modules/class-critical-css.php:1757 languages/react.php:929
+#: core/modules/class-critical-css.php:1763 languages/react.php:929
 msgid "Optimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1757
+#: core/modules/class-critical-css.php:1763
 msgid "Error"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1760
+#: core/modules/class-critical-css.php:1766
 msgid "Last Generated: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1762
+#: core/modules/class-critical-css.php:1768
 msgid "Unoptimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1765
+#: core/modules/class-critical-css.php:1771
 msgid "Select settings and saves changes to generate Critical CSS"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1770
+#: core/modules/class-critical-css.php:1776
 #. translators: %1$s = tooltip text, %2$s = sui tag, %3$s = info icon, %4$s =
 #. text for tag.
 msgid ""
@@ -7919,15 +8660,15 @@ msgstr ""
 msgid "Error fetching Gravatar. Gravatar not found."
 msgstr ""
 
-#: core/modules/class-minify.php:1673
+#: core/modules/class-minify.php:1680
 msgid "Unsupported content"
 msgstr ""
 
-#: core/modules/class-minify.php:1682
+#: core/modules/class-minify.php:1689
 msgid "Error saving file"
 msgstr ""
 
-#: core/modules/class-minify.php:2230
+#: core/modules/class-minify.php:2242
 msgid ""
 "We've noticed that you have Safe Mode active in Hummingbird Asset "
 "Optimization. Keeping safe mode active for a long period of time may cause "
@@ -7935,18 +8676,18 @@ msgid ""
 "changes and publish them to live, or disable safe mode."
 msgstr ""
 
-#: core/modules/class-minify.php:2239
+#: core/modules/class-minify.php:2251
 msgid "Disable safe mode"
 msgstr ""
 
-#: core/modules/class-page-cache.php:236
+#: core/modules/class-page-cache.php:239
 #. translators: %s: plugin name.
 msgid ""
 "%s plugin detected. Please disable it to use Hummingbird page caching "
 "functionality."
 msgstr ""
 
-#: core/modules/class-page-cache.php:248
+#: core/modules/class-page-cache.php:251
 #. translators: %1$s - opening a tag, %2$s - closing a tag, %3$s - button tag,
 #. %4$s - closing button tag
 msgid ""
@@ -7959,18 +8700,18 @@ msgid ""
 "FTP.%3$sRemove file%4$s"
 msgstr ""
 
-#: core/modules/class-page-cache.php:273
+#: core/modules/class-page-cache.php:276
 msgid ""
 "Hummingbird has halted page caching to prevent any issues while asset "
 "optimization is in progress. Page caching will resume automatically when "
 "asset optimization is complete."
 msgstr ""
 
-#: core/modules/class-page-cache.php:293
+#: core/modules/class-page-cache.php:296
 msgid "Hummingbird has halted page caching to prevent any issues with FastCGI cache"
 msgstr ""
 
-#: core/modules/class-page-cache.php:572
+#: core/modules/class-page-cache.php:575
 #. translators: %1$s - code tag, %2$s - closing code tag, %3$s - button tag,
 #. %4$s - closing button tag
 msgid ""
@@ -7979,7 +8720,7 @@ msgid ""
 "true);%2$sClick Retry to try again.%3$sRetry%4$s"
 msgstr ""
 
-#: core/modules/class-page-cache.php:588
+#: core/modules/class-page-cache.php:591
 #. translators: %1$s - code tag, %2$s - closing code tag, button tag, %3$s -
 #. closing button tag
 msgid ""
@@ -7988,48 +8729,48 @@ msgid ""
 "file:%1$sdefine('WP_CACHE', true);%2$sRetry%3$s"
 msgstr ""
 
-#: core/modules/class-page-cache.php:618
+#: core/modules/class-page-cache.php:621
 msgid "Frontpage"
 msgstr ""
 
-#: core/modules/class-page-cache.php:619
+#: core/modules/class-page-cache.php:622
 msgid "Blog"
 msgstr ""
 
-#: core/modules/class-page-cache.php:620
+#: core/modules/class-page-cache.php:623
 msgid "Pages"
 msgstr ""
 
-#: core/modules/class-page-cache.php:621
+#: core/modules/class-page-cache.php:624
 msgid "Posts"
 msgstr ""
 
-#: core/modules/class-page-cache.php:622
+#: core/modules/class-page-cache.php:625
 msgid "Archives"
 msgstr ""
 
-#: core/modules/class-page-cache.php:623
+#: core/modules/class-page-cache.php:626
 msgid "Categories"
 msgstr ""
 
-#: core/modules/class-page-cache.php:624
+#: core/modules/class-page-cache.php:627
 msgid "Tags"
 msgstr ""
 
-#: core/modules/class-page-cache.php:2272
+#: core/modules/class-page-cache.php:2275
 msgid ""
 "Hummingbird cache will not work for some pages while Critical CSS is being "
 "generated. Page caching will resume automatically when Critical CSS is "
 "generated."
 msgstr ""
 
-#: core/modules/class-performance.php:140
+#: core/modules/class-performance.php:142
 msgid ""
 "Whoops, looks like we were unable to grab your test results this time "
 "round. Please wait a few moments and try again..."
 msgstr ""
 
-#: core/modules/class-performance.php:142
+#: core/modules/class-performance.php:144
 msgid ""
 "The performance test didn't return any results. This could be because "
 "you're on a local website (which we can't access) or something went wrong "

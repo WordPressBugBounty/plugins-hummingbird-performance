@@ -120,6 +120,13 @@ class Minify extends Module {
 	const AO_TRANSIENT_NAME = 'wphb-processing';
 
 	/**
+	 * Cached result of the safe mode preview check.
+	 *
+	 * @var bool|null
+	 */
+	private $previewing_safe_mode = null;
+
+	/**
 	 * Initializes the module. Always executed even if the module is deactivated.
 	 *
 	 * We need the scanner module to be always active, because HB uses is_scanning to detect
@@ -1184,7 +1191,7 @@ class Minify extends Module {
 		$minify_default = $default[ $this->get_slug() ];
 
 		// Settings that need to be reset.
-		$ao_settings = array( 'do_assets', 'view', 'type', 'use_cdn', 'nocdn', 'delay_js', 'delay_js_timeout', 'delay_js_exclusions' );
+		$ao_settings = array( 'do_assets', 'view', 'type', 'use_cdn', 'nocdn', 'delay_js', 'delay_js_timeout', 'delay_js_exclusions', 'critical_css', 'critical_css_type', 'font_optimization', 'font_swap' );
 
 		// These settings are only valid for single sites or network admin.
 		if ( ! is_multisite() || is_network_admin() ) {
@@ -2091,9 +2098,14 @@ class Minify extends Module {
 	 * @return mixed
 	 */
 	private function previewing_safe_mode() {
-		$query_param_value = filter_input( INPUT_GET, 'minify-safe', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		if ( null === $this->previewing_safe_mode ) {
+			$safe_mode_status  = self::get_safe_mode_status();
+			$query_param_value = filter_input( INPUT_GET, 'minify-safe', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
 
-		return self::get_safe_mode_status() && true === $query_param_value;
+			$this->previewing_safe_mode = $safe_mode_status && true === $query_param_value;
+		}
+
+		return $this->previewing_safe_mode;
 	}
 
 	public function add_safe_mode_param_to_links( $content ) {

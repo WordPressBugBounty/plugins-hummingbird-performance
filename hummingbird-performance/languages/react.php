@@ -306,7 +306,7 @@ $generated_i18n_strings = array(
 	__( 'Are you sure you want to apply the %s config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.', 'wphb' ),
 
 	// Reference: _src/react/modules/configs.jsx:108
-	// Reference: _src/react/views/minify/assets-manual.jsx:343
+	// Reference: _src/react/views/minify/assets-manual.jsx:344
 	__( 'Apply', 'wphb' ),
 
 	// Reference: _src/react/modules/configs.jsx:111
@@ -746,95 +746,95 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/assets-manual.jsx:109
 	__( 'Safe mode has been disabled!', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:322
+	// Reference: _src/react/views/minify/assets-manual.jsx:323
 	__( 'Compress', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:323
+	// Reference: _src/react/views/minify/assets-manual.jsx:324
 	__( 'Combine', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:324
+	// Reference: _src/react/views/minify/assets-manual.jsx:325
 	__( 'Inline', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:325
+	// Reference: _src/react/views/minify/assets-manual.jsx:326
 	__( 'Async', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:330
+	// Reference: _src/react/views/minify/assets-manual.jsx:331
 	__( 'Move to Footer', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:331
+	// Reference: _src/react/views/minify/assets-manual.jsx:332
 	__( 'Preload', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:332
+	// Reference: _src/react/views/minify/assets-manual.jsx:333
 	__( 'Defer', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:351
+	// Reference: _src/react/views/minify/assets-manual.jsx:352
 	__( 'Choose what bulk update actions you’d like to apply to the selected files. You still have to publish your changes before they will be set live.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:370
+	// Reference: _src/react/views/minify/assets-manual.jsx:371
 	__( 'Discard', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:382
+	// Reference: _src/react/views/minify/assets-manual.jsx:383
 	__( 'Publish', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:389
+	// Reference: _src/react/views/minify/assets-manual.jsx:390
 	__( 'Unpublished changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:390
+	// Reference: _src/react/views/minify/assets-manual.jsx:391
 	__( 'There are unpublished changes made in safe mode. Do you want to publish the changes to live or discard them?', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:577
+	// Reference: _src/react/views/minify/assets-manual.jsx:578
 	__( 'Test different settings in a safe environment without affecting visitors\' experience. The changes done in the safe mode will be only visible to you (as an admin).', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:580
+	// Reference: _src/react/views/minify/assets-manual.jsx:581
 	__( 'Safe mode', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:596
+	// Reference: _src/react/views/minify/assets-manual.jsx:597
 	__( 'All', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:602
+	// Reference: _src/react/views/minify/assets-manual.jsx:603
 	__( 'Hosted', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:608
+	// Reference: _src/react/views/minify/assets-manual.jsx:609
 	__( 'External', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:617
+	// Reference: _src/react/views/minify/assets-manual.jsx:618
 	__( 'Preview your changes on the front-end, then publish to live if no errors are found.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:623
+	// Reference: _src/react/views/minify/assets-manual.jsx:624
 	__( 'Preview', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:630
+	// Reference: _src/react/views/minify/assets-manual.jsx:631
 	// Reference: _src/react/views/minify/configurations.jsx:54
 	__( 'Publish changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:644
+	// Reference: _src/react/views/minify/assets-manual.jsx:645
 	__( 'Bulk update', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:660
+	// Reference: _src/react/views/minify/assets-manual.jsx:661
 	__( 'Display files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:673
+	// Reference: _src/react/views/minify/assets-manual.jsx:674
 	__( 'Sort by', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:674
+	// Reference: _src/react/views/minify/assets-manual.jsx:675
 	__( 'Choose plugin or theme', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:681
+	// Reference: _src/react/views/minify/assets-manual.jsx:682
 	__( 'Search by name or extension', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:691
+	// Reference: _src/react/views/minify/assets-manual.jsx:692
 	__( 'Clear filters', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:883
+	// Reference: _src/react/views/minify/assets-manual.jsx:884
 	__( 'We\'ve completed the file check but haven\'t been able to load the files. Please try clearing your object cache, refresh the page and wait a few seconds to load the files, or visit your homepage to trigger the file list to show.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:899
+	// Reference: _src/react/views/minify/assets-manual.jsx:900
 	__( 'Visit homepage', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:926
+	// Reference: _src/react/views/minify/assets-manual.jsx:927
 	__( 'You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitors\' experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser\'s console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you\'ve made as soon as possible to avoid page load issues.</span>', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:952
+	// Reference: _src/react/views/minify/assets-manual.jsx:953
 	// Reference: _src/react/views/minify/configurations.jsx:90
 	__( 'Fonts', 'wphb' ),
 

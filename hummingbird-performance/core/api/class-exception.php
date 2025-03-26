@@ -25,7 +25,7 @@ class Exception extends \Exception {
 	 * @param int            $code      Error code.
 	 * @param Exception|null $previous  Previous exception.
 	 */
-	public function __construct( $message = '', $code = 0, Exception $previous = null ) {
+	public function __construct( $message = '', $code = 0, ?Exception $previous = null ) {
 		if ( ! is_numeric( $code ) ) {
 			switch ( $code ) {
 				default:

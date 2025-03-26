@@ -250,6 +250,7 @@ class Advanced extends Module {
 
 		if ( 'all' === $options['cart_fragments'] || ( ! is_woocommerce() && ! is_cart() && ! is_checkout() ) ) {
 			wp_dequeue_script( 'wc-cart-fragments' );
+			wp_deregister_script( 'wc-cart-fragments' );
 		}
 	}
 

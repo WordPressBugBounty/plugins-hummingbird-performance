@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$informative_audits = array( 'uses-rel-preload', 'layout-shift-elements', 'largest-contentful-paint-element' );
+$informative_audits = array( 'uses-rel-preload', 'layout-shift-elements', 'largest-contentful-paint-element', 'user-timings' );
 
 if ( $is_dismissed ) {
 	$impact_score_class = 'dismissed';
@@ -37,6 +37,20 @@ if ( $is_dismissed ) {
 	if ( in_array( $rule, $informative_audits, true ) ) {
 		$impact_score_class = 'default';
 		$impact_icon_class  = 'info';
+	}
+
+	$force_all_audit_fail = isset( $_GET['force_all_audit_fail'] ) ? sanitize_text_field( wp_unslash( $_GET['force_all_audit_fail'] ) ) : '';
+	$force_audit_pass     = isset( $_GET['force_audit_pass'] ) ? sanitize_text_field( wp_unslash( $_GET['force_audit_pass'] ) ) : '';
+	$force_audit_fail     = isset( $_GET['force_audit_fail'] ) ? sanitize_text_field( wp_unslash( $_GET['force_audit_fail'] ) ) : '';
+	if ( $force_all_audit_fail ) {
+		$impact_score_class = 'error';
+		$impact_icon_class  = 'warning-alert';
+	} elseif ( ! empty( $force_audit_pass ) && $rule === $force_audit_pass ) {
+		$impact_score_class = 'success';
+		$impact_icon_class  = 'check-tick';
+	} elseif ( ! empty( $force_audit_fail ) && $rule === $force_audit_fail ) {
+		$impact_score_class = 'error';
+		$impact_icon_class  = 'warning-alert';
 	}
 }
 ?>
@@ -72,6 +86,13 @@ if ( $is_dismissed ) {
 	</div>
 
 	<?php if ( $this->view_exists( "performance/audits/{$rule}" ) ) : ?>
+		<?php
+		if ( $rule === $force_audit_pass ) {
+			$rule_result->score = 1;
+		} elseif ( $rule === $force_audit_fail || $force_all_audit_fail ) {
+			$rule_result->score = 0;
+		}
+		?>
 		<div class="sui-accordion-item-body">
 			<div class="sui-box">
 				<div class="sui-box-body">

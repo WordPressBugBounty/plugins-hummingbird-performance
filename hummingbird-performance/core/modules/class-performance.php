@@ -89,6 +89,8 @@ class Performance extends Module {
 	 */
 	public static function get_last_report() {
 		$report = Settings::get( 'wphb-last-report' );
+		self::move_audits_without_score( $report );
+
 		return $report ? $report : false;
 	}
 
@@ -579,5 +581,41 @@ class Performance extends Module {
 
 		// Return true if all metrics pass, false otherwise.
 		return $lcp_pass && $inp_pass && $cls_pass ? 'pass' : 'fail';
+	}
+
+	/**
+	 * Move audits without a score to the `passed` object.
+	 *
+	 * @since 3.13.0
+	 *
+	 * @param object $psi_response PSI response.
+	 */
+	public static function move_audits_without_score( &$psi_response ) {
+		if ( ! isset( $psi_response->data ) ) {
+			return;
+		}
+
+		foreach ( array( 'desktop', 'mobile' ) as $platform ) {
+			if ( ! isset( $psi_response->data->$platform->audits ) ) {
+				continue;
+			}
+
+			$audits = $psi_response->data->$platform->audits;
+
+			if ( ! isset( $audits->passed ) ) {
+				$audits->passed = new \stdClass();
+			}
+
+			foreach ( array( 'diagnostics', 'opportunities' ) as $audit_type ) {
+				if ( isset( $audits->$audit_type ) ) {
+					foreach ( $audits->$audit_type as $key => $audit ) {
+						if ( ! isset( $audit->score ) ) {
+							$audits->passed->$key = $audit;
+							unset( $audits->$audit_type->$key );
+						}
+					}
+				}
+			}
+		}
 	}
 }

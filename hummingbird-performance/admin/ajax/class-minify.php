@@ -604,15 +604,30 @@ class Minify {
 		unset( $options['delay_js_exclusions'] );
 		unset( $options['delay_js_timeout'] );
 		unset( $options['delay_js_exclusion_list'] );
+		unset( $options['delay_js_files_exclusion'] );
+		unset( $options['delay_js_post_types_exclusion'] );
+		unset( $options['delay_js_post_urls_exclusion'] );
+		unset( $options['delay_js_plugins_themes_exclusion'] );
+		unset( $options['delay_js_ads_tracker_exclusion'] );
+		unset( $options['delay_js_exclude_inline_js'] );
+		unset( $options['delay_js_keywords_advanced_view'] );
 		unset( $options['critical_css'] );
 		unset( $options['critical_css_type'] );
 		unset( $options['critical_css_remove_type'] );
 		unset( $options['critical_css_mode'] );
 		unset( $options['critical_page_types'] );
 		unset( $options['critical_skipped_custom_post_types'] );
+		unset( $options['above_fold_load_stylesheet_method'] );
+		unset( $options['critical_css_files_exclusion'] );
+		unset( $options['critical_css_post_urls_exclusion'] );
+		unset( $options['critical_css_plugins_themes_exclusion'] );
+		unset( $options['critical_css_keywords'] );
 		unset( $options['font_optimization'] );
 		unset( $options['preload_fonts'] );
+		unset( $options['preload_fonts_mode'] );
 		unset( $options['font_swap'] );
+		unset( $options['font_display_value'] );
+		unset( $options['ao_completed_time'] );
 		return $options;
 	}
 }

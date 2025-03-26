@@ -1,6 +1,6 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.12.0
+Version: 3.13.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 3.12.0
+Stable tag: 3.13.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -207,6 +207,20 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 4. Use suggestions to make improvements and speed up your site.
 
 == Changelog ==
+
+= 3.13.0 ( 2025-03-26 ) =
+- Improvement: Add new Google audits in Performance Test
+- Improvement: Whitelabel email notifications
+- Improvement: Ensure JS Delay, HB CDN, and Lazy Load work together
+- Improvement: Updated component versions
+- Improvement: Ensure compatibility with PHP 8.4
+- Improvement: Performance enhancements
+- Fix: The 'Reset' option in AO Settings does not reset Critical CSS and Font Optimization settings
+- Fix: WooCommerce "Disable Cart Fragments On > All Pages" is not behaving as expected
+- Fix: Critical CSS generation issue for taxonomy feed pages
+- Fix: Page Cache is not cleared automatically after saving menu from the Site Editor
+- Fix: Static Server Cache is not clearing on post update
+- Fix: Add wpdef_lockout_ to the default cookie exclusion list
 
 = 3.12.0 ( 2025-02-12 ) =
 - New: Option to clear Static Server Cache when a post/page is updated

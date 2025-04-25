@@ -74,6 +74,9 @@ class Core {
 
 		// Init logger.
 		$this->logger = Logger::get_instance();
+
+		// Load the cross sell module.
+		add_action( 'init', array( $this, 'load_cross_sell_module' ), 9 );
 	}
 
 	/**
@@ -606,4 +609,38 @@ class Core {
 		<?php
 	}
 
+	/**
+	 * Load cross sell module.
+	 *
+	 * @return bool
+	 */
+	public function load_cross_sell_module() {
+		if ( Utils::is_member() ) {
+			return;
+		}
+
+		$cross_sell_plugin_file = WPHB_DIR_PATH . 'core/externals/plugins-cross-sell-page/plugin-cross-sell.php';
+		if ( ! file_exists( $cross_sell_plugin_file ) ) {
+			return;
+		}
+
+		static $cross_sell_handler = null;
+		if ( ! is_null( $cross_sell_handler ) ) {
+			return;
+		}
+
+		if ( ! class_exists( '\WPMUDEV\Modules\Plugin_Cross_Sell' ) ) {
+			require_once $cross_sell_plugin_file;
+		}
+
+		$submenu_params = array(
+			'slug'            => 'hummingbird-performance',
+			'parent_slug'     => 'wphb',
+			'menu_slug'       => 'wphb-cross-sell',
+			'position'        => 10,
+			'translation_dir' => WPHB_DIR_PATH . 'languages',
+		);
+
+		$cross_sell_handler = new \WPMUDEV\Modules\Plugin_Cross_Sell( $submenu_params );
+	}
 }

@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 3.13.0\n"
+"Project-Id-Version: Hummingbird 3.13.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2025-03-25 16:45:29+00:00\n"
+"POT-Creation-Date: 2025-04-25 13:11:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,6 +113,7 @@ msgstr ""
 #: admin/class-admin.php:304 admin/class-admin.php:322
 #: admin/pages/class-dashboard.php:344
 #: admin/views/dashboard/welcome/upsell-meta-box-header.php:15
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:231
 msgid "Hummingbird Pro"
 msgstr ""
 
@@ -1415,6 +1416,7 @@ msgid ""
 msgstr ""
 
 #: admin/modals/membership-modal.php:50
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:191
 msgid "Smush Pro"
 msgstr ""
 
@@ -2168,7 +2170,7 @@ msgstr ""
 
 #: admin/views/advanced/db-meta-box.php:44
 #: admin/views/caching/page/meta-box.php:318
-#: admin/views/minification/settings-meta-box.php:207 core/class-core.php:202
+#: admin/views/minification/settings-meta-box.php:207 core/class-core.php:205
 msgid "Clear"
 msgstr ""
 
@@ -7695,32 +7697,32 @@ msgstr ""
 msgid "Cache control in admin bar"
 msgstr ""
 
-#: core/class-core.php:186
+#: core/class-core.php:189
 msgid "Clear all cache"
 msgstr ""
 
-#: core/class-core.php:195
+#: core/class-core.php:198
 msgid "Clear Cloudflare cache"
 msgstr ""
 
-#: core/class-core.php:212
+#: core/class-core.php:215
 msgid "Clear page cache on all subsites"
 msgstr ""
 
-#: core/class-core.php:220
+#: core/class-core.php:223
 msgid "See this page minified"
 msgstr ""
 
-#: core/class-core.php:220
+#: core/class-core.php:223
 msgid "See this page unminified"
 msgstr ""
 
-#: core/class-core.php:323
+#: core/class-core.php:326
 #. translators: %1$s - Text, %2$s - Link to privacy policy page
 msgid "Third parties"
 msgstr ""
 
-#: core/class-core.php:326
+#: core/class-core.php:329
 #. translators: %1$s - opening a tag, %2$s - closing a tag
 msgid ""
 "Hummingbird uses the Stackpath Content Delivery Network (CDN). Stackpath "
@@ -7730,29 +7732,29 @@ msgid ""
 "your own. Stackpath’s privacy policy can be found %1$shere%2$s."
 msgstr ""
 
-#: core/class-core.php:401
+#: core/class-core.php:404
 #: core/externals/free-dashboard/classes/notices/class-email.php:95
 #: core/externals/free-dashboard/classes/notices/class-email.php:213
 msgid "Get Fast!"
 msgstr ""
 
-#: core/class-core.php:456
+#: core/class-core.php:459
 msgid "Go Back"
 msgstr ""
 
-#: core/class-core.php:460
+#: core/class-core.php:463
 msgid "Copy Test Link"
 msgstr ""
 
-#: core/class-core.php:461
+#: core/class-core.php:464
 msgid "Link Copied"
 msgstr ""
 
-#: core/class-core.php:463 languages/react.php:777
+#: core/class-core.php:466 languages/react.php:777
 msgid "Publish"
 msgstr ""
 
-#: core/class-core.php:466
+#: core/class-core.php:469
 msgid ""
 "You are currently viewing the frontend of your website in Safe Mode "
 "preview. Check for any errors in your browser's console or broken UI. You "
@@ -8199,6 +8201,195 @@ msgstr ""
 
 #: core/externals/plugin-notice/notice.php:325
 msgid "Generate leads with pop-ups, slide-ins and email opt-ins."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/app/rest-endpoints/class-activate-plugin.php:102
+msgid "Plugin not found."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/app/rest-endpoints/class-install-plugin.php:106
+msgid "You are already using this plugin."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/app/rest-endpoints/class-install-plugin.php:115
+msgid "Plugin installed successfully."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/app/rest-endpoints/class-install-plugin.php:118
+msgid "Plugin already installed."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/app/submenus/class-cross-sell.php:266
+#: core/externals/plugins-cross-sell-page/app/submenus/class-cross-sell.php:267
+msgid "More free Plugins?"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:24
+msgid "Smush"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:25
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:192
+msgid "Smush images down to size for faster page loading."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:40
+msgid "Forminator"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:41
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:172
+msgid "Surveys, subscriptions, feedback, quizzes: Forminator makes it easy."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:56
+msgid "Defender"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:57
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:212
+msgid "Automated and reliable WordPress security in a matter of clicks."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:73
+msgid "For sites that load in one flap of a hummingbird’s wing. "
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:88
+msgid "SmartCrawl"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:89
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:252
+msgid "Take the mystery out of optimizing your site."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:104
+msgid "Hustle"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:105
+msgid "Create high-converting and targeted marketing campaigns in minutes."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:120
+msgid "Branda"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:121
+msgid "Rebrand, customize, and white label WordPress without code."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:136
+msgid "Beehive"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:137
+msgid "Customizable Google Analytics dashboards, statistics, and reports."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:152
+msgid "Broken Link Checker"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:153
+msgid "Check posts, pages & content for broken links to improve SEO. "
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:171
+msgid "Forminator Pro"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:174
+msgid "Generate and send PDF files"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:175
+msgid "Accept recurring payment"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:176
+msgid "Get form submitter’s geolocation"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:194
+msgid "Ultra Smush with 5X compression"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:195
+msgid "123 point CDN + 50GB bandwidth"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:196
+msgid "Unlimited bulk and auto smushing"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:211
+msgid "Defender Pro"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:214
+msgid "Scheduled malware scanning"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:215
+msgid "AntiBot Global Firewall"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:216
+msgid "Comprehensive audit logging"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:232
+msgid "For sites that load in one flap of a hummingbird’s wing."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:234
+msgid "Delay JavaScript execution"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:235
+msgid "Automated critical CSS generation"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:236
+msgid "Turbocharged asset optimization"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:251
+msgid "SmartCrawl Pro"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:254
+msgid "Site crawler SEO scan & reports"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:255
+msgid "SEO health audit reports"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:256
+msgid "Automatic integrated linking"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:271
+msgid "Snapshot Pro"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:272
+msgid "Space-efficient backups that happen effortlessly while you sleep."
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:274
+msgid "Our PRO-only backup plugin"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:275
+msgid "Comes with up to 50GB storage"
+msgstr ""
+
+#: core/externals/plugins-cross-sell-page/core/plugins-list.php:276
+msgid "Store backups for 50 days"
 msgstr ""
 
 #: core/integration/class-gutenberg.php:96

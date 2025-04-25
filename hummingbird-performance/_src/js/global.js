@@ -117,7 +117,7 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 				return;
 			}
 
-			if ( ! wphb.mixpanel.enabled ) {
+			if ( typeof wphb === 'undefined' || ! wphb.mixpanel.enabled ) {
 				return;
 			}
 

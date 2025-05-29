@@ -1,6 +1,6 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.13.1
+Version: 3.14.1
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.13.1
+Stable tag: 3.14.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -208,6 +208,21 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 5. Custom performance optimizations using Advanced Tools.
 
 == Changelog ==
+
+= 3.14.1 ( 2025-05-29 ) =
+- Fix: Prevent duplicate injection of JS delay script
+
+= 3.14.0 ( 2025-05-19 ) =
+- New: Serve from page cache even when processes like Asset Optimization are in progress
+- Fix: Cloudflare cache not cleared when post is edited
+- Fix: Manual cache clearing required in certain contexts
+- Fix: Manual cache clearing required to publish Elementor changes
+- Fix: PHP warnings
+- Fix: Delay JS Exclusions and Critical CSS Exclusions do not reset when we reset Asset Optimization settings
+- Fix: Manual Inclusions (Advanced) not resetting when settings are reset
+- Fix: "Clear Cache" button still appears in wp-admin when disabled
+- Fix: After the Setup Wizard finishes, all WP post types are added to the Critical CSS Exclusions list
+- Fix: Hamburger menu stops working on mobile when JS Delay is enabled
 
 = 3.13.1 ( 2025-04-24 ) =
 - Improvement: WP 6.8 compatibility

@@ -327,7 +327,7 @@
 				window.removeEventListener("touchstart", hbStartTouchHandler, {passive: true});
 				window.removeEventListener("mousedown", hbStartTouchHandler);
 				hbInterceptedClicks.forEach((event) => {
-					if (event.target.outerHTML === hbTargetElement) {
+					if (event.target === hbTargetElement) {
 						event.target.dispatchEvent(new MouseEvent("click", {
 							view: event.view,
 							bubbles: true,
@@ -341,7 +341,7 @@
 
 				if (event.target.tagName !== "HTML") {
 					if (!hbTargetElement) {
-						hbTargetElement = event.target.outerHTML;
+						hbTargetElement = event.target;
 					}
 
 					window.addEventListener("touchend", hbEndTouchHandler);
@@ -387,6 +387,9 @@
 					passive: true,
 				}); // Indicates that the function specified by listener will never call preventDefault().
 			});
+
+			window.addEventListener( 'touchstart', hbStartTouchHandler, { passive: true } );
+			window.addEventListener( 'mousedown', hbStartTouchHandler );
 
 			// Fired when the contents of its tab have become visible or have been hidden.
 			document.addEventListener("visibilitychange", hbUserInteractionHandler);

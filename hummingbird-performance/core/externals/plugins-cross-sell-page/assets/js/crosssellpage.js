@@ -2756,7 +2756,7 @@ var SERVICES_ITEMS = [{
 }, {
   icon: malware_namespaceObject,
   title: (0,external_wp_i18n_namespaceObject.__)("Malware Removal", "plugin-cross-sell-textdomain"),
-  description: (0,external_wp_i18n_namespaceObject.__)("Our malware removal service doesn’t just clean up infections - it prevents them from recurring.", "plugin-cross-sell-textdomain"),
+  description: (0,external_wp_i18n_namespaceObject.__)("Need help with CSS or custom functionality? Our experts create scripts to solve WordPress issues and enhance your site.", "plugin-cross-sell-textdomain"),
   link: getUtmUrl("https://wpmudev.com/expert-services/", {
     utm_campaign: 'cross-sell_expert_security'
   })

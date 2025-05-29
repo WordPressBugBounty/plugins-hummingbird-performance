@@ -119,6 +119,7 @@ if ( $settings['remove_data'] ) {
 	$fs = Filesystem::instance();
 	if ( ! is_wp_error( $fs->status ) ) {
 		$fs->clean_up();
+		$fs->purge_manual_critical_css();
 	}
 
 	if ( ! class_exists( 'Hummingbird\\Core\\Logger' ) ) {

@@ -87,214 +87,210 @@ class Settings {
 	 * @return array  Default Hummingbird settings.
 	 */
 	public static function get_default_settings() {
-		if ( null === self::$default_settings ) {
-			self::$default_settings = array(
-				'minify'      => array(
-					'enabled'                               => false,
-					'use_cdn'                               => true,
-					'delay_js'                              => false,
-					'critical_css'                          => false,
-					'critical_css_type'                     => 'remove',
-					'critical_css_remove_type'              => 'user_interaction_with_remove',
-					'critical_css_mode'                     => '',
-					'critical_page_types'                   => array(),
-					'critical_skipped_custom_post_types'    => array(),
-					'above_fold_load_stylesheet_method'     => 'load_stylesheet_on_user_interaction',
-					'critical_css_files_exclusion'          => array(),
-					'critical_css_post_urls_exclusion'      => array(),
-					'critical_css_plugins_themes_exclusion' => array(),
-					'critical_css_keywords'                 => array(),
-					'font_optimization'                     => false,
-					'preload_fonts'                         => '',
-					'font_swap'                             => false,
-					'font_display_value'                    => 'swap',
-					'preload_fonts_mode'                    => 'automatic',
-					'log'                                   => false,
-					'file_path'                             => '',
-					// Only for multisites. Toggles minification in a subsite
-					// By default is true as if 'minify'-'enabled' is set to false, this option has no meaning.
-					'minify_blog'                           => false,
-					'view'                                  => 'basic', // Accepts: 'basic' or 'advanced'.
-					'type'                                  => 'speedy', // Accepts: 'speedy' or 'basic'.
-					'do_assets'                             => array( // Assets to optimize.
-						'styles'  => true,
-						'scripts' => true,
-						'fonts'   => true,
-					),
-					// Only for multisite.
-					'block'                                 => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'dont_minify'                           => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'dont_combine'                          => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'position'                              => array( // Move to footer.
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'defer'                                 => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'inline'                                => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'nocdn'                                 => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'delay_js_exclusions'                   => '',
-					'delay_js_exclusion_list'               => false,
-					'delay_js_timeout'                      => 20,
-					'fonts'                                 => array(),
-					'delay_js_files_exclusion'              => array(),
-					'delay_js_post_types_exclusion'         => array(),
-					'delay_js_post_urls_exclusion'          => array(),
-					'delay_js_plugins_themes_exclusion'     => array(),
-					'delay_js_ads_tracker_exclusion'        => array(),
-					'delay_js_exclude_inline_js'            => false,
-					'delay_js_keywords_advanced_view'       => false,
-					'preload'                               => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'async'                                  => array(
-						'scripts' => array(),
-						'styles'  => array(),
-					),
-					'ao_completed_time'                      => '',
+		$defaults = array(
+			'minify'      => array(
+				'enabled'                               => false,
+				'use_cdn'                               => true,
+				'delay_js'                              => false,
+				'critical_css'                          => false,
+				'critical_css_type'                     => 'remove',
+				'critical_css_remove_type'              => 'user_interaction_with_remove',
+				'critical_css_mode'                     => '',
+				'critical_page_types'                   => array(),
+				'critical_skipped_custom_post_types'    => array(),
+				'above_fold_load_stylesheet_method'     => 'load_stylesheet_on_user_interaction',
+				'critical_css_files_exclusion'          => array(),
+				'critical_css_post_urls_exclusion'      => array(),
+				'critical_css_plugins_themes_exclusion' => array(),
+				'critical_css_keywords'                 => array(),
+				'font_optimization'                     => false,
+				'preload_fonts'                         => '',
+				'font_swap'                             => false,
+				'font_display_value'                    => 'swap',
+				'preload_fonts_mode'                    => 'automatic',
+				'log'                                   => false,
+				'file_path'                             => '',
+				// Only for multisites. Toggles minification in a subsite
+				// By default is true as if 'minify'-'enabled' is set to false, this option has no meaning.
+				'minify_blog'                           => false,
+				'view'                                  => 'basic', // Accepts: 'basic' or 'advanced'.
+				'type'                                  => 'speedy', // Accepts: 'speedy' or 'basic'.
+				'do_assets'                             => array( // Assets to optimize.
+					'styles'  => true,
+					'scripts' => true,
+					'fonts'   => true,
 				),
-				'uptime'      => array(
-					'enabled'       => false,
-					'notifications' => array(
-						'enabled' => false,
-					),
-					'reports'       => array(
-						'enabled' => false,
-					),
+				// Only for multisite.
+				'block'                                 => array(
+					'scripts' => array(),
+					'styles'  => array(),
 				),
-				'gravatar'    => array(
+				'dont_minify'                           => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'dont_combine'                          => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'position'                              => array( // Move to footer.
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'defer'                                 => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'inline'                                => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'nocdn'                                 => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'delay_js_exclusions'                   => '',
+				'delay_js_exclusion_list'               => false,
+				'delay_js_timeout'                      => 20,
+				'fonts'                                 => array(),
+				'delay_js_files_exclusion'              => array(),
+				'delay_js_post_types_exclusion'         => array(),
+				'delay_js_post_urls_exclusion'          => array(),
+				'delay_js_plugins_themes_exclusion'     => array(),
+				'delay_js_ads_tracker_exclusion'        => array(),
+				'delay_js_exclude_inline_js'            => false,
+				'delay_js_keywords_advanced_view'       => false,
+				'preload'                               => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'async'                                  => array(
+					'scripts' => array(),
+					'styles'  => array(),
+				),
+				'ao_completed_time'                      => '',
+			),
+			'uptime'      => array(
+				'enabled'       => false,
+				'notifications' => array(
 					'enabled' => false,
 				),
-				'page_cache'  => array(
-					'enabled'      => false,
-					// Only for multisites. Toggles page caching in a subsite
-					// By default is true as if 'page_cache'-'enabled' is set to false, this option has no meaning.
-					'cache_blog'   => true,
-					'detection'    => 'auto', // Accepts: manual, auto and none.
-					'pages_cached' => 0,
-					'integrations' => array(
-						'varnish' => false,
-						'opcache' => false,
-					),
-					'preload'      => true,
-					'preload_type' => array(
-						'home_page' => true,
-						'on_clear'  => false,
-					),
+				'reports'       => array(
+					'enabled' => false,
 				),
-				'caching'     => array(
-					// Always enabled, so no 'enabled' option.
-					'expiry_css'        => '1y/A31536000',
-					'expiry_javascript' => '1y/A31536000',
-					'expiry_media'      => '1y/A31536000',
-					'expiry_images'     => '1y/A31536000',
+			),
+			'gravatar'    => array(
+				'enabled' => false,
+			),
+			'page_cache'  => array(
+				'enabled'      => false,
+				// Only for multisites. Toggles page caching in a subsite
+				// By default is true as if 'page_cache'-'enabled' is set to false, this option has no meaning.
+				'cache_blog'   => true,
+				'detection'    => 'auto', // Accepts: manual, auto and none.
+				'pages_cached' => 0,
+				'integrations' => array(
+					'varnish' => false,
+					'opcache' => false,
 				),
-				'cloudflare'  => array(
-					'enabled'      => false,
-					'connected'    => false,
-					'last_check'   => false,
-					'email'        => '',
-					'api_key'      => '',
-					'account_id'   => '',
-					'zone'         => '',
-					'zone_name'    => '',
-					'plan'         => false,
-					'page_rules'   => array(),
-					'cache_expiry' => 31536000,
-					'apo_paid'     => false,
-					'apo'          => array(),
+				'preload'      => true,
+				'preload_type' => array(
+					'home_page' => true,
+					'on_clear'  => false,
 				),
-				'performance' => array(
-					'reports'       => array(
-						'enabled' => false,
-					),
-					'subsite_tests' => true,
-					'dismissed'     => false,
+			),
+			'caching'     => array(
+				// Always enabled, so no 'enabled' option.
+				'expiry_css'        => '1y/A31536000',
+				'expiry_javascript' => '1y/A31536000',
+				'expiry_media'      => '1y/A31536000',
+				'expiry_images'     => '1y/A31536000',
+			),
+			'cloudflare'  => array(
+				'enabled'      => false,
+				'connected'    => false,
+				'last_check'   => false,
+				'email'        => '',
+				'api_key'      => '',
+				'account_id'   => '',
+				'zone'         => '',
+				'zone_name'    => '',
+				'plan'         => false,
+				'page_rules'   => array(),
+				'cache_expiry' => 31536000,
+				'apo_paid'     => false,
+				'apo'          => array(),
+			),
+			'performance' => array(
+				'reports'       => array(
+					'enabled' => false,
 				),
-				'advanced'    => array(
-					'query_string'         => false,
-					'query_strings_global' => false, // If true, will force query_string on all subsites.
-					'emoji'                => false,
-					'post_revisions'       => false,
-					'viewport_meta'        => true,
-					'emoji_global'         => false, // If true, will force emoji on all subsites.
-					'prefetch'             => array(),
-					'preconnect'           => array(),
-					'cart_fragments'       => false,
-					'lazy_load'            => array(
-						'enabled'   => false,
-						'method'    => 'click',
-						'button'    => array(
-							'dimensions' => array(
-								'height' => 0,
-								'width'  => 0,
-								'radius' => 0,
-							),
-							'color'      => array(
-								'background' => '',
-								'border'     => '',
-								'hover'      => '',
-							),
-							'alignment'  => array(
-								'align'      => 'center',
-								'full_width' => 'on',
-								'left'       => 0,
-								'right'      => 0,
-								'top'        => 0,
-								'bottom'     => 0,
-							),
+				'subsite_tests' => true,
+				'dismissed'     => false,
+			),
+			'advanced'    => array(
+				'query_string'         => false,
+				'query_strings_global' => false, // If true, will force query_string on all subsites.
+				'emoji'                => false,
+				'post_revisions'       => false,
+				'viewport_meta'        => true,
+				'emoji_global'         => false, // If true, will force emoji on all subsites.
+				'prefetch'             => array(),
+				'preconnect'           => array(),
+				'cart_fragments'       => false,
+				'lazy_load'            => array(
+					'enabled'   => false,
+					'method'    => 'click',
+					'button'    => array(
+						'dimensions' => array(
+							'height' => 0,
+							'width'  => 0,
+							'radius' => 0,
 						),
-						'threshold' => 10,
-						'preload'   => false,
+						'color'      => array(
+							'background' => '',
+							'border'     => '',
+							'hover'      => '',
+						),
+						'alignment'  => array(
+							'align'      => 'center',
+							'full_width' => 'on',
+							'left'       => 0,
+							'right'      => 0,
+							'top'        => 0,
+							'bottom'     => 0,
+						),
 					),
+					'threshold' => 10,
+					'preload'   => false,
 				),
-				'rss'         => array(
-					'enabled'  => true,
-					'duration' => 3600,
-				),
-				'settings'    => array(
-					'accessible_colors' => false,
-					'remove_settings'   => false,
-					'remove_data'       => false,
-					'tracking'          => false,
-					'control'           => false, // Cache control in admin bar.
-				),
-				'redis'       => array(
+			),
+			'rss'         => array(
+				'enabled'  => true,
+				'duration' => 3600,
+			),
+			'settings'    => array(
+				'accessible_colors' => false,
+				'remove_settings'   => false,
+				'remove_data'       => false,
+				'tracking'          => false,
+				'control'           => false, // Cache control in admin bar.
+			),
+			'redis'       => array(
+				'enabled' => false,
+			),
+			'database'    => array(
+				'reports' => array(
 					'enabled' => false,
 				),
-				'database'    => array(
-					'reports' => array(
-						'enabled' => false,
-					),
-				),
-			);
+			),
+		);
 
-			/**
-			 * Filter the default settings.
-			 * Useful when adding new settings to the plugin
-			 */
-			self::$default_settings = apply_filters( 'wp_hummingbird_default_options', self::$default_settings );
-		}
-
-		return self::$default_settings;
+		/**
+		 * Filter the default settings.
+		 * Useful when adding new settings to the plugin
+		 */
+		return apply_filters( 'wp_hummingbird_default_options', $defaults );
 	}
 
 	/**

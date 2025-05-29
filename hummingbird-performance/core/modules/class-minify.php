@@ -1191,7 +1191,7 @@ class Minify extends Module {
 		$minify_default = $default[ $this->get_slug() ];
 
 		// Settings that need to be reset.
-		$ao_settings = array( 'do_assets', 'view', 'type', 'use_cdn', 'nocdn', 'delay_js', 'delay_js_timeout', 'delay_js_exclusions', 'critical_css', 'critical_css_type', 'font_optimization', 'font_swap' );
+		$ao_settings = array( 'do_assets', 'view', 'type', 'use_cdn', 'nocdn', 'delay_js', 'delay_js_timeout', 'delay_js_exclusions', 'delay_js_files_exclusion', 'delay_js_post_types_exclusion', 'delay_js_post_urls_exclusion', 'delay_js_plugins_themes_exclusion', 'delay_js_ads_tracker_exclusion', 'delay_js_exclude_inline_js', 'delay_js_keywords_advanced_view', 'critical_css', 'critical_css_type', 'critical_css_remove_type', 'critical_css_mode', 'critical_page_types', 'critical_skipped_custom_post_types', 'above_fold_load_stylesheet_method', 'critical_css_files_exclusion', 'critical_css_post_urls_exclusion', 'critical_css_plugins_themes_exclusion', 'critical_css_keywords', 'font_optimization', 'font_swap', 'font_display_value', 'preload_fonts_mode' );
 
 		// These settings are only valid for single sites or network admin.
 		if ( ! is_multisite() || is_network_admin() ) {
@@ -1206,6 +1206,7 @@ class Minify extends Module {
 
 		// Reset Critical css.
 		self::save_css( '' );
+		self::save_css( '', 'manual-critical' );
 
 		$this->update_options( $minify_settings );
 	}
@@ -1284,7 +1285,7 @@ class Minify extends Module {
 		}
 
 		// Filter already minified resources.
-		if ( preg_match( '/\.min\.(css|js)/', basename( $url ) ) ) {
+		if ( ! empty( $url ) && preg_match( '/\.min\.(css|js)/', basename( $url ) ) ) {
 			return false;
 		}
 

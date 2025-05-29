@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-25T12:23:25+00:00\n"
+"POT-Creation-Date: 2025-04-22T13:36:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: plugin-cross-sell-textdomain\n"
@@ -299,7 +299,7 @@ msgstr ""
 #: assets/js/crosssellpage.js:2759
 #: assets/js/crosssellpage.min.js:1
 #: assets/js/crosssellpage.js:1863
-msgid "Our malware removal service doesn’t just clean up infections - it prevents them from recurring."
+msgid "Need help with CSS or custom functionality? Our experts create scripts to solve WordPress issues and enhance your site."
 msgstr ""
 
 #: assets/js/crosssellpage.js:2766

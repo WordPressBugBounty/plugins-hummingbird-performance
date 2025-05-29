@@ -3,7 +3,7 @@
         'name' => 'wpmudev/plugin-cross-sell',
         'pretty_version' => 'dev-development',
         'version' => 'dev-development',
-        'reference' => 'f6cbdfc414957619e964853bdf34fa89953583e1',
+        'reference' => 'c28c8f4054046899664bdbb41e4b84942c009f05',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'wpmudev/plugin-cross-sell' => array(
             'pretty_version' => 'dev-development',
             'version' => 'dev-development',
-            'reference' => 'f6cbdfc414957619e964853bdf34fa89953583e1',
+            'reference' => 'c28c8f4054046899664bdbb41e4b84942c009f05',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

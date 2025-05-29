@@ -180,11 +180,18 @@ class Delayjs extends Module {
 			return;
 		}
 
+		// Prevent duplicate injection.
+		static $script_already_printed = false;
+		if ( $script_already_printed ) {
+			return;
+		}
+
 		$options          = Utils::get_module( 'minify' )->get_options();
 		$delay_js_file    = WPHB_DIR_PATH . 'admin/assets/js/wphb-add-delay.min.js';
 		$delay_js_content = file_get_contents( $delay_js_file );
 
 		if ( ! empty( $delay_js_content ) ) {
+			$script_already_printed = true;
 			$delay_js_timeout       = $options['delay_js_timeout'];
 			$delay_js_content_timer = '';
 
@@ -320,7 +327,7 @@ class Delayjs extends Module {
 			}
 
 			$combined_pattern = '#(' . implode( '|', array_map( 'preg_quote', $patterns ) ) . ')#i';
-			if ( preg_match( $combined_pattern, $url ) ) {
+			if ( ! empty( $url ) && preg_match( $combined_pattern, $url ) ) {
 				$this->excluded_script_ids[] = $handle;
 			}
 		}

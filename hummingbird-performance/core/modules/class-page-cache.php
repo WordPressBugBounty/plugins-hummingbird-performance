@@ -90,8 +90,6 @@ class Page_Cache extends Module {
 		// Init modules and perform pre-run checks.
 		$this->init_filesystem();
 		$this->check_plugin_compatibility();
-		$this->check_minification_queue();
-		$this->check_critical_css_queue();
 		$this->check_fast_cgi_cache();
 
 		add_action( 'admin_init', array( $this, 'maybe_update_advanced_cache' ) );
@@ -254,26 +252,6 @@ class Page_Cache extends Module {
 					'<br><button id="wphb-remove-advanced-cache" style="margin-top: 10px" class="sui-button sui-button-blue" role="button">',
 					'</button>'
 				)
-			);
-		}
-	}
-
-	/**
-	 * Check for active minification queue.
-	 *
-	 * @since   1.7.0
-	 * @access  private
-	 * @used-by Page_Cache::init()
-	 */
-	private function check_minification_queue() {
-		if ( is_wp_error( $this->error ) || ! $this->is_active() ) {
-			return;
-		}
-
-		if ( get_transient( 'wphb-processing' ) ) {
-			$this->error = new WP_Error(
-				'min-queue-present',
-				__( 'Hummingbird has halted page caching to prevent any issues while asset optimization is in progress. Page caching will resume automatically when asset optimization is complete.', 'wphb' )
 			);
 		}
 	}
@@ -666,6 +644,8 @@ class Page_Cache extends Module {
 		/**
 		 * Generate cache hash.
 		 */
+		// Convert dots to dashes for consistent cache file naming across URL variants.
+		$request_uri = str_replace( '.', '-', $request_uri );
 		// Remove index.php from query.
 		$hash = str_replace( '/index.php', '/', $request_uri );
 		// Remove any query hash from request URI.
@@ -1278,12 +1258,6 @@ class Page_Cache extends Module {
 	 */
 	public function cache_request( $buffer ) {
 		global $wphb_cache_file, $wphb_cache_config, $wphb_meta_file;
-		// We need this to be able to counter generating pages right after clearing AO settings, queue initiated on page load.
-		if ( get_transient( 'wphb-processing' ) ) {
-			// Exit early.
-			self::log_msg( 'Page not cached. Asset optimization processing in progress. Sending buffer to user.' );
-			return $buffer;
-		}
 
 		if ( Fast_CGI::is_fast_cgi_enabled() ) {
 			self::log_msg( 'Page not cached. Static server cache is enabled.' );
@@ -2255,26 +2229,6 @@ class Page_Cache extends Module {
 		$buffer = (string) apply_filters( 'wphb_buffer', $buffer );
 
 		return $buffer;
-	}
-
-	/**
-	 * Check for critical css queue.
-	 *
-	 * @since   3.6.0
-	 * @access  private
-	 * @used-by Page_Cache::init()
-	 */
-	private function check_critical_css_queue() {
-		if ( is_wp_error( $this->error ) || ! $this->is_active() ) {
-			return;
-		}
-
-		if ( get_transient( 'wphb-cs-processing' ) ) {
-			$this->error = new WP_Error(
-				'critical-css-queue-present',
-				__( 'Hummingbird cache will not work for some pages while Critical CSS is being generated. Page caching will resume automatically when Critical CSS is generated.', 'wphb' )
-			);
-		}
 	}
 
 	/**

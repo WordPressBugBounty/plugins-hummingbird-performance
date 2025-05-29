@@ -623,7 +623,6 @@ class Advanced extends Module {
 			'E_USER_ERROR',
 			'E_USER_WARNING',
 			'E_USER_NOTICE',
-			'E_STRICT',
 			'E_RECOVERABLE_ERROR',
 			'E_DEPRECATED',
 			'E_USER_DEPRECATED',
@@ -795,9 +794,9 @@ class Advanced extends Module {
 		$dump_server[ __( 'Server Hostname', 'wphb' ) ]   = isset( $_SERVER['SERVER_NAME'] ) ? wp_unslash( $_SERVER['SERVER_NAME'] ) : __( 'undefined', 'wphb' );
 		$dump_server[ __( 'Server Admin', 'wphb' ) ]      = isset( $_SERVER['SERVER_ADMIN'] ) ? wp_unslash( $_SERVER['SERVER_ADMIN'] ) : __( 'undefined', 'wphb' );
 		$dump_server[ __( 'Server local time', 'wphb' ) ] = date( 'Y-m-d H:i:s (\U\T\C P)' );
-		$dump_server[ __( 'Operating System', 'wphb' ) ]  = @php_uname( 's' );
-		$dump_server[ __( 'OS Hostname', 'wphb' ) ]       = @php_uname( 'n' );
-		$dump_server[ __( 'OS Version', 'wphb' ) ]        = @php_uname( 'v' );
+		$dump_server[ __( 'Operating System', 'wphb' ) ]  = function_exists( 'php_uname' ) ? php_uname( 's' ) : '';
+		$dump_server[ __( 'OS Hostname', 'wphb' ) ]       = function_exists( 'php_uname' ) ? php_uname( 'n' ) : '';
+		$dump_server[ __( 'OS Version', 'wphb' ) ]        = function_exists( 'php_uname' ) ? php_uname( 'v' ) : '';
 
 		return $dump_server;
 	}

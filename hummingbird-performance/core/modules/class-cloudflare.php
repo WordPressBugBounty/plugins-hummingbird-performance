@@ -55,19 +55,20 @@ class Cloudflare extends Module {
 		if ( $this->is_connected() && $this->is_zone_selected() ) {
 			add_action( 'init', array( $this, 'init_apo' ) );
 
+			add_action( 'wphb_cloudflare_apo_clear_cache', array( $this, 'clear_post_cache' ) );
+			add_action( 'wphb_cache_directory_cleared', array( $this, 'clear_cache' ) );
+
+			if ( ! Settings::get_setting( 'enabled', 'page_cache' ) ) {
+				add_action( 'deleted_post', array( $this, 'clear_post_cache' ) );
+				add_action( 'delete_attachment', array( $this, 'clear_post_cache' ) );
+				add_action( 'transition_post_status', array( $this, 'post_status_change' ), 10, 3 );
+				add_action( 'transition_comment_status', array( $this, 'comment_status_change' ), 10, 3 );
+				add_action( 'comment_post', array( $this, 'clear_on_comment_post' ), 10, 3 );
+			}
+
 			if ( $this->is_apo_enabled() ) {
-				add_action( 'wphb_cache_directory_cleared', array( $this, 'clear_cache' ) );
-				add_action( 'wphb_cloudflare_apo_clear_cache', array( $this, 'clear_post_cache' ) );
 				add_action( 'switch_theme', array( $this, 'clear_cache' ) );
 				add_action( 'customize_save_after', array( $this, 'clear_cache' ) );
-
-				if ( ! Settings::get_setting( 'enabled', 'page_cache' ) ) {
-					add_action( 'deleted_post', array( $this, 'clear_post_cache' ) );
-					add_action( 'delete_attachment', array( $this, 'clear_post_cache' ) );
-					add_action( 'transition_post_status', array( $this, 'post_status_change' ), 10, 3 );
-					add_action( 'transition_comment_status', array( $this, 'comment_status_change' ), 10, 3 );
-					add_action( 'comment_post', array( $this, 'clear_on_comment_post' ), 10, 3 );
-				}
 			}
 		}
 	}

@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 3.13.1\n"
+"Project-Id-Version: Hummingbird 3.14.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2025-04-25 13:11:34+00:00\n"
+"POT-Creation-Date: 2025-05-29 12:55:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -45,63 +45,63 @@ msgstr ""
 
 #: admin/ajax/class-minify.php:549 admin/class-ajax.php:1579
 #: admin/class-ajax.php:2302 admin/class-ajax.php:2745 core/class-utils.php:197
-#: core/modules/class-minify.php:1712
+#: core/modules/class-minify.php:1713
 msgid "Settings updated"
 msgstr ""
 
-#: admin/class-admin.php:128 admin/views/wphb-upgrade-page.php:21
+#: admin/class-admin.php:129 admin/views/wphb-upgrade-page.php:21
 msgid "Upgrade to Hummingbird Pro"
 msgstr ""
 
-#: admin/class-admin.php:128
+#: admin/class-admin.php:129
 #. translators: %s: Discount percent
 msgid "Upgrade For %s Off!"
 msgstr ""
 
-#: admin/class-admin.php:130
+#: admin/class-admin.php:131
 msgid "Renew Membership"
 msgstr ""
 
-#: admin/class-admin.php:135
+#: admin/class-admin.php:136
 msgid "View Hummingbird Documentation"
 msgstr ""
 
-#: admin/class-admin.php:135 admin/class-page.php:498 admin/class-page.php:512
+#: admin/class-admin.php:136 admin/class-page.php:498 admin/class-page.php:512
 msgid "Docs"
 msgstr ""
 
-#: admin/class-admin.php:144
+#: admin/class-admin.php:145
 msgid "Go to Hummingbird settings"
 msgstr ""
 
-#: admin/class-admin.php:144 admin/class-admin.php:206
-#: admin/class-admin.php:307
+#: admin/class-admin.php:145 admin/class-admin.php:207
+#: admin/class-admin.php:308
 msgid "Dashboard"
 msgstr ""
 
-#: admin/class-admin.php:166 admin/class-notices.php:536
+#: admin/class-admin.php:167 admin/class-notices.php:536
 msgid "Rate Hummingbird"
 msgstr ""
 
-#: admin/class-admin.php:167 admin/class-page.php:497 admin/class-page.php:511
+#: admin/class-admin.php:168 admin/class-page.php:497 admin/class-page.php:511
 msgid "Support"
 msgstr ""
 
-#: admin/class-admin.php:173
+#: admin/class-admin.php:174
 #. translators: %s - Link to Hummingbird project detail page, %s - Text for
 #. anchor tag
 msgid "View details"
 msgstr ""
 
-#: admin/class-admin.php:177
+#: admin/class-admin.php:178
 msgid "Premium Support"
 msgstr ""
 
-#: admin/class-admin.php:180 admin/class-page.php:496 admin/class-page.php:510
+#: admin/class-admin.php:181 admin/class-page.php:496 admin/class-page.php:510
 msgid "Roadmap"
 msgstr ""
 
-#: admin/class-admin.php:182
+#: admin/class-admin.php:183
 msgid "Rate our plugin"
 msgstr ""
 
@@ -109,30 +109,30 @@ msgstr ""
 msgid "Hummingbird"
 msgstr ""
 
-#: admin/class-admin.php:199 admin/class-admin.php:251
-#: admin/class-admin.php:304 admin/class-admin.php:322
+#: admin/class-admin.php:200 admin/class-admin.php:252
+#: admin/class-admin.php:305 admin/class-admin.php:323
 #: admin/pages/class-dashboard.php:344
 #: admin/views/dashboard/welcome/upsell-meta-box-header.php:15
 #: core/externals/plugins-cross-sell-page/core/plugins-list.php:231
 msgid "Hummingbird Pro"
 msgstr ""
 
-#: admin/class-admin.php:209 admin/class-admin.php:308
+#: admin/class-admin.php:210 admin/class-admin.php:309
 #: admin/pages/class-dashboard.php:1112
 #: admin/views/dashboard/reports/meta-box.php:23
 #: admin/views/notifications/configure-meta-box.php:37 languages/react.php:376
 msgid "Performance Test"
 msgstr ""
 
-#: admin/class-admin.php:217 admin/class-admin.php:309
+#: admin/class-admin.php:218 admin/class-admin.php:310
 msgid "Caching"
 msgstr ""
 
-#: admin/class-admin.php:220 admin/class-admin.php:310
+#: admin/class-admin.php:221 admin/class-admin.php:311
 msgid "Gzip Compression"
 msgstr ""
 
-#: admin/class-admin.php:226 admin/class-admin.php:311
+#: admin/class-admin.php:227 admin/class-admin.php:312
 #: admin/pages/class-dashboard.php:433 admin/pages/class-dashboard.php:449
 #: admin/pages/class-dashboard.php:458
 #: admin/views/dashboard/welcome/subsite-meta-box.php:120
@@ -140,12 +140,12 @@ msgstr ""
 msgid "Asset Optimization"
 msgstr ""
 
-#: admin/class-admin.php:234 admin/class-admin.php:312
+#: admin/class-admin.php:235 admin/class-admin.php:313
 #: admin/pages/class-dashboard.php:472 languages/react.php:367
 msgid "Advanced Tools"
 msgstr ""
 
-#: admin/class-admin.php:237 admin/class-admin.php:313
+#: admin/class-admin.php:238 admin/class-admin.php:314
 #: admin/views/dashboard/reports/meta-box.php:41
 #: admin/views/notifications/configure-meta-box.php:46
 #: admin/views/notifications/configure-meta-box.php:55
@@ -155,13 +155,13 @@ msgstr ""
 msgid "Uptime"
 msgstr ""
 
-#: admin/class-admin.php:240 admin/class-admin.php:314
+#: admin/class-admin.php:241 admin/class-admin.php:315
 #: admin/pages/class-dashboard.php:553
 #: admin/views/notifications/configure-meta-box.php:25
 msgid "Notifications"
 msgstr ""
 
-#: admin/class-admin.php:243 admin/class-admin.php:315
+#: admin/class-admin.php:244 admin/class-admin.php:316
 #: admin/pages/class-caching.php:186 admin/pages/class-caching.php:329
 #: admin/pages/class-minification.php:168
 #: admin/pages/class-minification.php:379
@@ -174,20 +174,19 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-admin.php:247 admin/class-admin.php:318 languages/react.php:474
+#: admin/class-admin.php:248 admin/class-admin.php:319 languages/react.php:474
 msgid "Tutorials"
 msgstr ""
 
-#: admin/class-admin.php:255 admin/class-admin.php:326
+#: admin/class-admin.php:256 admin/class-admin.php:327
 msgid "Expert Services"
 msgstr ""
 
-#: admin/class-admin.php:258 admin/class-admin.php:329
+#: admin/class-admin.php:259 admin/class-admin.php:330
 msgid "Setup Wizard"
 msgstr ""
 
-#: admin/class-admin.php:276 admin/pages/class-minification.php:553
-#: admin/views/advanced/general-meta-box.php:46
+#: admin/class-admin.php:277 admin/pages/class-minification.php:553
 msgid "NEW"
 msgstr ""
 
@@ -1805,7 +1804,7 @@ msgstr ""
 
 #: admin/pages/class-caching.php:826
 #: admin/views/caching/gravatar/meta-box-header.php:21
-#: core/modules/class-page-cache.php:1997 languages/react.php:293
+#: core/modules/class-page-cache.php:1971 languages/react.php:293
 msgid "Clear cache"
 msgstr ""
 
@@ -2138,7 +2137,7 @@ msgid "Last 30 days"
 msgstr ""
 
 #: admin/pages/class-uptime.php:423 core/modules/class-caching.php:297
-#: core/modules/class-cloudflare.php:683
+#: core/modules/class-cloudflare.php:684
 msgid "1 day"
 msgstr ""
 
@@ -2170,7 +2169,7 @@ msgstr ""
 
 #: admin/views/advanced/db-meta-box.php:44
 #: admin/views/caching/page/meta-box.php:318
-#: admin/views/minification/settings-meta-box.php:207 core/class-core.php:205
+#: admin/views/minification/settings-meta-box.php:207 core/class-core.php:206
 msgid "Clear"
 msgstr ""
 
@@ -2883,17 +2882,17 @@ msgid "1 hour"
 msgstr ""
 
 #: admin/views/caching/page/fast-cgi-meta-box.php:165
-#: core/modules/class-caching.php:291 core/modules/class-cloudflare.php:677
+#: core/modules/class-caching.php:291 core/modules/class-cloudflare.php:678
 msgid "4 hours"
 msgstr ""
 
 #: admin/views/caching/page/fast-cgi-meta-box.php:166
-#: core/modules/class-cloudflare.php:679
+#: core/modules/class-cloudflare.php:680
 msgid "8 hours"
 msgstr ""
 
 #: admin/views/caching/page/fast-cgi-meta-box.php:167
-#: core/modules/class-caching.php:294 core/modules/class-cloudflare.php:680
+#: core/modules/class-caching.php:294 core/modules/class-cloudflare.php:681
 msgid "12 hours"
 msgstr ""
 
@@ -7180,8 +7179,8 @@ msgid ""
 msgstr ""
 
 #: admin/views/uptime/downtime-meta-box.php:30
-#: admin/views/uptime/meta-box.php:79 core/modules/class-advanced.php:683
-#: core/modules/class-advanced.php:692 core/modules/class-advanced.php:693
+#: admin/views/uptime/meta-box.php:79 core/modules/class-advanced.php:682
+#: core/modules/class-advanced.php:691 core/modules/class-advanced.php:692
 msgid "Unknown"
 msgstr ""
 
@@ -7697,32 +7696,32 @@ msgstr ""
 msgid "Cache control in admin bar"
 msgstr ""
 
-#: core/class-core.php:189
+#: core/class-core.php:190
 msgid "Clear all cache"
 msgstr ""
 
-#: core/class-core.php:198
+#: core/class-core.php:199
 msgid "Clear Cloudflare cache"
 msgstr ""
 
-#: core/class-core.php:215
+#: core/class-core.php:217
 msgid "Clear page cache on all subsites"
 msgstr ""
 
-#: core/class-core.php:223
+#: core/class-core.php:226
 msgid "See this page minified"
 msgstr ""
 
-#: core/class-core.php:223
+#: core/class-core.php:226
 msgid "See this page unminified"
 msgstr ""
 
-#: core/class-core.php:326
+#: core/class-core.php:329
 #. translators: %1$s - Text, %2$s - Link to privacy policy page
 msgid "Third parties"
 msgstr ""
 
-#: core/class-core.php:329
+#: core/class-core.php:332
 #. translators: %1$s - opening a tag, %2$s - closing a tag
 msgid ""
 "Hummingbird uses the Stackpath Content Delivery Network (CDN). Stackpath "
@@ -7732,29 +7731,29 @@ msgid ""
 "your own. Stackpath’s privacy policy can be found %1$shere%2$s."
 msgstr ""
 
-#: core/class-core.php:404
+#: core/class-core.php:407
 #: core/externals/free-dashboard/classes/notices/class-email.php:95
 #: core/externals/free-dashboard/classes/notices/class-email.php:213
 msgid "Get Fast!"
 msgstr ""
 
-#: core/class-core.php:459
+#: core/class-core.php:462
 msgid "Go Back"
 msgstr ""
 
-#: core/class-core.php:463
+#: core/class-core.php:466
 msgid "Copy Test Link"
 msgstr ""
 
-#: core/class-core.php:464
+#: core/class-core.php:467
 msgid "Link Copied"
 msgstr ""
 
-#: core/class-core.php:466 languages/react.php:777
+#: core/class-core.php:469 languages/react.php:777
 msgid "Publish"
 msgstr ""
 
-#: core/class-core.php:469
+#: core/class-core.php:472
 msgid ""
 "You are currently viewing the frontend of your website in Safe Mode "
 "preview. Check for any errors in your browser's console or broken UI. You "
@@ -7779,32 +7778,32 @@ msgid ""
 "functions successfully."
 msgstr ""
 
-#: core/class-filesystem.php:534 core/class-filesystem.php:561
+#: core/class-filesystem.php:547 core/class-filesystem.php:574
 #. translators: %s: directory
 msgid "Error creating directory %s."
 msgstr ""
 
-#: core/class-filesystem.php:547 core/class-filesystem.php:575
+#: core/class-filesystem.php:560 core/class-filesystem.php:588
 #. translators: %s: file
 msgid "Error uploading file %s."
 msgstr ""
 
-#: core/class-filesystem.php:604
+#: core/class-filesystem.php:617
 msgid "Empty filename"
 msgstr ""
 
-#: core/class-filesystem.php:611
+#: core/class-filesystem.php:624
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr ""
 
-#: core/class-filesystem.php:679
+#: core/class-filesystem.php:692
 #. translators: %s: directory path
 msgid ""
 "Unable to create directory %s. Is its parent directory writable by the "
 "server?"
 msgstr ""
 
-#: core/class-filesystem.php:689
+#: core/class-filesystem.php:702
 #. translators: %s: file name with path
 msgid "Could not write file %s"
 msgstr ""
@@ -8406,8 +8405,8 @@ msgid "Clear %s post cache"
 msgstr ""
 
 #: core/integration/class-gutenberg.php:138
-#: core/modules/class-page-cache.php:1911
-#: core/modules/class-page-cache.php:2013
+#: core/modules/class-page-cache.php:1885
+#: core/modules/class-page-cache.php:1987
 #. translators: %s - Cache expiration time, %s - Cache old time
 msgid "Cache for post has been cleared."
 msgstr ""
@@ -8510,78 +8509,78 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: core/modules/class-advanced.php:641
+#: core/modules/class-advanced.php:640
 msgid "Error Reporting"
 msgstr ""
 
-#: core/modules/class-advanced.php:644
+#: core/modules/class-advanced.php:643
 msgid "Extensions"
 msgstr ""
 
-#: core/modules/class-advanced.php:792
+#: core/modules/class-advanced.php:791
 msgid "Software Name"
 msgstr ""
 
-#: core/modules/class-advanced.php:793
+#: core/modules/class-advanced.php:792
 msgid "Software Version"
 msgstr ""
 
-#: core/modules/class-advanced.php:794
+#: core/modules/class-advanced.php:793
 msgid "Server IP"
 msgstr ""
 
-#: core/modules/class-advanced.php:794 core/modules/class-advanced.php:795
-#: core/modules/class-advanced.php:796 core/modules/class-advanced.php:816
+#: core/modules/class-advanced.php:793 core/modules/class-advanced.php:794
+#: core/modules/class-advanced.php:795 core/modules/class-advanced.php:815
 msgid "undefined"
 msgstr ""
 
-#: core/modules/class-advanced.php:795
+#: core/modules/class-advanced.php:794
 msgid "Server Hostname"
 msgstr ""
 
-#: core/modules/class-advanced.php:796
+#: core/modules/class-advanced.php:795
 msgid "Server Admin"
 msgstr ""
 
-#: core/modules/class-advanced.php:797
+#: core/modules/class-advanced.php:796
 msgid "Server local time"
 msgstr ""
 
-#: core/modules/class-advanced.php:798
+#: core/modules/class-advanced.php:797
 msgid "Operating System"
 msgstr ""
 
-#: core/modules/class-advanced.php:799
+#: core/modules/class-advanced.php:798
 msgid "OS Hostname"
 msgstr ""
 
-#: core/modules/class-advanced.php:800
+#: core/modules/class-advanced.php:799
 msgid "OS Version"
 msgstr ""
 
-#: core/modules/class-advanced.php:823
+#: core/modules/class-advanced.php:822
 msgid "FALSE"
 msgstr ""
 
-#: core/modules/class-advanced.php:825
+#: core/modules/class-advanced.php:824
 msgid "TRUE"
 msgstr ""
 
-#: core/modules/class-advanced.php:1124
+#: core/modules/class-advanced.php:1123
 msgid "We could not validate the request, try reloading the page."
 msgstr ""
 
-#: core/modules/class-advanced.php:1130
+#: core/modules/class-advanced.php:1129
 msgid ""
 "Something went wrong. Try reloading the page to see if the comments load "
 "for you."
 msgstr ""
 
-#: core/modules/class-caching.php:290 core/modules/class-cloudflare.php:676
+#: core/modules/class-caching.php:290 core/modules/class-cloudflare.php:677
 msgid "3 hours"
 msgstr ""
 
-#: core/modules/class-caching.php:292 core/modules/class-cloudflare.php:678
+#: core/modules/class-caching.php:292 core/modules/class-cloudflare.php:679
 msgid "5 hours"
 msgstr ""
 
@@ -8589,47 +8588,47 @@ msgstr ""
 msgid "6 hours"
 msgstr ""
 
-#: core/modules/class-caching.php:295 core/modules/class-cloudflare.php:681
+#: core/modules/class-caching.php:295 core/modules/class-cloudflare.php:682
 msgid "16 hours"
 msgstr ""
 
-#: core/modules/class-caching.php:296 core/modules/class-cloudflare.php:682
+#: core/modules/class-caching.php:296 core/modules/class-cloudflare.php:683
 msgid "20 hours"
 msgstr ""
 
-#: core/modules/class-caching.php:298 core/modules/class-cloudflare.php:684
+#: core/modules/class-caching.php:298 core/modules/class-cloudflare.php:685
 msgid "2 days"
 msgstr ""
 
-#: core/modules/class-caching.php:299 core/modules/class-cloudflare.php:685
+#: core/modules/class-caching.php:299 core/modules/class-cloudflare.php:686
 msgid "3 days"
 msgstr ""
 
-#: core/modules/class-caching.php:300 core/modules/class-cloudflare.php:686
+#: core/modules/class-caching.php:300 core/modules/class-cloudflare.php:687
 msgid "4 days"
 msgstr ""
 
-#: core/modules/class-caching.php:301 core/modules/class-cloudflare.php:687
+#: core/modules/class-caching.php:301 core/modules/class-cloudflare.php:688
 msgid "5 days"
 msgstr ""
 
-#: core/modules/class-caching.php:302 core/modules/class-cloudflare.php:688
+#: core/modules/class-caching.php:302 core/modules/class-cloudflare.php:689
 msgid "8 days"
 msgstr ""
 
-#: core/modules/class-caching.php:303 core/modules/class-cloudflare.php:689
+#: core/modules/class-caching.php:303 core/modules/class-cloudflare.php:690
 msgid "16 days"
 msgstr ""
 
-#: core/modules/class-caching.php:304 core/modules/class-cloudflare.php:690
+#: core/modules/class-caching.php:304 core/modules/class-cloudflare.php:691
 msgid "24 days"
 msgstr ""
 
-#: core/modules/class-caching.php:305 core/modules/class-cloudflare.php:691
+#: core/modules/class-caching.php:305 core/modules/class-cloudflare.php:692
 msgid "1 month"
 msgstr ""
 
-#: core/modules/class-caching.php:306 core/modules/class-cloudflare.php:692
+#: core/modules/class-caching.php:306 core/modules/class-cloudflare.php:693
 msgid "2 months"
 msgstr ""
 
@@ -8637,22 +8636,22 @@ msgstr ""
 msgid "3 months"
 msgstr ""
 
-#: core/modules/class-caching.php:308 core/modules/class-cloudflare.php:693
+#: core/modules/class-caching.php:308 core/modules/class-cloudflare.php:694
 msgid "6 months"
 msgstr ""
 
 #: core/modules/class-caching.php:309 core/modules/class-caching.php:321
 #: core/modules/class-caching.php:325 core/modules/class-caching.php:329
-#: core/modules/class-caching.php:333 core/modules/class-cloudflare.php:694
+#: core/modules/class-caching.php:333 core/modules/class-cloudflare.php:695
 msgid "1 year"
 msgstr ""
 
-#: core/modules/class-cloudflare.php:576
+#: core/modules/class-cloudflare.php:577
 #. translators: %s - Zone Error message, %s - Zone Error code
 msgid "Invalid Cloudflare expiration value"
 msgstr ""
 
-#: core/modules/class-cloudflare.php:675
+#: core/modules/class-cloudflare.php:676
 msgid "2 hours"
 msgstr ""
 
@@ -8851,15 +8850,15 @@ msgstr ""
 msgid "Error fetching Gravatar. Gravatar not found."
 msgstr ""
 
-#: core/modules/class-minify.php:1680
+#: core/modules/class-minify.php:1681
 msgid "Unsupported content"
 msgstr ""
 
-#: core/modules/class-minify.php:1689
+#: core/modules/class-minify.php:1690
 msgid "Error saving file"
 msgstr ""
 
-#: core/modules/class-minify.php:2242
+#: core/modules/class-minify.php:2243
 msgid ""
 "We've noticed that you have Safe Mode active in Hummingbird Asset "
 "Optimization. Keeping safe mode active for a long period of time may cause "
@@ -8867,18 +8866,18 @@ msgid ""
 "changes and publish them to live, or disable safe mode."
 msgstr ""
 
-#: core/modules/class-minify.php:2251
+#: core/modules/class-minify.php:2252
 msgid "Disable safe mode"
 msgstr ""
 
-#: core/modules/class-page-cache.php:239
+#: core/modules/class-page-cache.php:237
 #. translators: %s: plugin name.
 msgid ""
 "%s plugin detected. Please disable it to use Hummingbird page caching "
 "functionality."
 msgstr ""
 
-#: core/modules/class-page-cache.php:251
+#: core/modules/class-page-cache.php:249
 #. translators: %1$s - opening a tag, %2$s - closing a tag, %3$s - button tag,
 #. %4$s - closing button tag
 msgid ""
@@ -8891,18 +8890,11 @@ msgid ""
 "FTP.%3$sRemove file%4$s"
 msgstr ""
 
-#: core/modules/class-page-cache.php:276
-msgid ""
-"Hummingbird has halted page caching to prevent any issues while asset "
-"optimization is in progress. Page caching will resume automatically when "
-"asset optimization is complete."
-msgstr ""
-
-#: core/modules/class-page-cache.php:296
+#: core/modules/class-page-cache.php:274
 msgid "Hummingbird has halted page caching to prevent any issues with FastCGI cache"
 msgstr ""
 
-#: core/modules/class-page-cache.php:575
+#: core/modules/class-page-cache.php:553
 #. translators: %1$s - code tag, %2$s - closing code tag, %3$s - button tag,
 #. %4$s - closing button tag
 msgid ""
@@ -8911,7 +8903,7 @@ msgid ""
 "true);%2$sClick Retry to try again.%3$sRetry%4$s"
 msgstr ""
 
-#: core/modules/class-page-cache.php:591
+#: core/modules/class-page-cache.php:569
 #. translators: %1$s - code tag, %2$s - closing code tag, button tag, %3$s -
 #. closing button tag
 msgid ""
@@ -8920,39 +8912,32 @@ msgid ""
 "file:%1$sdefine('WP_CACHE', true);%2$sRetry%3$s"
 msgstr ""
 
-#: core/modules/class-page-cache.php:621
+#: core/modules/class-page-cache.php:599
 msgid "Frontpage"
 msgstr ""
 
-#: core/modules/class-page-cache.php:622
+#: core/modules/class-page-cache.php:600
 msgid "Blog"
 msgstr ""
 
-#: core/modules/class-page-cache.php:623
+#: core/modules/class-page-cache.php:601
 msgid "Pages"
 msgstr ""
 
-#: core/modules/class-page-cache.php:624
+#: core/modules/class-page-cache.php:602
 msgid "Posts"
 msgstr ""
 
-#: core/modules/class-page-cache.php:625
+#: core/modules/class-page-cache.php:603
 msgid "Archives"
 msgstr ""
 
-#: core/modules/class-page-cache.php:626
+#: core/modules/class-page-cache.php:604
 msgid "Categories"
 msgstr ""
 
-#: core/modules/class-page-cache.php:627
+#: core/modules/class-page-cache.php:605
 msgid "Tags"
-msgstr ""
-
-#: core/modules/class-page-cache.php:2275
-msgid ""
-"Hummingbird cache will not work for some pages while Critical CSS is being "
-"generated. Page caching will resume automatically when Critical CSS is "
-"generated."
 msgstr ""
 
 #: core/modules/class-performance.php:142

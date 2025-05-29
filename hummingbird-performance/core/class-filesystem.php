@@ -444,6 +444,19 @@ class Filesystem {
 	}
 
 	/**
+	 * Clear manual critical CSS file.
+	 *
+	 * @return void
+	 */
+	public function purge_manual_critical_css() {
+		$assets_dir = self::critical_assets_dir();
+		$file       = $assets_dir['path'] . 'manual-critical.css';
+		if ( file_exists( $file ) ) {
+			unlink( $file );
+		}
+	}
+
+	/**
 	 * Find file in the filesystem.
 	 *
 	 * @since  1.6.0

@@ -59,7 +59,15 @@ class WPMUDev {
 	 * @param string $path  Path to purge for.
 	 */
 	public function purge_cache( $path = '' ) {
-		$domain   = untrailingslashit( get_site_url( null, null, 'https' ) );
+		if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+			$host = htmlentities( wp_unslash( $_SERVER['HTTP_HOST'] ) ); // Input var ok.
+			// Determine if HTTPS is being used.
+			$protocol = ! empty( $_SERVER['HTTPS'] ) && 'off' !== $_SERVER['HTTPS'] ? 'https://' : 'http://';
+			$domain   = $protocol . $host;
+		} else {
+			$domain = untrailingslashit( get_site_url( null, null, 'https' ) );
+		}
+
 		$resolver = str_replace( array( 'http://', 'https://' ), '', $domain ) . ':443:127.0.0.1';
 
 		// To purge only the home page / we need to append a $ character as the purge URL is a regex.
@@ -89,5 +97,4 @@ class WPMUDev {
 		curl_exec( $ch );
 		curl_close( $ch );
 	}
-
 }

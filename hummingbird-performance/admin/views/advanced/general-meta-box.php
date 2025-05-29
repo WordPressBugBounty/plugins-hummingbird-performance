@@ -43,7 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<label for="viewport_meta" class="sui-toggle">
 				<input type="checkbox" name="viewport_meta" id="viewport_meta" aria-labelledby="viewport-meta-label" <?php checked( $viewport_meta ); ?> >
 				<span class="sui-toggle-slider" aria-hidden="true"></span>
-				<span id="viewport-meta-label" class="sui-toggle-label"><?php esc_html_e( 'Enable Viewport Meta Tag', 'wphb' ); ?><span class="sui-tag sui-tag-green sui-tag-sm" style="margin-left: 10px;vertical-align: middle;"><?php esc_html_e( 'NEW', 'wphb' ); ?></span></span>
+				<span id="viewport-meta-label" class="sui-toggle-label"><?php esc_html_e( 'Enable Viewport Meta Tag', 'wphb' ); ?></span>
 			</label>
 		</div>
 	</div>

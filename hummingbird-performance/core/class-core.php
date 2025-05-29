@@ -179,11 +179,12 @@ class Core {
 			return; // No active caching modules - exit.
 		}
 
-		$minify    = Settings::get_setting( 'enabled', 'minify' );
-		$pc_module = Settings::get_setting( 'enabled', 'page_cache' );
+		$minify           = Settings::get_setting( 'enabled', 'minify' );
+		$pc_module        = Settings::get_setting( 'enabled', 'page_cache' );
+		$is_cache_enabled = true === (bool) $pc_module || Utils::get_api()->hosting->has_fast_cgi_header();
 
 		// Do not strict compare $pc_module to true, because it can also be 'blog-admins'.
-		if ( ! is_multisite() || ( ( 'super-admins' === $minify && is_super_admin() ) || true === $minify || true === (bool) $pc_module ) ) {
+		if ( ! is_multisite() || ( ( 'super-admins' === $minify && is_super_admin() ) || true === $minify || $is_cache_enabled ) ) {
 			$cache_control = Settings::get_setting( 'control', 'settings' );
 			if ( true === $cache_control ) {
 				$menu['wphb-clear-all-cache'] = array( 'title' => __( 'Clear all cache', 'wphb' ) );
@@ -211,8 +212,10 @@ class Core {
 			}
 		}
 
-		if ( is_multisite() && is_network_admin() && $pc_module ) {
-			$menu['wphb-clear-cache-network-wide'] = array( 'title' => __( 'Clear page cache on all subsites', 'wphb' ) );
+		if ( is_multisite() && is_network_admin() && $is_cache_enabled && ! empty( $cache_control ) ) {
+			if ( true === $cache_control || ( is_array( $cache_control ) && in_array( 'page_cache', $cache_control, true ) ) ) {
+				$menu['wphb-clear-cache-network-wide'] = array( 'title' => __( 'Clear page cache on all subsites', 'wphb' ) );
+			}
 		}
 
 		if ( ! is_admin() ) {
@@ -489,7 +492,7 @@ class Core {
 					box-sizing: border-box;
 				}
 
-				#wphb-ao-safe-mode p { 
+				#wphb-ao-safe-mode p {
 					margin: 0;
 					font-size: 13px;
 					line-height: 22px;

@@ -9,6 +9,7 @@ namespace Hummingbird\Admin;
 
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Modules\Minify;
 use Hummingbird\WP_Hummingbird;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -422,6 +423,12 @@ class Admin {
 
 		if ( 'all' === $wphb_clear ) {
 			Settings::reset_to_defaults();
+			Minify::save_css( '', 'manual-critical' );
+
+			// Disable FastCGI if it's enabled.
+			if ( Utils::get_api()->hosting->has_fast_cgi_header() ) {
+				Utils::get_api()->hosting->toggle_fast_cgi( false );
+			}
 
 			// Remove configs.
 			delete_site_option( 'wphb-preset_configs' );

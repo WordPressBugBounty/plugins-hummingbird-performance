@@ -10,6 +10,7 @@
  * @var string     $site_language     Site language.
  * @var string     $translation_link  Link to translations.
  * @var bool       $tracking          Tracking status.
+ * @var bool       $show_disconnect   Whether to show the disconnect button.
  */
 
 use Hummingbird\Core\Utils;
@@ -18,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$this->modal( 'disconnect-site' );
 ?>
 
 <p><?php esc_html_e( 'Configure general settings for this plugin.', 'wphb' ); ?></p>
@@ -128,6 +130,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 	</div>
+
+	<?php if ( $show_disconnect ) : ?>
+	<div class="sui-box-settings-row">
+		<div class="sui-box-settings-col-1">
+			<span class="sui-settings-label "><?php esc_html_e( 'Hub Connector', 'wphb' ); ?></span>
+			<span class="sui-description">
+				<?php
+					esc_html_e( 'Connects your site to the WPMU DEV Free Plan, unlocking the plugin\'s Free plan features.', 'wphb' );
+				?>
+			</span>
+		</div>
+		<div class="sui-box-settings-col-2">
+			<div class="sui-form-field">
+				<button class="sui-button sui-button-ghost" id="wphb-hub-disconnector" data-track-action="hub_disconnector" data-modal-open="wphb-disconnect-site-modal" data-modal-open-focus="dialog-close-div" data-modal-mask="true" >
+					<span class="sui-button-text-default">
+						<span class="sui-icon-plug-disconnected" aria-hidden="true"></span>
+						<?php esc_html_e( 'DISCONNECT SITE', 'wphb' ); ?>
+					</span>
+				</button>
+				<span class="sui-description wphb-mt-10px">
+					<?php
+						esc_html_e( 'Note: disconnecting your site from WPMU DEV will disable other services that rely on this connection.', 'wphb' );
+					?>
+				</span>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 
 	<div class="sui-box-settings-row">
 		<div class="sui-box-settings-col-1">

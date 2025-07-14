@@ -119,24 +119,23 @@ export default class Wizard extends React.Component {
 			return <line key={ key } x1={ x1 + '%' } x2={ x2 + '%' } className="line-mobile" stroke={ stroke } />;
 		} );
 
-		const steps = Object.entries( this.state.steps ).map( ( step, key ) => {			
-			if ( 6 === key ) {
+		const steps = Object.entries( this.state.steps ).map( ( step, key ) => {
+			if ( 6 === key || ( 3 === parseInt( step[ 0 ] ) && ! this.props.hasUptime ) ) {
 				return null;
 			}
 
 			const classes = classNames( {
 				current: parseInt( step[ 0 ] ) === this.props.step,
 				done: parseInt( step[ 0 ] ) < this.props.step,
-				disabled: 3 === parseInt( step[ 0 ] ) && ! this.props.hasUptime,
 			} );
+			const incFlag = ( ! this.props.hasUptime && parseInt( step[ 0 ] ) > 3 ) ? 1 : 0;
 
 			return (
 				<React.Fragment key={ key }>
 					<li className={ classes }>
-						{ 'done' !== classes && <span>{ step[ 0 ] }</span> }
+						{ 'done' !== classes && <span>{ step[ 0 ] - incFlag }</span> }
 						{ 'done' === classes && <Icon classes="sui-icon-check" /> }
 						{ step[ 1 ] }
-						{ 3 === parseInt( step[ 0 ] ) && ! this.props.hasUptime && <Tag type="pro" value={ __( 'Pro', 'wphb' ) } /> }
 					</li>
 					{ 5 > key && <svg focusable="false" aria-hidden="true"><line y1="0" y2="30px" /></svg> }
 				</React.Fragment>

@@ -7,6 +7,7 @@
 
 namespace Hummingbird\Admin;
 
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use WPMUDEV_Dashboard;
@@ -91,11 +92,13 @@ class Notices {
 			add_action( 'network_admin_notices', array( $this, 'upgrade_to_pro' ) );
 			add_action( 'network_admin_notices', array( $this, 'free_version_deactivated' ) );
 			add_action( 'network_admin_notices', array( $this, 'free_version_rate' ) );
+			add_action( 'network_admin_notices', array( $this, 'site_monitoring' ) );
 			add_action( 'network_admin_notices', array( $this, 'plugin_compat_check' ) );
 			add_action( 'network_admin_notices', array( $this, 'legacy_critical_css_deprecation_notice' ) );
 		} else {
 			add_action( 'admin_notices', array( $this, 'upgrade_to_pro' ) );
 			add_action( 'admin_notices', array( $this, 'free_version_deactivated' ) );
+			add_action( 'admin_notices', array( $this, 'site_monitoring' ) );
 			add_action( 'admin_notices', array( $this, 'free_version_rate' ) );
 			add_action( 'admin_notices', array( $this, 'plugin_compat_check' ) );
 			add_action( 'admin_notices', array( $this, 'legacy_critical_css_deprecation_notice' ) );
@@ -145,7 +148,12 @@ class Notices {
 						<?php esc_html_e( 'Switch To Automatic CSS Optimization', 'wphb' ); ?>
 					</a>
 				<?php } ?>
-				<a href="<?php echo esc_url( $dismiss_url ); ?>" style="<?php if ( ! is_multisite() ) { echo 'margin-left: 10px;color: #888;'; } ?>text-decoration: none;">
+				<a href="<?php echo esc_url( $dismiss_url ); ?>" style="
+				<?php
+				if ( ! is_multisite() ) {
+					echo 'margin-left: 10px;color: #888;'; }
+				?>
+				text-decoration: none;">
 					<?php esc_html_e( 'I Understand, Remove This Notice', 'wphb' ); ?>
 				</a>
 			</p>
@@ -191,6 +199,48 @@ class Notices {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Display sui compatible notice with flexibility.
+	 *
+	 * @since 3.15.0
+	 * @access private
+	 * @param  string $id             Unique identifier.
+	 * @param  string $message        Notice message.
+	 * @param  bool   $additional     Additional content that goes after the message text.
+	 * @param  bool   $only_hb_pages  Show message only on Hummingbird pages.
+	 * @param  string $sui_class       SUI class for the notice.
+	 */
+	private function show_sui_notice( $id = '', $message = '', $additional = false, $only_hb_pages = false, $sui_class = 'blue' ) {
+		// Only run on HB pages.
+		if ( $only_hb_pages && ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
+			return;
+		}
+
+		$dismiss_url = wp_nonce_url( add_query_arg( 'wphb-dismiss', $id ), 'wphb-dismiss-notice' );
+		?>
+		<div class="sui-wrap notice-<?php echo esc_attr( $id ); ?>">
+			<div class="sui-notice sui-notice-<?php echo esc_attr( $sui_class ); ?>">
+				<div class="sui-notice-content">
+					<div class="sui-notice-message">
+							<a class="wphb-dismiss" href="<?php echo esc_url( $dismiss_url ); ?>">
+								<span class="sui-icon-close sui-sm"></span>
+								<span class="screen-reader-text">
+									<?php esc_html_e( 'Dismiss this notice.', 'wphb' ); ?>
+								</span>
+							</a>
+							<?php echo wp_kses_post( $message ); ?>
+							<?php if ( $additional ) : ?>
+								<p>
+									<?php echo wp_kses_post( $additional ); ?>
+								</p>
+							<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -287,6 +337,7 @@ class Notices {
 			'free-rated',
 			'cache-cleaned',
 			'legacy-critical-css',
+			'connect-for-site-monitoring',
 		);
 
 		if ( in_array( $notice, $user_notices, true ) ) {
@@ -506,6 +557,44 @@ class Notices {
 			'free-deactivated',
 			$text
 		);
+	}
+
+	/**
+	 * Show Site Monitoring to Performance report.
+	 *
+	 * User is not authenticated into WPMU DEV and it has a report.
+	 */
+	public function site_monitoring() {
+		$page = filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW );
+
+		if ( 'wphb-performance' !== $page || $this->is_dismissed( 'connect-for-site-monitoring', 'option' ) ) {
+			return;
+		}
+
+		if ( ! Settings::get( 'wphb-last-report' ) || Utils::has_access_to_hub() ) {
+			return;
+		}
+
+		if ( is_multisite() && ! is_network_admin() ) {
+			return;
+		}
+
+		$image_part  = sprintf(
+			'<img class="sui-image" aria-hidden="true" alt="" src="%1$s" srcset="%1$s 1x, %2$s 2x" />',
+			esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-connect@1x.png' ),
+			esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-connect@2x.png' )
+		);
+		$message     = esc_html__( 'Get notified instantly when your site is down or too slow — and act fast to keep visitors happy. All you need is a free WPMU DEV account.', 'wphb' );
+		$heading     = esc_html__( 'Free 24/7 Site Monitoring', 'wphb' );
+		$connect_str = esc_html__( 'Connect Site to Activate', 'wphb' );
+		$connect_url = esc_url( Hub_Connector::get_connect_site_url( 'wphb-uptime', 'hummingbird_performance-test_uptime-prompt' ) );
+		$link_icon   = '<span class="sui-icon-link" aria-hidden="true"></span>';
+
+		$message  = '<div class="wphb-wrapper"> <div>' . $image_part . '</div>
+		<div><h4>' . $heading . '</h4> <p>' . $message . '</p>';
+		$message .= '<a class="sui-button sui-button-blue" href="' . $connect_url . '"> ' . $link_icon . $connect_str . ' </a></div></div>';
+
+		$this->show_sui_notice( 'connect-for-site-monitoring', $message, false, true );
 	}
 
 	/**

@@ -15,6 +15,7 @@ import 'core-js/features/array/find-index';
  */
 import HBFetcher from '../utils/fetcher';
 import { getString } from '../utils/helpers';
+const { __ } = wp.i18n;
 
 /**
  * Notifications module.
@@ -72,13 +73,15 @@ import { getString } from '../utils/helpers';
 			this.moduleData = settings;
 
 			$( '.wphb-disable-notification' ).on( 'click', this.disable );
-			$( '.wphb-enable-notification' ).on( 'click', ( e ) =>
-				this.renderTemplate( e, 'add' )
-			);
+			$( '.wphb-enable-notification' ).on( 'click', function( e ) {
+				 WPHB_Admin.notifications.renderTemplate( e, 'add' );
+				 WPHB_Admin.notifications.maybeInstantFree();
+			});
 
-			$( '.wphb-configure-notification' ).on( 'click', ( e ) =>
-				this.renderTemplate( e, 'edit' )
-			);
+			$( '.wphb-configure-notification' ).on( 'click', function( e ) {
+				WPHB_Admin.notifications.renderTemplate( e, 'edit' );
+				WPHB_Admin.notifications.maybeInstantFree();
+			});
 
 			this.maybeOpenModal();
 
@@ -123,6 +126,15 @@ import { getString } from '../utils/helpers';
 			if ( 0 !== el.length ) {
 				el.trigger( 'click' );
 			}
+		},
+		
+		maybeInstantFree(){
+			jQuery("#report-threshold-free").on('select2:open', function () {
+				setTimeout(function () {
+					$('#select2-report-threshold-free-results>li:first-child').addClass('wphb-instant-pro')
+					.append('<span> PRO </span><a target="_blank" href="' + wphb.links.upgradeUrl + '">' + __( 'Upgrade' ) + '</a> ');
+				}, 0);
+			});
 		},
 
 		/**
@@ -235,7 +247,7 @@ import { getString } from '../utils/helpers';
 				'notifications' === this.settings.type;
 
 			if ( threshold ) {
-				const select = $( 'select#report-threshold' );
+				const select = $( 'select#report-threshold' ).length ? $( 'select#report-threshold' ) : $( 'select#report-threshold-free' ) ;
 				this.settings.schedule.threshold = select.val();
 			} else {
 				const frequency = $( 'input[name="report-frequency"]:checked' );

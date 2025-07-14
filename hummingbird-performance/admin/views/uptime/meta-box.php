@@ -36,8 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="sui-block-content-center">
 		<?php if ( ! apply_filters( 'wpmudev_branding_hide_branding', false ) ) : ?>
 			<img class="sui-image sui-image-center"
-				 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
-				 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x">
+				src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@1x.png' ); ?>"
+				srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-uptime-disabled@2x.png' ); ?> 2x">
 		<?php endif; ?>
 
 		<p>

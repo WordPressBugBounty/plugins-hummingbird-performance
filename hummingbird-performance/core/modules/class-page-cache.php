@@ -123,6 +123,10 @@ class Page_Cache extends Module {
 		// Clear cache on new comment.
 		add_action( 'comment_post', array( $this, 'clear_on_comment_post' ), 10, 3 );
 
+		// Clear cache on home display changed.
+		add_action( 'update_option_page_on_front', array( $this, 'clear_on_home_page_on_front_change' ), 10, 2 );
+		add_action( 'update_option_page_for_posts', array( $this, 'clear_on_home_page_for_posts' ), 10, 2 );
+
 		// Clear cache when defender updating security headers settings.
 		add_action( 'wd_save_setting_security_headers', array( $this, 'clear_cache' ) );
 
@@ -1475,7 +1479,7 @@ class Page_Cache extends Module {
 		);
 		foreach ( $meta_array as $meta_name => $meta_key ) {
 			// If page_types not array, skip early.
-			if ( ! is_array( $wphb_cache_config->page_types ) ) {
+			if ( empty( $wphb_cache_config ) || ( ! is_array( $wphb_cache_config->page_types ) ) ) {
 				continue;
 			}
 
@@ -2087,6 +2091,40 @@ class Page_Cache extends Module {
 		}
 
 		$this->purge_post_cache( $comment_data['comment_post_ID'] );
+	}
+
+	/**
+	 * Clear cache when home page display is changed.
+	 *
+	 * @since 3.15.0
+	 *
+	 * @param string|int $old_value  Old value.
+	 * @param string|int $new_value  New value.
+	 */
+	public function clear_on_home_page_on_front_change( $old_value, $new_value ) {
+		$this->clear_cache( '/', true );
+		$old_value = (int) $old_value;
+		$new_value = (int) $new_value;
+
+		$this->clear_on_home_page_for_posts( $old_value, $new_value );
+	}
+
+	/**
+	 * Clear cache for pages settings changed.
+	 *
+	 * @since 3.15.0
+	 *
+	 * @param string|int $old_value  Old value.
+	 * @param string|int $new_value  New value.
+	 */
+	public function clear_on_home_page_for_posts( $old_value, $new_value ) {
+		if ( 0 === $old_value || 0 === $new_value ) {
+			$page_id = 0 === $old_value ? $new_value : $old_value;
+			$this->purge_post_cache( $page_id );
+		} else {
+			$this->purge_post_cache( $old_value );
+			$this->purge_post_cache( $new_value );
+		}
 	}
 
 	/**

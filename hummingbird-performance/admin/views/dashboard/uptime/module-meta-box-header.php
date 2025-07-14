@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( ! Utils::is_member() ) : ?>
-	<span class="sui-tag sui-tag-pro" style="margin-left: 10px">
-		<?php esc_html_e( 'Pro', 'wphb' ); ?>
+	<span class="sui-tag hb-tag-blue sui-tag-sm sui-tag-ghost" style="margin-left: 10px">
+		<?php esc_html_e( 'Connect', 'wphb' ); ?>
 	</span>
 <?php endif; ?>

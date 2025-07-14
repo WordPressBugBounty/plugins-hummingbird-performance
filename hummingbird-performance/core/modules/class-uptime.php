@@ -10,6 +10,7 @@ namespace Hummingbird\Core\Modules;
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Hub_Connector;
 use WP_Error;
 use WPMUDEV_Dashboard;
 
@@ -214,25 +215,27 @@ class Uptime extends Module {
 			return false;
 		}
 
-		// Helper function exist from Dash v4.11.9, use it.
-		if ( method_exists( 'WPMUDEV_Dashboard_Api', 'has_access' ) ) {
-			return WPMUDEV_Dashboard::$api->has_access( 'performance-uptime-monitor' );
-		}
-
 		// Check if required method exist.
-		if ( ! method_exists( 'WPMUDEV_Dashboard_Api', 'get_membership_data' ) ) {
+		if ( method_exists( 'WPMUDEV_Dashboard_Api', 'get_membership_data' ) ) {
+			// Helper function exist from Dash v4.11.9, use it.
+			if ( method_exists( 'WPMUDEV_Dashboard_Api', 'has_access' ) ) {
+				return WPMUDEV_Dashboard::$api->has_access( 'performance-uptime-monitor' );
+			}
+
+			// Get membership data.
+			$data = WPMUDEV_Dashboard::$api->get_membership_data();
+
+			// Get available features.
+			$features = isset( $data['membership_access'] ) ? $data['membership_access'] : array();
+
+			// If true, full access.
+			if ( true === $features ) {
+				return true;
+			}
+		} elseif ( class_exists( '\WPMUDEV\Hub\Connector' ) ) {
+			return Hub_Connector::has_access();
+		} else {
 			return false;
-		}
-
-		// Get membership data.
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
-
-		// Get available features.
-		$features = isset( $data['membership_access'] ) ? $data['membership_access'] : array();
-
-		// If true, full access.
-		if ( true === $features ) {
-			return true;
 		}
 
 		// Check if uptime is available.

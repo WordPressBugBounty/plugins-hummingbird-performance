@@ -137,6 +137,7 @@ class Minify extends Module {
 
 		add_filter( 'wp_hummingbird_is_active_module_minify', array( $this, 'minify_module_status' ) );
 
+		add_filter( 'wphb_dont_add_handle_to_collection', array( $this, 'filter_assets_bloating'), 10, 3 );
 		add_filter( 'wphb_block_resource', array( $this, 'filter_resource_block' ), 10, 5 );
 		add_filter( 'wphb_minify_resource', array( $this, 'filter_resource_minify' ), 10, 4 );
 		add_filter( 'wphb_combine_resource', array( $this, 'filter_resource_combine' ), 10, 3 );
@@ -1241,6 +1242,21 @@ class Minify extends Module {
 		}
 
 		return $current;
+	}
+
+	/**
+	 * Filter assets with dynamic parameter in src, bloating AO.
+	 *
+	 * @param bool   $skip   Current value.
+	 * @param string $handle Resource handle.
+	 * @param string $src    Source URL.
+	 *
+	 * @return bool
+	 */
+	public function filter_assets_bloating ( $skip, $handle, $src ) {
+		$parsed_url = wp_parse_url( $src );
+	
+		return !empty( $parsed_url['query'] );
 	}
 
 	/**

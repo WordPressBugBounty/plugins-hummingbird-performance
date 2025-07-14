@@ -104,6 +104,70 @@
     }
 }
 
+// uptime no membership
+.wpmud .wrap-wphb-uptime {
+    .box-uptime-no-membership {
+        .sui-box{
+            padding: 0px;
+            padding-top: 60px;
+
+            h2{
+                line-height: 30px;
+                margin-bottom: 10px;
+            }
+
+            .sui-message-content {
+                margin-bottom: 60px;
+            }
+
+            .unlock-features{
+                background-color: #F9F9F9;
+                text-align: left;
+                padding: 60px 90px;
+
+                h3{
+                    line-height: 30px;
+                    margin: 0;
+                }
+                p{
+                    margin: 0;
+                }
+
+                .features{
+                    margin: 30px 0;
+
+                    .feature{
+                        display: flex;
+
+                        .image-container{
+                            padding-right: 10px;
+
+                        }
+                        .feature-text{
+                            margin-top: -5px;
+
+                            h4{
+                                margin: 0;
+                            }
+                            p{
+                                line-height: 22px;
+                                font-size: 13px;
+                            }
+                        }
+
+                    }
+                }
+                .learn-more{
+                    p{
+                        font-size: 13px;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
 /**
  * Summary meta box
  */
@@ -312,6 +376,17 @@
         margin-top: 46px;
         opacity: .7;
     }
+    .wpmud .wrap-wphb-uptime .box-uptime-no-membership .sui-box.sui-message {
+        padding-top: 30px;
+        
+        .sui-message-content{
+            margin-bottom: 45px;
+        }
+        .unlock-features{
+            padding: 10px;
+        }   
+    }
+
 }
 
 @include bp(phone) {

@@ -16,6 +16,7 @@
  * @var bool   $report_dismissed   Last report dismissed warning.
  */
 
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -111,6 +112,16 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 <div class="sui-summary-segment">
 	<ul class="sui-list">
 		<li>
+			<span class="sui-list-label"><?php esc_html_e( 'Page Caching', 'wphb' ); ?></span>
+			<span class="sui-list-detail">
+				<?php if ( $pc_active ) : ?>
+					<span class="sui-icon-check-tick sui-lg sui-success" aria-hidden="true"></span>
+				<?php else : ?>
+					<span class="sui-tag sui-tag-disabled">Inactive</span>
+				<?php endif; ?>
+			</span>
+		</li>
+		<li>
 			<span class="sui-list-label"><?php esc_html_e( 'Browser Caching', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
 				<?php if ( ( $cf_active && YEAR_IN_SECONDS <= $cf_current ) || ( ! $cf_active && ! $caching_issues ) ) : ?>
@@ -123,26 +134,42 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 			</span>
 		</li>
 		<li>
-			<span class="sui-list-label"><?php esc_html_e( 'GZIP Compression', 'wphb' ); ?></span>
-			<span class="sui-list-detail">
-				<?php if ( $gzip_issues ) : ?>
-					<span class="sui-tag sui-tag-warning"><?php echo (int) $gzip_issues; ?></span>
-				<?php else : ?>
-					<span class="sui-icon-check-tick sui-lg sui-success" aria-hidden="true"></span>
-				<?php endif; ?>
-			</span>
+			<?php if ( Utils::has_access_to_hub() ) : ?>
+				<span class="sui-list-label"><?php esc_html_e( 'Scheduled Reporting', 'wphb' ); ?></span>
+				<span class="sui-list-detail">
+					<?php if ( $reports_enabled ) : ?>
+						<?php echo esc_html( $reports_next ); ?>
+						<a href="<?php echo esc_url( $reports_url ); ?>#performance-reports">
+							<span class="sui-icon-pencil" aria-hidden="true"></span>
+						</a>
+					<?php else : ?>
+						<a href="<?php echo esc_url( $reports_url ); ?>#performance-reports">
+							<span class="sui-tag"><?php esc_html_e( 'Disabled', 'wphb' ); ?></span>
+						</a>
+					<?php endif; ?>
+				</span>
+			<?php else : ?>
+				<span class="sui-list-label"><?php esc_html_e( 'Scheduled Reporting', 'wphb' ); ?></span>
+				<span class="sui-list-detail">
+					<a class="sui-button sui-button-blue" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_dash_summary_schedule_connect_tag' ) ); ?>">
+						<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
+					</a>
+				</span>
+			<?php endif; ?>
 		</li>
 		<li>
-			<span class="sui-list-label"><?php esc_html_e( 'Last Down', 'wphb' ); ?></span>
+			<span class="sui-list-label"><?php esc_html_e( 'Last Down Time', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
-				<?php if ( ! Utils::is_member() ) : ?>
-					<a class="sui-button sui-button-purple" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_dash_summary_pro_tag' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'dash_summary', 'cta_clicked', this.href, 'hb_uptime_upsell' );" target="_blank">
-						<?php esc_html_e( 'PRO', 'wphb' ); ?>
+				<?php if ( ! Utils::has_access_to_hub() ) : ?>
+					<a class="sui-button sui-button-blue" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-uptime', 'hummingbird_dash_summary_down_connect_tag' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'dash_summary', 'cta_clicked', this.href, 'hb_uptime_upsell' );">
+						<?php esc_html_e( 'Connect site', 'wphb' ); ?>
 					</a>
 				<?php elseif ( is_wp_error( $uptime_report ) || ( ! $uptime_active ) ) : ?>
-					<span class="sui-tag sui-tag-disabled">
-						<?php esc_html_e( 'Uptime Inactive', 'wphb' ); ?>
-					</span>
+					<a href="<?php echo esc_url( $uptime_url ); ?>" >
+						<span class="sui-tag sui-tag-disabled">
+							<?php esc_html_e( 'Uptime Inactive', 'wphb' ); ?>
+						</span>
+					</a>
 				<?php elseif ( empty( $site_date ) ) : ?>
 					<?php esc_html_e( 'Website is reported down', 'wphb' ); ?>
 				<?php else : ?>

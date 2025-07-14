@@ -39,7 +39,7 @@ class Notifications extends Page {
 			)
 		);
 
-		if ( Utils::is_member() ) {
+		if ( Utils::has_access_to_hub() ) {
 			return;
 		}
 

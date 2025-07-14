@@ -38,20 +38,20 @@ if ( $is_dismissed ) {
 		$impact_score_class = 'default';
 		$impact_icon_class  = 'info';
 	}
+}
 
-	$force_all_audit_fail = isset( $_GET['force_all_audit_fail'] ) ? sanitize_text_field( wp_unslash( $_GET['force_all_audit_fail'] ) ) : '';
-	$force_audit_pass     = isset( $_GET['force_audit_pass'] ) ? sanitize_text_field( wp_unslash( $_GET['force_audit_pass'] ) ) : '';
-	$force_audit_fail     = isset( $_GET['force_audit_fail'] ) ? sanitize_text_field( wp_unslash( $_GET['force_audit_fail'] ) ) : '';
-	if ( $force_all_audit_fail ) {
-		$impact_score_class = 'error';
-		$impact_icon_class  = 'warning-alert';
-	} elseif ( ! empty( $force_audit_pass ) && $rule === $force_audit_pass ) {
-		$impact_score_class = 'success';
-		$impact_icon_class  = 'check-tick';
-	} elseif ( ! empty( $force_audit_fail ) && $rule === $force_audit_fail ) {
-		$impact_score_class = 'error';
-		$impact_icon_class  = 'warning-alert';
-	}
+$force_all_audit_fail = isset( $_GET['force_all_audit_fail'] ) ? sanitize_text_field( wp_unslash( $_GET['force_all_audit_fail'] ) ) : '';
+$force_audit_pass     = isset( $_GET['force_audit_pass'] ) ? sanitize_text_field( wp_unslash( $_GET['force_audit_pass'] ) ) : '';
+$force_audit_fail     = isset( $_GET['force_audit_fail'] ) ? sanitize_text_field( wp_unslash( $_GET['force_audit_fail'] ) ) : '';
+if ( $force_all_audit_fail ) {
+	$impact_score_class = 'error';
+	$impact_icon_class  = 'warning-alert';
+} elseif ( ! empty( $force_audit_pass ) && $rule === $force_audit_pass ) {
+	$impact_score_class = 'success';
+	$impact_icon_class  = 'check-tick';
+} elseif ( ! empty( $force_audit_fail ) && $rule === $force_audit_fail ) {
+	$impact_score_class = 'error';
+	$impact_icon_class  = 'warning-alert';
 }
 ?>
 <div class="sui-accordion-item sui-<?php echo esc_attr( $impact_score_class ); ?>" id="<?php echo esc_attr( $rule ); ?>" data-metrics="<?php echo esc_attr( $relevant_metrics ); ?>">

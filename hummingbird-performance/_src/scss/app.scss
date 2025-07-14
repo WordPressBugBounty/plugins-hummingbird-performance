@@ -303,3 +303,34 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 .wphb-deactivation-survey-modal .wphb-deactivation-field-row {
     margin-bottom: 5px;
 }
+
+.sui-modal{
+    #wphb-hub-connection-success-modal {
+        .sui-box-body {
+            padding-top: 15px;
+            p{
+                font-size: 13px;
+                line-height: 22px;
+                margin-bottom: 0;
+            }
+            strong{
+                color: #666666;
+            }
+            ul{
+                margin-bottom: 0;
+                li{
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 24px;
+                    color: #333333;
+                    span:before {
+                        color: #333333;
+                        margin-right: 5px;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+

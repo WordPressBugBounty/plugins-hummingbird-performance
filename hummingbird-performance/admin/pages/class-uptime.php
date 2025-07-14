@@ -8,6 +8,7 @@
 namespace Hummingbird\Admin\Pages;
 
 use Hummingbird\Admin\Page;
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Modules\Uptime as Uptime_Module;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
@@ -46,7 +47,7 @@ class Uptime extends Page {
 		if ( ! $this->uptime->has_access() ) {
 			$this->add_meta_box(
 				'uptime/no-membership',
-				__( 'Upgrade', 'wphb' ),
+				'',
 				null,
 				null,
 				null,
@@ -256,6 +257,17 @@ class Uptime extends Page {
 	}
 
 	/**
+	 * Render site connected modal.
+	 *
+	 * @since 3.15.0
+	 */
+	public function render_modals() {
+		parent::render_modals();
+
+		Hub_Connector::render_hub_connector_success_modal();
+	}
+
+	/**
 	 * Uptime disabled meta box.
 	 */
 	public function uptime_disabled_metabox() {
@@ -385,7 +397,7 @@ class Uptime extends Page {
 				$stats = $this->first_activated_state_data();
 			}
 
-			if ( empty( $stats->chart_json ) ) {
+			if ( is_object( $stats ) && empty( $stats->chart_json ) ) {
 				$stats->chart_json = $this->get_chart_data( 'dummy' );
 			}
 
@@ -430,7 +442,7 @@ class Uptime extends Page {
 		$notifications_next = '';
 		$reports_next       = '';
 
-		if ( Utils::get_module( 'uptime' )->has_access() && Utils::pro() ) {
+		if ( Utils::get_module( 'uptime' )->has_access() && Utils::has_access_to_hub() ) {
 			$notifications_next = Utils::pro()->module( 'notifications' )->get_schedule_label_for( 'uptime', 'notifications' );
 			$reports_next       = Utils::pro()->module( 'notifications' )->get_schedule_label_for( 'uptime', 'reports' );
 		}

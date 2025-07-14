@@ -34,6 +34,7 @@ class Installer {
 
 		update_site_option( 'wphb_version', WPHB_VERSION );
 		update_site_option( 'wphb-notice-uptime-info-show', 'yes' ); // Add uptime notice.
+		update_site_option( 'wphb-notice-connect-for-site-monitoring-show', 'yes' ); // Add connect notice.
 
 		// From get_site_option() docs, false = if Option not exists.
 		if ( false === get_site_option( 'wphb_run_onboarding' ) ) {
@@ -218,6 +219,10 @@ class Installer {
 
 			if ( version_compare( $version, '3.10.0', '<' ) ) {
 				self::upgrade_3_10_0();
+			}
+
+			if ( version_compare( $version, '3.15.0', '<' ) ) {
+				self::upgrade_3_15_0();
 			}
 
 			update_site_option( 'wphb_version', WPHB_VERSION );
@@ -749,6 +754,24 @@ class Installer {
 		add_site_option( 'wphb_show_upgrade_summary', true );
 	}
 
+	/**
+	 * Handle Summary upgrade modal display.
+	 *
+	 * @since 3.15.0
+	 *
+	 * @return void
+	 */
+	private static function upgrade_3_15_0() {
+		if ( ! Utils::has_access_to_hub() ) {
+			add_site_option( 'wphb_show_upgrade_summary', true );
+		}
+	}
+
+	/**
+	 * Save plugin timestamps for actions like activation, deactivation, and upgrade.
+	 *
+	 * @param string $action The action being performed (e.g., 'plugin_activated', 'plugin_upgraded').
+	 */
 	private static function save_plugin_timestamps( $action ) {
 		$option_key            = 'wphb_plugin_timestamps';
 		$timestamps            = get_site_option( $option_key, array() );

@@ -69,6 +69,8 @@ class Core {
 		add_action( 'admin_init', array( $this, 'upsell_notice' ), 9 );
 		add_filter( 'wpmudev_notices_is_disabled', array( $this, 'wpmudev_remove_email_from_disabled_list' ), 10, 3 );
 
+		Hub_Connector::get_instance();
+
 		// Init the API.
 		$this->api = new Api\API();
 
@@ -103,6 +105,7 @@ class Core {
 		new Integration\Gtranslate();
 		new Integration\Elementor();
 		new Integration\The_Events_Calendar();
+		new Integration\Forminator();
 	}
 
 	/**
@@ -463,8 +466,8 @@ class Core {
 
 				<div>
 					<a href="#" id="wphb-ao-safe-mode-copy">
-						<span><?php esc_html_e( "Copy Test Link", 'wphb' ); ?></span>
-						<span><?php esc_html_e( "Link Copied", 'wphb' ); ?></span>
+						<span><?php esc_html_e( 'Copy Test Link', 'wphb' ); ?></span>
+						<span><?php esc_html_e( 'Link Copied', 'wphb' ); ?></span>
 					</a>
 					<button role="button" id="wphb-ao-safe-mode-save"><?php esc_html_e( 'Publish', 'wphb' ); ?></button>
 				</div>
@@ -640,7 +643,7 @@ class Core {
 			'slug'            => 'hummingbird-performance',
 			'parent_slug'     => 'wphb',
 			'menu_slug'       => 'wphb-cross-sell',
-			'position'        => 10,
+			'position'        => 9,
 			'translation_dir' => WPHB_DIR_PATH . 'languages',
 		);
 

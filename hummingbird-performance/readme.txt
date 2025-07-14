@@ -1,6 +1,6 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.14.1
+Version: 3.15.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.14.1
+Stable tag: 3.15.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Hummingbird is brought to you by the WordPress speed specialists that created [S
 
 **Enjoy top-tier performance and PageSpeed optimization from the start with [Hummingbird Pro](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-above-the-fold&utm_content=wp_hummingbird_pro ).**
 
-Level up immediately with exclusive Pro features like Delay JavaScript Execution, Critical CSS Generation, Brotli file compression, and 123-point global asset CDN with unlimited bandwidth. [Learn more about Pro](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-above-the-fold&utm_content=wp_hummingbird_pro).
+Level up immediately with exclusive Pro features like Delay JavaScript Execution, Critical CSS Generation, Brotli file compression, and 119-point global asset CDN with unlimited bandwidth. [Learn more about Pro](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-above-the-fold&utm_content=wp_hummingbird_pro).
 
 ### If PageSpeed Insights is making these speed recommendations Hummingbird can help:
 
@@ -55,6 +55,8 @@ You’ll get faster loading pages, higher search rankings (SERP) and PageSpeed s
 - GZIP Compression – Blazing-fast HTML, JavaScript, and stylesheet (CSS) transfer.
 - Configs – Set your preferred performance settings, save them as config, and instantly upload to any other site.
 - Font Optimization - Improve site speed, Core Web Vitals, and visual stability by preloading critical fonts and enabling fallbacks.
+- Uptime Monitoring & Alerts - Get instant notifications if your site ever goes down.
+- Scheduled Performance Reports - Stay on top of site speed with regular insights.
 
 ### Learn The Ropes With These Hands-On Hummingbird Tutorials
 
@@ -132,7 +134,7 @@ Hummingbird is built with ease-of-use in mind; it makes your WordPress site fast
 
 All the above is free and will speed up WordPress for you. **If you need the very fastest WordPress site, [you should get a WPMU DEV Membership](https://wpmudev.com/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme&utm_content=you_should_get_wpmudev_membership).**
 
-Our Membership gives you access to Hummingbird Pro – which features automated scanning, uptime monitoring, enhanced minify compression (with 2x the regular optimization), CDN hosted minification – alongside Smush Pro image optimization, all our premium WordPress plugins, and 24/7 WordPress support.
+Our Membership gives you access to Hummingbird Pro – which features automated scanning, enhanced minify compression (with 2x the regular optimization), CDN hosted minification – alongside Smush Pro image optimization, all our premium WordPress plugins, and 24/7 WordPress support.
 
 [It’s an incredible deal, and you can find out more here.](https://wpmudev.com/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme&utm_content=and_you_can_find_out_more_here)
 
@@ -208,6 +210,14 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 5. Custom performance optimizations using Advanced Tools.
 
 == Changelog ==
+
+= 3.15.0 ( 2025-07-14 ) =
+- Improvement: Uptime Monitoring feature is now available for WPMU DEV Free Plan members
+- Improvement: Performance Notifications feature is now available for WPMU DEV Free Plan members
+- Fix: Homepage display change requires manual cache clearing
+- Fix: PHP warnings
+- Fix: Menu item position swap and styling missing
+- Fix: Hummingbird is not updating the Forminator CSS file upon form style update
 
 = 3.14.1 ( 2025-05-29 ) =
 - Fix: Prevent duplicate injection of JS delay script

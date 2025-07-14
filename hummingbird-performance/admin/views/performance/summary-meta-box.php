@@ -19,6 +19,7 @@
  */
 
 use Hummingbird\Admin\Page;
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Modules\Performance;
 use Hummingbird\Core\Utils;
 
@@ -162,22 +163,31 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 				<?php endif; ?>
 			</span>
 		</li>
-		<?php if ( Utils::is_member() ) : ?>
-		<li>
-			<span class="sui-list-label"><?php esc_html_e( 'Scheduled reports', 'wphb' ); ?></span>
-			<span class="sui-list-detail">
-				<?php if ( $reports_enabled ) : ?>
-					<?php echo esc_html( $reports_next ); ?>
-					<a href="<?php echo esc_url( $reports_url ); ?>#performance-reports">
-						<span class="sui-icon-pencil" aria-hidden="true"></span>
+		<?php if ( Utils::has_access_to_hub() ) : ?>
+			<li>
+				<span class="sui-list-label"><?php esc_html_e( 'Scheduled reports', 'wphb' ); ?></span>
+				<span class="sui-list-detail">
+					<?php if ( $reports_enabled ) : ?>
+						<?php echo esc_html( $reports_next ); ?>
+						<a href="<?php echo esc_url( $reports_url ); ?>#performance-reports">
+							<span class="sui-icon-pencil" aria-hidden="true"></span>
+						</a>
+					<?php else : ?>
+						<a href="<?php echo esc_url( $reports_url ); ?>#performance-reports">
+							<span class="sui-tag"><?php esc_html_e( 'Disabled', 'wphb' ); ?></span>
+						</a>
+					<?php endif; ?>
+				</span>
+			</li>
+		<?php elseif ( ! is_multisite() || is_network_admin() ) : ?>
+			<li>
+				<span class="sui-list-label"><?php esc_html_e( 'Scheduled Reporting', 'wphb' ); ?></span>
+				<span class="sui-list-detail">
+					<a class="sui-button sui-button-blue" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_performance-test_summary_notifications' ) ); ?>">
+						<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
 					</a>
-				<?php else : ?>
-					<a href="<?php echo esc_url( $reports_url ); ?>#performance-reports">
-						<span class="sui-tag"><?php esc_html_e( 'Disabled', 'wphb' ); ?></span>
-					</a>
-				<?php endif; ?>
-			</span>
-		</li>
+				</span>
+			</li>
 		<?php endif; ?>
 	</ul>
 </div>

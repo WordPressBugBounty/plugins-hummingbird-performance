@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11
+class ComposerStaticInitfa08fb1bc68355d021bca2ee1bc3c8d5
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -51,7 +51,6 @@ class ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11
         'Hummingbird\\Admin\\Pages\\Performance' => __DIR__ . '/../..' . '/admin/pages/class-performance.php',
         'Hummingbird\\Admin\\Pages\\React\\Gzip' => __DIR__ . '/../..' . '/admin/pages/react/class-gzip.php',
         'Hummingbird\\Admin\\Pages\\React\\Setup' => __DIR__ . '/../..' . '/admin/pages/react/class-setup.php',
-        'Hummingbird\\Admin\\Pages\\React\\Tutorials' => __DIR__ . '/../..' . '/admin/pages/react/class-tutorials.php',
         'Hummingbird\\Admin\\Pages\\Services' => __DIR__ . '/../..' . '/admin/pages/class-services.php',
         'Hummingbird\\Admin\\Pages\\Settings' => __DIR__ . '/../..' . '/admin/pages/class-settings.php',
         'Hummingbird\\Admin\\Pages\\Upgrade' => __DIR__ . '/../..' . '/admin/pages/class-upgrade.php',
@@ -76,12 +75,14 @@ class ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11
         'Hummingbird\\Core\\Configs' => __DIR__ . '/../..' . '/core/class-configs.php',
         'Hummingbird\\Core\\Core' => __DIR__ . '/../..' . '/core/class-core.php',
         'Hummingbird\\Core\\Filesystem' => __DIR__ . '/../..' . '/core/class-filesystem.php',
+        'Hummingbird\\Core\\Hub_Connector' => __DIR__ . '/../..' . '/core/class-hub-connector.php',
         'Hummingbird\\Core\\Installer' => __DIR__ . '/../..' . '/core/class-installer.php',
         'Hummingbird\\Core\\Integration\\Avada' => __DIR__ . '/../..' . '/core/integration/class-avada.php',
         'Hummingbird\\Core\\Integration\\Builders' => __DIR__ . '/../..' . '/core/integration/class-builders.php',
         'Hummingbird\\Core\\Integration\\Defender' => __DIR__ . '/../..' . '/core/integration/class-defender.php',
         'Hummingbird\\Core\\Integration\\Divi' => __DIR__ . '/../..' . '/core/integration/class-divi.php',
         'Hummingbird\\Core\\Integration\\Elementor' => __DIR__ . '/../..' . '/core/integration/class-elementor.php',
+        'Hummingbird\\Core\\Integration\\Forminator' => __DIR__ . '/../..' . '/core/integration/class-forminator.php',
         'Hummingbird\\Core\\Integration\\Google_Site_Kit' => __DIR__ . '/../..' . '/core/integration/class-google-site-kit.php',
         'Hummingbird\\Core\\Integration\\Gtranslate' => __DIR__ . '/../..' . '/core/integration/class-gtranslate.php',
         'Hummingbird\\Core\\Integration\\Gutenberg' => __DIR__ . '/../..' . '/core/integration/class-gutenberg.php',
@@ -414,9 +415,9 @@ class ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit9e7bd3ff633039a5a4ef341c58349e11::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfa08fb1bc68355d021bca2ee1bc3c8d5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfa08fb1bc68355d021bca2ee1bc3c8d5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitfa08fb1bc68355d021bca2ee1bc3c8d5::$classMap;
 
         }, null, ClassLoader::class);
     }

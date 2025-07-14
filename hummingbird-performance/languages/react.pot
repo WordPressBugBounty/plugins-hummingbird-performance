@@ -11,6 +11,10 @@ msgstr ""
 msgid "Critical CSS generated successfully"
 msgstr ""
 
+#: _src/js/modules/admin-notifications.js:135
+msgid "Upgrade"
+msgstr ""
+
 #: _src/react/components/loader/index.jsx:28
 msgid "Fetching latest data..."
 msgstr ""
@@ -410,7 +414,7 @@ msgstr ""
 #: _src/react/modules/caching/integrations.jsx:527
 #: _src/react/views/caching/browser/status.jsx:410
 #: _src/react/views/gzip/summary.jsx:320
-#: _src/react/views/setup/wizard.jsx:581
+#: _src/react/views/setup/wizard.jsx:580
 msgid "Status"
 msgstr ""
 
@@ -426,7 +430,7 @@ msgstr ""
 #: _src/react/modules/caching/integrations.jsx:576
 #: _src/react/views/caching/browser/status.jsx:374
 #: _src/react/views/gzip/summary.jsx:302
-#: _src/react/views/setup/wizard.jsx:252
+#: _src/react/views/setup/wizard.jsx:251
 msgid "Re-check status"
 msgstr ""
 
@@ -534,7 +538,7 @@ msgid "%s config created successfully."
 msgstr ""
 
 #: _src/react/modules/configs.jsx:153
-#: _src/react/views/setup/wizard.jsx:631
+#: _src/react/views/setup/wizard.jsx:630
 msgid "Uptime"
 msgstr ""
 
@@ -543,12 +547,12 @@ msgid "Gravatar Caching"
 msgstr ""
 
 #: _src/react/modules/configs.jsx:155
-#: _src/react/views/setup/wizard.jsx:655
+#: _src/react/views/setup/wizard.jsx:654
 msgid "Page Caching"
 msgstr ""
 
 #: _src/react/modules/configs.jsx:156
-#: _src/react/views/setup/wizard.jsx:683
+#: _src/react/views/setup/wizard.jsx:682
 msgid "Advanced Tools"
 msgstr ""
 
@@ -695,21 +699,6 @@ msgstr ""
 
 #: _src/react/modules/setup.jsx:445
 msgid "Documentation"
-msgstr ""
-
-#: _src/react/modules/tutorials.jsx:29
-#. %1$s - opening a tag, %2$s - closing a tag
-msgid ""
-"The widget has been removed. Hummingbird tutorials can still be found in "
-"the %1$sTutorials tab%2$s any time."
-msgstr ""
-
-#: _src/react/modules/tutorials.jsx:47
-msgid "Tutorials"
-msgstr ""
-
-#: _src/react/modules/tutorials.jsx:61
-msgid "Hummingbird Tutorials"
 msgstr ""
 
 #: _src/react/views/caching/browser/server-instructions.jsx:100
@@ -1468,7 +1457,7 @@ msgid "The Network Admin has the WPMU DEV CDN turned off"
 msgstr ""
 
 #: _src/react/views/minify/summary.jsx:372
-#: _src/react/views/setup/wizard.jsx:707
+#: _src/react/views/setup/wizard.jsx:706
 msgid "Disabled"
 msgstr ""
 
@@ -1477,141 +1466,140 @@ msgid "Filesize reductions"
 msgstr ""
 
 #: _src/react/views/minify/summary.jsx:405
-#: _src/react/views/setup/wizard.jsx:346
+#: _src/react/views/setup/wizard.jsx:345
 msgid "WPMU DEV CDN"
 msgstr ""
 
 #: _src/react/views/minify/summary.jsx:416
-#: _src/react/views/setup/wizard.jsx:393
+#: _src/react/views/setup/wizard.jsx:392
 msgid "Delay JavaScript Execution"
 msgstr ""
 
 #: _src/react/views/minify/summary.jsx:423
-#: _src/react/views/setup/wizard.jsx:610
+#: _src/react/views/setup/wizard.jsx:609
 msgid "Generate Critical CSS"
 msgstr ""
 
 #: _src/react/views/minify/summary.jsx:424
-#: _src/react/views/setup/wizard.jsx:139
 msgid "Pro"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:167
+#: _src/react/views/setup/wizard.jsx:166
 msgid "Plugin Conflict"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:170
+#: _src/react/views/setup/wizard.jsx:169
 msgid "Wizard Completed!"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:184
+#: _src/react/views/setup/wizard.jsx:183
 msgid "Hummingbird Setup"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:201
+#: _src/react/views/setup/wizard.jsx:200
 msgid "No other caching plugin is detected"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:205
+#: _src/react/views/setup/wizard.jsx:204
 msgid "No other caching plugin is detected. You can proceed with the setup."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:210
+#: _src/react/views/setup/wizard.jsx:209
 msgid "Another caching plugin is detected"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:214
+#: _src/react/views/setup/wizard.jsx:213
 msgid ""
 "Hummingbird has detected an advanced-cache.php file in your site’s "
 "wp-content directory. <a>Manage your plugins</a> and disable any other "
 "active caching plugins to ensure Hummingbird’s page caching works properly."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:224
+#: _src/react/views/setup/wizard.jsx:223
 msgid ""
 "If no other caching plugins are active, the advanced-cache.php may have "
 "been left by a previously used caching plugin. You can remove the file from "
 "the wp-content directory, or remove it via your file manager or FTP."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:260
+#: _src/react/views/setup/wizard.jsx:259
 msgid "Remove file"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:294
+#: _src/react/views/setup/wizard.jsx:293
 msgid "Local Page Cache"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:294
+#: _src/react/views/setup/wizard.jsx:293
 msgid "Enable"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:300
+#: _src/react/views/setup/wizard.jsx:299
 msgid "Disable"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:336
+#: _src/react/views/setup/wizard.jsx:335
 msgid "Enable Speedy Compression"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:338
+#: _src/react/views/setup/wizard.jsx:337
 msgid ""
 "Our automatic solution for optimization, the Speedy compression will "
 "auto-compress and auto-combine smaller files together. This can help to "
 "decrease the number of requests made when a page is loaded."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:347
+#: _src/react/views/setup/wizard.jsx:346
 msgid "WPMU DEV CDN <span>PRO</span>"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:354
+#: _src/react/views/setup/wizard.jsx:353
 msgid ""
 "WPMU DEV CDN will serve your CSS, JS and other compatible files from our "
 "external CDN, effectively taking the load off your server so that pages "
 "load faster for your visitors."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:361
+#: _src/react/views/setup/wizard.jsx:360
 msgid "Activating Speedy Optimization..."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:361
+#: _src/react/views/setup/wizard.jsx:360
 msgid "Activating Basic Optimization..."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:364
+#: _src/react/views/setup/wizard.jsx:363
 msgid "Please wait, this won’t take more than a minute..."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:394
+#: _src/react/views/setup/wizard.jsx:393
 msgid "Delay JavaScript Execution <span>PRO</span>"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:401
+#: _src/react/views/setup/wizard.jsx:400
 msgid ""
 "Improve performance by delaying the loading of non-critical JavaScript "
 "files above the fold until user interaction (e.g. scroll, click)."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:410
+#: _src/react/views/setup/wizard.jsx:409
 msgid "Generate Critical CSS <span>PRO</span>"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:417
+#: _src/react/views/setup/wizard.jsx:416
 msgid ""
 "Drastically reduce your page load time and eliminate render-blocking "
 "resources by automatically generating the critical CSS required to load "
 "your above-the-fold content."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:427
+#: _src/react/views/setup/wizard.jsx:426
 msgid ""
 "Apply a similar fallback font that visitors will temporarily see until the "
 "primary font loads, to improve text visibility."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:433
+#: _src/react/views/setup/wizard.jsx:432
 msgid ""
 "<strong>Note:</strong> You can tweak these settings further under Assets "
 "Optimization > Extra Optimization."
@@ -1621,41 +1609,41 @@ msgstr ""
 msgid "Getting Started"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:490
+#: _src/react/views/setup/wizard.jsx:489
 msgid ""
 "By default, page caching is enabled for mobile devices. If you don't want "
 "to use mobile caching, simply disable this setting."
+msgstr ""
+
+#: _src/react/views/setup/wizard.jsx:499
+msgid "The page cache will be cleared after each comment made on a post."
 msgstr ""
 
 #: _src/react/views/setup/wizard.jsx:50
 msgid "Finish"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:500
-msgid "The page cache will be cleared after each comment made on a post."
-msgstr ""
-
-#: _src/react/views/setup/wizard.jsx:510
+#: _src/react/views/setup/wizard.jsx:509
 msgid ""
 "By default, Hummingbird won't cache HTTP headers. Enable this feature to "
 "include them."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:520
+#: _src/react/views/setup/wizard.jsx:519
 msgid ""
 "Add a shortcut to Hummingbird settings in the top WordPress Admin bar. "
 "Clicking the Clear Cache button in the WordPress Admin Bar will clear all "
 "active cache types."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:542
+#: _src/react/views/setup/wizard.jsx:541
 msgid ""
 "Some of your resource URLs can end with something like “?x=y”, these are "
 "the query strings of the URL. Some servers, CDNs or caching systems don’t "
 "like query strings and removing them can help to increase speed."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:553
+#: _src/react/views/setup/wizard.jsx:552
 msgid ""
 "WooCommerce uses ajax calls to update cart totals without refreshing the "
 "page. These ajax calls run on every page and can drastically increase page "
@@ -1663,116 +1651,116 @@ msgid ""
 "pages."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:563
+#: _src/react/views/setup/wizard.jsx:562
 msgid ""
 "WordPress adds Javascript and CSS files to convert common symbols like “:)” "
 "to visual emojis. If you don’t need emojis this will remove two unnecessary "
 "assets."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:579
+#: _src/react/views/setup/wizard.jsx:578
 msgid "Modules"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:580
+#: _src/react/views/setup/wizard.jsx:579
 msgid "Settings applied"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:588
+#: _src/react/views/setup/wizard.jsx:587
 msgid "Asset Optimization"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:590
+#: _src/react/views/setup/wizard.jsx:589
 msgid "Speedy Optimization"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:591
+#: _src/react/views/setup/wizard.jsx:590
 msgid "Basic Optimization"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:592
+#: _src/react/views/setup/wizard.jsx:591
 msgid "Active on subsites"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:595
+#: _src/react/views/setup/wizard.jsx:594
 msgid "CDN"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:607
+#: _src/react/views/setup/wizard.jsx:606
 msgid "Extra Optimization"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:609
+#: _src/react/views/setup/wizard.jsx:608
 msgid "Delay JS Executions"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:611
+#: _src/react/views/setup/wizard.jsx:610
 msgid "Swap Web Fonts"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:632
+#: _src/react/views/setup/wizard.jsx:631
 msgid "Default settings"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:640
+#: _src/react/views/setup/wizard.jsx:639
 msgid "Static Server Cache"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:657
+#: _src/react/views/setup/wizard.jsx:656
 msgid "Cache on mobile devices"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:658
+#: _src/react/views/setup/wizard.jsx:657
 msgid "Clear cache on comment post"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:659
+#: _src/react/views/setup/wizard.jsx:658
 msgid "Cache HTTP headers"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:660
+#: _src/react/views/setup/wizard.jsx:659
 msgid "Show clear cache button in admin bar"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:685
+#: _src/react/views/setup/wizard.jsx:684
 msgid "Remove query strings from my assets"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:688
+#: _src/react/views/setup/wizard.jsx:687
 msgid "Disable cart fragments"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:690
+#: _src/react/views/setup/wizard.jsx:689
 msgid "Remove the default Emoji JS & CSS files"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:705
+#: _src/react/views/setup/wizard.jsx:704
 msgid "Enabled"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:724
+#: _src/react/views/setup/wizard.jsx:723
 msgid ""
 "Get started by activating all our features with recommended default "
 "settings, then fine-tune them to suit your specific needs. Alternately you "
 "can skip this process if you’d prefer to start customizing."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:726
+#: _src/react/views/setup/wizard.jsx:725
 msgid "Any issue reported here may cause issues while we set up the plugin."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:728
+#: _src/react/views/setup/wizard.jsx:727
 msgid "There are no more potential issues. You can proceed with the setup."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:732
+#: _src/react/views/setup/wizard.jsx:731
 msgid ""
 "Hummingbird's Asset Optimization engine can combine and minify the files "
 "your website outputs when a user visits your website. The fewer requests "
 "your visitors have to make to your server, the better."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:734
+#: _src/react/views/setup/wizard.jsx:733
 msgid ""
 "Uptime monitors your server response time and lets you know when your "
 "website is down or too slow for your visitors. Monitor your site every "
@@ -1780,31 +1768,31 @@ msgid ""
 "everything is running super smooth."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:736
+#: _src/react/views/setup/wizard.jsx:735
 msgid ""
 "Hummingbird stores static HTML copies of your pages and posts to decrease "
 "page load time. We will activate the default and basic settings and you can "
 "then fine-tune them to suit your specific needs."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:738
+#: _src/react/views/setup/wizard.jsx:737
 msgid ""
 "Here are a few additional tweaks you can make to further reduce your page "
 "load times."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:740
+#: _src/react/views/setup/wizard.jsx:739
 msgid ""
 "The setup is complete. We have activated the main features with the default "
 "settings. You can proceed to run a Performance Test or go directly to the "
 "Dashboard page."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:755
+#: _src/react/views/setup/wizard.jsx:754
 msgid "Help us Optimize your site for better Performance<span>Recommended</span>"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:763
+#: _src/react/views/setup/wizard.jsx:762
 msgid ""
 "Help us improve Hummingbird, minimize errors, and enhance the user "
 "experience by sharing anonymous, and non-sensitive usage data. You can "
@@ -1812,42 +1800,42 @@ msgid ""
 "data we collect."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:797
+#: _src/react/views/setup/wizard.jsx:796
 msgid "Skip wizard and apply a config"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:806
+#: _src/react/views/setup/wizard.jsx:805
 msgid "Back"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:813
+#: _src/react/views/setup/wizard.jsx:812
 msgid "Get started"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:817
+#: _src/react/views/setup/wizard.jsx:816
 msgid "We advise to check the recommendations before proceeding."
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:823
+#: _src/react/views/setup/wizard.jsx:822
 msgid "Continue anyway"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:832
+#: _src/react/views/setup/wizard.jsx:831
 msgid "Continue"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:839
+#: _src/react/views/setup/wizard.jsx:838
 msgid "Go to Dashboard"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:844
+#: _src/react/views/setup/wizard.jsx:843
 msgid "Run Performance Test"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:876
+#: _src/react/views/setup/wizard.jsx:875
 msgid "Checking status"
 msgstr ""
 
-#: _src/react/views/setup/wizard.jsx:876
+#: _src/react/views/setup/wizard.jsx:875
 msgid "Saving settings"
 msgstr ""

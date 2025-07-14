@@ -39,6 +39,8 @@ class WPMUDEV extends Request {
 			$api_key = $wpmudev_un->get_apikey();
 		} elseif ( class_exists( 'WPMUDEV_Dashboard' ) && is_object( WPMUDEV_Dashboard::$api ) && method_exists( WPMUDEV_Dashboard::$api, 'get_key' ) ) {
 			$api_key = WPMUDEV_Dashboard::$api->get_key();
+		} elseif ( class_exists( 'WPMUDEV\Hub\Connector\API' ) && \WPMUDEV\Hub\Connector\API::get()->is_logged_in() ) {
+			$api_key = \WPMUDEV\Hub\Connector\API::get()->get_api_key();
 		} else {
 			$api_key = '';
 		}

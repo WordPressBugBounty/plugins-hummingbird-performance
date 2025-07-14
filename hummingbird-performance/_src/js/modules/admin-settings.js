@@ -178,5 +178,21 @@ import { getLink } from '../utils/helpers';
 				window.location.href = getLink( 'resetSettings' );
 			} );
 		},
+
+		/**
+		 * Parse confirm disconnect site from the modal.
+		 *
+		 * @param {HTMLElement} btn The button that triggered the action.
+		 * @since 3.15.0
+		 */
+		confirmDisconnectSite: ( btn ) => {
+			if ( btn ) {
+				btn.classList.add( 'sui-button-onload-text' );
+			}
+
+			Fetcher.common.call( 'wphb_disconnect_site' ).then( () => {
+				window.location.reload();
+			} );
+		},
 	};
-} )( jQuery );
+}( jQuery ) );

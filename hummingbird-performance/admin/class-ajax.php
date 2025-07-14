@@ -9,6 +9,7 @@ namespace Hummingbird\Admin;
 
 use Hummingbird\Core\Configs;
 use Hummingbird\Core\Filesystem;
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Integration\Opcache;
 use Hummingbird\Core\Modules\Caching\Preload;
 use Hummingbird\Core\Modules\Minify;
@@ -198,6 +199,8 @@ class AJAX {
 		add_action( 'wp_ajax_wphb_admin_settings_export_settings', array( $this, 'admin_settings_export_settings' ) );
 		// Import settings.
 		add_action( 'wp_ajax_wphb_admin_settings_import_settings', array( $this, 'admin_settings_import_settings' ) );
+		// Disconnect Site.
+		add_action( 'wp_ajax_wphb_disconnect_site', array( $this, 'disconnect_site' ) );
 
 		// Configs.
 		add_action( 'wp_ajax_wphb_create_config', array( $this, 'save_config' ) );
@@ -2467,6 +2470,31 @@ class AJAX {
 				'message' => __( 'Settings imported and configured successfully.', 'wphb' ),
 			)
 		);
+	}
+
+	/**
+	 * Disconnect Site.
+	 *
+	 * @since 3.15.0
+	 */
+	public function disconnect_site() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
+		if ( Hub_Connector::logged_in() ) {
+			Hub_Connector::disconnect();
+		} else {
+			wp_send_json_error(
+				array(
+					'message' => __( 'You are not connected to the Hub.', 'wphb' ),
+				)
+			);
+		}
+
+		wp_send_json_success();
 	}
 
 	/**

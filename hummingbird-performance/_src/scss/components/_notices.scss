@@ -10,7 +10,7 @@
  * @since 2.6.0
  */
 
-.wpmud .sui-wrap .sui-row-with-sidenav > .sui-box.wphb-box-notice {
+.wpmud .sui-wrap .sui-row-with-sidenav>.sui-box.wphb-box-notice {
     display: flex;
     margin-bottom: 30px !important;
     box-shadow: inset 2px 0 0 0 #17A8E3, 0 2px 0 0 #DDDDDD;
@@ -45,7 +45,7 @@
     width: 100%;
 }
 
-.wpmud .wrap-wp-hummingbird > .wphb-notice:not(.notice) {
+.wpmud .wrap-wp-hummingbird>.wphb-notice:not(.notice) {
     width: 600px;
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.15);
     border-radius: 0 0 5px 5px;
@@ -90,6 +90,7 @@
             text-decoration: none;
         }
     }
+
     &.notice p {
         font-size: 14px;
         line-height: 1.5;
@@ -139,14 +140,32 @@
     font-weight: 400;
 }
 
+.wpmud {
+
+    .notice-connect-for-site-monitoring {
+        .wphb-wrapper {
+            display: flex;
+            align-items: center;
+            margin-right: 50px;
+            margin-bottom: 5px;
+
+            .sui-image {
+                max-width: 65px;
+                margin-right: 47px;
+                margin-left: 37px;
+            }
+        }
+    }
+}
+
 @include bp(tablet) {
-    .wpmud .wrap-wp-hummingbird > .wphb-notice {
+    .wpmud .wrap-wp-hummingbird>.wphb-notice {
         width: 85%;
     }
 }
 
 @include bp(phone-large) {
-    .wpmud .wrap-wp-hummingbird > .wphb-notice {
+    .wpmud .wrap-wp-hummingbird>.wphb-notice {
         width: 100%;
         top: 46px;
         margin-left: -251px;
@@ -156,5 +175,10 @@
 @include bp(phone) {
     .wpmud .wphb-notice:not(.notice) {
         padding: 15px 20px;
+    }
+
+    .wpmud .notice-connect-for-site-monitoring .wphb-wrapper {
+        margin-right: 5px;
+        display: block;
     }
 }

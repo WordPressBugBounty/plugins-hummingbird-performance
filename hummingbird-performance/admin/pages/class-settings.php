@@ -9,6 +9,7 @@ namespace Hummingbird\Admin\Pages;
 
 use Hummingbird\Admin\Page;
 use Hummingbird\Core\Configs;
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings as Settings_Module;
 use Hummingbird\Core\Utils;
 
@@ -129,6 +130,7 @@ class Settings extends Page {
 				'site_language'    => $site_language,
 				'translation_link' => $link,
 				'tracking'         => Settings_Module::get_setting( 'tracking', 'settings' ),
+				'show_disconnect'  => Hub_Connector::logged_in() && ! Utils::is_member(),
 			)
 		);
 	}

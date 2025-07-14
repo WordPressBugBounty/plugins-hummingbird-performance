@@ -11,6 +11,7 @@ use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Modules\Minify;
 use Hummingbird\WP_Hummingbird;
+use Hummingbird\Core\Hub_Connector;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -72,12 +73,19 @@ class Admin {
 	 * Admin constructor.
 	 */
 	public function __construct() {
-		$this->admin_notices = Notices::get_instance();
-
-		add_action( 'admin_init', array( $this, 'wphb_refresh_fast_cgi_status' ) );
 		add_action( 'admin_menu', array( $this, 'add_menu_pages' ) );
 		add_action( 'network_admin_menu', array( $this, 'add_network_menu_pages' ) );
+
+		add_action( 'admin_head', array( $this, 'wphb_style_upgrade_pro_upsell' ) );
+
 		add_filter( 'submenu_file', array( $this, 'remove_submenu_item' ) );
+
+		if ( Hub_Connector::is_connection_flow() ) {
+			return;
+		}
+
+		$this->admin_notices = Notices::get_instance();
+		add_action( 'admin_init', array( $this, 'wphb_refresh_fast_cgi_status' ) );
 
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			new AJAX();
@@ -104,8 +112,6 @@ class Admin {
 
 		// Filter built-in wpmudev branding script.
 		add_filter( 'wpmudev_whitelabel_plugin_pages', array( $this, 'builtin_wpmudev_branding' ) );
-
-		add_action( 'admin_head', array( $this, 'wphb_style_upgrade_pro_upsell' ) );
 
 		// Deactivation survey.
 		add_action( 'admin_footer-plugins.php', array( $this, 'load_deactivation_survey_modal' ) );
@@ -244,10 +250,6 @@ class Admin {
 			$this->pages['wphb-settings'] = new Pages\Settings( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
 		}
 
-		if ( ! apply_filters( 'wpmudev_branding_hide_doc_link', false ) ) {
-			$this->pages['wphb-tutorials'] = new Pages\React\Tutorials( 'wphb-tutorials', __( 'Tutorials', 'wphb' ), __( 'Tutorials', 'wphb' ), 'wphb' );
-		}
-
 		if ( ! Utils::is_member() && ! is_multisite() ) {
 			$this->pages['wphb-upgrade'] = new Pages\Upgrade( 'wphb-upgrade', __( 'Hummingbird Pro', 'wphb' ), __( 'Hummingbird Pro', 'wphb' ), 'wphb' );
 		}
@@ -314,10 +316,6 @@ class Admin {
 		$this->pages['wphb-uptime']        = new Pages\Uptime( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 		$this->pages['wphb-notifications'] = new Pages\Notifications( 'wphb-notifications', __( 'Notifications', 'wphb' ), __( 'Notifications', 'wphb' ), 'wphb' );
 		$this->pages['wphb-settings']      = new Pages\Settings( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
-
-		if ( ! apply_filters( 'wpmudev_branding_hide_doc_link', false ) ) {
-			$this->pages['wphb-tutorials'] = new Pages\React\Tutorials( 'wphb-tutorials', __( 'Tutorials', 'wphb' ), __( 'Tutorials', 'wphb' ), 'wphb' );
-		}
 
 		if ( ! Utils::is_member() ) {
 			$this->pages['wphb-upgrade'] = new Pages\Upgrade( 'wphb-upgrade', __( 'Hummingbird Pro', 'wphb' ), __( 'Hummingbird Pro', 'wphb' ), 'wphb' );
@@ -496,7 +494,8 @@ class Admin {
 			#toplevel_page_wphb ul.wp-submenu li:last-child a[href^="https://wpmudev.com"] {
 				background-color: #8d00b1 !important;
 				color: #fff !important;
-				font-weight: 400 !important;
+				font-weight: 500 !important;
+				white-space: nowrap;
 			}
 		</style>';
 

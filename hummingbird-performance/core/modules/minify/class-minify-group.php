@@ -243,23 +243,22 @@ class Minify_Group {
 	}
 
 	/**
-	 * Check if a script or style enqueued file version is in format like x.x.x.
+	 * Check if a script or style enqueued file version is valid and in format like x.x.x.
 	 *
 	 * @param string $version The version number to validate.
 	 *
 	 * @return bool True if the version is valid, false otherwise.
 	 */
 	public function is_valid_enqueue_version( $version ) {
-		if ( empty( $version ) ) {
+		// Make sure version is not empty and not an array otherwise it will through PHP warning while imploding the multidimensional array.
+		if ( empty( $version ) || is_array( $version ) ) {
 			return false;
 		}
 
-		$pattern = '/^\d+\.\d+(\.\d+)?$/';
-
-		// Perform the regular expression match.
+		// Make sure enqueue file version is in format like x.x.x if not it means the version is dynamic and set it to false otherwise it will end up in a forever loop.
+		$pattern  = '/^\d+\.\d+(\.\d+)?$/';
 		$is_valid = preg_match( $pattern, $version );
 
-		// Return true if the version matches the pattern, false otherwise.
 		return (bool) $is_valid;
 	}
 
@@ -275,23 +274,12 @@ class Minify_Group {
 		$this->handle_urls[ $handle ] = $url;
 
 		/**
-		 * Assets that use timestamp as a version will end up in a forever loop, causing issues for Hummingbird.
-		 * To mitigate future issues, we are discarding the version. This will make sure the asset hash stays static,
-		 * preventing such assets from being auto re-added to the queue in add_items_to_persistent_queue().
+		 * Filter resource version from validation.
 		 *
-		 * @since 3.1.2
+		 * @since 3.15.0
 		 */
-		if ( is_int( $version ) && 10 === strlen( $version ) ) {
-			$version = false;
-		}
-
-		// Make sure version is not array otherwise it will through PHP warning while imploding the multidimensional array.
-		if ( is_array( $version ) ) {
-			$version = false;
-		}
-
-		// Make sure enqueue file version is in format like x.x.x if not it means the version is dynamic and set it to false otherwise it will end up in a forever loop.
-		if ( ! $this->is_valid_enqueue_version( $version ) ) {
+		$validate = apply_filters( 'wphb_validate_handle_version', true, $handle, $version, $this->type );
+		if ( $validate && ! $this->is_valid_enqueue_version( $version ) ) {
 			$version = false;
 		}
 
@@ -1050,6 +1038,7 @@ class Minify_Group {
 		// First file is for the header.
 		$files_data = array();
 
+		$minify_module->log( 'Processing group: ' . $this->group_id . ' (handles: ' . implode( ', ', $handles ) . ')' );
 		foreach ( $handles as $handle ) {
 			$src = $this->get_handle_url( $handle );
 
@@ -1077,8 +1066,6 @@ class Minify_Group {
 				);
 				continue;
 			}
-
-			$minify_module->log( 'Processing group: ' . $this->group_id . ' (handles: ' . implode( ', ', $handles ) . ')' );
 
 			// Get the full URL.
 			if ( ! preg_match( '|^(https?:)?//|', $src ) ) {

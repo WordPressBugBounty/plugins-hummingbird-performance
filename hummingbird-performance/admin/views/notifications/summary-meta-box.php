@@ -9,6 +9,8 @@
  * @var string $next_notification     Next scheduled notification.
  */
 
+use Hummingbird\Core\Hub_Connector;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -29,14 +31,15 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 		</span>
 	</div>
 </div>
-<div class="sui-summary-segment">
-	<ul class="sui-list">
-		<li>
-			<span class="sui-list-label"><?php esc_html_e( 'Next scheduled reporting', 'wphb' ); ?></span>
-			<span class="sui-list-detail">
-				<?php esc_html_e( 'Never', 'wphb' ); ?>
-			</span>
-		</li>
-	</ul>
-</div>
-
+<?php if ( ! is_multisite() || is_network_admin() ) : ?>
+	<div class="sui-summary-segment">
+		<ul class="sui-list">
+			<li>
+				<span class="sui-list-label"><?php esc_html_e( 'Next scheduled reporting', 'wphb' ); ?></span>
+				<a href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications' ) ); ?>" class="sui-button sui-button-blue">
+					<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
+				</a>
+			</li>
+		</ul>
+	</div>
+<?php endif; ?>

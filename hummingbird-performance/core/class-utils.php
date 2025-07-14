@@ -84,16 +84,19 @@ class Utils {
 	 * @return bool
 	 */
 	public static function has_access_to_hub() {
-		if ( ! class_exists( 'WPMUDEV_Dashboard' ) ) {
+		if ( class_exists( 'WPMUDEV_Dashboard' ) ) {
+
+			if ( ! method_exists( 'WPMUDEV_Dashboard_Api', 'get_membership_status' ) ) {
+				return self::is_member();
+			}
+
+			// Possible values: full, single, free, expired, paused, unit.
+			$plan = WPMUDEV_Dashboard::$api->get_membership_status();
+		} elseif (  Hub_Connector::has_access() ) {
+			$plan = \WPMUDEV\Hub\Connector\Data::get()->membership_type();
+		} else {
 			return false;
 		}
-
-		if ( ! method_exists( 'WPMUDEV_Dashboard_Api', 'get_membership_status' ) ) {
-			return self::is_member();
-		}
-
-		// Possible values: full, single, free, expired, paused, unit.
-		$plan = WPMUDEV_Dashboard::$api->get_membership_status();
 
 		return in_array( $plan, array( 'full', 'single', 'free', 'unit' ), true );
 	}
@@ -253,6 +256,7 @@ class Utils {
 					),
 					self::get_admin_menu_url()
 				),
+				'upgradeUrl' => self::get_link( 'plugin', 'hummingbird_instant_threshold_option' ),
 			),
 		);
 
@@ -294,10 +298,6 @@ class Utils {
 					'isMinifyPage' => sanitize_text_field( filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW ) ),
 				)
 			);
-		}
-
-		if ( ! apply_filters( 'wpmudev_branding_hide_doc_link', false ) && $minify_module->is_on_page( true ) ) {
-			wp_enqueue_script( 'wphb-react-tutorials', WPHB_DIR_URL . 'admin/assets/js/wphb-react-tutorials.min.js', array( 'wp-i18n' ), WPHB_VERSION, true );
 		}
 
 		$i10n = array_merge_recursive(

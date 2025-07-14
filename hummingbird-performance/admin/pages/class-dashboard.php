@@ -14,6 +14,7 @@ use Hummingbird\Core\Modules\Performance;
 use Hummingbird\Core\Modules\Uptime;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Modules\Caching\Fast_CGI;
+use Hummingbird\Core\Settings;
 use stdClass;
 use WP_Error;
 
@@ -547,12 +548,12 @@ class Dashboard extends Page {
 		}
 
 		/* Reports */
-		if ( ! Utils::is_member() || ( defined( 'WPHB_WPORG' ) && WPHB_WPORG ) ) {
+		if ( ! Utils::has_access_to_hub() ) {
 			$this->add_meta_box(
 				'dashboard/reports',
 				__( 'Notifications', 'wphb' ),
 				null,
-				null,
+				array( $this, 'dashboard_notification_module_metabox_header' ),
 				null,
 				'box-dashboard-right'
 			);
@@ -563,8 +564,9 @@ class Dashboard extends Page {
 	 * Display dashboard welcome metabox.
 	 */
 	public function dashboard_welcome_metabox() {
-		$site_date = $cf_current = '';
-		$cf_active = false;
+		$site_date  = '';
+		$cf_current = '';
+		$cf_active  = false;
 
 		if ( Utils::get_module( 'uptime' )->has_access() && isset( $this->uptime_report->up_since ) && false !== $this->uptime_report->up_since ) {
 			$gmt_date  = date( 'Y-m-d H:i:s', $this->uptime_report->up_since );
@@ -580,6 +582,12 @@ class Dashboard extends Page {
 			}
 		}
 
+		$reports      = Settings::get_setting( 'reports', 'performance' );
+		$reports_next = '';
+		if ( Utils::has_access_to_hub() ) {
+			$reports_next = Utils::pro()->module( 'notifications' )->get_schedule_label_for( 'performance', 'reports' );
+		}
+
 		$this->view(
 			'dashboard/welcome/meta-box',
 			array(
@@ -588,13 +596,18 @@ class Dashboard extends Page {
 				'gzip_status'      => $this->gzip_status,
 				'gzip_issues'      => Utils::get_number_of_issues( 'gzip', $this->gzip_status ),
 				'uptime_active'    => $this->uptime_active,
+				'uptime_url'       => Utils::get_admin_menu_url( 'uptime' ),
 				'uptime_report'    => $this->uptime_report,
+				'reports_enabled'  => isset( $reports['enabled'] ) ? $reports['enabled'] : false,
+				'reports_next'     => $reports_next,
+				'reports_url'      => Utils::get_admin_menu_url( 'notifications' ),
 				'report_type'      => $this->performance->type,
 				'last_report'      => isset( $this->performance->last_report->data ) ? $this->performance->last_report->data : false,
 				'report_dismissed' => $this->performance->report_dismissed,
 				'is_doing_report'  => $this->performance->is_doing_report,
 				'cf_active'        => $cf_active,
 				'cf_current'       => $cf_current,
+				'pc_active'        => Utils::get_module( 'page_cache' )->is_active(),
 				'site_date'        => $site_date,
 			)
 		);
@@ -850,6 +863,14 @@ class Dashboard extends Page {
 	public function dashboard_uptime_module_metabox_header() {
 		$title = __( 'Uptime Monitoring', 'wphb' );
 		$this->view( 'dashboard/uptime/module-meta-box-header', compact( 'title' ) );
+	}
+
+	/**
+	 * Notification header meta box.
+	 */
+	public function dashboard_notification_module_metabox_header() {
+		$title = __( 'Notifications', 'wphb' );
+		$this->view( 'dashboard/reports/meta-box-header', compact( 'title' ) );
 	}
 
 	/**

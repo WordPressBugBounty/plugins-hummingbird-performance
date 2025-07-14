@@ -440,7 +440,7 @@ class Performance extends Page {
 		$reports = Settings::get_setting( 'reports', 'performance' );
 
 		$reports_next = '';
-		if ( Utils::is_member() && Utils::pro() ) {
+		if ( Utils::has_access_to_hub() ) {
 			$reports_next = Utils::pro()->module( 'notifications' )->get_schedule_label_for( 'performance', 'reports' );
 		}
 

@@ -7,6 +7,7 @@
 
 namespace Hummingbird\Admin;
 
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 
@@ -73,6 +74,20 @@ abstract class Page {
 	 * @param bool   $render      Render the page.
 	 */
 	public function __construct( $slug, $page_title, $menu_title, $parent = false, $render = true ) {
+
+		if ( $render && 'wphb' === $parent && 'wphb-upgrade' !== $slug && Hub_Connector::$valid_screen && Hub_Connector::is_connection_flow() && ! Hub_Connector::logged_in() ) {
+			add_submenu_page(
+				$parent,
+				$page_title,
+				$menu_title,
+				Utils::get_admin_capability(),
+				$slug,
+				$render ? array( Hub_Connector::class, 'render' ) : null
+			);
+
+			return false;
+		}
+
 		$this->slug = $slug;
 
 		$this->admin_notices = Notices::get_instance();
@@ -546,7 +561,8 @@ abstract class Page {
 			$this->modal( 'clear-cache-network-wide' );
 		}
 
-		$show_upgrade_modal = ! is_multisite() || is_main_site() || is_network_admin();
+		$show_upgrade_modal = ! is_multisite() || is_network_admin();
+
 		if ( get_site_option( 'wphb_show_upgrade_summary' ) && $show_upgrade_modal && ! apply_filters( 'wpmudev_branding_hide_doc_link', false ) ) {
 			$this->modal( 'upgrade-summary' );
 			?>

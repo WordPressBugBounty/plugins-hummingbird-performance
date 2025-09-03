@@ -30,9 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</p>
 
-	<button role="button" class="sui-button sui-button-blue" id="check-files" onclick="WPHB_Admin.minification.hbTrackMPOnAoActivate()">
+	<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'enable', 'true' ), 'wphb-enable-ao' ) ); ?>" class="sui-button sui-button-blue" type="button" onclick="WPHB_Admin.minification.hbTrackMPOnAoActivate()">
 		<?php esc_html_e( 'Activate', 'wphb' ); ?>
-	</button>
+	</a>
 </div>
 
 <?php $this->modal( 'check-files' ); ?>

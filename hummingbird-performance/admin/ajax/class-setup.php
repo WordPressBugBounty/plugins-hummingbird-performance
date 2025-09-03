@@ -183,16 +183,32 @@ class Setup {
 			if ( isset( $settings['enable'] ) && $settings['enable'] ) {
 				$options = Settings::get_settings( 'minify' );
 
-				$options['type']      = isset( $settings['aoSpeedy'] ) && $settings['aoSpeedy'] ? 'speedy' : 'basic';
+				$options['enabled']   = isset( $settings['enable'] ) && $settings['enable'];
+				$options['compress']  = isset( $settings['aoCompress'] ) && $settings['aoCompress'];
+				$options['combine']   = isset( $settings['aoCombine'] ) && $settings['aoCombine'];
 				$options['use_cdn']   = isset( $settings['aoCdn'] ) && $settings['aoCdn'];
 				$options['delay_js']  = isset( $settings['delayJS'] ) && $settings['delayJS'];
 				$options['font_swap'] = isset( $settings['delayJS'] ) && $settings['fontSwap'];
 
 				Settings::update_settings( $options, 'minify' );
 
+				// Starts the AO scan.
+				Utils::get_module( 'minify' )->start_process();
+
 				// Enable/disable critical CSS and generate it if enabled.
 				$critical_css = isset( $settings['criticalCSS'] ) && $settings['criticalCSS'];
 				Utils::get_module( 'critical_css' )->toggle_critical_css( $critical_css );
+
+				// Track mixpanel events.
+				$options = Utils::get_module( 'minify' )->get_options();
+
+				// Track Mixpanel event for delay JS.
+				$update_type = ! empty( $options['delay_js'] ) ? 'activate' : 'deactivate';
+				Utils::get_module( 'mixpanel_analytics' )->track_delay_js_event( $update_type, 'wizard' );
+
+				// Track Mixpanel event for critical CSS.
+				$update_type = ! empty( $options['critical_css'] ) ? 'activate' : 'deactivate';
+				Utils::get_module( 'mixpanel_analytics' )->track_critical_css_event( $update_type, 'wizard' );
 			} elseif ( ! Utils::is_ajax_network_admin() ) {
 				Utils::get_module( 'minify' )->disable();
 			}

@@ -22,6 +22,7 @@ import HBAPIFetch from '../api';
 import AutoAssets from '../views/minify/assets-auto';
 import { ManualAssets } from '../views/minify/assets-manual';
 import { MinifySummary } from '../views/minify/summary';
+import ClearCacheButton from '../views/minify/clear-cache-button';
 import { STORE_NAME } from '../data/minify';
 
 /**
@@ -35,28 +36,6 @@ import { STORE_NAME } from '../data/minify';
 export const MinifyPage = ( props ) => {
 	const api = new HBAPIFetch();
 	const [ loading, setLoading ] = useState( true );
-
-	/**
-	 * Clear asset optimization cache.
-	 */
-	const clearCache = () => {
-		setLoading( true );
-
-		api.post( 'minify_clear_cache' )
-			.then( ( response ) => {
-				dispatch( STORE_NAME ).invalidateResolution( 'getAssets' );
-				dispatch( STORE_NAME ).invalidateResolution( 'getOptions' );
-				if ( response.isCriticalActive ) {
-					window.wphbMixPanel.track( 'critical_css_cache_purge', {
-						location: 'ao_settings'
-					} );
-				}
-				const message = __( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' );
-				WPHB_Admin.notices.show( message ); // eslint-disable-line camelcase
-				setLoading( false );
-			} )
-			.catch( window.console.log );
-	};
 
 	/**
 	 * Re-check files.
@@ -75,7 +54,6 @@ export const MinifyPage = ( props ) => {
 				loading={ loading }
 				api={ api }
 				mode={ props.wphbData.mode }
-				clearCache={ clearCache }
 				reCheckFiles={ reCheckFiles }
 				showModal={ props.wphbData.showModal }
 				filters={ props.wphbData.filters }
@@ -89,7 +67,6 @@ export const MinifyPage = ( props ) => {
 			loading={ loading }
 			api={ api }
 			mode={ props.wphbData.mode }
-			clearCache={ clearCache }
 			reCheckFiles={ reCheckFiles }
 			showModal={ props.wphbData.showModal } />
 	);
@@ -108,5 +85,10 @@ domReady( function() {
 	const summary = document.getElementById( 'wrap-wphb-summary' );
 	if ( summary ) {
 		ReactDOM.render( <MinifySummary wphbData={ wphbReact } />, summary );
+	}
+
+	const clearAO = document.getElementById( 'wrap-wphb-clear-ao-files' );
+	if ( clearAO ) {
+		ReactDOM.render( <ClearCacheButton />, clearAO );
 	}
 } );

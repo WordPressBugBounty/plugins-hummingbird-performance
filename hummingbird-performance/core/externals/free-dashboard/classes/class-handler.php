@@ -34,7 +34,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 		 *
 		 * @since 2.0
 		 */
-		public $version = '2.0.2';
+		public $version = '2.0.6';
 
 		/**
 		 * Option name to store data.
@@ -70,7 +70,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 		 *
 		 * @since 2.0
 		 */
-		private $disabled = array( 'email' );
+		private $disabled = array( 'email', 'giveaway' );
 
 		/**
 		 * Registered plugin notices data from db.
@@ -102,6 +102,16 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 		 */
 		private $plugin_notices = array(
 			'giveaway' => '\WPMUDEV\Notices\Notices\Giveaway',
+		);
+
+		/**
+		 * List of allowed actions.
+		 *
+		 * @var string[]
+		 */
+		private $allowed_actions = array(
+			'dismiss_notice',
+			'extend_notice',
 		);
 
 		/**
@@ -149,7 +159,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 		 *          'title'        => 'Beehive', // Required: Plugin title.
 		 *          'wp_slug'      => 'beehive-analytics', // Required: wp.org slug of the plugin.
 		 *          'cta_email'    => __( 'Get Fast!', 'ga_trans' ), // Email button CTA.
-		 *          'mc_list_id'   => 'xxxxxxxx', // Optional: Mailchimp list id for the plugin - e.g. 4b14b58816 is list id for Smush.
 		 *          'installed_on' => time(), // Optional: Plugin activated time.
 		 *          'screens'      => array( // Required: Plugin screen ids.
 		 *                  'toplevel_page_beehive',
@@ -271,6 +280,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 			// Verify nonce.
 			if ( ! wp_verify_nonce( $nonce, 'wpmudev_notices_action' ) ) {
 				wp_die( esc_html__( 'Nonce verification failed.', 'wdev_frash' ) );
+			}
+
+			// Check if action is valid.
+			if ( ! in_array( $action, $this->allowed_actions, true ) ) {
+				wp_die( esc_html__( 'Invalid action.', 'wdev_frash' ) );
 			}
 
 			// Initialize the options.
@@ -587,7 +601,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 				}
 
 				// Disabled type, skip.
-				if ( in_array( $type, $this->disabled, true ) ) {
+				if ( $this->is_disabled( $type, $plugin_id ) ) {
 					continue;
 				}
 
@@ -666,6 +680,38 @@ if ( ! class_exists( __NAMESPACE__ . '\\Handler' ) ) {
 			$time = filter_input( INPUT_GET, 'wpmudev_notice_time', FILTER_SANITIZE_SPECIAL_CHARS );
 
 			return empty( $time ) ? time() : (int) $time;
+		}
+
+		/**
+		 * Check if a notice type is disabled.
+		 *
+		 * @since 2.0.3
+		 *
+		 * @param string $type   Notice type.
+		 * @param string $plugin Plugin ID.
+		 *
+		 * @return bool
+		 */
+		protected function is_disabled( $type, $plugin ) {
+			/**
+			 * Filter to modify disabled notices list.
+			 *
+			 * @param array  $disabled Disabled list.
+			 * @param string $plugin   Plugin ID.
+			 */
+			$disabled = apply_filters( 'wpmudev_notices_disabled_notices', $this->disabled, $plugin );
+
+			// Check if notice type is disabled.
+			$is_disabled = in_array( $type, $disabled, true );
+
+			/**
+			 * Filter to enable/disable a notice type.
+			 *
+			 * @param bool   $is_disabled Is disabled.
+			 * @param string $type        Notice type.
+			 * @param string $plugin      Plugin ID.
+			 */
+			return apply_filters( 'wpmudev_notices_is_disabled', $is_disabled, $type, $plugin );
 		}
 
 		/**

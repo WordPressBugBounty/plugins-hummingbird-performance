@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</button>
 
 				<h3 id="upgrade-summary-modal-title" class="sui-box-title sui-lg" style="white-space: inherit">
-					<?php esc_html_e( 'Stay Online. Stay in Control — For Free', 'wphb' ); ?>
+					<?php esc_html_e( 'Smarter optimization, smoother workflow', 'wphb' ); ?>
 				</h3>
 			</div>
 
@@ -47,14 +47,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="wphb-upgrade-feature">
 					<p class="wphb-upgrade-item-desc" style="text-align: center">
 						<?php
-						esc_html_e( 'Get real-time downtime alerts and automated performance reports sent straight to your inbox. Protect your site, keep visitors happy, and fix issues fast — just connect your site with a free WPMU DEV account.', 'wphb' );
+						esc_html_e( 'We\'re making it easier than ever to optimize your site without slowing down your workflow. Asset Optimization Scan now runs in the background while you continue working. Dev mode gives you control of advanced tweaks, and Gzip compression joins the optimization party - all in one streamlined workflow!', 'wphb' );
 						?>
 					</p>
 				</div>
 				<div class="wphb-upgrade-feature">
 					<?php
-						$hb_button      = esc_html__( 'ACTIVATE FREE MONITORING & REPORTS', 'wphb' );
-						$hb_button_link = Hub_Connector::get_connect_site_url( 'wphb-notifications', 'new_feature_modal' );
+						$hb_button      = esc_html__( 'Check it out', 'wphb' );
+						$hb_button_link = Utils::get_admin_menu_url( 'minification' );
 					?>
 				</div>
 			</div>

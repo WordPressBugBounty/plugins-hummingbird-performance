@@ -140,8 +140,6 @@ import Fetcher from './utils/fetcher';
 		 * @param {object} properties Properties.
 		 */
 		 trackAOUpdated( properties ) {
-			const mode = properties.Mode.charAt(0).toUpperCase() + properties.Mode.slice(1);
-			properties.Mode = mode;
 			this.track( 'ao_updated', properties );
 		},
 

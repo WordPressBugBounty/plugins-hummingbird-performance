@@ -49,14 +49,12 @@ class Admin {
 		'toplevel_page_wphb-network',
 		'hummingbird_page_wphb-performance',
 		'hummingbird_page_wphb-caching',
-		'hummingbird_page_wphb-gzip',
 		'hummingbird_page_wphb-minification',
 		'hummingbird_page_wphb-advanced',
 		'hummingbird_page_wphb-uptime',
 		'hummingbird_page_wphb-notifications',
 		'hummingbird-pro_page_wphb-performance',
 		'hummingbird-pro_page_wphb-caching',
-		'hummingbird-pro_page_wphb-gzip',
 		'hummingbird-pro_page_wphb-minification',
 		'hummingbird-pro_page_wphb-advanced',
 		'hummingbird-pro_page_wphb-uptime',
@@ -64,7 +62,6 @@ class Admin {
 		'hummingbird_page_wphb-performance-network',
 		'hummingbird_page_wphb-minification-network',
 		'hummingbird_page_wphb-caching-network',
-		'hummingbird_page_wphb-gzip-network',
 		'hummingbird_page_wphb-uptime-network',
 		'hummingbird_page_wphb-notifications-network',
 	);
@@ -132,7 +129,7 @@ class Admin {
 		// Upgrade link.
 		if ( ! Utils::is_member() ) {
 			if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG ) {
-				$actions['wphb-plugins-upgrade'] = '<a href="' . Utils::get_link( 'plugin', 'hummingbird_pluginlist_upgrade' ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hummingbird Pro', 'wphb' ) ) . '" target="_blank" style="color: #8D00B1;" onclick="window.wphbMixPanel.trackHBUpsell( \'pro_general\', \'plugins_list\', \'cta_clicked\', this.href, \'hb_pro_upsell\' );">' . sprintf( /* translators: %s: Discount percent */ __( 'Upgrade For %s Off!', 'wphb' ), Utils::get_plugin_discount() ) . '</a>';
+				$actions['wphb-plugins-upgrade'] = '<a href="' . Utils::get_link( 'plugin', 'hummingbird_pluginlist_upgrade' ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hummingbird Pro', 'wphb' ) ) . '" target="_blank" style="color: #8D00B1;" onclick="window.wphbMixPanel.trackHBUpsell( \'pro_general\', \'plugins_list\', \'cta_clicked\', this.href, \'hb_pro_upsell\' );">' . esc_html__( 'SALE - Limited Offer', 'wphb' ) . '</a>';
 			} elseif ( ! Utils::is_hosted_site_connected_to_free_hub() ) {
 				$actions['wphb-plugins-upgrade'] = '<a href="' . Utils::get_link( 'plugin', 'hummingbird_pluginlist_renew' ) . '" aria-label="' . esc_attr( __( 'Renew Membership', 'wphb' ) ) . '" target="_blank" style="color: #8D00B1;" onclick="window.wphbMixPanel.trackHBUpsell( \'pro_general\', \'plugins_list\', \'cta_clicked\', this.href, \'hb_pro_upsell\' );">' . esc_html__( 'Renew Membership', 'wphb' ) . '</a>';
 			}
@@ -223,10 +220,6 @@ class Admin {
 
 		$this->pages['wphb-caching'] = new Pages\Caching( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
 
-		if ( ! is_multisite() ) {
-			$this->pages['wphb-gzip'] = new Pages\React\Gzip( 'wphb-gzip', __( 'Gzip Compression', 'wphb' ), __( 'Gzip Compression', 'wphb' ), 'wphb' );
-		}
-
 		$minify = Settings::get_setting( 'enabled', 'minify' );
 
 		if ( ! is_multisite() || ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify ) ) ) {
@@ -310,7 +303,6 @@ class Admin {
 		$this->pages['wphb-dashboard']     = new Pages\Dashboard( 'wphb', __( 'Dashboard', 'wphb' ), __( 'Dashboard', 'wphb' ), 'wphb' );
 		$this->pages['wphb-performance']   = new Pages\Performance( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb' );
 		$this->pages['wphb-caching']       = new Pages\Caching( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
-		$this->pages['wphb-gzip']          = new Pages\React\Gzip( 'wphb-gzip', __( 'Gzip Compression', 'wphb' ), __( 'Gzip Compression', 'wphb' ), 'wphb' );
 		$this->pages['wphb-minification']  = new Pages\Minification( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ) . $this->get_status_tag_html(), 'wphb' );
 		$this->pages['wphb-advanced']      = new Pages\Advanced( 'wphb-advanced', __( 'Advanced Tools', 'wphb' ), __( 'Advanced Tools', 'wphb' ), 'wphb' );
 		$this->pages['wphb-uptime']        = new Pages\Uptime( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
@@ -491,7 +483,7 @@ class Admin {
 		}
 
 		echo '<style>
-			#toplevel_page_wphb ul.wp-submenu li:last-child a[href^="https://wpmudev.com"] {
+			#toplevel_page_wphb ul.wp-submenu li:last-child a[href*="wpmudev.com"] {
 				background-color: #8d00b1 !important;
 				color: #fff !important;
 				font-weight: 500 !important;
@@ -501,7 +493,7 @@ class Admin {
 
 		echo '<script>
 				jQuery(function() {
-					jQuery(\'#toplevel_page_wphb ul.wp-submenu li:last-child a[href^="https://wpmudev.com"]\').attr("target", "_blank");
+					jQuery(\'#toplevel_page_wphb ul.wp-submenu li:last-child a[href*="wpmudev.com"]\').attr("target", "_blank");
 				});
 			</script>';
 	}

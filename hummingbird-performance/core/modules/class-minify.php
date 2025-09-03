@@ -137,7 +137,7 @@ class Minify extends Module {
 
 		add_filter( 'wp_hummingbird_is_active_module_minify', array( $this, 'minify_module_status' ) );
 
-		add_filter( 'wphb_dont_add_handle_to_collection', array( $this, 'filter_assets_bloating'), 10, 3 );
+		add_filter( 'wphb_dont_add_handle_to_collection', array( $this, 'filter_assets_bloating'), 9, 3 );
 		add_filter( 'wphb_block_resource', array( $this, 'filter_resource_block' ), 10, 5 );
 		add_filter( 'wphb_minify_resource', array( $this, 'filter_resource_minify' ), 10, 4 );
 		add_filter( 'wphb_combine_resource', array( $this, 'filter_resource_combine' ), 10, 3 );
@@ -323,6 +323,11 @@ class Minify extends Module {
 	public function filter_enqueues_list( $handles, $type ) {
 		if ( ! $this->is_active() ) {
 			// Asset optimization is not active, return the handles.
+			return $handles;
+		}
+
+		if ( ! $this->is_minification_mode_enabled() ) {
+			// Asset optimization no optimization mode is selected in automatic mode, return the handles.
 			return $handles;
 		}
 
@@ -1245,7 +1250,7 @@ class Minify extends Module {
 	}
 
 	/**
-	 * Filter assets with dynamic parameter in src, bloating AO.
+	 * Filter assets with dynamic handle or src, bloating AO.
 	 *
 	 * @param bool   $skip   Current value.
 	 * @param string $handle Resource handle.
@@ -1253,11 +1258,28 @@ class Minify extends Module {
 	 *
 	 * @return bool
 	 */
-	public function filter_assets_bloating ( $skip, $handle, $src ) {
-		$parsed_url = wp_parse_url( $src );
-	
-		return !empty( $parsed_url['query'] );
+	public function filter_assets_bloating( $skip, $handle, $src ) {
+		// Respect previous filters.
+		if ( $skip ) {
+			return true;
+		}
+
+		// Skip if URL has query parameters.
+		if ( strpos( $src, '?' ) !== false ) {
+			return true;
+		}
+
+		// Skip if handle contains realistic timestamp (9–10 digits, between 2010 and 2200).
+		if ( preg_match( '/\d{9,10}/', $handle, $match ) ) {
+			$timestamp = (int) $match[0];
+			if ( $timestamp >= 1262304000 && $timestamp <= 7258118400 ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
+
 
 	/**
 	 * Filter blocker resources.
@@ -1318,11 +1340,10 @@ class Minify extends Module {
 	 * @return bool
 	 */
 	public function filter_resource_combine( $value, $handle, $type ) {
-		$options  = $this->get_options();
-		$combine  = $options['dont_combine'][ $type ];
-		$delay_js = $options['delay_js'];
+		$options = $this->get_options();
+		$combine = $options['dont_combine'][ $type ];
 
-		if ( true === $delay_js && 'scripts' === $type ) {
+		if ( ! $this->should_combine_files( $value, $handle, $type ) ) {
 			return false;
 		}
 
@@ -2270,5 +2291,56 @@ class Minify extends Module {
 			</div>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Check if any minification mode is enabled.
+	 *
+	 * @since  3.16.0
+	 * @return bool
+	 */
+	public function is_minification_mode_enabled() {
+		$options = $this->get_options();
+
+		return ( $options['view'] ?? '' ) === 'advanced'
+			|| ! empty( $options['compress'] )
+			|| ! empty( $options['combine'] );
+	}
+
+	/**
+	 * Check if files should be combined.
+	 *
+	 * @since 3.16.0
+	 *
+	 * @param bool   $value   Current value.
+	 * @param string $handle  Resource handle.
+	 * @param string $type    Script or style.
+	 *
+	 * @return bool
+	 */
+	public function should_combine_files( $value, $handle, $type ) {
+		$options = $this->get_options();
+
+		// Skip combining scripts if delay JS is enabled.
+		if ( 'scripts' === $type && $options['delay_js'] ) {
+			return false;
+		}
+
+		// Skip combining if basic mode and combine is not enabled.
+		if ( 'basic' === $options['view'] && ! $options['combine'] ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Start the background process for AO scan.
+	 *
+	 * @since 3.16.0
+	 */
+	public function start_process() {
+		// Start AO scan.
+		Utils::get_module( 'background_processing' )->maybe_start_scan();
 	}
 }

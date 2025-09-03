@@ -40,6 +40,10 @@ $this->do_react_meta_boxes( 'summary' );
 			</form>
 		<?php endif; ?>
 
+		<?php if ( 'gzip' === $this->get_current_tab() ) : ?>
+			<div class="row" id="<?php echo 'wrap-' . esc_attr( 'wphb-gzip' ); ?>"></div>
+		<?php endif; ?>
+
 		<?php if ( 'settings' === $this->get_current_tab() ) : ?>
 			<form id="wphb-minification-settings-form" method="post">
 				<?php $this->do_meta_boxes( 'settings' ); ?>
@@ -56,8 +60,6 @@ endif;
 if ( get_option( 'wphb-minification-show-advanced_modal' ) ) {
 	$this->modal( 'minification-advanced' );
 }
-$this->modal( 'automatic-ao-how-does-it-work' );
-$this->modal( 'manual-ao-how-does-it-work' );
 
 if ( 'advanced' === $this->mode ) {
 	$this->modal( 'minification-tour' );
@@ -76,6 +78,10 @@ if ( ! Utils::is_member() ) {
 
 <script>
 	jQuery(document).ready( function() {
+		<?php if ( 'gzip' === $this->get_current_tab() ) : ?>
+			return;
+		<?php endif; ?>
+
 		window.WPHB_Admin.getModule( 'minification' );
 		<?php if ( isset( $_GET['run'] ) ) : ?>
 			jQuery( document ).trigger( 'check-files' );

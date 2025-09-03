@@ -53,14 +53,14 @@ class SetupWizard extends React.Component {
 			 * 6. Finish
 			 */
 			step: 1,
-			scanning: false,
 			issues: {
 				advCacheFile: false
 			},
 			showConflicts: false,
 			settings: {
 				aoEnable: true,
-				aoSpeedy: true,
+				aoCompress: true,
+				aoCombine: true,
 				aoCdn: Boolean( this.props.wphbData.isMember ),
 				delayJS: Boolean( this.props.wphbData.isMember ),
 				criticalCSS: Boolean( this.props.wphbData.isMember ),
@@ -90,7 +90,6 @@ class SetupWizard extends React.Component {
 		this.updateSettings = this.updateSettings.bind( this );
 		this.toggleModule = this.toggleModule.bind( this );
 		this.quitWizard = this.quitWizard.bind( this );
-		this.scanning = this.scanning.bind( this );
 	}
 
 	/**
@@ -289,13 +288,6 @@ class SetupWizard extends React.Component {
 	}
 
 	/**
-	 * Set scanning state.
-	 */
-	scanning() {
-		this.setState( { scanning: true } );
-	}
-
-	/**
 	 * Track setup wizard events.
 	 *
 	 * @param {string} action
@@ -310,7 +302,7 @@ class SetupWizard extends React.Component {
 
 		const stepMap = {
 			1: this.state.issues.advCacheFile ? 'conflict' : 'tracking',
-			2: this.state.scanning ? 'ao_progress' : 'ao_settings',
+			2: 'ao_settings',
 			3: 'uptime',
 			4: 'page_caching',
 			5: 'advanced_tools'
@@ -319,7 +311,8 @@ class SetupWizard extends React.Component {
 		const conflict = this.state.issues.advCacheFile ? 'yes' : 'no';
 
 		const aoSettings = {
-			aoSpeedy: 'speedy',
+			aoCompress: 'compress',
+			aoCombine: 'combine',
 			aoCdn: 'cdn',
 			delayJS: 'js_delay',
 			criticalCSS: 'critical_css',
@@ -466,7 +459,6 @@ class SetupWizard extends React.Component {
 					nextStep={ this.nextStep }
 					prevStep={ this.prevStep }
 					finish={ this.finish }
-					scanning={ this.scanning }
 					skipConflicts={ this.skipConflicts }
 					isMember={ this.state.isMember }
 					isNetworkAdmin={ this.props.wphbData.isNetworkAdmin }

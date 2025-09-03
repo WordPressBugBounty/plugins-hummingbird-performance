@@ -191,8 +191,9 @@ class Scanner {
 		$urls = array_unique( $urls );
 
 		$urls_list = array();
-		// Duplicate every URL 3 times. This will be enough to generate all the files for most of the sites.
-		for ( $i = 0; $i < 3; $i++ ) {
+		// Duplicate every URL multiple times. This will be enough to generate all the files for most of the sites.
+		$duplicate_count = apply_filters( 'wphb_minify_scan_url_duplicate_count', 3 );
+		for ( $i = 0; $i < $duplicate_count; $i++ ) {
 			$urls_list = array_merge( $urls_list, $urls );
 		}
 

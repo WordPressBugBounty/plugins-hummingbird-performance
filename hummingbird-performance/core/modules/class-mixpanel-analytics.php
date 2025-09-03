@@ -88,7 +88,7 @@ class Mixpanel_Analytics extends Module {
 	 * Track Mixpanel event.
 	 *
 	 * @param string $event Mixpanel event name.
-	 * @param array $properties Mixpanel event properties.
+	 * @param array  $properties Mixpanel event properties.
 	 *
 	 * @return array
 	 */
@@ -404,5 +404,101 @@ class Mixpanel_Analytics extends Module {
 		$plugin_data = get_plugin_data( $plugin_file );
 
 		return ! empty( $plugin_data['Name'] ) ? $plugin_data['Name'] : ''; // Return plugin name if available, otherwise empty string.
+	}
+
+	/**
+	 * Track feature activation.
+	 *
+	 * @param string $feature Feature name.
+	 *
+	 * @return void
+	 */
+	private function track_feature_activation( $feature ) {
+		if ( ! $this->is_active() ) {
+			return;
+		}
+
+		$this->track( 'plugin_feature_activate', array( 'feature' => $feature ) );
+	}
+
+	/**
+	 * Track feature deactivation.
+	 *
+	 * @param string $feature Feature name.
+	 *
+	 * @return void
+	 */
+	private function track_feature_deactivation( $feature ) {
+		if ( ! $this->is_active() ) {
+			return;
+		}
+
+		$this->track( 'plugin_feature_deactivate', array( 'feature' => $feature ) );
+	}
+
+	/**
+	 * Track feature event with activation/deactivation handling.
+	 *
+	 * @param string $feature_name Feature name.
+	 * @param string $event_name   Event name to track.
+	 * @param array  $properties   Event properties.
+	 *
+	 * @return void
+	 */
+	private function track_feature_event( $feature_name, $event_name, $properties ) {
+		if ( ! $this->is_active() ) {
+			return;
+		}
+
+		if ( isset( $properties['update_type'] ) && 'activate' === $properties['update_type'] ) {
+			$this->track_feature_activation( $feature_name );
+		}
+
+		if ( isset( $properties['update_type'] ) && 'deactivate' === $properties['update_type'] ) {
+			$this->track_feature_deactivation( $feature_name );
+		}
+
+		$this->track( $event_name, $properties );
+	}
+
+	/**
+	 * Track JS Delay event.
+	 *
+	 * @param string $update_type Update type ('activate' or 'deactivate').
+	 * @param string $location    Location where the event occurred.
+	 *
+	 * @return void
+	 */
+	public function track_delay_js_event( $update_type, $location ) {
+		$options    = Utils::get_module( 'minify' )->get_options();
+		$properties = array(
+			'update_type' => $update_type,
+			'Location'    => $location,
+			'Timeout'     => $options['delay_js_timeout'],
+		);
+
+		$this->track_feature_event( 'JS Delay', 'js_delay_updated', $properties );
+	}
+
+	/**
+	 * Track Critical CSS event.
+	 *
+	 * @param string $update_type       Update type ('activate' or 'deactivate').
+	 * @param string $location          Location where the event occurred.
+	 * @param string $settings_modified Settings modified.
+	 * @param string $settings_default  Default settings.
+	 *
+	 * @return void
+	 */
+	public function track_critical_css_event( $update_type, $location, $settings_modified = '', $settings_default = '' ) {
+		$properties = array(
+			'update_type'       => $update_type,
+			'Location'          => $location,
+			'mode'              => Utils::get_module( 'critical_css' )->get_critical_mode_for_mp(),
+			'settings_modified' => $settings_modified,
+			'settings_default'  => $settings_default,
+		);
+
+		$this->track_feature_event( 'Critical Css', 'critical_css_updated', $properties );
 	}
 }

@@ -41,6 +41,8 @@ class Minify {
 			'minify_manual_status',
 			'minify_regenerate_asset',
 			'minify_toggle_cdn',
+			'minify_start_ao_scan',
+			'minify_background_processing_status',
 		);
 
 		foreach ( $endpoints as $endpoint ) {
@@ -61,6 +63,8 @@ class Minify {
 			 * @uses minify_manual_status()
 			 * @uses minify_regenerate_asset()
 			 * @uses minify_toggle_cdn()
+			 * @uses minify_start_ao_scan()
+			 * @uses minify_background_processing_status()
 			 */
 			add_action( "wp_ajax_wphb_react_$endpoint", array( $this, $endpoint ) );
 		}
@@ -76,7 +80,7 @@ class Minify {
 	 * @return array
 	 */
 	private function get_exclusions( $options ) {
-		if ( 'basic' === $options['type'] ) {
+		if ( ! $options['combine'] ) {
 			$excluded_styles  = $options['dont_minify']['styles'];
 			$excluded_scripts = $options['dont_minify']['scripts'];
 		} else {
@@ -119,7 +123,8 @@ class Minify {
 					'styles'  => $excluded_styles,
 					'scripts' => $excluded_scripts,
 				),
-				'type'       => $options['type'],
+				'compress'   => $options['compress'],
+				'combine'    => $options['combine'],
 			)
 		);
 	}
@@ -218,15 +223,22 @@ class Minify {
 
 		$options = Utils::get_module( 'minify' )->get_options();
 
-		// Update selected type.
-		$type_changed = false;
-		if ( isset( $settings['type'] ) && in_array( $settings['type'], array( 'speedy', 'basic' ), true ) ) {
-			$type_changed    = $options['type'] !== $settings['type'];
-			$options['type'] = $settings['type'];
+		// Update compress and combine settings.
+		$compress_changed = false;
+		$combine_changed  = false;
+
+		if ( isset( $settings['compress'] ) ) {
+			$compress_changed    = $options['compress'] !== $settings['compress'];
+			$options['compress'] = $settings['compress'];
+		}
+
+		if ( isset( $settings['combine'] ) ) {
+			$combine_changed    = $options['combine'] !== $settings['combine'];
+			$options['combine'] = $settings['combine'];
 		}
 
 		// Process font optimization changes.
-		$options['do_assets']['fonts'] = ! ( isset( $settings['fonts'] ) && false === $settings['fonts'] ) && 'speedy' === $settings['type'];
+		$options['do_assets']['fonts'] = ! ( isset( $settings['fonts'] ) && false === $settings['fonts'] ) && $settings['combine'];
 		if ( false === $options['do_assets']['fonts'] ) {
 			$options['fonts'] = array();
 		}
@@ -243,7 +255,7 @@ class Minify {
 
 			// By default, we minify and combine everything.
 			$options['dont_minify'][ $type ] = array();
-			if ( 'speedy' === $settings['type'] ) {
+			if ( $settings['combine'] ) {
 				$options['dont_combine'][ $type ] = array();
 			} else {
 				$options['dont_combine'][ $type ] = array_keys( $collections[ $type ] );
@@ -264,8 +276,8 @@ class Minify {
 			}
 
 			$options['dont_minify'][ $type ] = $handles;
-			// We've already excluded all the handles for basic above.
-			if ( 'speedy' === $settings['type'] ) {
+			// We've already excluded all the handles for compress-only mode above.
+			if ( $settings['combine'] ) {
 				$options['dont_combine'][ $type ] = $handles;
 			}
 		}
@@ -279,11 +291,23 @@ class Minify {
 
 		Utils::get_module( 'minify' )->clear_cache( false );
 
-		if ( $type_changed ) {
-			$type_changed = sprintf( /* translators: %1$s - optimization type, %2$s - opening <a> tag, %3$s - closing </a> tag */
-				esc_html__( '%1$s optimization is now active. Plugins and theme files are now being queued for processing and will gradually be optimized as they are requested by your visitors. For more information on how automatic optimization works, you can check %2$sHow Does It Work%3$s section.', 'wphb' ),
-				'basic' === $settings['type'] ? __( 'Basic', 'wphb' ) : __( 'Speedy', 'wphb' ),
-				"<a href='#' id='wphb-basic-hdiw-link' data-modal-open='automatic-ao-hdiw-modal-content'>",
+		$settings_changed_message = false;
+		if ( $compress_changed || $combine_changed ) {
+			if ( $settings['combine'] ) {
+				$optimization_mode = __( 'Combine and Compress optimizations are', 'wphb' );
+			} elseif ( $settings['compress'] ) {
+				$optimization_mode = __( 'Compress optimization is', 'wphb' );
+			} else {
+				$optimization_mode = __( 'None optimization is', 'wphb' );
+			}
+
+			$settings_changed_message = sprintf( /* translators: %1$s - optimization mode, %2$s - opening <a> tag, %3$s - closing </a> tag */
+				esc_html__( '%1$s active. Plugins and theme files are now being queued for processing and will gradually be optimized as they are requested by your visitors. For more information on how automatic optimization works, you can check %2$sHow Does It Work%3$s section.', 'wphb' ),
+				$optimization_mode,
+				sprintf(
+					"<a href='%s' target='_blank' >",
+					esc_url( Utils::get_documentation_url( 'wphb-minification' ) )
+				),
 				'</a>'
 			);
 		}
@@ -293,6 +317,7 @@ class Minify {
 		wp_send_json_success(
 			array(
 				'assets'     => $collections,
+				'mode'       => Utils::get_minification_mode(),
 				'enabled'    => array(
 					'styles'  => $options['do_assets']['styles'],
 					'scripts' => $options['do_assets']['scripts'],
@@ -302,7 +327,9 @@ class Minify {
 					'styles'  => $excluded_styles,
 					'scripts' => $excluded_scripts,
 				),
-				'notice'     => $type_changed,
+				'compress'   => $options['compress'],
+				'combine'    => $options['combine'],
+				'notice'     => ( $settings['compress'] || $settings['combine'] ) && $settings_changed_message ? $settings_changed_message : false,
 			)
 		);
 	}
@@ -581,6 +608,7 @@ class Minify {
 			array(
 				'options'           => $saved_options,
 				'safe_mode_options' => $unsaved_options,
+				'mode'              => Utils::get_minification_mode(),
 			)
 		);
 	}
@@ -629,5 +657,63 @@ class Minify {
 		unset( $options['font_display_value'] );
 		unset( $options['ao_completed_time'] );
 		return $options;
+	}
+
+	/**
+	 * Start asset optimization scan.
+	 *
+	 * @since 3.16.0
+	 *
+	 * @return void
+	 */
+	public function minify_start_ao_scan() {
+		check_ajax_referer( 'wphb-fetch' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
+		$minify = Utils::get_module( 'minify' );
+		$minify->clear_cache( false );
+
+		$collector = $minify->sources_collector;
+		$collector::clear_collection();
+
+		$minify->start_process();
+
+		wp_send_json_success(
+			array(
+				'notice' => __( 'Hummingbird is running a file check to see what files can be optimized. Feel free to close this page while Hummingbird works its magic in the background.', 'wphb' ),
+			)
+		);
+	}
+
+	/**
+	 * Get background processing status.
+	 *
+	 * @since 3.16.0
+	 *
+	 * @return void
+	 */
+	public function minify_background_processing_status() {
+		check_ajax_referer( 'wphb-fetch' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
+		$background_process = Utils::get_module( 'background_processing' )->get_processor( 'ao_scan' );
+		$status             = $background_process->get_status();
+		$notice             = '';
+		if ( ! $status->is_running() ) {
+			$notice = Utils::get_ao_background_processing_completion_message();
+		}
+
+		wp_send_json_success(
+			array(
+				'isAoScanProcessing' => $status->is_running(),
+				'notice'             => $notice,
+			)
+		);
 	}
 }

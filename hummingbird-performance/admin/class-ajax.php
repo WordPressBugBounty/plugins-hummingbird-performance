@@ -1471,7 +1471,11 @@ class AJAX {
 			delete_option( 'wphb-minification-show-advanced_modal' );
 		}
 
-		wp_send_json_success();
+		wp_send_json_success(
+			array(
+				'mode' => Utils::get_minification_mode(),
+			)
+		);
 	}
 
 	/**

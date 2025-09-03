@@ -36,6 +36,9 @@ class Installer {
 		update_site_option( 'wphb-notice-uptime-info-show', 'yes' ); // Add uptime notice.
 		update_site_option( 'wphb-notice-connect-for-site-monitoring-show', 'yes' ); // Add connect notice.
 
+		update_option( 'wphb-minification-show-config_modal', true );
+		update_option( 'wphb-minification-show-advanced_modal', true );
+
 		// From get_site_option() docs, false = if Option not exists.
 		if ( false === get_site_option( 'wphb_run_onboarding' ) ) {
 			update_site_option( 'wphb_run_onboarding', true );
@@ -223,6 +226,10 @@ class Installer {
 
 			if ( version_compare( $version, '3.15.0', '<' ) ) {
 				self::upgrade_3_15_0();
+			}
+
+			if ( version_compare( $version, '3.16.0', '<' ) ) {
+				self::upgrade_3_16_0();
 			}
 
 			update_site_option( 'wphb_version', WPHB_VERSION );
@@ -777,5 +784,38 @@ class Installer {
 		$timestamps            = get_site_option( $option_key, array() );
 		$timestamps[ $action ] = time();
 		update_site_option( $option_key, $timestamps );
+	}
+
+	/**
+	 * Upgrade to 3.16.0.
+	 *
+	 * @since 3.16.0
+	 */
+	private static function upgrade_3_16_0() {
+		// Summary upgrade modal.
+		add_site_option( 'wphb_show_upgrade_summary', true );
+
+		$minify  = Utils::get_module( 'minify' );
+		$options = $minify->get_options();
+
+		// Asset optimization not enabled - skip.
+		if ( ! $options['enabled'] ) {
+			return;
+		}
+
+		// If not enabled on subsites - skip.
+		if ( is_multisite() && ! is_network_admin() && ! $options['minify_blog'] ) {
+			return;
+		}
+
+		if ( 'basic' === $options['type'] ) {
+			$options['compress'] = true;
+			$options['combine']  = false;
+		} elseif ( 'speedy' === $options['type'] ) {
+			$options['compress'] = true;
+			$options['combine']  = true;
+		}
+
+		$minify->update_options( $options );
 	}
 }

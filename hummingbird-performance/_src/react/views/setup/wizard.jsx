@@ -18,7 +18,6 @@ import { getLink } from '../../../js/utils/helpers';
 import Icon from '../../components/sui-icon';
 import ProgressBar from '../../components/sui-progress';
 import Tag from '../../components/sui-tag';
-import MinifySetupWizard from '../../../js/scanners/MinifySetupWizard';
 import Toggle from '../../components/sui-toggle';
 import SettingsRow from '../../components/sui-box-settings/row';
 import Button from '../../components/sui-button';
@@ -49,7 +48,6 @@ export default class Wizard extends React.Component {
 				5: __( 'Advanced Tools', 'wphb' ),
 				6: __( 'Finish', 'wphb' )
 			},
-			scanning: false,
 			skip: {
 				advCacheFile: false,
 			}
@@ -78,17 +76,6 @@ export default class Wizard extends React.Component {
 			} );
 
 			jQuery( '.sui-box-header' ).on( 'click', this.toggleContent );
-		}
-
-		if ( 2 === this.props.step && this.props.settings.aoEnable ) {
-			if ( true === this.state.scanning && this.state.scanning !== prevState.scanning ) {
-				const scanner = new MinifySetupWizard( this.props.minifySteps, 0 );
-				scanner.start();
-			}
-		}
-
-		if ( 3 <= this.props.step && this.props.step !== prevProps.step ) {
-			this.setState( { scanning: false } );
 		}
 	}
 
@@ -274,11 +261,6 @@ export default class Wizard extends React.Component {
 			return null;
 		}
 
-		// Do not show during AO scanning.
-		if ( 2 === this.props.step && this.state.scanning ) {
-			return null;
-		}
-
 		const id = [ 'aoEnable', 'uptimeEnable', 'cacheEnable' ];
 
 		let tabEnabledChecked = this.props.settings[ id[ this.props.step - 2 ] ];
@@ -324,18 +306,30 @@ export default class Wizard extends React.Component {
 		return (
 			<React.Fragment>
 				{ this.props.settings.aoEnable &&
-					<div className={ classNames( 'sui-border-frame', { 'sui-hidden': this.state.scanning || ( this.props.isNetworkAdmin && ! this.props.isMember ) } ) }>
+					<div className={ classNames( 'sui-border-frame', { 'sui-hidden': ( this.props.isNetworkAdmin && ! this.props.isMember ) } ) }>
 						{ ! this.props.isNetworkAdmin &&
-							<SettingsRow
-								classes="sui-flushed"
-								content={
-									<Toggle
-										id="aoSpeedy"
-										onChange={ this.props.updateSettings }
-										text={ __( 'Enable Speedy Compression', 'wphb' ) }
-										checked={ this.props.settings.aoSpeedy }
-										description={ __( 'Our automatic solution for optimization, the Speedy compression will auto-compress and auto-combine smaller files together. This can help to decrease the number of requests made when a page is loaded.', 'wphb' ) } />
-								} /> }
+							<>
+								<SettingsRow
+									classes="sui-flushed"
+									content={
+										<Toggle
+											id="aoCompress"
+											onChange={ this.props.updateSettings }
+											text={ __( 'Compress', 'wphb' ) }
+											checked={ this.props.settings.aoCompress }
+											description={ __( 'Compresses your files for faster delivery while improving site speed by decluttering CSS and JavaScript.', 'wphb' ) } />
+									} />
+								<SettingsRow
+									classes="sui-flushed"
+									content={
+										<Toggle
+											id="aoCombine"
+											onChange={ this.props.updateSettings }
+											text={ __( 'Combine', 'wphb' ) }
+											checked={ this.props.settings.aoCombine }
+											description={ __( 'Combines multiple JS and CSS files into fewer files, reducing the number of requests made when a page is loaded.', 'wphb' ) } />
+									} />
+							</> }
 						<SettingsRow
 							classes="sui-flushed"
 							content={
@@ -354,15 +348,6 @@ export default class Wizard extends React.Component {
 							} />
 					</div> }
 				{ this.eoSettings() }
-				{ this.state.scanning &&
-					<React.Fragment>
-						<div className="wphb-progress-wrapper">
-							<ProgressBar status={ this.props.settings.aoSpeedy ? __( 'Activating Speedy Optimization...', 'wphb' ) : __( 'Activating Basic Optimization...', 'wphb' ) } />
-						</div>
-						<p className="sui-description">
-							{ __( 'Please wait, this won’t take more than a minute...', 'wphb' ) }
-						</p>
-					</React.Fragment> }
 			</React.Fragment>
 		);
 	}
@@ -373,7 +358,7 @@ export default class Wizard extends React.Component {
 	 * @return {JSX.Element} Tab content.
 	 */
 	eoSettings() {
-		if ( ! this.props.settings.aoEnable || this.state.scanning || this.props.isNetworkAdmin ) {
+		if ( ! this.props.settings.aoEnable || this.props.isNetworkAdmin ) {
 			return null;
 		}
 
@@ -586,8 +571,8 @@ export default class Wizard extends React.Component {
 						<tr>
 							<td className="sui-table-item-title">{ __( 'Asset Optimization', 'wphb' ) }</td>
 							<td>
-								{ ! this.props.isNetworkAdmin && this.props.settings.aoSpeedy && __( 'Speedy Optimization', 'wphb' ) }
-								{ ! this.props.isNetworkAdmin && ! this.props.settings.aoSpeedy && __( 'Basic Optimization', 'wphb' ) }
+								{ ! this.props.isNetworkAdmin && this.props.settings.aoCombine && __( 'Speedy Optimization', 'wphb' ) }
+								{ ! this.props.isNetworkAdmin && ! this.props.settings.aoCombine && __( 'Basic Optimization', 'wphb' ) }
 								{ this.props.isNetworkAdmin && __( 'Active on subsites', 'wphb' ) }
 								{ this.props.isMember && <br /> }
 								{ this.props.isMember &&
@@ -798,7 +783,6 @@ export default class Wizard extends React.Component {
 				{ 1 !== this.props.step &&
 					<Button
 						onClick={ this.props.prevStep }
-						disabled={ this.state.scanning }
 						type="button"
 						icon="sui-icon-arrow-left"
 						classes={ [ 'sui-button', 'sui-button-ghost' ] }
@@ -824,7 +808,6 @@ export default class Wizard extends React.Component {
 					{ ( 1 !== this.props.step || ( this.props.showConflicts && ! this.props.issues.advCacheFile ) ) && 6 > this.props.step &&
 						<Button
 							onClick={ this.continueToNextStep }
-							disabled={ this.state.scanning }
 							type="button"
 							icon="sui-icon-arrow-right"
 							classes={ [ 'sui-button', 'sui-button-blue' ] }
@@ -851,12 +834,7 @@ export default class Wizard extends React.Component {
 	 * Handle "Continue" button click.
 	 */
 	continueToNextStep() {
-		if ( 2 === this.props.step && this.props.settings.aoEnable && ! this.props.isNetworkAdmin ) {
-			this.setState( { scanning: true } );
-			this.props.scanning();
-		} else {
-			this.props.nextStep();
-		}
+		this.props.nextStep();
 	}
 
 	/**

@@ -66,7 +66,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="dashboard-delay-highlight">
 		<h4 class="sui-no-margin-bottom">
 			<?php esc_html_e( 'Extra Optimization', 'wphb' ); ?>
-			<span class="sui-tag sui-tag-beta"><?php esc_html_e( 'New', 'wphb' ); ?></span>
 		</h4>
 		<div class="sui-no-margin-bottom">
 			<p>

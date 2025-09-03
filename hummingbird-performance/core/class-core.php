@@ -117,7 +117,7 @@ class Core {
 		 */
 		$modules = apply_filters(
 			'wp_hummingbird_modules',
-			array( 'minify', 'gzip', 'caching', 'performance', 'uptime', 'cloudflare', 'gravatar', 'page_cache', 'advanced', 'rss', 'redis', 'delayjs', 'critical_css', 'mixpanel_analytics', 'exclusions' )
+			array( 'minify', 'gzip', 'caching', 'performance', 'uptime', 'cloudflare', 'gravatar', 'page_cache', 'advanced', 'rss', 'redis', 'delayjs', 'critical_css', 'mixpanel_analytics', 'exclusions', 'background_processing' )
 		);
 
 		array_walk( $modules, array( $this, 'load_module' ) );
@@ -643,7 +643,7 @@ class Core {
 			'slug'            => 'hummingbird-performance',
 			'parent_slug'     => 'wphb',
 			'menu_slug'       => 'wphb-cross-sell',
-			'position'        => 9,
+			'position'        => 8,
 			'translation_dir' => WPHB_DIR_PATH . 'languages',
 		);
 

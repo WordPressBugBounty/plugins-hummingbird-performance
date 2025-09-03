@@ -13,6 +13,7 @@ use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\WP_Hummingbird;
 use Hummingbird\Core\Modules\Page_Cache;
+use Hummingbird\Core\Module_Server;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -40,6 +41,14 @@ class Minification extends Page {
 		$this->setup_navigation();
 
 		$minify_module = Utils::get_module( 'minify' );
+
+		if ( isset( $_GET['enable'] ) ) { // Input var okay.
+			check_admin_referer( 'wphb-enable-ao' );
+			$minify_module->toggle_service( true );
+			$minify_module->start_process();
+			wp_safe_redirect( Utils::get_admin_menu_url( 'minification' ) );
+			exit;
+		}
 
 		if ( ! $minify_module->scanner->is_scanning() ) {
 			$minify_module->scanner->finish_scan();
@@ -90,7 +99,8 @@ class Minification extends Page {
 			check_admin_referer( 'wphb-reset-minification' );
 			$minify_module->reset_minification_settings();
 			$minify_module->clear_cache();
-			$minify_module->scanner->init_scan();
+			$minify_module->toggle_service( true );
+			$minify_module->start_process();
 			$redirect = true;
 		}
 
@@ -111,45 +121,112 @@ class Minification extends Page {
 	 * Enqueue scripts and styles for React.
 	 */
 	public function enqueue_react_scripts() {
-		wp_enqueue_style( 'wphb-react-minify-styles', WPHB_DIR_URL . 'admin/assets/css/wphb-react-minify.min.css', array(), WPHB_VERSION );
-		wp_enqueue_script( 'wphb-react-minify', WPHB_DIR_URL . 'admin/assets/js/wphb-react-minify.min.js', array( 'wp-i18n', 'lodash', 'wphb-react-lib', 'wp-api-fetch' ), WPHB_VERSION, true );
+		if ( 'gzip' === $this->get_current_tab() ) {
 
-		$current_page = filter_input( INPUT_GET, 'view', FILTER_UNSAFE_RAW );
+			parent::enqueue_scripts( $this->slug );
+			wp_enqueue_style(
+				'wphb-sui',
+				WPHB_DIR_URL . 'admin/assets/css/wphb-react-gzip.min.css',
+				array(),
+				WPHB_VERSION
+			);
 
-		wp_localize_script(
-			'wphb-react-minify',
-			'wphbReact',
-			array(
-				'isMember'          => Utils::is_member(),
-				'isHubMember'       => Utils::has_access_to_hub(),
-				'isMultisite'       => is_multisite(),
-				'brandingHeroImage' => apply_filters( 'wpmudev_branding_hero_image', '' ),
-				'hideBranding'      => apply_filters( 'wpmudev_branding_hide_branding', false ),
-				'filters'           => $this->get_selector_filters(),
-				'mode'              => $this->mode,
-				'showModal'         => (bool) get_option( 'wphb-minification-show-advanced_modal' ),
-				'links'             => array(
-					'connect'        => Utils::get_link( 'wpmudev-login' ),
-					'site'           => site_url(),
-					'images'         => WPHB_DIR_URL . 'admin/assets/image/',
-					'support'        => array(
-						'chat'  => Utils::get_link( 'chat' ),
-						'forum' => Utils::get_link( 'support' ),
+			wp_enqueue_script(
+				'wphb-react-gzip',
+				WPHB_DIR_URL . 'admin/assets/js/wphb-react-gzip.min.js',
+				array( 'wp-i18n', 'lodash', 'wphb-react-lib' ),
+				WPHB_VERSION,
+				true
+			);
+
+			wp_localize_script(
+				'wphb-react-gzip',
+				'wphb',
+				array_merge_recursive(
+					array(
+						'isMember' => Utils::is_member(),
+						'links'    => array(
+							'modules' => array(
+								'gzip' => Utils::get_admin_menu_url( 'wphb-minification' ),
+							),
+							'support' => array(
+								'chat'  => Utils::get_link( 'chat' ),
+								'forum' => Utils::get_link( 'support' ),
+							),
+						),
+						'nonces'   => array(
+							'HBFetchNonce' => wp_create_nonce( 'wphb-fetch' ),
+						),
+						'module'   => array(
+							'is_wpmu_hosting'   => isset( $_SERVER['WPMUDEV_HOSTED'] ),
+							'is_white_labeled'  => apply_filters( 'wpmudev_branding_hide_branding', false ),
+							'compression_type'  => get_option( 'wphb_compression_type' ),
+							'cdn'               => Utils::get_module( 'minify' )->is_active() && Utils::get_module( 'minify' )->get_cdn_status(),
+							'htaccess_error'    => isset( $_GET['htaccess-error'] ), // Input data ok.
+							'htaccess_writable' => Module_Server::is_htaccess_writable(),
+							'htaccess_written'  => Module_Server::is_htaccess_written( 'gzip' ),
+							'servers_array'     => Module_Server::get_servers(),
+							'server_name'       => Module_Server::get_server_type(),
+							'snippets'          => array(
+								'apache' => Module_Server::get_code_snippet( 'gzip', 'apache' ),
+								'iis'    => Module_Server::get_code_snippet( 'gzip', 'iis' ),
+								'nginx'  => Module_Server::get_code_snippet( 'gzip', 'nginx' ),
+							),
+						),
 					),
-					'cdnUpsell'      => Utils::get_link( 'plugin', 'hummingbird_ao_summary_cdn_button' ),
-					'delayUpsell'    => Utils::get_link( 'plugin', 'hummingbird_delay_js_ao_summary' ),
-					'criticalUpsell' => Utils::get_link( 'plugin', 'hummingbird_criticalcss_ao_summary' ),
-					'isEoPage'       => 'tools' === $current_page ? true : false,
-					'safeMode'       => site_url() . '?minify-safe=true',
-				),
-			)
-		);
+					Utils::get_tracking_data()
+				)
+			);
 
-		wp_add_inline_script(
-			'wphb-react-minify',
-			'wp.i18n.setLocaleData( ' . wp_json_encode( Utils::get_locale_data() ) . ', "wphb" );',
-			'before'
-		);
+			wp_add_inline_script(
+				'wphb-react-gzip',
+				'wp.i18n.setLocaleData( ' . wp_json_encode( Utils::get_locale_data() ) . ', "wphb" );',
+				'before'
+			);
+		} else {
+			wp_enqueue_style( 'wphb-react-minify-styles', WPHB_DIR_URL . 'admin/assets/css/wphb-react-minify.min.css', array(), WPHB_VERSION );
+			wp_enqueue_script( 'wphb-react-minify', WPHB_DIR_URL . 'admin/assets/js/wphb-react-minify.min.js', array( 'wp-i18n', 'lodash', 'wphb-react-lib', 'wp-api-fetch' ), WPHB_VERSION, true );
+
+			$current_page = filter_input( INPUT_GET, 'view', FILTER_UNSAFE_RAW );
+			$status       = Utils::get_module( 'background_processing' )->get_processor( 'ao_scan' )->get_status();
+
+			wp_localize_script(
+				'wphb-react-minify',
+				'wphbReact',
+				array(
+					'isMember'           => Utils::is_member(),
+					'isHubMember'        => Utils::has_access_to_hub(),
+					'isAoScanProcessing' => $status->is_running(),
+					'isMultisite'        => is_multisite(),
+					'brandingHeroImage'  => apply_filters( 'wpmudev_branding_hero_image', '' ),
+					'hideBranding'       => apply_filters( 'wpmudev_branding_hide_branding', false ),
+					'filters'            => $this->get_selector_filters(),
+					'mode'               => $this->mode,
+					'showModal'          => (bool) get_option( 'wphb-minification-show-advanced_modal' ),
+					'links'              => array(
+						'connect'        => Utils::get_link( 'wpmudev-login' ),
+						'site'           => site_url(),
+						'images'         => WPHB_DIR_URL . 'admin/assets/image/',
+						'support'        => array(
+							'chat'  => Utils::get_link( 'chat' ),
+							'forum' => Utils::get_link( 'support' ),
+						),
+						'cdnUpsell'      => Utils::get_link( 'plugin', 'hummingbird_ao_summary_cdn_button' ),
+						'aoDocLink'      => Utils::get_documentation_url( 'wphb-minification' ),
+						'delayUpsell'    => Utils::get_link( 'plugin', 'hummingbird_delay_js_ao_summary' ),
+						'criticalUpsell' => Utils::get_link( 'plugin', 'hummingbird_criticalcss_ao_summary' ),
+						'isEoPage'       => 'tools' === $current_page ? true : false,
+						'safeMode'       => site_url() . '?minify-safe=true',
+					),
+				)
+			);
+
+			wp_add_inline_script(
+				'wphb-react-minify',
+				'wp.i18n.setLocaleData( ' . wp_json_encode( Utils::get_locale_data() ) . ', "wphb" );',
+				'before'
+			);
+		}
 	}
 
 	/**
@@ -165,6 +242,7 @@ class Minification extends Page {
 		$this->tabs = array(
 			'files'    => __( 'Assets Optimization', 'wphb' ),
 			'tools'    => __( 'Extra Optimization', 'wphb' ),
+			'gzip'     => __( 'Gzip Compression', 'wphb' ),
 			'settings' => __( 'Settings', 'wphb' ),
 		);
 
@@ -172,8 +250,6 @@ class Minification extends Page {
 		if ( is_multisite() && ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify ) ) ) {
 			$this->tabs['import'] = __( 'Import / Export', 'wphb' );
 		}
-
-		add_filter( 'wphb_admin_after_tab_' . $this->get_slug(), array( $this, 'after_tab' ) );
 	}
 
 	/**
@@ -238,7 +314,9 @@ class Minification extends Page {
 		if ( ! apply_filters( 'wp_hummingbird_is_active_module_minify', false ) || is_network_admin() ) {
 			return;
 		}
-
+		?>
+		<div id="wrap-wphb-clear-ao-files" style="margin-right: 10px;"></div>
+		<?php
 		if ( ! isset( $this->mode ) || 'advanced' !== $this->mode ) {
 			return;
 		}
@@ -541,17 +619,6 @@ class Minification extends Page {
 				'safe_mode'    => Minify::get_safe_mode_status(),
 			)
 		);
-	}
-
-	/**
-	 * Content after tabbed menu.
-	 *
-	 * @param string $tab  Tab name.
-	 */
-	public function after_tab( $tab ) {
-		if ( 'tools' === $tab ) {
-			echo ' <span class="sui-tag sui-tag-green">' . esc_html__( 'NEW', 'wphb' ) . '</span>';
-		}
 	}
 
 	/**

@@ -27,12 +27,20 @@
     }
 
     .sui-box-builder.sui-flushed { margin-top: 30px; }
+    .wphb-ao-mode-switch-tooltip > .sui-icon-info {
+      display: flex;
+      &:before { font-size: 14px; }
+    }
   }
 
   /**
    * Automatic mode.
    */
   .box-minification-assets-auto .sui-box-builder.sui-flushed {
+    .sui-box-builder-body {
+      background-color: #ffffff !important;
+      padding-top: 10px !important;
+    }
     .sui-builder-field {
       padding: 30px;
       align-items: flex-start;

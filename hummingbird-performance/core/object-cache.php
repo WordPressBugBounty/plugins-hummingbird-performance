@@ -11,7 +11,7 @@
  * Plugin URI:        https://wpmudev.com/project/wp-hummingbird/
  * Description:       Hummingbird object cache powered by Redis.
  * Author:            WPMU DEV
- * Author URI:        https://profiles.wordpress.org/wpmudev/
+ * Author URI:        https://wpmudev.com/
  *
  * Based on Eric Mann's and Erick Hitter's Redis Object Cache: https://github.com/ericmann/Redis-Object-Cache
  * Based on Till Krüss's Redis Object Cache: https://wordpress.org/plugins/redis-cache/

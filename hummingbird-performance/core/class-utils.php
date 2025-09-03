@@ -17,6 +17,7 @@ namespace Hummingbird\Core;
 
 use Hummingbird\WP_Hummingbird;
 use Hummingbird\Core\Modules\Caching\Fast_CGI;
+use Hummingbird\Core\Modules\Minify;
 use stdClass;
 use WP_User;
 use WPMUDEV_Dashboard;
@@ -92,7 +93,7 @@ class Utils {
 
 			// Possible values: full, single, free, expired, paused, unit.
 			$plan = WPMUDEV_Dashboard::$api->get_membership_status();
-		} elseif (  Hub_Connector::has_access() ) {
+		} elseif ( Hub_Connector::has_access() ) {
 			$plan = \WPMUDEV\Hub\Connector\Data::get()->membership_type();
 		} else {
 			return false;
@@ -256,7 +257,7 @@ class Utils {
 					),
 					self::get_admin_menu_url()
 				),
-				'upgradeUrl' => self::get_link( 'plugin', 'hummingbird_instant_threshold_option' ),
+				'upgradeUrl'     => self::get_link( 'plugin', 'hummingbird_instant_threshold_option' ),
 			),
 		);
 
@@ -270,13 +271,13 @@ class Utils {
 				$i10n,
 				array(
 					'minification' => array(
-						'criticalStatusForQueue'     => self::get_module( 'critical_css' )->critical_css_status_for_queue(),
-						'gutenbergUpgradeCTAUrl'     => self::get_link( 'plugin', 'hummingbird_criticalcss_gutenberg' ),
-						'is'                         => array(
+						'criticalStatusForQueue' => self::get_module( 'critical_css' )->critical_css_status_for_queue(),
+						'gutenbergUpgradeCTAUrl' => self::get_link( 'plugin', 'hummingbird_criticalcss_gutenberg' ),
+						'is'                     => array(
 							'scanning' => $is_scanning,
 							'scanned'  => $minify_module->scanner->is_files_scanned(),
 						),
-						'get'                        => array(
+						'get'                    => array(
 							'currentScanStep' => $minify_module->scanner->get_current_scan_step(),
 							'totalSteps'      => $minify_module->scanner->get_scan_steps(),
 							'showCDNModal'    => ! is_multisite(),
@@ -291,7 +292,7 @@ class Utils {
 					),
 					'stats'        => array(
 						'assetsFound'        => $get_ao_stats['enqueued_files'],
-						'type'               => $minify_options['type'],
+						'type'               => ! empty( $minify_options['combine'] ) ? 'combine' : ( ! empty( $minify_options['compress'] ) ? 'compress' : 'N/A' ),
 						'totalFiles'         => self::minified_files_count(),
 						'filesizeReductions' => absint( $get_ao_stats['compressed_size'] ),
 					),
@@ -318,7 +319,7 @@ class Utils {
 	public static function get_tracking_data() {
 		return array(
 			'mixpanel' => array(
-				'enabled'        => Settings::get_setting( 'tracking', 'settings' ),
+				'enabled' => Settings::get_setting( 'tracking', 'settings' ),
 			),
 		);
 	}
@@ -704,7 +705,7 @@ class Utils {
 	 *
 	 * @param string $link_for      Accepts: 'chat', 'plugin', 'support', 'smush', 'docs'.
 	 * @param string $campaign      Utm campaign tag to be used in link. Default: 'hummingbird_pro_modal_upgrade'.
-     * @param string $hub_campaign  Utm campaign tag to be used to redirect to HUb site.
+	 * @param string $hub_campaign  Utm campaign tag to be used to redirect to HUb site.
 	 *
 	 * @return string
 	 */
@@ -1274,14 +1275,12 @@ class Utils {
 
 		// AO_Speedy','AO_Basic','AO_Manual'.
 		if ( self::get_module( 'minify' )->is_active() ) {
-			if ( 'advanced' == $minify_options['view'] ) {
+			if ( 'advanced' === $minify_options['view'] ) {
 				$active_features[] = 'AO_Manual';
-			} else {
-				if ( 'speedy' == $minify_options['type'] ) {
-					$active_features[] = 'AO_Speedy';
-				} else {
-					$active_features[] = 'AO_Basic';
-				}
+			} elseif ( ! empty( $minify_options['combine'] ) ) {
+				$active_features[] = 'AO_Combine';
+			} elseif ( ! empty( $minify_options['compress'] ) ) {
+				$active_features[] = 'AO_Compress';
 			}
 
 			// Font preload feature.
@@ -1468,8 +1467,20 @@ class Utils {
 	 * @param bool   $is_eo_link Is EO upsell link.
 	 */
 	public static function unlock_now_link( $location, $utm, $event_name, $display = true, $is_eo_link = false ) {
-		$upsell_link = $is_eo_link ? esc_html__( 'Unlock now for Peak Performance  ️⚡️ - 80% Off!', 'wphb' ) : esc_html__( 'Unlock now', 'wphb' );
-		$html        = sprintf(
+
+		if ( $is_eo_link ) {
+			$bolt_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 36 36" style="vertical-align: middle;">
+			<path fill="#FFAC33" stroke="#000" stroke-width="1" stroke-linejoin="round"
+				d="M17.578 1.047L4.5 21h9l-5 14 20.922-20h-9l5.156-13.953z"/>
+			</svg>';
+			$upsell_link = ( 'delayjs' === $event_name )
+			? esc_html__( 'Boost Performance with Pro – On Sale Now ', 'wphb' ) . $bolt_svg
+			: esc_html__( 'Unlock Faster Load Times – On Sale Now ', 'wphb' ) . $bolt_svg;
+		} else {
+			$upsell_link = esc_html__( 'Unlock now', 'wphb' );
+		}
+
+		$html = sprintf(
 			'<a target="_blank" data-location="%1$s" href="%2$s" data-eventname="%3$s" id="%4$s" class="wphb-upsell-link wphb-upsell-eo" onclick="WPHB_Admin.minification.hbTrackEoMPEvent( this )">
 				%5$s
 				<span class="sui-icon-open-new-window" aria-hidden="true"></span>
@@ -1482,7 +1493,7 @@ class Utils {
 		);
 
 		if ( $display ) {
-			echo $html;
+			echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 		} else {
 			return $html;
 		}
@@ -1745,5 +1756,76 @@ class Utils {
 		} else {
 			return is_scalar( $data ) ? sanitize_text_field( $data ) : $data;
 		}
+	}
+
+	/**
+	 * Get Asset Optimization background processing completion message.
+	 *
+	 * @return string
+	 */
+	public static function get_ao_background_processing_completion_message() {
+		$minify  = self::get_module( 'minify' );
+		$message = '';
+		if ( ! $minify->is_active() ) {
+			return $message;
+		}
+
+		if ( 'yes' !== get_site_transient( 'wphb-notice-ao-scan-completion-show' ) ) {
+			return $message;
+		}
+
+		if ( is_multisite() && is_network_admin() ) {
+			return $message;
+		}
+
+		$message = sprintf(
+			/* translators: %s - number of assets */
+			esc_html__( 'Found %s assets for optimization. These assets are now being optimized in the background.', 'wphb' ),
+			self::minified_files_count()
+		);
+
+		delete_site_transient( 'wphb-notice-ao-scan-completion-show' );
+
+		return $message;
+	}
+
+	/**
+	 * Get AO mode.
+	 *
+	 * @return array
+	 */
+	public static function get_minification_mode() {
+		// Check if the Minify module is active before proceeding.
+		$mode = array();
+		if ( ! self::get_module( 'minify' )->is_active() ) {
+			return $mode;
+		}
+
+		$minify_options = self::get_module( 'minify' )->get_options();
+		// Extract minify options safely.
+		$view     = $minify_options['view'] ?? '';
+		$combine  = ! empty( $minify_options['combine'] );
+		$compress = ! empty( $minify_options['compress'] );
+
+		// Determine the active mode based on view and settings.
+		switch ( $view ) {
+			case 'basic':
+				if ( $combine && $compress ) {
+					$mode = array( 'AO_Combine', 'AO_Compress', 'speedy' );
+				} elseif ( $combine ) {
+					$mode = array( 'AO_Combine', 'speedy' );
+				} elseif ( $compress ) {
+					$mode = array( 'AO_Compress', 'basic' );
+				}
+				break;
+			case 'advanced':
+				$mode = array( 'manual' );
+				if ( Minify::get_safe_mode_status() ) {
+					$mode[] = 'safe';
+				}
+				break;
+		}
+
+		return $mode;
 	}
 }

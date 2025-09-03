@@ -84,7 +84,7 @@ export default class Configurations extends React.Component {
 					onChange={ this.props.onEnabledChange }
 				/>
 
-				{ 'speedy' === this.props.view &&
+				{ true === this.props.combine &&
 					<Checkbox
 						id="auto-fonts"
 						label={ __( 'Fonts', 'wphb' ) }

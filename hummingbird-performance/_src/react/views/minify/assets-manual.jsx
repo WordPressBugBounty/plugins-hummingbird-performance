@@ -29,6 +29,7 @@ import Modal from '../../components/sui-modal';
 import Tooltip from '../../components/sui-tooltip';
 import Icon from "../../components/sui-icon";
 import Toggle from "../../components/sui-toggle";
+import RecheckFilesButton from './recheck-files-button';
 
 const cloneDeep = require( 'clone-deep' );
 
@@ -535,10 +536,11 @@ export const ManualAssets = ( props ) => {
 			.then((response) => {
 				dispatch(STORE_NAME).invalidateResolution('getOptions');
 				window.wphbMixPanel.trackAOUpdated( {
-					'Mode': 'safe',
+					'Mode': response.mode,
 					'assets_found': wphb.stats.assetsFound,
 					'total_files': wphb.stats.totalFiles,
 					'filesize_reductions': wphb.stats.filesizeReductions,
+					location: 'ao_settings',
 				} );
 				updateStateFromApiResponse( response );
 				setLoading(false);
@@ -630,6 +632,7 @@ export const ManualAssets = ( props ) => {
 			classes={['sui-button', 'sui-button-blue', {disabled: !hasUpdates()}]}
 			text={__('Publish changes', 'wphb')}
 		/>;
+		const reCheckFiles = <RecheckFilesButton />;
 		return (
 			<Box
 				stickyType = { true }	
@@ -646,6 +649,7 @@ export const ManualAssets = ( props ) => {
 
 							{safeMode && safeModeSaveButton}
 							{!safeMode && publishButton}
+							{ reCheckFiles }
 						</div>
 						<Action type="right" content={
 							<React.Fragment>

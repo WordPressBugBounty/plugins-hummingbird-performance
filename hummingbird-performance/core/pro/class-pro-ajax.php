@@ -141,16 +141,21 @@ class Pro_AJAX {
 		}
 
 		try {
-			$response = Utils::get_api()->uptime->update_recipients( $recipients );
+			$data                 = array();
+			$data['notification'] = array(
+				'recipients' => $recipients,
+			);
+			$response             = Utils::get_api()->uptime->sync_hub( $data );
+			$confirmed_recipients = isset( $response->notification->recipients ) ? $response->notification->recipients : array();
 
-			$emails = wp_list_pluck( $response, 'email' );
+			$emails = wp_list_pluck( $confirmed_recipients, 'email' );
 			$key    = array_search( $email, $emails, true );
 
 			wp_send_json_success(
 				array(
-					'subscribed' => $response[ $key ]->is_subscribed,
-					'pending'    => $response[ $key ]->is_pending,
-					'canResend'  => $response[ $key ]->is_can_resend_confirmation,
+					'subscribed' => $confirmed_recipients[ $key ]->is_subscribed,
+					'pending'    => $confirmed_recipients[ $key ]->is_pending,
+					'canResend'  => $confirmed_recipients[ $key ]->is_can_resend_confirmation,
 				)
 			);
 		} catch ( Exception $e ) {
@@ -186,7 +191,13 @@ class Pro_AJAX {
 
 			if ( 'uptime' === $module ) {
 				try {
-					Utils::get_api()->uptime->update_recipients( $settings['recipients'] );
+					$request_data = array(
+						'notification' => array(
+							'is_active' => false,
+						),
+					);
+
+					Utils::get_api()->uptime->sync_hub( $request_data );
 				} catch ( Exception $e ) {
 					wp_send_json_error(
 						array(
@@ -262,7 +273,7 @@ class Pro_AJAX {
 			$settings['time'] = sanitize_text_field( $data['schedule']['time'] );
 
 			// Randomize the minutes, so we don't spam the API.
-			$email_time       = explode( ':', $settings['time'] );
+			$email_time = explode( ':', $settings['time'] );
 			/* translators: %02d - Random number */
 			$email_time[1]    = sprintf( '%02d', wp_rand( 0, 59 ) );
 			$settings['time'] = implode( ':', $email_time );
@@ -291,6 +302,7 @@ class Pro_AJAX {
 			}
 		} else {
 			$settings['threshold'] = (int) $data['schedule']['threshold'];
+			$request_data          = array();
 
 			// We need to do this to convert "false" strings to actual boolean values.
 			foreach ( $data['recipients'] as $id => $recipient ) {
@@ -304,11 +316,17 @@ class Pro_AJAX {
 			}
 
 			if ( 'uptime' === $module ) {
-				try {
-					$response = Utils::get_api()->uptime->update_recipients( $data['recipients'] );
 
-					if ( isset( $response ) && is_array( $response ) && ! is_wp_error( $response ) ) {
-						$recipients = json_decode( wp_json_encode( $response ), true ); // Convert to array.
+				$request_data['notification']['recipients'] = $data['recipients'];
+				$request_data['notification']['threshold']  = (int) $data['schedule']['threshold'];
+				$request_data['notification']['is_active']  = true;
+
+				try {
+					$response = Utils::get_api()->uptime->sync_hub( $request_data );
+
+					if (  ! is_wp_error( $response ) && isset(  $response->notification->recipients ) && is_array(  $response->notification->recipients ) ) {
+						
+						$recipients = json_decode( wp_json_encode( $response->notification->recipients ), true ); // Convert to array.
 
 						foreach ( $recipients as $id => $recipient ) {
 							$key = array_search( $recipient['email'], array_column( $data['recipients'], 'email' ), true );
@@ -335,7 +353,6 @@ class Pro_AJAX {
 		}
 
 		$settings['recipients'] = $data['recipients'];
-
 		Settings::update_setting( $type, $settings, $module );
 
 		// We need to do this at the end, because the settings need to be saved first.

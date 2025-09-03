@@ -901,20 +901,21 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 		 *
 		 * @param {object} element
 		 */
-		 hbTrackEoMPEvent( element ) {
+		hbTrackEoMPEvent( element ) {
 			window.wphbMixPanel.trackEoUpsell( element.dataset.eventname, element.dataset.location );
 		},
 
 		/**
 		 * Track MP event on AO activation.
 		 */
-		 hbTrackMPOnAoActivate() {
-			window.wphbMixPanel.enableFeature( 'Asset Optimization' )
+		hbTrackMPOnAoActivate() {
+			window.wphbMixPanel.enableFeature( 'Asset Optimization' );
 			window.wphbMixPanel.trackAOUpdated( {
-				'Mode': 'speedy',
-				'assets_found': 0,
-				'total_files': 0,
-				'filesize_reductions': 0,
+				Mode: [ 'AO_Combine', 'AO_Compress', 'speedy' ],
+				assets_found: 0,
+				location: 'ao_settings',
+				total_files: 0,
+				filesize_reductions: 0,
 			} );
 		},
 
@@ -934,14 +935,15 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 				hide = true;
 			}
 
-			Fetcher.minification.toggleView( mode, hide ).then( () => {
+			Fetcher.minification.toggleView( mode, hide ).then( ( response ) => {
 				window.wphbMixPanel.trackAOUpdated( {
-					'Mode': mode === 'advanced' ? 'Manual' : wphb.stats.type,
-					'assets_found': wphb.stats.assetsFound,
-					'total_files': wphb.stats.totalFiles,
-					'filesize_reductions': wphb.stats.filesizeReductions,
+					Mode: response.mode,
+					assets_found: wphb.stats.assetsFound,
+					total_files: wphb.stats.totalFiles,
+					filesize_reductions: wphb.stats.filesizeReductions,
+					location: 'ao_settings',
 				} );
-				
+
 				window.location.href = getLink( 'minification' );
 			} );
 		},

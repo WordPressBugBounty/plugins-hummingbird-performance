@@ -107,7 +107,7 @@ abstract class Page {
 			$this->page_id = add_submenu_page(
 				$parent,
 				$page_title,
-				__( 'Upgrade for 80% Off!', 'wphb' ),
+				__( 'SALE - Limited Offer', 'wphb' ),
 				Utils::get_admin_capability(),
 				esc_url( Utils::get_link( 'plugin', 'hummingbird_submenu_upsell' ) ),
 			);
@@ -290,7 +290,7 @@ abstract class Page {
 		);
 
 		// React pages - load React lib.
-		if ( preg_match( '/wphb-?(gzip|minification|caching|tutorials|settings|setup)?$/', $hook ) ) {
+		if ( preg_match( '/wphb-?(minification|caching|tutorials|settings|setup)?$/', $hook ) ) {
 			wp_register_script(
 				'wphb-react-lib',
 				WPHB_DIR_URL . 'admin/assets/js/wphb-react-lib.min.js',
@@ -559,6 +559,10 @@ abstract class Page {
 	protected function render_modals() {
 		if ( is_multisite() && ( is_network_admin() || is_super_admin() ) ) {
 			$this->modal( 'clear-cache-network-wide' );
+		}
+
+		if ( 'wphb-minification' !== $this->slug ) {
+			return;
 		}
 
 		$show_upgrade_modal = ! is_multisite() || is_network_admin();

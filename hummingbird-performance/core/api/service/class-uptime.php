@@ -141,25 +141,24 @@ class Uptime extends Service {
 	}
 
 	/**
-	 * Update recipients.
+	 * Sync Hub or update settings.
 	 *
 	 * Making a POST request to this endpoint will trigger a confirmation email for the selected recipient.
 	 *
 	 * @since 2.1.0
 	 *
-	 * @param array $recipients  Recipients array. Example: ['name'=>'name', 'email'=>'email@example.org'].
+	 * @param array $data  Data to send to the API.
 	 *
 	 * @return array|WP_Error
 	 */
-	public function update_recipients( array $recipients = array() ) {
+	public function sync_hub( array $data = array() ) {
 		$this->request->set_timeout( 30 );
 
+		$data['domain'] = $this->request->get_this_site();
+
 		$results = $this->request->post(
-			'monitoring/recipients',
-			array(
-				'domain'     => $this->request->get_this_site(),
-				'recipients' => wp_json_encode( $recipients ),
-			)
+			'monitoring/settings',
+			$data
 		);
 
 		if ( isset( $results->code ) && isset( $results->message ) ) {

@@ -95,6 +95,7 @@ class Notices {
 			add_action( 'network_admin_notices', array( $this, 'site_monitoring' ) );
 			add_action( 'network_admin_notices', array( $this, 'plugin_compat_check' ) );
 			add_action( 'network_admin_notices', array( $this, 'legacy_critical_css_deprecation_notice' ) );
+			add_action( 'admin_notices', array( $this, 'ao_scan_completion_notice' ) );
 		} else {
 			add_action( 'admin_notices', array( $this, 'upgrade_to_pro' ) );
 			add_action( 'admin_notices', array( $this, 'free_version_deactivated' ) );
@@ -102,6 +103,7 @@ class Notices {
 			add_action( 'admin_notices', array( $this, 'free_version_rate' ) );
 			add_action( 'admin_notices', array( $this, 'plugin_compat_check' ) );
 			add_action( 'admin_notices', array( $this, 'legacy_critical_css_deprecation_notice' ) );
+			add_action( 'admin_notices', array( $this, 'ao_scan_completion_notice' ) );
 		}
 	}
 
@@ -356,16 +358,18 @@ class Notices {
 	 *
 	 * @since 2.6.0
 	 *
-	 * @param string $message  The notice text.
-	 * @param string $type     Notice type.
+	 * @param string $message     The notice text.
+	 * @param string $type        Notice type.
+	 * @param bool   $dismissible Whether the notice is dismissible.
 	 */
-	public function show_floating( $message, $type = 'success' ) {
+	public function show_floating( $message, $type = 'success', $dismissible = true ) {
 		?>
 		<script>
 			document.addEventListener( 'DOMContentLoaded', function () {
 				WPHB_Admin.notices.show(
 					"<?php echo wp_kses_post( $message ); ?>",
-					"<?php echo esc_attr( $type ); ?>"
+					"<?php echo esc_attr( $type ); ?>",
+					<?php echo $dismissible ? 'true' : 'false'; ?>
 				);
 			} );
 		</script>
@@ -746,4 +750,23 @@ class Notices {
 		$this->show_notice( 'plugin-compat', $text, $additional, true );
 	}
 
+	/**
+	 * Show Asset Optimization scan completion notice.
+	 *
+	 * This notice is displayed when the AO scan is completed successfully.
+	 *
+	 * @since 3.16.0
+	 */
+	public function ao_scan_completion_notice() {
+		if ( ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
+			return;
+		}
+
+		$message = Utils::get_ao_background_processing_completion_message();
+		if ( empty( $message ) ) {
+			return;
+		}
+
+		$this->show_floating( $message, 'success', false );
+	}
 }

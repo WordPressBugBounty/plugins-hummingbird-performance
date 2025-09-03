@@ -1,4 +1,5 @@
 /* global SUI */
+/* global wphbReact */
 
 /**
  * External dependencies
@@ -16,10 +17,10 @@ const { __ } = wp.i18n;
 import './assets.scss';
 import Action from '../../components/sui-box/action';
 import Box from '../../components/sui-box';
-import Button from '../../components/sui-button';
 import Tooltip from '../../components/sui-tooltip';
-import Tabs from '../../components/sui-tabs';
 import BoxBuilder from '../../components/sui-box-builder';
+import { createInterpolateElement } from "@wordpress/element";
+import Icon from '../../components/sui-icon';
 
 /**
  * Assets component.
@@ -45,23 +46,19 @@ export default class Assets extends React.Component {
 	 */
 	getHeaderActions() {
 		const buttons = (
-			<React.Fragment>
-				<Tooltip classes="sui-tooltip-constrained" text={ __( 'Added/removed plugins or themes? Update your file list to include new files, and remove old ones', 'wphb' ) }>
-					<Button
-						text={ __( 'Re-Check Files', 'wphb' ) }
-						classes={ [ 'sui-button', 'sui-button-ghost' ] }
-						icon="sui-icon-update"
-						onClick={ this.props.reCheckFiles }
-					/>
+			<div className="sui-actions-right">
+				<Tooltip classes="sui-tooltip-top-right sui-tooltip-constrained wphb-ao-mode-switch-tooltip" text={ 'advanced' === this.props.mode ? __( 'Optimize your assets and improve page load times based on our automated options.' ) : __( "Manually configure each file yourself to achieve the exact setup for your site. If you're unfamiliar with manual optimization, check the documentation first.", 'wphb' ) }>
+					<Icon classes="sui-icon-info sui-md" />
 				</Tooltip>
-				<Tooltip classes={ [ 'sui-tooltip-constrained', 'sui-tooltip-top-right' ] } text={ __( 'Clears all local or hosted assets and recompresses files that need it', 'wphb' ) }>
-					<Button
-						text={ __( 'Clear cache', 'wphb' ) }
-						classes="sui-button"
-						onClick={ this.props.clearCache }
-					/>
-				</Tooltip>
-			</React.Fragment>
+				<span className="sui-description" style={ { marginTop: '0px' } }>
+					{ createInterpolateElement(
+						__( 'Switch to <a></a>', 'wphb' ),
+						{
+							a: <a onClick={ this.onTabClick } id={ 'advanced' === this.props.mode ? 'auto-tab' : 'manual-tab' } href="javascript:void(0)">{ 'advanced' === this.props.mode ? __( 'Automatic Mode', 'wphb' ) : __( 'Dev Mode', 'wphb' ) }</a>
+						}
+					) }
+				</span>
+			</div>
 		);
 
 		return <Action type="right" content={ buttons } />;
@@ -130,47 +127,30 @@ export default class Assets extends React.Component {
 	 * @return {JSX.Element}  Content.
 	 */
 	getContent( content ) {
-		const sideTabs = [
-			{
-				title: __( 'Automatic', 'wphb' ),
-				id: 'auto',
-				checked: 'basic' === this.props.mode,
-				onClick: this.onTabClick
-			},
-			{
-				title: __( 'Manual', 'wphb' ),
-				id: 'manual',
-				checked: 'advanced' === this.props.mode,
-				onClick: this.onTabClick
-			},
-		];
-
 		return (
 			<React.Fragment>
-				<p>
-					{ __(
-						'Optimizing your assets will compress and organize them in a way that improves page load times. You can choose to use our automated options, or manually configure each file yourself.',
-						'wphb'
-					) }
-				</p>
-
-				<div className="sui-actions">
-					<Button
-						text={ __( 'How Does it Work?', 'wphb' ) }
-						icon="sui-icon-info"
-						id="wphb-basic-hdiw-link"
-						onClick={ this.showHowDoesItWork }
-					/>
-				</div>
-
-				<div id="wphb-optimization-type-selector">
-					<Tabs menu={sideTabs} sideTabs="true"/>
-				</div>
-
-				{ 'advanced' === this.props.mode &&
-					<p className="sui-description">
-						{ __( 'Manually configure your optimization settings (compress, combine, move, inline, defer, async, and preload) and then publish your changes.', 'wphb' ) }
-					</p> }
+				{ 'advanced' === this.props.mode ? (
+					<React.Fragment>
+						<p>
+							{ createInterpolateElement(
+								__( 'In Dev Mode, you can manually optimize (compress, combine, move, inline, defer, async, and preload) individual files. With this amount of freedom comes the possibility of damaging your site so if you are unfamiliar with manually optimizing your files, we recommend reviewing the <a>How Does it Work?</a> guide.', 'wphb' ),
+								{
+									a: <a href={ wphbReact.links.aoDocLink } target="_blank" rel="noopener noreferrer">{ __( 'How Does it Work?', 'wphb' ) }</a>
+								}
+							) }
+						</p>
+						<p className="sui-description">
+							{ __( 'Manually configure your optimization settings (compress, combine, move, inline, defer, async, and preload) and then publish your changes.', 'wphb' ) }
+						</p>
+					</React.Fragment>
+				) : (
+					<p>
+						{ __(
+							'Optimizing your assets will compress and organize them in a way that improves page load times. You can choose to use our automated options, or manually configure each file yourself.',
+							'wphb'
+						) }
+					</p>
+				) }
 
 				<BoxBuilder flushed={ true } fields={ content } />
 			</React.Fragment>

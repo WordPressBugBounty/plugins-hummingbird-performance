@@ -249,7 +249,11 @@ function Fetcher() {
 			 */
 			toggleView: ( value, hide ) => {
 				const action = actionPrefix + 'minification_toggle_view';
-				return request( action, { value, hide }, 'POST' );
+				return request( action, { value, hide }, 'POST' ).then(
+					( response ) => {
+						return response;
+					}
+				);
 			},
 
 			/**

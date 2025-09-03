@@ -972,12 +972,11 @@ class Dashboard extends Page {
 	public function dashboard_minification_disabled_metabox() {
 		$minification_url = add_query_arg(
 			array(
-				'run'  => 'true',
-				'type' => 'minification',
+				'enable' => 'true',
 			),
-			Utils::get_admin_menu_url()
+			Utils::get_admin_menu_url( 'minification' )
 		);
-		$minification_url = wp_nonce_url( $minification_url, 'wphb-run-dashboard' ) . '#wphb-box-dashboard-minification-checking-files';
+		$minification_url = wp_nonce_url( $minification_url, 'wphb-enable-ao' );
 		$this->view( 'dashboard/minification/disabled-meta-box', compact( 'minification_url' ) );
 	}
 
@@ -1057,7 +1056,12 @@ class Dashboard extends Page {
 		$this->view(
 			'dashboard/gzip/module-meta-box-footer',
 			array(
-				'gzip_url' => Utils::get_admin_menu_url( 'gzip' ),
+				'gzip_url' => add_query_arg(
+					array(
+						'view' => 'gzip',
+					),
+					Utils::get_admin_menu_url( 'minification' )
+				),
 			)
 		);
 	}

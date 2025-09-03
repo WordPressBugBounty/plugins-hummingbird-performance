@@ -347,7 +347,7 @@ if ( is_wp_error( $error ) ) {
 			</label>
 			<?php if ( ! Utils::is_member() ) : ?>
 				<a target="_blank" onclick="window.wphbMixPanel.trackHBUpsell( 'identify_cached_page', 'page_caching_settings', 'cta_clicked', this.href );" href="<?php echo esc_url( Utils::get_link( 'plugin', 'hummingbird_caching_identify_pages' ) ); ?>" class="wphb-upsell-link wphb-upsell-eo" style="font-size: 13px;">
-					<?php esc_html_e( 'Unlock now - 80% Off!', 'wphb' ); ?>
+					<?php esc_html_e( 'Unlock with Pro — Don’t Miss the Sale.', 'wphb' ); ?>
 					<span class="sui-icon-open-new-window" aria-hidden="true"></span>
 				</a>
 			<?php endif; ?>

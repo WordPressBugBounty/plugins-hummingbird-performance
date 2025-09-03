@@ -44,6 +44,7 @@ class Hub {
 		'purge_all_cache',
 		'import_settings',
 		'export_settings',
+		'uptime_updated',
 	);
 
 	/**
@@ -370,7 +371,7 @@ class Hub {
 
 		if ( 'performance' === $module || 'reports' === $module ) {
 			// Randomize the minutes, so we don't spam the API.
-			$email_time    = explode( ':', sanitize_text_field( $params->time ) );
+			$email_time = explode( ':', sanitize_text_field( $params->time ) );
 			/* translators: %02d: Random number */
 			$email_time[1] = sprintf( '%02d', wp_rand( 0, 59 ) );
 
@@ -731,4 +732,44 @@ class Hub {
 		wp_send_json_success( $config['config'] );
 	}
 
+	/**
+	 * Update uptime setting from the Hub.
+	 *
+	 * @since 3.16.0
+	 * @param array  $params  Parameters.
+	 * @param string $action  Action.
+	 */
+	public function action_uptime_updated( $params, $action ) {
+		$hub_settings = Utils::get_api()->uptime->sync_hub();
+
+		if ( is_wp_error( $hub_settings ) || ! isset( $hub_settings->notification ) ) {
+			wp_send_json_error(
+				array(
+					'message' => 'HB unable to fetch uptime settings',
+				)
+			);
+		}
+
+		if ( isset( $hub_settings->is_active ) && $hub_settings->is_active ) {
+			Utils::get_module( 'uptime' )->enable();
+		} else {
+			Utils::get_module( 'uptime' )->disable();
+		}
+
+		$notification_settings = $hub_settings->notification;
+		$settings              = array();
+
+		if ( ! $notification_settings->is_active ) {
+			$settings['enabled'] = false;
+		} else {
+			$settings['enabled']   = true;
+			$settings['threshold'] = isset( $notification_settings->threshold ) ? (int) $notification_settings->threshold : 0;
+
+			if ( isset( $notification_settings->recipients ) && is_array( $notification_settings->recipients ) ) {
+				$settings['recipients'] = json_decode( wp_json_encode( $notification_settings->recipients ), true );
+			}
+		}
+
+		Settings::update_setting( 'notifications', $settings, 'uptime' );
+	}
 }

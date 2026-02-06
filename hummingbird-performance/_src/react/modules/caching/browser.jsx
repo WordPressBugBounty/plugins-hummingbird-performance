@@ -166,10 +166,32 @@ class BrowserCachingPage extends React.Component {
 				document.getElementById( 'set-expiry-media' ).dispatchEvent( event );
 			}
 		} else {
-			CSS = document.getElementById( 'set-expiry-css' ).value;
-			Images = document.getElementById( 'set-expiry-images' ).value;
-			JavaScript = document.getElementById( 'set-expiry-javascript' ).value;
-			Media = document.getElementById( 'set-expiry-media' ).value;
+			const fieldMap = {
+				'set-expiry-css': 'CSS',
+				'set-expiry-images': 'Images',
+				'set-expiry-javascript': 'JavaScript',
+				'set-expiry-media': 'Media'
+			};
+
+			const changedField = fieldMap[ e.target.id ];
+
+			// Start with current state values or fallback to DOM
+			const values = {
+				CSS: this.state.expires.CSS || document.getElementById( 'set-expiry-css' ).value,
+				Images: this.state.expires.Images || document.getElementById( 'set-expiry-images' ).value,
+				JavaScript: this.state.expires.JavaScript || document.getElementById( 'set-expiry-javascript' ).value,
+				Media: this.state.expires.Media || document.getElementById( 'set-expiry-media' ).value
+			};
+
+			// Override with the changed field value
+			if ( changedField ) {
+				values[ changedField ] = e.target.value;
+			}
+
+			CSS = values.CSS;
+			Images = values.Images;
+			JavaScript = values.JavaScript;
+			Media = values.Media;
 		}
 
 		this.setState( { expires: { CSS, Images, JavaScript, Media } } );

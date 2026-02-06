@@ -41,15 +41,15 @@ class Housekeeper {
 	 */
 	public static function clear_expired_groups() {
 		$maybe_clear_page_cache = false;
+		$groups_ids             = Minify_Group::get_minify_groups_ids();
 
-		$groups = Minify_Group::get_minify_groups();
-		foreach ( $groups as $group ) {
-			$instance = Minify_Group::get_instance_by_post_id( $group->ID );
+		foreach ( $groups_ids as $group_id ) {
+			$instance = Minify_Group::get_instance_by_post_id( $group_id );
 			if ( ( $instance instanceof Minify_Group ) && $instance->is_expired() && $instance->file_id ) {
 				$instance->delete_file();
-				if ( 'wphb_minify_group' === get_post_type( $instance->file_id ) ) {
+				if ( in_array( (string) $instance->file_id, Minify_Group::query_minify_post_ids(), true ) ) {
 					Utils::get_module( 'minify' )->log( 'In Housekeeper Deleting the minify group file id : ' . $instance->file_id );
-					wp_delete_post( $instance->file_id, true );	
+					wp_delete_post( $instance->file_id, true );
 				}
 				$maybe_clear_page_cache = true;
 			}

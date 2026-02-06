@@ -108,10 +108,12 @@ export default class Assets extends React.Component {
 		}
 
 		const type = 'advanced' === this.props.mode ? 'basic' : 'advanced';
+		const modalId = 'wphb-' + type + '-minification-modal';
+		const modalElement = document.getElementById( modalId );
 
-		if ( this.props.showModal ) {
+		if ( this.props.showModal && modalElement ) {
 			SUI.openModal(
-				'wphb-' + type + '-minification-modal',
+				modalId,
 				'wphb-switch-to-' + type
 			);
 		} else {

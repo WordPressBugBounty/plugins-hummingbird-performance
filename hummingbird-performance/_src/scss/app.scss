@@ -4,11 +4,11 @@ $upgrade-image: '../../admin/assets/image/hero.png';
 $upgrade-image-mobile: '../../admin/assets/image/hero-mobile.png';
 
 // Overwrite image size
-$summary-image-sm--width:  96px;
+$summary-image-sm--width: 96px;
 $summary-image-sm--height: 96px;
 $summary-image-sm--position-y: 30px;
 
-$summary-image--width:  96px;
+$summary-image--width: 96px;
 $summary-image--height: 96px;
 $summary-image--position-y: center;
 
@@ -30,6 +30,7 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 @import "~@wpmudev/shared-ui/scss/colors";
 @import "~@wpmudev/shared-ui/scss/variables";
 @import "~@wpmudev/shared-ui/scss/mixins";
+@import "~@wpmudev/shared-ui/scss/icons";
 @import "~@wpmudev/shared-ui/scss/accessibility";
 @import "~@wpmudev/shared-ui/scss/animations";
 @import "~@wpmudev/shared-ui/scss/typography";
@@ -107,7 +108,10 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 .wpmud .wphb-listing {
     margin: 0;
 
-    &.bold li, li strong { font-weight: 500; }
+    &.bold li,
+    li strong {
+        font-weight: 500;
+    }
 
     li {
         font-family: $font;
@@ -117,7 +121,9 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
         margin-top: 10px;
         margin-bottom: 0;
 
-        &:first-child { margin-top: 0; }
+        &:first-child {
+            margin-top: 0;
+        }
 
         :before {
             color: #17A8E3;
@@ -136,16 +142,26 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
     display: flex;
     align-items: center;
 
-    .wphb-filename-extension { margin: -5px 10px -5px 0px; }
-    .wphb-filename-extension-label { line-height: 22px; }
-    .sui-tag { margin-left: 10px !important; }
+    .wphb-filename-extension {
+        margin: -5px 10px -5px 0px;
+    }
+
+    .wphb-filename-extension-label {
+        line-height: 22px;
+    }
+
+    .sui-tag {
+        margin-left: 10px !important;
+    }
 }
 
 .sui-recipient .sui-recipient-email,
-.sui-recipient .sui-recipient-name { flex-basis: 45%; }
+.sui-recipient .sui-recipient-name {
+    flex-basis: 45%;
+}
 
 .sui-box {
-    a.wphb-upsell-link:not(#manual_css_switch_now){
+    a.wphb-upsell-link:not(#manual_css_switch_now) {
         margin-left: 44px;
     }
 
@@ -154,6 +170,7 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
         font-size: 11px;
         color: #8D00B1;
     }
+
     a.wphb-upsell-link:hover {
         color: #64007e !important;
     }
@@ -162,13 +179,15 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
 .wp-hb-upsell-modals {
     .sui-box-body {
         .sui-description {
-            margin-top: 8px!important;
-            margin-bottom: 20px!important;
+            margin-top: 8px !important;
+            margin-bottom: 20px !important;
         }
     }
+
     .sui-box-footer {
         flex-direction: column;
     }
+
     .sui-box-footer {
         .sui-box-title {
             font-size: 13px !important;
@@ -177,15 +196,19 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
             margin-bottom: 11px !important;
             // padding-left: 7px;
         }
+
         .wp-hb-pro-features {
             display: flex;
+
             ul {
                 font-size: 12px;
-                margin:0;
-                padding:0;
+                margin: 0;
+                padding: 0;
+
                 li {
                     display: flex;
                     flex-direction: column;
+
                     .wp-hb-pro-features_item {
                         display: flex;
                         align-self: stretch;
@@ -193,44 +216,52 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
                         width: 100%;
                         gap: 10px;
                         margin-bottom: 7px;
+
                         // padding-left: 7px;
-                        .sui-icon-box{
+                        .sui-icon-box {
                             display: block;
                             border-radius: 6px;
-                            padding:3px;
+                            padding: 3px;
                             border: 1px solid #ddd;
                             justify-content: center;
-                            >span{
-                                width:20px;
+
+                            >span {
+                                width: 20px;
                                 height: 20px;
                                 justify-content: center;
                                 align-items: center;
                                 display: flex;
                             }
                         }
+
                         .sui-content-box {
-                            margin:0;
+                            margin: 0;
+
                             h5 {
                                 line-height: 16px;
-                                margin:0 0 3px 0;
+                                margin: 0 0 3px 0;
                                 font-weight: 600;
                                 font-size: inherit;
                                 display: flex;
                                 align-self: stretch;
                                 letter-spacing: 0;
                             }
+
                             p {
-                                margin:0;
+                                margin: 0;
                                 font-size: 12px;
                                 line-height: 20px;
                             }
                         }
                     }
+
                     @media screen and (min-width: 480px) {
                         flex-direction: row;
+
                         .wp-hb-pro-features_item {
                             width: 50%;
-                            &:last-child{
+
+                            &:last-child {
                                 padding-left: 7px;
                             }
                         }
@@ -238,64 +269,76 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
                 }
             }
         }
-        > p {
+
+        >p {
             --purple: #8D00B1;
-            width:100%;
+            width: 100%;
             margin-top: 16px;
+
             .sui-button-ghost {
                 font-size: 13px;
                 display: block;
-                color: var( --purple );
+                color: var(--purple);
                 background-color: #F8F8F8;
                 text-align: center;
                 padding: 7px 12px;
                 transition: all 0.3s ease;
                 line-height: 22px;
+
                 span {
                     &:before {
-                        color: var( --purple );
+                        color: var(--purple);
                     }
                 }
-                &:hover{
+
+                &:hover {
                     text-decoration: underline;
                 }
             }
         }
     }
 }
+
 #wphb-switch-page-cache-method-summary-box.sui-button-onload-text {
     .sui-description {
         display: none !important;
     }
+
     .sui-button-text-onload {
         display: block !important;
     }
 }
 
 .wpmud .wrap-wp-hummingbird {
-    .wphb-mt-5px{
+    .wphb-mt-5px {
         margin-top: 5px !important;
     }
-    .wphb-mt-10px{
+
+    .wphb-mt-10px {
         margin-top: 10px !important;
     }
-    .wphb-mt-15px{
+
+    .wphb-mt-15px {
         margin-top: 15px !important;
     }
-    .wphb-mt-20px{
+
+    .wphb-mt-20px {
         margin-top: 20px !important;
     }
 
-    .wphb-mb-5px{
+    .wphb-mb-5px {
         margin-bottom: 5px !important;
     }
-    .wphb-mb-10px{
+
+    .wphb-mb-10px {
         margin-bottom: 10px !important;
     }
-    .wphb-mb-15px{
+
+    .wphb-mb-15px {
         margin-bottom: 15px !important;
     }
-    .wphb-mb-20px{
+
+    .wphb-mb-20px {
         margin-bottom: 20px !important;
     }
 }
@@ -304,33 +347,132 @@ $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
     margin-bottom: 5px;
 }
 
-.sui-modal{
+.sui-modal {
     #wphb-hub-connection-success-modal {
         .sui-box-body {
             padding-top: 15px;
-            p{
+
+            p {
                 font-size: 13px;
                 line-height: 22px;
                 margin-bottom: 0;
             }
-            strong{
+
+            strong {
                 color: #666666;
             }
-            ul{
+
+            ul {
                 margin-bottom: 0;
-                li{
+
+                li {
                     font-weight: 500;
                     font-size: 14px;
                     line-height: 24px;
                     color: #333333;
+
                     span:before {
                         color: #333333;
                         margin-right: 5px;
                     }
                 }
             }
-            
+
+        }
+    }
+
+    #wphb-disconnect-site-modal {
+        .sui-box-header {
+            padding-top: 40px;
+        }
+
+        .sui-box-body {
+            padding-top: 15px;
+
+            .sui-notice {
+
+                &>p.sui-description {
+                    margin-bottom: 20px;
+                }
+
+                .sui-notice-content {
+                    box-shadow: 0px 0px 0px 1px #E6E6E6 inset;
+                    border: 1px solid #F9C101;
+                    border-radius: 5px;
+                    padding-top: 13px;
+                    padding-right: 20px;
+                    padding-bottom: 13px;
+                    padding-left: 20px;
+                    background-color: #FFFBF0;
+                    color: #333333;
+
+                    .sui-description {
+                        font-weight: 700;
+                    }
+
+                    ul {
+                        margin-top: 10px;
+                        margin-bottom: 0;
+
+                        li {
+                            font-size: 13px;
+                            color: #333333;
+                            margin-bottom: 0;
+                            display: flex;
+
+                            &:not(:last-child) {
+                                margin-bottom: 8px;
+                            }
+
+                            div {
+                                display: inline-block;
+                                margin-left: 8px;
+                            }
+
+                            .cross-icon {
+                                font-family: wpmudev-plugin-icons;
+                                font-weight: 400;
+                                font-size: 14px;
+                                color: #666666;
+                            }
+                        }
+                    }
+                }
+
+                #wphb-disconnect-reason-input {
+                    margin-top: 20px;
+                }
+            }
+
+            .sui-block-content-center {
+                margin-bottom: 10px;
+            }
         }
     }
 }
 
+.sui-form-field-safe-mode {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 0px 4px 10px;
+
+    label {
+        margin-right: 0px !important;
+    }
+
+    #safe_mode-label {
+        color: #666666;
+    }
+
+    .safe-mode-seperator {
+        height: 30px;
+        position: relative;
+        border: 1px solid #AAAAAA;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+.notice-wphb-safe-mode a.wphb-dismiss {
+    display: none;
+}

@@ -177,14 +177,11 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 				'change',
 				function() {
 					const enabled = $( this ).is( ':checked' );
-					Fetcher.minification.toggleLog( enabled ).then( () => {
-						WPHB_Admin.notices.show();
-						if ( enabled ) {
-							$( '.wphb-logging-box' ).show();
-						} else {
-							$( '.wphb-logging-box' ).hide();
-						}
-					} );
+					if ( enabled ) {
+						$( '.wphb-logging-box' ).show();
+					} else {
+						$( '.wphb-logging-box' ).hide();
+					}
 				}
 			);
 
@@ -343,9 +340,14 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 				spinner.addClass( 'visible' );
 
 				const data = self.getMultiSelectValues( 'cdn_exclude' );
+				const debugLog = $( 'input[name=debug_log]' ).is( ':checked' );
+				const requestData = {
+					excludeAssets: data,
+					debugLog
+				};
 
 				Fetcher.minification
-					.updateExcludeList( JSON.stringify( data ) )
+					.updateExcludeList( JSON.stringify( requestData ) )
 					.then( () => {
 						spinner.removeClass( 'visible' );
 						WPHB_Admin.notices.show();

@@ -7,11 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInitbf493c160c6f492dd9424e65184660e2
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'P' =>
         array (
             'Predis\\' => 7,
         ),
-        'H' => 
+        'H' =>
         array (
             'Hummingbird\\Core\\' => 17,
             'Hummingbird\\Admin\\' => 18,
@@ -19,24 +19,21 @@ class ComposerStaticInitbf493c160c6f492dd9424e65184660e2
     );
 
     public static $prefixDirsPsr4 = array (
-        'Predis\\' => 
+        'Predis\\' =>
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
-        'Hummingbird\\Core\\' => 
+        'Hummingbird\\Core\\' =>
         array (
             0 => __DIR__ . '/../..' . '/core',
         ),
-        'Hummingbird\\Admin\\' => 
+        'Hummingbird\\Admin\\' =>
         array (
             0 => __DIR__ . '/../..' . '/admin',
         ),
     );
 
     public static $classMap = array (
-        'ComposerAutoloaderInit65a0a6b53636acc8bd93737adac79345' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/vendor/composer/autoload_real.php',
-        'Composer\\Autoload\\ClassLoader' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/vendor/composer/ClassLoader.php',
-        'Composer\\Autoload\\ComposerStaticInit65a0a6b53636acc8bd93737adac79345' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/vendor/composer/autoload_static.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Hummingbird\\Admin\\AJAX' => __DIR__ . '/../..' . '/admin/class-ajax.php',
         'Hummingbird\\Admin\\Admin' => __DIR__ . '/../..' . '/admin/class-admin.php',
@@ -82,6 +79,7 @@ class ComposerStaticInitbf493c160c6f492dd9424e65184660e2
         'Hummingbird\\Core\\Hub_Connector' => __DIR__ . '/../..' . '/core/class-hub-connector.php',
         'Hummingbird\\Core\\Installer' => __DIR__ . '/../..' . '/core/class-installer.php',
         'Hummingbird\\Core\\Integration\\Avada' => __DIR__ . '/../..' . '/core/integration/class-avada.php',
+        'Hummingbird\\Core\\Integration\\Breakdance' => __DIR__ . '/../..' . '/core/integration/class-breakdance.php',
         'Hummingbird\\Core\\Integration\\Builders' => __DIR__ . '/../..' . '/core/integration/class-builders.php',
         'Hummingbird\\Core\\Integration\\Defender' => __DIR__ . '/../..' . '/core/integration/class-defender.php',
         'Hummingbird\\Core\\Integration\\Divi' => __DIR__ . '/../..' . '/core/integration/class-divi.php',
@@ -144,6 +142,7 @@ class ComposerStaticInitbf493c160c6f492dd9424e65184660e2
         'Hummingbird\\Core\\Pro\\Modules\\Reports_Uptime' => __DIR__ . '/../..' . '/core/pro/modules/class-reports-uptime.php',
         'Hummingbird\\Core\\Pro\\Pro' => __DIR__ . '/../..' . '/core/pro/class-pro.php',
         'Hummingbird\\Core\\Pro\\Pro_AJAX' => __DIR__ . '/../..' . '/core/pro/class-pro-ajax.php',
+        'Hummingbird\\Core\\SafeMode' => __DIR__ . '/../..' . '/core/class-safemode.php',
         'Hummingbird\\Core\\Settings' => __DIR__ . '/../..' . '/core/class-settings.php',
         'Hummingbird\\Core\\Traits\\Module' => __DIR__ . '/../..' . '/core/traits/trait-module.php',
         'Hummingbird\\Core\\Traits\\Smush' => __DIR__ . '/../..' . '/core/traits/trait-smush.php',
@@ -420,53 +419,6 @@ class ComposerStaticInitbf493c160c6f492dd9424e65184660e2
         'Predis\\Transaction\\AbortedMultiExecException' => __DIR__ . '/..' . '/predis/predis/src/Transaction/AbortedMultiExecException.php',
         'Predis\\Transaction\\MultiExec' => __DIR__ . '/..' . '/predis/predis/src/Transaction/MultiExec.php',
         'Predis\\Transaction\\MultiExecState' => __DIR__ . '/..' . '/predis/predis/src/Transaction/MultiExecState.php',
-        'Test_WPMUDEV_Analytics' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/tests/test-wpmudev-analytics.php',
-        'Testable_Mixpanel' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/tests/test-wpmudev-analytics.php',
-        'WPMUDEV\\Hub\\Connector' => __DIR__ . '/../..' . '/core/externals/hub-connector/connector.php',
-        'WPMUDEV\\Hub\\Connector\\API' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-api.php',
-        'WPMUDEV\\Hub\\Connector\\Actions' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-actions.php',
-        'WPMUDEV\\Hub\\Connector\\Admin' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-admin.php',
-        'WPMUDEV\\Hub\\Connector\\Data' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-data.php',
-        'WPMUDEV\\Hub\\Connector\\Options' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-options.php',
-        'WPMUDEV\\Hub\\Connector\\Remote' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-remote.php',
-        'WPMUDEV\\Hub\\Connector\\Request' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-request.php',
-        'WPMUDEV\\Hub\\Connector\\Rest' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-rest.php',
-        'WPMUDEV\\Hub\\Connector\\Singleton' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-singleton.php',
-        'WPMUDEV\\Hub\\Connector\\Upgrader' => __DIR__ . '/../..' . '/core/externals/hub-connector/inc/class-upgrader.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/plugin-cross-sell.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\App\\Rest_Endpoints\\Activate_Plugin' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/app/rest-endpoints/class-activate-plugin.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\App\\Rest_Endpoints\\Install_Plugin' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/app/rest-endpoints/class-install-plugin.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\App\\Submenus\\CrossSell' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/app/submenus/class-cross-sell.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\Container' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/core/class-container.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\Loader' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/core/class-loader.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\Rest_Api' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/core/class-rest-api.php',
-        'WPMUDEV\\Modules\\Plugin_Cross_Sell\\Utilities' => __DIR__ . '/../..' . '/core/externals/plugins-cross-sell-page/core/class-utilities.php',
-        'WPMUDEV\\Notices\\Handler' => __DIR__ . '/../..' . '/core/externals/free-dashboard/classes/class-handler.php',
-        'WPMUDEV\\Notices\\Notices\\Email' => __DIR__ . '/../..' . '/core/externals/free-dashboard/classes/notices/class-email.php',
-        'WPMUDEV\\Notices\\Notices\\Giveaway' => __DIR__ . '/../..' . '/core/externals/free-dashboard/classes/notices/class-giveaway.php',
-        'WPMUDEV\\Notices\\Notices\\Notice' => __DIR__ . '/../..' . '/core/externals/free-dashboard/classes/notices/class-notice.php',
-        'WPMUDEV\\Notices\\Notices\\Rating' => __DIR__ . '/../..' . '/core/externals/free-dashboard/classes/notices/class-rating.php',
-        'WPMUDEV_Analytics' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/core/class-wpmudev-analytics.php',
-        'WPMUDEV_Analytics_V2' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/core/class-wpmudev-analytics-v2.php',
-        'WPMUDEV_Analytics_V2_Mutex' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/core/class-wpmudev-analytics-v2-mutex.php',
-        'WPMUDEV_Analytics_V3' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/core/class-wpmudev-analytics-v3.php',
-        'WPMUDEV_Analytics_V4' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/core/class-wpmudev-analytics-v4.php',
-        'WPMUDEV_Analytics_Vendor\\Base_MixpanelBase' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/Base/MixpanelBase.php',
-        'WPMUDEV_Analytics_Vendor\\ConsumerStrategies_AbstractConsumer' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/ConsumerStrategies/AbstractConsumer.php',
-        'WPMUDEV_Analytics_Vendor\\ConsumerStrategies_CurlConsumer' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/ConsumerStrategies/CurlConsumer.php',
-        'WPMUDEV_Analytics_Vendor\\ConsumerStrategies_FileConsumer' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/ConsumerStrategies/FileConsumer.php',
-        'WPMUDEV_Analytics_Vendor\\ConsumerStrategies_SocketConsumer' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/ConsumerStrategies/SocketConsumer.php',
-        'WPMUDEV_Analytics_Vendor\\Mixpanel' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/Mixpanel.php',
-        'WPMUDEV_Analytics_Vendor\\Producers_MixpanelBaseProducer' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/Producers/MixpanelBaseProducer.php',
-        'WPMUDEV_Analytics_Vendor\\Producers_MixpanelEvents' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/Producers/MixpanelEvents.php',
-        'WPMUDEV_Analytics_Vendor\\Producers_MixpanelGroups' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/Producers/MixpanelGroups.php',
-        'WPMUDEV_Analytics_Vendor\\Producers_MixpanelPeople' => __DIR__ . '/../..' . '/core/externals/wpmudev-analytics/vendor_prefixed/Producers/MixpanelPeople.php',
-        'WPMUDEV_Dashboard_Notice' => __DIR__ . '/../..' . '/core/externals/dash-notice/wpmudev-dash-notification.php',
-        'WPMUDEV_Dashboard_Notice3' => __DIR__ . '/../..' . '/core/externals/dash-notice/wpmudev-dash-notification.php',
-        'WPMUDEV_Dashboard_Notice4' => __DIR__ . '/../..' . '/core/externals/dash-notice/wpmudev-dash-notification.php',
-        'WPMUDEV_Recommended_Plugins_Notice' => __DIR__ . '/../..' . '/core/externals/plugin-notice/notice.php',
-        'WPMUDEV_Recommended_Plugins_Notice_Registered_Plugin' => __DIR__ . '/../..' . '/core/externals/plugin-notice/notice.php',
-        'WP_Object_Cache' => __DIR__ . '/../..' . '/core/object-cache.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

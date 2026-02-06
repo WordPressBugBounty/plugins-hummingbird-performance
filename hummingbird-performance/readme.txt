@@ -1,14 +1,14 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.16.0
+Version: 3.19.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
 Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.16.0
+Stable tag: 3.19.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -49,7 +49,8 @@ You’ll get faster loading pages, higher search rankings (SERP) and PageSpeed s
 - Scan and Fix – Get a scan of your site, find out what’s slowing it down, and use one-click performance improvements to make critical speed improvements.
 - World-class caching – A full caching suite to load pages faster with full-page, Gravatar, and browser cache tool.
 - Performance Reports – Pro tips for running your site at super speed.
-- Asset Optimization – Position, minify and combine Javascript, CSS, and Google Font files for top performance. Test changes with built-in Safe Mode.
+- Asset Optimization – Combine, compress and position Javascript, CSS, and Google Font files for top performance.
+- Safe Mode — Test Hummingbird settings without affecting your visitors' experience, only logged-in admins see the optimized version.
 - Better Rankings – Improve scores on Google PageSpeed Insights (SEO ranking factor), YSlow, Pingdom, and GTmetrix.
 - Increase Your Conversion Rate - Don’t keep visitors waiting: faster sites convert better.
 - GZIP Compression – Blazing-fast HTML, JavaScript, and stylesheet (CSS) transfer.
@@ -82,9 +83,7 @@ Make your site load even faster with Hummingbird’s complete set of cache tools
 
 ### Asset Optimization
 
-Did you know that the more files you add to your site’s header, the slower it will load? With Hummingbird, you can easily customize the load position of your CSS, JavaScript (defer CSS and Javascript), Fonts, and other files to increase your page speed.
-
-Quickly reorder, compress, and reposition files with Hummingbird’s minification feature. Reset any changes you make in one click, or use Asset Optimization Safe Mode to test changes before pushing live.
+Did you know that loading too many files in your site’s header can slow it down? Hummingbird now gives you granular control with separate Combine and Compress optimization modes, so you can fine tune your Asset Optimization like a pro. Reorder, defer, compress and exclude CSS and JavaScript files with one-click.
 
 ### Transfer Data at Top Speed With GZIP
 
@@ -210,6 +209,52 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 5. Custom performance optimizations using Advanced Tools.
 
 == Changelog ==
+
+= 3.19.0 ( 2026-01-26 ) =
+- New: Success notification when cache is cleared from the admin bar
+- Improvement: Updated optimization labels in Hummingbird Onboarding Wizard Summary
+- Improvement: Enhanced Asset Optimization background file scan across all relevant locations
+- Improvement: Mobile-specific Above-the-Fold critical CSS is now supported on sites using Static Server Cache
+- Improvement: Improved caching plugin conflict detection to cover more popular caching solutions
+- Fix: Browser caching only updating Images when generating the server script for individual file types
+- Fix: Error in Debug log when Page caching is active
+- Fix: Custom post type cache not working when "Posts" cache is disabled
+- Fix: "Connect Site" button icon display issue
+- Fix: Fatal error when enabling Asset Optimization after activating Safe Mode
+
+= 3.18.1 ( 2025-12-16 ) =
+- Improvement: Security hardening
+
+= 3.18.0 ( 2025-12-15 ) =
+- New: Safe Mode now covers all plugin settings, allowing you to test any change in a sandbox environment before going live
+- New: Ability to run performance test in the safe mode
+- Improvement: Refined the UX for Critical CSS generation
+- Improvement: Enhanced Hummingbird Delay JS compatibility with Divi
+- Improvement: Automatically excluded specific WooCommerce files from Asset Optimization to prevent product image issues
+- Fix: Resolved an issue causing excessive cache folder size
+- Fix: Resolved Hummingbird Delay JS and Critical CSS conflicts with other plugins
+- Fix: Bulk Update issue in Asset Optimization Dev Mode
+- Fix: Minor UX and copy adjustments
+
+= 3.17.2 ( 2025-11-20 ) =
+- Improvement: Miscellaneous improvements
+
+= 3.17.1 ( 2025-11-06 ) =
+- Fix: Deletion of Asset Optimization database data sometimes not working
+
+= 3.17.0 ( 2025-11-06 ) =
+- Improvement: Enhanced Hummingbird onboarding experience
+- Improvement: Automatically clear Page Cache after editing Site Appearance
+- Improvement: Improved logging for Critical CSS
+- Fix: High memory usage when many minify groups are stored in the database
+- Fix: Server and local cache not clearing automatically when adding a new post/page
+- Fix: Cache not cleared when new comments are posted
+- Fix: Some settings not resetting after clicking the "Reset" button
+- Fix: Asset Optimization not stopping when the Complianz plugin is active
+- Fix: Asset Optimization occasionally changing the order of styles
+- Fix: Inaccurate caching stats in certain cases
+- Fix: Minor visual issues
+- Fix: PHP warnings
 
 = 3.16.0 ( 2025-09-03 ) =
 - Improvement: Restructure Asset Optimization modes

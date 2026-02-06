@@ -176,10 +176,8 @@ export const ManualAssets = ( props ) => {
 		});
 	};
 
-	const saveAndPreviewSafeModeSettings = () => {
-		saveSettings('minify_save_safe_mode_settings').then(() => {
-			showSafeMode();
-		});
+	const saveSafeModeSettings = () => {
+		saveSettings('minify_save_safe_mode_settings');
 	}
 
 	const discardSafeModeSettings = () => {
@@ -292,6 +290,10 @@ export const ManualAssets = ( props ) => {
 
 				if ( ! actionAllowedForType( action, type ) ) {
 					continue; // Skip options that are not relevant for a specific asset type.
+				}
+
+				if ( ! defaultBulkOptions.hasOwnProperty( action ) ) {
+					continue; // Skip actions that are not part of bulk updates.
 				}
 
 				const isReverseOption = window.lodash.includes( [ 'dont_minify', 'dont_combine' ], action );
@@ -575,18 +577,6 @@ export const ManualAssets = ( props ) => {
 	 * @return {JSX.Element} Header elements.
 	 */
 	const stickyHeader = () => {
-		const safeModeElement = (
-			<React.Fragment>
-				<Tooltip classes="sui-tooltip-left sui-tooltip-constrained" text={ __( "Test different settings in a safe environment without affecting visitors' experience. The changes done in the safe mode will be only visible to you (as an admin).", 'wphb' ) }>
-					<Icon classes="sui-icon-info sui-md" />
-				</Tooltip>
-				{ __( 'Safe mode', 'wphb' ) }
-				<div className="wphb-safemode-toggle">
-					<Toggle checked={safeMode} onChange={toggleSafeMode}/>
-				</div>
-			</React.Fragment>
-		);
-
 		const filterBtn = <Button
 			type="button"
 			id="wphb-toggle-filter"
@@ -617,13 +607,13 @@ export const ManualAssets = ( props ) => {
 
 		const safeModeSaveButton =
 			<Tooltip classes="sui-tooltip-right sui-tooltip-constrained"
-					 text={__("Preview your changes on the front-end, then publish to live if no errors are found.", 'wphb')}>
+				text={__("Preview your changes on the front-end, then publish to live if no errors are found.", 'wphb')}>
 				<Button
-					onClick={saveAndPreviewSafeModeSettings}
+					onClick={saveSafeModeSettings}
 					type="button"
 					icon="sui-icon-eye"
-					classes={['sui-button']}
-					text={__('Preview', 'wphb')}
+					classes={['sui-button save-safe-mode-ao']}
+					text={__('Save Safe mode changes', 'wphb')}
 				/>
 			</Tooltip>;
 		const publishButton = <Button
@@ -653,7 +643,6 @@ export const ManualAssets = ( props ) => {
 						</div>
 						<Action type="right" content={
 							<React.Fragment>
-								{ 'advanced' === props.mode ? safeModeElement : false }
 								{ filterBtn }
 							</React.Fragment>
 						} />
@@ -928,7 +917,7 @@ export const ManualAssets = ( props ) => {
 			{safeMode &&
 				<Notice
 					classes="sui-notice-warning"
-					content={createInterpolateElement(__("You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitors' experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser's console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you've made as soon as possible to avoid page load issues.</span>", 'wphb'), {
+					content={createInterpolateElement(__("You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitor's experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser's console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you've made as soon as possible to avoid page load issues.</span>", 'wphb'), {
 						'strong': <strong/>,
 						'span': <span style={{marginTop: "10px", display: "block"}} />,
 					})}

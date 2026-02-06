@@ -46,8 +46,10 @@ class Mixpanel_Analytics extends Module {
 	 */
 	public function init() {
 		add_filter( 'wp_hummingbird_is_active_module_mixpanel_analytics', array( $this, 'module_status' ) );
-		add_action( 'wphb_mixpanel_usage_tracking_value_update', array( $this, 'wphb_track_opt_toggle' ), 10, 2 );
+		add_action( 'wphb_mixpanel_usage_tracking_value_update', array( $this, 'wphb_track_opt_toggle' ), 10, 3 );
 		add_action( 'wp_ajax_wphb_track_deactivation', array( $this, 'wphb_track_deactivation' ) );
+		add_action( 'admin_init', array( $this, 'wphb_track_plugin_activation' ) );
+		add_action( 'wp_ajax_wphb_analytics_track_event', array( $this, 'wphb_handle_track_request_for_mixpanel' ) );
 	}
 
 	/**
@@ -56,18 +58,27 @@ class Mixpanel_Analytics extends Module {
 	 * @since 3.9.4
 	 */
 	public function run() {
-		add_action( 'wp_ajax_wphb_analytics_track_event', array( $this, 'wphb_handle_track_request_for_mixpanel' ) );
+		if ( defined( 'WPHB_BASENAME' ) ) {
+			$plugin_basename = WPHB_BASENAME;
+			add_action( "deactivate_$plugin_basename", array( $this, 'track_plugin_deactivation' ) );
+		}
 	}
 
 	/**
 	 * Track Mixpanel event when user toggles the tracking option.
 	 *
-	 * @param bool $is_mixpanel_value_updated Mixpanel value updated.
-	 * @param bool $opted_value Opted value.
+	 * @param bool   $is_mixpanel_value_updated Mixpanel value updated.
+	 * @param bool   $opted_value Opted value.
+	 * @param string $location Location of the toggle action.
 	 */
-	public function wphb_track_opt_toggle( $is_mixpanel_value_updated, $opted_value ) {
+	public function wphb_track_opt_toggle( $is_mixpanel_value_updated, $opted_value, $location = 'settings' ) {
 		if ( $is_mixpanel_value_updated ) {
-			$this->track( $opted_value ? 'Opt In' : 'Opt Out' );
+			$this->track(
+				$opted_value ? 'Opt In' : 'Opt Out',
+				array(
+					'Location' => $location,
+				)
+			);
 		}
 	}
 
@@ -500,5 +511,49 @@ class Mixpanel_Analytics extends Module {
 		);
 
 		$this->track_feature_event( 'Critical Css', 'critical_css_updated', $properties );
+	}
+
+	/**
+	 * Track plugin activation event.
+	 *
+	 * @return void
+	 */
+	public function wphb_track_plugin_activation() {
+		if ( get_site_option( 'wphb-track-plugin-activation' ) ) {
+			delete_site_option( 'wphb-track-plugin-activation' );
+
+			$tracking_value = Settings::get_setting( 'tracking', 'settings' );
+			if ( $tracking_value ) {
+				$this->wphb_track_opt_toggle( true, true, 'reactivate' );
+			}
+		}
+	}
+
+	/**
+	 * Track deactivation location.
+	 */
+	public function track_plugin_deactivation() {
+		$this->track(
+			'Opt Out',
+			array(
+				'Location' => $this->get_deactivation_location(),
+			)
+		);
+	}
+
+	/**
+	 * Get deactivation location.
+	 *
+	 * @return string
+	 */
+	private function get_deactivation_location() {
+		$is_hub_request = ! empty( $_REQUEST['wpmudev-hub'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
+		if ( $is_hub_request ) {
+			return 'deactivate_hub';
+		}
+
+		$is_dashboard_request = wp_doing_ajax() && ! empty( $_REQUEST['action'] ) && 'wdp-project-deactivate' === wp_unslash( $_REQUEST['action'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
+
+		return $is_dashboard_request ? 'deactivate_dashboard' : 'deactivate_pluginlist';
 	}
 }

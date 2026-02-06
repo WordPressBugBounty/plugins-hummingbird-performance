@@ -43,6 +43,11 @@ class Installer {
 		if ( false === get_site_option( 'wphb_run_onboarding' ) ) {
 			update_site_option( 'wphb_run_onboarding', true );
 		}
+
+		$wphb_settings = get_site_option( 'wphb_settings' );
+		if ( isset( $wphb_settings['settings'] ) && ! empty( $wphb_settings['settings']['tracking'] ) ) {
+			update_site_option( 'wphb-track-plugin-activation', true );
+		}
 	}
 
 	/**

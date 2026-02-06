@@ -725,4 +725,54 @@ class Filesystem {
 		);
 	}
 
+	/**
+	 * Count files.
+	 *
+	 * @since 3.17.0
+	 *
+	 * @param string $path Path to the directory/file.
+	 * @param string $preg Optional. Regular expression to match file names.
+	 * @return int Number of files matching the pattern.
+	 */
+	public function count_files( $path, $preg = '/^[a-f0-9]{32}\.html$/' ) {
+		$count = 0;
+
+		// If $path is a file, check if it matches the pattern.
+		if ( is_file( $path ) ) {
+			if ( preg_match( $preg, basename( $path ) ) ) {
+				return 1;
+			}
+			return 0;
+		}
+
+		// Use WP_Filesystem API if available.
+		if ( $this->fs_api ) {
+			global $wp_filesystem;
+			if ( ! $wp_filesystem->is_dir( $path ) ) {
+				return 0;
+			}
+			$files = $wp_filesystem->dirlist( $path );
+			foreach ( $files as $file ) {
+				if ( isset( $file['name'] ) && preg_match( $preg, $file['name'] ) ) {
+					$count++;
+				} elseif ( isset( $file['type'] ) && 'd' === $file['type'] ) {
+					$count += $this->count_files( trailingslashit( $path . $file['name'] ), $preg );
+				}
+			}
+		} else {
+			if ( ! is_dir( $path ) ) {
+				return 0;
+			}
+			foreach ( scandir( $path ) as $file ) {
+				if ( is_file( $path . DIRECTORY_SEPARATOR . $file ) && preg_match( $preg, $file ) ) {
+					$count++;
+				} elseif ( is_dir( $path . DIRECTORY_SEPARATOR . $file ) && ! in_array( $file, array( '.', '..' ), true ) ) {
+					$count += $this->count_files( trailingslashit( $path . DIRECTORY_SEPARATOR . $file ), $preg );
+				}
+			}
+		}
+
+		return $count;
+	}
+
 }

@@ -8,6 +8,8 @@
 
 namespace Hummingbird\Core;
 
+use Hummingbird\Core\SafeMode;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -166,11 +168,11 @@ class Settings {
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'async'                                  => array(
+				'async'                                 => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'ao_completed_time'                      => '',
+				'ao_completed_time'                     => '',
 			),
 			'uptime'      => array(
 				'enabled'       => false,
@@ -367,11 +369,11 @@ class Settings {
 		$defaults = self::get_default_settings();
 
 		if ( ! is_multisite() ) {
-			update_option( 'wphb_settings', $defaults );
+			update_option( self::get_setting_name(), $defaults );
 		} else {
 			$options = self::filter_multisite_options( $defaults );
-			update_site_option( 'wphb_settings', $options['network'] );
-			update_option( 'wphb_settings', $options['blog'] );
+			update_site_option( self::get_setting_name(), $options['network'] );
+			update_option( self::get_setting_name(), $options['blog'] );
 		}
 	}
 
@@ -382,12 +384,13 @@ class Settings {
 	 *
 	 * @return array  Hummingbird settings.
 	 */
-	public static function get_settings( $for_module = false ) {
+	public static function get_settings( $for_module = false, $force_setting_name = false ) {
+		$setting_name = $force_setting_name ? $force_setting_name : self::get_setting_name();
 		if ( ! is_multisite() ) {
-			$options = get_option( 'wphb_settings', array() );
+			$options = get_option( $setting_name, array() );
 		} else {
-			$blog_options    = get_option( 'wphb_settings', array() );
-			$network_options = get_site_option( 'wphb_settings', array() );
+			$blog_options    = get_option( $setting_name, array() );
+			$network_options = get_site_option( $setting_name, array() );
 			$options         = array_merge_recursive( $blog_options, $network_options );
 		}
 
@@ -417,19 +420,28 @@ class Settings {
 	 * @param array       $new_settings  New settings.
 	 * @param bool|string $for_module    Module to update settings for.
 	 */
-	public static function update_settings( $new_settings, $for_module = false ) {
+	public static function update_settings( $new_settings, $for_module = false, $force_setting_name = false ) {
+		$setting_name = $force_setting_name ? $force_setting_name : self::get_setting_name();
+
 		if ( $for_module ) {
-			$options                = self::get_settings();
+			$options                = self::get_settings( false, $setting_name );
 			$options[ $for_module ] = $new_settings;
 			$new_settings           = $options;
 		}
 
+		if ( 'wphb_safe_mode_settings' === $setting_name ) {
+			$safemode_settings = SafeMode::filter_options( $new_settings );
+			foreach ( $safemode_settings as $module => $settings ) {
+				$new_settings[ $module ] = wp_parse_args( $settings, $new_settings[ $module ] );
+			}
+		}
+
 		if ( ! is_multisite() ) {
-			update_option( 'wphb_settings', $new_settings );
+			update_option( $setting_name, $new_settings );
 		} else {
 			$options = self::filter_multisite_options( $new_settings );
-			update_site_option( 'wphb_settings', $options['network'] );
-			update_option( 'wphb_settings', $options['blog'] );
+			update_site_option( $setting_name, $options['network'] );
+			update_option( $setting_name, $options['blog'] );
 		}
 	}
 
@@ -563,6 +575,21 @@ class Settings {
 		} else {
 			update_site_option( $option, $value );
 		}
+	}
+
+	/**
+	 * Get setting name based on safe mode and context.
+	 *
+	 * @return string The appropriate settings option name.
+	 */
+	public static function get_setting_name() : string {
+		$is_safe_mode_call = SafeMode::instance()->is_safemode_call();
+
+		if ( $is_safe_mode_call ) {
+			return 'wphb_safe_mode_settings';
+		}
+
+		return 'wphb_settings';
 	}
 
 }

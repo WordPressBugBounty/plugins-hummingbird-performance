@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<p>
 							<?php esc_html_e( 'Get customized performance and uptime reports delivered to your inbox — daily, weekly, or monthly. All you need is a free WPMU DEV account to enable reporting.', 'wphb' ); ?>
 							<br/>
-							<a href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications' ) ); ?>" class="sui-button sui-button-blue" style="margin-top: 10px" onclick="window.wphbMixPanel.trackHBUpsell( 'notifications', 'notifications_page', 'cta_clicked', this.href, 'hb_notifications_upsell' );">
+							<a href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications' ) ); ?>" class="sui-button wphb-hub-connector-upsell-button" style="margin-top: 10px" onclick="window.wphbMixPanel.trackHBUpsell( 'notifications', 'notifications_page', 'cta_clicked', this.href, 'hb_notifications_upsell' );">
 								<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
 							</a>
 						</p>

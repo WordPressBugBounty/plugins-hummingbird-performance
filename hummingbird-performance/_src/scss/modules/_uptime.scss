@@ -4,27 +4,30 @@
 
 @import "../common/variables";
 
-.sui-header .sui-actions-right {
-    label,
-    .select2-container {
-        margin-right: 10px;
-    }
-    label {
-        font-size: 12px;
-        color: #aaa;
-    }
-}
 
 /**
  * Common styles for uptime pages
  */
 .wpmud .wrap-wphb-uptime {
-    .dev-list-stats > li {
+    .sui-header .sui-actions-right {
+
+        label,
+        .select2-container {
+            margin-right: 10px;
+        }
+
+        label {
+            font-size: 12px;
+            color: #aaa;
+        }
+    }
+
+    .dev-list-stats>li {
         &.standalone {
             margin: 0;
         }
 
-        &.small > li {
+        &.small>li {
             .list-label-stats {
                 line-height: 26px;
             }
@@ -107,11 +110,11 @@
 // uptime no membership
 .wpmud .wrap-wphb-uptime {
     .box-uptime-no-membership {
-        .sui-box{
+        .sui-box {
             padding: 0px;
             padding-top: 60px;
 
-            h2{
+            h2 {
                 line-height: 30px;
                 margin-bottom: 10px;
             }
@@ -120,36 +123,39 @@
                 margin-bottom: 60px;
             }
 
-            .unlock-features{
+            .unlock-features {
                 background-color: #F9F9F9;
                 text-align: left;
                 padding: 60px 90px;
 
-                h3{
+                h3 {
                     line-height: 30px;
                     margin: 0;
                 }
-                p{
+
+                p {
                     margin: 0;
                 }
 
-                .features{
+                .features {
                     margin: 30px 0;
 
-                    .feature{
+                    .feature {
                         display: flex;
 
-                        .image-container{
+                        .image-container {
                             padding-right: 10px;
 
                         }
-                        .feature-text{
+
+                        .feature-text {
                             margin-top: -5px;
 
-                            h4{
+                            h4 {
                                 margin: 0;
                             }
-                            p{
+
+                            p {
                                 line-height: 22px;
                                 font-size: 13px;
                             }
@@ -157,8 +163,9 @@
 
                     }
                 }
-                .learn-more{
-                    p{
+
+                .learn-more {
+                    p {
                         font-size: 13px;
                     }
                 }
@@ -173,7 +180,7 @@
  */
 .wpmud .wrap-wphb-uptime .box-uptime-summary.sui-summary:not(.sui-rebranded):not(.sui-unbranded):not(.sui-summary-sm) {
     @if variable-exists(summary-image) {
-        @include background-2x("#{$image--path}/hb-icon", 'png', $summary-image--width, $summary-image--height, 30px center );
+        @include background-2x("#{$image--path}/hb-icon", 'png', $summary-image--width, $summary-image--height, 30px center);
     }
 
     @include media(max-width, md) {
@@ -200,6 +207,7 @@
             font-size: 13px;
             font-weight: 400;
         }
+
         svg g g g g rect:hover {
             stroke-width: 0px;
             stroke: red;
@@ -270,6 +278,7 @@
         border-radius: 5px;
         font-size: 15px;
         line-height: 10px;
+
         &:before {
             color: #FFFFFF;
 
@@ -327,7 +336,7 @@
         margin-top: 16px;
     }
 
-    .wphb-image-pills-divider{
+    .wphb-image-pills-divider {
         display: inline-block;
         height: 56px;
         margin-bottom: -25px;
@@ -376,15 +385,17 @@
         margin-top: 46px;
         opacity: .7;
     }
+
     .wpmud .wrap-wphb-uptime .box-uptime-no-membership .sui-box.sui-message {
         padding-top: 30px;
-        
-        .sui-message-content{
+
+        .sui-message-content {
             margin-bottom: 45px;
         }
-        .unlock-features{
+
+        .unlock-features {
             padding: 10px;
-        }   
+        }
     }
 
 }

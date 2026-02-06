@@ -607,7 +607,7 @@ class Hub {
 
 		wp_send_json_success(
 			array(
-				'recipients' => $options['recipients'],
+				'recipients' => isset( $options['recipients'] ) ? $options['recipients'] : array(),
 			)
 		);
 	}

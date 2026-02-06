@@ -20,6 +20,10 @@
     }
 
     .sui-icon-check-tick { margin-left: 10px; }
+
+    .sui-summary-image-space + .sui-summary-segment {
+      overflow: visible;
+    }
   }
 
 }

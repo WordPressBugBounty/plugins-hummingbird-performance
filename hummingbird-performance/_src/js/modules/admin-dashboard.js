@@ -59,11 +59,7 @@ import Fetcher from '../utils/fetcher';
 						settings_modified: '',
 						settings_default: '',
 					} );
-					if ( criticalValue && wphb.links.eoUrl ) {
-						window.location.href = wphb.links.eoUrl;
-					} else {
-						WPHB_Admin.notices.show();
-					}
+					WPHB_Admin.notices.show();
 				} );
 			} );
 

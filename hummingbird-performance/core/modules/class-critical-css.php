@@ -1088,6 +1088,7 @@ class Critical_Css extends Module {
 		$queue = $this->get_persistent_queue( array( 'pending' ) ); // Get only pending queue to proceed.
 
 		if ( empty( $queue ) ) {
+			$this->log( 'Critical CSS API: No pending queue items found' );
 			return;
 		}
 
@@ -1109,6 +1110,8 @@ class Critical_Css extends Module {
 			}
 		}
 
+		$this->log( 'Critical CSS API: Prepared ' . count( $urls ) . ' URLs for processing (including mobile variants)' );
+
 		$ignored_files = Utils::get_module( 'exclusions' )->get_ignored_files_for_critical_api();
 		$response      = $api->critical_css->generate_critical_css( $urls, $api_call_type, $ignored_files );
 		$is_type_error = true;
@@ -1122,7 +1125,7 @@ class Critical_Css extends Module {
 				// Fetch the id.
 				$response_id = ! empty( $response->id ) ? $response->id : false;
 
-				Utils::get_module( 'minify' )->log( 'Response ID from the calculate critical endpoint - ' . $response_id );
+				$this->log( 'Critical CSS API: Received successful response with ID: ' . $response_id );
 
 				// Update Queue.
 				$is_type_error = false;
@@ -1139,7 +1142,7 @@ class Critical_Css extends Module {
 		// Log the error.
 		if ( $is_type_error ) {
 			$api_error = is_wp_error( $response ) ? $response->get_error_message() : esc_html__( 'HB critical unknown error', 'wphb' );
-			Utils::get_module( 'minify' )->log( 'There is an error in calling critical api ' . $api_error );
+			$this->log( 'Critical CSS API: Request failed with error: ' . $api_error );
 
 			// Update the pending queues.
 			foreach ( $urls as $hash => $url ) {
@@ -1167,8 +1170,11 @@ class Critical_Css extends Module {
 		$id = $this->fetch_id_from_processing_queue();
 
 		if ( ! $id ) {
+			$this->log( 'Critical CSS Fetch: No processing ID found in queue' );
 			return;
 		}
+
+		$this->log( "Critical CSS Fetch: Fetching generated CSS for job ID: $id" );
 
 		$api      = Utils::get_api();
 		$response = $api->critical_css->get_generated_critical_css( $id );
@@ -1180,7 +1186,10 @@ class Critical_Css extends Module {
 			$error_message = ! empty( $response->errorMessage ) ? $response->errorMessage : '';
 			$error_code    = ! empty( $response->errorCode ) ? $response->errorCode : '';
 
+			$this->log( "Critical CSS Fetch: API response status: $status" );
+
 			if ( 'COMPLETE' === $status ) {
+				$this->log( 'Critical CSS Fetch: Processing completed CSS files' );
 				$critical_css = isset( $response->criticalCss ) ? $response->criticalCss : array();
 				foreach ( $critical_css as $hash => $css_value ) {
 					$hash_object = $this->get_queue_item_by_hash( $hash );
@@ -1211,6 +1220,7 @@ class Critical_Css extends Module {
 					$this->update_item_in_persistent_queue( $hash, 'complete', '', $status, $error_message, $error_code );
 				}
 			} elseif ( 'ERROR' === $status && ! empty( $urls ) ) {
+				$this->log( "Critical CSS Fetch: API returned error status with message: $error_message" );
 				foreach ( $urls as $hash => $url_value ) {
 					$hash_object = $this->get_queue_item_by_hash( $hash );
 
@@ -1226,11 +1236,13 @@ class Critical_Css extends Module {
 					$this->update_item_in_persistent_queue( $hash, 'complete', '', $status, $error_message, $error_code );
 				}
 			} elseif ( 'ERROR' === $status ) {
+				$this->log( "Critical CSS Fetch: General API error - $error_message" );
 				$this->update_item_for_general_api_error( $id, $error_message, $error_code );
 			}
 		} else {
 			// If any API error occurs.
 			$api_error = $response->get_error_message();
+			$this->log( "Critical CSS Fetch: API request error - $api_error" );
 			$this->update_item_for_general_api_error( $id, $api_error, $api_error );
 		}
 	}
@@ -1243,7 +1255,6 @@ class Critical_Css extends Module {
 	 * @param string $error_code    Error code.
 	 */
 	public function update_item_for_general_api_error( $id, $error_message, $error_code ) {
-		Utils::get_module( 'minify' )->log( 'There is an error in fetching data from the critical api ' . $error_message );
 		$queue_by_ids = $this->get_queue_items_by_job_id( $id );
 
 		foreach ( $queue_by_ids as $hash => $id_value ) {
@@ -1757,7 +1768,7 @@ class Critical_Css extends Module {
 			$tag_display_value = esc_html__( 'Optimizing ', 'wphb' );
 			$sui_tag           = 'sui-tag sui-tag-blue sui-tooltip sui-tooltip-constrained';
 			$sui_icon          = 'sui-icon-loader sui-loading';
-			$tooltip_text      = esc_html__( 'Generating Critical CSS, this could take about a minute.', 'wphb' );
+			$tooltip_text      = esc_html__( 'Generating Critical CSS. This could take a few minutes depending on the number of site assets that need to be checked.', 'wphb' );
 		} elseif ( $this->is_active() && 'complete' === $status ) {
 			$is_result_complete = 'COMPLETE' === $critical_css_log['result'];
 			$tag_display_value  = $is_result_complete ? esc_html__( 'Optimized', 'wphb' ) : esc_html__( 'Error', 'wphb' );
@@ -1883,7 +1894,7 @@ class Critical_Css extends Module {
 	 * @return bool
 	 */
 	public function is_mobile_critical_css_allowed() {
-		return 'asynchronously' === $this->get_critical_css_type() && ! Fast_CGI::is_fast_cgi_enabled();
+		return 'asynchronously' === $this->get_critical_css_type();
 	}
 
 	/**

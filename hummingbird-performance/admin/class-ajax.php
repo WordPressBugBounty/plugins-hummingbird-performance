@@ -19,6 +19,7 @@ use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\WP_Hummingbird;
 use Hummingbird\Core\Modules\Caching\Fast_CGI;
+use Hummingbird\Core\SafeMode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -232,6 +233,11 @@ class AJAX {
 		add_action( 'wp_ajax_wphb_search_posts', array( $this, 'wphb_search_posts' ) );
 		// Reset exclusions.
 		add_action( 'wp_ajax_wphb_reset_exclusions', array( $this, 'reset_exclusions' ) );
+		// Toggle Safe Mode.
+		add_action( 'wp_ajax_wphb_toggle_safe_mode', array( $this, 'wphb_toggle_safe_mode' ) );
+		add_action( 'wp_ajax_wphb_discard_safe_mode', array( $this, 'wphb_discard_safe_mode' ) );
+		add_action( 'wp_ajax_wphb_publish_safe_mode', array( $this, 'wphb_publish_safe_mode' ) );
+		add_action( 'wp_ajax_wphb_safemode_has_changes', array( $this, 'wphb_safemode_has_changes' ) );
 	}
 
 	/**
@@ -264,7 +270,7 @@ class AJAX {
 	 */
 	public function clear_global_cache() {
 		check_ajax_referer( 'wphb-fetch', 'nonce' );
-
+		$all_clear = filter_input( INPUT_GET, 'all_clear', FILTER_SANITIZE_NUMBER_INT);
 		// Check permission.
 		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
 			die();
@@ -288,6 +294,9 @@ class AJAX {
 
 		// Remove notice.
 		delete_option( 'wphb-notice-cache-cleaned-show' );
+		if ( (bool) $all_clear ) {
+			update_option( 'wphb-notice-cache-global-cleared-show', time() );
+		}
 
 		wp_send_json_success();
 	}
@@ -485,6 +494,21 @@ class AJAX {
 
 		$notice_id = sanitize_text_field( wp_unslash( $_POST['id'] ) ); // Input var ok.
 
+		if ( 'free-rated' === $notice_id ) {
+			$sub_action = isset( $_POST['SubAction'] ) ? sanitize_text_field( wp_unslash( $_POST['SubAction'] ) ) : ''; // Input var ok.
+			switch ( $sub_action ) {
+				case 'remind_later':
+					update_site_option( 'wphb-notice-free-rated-later_date', time() + ( 7 * DAY_IN_SECONDS ) );
+					break;
+				case 'rate':
+				case 'dismiss':
+					update_site_option( 'wphb-notice-free-rated-later_date', 'never' );
+					break;
+				default:
+					// Do nothing.
+			}
+		}
+
 		delete_option( 'wphb-notice-' . $notice_id . '-show' );
 
 		wp_send_json_success();
@@ -570,7 +594,7 @@ class AJAX {
 			$report = Performance::get_last_report();
 
 			// Do not cancel the scan if the report is not latest one.
-			$current_gmt_time = current_time( 'timestamp', true );
+			$current_gmt_time = time();
 			if ( $report && ! is_wp_error( $report ) ) {
 				$date_time = $report->data->time;
 				if ( ( $date_time + 120 ) < $current_gmt_time ) {
@@ -1462,7 +1486,6 @@ class AJAX {
 
 		if ( 'basic' === $type ) {
 			$minify = Utils::get_module( 'minify' );
-			$minify->set_safe_mode_status( false );
 			$minify->clear_cache( true, false, true );
 			if ( true === $hide ) {
 				delete_option( 'wphb-minification-show-config_modal' );
@@ -1666,7 +1689,7 @@ class AJAX {
 				'mixpanel_key' => 'exclusions_files',
 			),
 			'critical_css_post_urls_exclusion'      => array(
-				'value' => Utils::wphb_sanitize_data( $form['critical_css_post_urls_exclusion'] ?? array() ),
+				'value'        => Utils::wphb_sanitize_data( $form['critical_css_post_urls_exclusion'] ?? array() ),
 				'mixpanel_key' => 'exclusions_urls',
 			),
 			'critical_css_plugins_themes_exclusion' => array(
@@ -1744,7 +1767,7 @@ class AJAX {
 			if ( ! empty( $critical_css_option ) ) {
 				$is_status_tag_needs_update = true;
 				$critical_status            = Utils::get_module( 'critical_css' )->regenerate_critical_css();
-				$message                    = __( 'Settings updated. Generating Critical CSS, this could take about a minute.', 'wphb' );
+				$message                    = __( 'Settings updated. Generating Critical CSS, this could take a few minutes depending on the number of site assets that need to be checked.', 'wphb' );
 			}
 		}
 
@@ -1944,10 +1967,13 @@ class AJAX {
 			die();
 		}
 
-		$assets = filter_input( INPUT_POST, 'data', FILTER_UNSAFE_RAW );
-		$assets = json_decode( html_entity_decode( $assets ), true );
+		$data           = filter_input( INPUT_POST, 'data', FILTER_UNSAFE_RAW );
+		$data           = json_decode( html_entity_decode( $data ), true );
+		$exclude_assets = $data['excludeAssets'];
+		$debug_log      = $data['debugLog'];
 
-		Settings::update_setting( 'nocdn', $assets, 'minify' );
+		Settings::update_setting( 'nocdn', $exclude_assets, 'minify' );
+		Settings::update_setting( 'log', $debug_log, 'minify' );
 		// This will require a clear cache call.
 		Utils::get_module( 'minify' )->clear_cache( false );
 
@@ -2353,6 +2379,9 @@ class AJAX {
 			die();
 		}
 
+		SafeMode::instance()->discard_cache_config_file();
+		SafeMode::instance()->delete_data();
+
 		wp_send_json_success();
 	}
 
@@ -2498,7 +2527,11 @@ class AJAX {
 			);
 		}
 
-		wp_send_json_success();
+		wp_send_json_success(
+			array(
+				'message' => __( 'Your site has been disconnected successfully!', 'wphb' ),
+			)
+		);
 	}
 
 	/**
@@ -2859,5 +2892,120 @@ class AJAX {
 		$results    = Utils::get_module( 'exclusions' )->reset_exclusion_to_defaults( $exclusions, $type );
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Toggle Safe Mode.
+	 */
+	public function wphb_toggle_safe_mode() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) || ! isset( $_POST['data'] ) ) { // Input var okay.
+			die();
+		}
+
+		$value = filter_input( INPUT_POST, 'data', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		if ( true === $value ) {
+			SafeMode::instance()->init_settings();
+		}
+		SafeMode::instance()->set_status( $value );
+
+		wp_send_json_success(
+			array(
+				'message' => sprintf(
+					/* translators: %1$s and %2$s - strong tags for Safe mode */
+					esc_html__( '%1$sSafe mode%2$s is successfully enabled.', 'wphb' ),
+					'<strong>',
+					'</strong>',
+				),
+			)
+		);
+	}
+
+	/**
+	 * Discard Safe Mode.
+	 */
+	public function wphb_discard_safe_mode() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) { // Input var okay.
+			die();
+		}
+
+		SafeMode::instance()->discard_cache_config_file();
+		SafeMode::instance()->delete_data();
+		SafeMode::instance()->handle_additional_settings_on_discard();
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Publish Safe Mode.
+	 */
+	public function wphb_publish_safe_mode() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) { // Input var okay.
+			die();
+		}
+
+		$clear_cache = filter_input( INPUT_POST, 'data', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+
+		SafeMode::instance()->publish_safe_mode_settings();
+		SafeMode::instance()->delete_data();
+		SafeMode::instance()->handle_additional_settings_on_publish();
+
+		if ( $clear_cache ) {
+			$modules = Utils::get_active_cache_modules();
+
+			foreach ( $modules as $module => $name ) {
+				$mod = Utils::get_module( $module );
+
+				if ( ! $mod->is_active() ) {
+					continue;
+				}
+
+				if ( 'minify' === $module ) {
+					$mod->clear_files();
+				} else {
+					$mod->clear_cache();
+				}
+			}
+		}
+
+		wp_send_json_success(
+			array(
+				'message' => sprintf(
+					/* translators: %1$s and %2$s - strong tags for Safe mode */
+					esc_html__( '%1$sSafe mode%2$s changes successfully published.', 'wphb' ),
+					'<strong>',
+					'</strong>',
+				),
+			)
+		);
+	}
+
+	/**
+	 * Check if Safe Mode has changes to publish.
+	 * Called before disabling Safe Mode.
+	 */
+	public function wphb_safemode_has_changes() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) { // Input var okay.
+			die();
+		}
+
+		$has_changes = SafeMode::instance()->has_changes_to_publish();
+		if ( ! $has_changes ) {
+			// in order to save extra call and time.
+			SafeMode::instance()->set_status( false );
+		}
+
+		wp_send_json_success(
+			array(
+				'hasChanges' => $has_changes,
+			)
+		);
 	}
 }

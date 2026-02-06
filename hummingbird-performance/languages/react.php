@@ -171,7 +171,7 @@ $generated_i18n_strings = array(
 	__( 'Close', 'wphb' ),
 
 	// Reference: _src/react/components/sui-modal/index.jsx:75
-	// Reference: _src/react/modules/configs.jsx:37
+	// Reference: _src/react/modules/configs.jsx:82
 	__( 'Cancel', 'wphb' ),
 
 	// Reference: _src/react/components/support-link/index.jsx:25
@@ -183,7 +183,7 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/components/support-link/index.jsx:29
 	__( 'Open a support ticket.', 'wphb' ),
 
-	// Reference: _src/react/modules/caching/browser.jsx:255
+	// Reference: _src/react/modules/caching/browser.jsx:277
 	// Reference: _src/react/modules/caching/integrations.jsx:159
 	__( 'Cloudflare was disconnected successfully.', 'wphb' ),
 
@@ -266,7 +266,7 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/modules/caching/integrations.jsx:527
 	// Reference: _src/react/views/caching/browser/status.jsx:410
 	// Reference: _src/react/views/gzip/summary.jsx:320
-	// Reference: _src/react/views/setup/wizard.jsx:565
+	// Reference: _src/react/views/setup/wizard.jsx:617
 	__( 'Status', 'wphb' ),
 
 	// Reference: _src/react/modules/caching/integrations.jsx:543
@@ -279,7 +279,7 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/modules/caching/integrations.jsx:576
 	// Reference: _src/react/views/caching/browser/status.jsx:374
 	// Reference: _src/react/views/gzip/summary.jsx:302
-	// Reference: _src/react/views/setup/wizard.jsx:238
+	// Reference: _src/react/views/setup/wizard.jsx:240
 	__( 'Re-check status', 'wphb' ),
 
 	// Reference: _src/react/modules/caching/integrations.jsx:589
@@ -304,145 +304,151 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/modules/caching/integrations.jsx:673
 	__( 'Open item', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:102
-	/* translators: %s config name */
-	__( 'Are you sure you want to apply the %s config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:108
-	// Reference: _src/react/views/minify/assets-manual.jsx:345
-	__( 'Apply', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:111
-	/* translators: %s. config name */
-	__( '%s config has been applied successfully.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:118
-	__( 'Delete Configuration File', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:121
-	/* translators: %s config name */
-	__( 'Are you sure you want to delete %s? You will no longer be able to apply it to this or other connected sites.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:127
-	__( 'Delete', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:132
-	__( 'Config name', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:133
-	__( 'Description', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:134
-	__( 'The config name is required', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:135
-	__( 'Save', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:136
-	__( 'Rename Config', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:137
-	__( 'Change your config name to something recognizable.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:141
-	__( 'Save Config', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:142
-	__( 'Save your current settings configuration. You’ll be able to then download and apply it to your other sites.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:148
-	/* translators: %s. config name */
-	__( '%s config created successfully.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:153
-	// Reference: _src/react/views/setup/wizard.jsx:615
-	__( 'Uptime', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:154
-	__( 'Gravatar Caching', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:155
-	// Reference: _src/react/views/setup/wizard.jsx:639
-	__( 'Page Caching', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:156
-	// Reference: _src/react/views/setup/wizard.jsx:667
-	__( 'Advanced Tools', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:157
-	__( 'RSS Caching', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:158
-	__( 'Settings', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:159
-	__( 'Performance Test', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:22
-	__( 'You can easily apply configs to multiple sites at once via ', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:31
-	__( 'the Hub.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:36
-	__( 'Close this dialog window', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:40
-	__( 'Preset Configs', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:41
-	__( 'Upload', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:42
-	__( 'Save config', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:43
-	__( 'Manage configs', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:44
-	__( 'Updating the config list...', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:45
-	__( 'You don’t have any available config. Save preset configurations of Hummingbird’s settings, then upload and apply them to your other sites in just a few clicks!', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:49
-	__( 'Use configs to save preset configurations of Hummingbird’s settings, then upload and apply them to your other sites in just a few clicks!', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:54
-	__( 'Use configs to save preset configurations of your settings.', 'wphb' ),
-
-	// Reference: _src/react/modules/configs.jsx:58
+	// Reference: _src/react/modules/configs.jsx:103
 	__( 'Created or updated the configs via the Hub?', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:62
+	// Reference: _src/react/modules/configs.jsx:107
 	__( 'Re-check to get the updated list.', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:67
+	// Reference: _src/react/modules/configs.jsx:112
 	__( 'Download', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:68
+	// Reference: _src/react/modules/configs.jsx:113
 	__( 'Name and Description', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:70
+	// Reference: _src/react/modules/configs.jsx:115
 	__( 'Dismiss notice', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:71
-	__( 'Try The Hub', 'wphb' ),
+	// Reference: _src/react/modules/configs.jsx:116
+	__( 'CONNECT MY SITE', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:74
+	// Reference: _src/react/modules/configs.jsx:120
 	/* translators: %s request status */
 	__( 'Request failed. Status: %s. Please reload the page and try again.', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:82
+	// Reference: _src/react/modules/configs.jsx:128
 	/* translators: %s request status */
 	__( '%s config has been uploaded successfully – you can now apply it to this site.', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:90
+	// Reference: _src/react/modules/configs.jsx:136
 	/* translators: %s {pluginName} */
 	__( 'The uploaded file is not a %s Config. Please make sure the uploaded file is correct.', 'wphb' ),
 
-	// Reference: _src/react/modules/configs.jsx:99
+	// Reference: _src/react/modules/configs.jsx:145
 	__( 'Apply Config', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:148
+	/* translators: %s config name */
+	__( 'Are you sure you want to apply the %s config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:154
+	// Reference: _src/react/views/minify/assets-manual.jsx:347
+	__( 'Apply', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:157
+	/* translators: %s. config name */
+	__( '%s config has been applied successfully.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:164
+	__( 'Delete Configuration File', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:167
+	/* translators: %s config name */
+	__( 'Are you sure you want to delete %s? You will no longer be able to apply it to this or other connected sites.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:173
+	__( 'Delete', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:178
+	__( 'Config name', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:179
+	__( 'Description', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:180
+	__( 'The config name is required', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:181
+	__( 'Save', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:182
+	__( 'Rename Config', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:183
+	__( 'Change your config name to something recognizable.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:187
+	__( 'Save Config', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:188
+	__( 'Save your current settings configuration. You’ll be able to then download and apply it to your other sites.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:194
+	/* translators: %s. config name */
+	__( '%s config created successfully.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:199
+	// Reference: _src/react/views/setup/wizard.jsx:671
+	__( 'Uptime', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:200
+	__( 'Gravatar Caching', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:201
+	// Reference: _src/react/views/setup/wizard.jsx:695
+	__( 'Page Caching', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:202
+	// Reference: _src/react/views/setup/wizard.jsx:723
+	__( 'Advanced Tools', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:203
+	__( 'RSS Caching', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:204
+	__( 'Settings', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:205
+	__( 'Performance Test', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:55
+	__( 'You can easily apply configs to multiple sites at once via ', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:64
+	__( 'the Hub.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:71
+	__( 'Connect now to apply configs across all your sites', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:75
+	__( 'Tired of saving, downloading, and uploading your configs across sites? Connect your site to WPMU DEV to apply your Hummingbird configs to multiple sites in just a few clicks. It’s free and takes less than a minute to set up.', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:81
+	__( 'Close this dialog window', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:85
+	__( 'Preset Configs', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:86
+	__( 'Upload', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:87
+	__( 'Save config', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:88
+	__( 'Manage configs', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:89
+	__( 'Updating the config list...', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:90
+	__( 'You don’t have any available config. Save preset configurations of Hummingbird’s settings, then upload and apply them to your other sites in just a few clicks!', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:94
+	__( 'Use configs to save preset configurations of Hummingbird’s settings, then upload and apply them to your other sites in just a few clicks!', 'wphb' ),
+
+	// Reference: _src/react/modules/configs.jsx:99
+	__( 'Use configs to save preset configurations of your settings.', 'wphb' ),
 
 	// Reference: _src/react/modules/setup.jsx:398
 	__( 'Setup wizard', 'wphb' ),
@@ -457,7 +463,6 @@ $generated_i18n_strings = array(
 	__( 'Get Hummingbird Pro for our full WordPress speed optimization suite, including uptime monitoring and enhanced CDN.', 'wphb' ),
 
 	// Reference: _src/react/modules/setup.jsx:419
-	// Reference: _src/react/views/minify/summary.jsx:361
 	__( 'UPGRADE TO PRO', 'wphb' ),
 
 	// Reference: _src/react/modules/setup.jsx:430
@@ -717,21 +722,19 @@ $generated_i18n_strings = array(
 	__( 'Optimizing your assets will compress and organize them in a way that improves page load times.', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:267
-	// Reference: _src/react/views/minify/assets-manual.jsx:324
-	// Reference: _src/react/views/setup/wizard.jsx:318
+	// Reference: _src/react/views/minify/assets-manual.jsx:326
 	__( 'Compress', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:271
-	// Reference: _src/react/views/setup/wizard.jsx:320
+	// Reference: _src/react/views/setup/wizard.jsx:345
 	__( 'Compresses your files for faster delivery while improving site speed by decluttering CSS and JavaScript.', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:274
-	// Reference: _src/react/views/minify/assets-manual.jsx:325
-	// Reference: _src/react/views/setup/wizard.jsx:328
+	// Reference: _src/react/views/minify/assets-manual.jsx:327
 	__( 'Combine', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:278
-	// Reference: _src/react/views/setup/wizard.jsx:330
+	// Reference: _src/react/views/setup/wizard.jsx:356
 	__( 'Combines multiple JS and CSS files into fewer files, reducing the number of requests made when a page is loaded.', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:284
@@ -750,105 +753,99 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/assets-manual.jsx:110
 	__( 'Safe mode has been disabled!', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:326
+	// Reference: _src/react/views/minify/assets-manual.jsx:328
 	__( 'Inline', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:327
+	// Reference: _src/react/views/minify/assets-manual.jsx:329
 	__( 'Async', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:332
+	// Reference: _src/react/views/minify/assets-manual.jsx:334
 	__( 'Move to Footer', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:333
+	// Reference: _src/react/views/minify/assets-manual.jsx:335
 	__( 'Preload', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:334
+	// Reference: _src/react/views/minify/assets-manual.jsx:336
 	__( 'Defer', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:353
+	// Reference: _src/react/views/minify/assets-manual.jsx:355
 	__( 'Choose what bulk update actions you’d like to apply to the selected files. You still have to publish your changes before they will be set live.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:372
+	// Reference: _src/react/views/minify/assets-manual.jsx:374
 	__( 'Discard', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:384
+	// Reference: _src/react/views/minify/assets-manual.jsx:386
 	__( 'Publish', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:391
+	// Reference: _src/react/views/minify/assets-manual.jsx:393
 	__( 'Unpublished changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:392
+	// Reference: _src/react/views/minify/assets-manual.jsx:394
 	__( 'There are unpublished changes made in safe mode. Do you want to publish the changes to live or discard them?', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:580
-	__( 'Test different settings in a safe environment without affecting visitors\' experience. The changes done in the safe mode will be only visible to you (as an admin).', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:583
-	__( 'Safe mode', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:599
+	// Reference: _src/react/views/minify/assets-manual.jsx:589
 	__( 'All', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:605
+	// Reference: _src/react/views/minify/assets-manual.jsx:595
 	__( 'Hosted', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:611
+	// Reference: _src/react/views/minify/assets-manual.jsx:601
 	__( 'External', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:620
+	// Reference: _src/react/views/minify/assets-manual.jsx:610
 	__( 'Preview your changes on the front-end, then publish to live if no errors are found.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:626
-	__( 'Preview', 'wphb' ),
+	// Reference: _src/react/views/minify/assets-manual.jsx:616
+	__( 'Save Safe mode changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:633
+	// Reference: _src/react/views/minify/assets-manual.jsx:623
 	// Reference: _src/react/views/minify/configurations.jsx:54
 	__( 'Publish changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:648
+	// Reference: _src/react/views/minify/assets-manual.jsx:638
 	__( 'Bulk update', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:665
+	// Reference: _src/react/views/minify/assets-manual.jsx:654
 	__( 'Display files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:678
+	// Reference: _src/react/views/minify/assets-manual.jsx:667
 	__( 'Sort by', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:679
+	// Reference: _src/react/views/minify/assets-manual.jsx:668
 	__( 'Choose plugin or theme', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:686
+	// Reference: _src/react/views/minify/assets-manual.jsx:675
 	__( 'Search by name or extension', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:696
+	// Reference: _src/react/views/minify/assets-manual.jsx:685
 	__( 'Clear filters', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:888
+	// Reference: _src/react/views/minify/assets-manual.jsx:877
 	__( 'We\'ve completed the file check but haven\'t been able to load the files. Please try clearing your object cache, refresh the page and wait a few seconds to load the files, or visit your homepage to trigger the file list to show.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:904
+	// Reference: _src/react/views/minify/assets-manual.jsx:893
 	__( 'Visit homepage', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:931
-	__( 'You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitors\' experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser\'s console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you\'ve made as soon as possible to avoid page load issues.</span>', 'wphb' ),
+	// Reference: _src/react/views/minify/assets-manual.jsx:920
+	__( 'You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitor\'s experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser\'s console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you\'ve made as soon as possible to avoid page load issues.</span>', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:957
+	// Reference: _src/react/views/minify/assets-manual.jsx:946
 	// Reference: _src/react/views/minify/configurations.jsx:90
 	__( 'Fonts', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets.jsx:136
+	// Reference: _src/react/views/minify/assets.jsx:138
 	__( 'In Dev Mode, you can manually optimize (compress, combine, move, inline, defer, async, and preload) individual files. With this amount of freedom comes the possibility of damaging your site so if you are unfamiliar with manually optimizing your files, we recommend reviewing the <a>How Does it Work?</a> guide.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets.jsx:138
+	// Reference: _src/react/views/minify/assets.jsx:140
 	__( 'How Does it Work?', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets.jsx:143
+	// Reference: _src/react/views/minify/assets.jsx:145
 	__( 'Manually configure your optimization settings (compress, combine, move, inline, defer, async, and preload) and then publish your changes.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets.jsx:148
+	// Reference: _src/react/views/minify/assets.jsx:150
 	__( 'Optimizing your assets will compress and organize them in a way that improves page load times. You can choose to use our automated options, or manually configure each file yourself.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets.jsx:172
+	// Reference: _src/react/views/minify/assets.jsx:174
 	__( 'Assets Optimization', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets.jsx:50
@@ -878,31 +875,31 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/configurations.jsx:112
 	__( 'file: ', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:130
+	// Reference: _src/react/views/minify/configurations.jsx:131
 	__( 'File exclusions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:131
+	// Reference: _src/react/views/minify/configurations.jsx:132
 	__( 'Type the filename and click on the filename to add it to the list.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:135
+	// Reference: _src/react/views/minify/configurations.jsx:136
 	__( 'Start typing the files to exclude...', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:153
+	// Reference: _src/react/views/minify/configurations.jsx:154
 	__( 'Choose which files you want to automatically optimize.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:162
+	// Reference: _src/react/views/minify/configurations.jsx:163
 	__( 'By default, we\'ll optimize all the CSS and JS files we can find. If you have specific files you want to leave as-is, list them here, and we\'ll exclude them.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:179
+	// Reference: _src/react/views/minify/configurations.jsx:180
 	__( 'Files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:184
+	// Reference: _src/react/views/minify/configurations.jsx:185
 	__( 'Exclusions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:192
+	// Reference: _src/react/views/minify/configurations.jsx:193
 	__( 'The configurations will be applied to the enabled automatic optimization option.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:216
+	// Reference: _src/react/views/minify/configurations.jsx:217
 	__( 'Configurations', 'wphb' ),
 
 	// Reference: _src/react/views/minify/configurations.jsx:36
@@ -938,272 +935,301 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/recheck-files-button.jsx:185
 	__( 'Background processing is currently running. Please wait for it to complete before re-checking files.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:272
+	// Reference: _src/react/views/minify/summary.jsx:268
 	__( 'All assets are auto-compressed', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:282
+	// Reference: _src/react/views/minify/summary.jsx:278
 	__( 'Compression savings', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:284
+	// Reference: _src/react/views/minify/summary.jsx:280
 	__( 'Total Files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:286
+	// Reference: _src/react/views/minify/summary.jsx:282
 	__( 'Optimizing assets, this could take a while, please hold on.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:288
+	// Reference: _src/react/views/minify/summary.jsx:284
 	__( 'Optimizing', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:292
+	// Reference: _src/react/views/minify/summary.jsx:288
 	__( 'Last Generated:', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:296
+	// Reference: _src/react/views/minify/summary.jsx:292
 	__( 'Optimized', 'wphb' ),
 
 	// Reference: _src/react/views/minify/summary.jsx:314
-	__( 'Unlock now  ', 'wphb' ),
-
-	// Reference: _src/react/views/minify/summary.jsx:345
-	__( 'Files are compressed', 'wphb' ),
+	__( 'Unlock now', 'wphb' ),
 
 	// Reference: _src/react/views/minify/summary.jsx:355
+	__( 'Files are compressed', 'wphb' ),
+
+	// Reference: _src/react/views/minify/summary.jsx:365
 	__( 'Enable WPMU DEV CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:360
-	__( 'Host your files on WPMU DEV’s blazing-fast CDN', 'wphb' ),
-
-	// Reference: _src/react/views/minify/summary.jsx:366
+	// Reference: _src/react/views/minify/summary.jsx:373
 	__( 'The Network Admin has the WPMU DEV CDN turned on', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:371
+	// Reference: _src/react/views/minify/summary.jsx:378
 	__( 'The Network Admin has the WPMU DEV CDN turned off', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:372
-	// Reference: _src/react/views/setup/wizard.jsx:691
+	// Reference: _src/react/views/minify/summary.jsx:379
+	// Reference: _src/react/views/setup/wizard.jsx:747
 	__( 'Disabled', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:400
+	// Reference: _src/react/views/minify/summary.jsx:407
 	__( 'Filesize reductions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:405
-	// Reference: _src/react/views/setup/wizard.jsx:339
+	// Reference: _src/react/views/minify/summary.jsx:412
+	// Reference: _src/react/views/setup/wizard.jsx:316
 	__( 'WPMU DEV CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:416
-	// Reference: _src/react/views/setup/wizard.jsx:377
+	// Reference: _src/react/views/minify/summary.jsx:413
+	__( 'Boost your speed globally. Serve your files from our optimized network for maximum performance.', 'wphb' ),
+
+	// Reference: _src/react/views/minify/summary.jsx:425
 	__( 'Delay JavaScript Execution', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:423
-	// Reference: _src/react/views/setup/wizard.jsx:594
+	// Reference: _src/react/views/minify/summary.jsx:426
+	__( 'Unlock immediate speed. Visible content loads first, so your site feels faster.', 'wphb' ),
+
+	// Reference: _src/react/views/minify/summary.jsx:434
+	// Reference: _src/react/views/setup/wizard.jsx:650
 	__( 'Generate Critical CSS', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:424
-	__( 'Pro', 'wphb' ),
+	// Reference: _src/react/views/minify/summary.jsx:435
+	__( 'Instantly visible pages. Prioritize essential CSS above the fold for no lag.', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:148
+	__( 'Ready to Boost Your Site’s Speed?', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:153
 	__( 'Plugin Conflict', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:156
+	// Reference: _src/react/views/setup/wizard.jsx:155
+	__( 'Uptime Monitoring', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:158
 	__( 'Wizard Completed!', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:170
+	// Reference: _src/react/views/setup/wizard.jsx:172
 	__( 'Hummingbird Setup', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:187
+	// Reference: _src/react/views/setup/wizard.jsx:189
 	__( 'No other caching plugin is detected', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:191
+	// Reference: _src/react/views/setup/wizard.jsx:193
 	__( 'No other caching plugin is detected. You can proceed with the setup.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:196
+	// Reference: _src/react/views/setup/wizard.jsx:198
 	__( 'Another caching plugin is detected', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:200
+	// Reference: _src/react/views/setup/wizard.jsx:202
 	__( 'Hummingbird has detected an advanced-cache.php file in your site’s wp-content directory. <a>Manage your plugins</a> and disable any other active caching plugins to ensure Hummingbird’s page caching works properly.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:210
+	// Reference: _src/react/views/setup/wizard.jsx:212
 	__( 'If no other caching plugins are active, the advanced-cache.php may have been left by a previously used caching plugin. You can remove the file from the wp-content directory, or remove it via your file manager or FTP.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:246
+	// Reference: _src/react/views/setup/wizard.jsx:248
 	__( 'Remove file', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:275
+	// Reference: _src/react/views/setup/wizard.jsx:277
 	__( 'Local Page Cache', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:275
+	// Reference: _src/react/views/setup/wizard.jsx:277
 	__( 'Enable', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:281
+	// Reference: _src/react/views/setup/wizard.jsx:283
 	__( 'Disable', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:340
+	// Reference: _src/react/views/setup/wizard.jsx:317
 	__( 'WPMU DEV CDN <span>PRO</span>', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:347
+	// Reference: _src/react/views/setup/wizard.jsx:324
 	__( 'WPMU DEV CDN will serve your CSS, JS and other compatible files from our external CDN, effectively taking the load off your server so that pages load faster for your visitors.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:378
-	__( 'Delay JavaScript Execution <span>PRO</span>', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:343
+	__( 'Compress files & clean code', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:385
-	__( 'Improve performance by delaying the loading of non-critical JavaScript files above the fold until user interaction (e.g. scroll, click).', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:354
+	__( 'Combine JavaScript & CSS', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:394
-	__( 'Generate Critical CSS <span>PRO</span>', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:367
+	__( 'Swap web fonts', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:401
-	__( 'Drastically reduce your page load time and eliminate render-blocking resources by automatically generating the critical CSS required to load your above-the-fold content.', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:411
+	// Reference: _src/react/views/setup/wizard.jsx:369
 	__( 'Apply a similar fallback font that visitors will temporarily see until the primary font loads, to improve text visibility.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:417
+	// Reference: _src/react/views/setup/wizard.jsx:378
+	__( 'Delay JavaScript execution', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:379
+	__( 'Delay JavaScript execution <span>PRO</span>', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:386
+	__( 'Improve performance by delaying the loading of non-critical JavaScript files above the fold until user interaction (e.g. scroll, click).', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:397
+	__( 'Generate critical CSS', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:398
+	__( 'Generate critical CSS <span>PRO</span>', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:405
+	__( 'Drastically reduce your page load time and eliminate render-blocking resources by automatically generating the critical CSS required to load your above-the-fold content.', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:422
 	__( '<strong>Note:</strong> You can tweak these settings further under Assets Optimization > Extra Optimization.', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:44
 	__( 'Getting Started', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:474
-	__( 'By default, page caching is enabled for mobile devices. If you don\'t want to use mobile caching, simply disable this setting.', 'wphb' ),
-
 	// Reference: _src/react/views/setup/wizard.jsx:484
+	__( 'Clear cache after new comment', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:486
 	__( 'The page cache will be cleared after each comment made on a post.', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:49
 	__( 'Finish', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:494
+	// Reference: _src/react/views/setup/wizard.jsx:497
+	__( 'By default, page caching is enabled for mobile devices. If you don\'t want to use mobile caching, simply disable this setting.', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:510
 	__( 'By default, Hummingbird won\'t cache HTTP headers. Enable this feature to include them.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:504
+	// Reference: _src/react/views/setup/wizard.jsx:521
 	__( 'Add a shortcut to Hummingbird settings in the top WordPress Admin bar. Clicking the Clear Cache button in the WordPress Admin Bar will clear all active cache types.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:526
+	// Reference: _src/react/views/setup/wizard.jsx:546
 	__( 'Some of your resource URLs can end with something like “?x=y”, these are the query strings of the URL. Some servers, CDNs or caching systems don’t like query strings and removing them can help to increase speed.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:537
-	__( 'WooCommerce uses ajax calls to update cart totals without refreshing the page. These ajax calls run on every page and can drastically increase page load times. We recommend disabling cart fragments on all non-WooCommerce pages.', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:555
+	__( 'Remove default Emoji JS & CSS files', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:547
+	// Reference: _src/react/views/setup/wizard.jsx:557
 	__( 'WordPress adds Javascript and CSS files to convert common symbols like “:)” to visual emojis. If you don’t need emojis this will remove two unnecessary assets.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:563
-	__( 'Modules', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:564
-	__( 'Settings applied', 'wphb' ),
-
 	// Reference: _src/react/views/setup/wizard.jsx:572
-	__( 'Asset Optimization', 'wphb' ),
+	__( 'WooCommerce uses ajax calls to update cart totals without refreshing the page. These ajax calls run on every page and can drastically increase page load times. We recommend disabling cart fragments on all non-WooCommerce pages.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:574
-	__( 'Speedy Optimization', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:575
-	__( 'Basic Optimization', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:576
-	__( 'Active on subsites', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:579
-	__( 'CDN', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:591
-	__( 'Extra Optimization', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:593
-	__( 'Delay JS Executions', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:588
+	__( 'Combine & Compress Optimization', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:595
-	__( 'Swap Web Fonts', 'wphb' ),
+	__( 'Combine Optimization', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:599
+	__( 'Compress Optimization', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:615
+	__( 'Modules', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:616
-	__( 'Default settings', 'wphb' ),
+	__( 'Settings applied', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:624
-	__( 'Static Server Cache', 'wphb' ),
+	__( 'Asset Optimization', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:641
-	__( 'Cache on mobile devices', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:627
+	__( 'Active on subsites', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:642
-	__( 'Clear cache on comment post', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:630
+	__( 'CDN', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:643
-	__( 'Cache HTTP headers', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:647
+	__( 'Extra Optimization', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:644
-	__( 'Show clear cache button in admin bar', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:649
+	__( 'Delay JS Executions', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:669
-	__( 'Remove query strings from my assets', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:651
+	__( 'Swap Web Fonts', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:672
+	__( 'Default settings', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:680
+	__( 'Static Server Cache', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:697
+	__( 'Cache on mobile devices', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:698
+	__( 'Clear cache on comment post', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:699
+	__( 'Cache HTTP headers', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:700
+	__( 'Show clear cache button in admin bar', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:725
+	__( 'Remove query strings from my assets', 'wphb' ),
+
+	// Reference: _src/react/views/setup/wizard.jsx:728
 	__( 'Disable cart fragments', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:674
+	// Reference: _src/react/views/setup/wizard.jsx:730
 	__( 'Remove the default Emoji JS & CSS files', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:689
+	// Reference: _src/react/views/setup/wizard.jsx:745
 	__( 'Enabled', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:708
-	__( 'Get started by activating all our features with recommended default settings, then fine-tune them to suit your specific needs. Alternately you can skip this process if you’d prefer to start customizing.', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:764
+	__( 'Let’s walk through a few quick steps to fine-tune your site’s performance and keep it running lightning-fast.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:710
+	// Reference: _src/react/views/setup/wizard.jsx:766
 	__( 'Any issue reported here may cause issues while we set up the plugin.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:712
+	// Reference: _src/react/views/setup/wizard.jsx:768
 	__( 'There are no more potential issues. You can proceed with the setup.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:716
+	// Reference: _src/react/views/setup/wizard.jsx:772
 	__( 'Hummingbird\'s Asset Optimization engine can combine and minify the files your website outputs when a user visits your website. The fewer requests your visitors have to make to your server, the better.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:718
-	__( 'Uptime monitors your server response time and lets you know when your website is down or too slow for your visitors. Monitor your site every minute to make sure it\'s up and graph your site speed so you can make sure everything is running super smooth.', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:774
+	__( 'Never get caught off guard by downtime again. Hummingbird checks your site every few minutes and alerts you if it goes down or slows, helping you keep things running at top speed.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:720
+	// Reference: _src/react/views/setup/wizard.jsx:776
 	__( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time. We will activate the default and basic settings and you can then fine-tune them to suit your specific needs.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:722
+	// Reference: _src/react/views/setup/wizard.jsx:778
 	__( 'Here are a few additional tweaks you can make to further reduce your page load times.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:724
+	// Reference: _src/react/views/setup/wizard.jsx:780
 	__( 'The setup is complete. We have activated the main features with the default settings. You can proceed to run a Performance Test or go directly to the Dashboard page.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:739
-	__( 'Help us Optimize your site for better Performance<span>Recommended</span>', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:795
+	__( 'Help improve Hummingbird with anonymous usage data<span>Recommended</span>', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:747
-	__( 'Help us improve Hummingbird, minimize errors, and enhance the user experience by sharing anonymous, and non-sensitive usage data. You can change this option in the settings anytime. See <a>more</a> info about the data we collect.', 'wphb' ),
+	// Reference: _src/react/views/setup/wizard.jsx:803
+	__( 'Join 18,000+ users helping us improve with anonymous data. No personal info collected. <a>Learn more</a>.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:781
-	__( 'Skip wizard and apply a config', 'wphb' ),
-
-	// Reference: _src/react/views/setup/wizard.jsx:789
+	// Reference: _src/react/views/setup/wizard.jsx:839
 	__( 'Back', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:796
+	// Reference: _src/react/views/setup/wizard.jsx:846
 	__( 'Get started', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:800
+	// Reference: _src/react/views/setup/wizard.jsx:850
 	__( 'We advise to check the recommendations before proceeding.', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:806
+	// Reference: _src/react/views/setup/wizard.jsx:856
 	__( 'Continue anyway', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:814
+	// Reference: _src/react/views/setup/wizard.jsx:864
 	__( 'Continue', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:821
+	// Reference: _src/react/views/setup/wizard.jsx:871
 	__( 'Go to Dashboard', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:826
+	// Reference: _src/react/views/setup/wizard.jsx:876
 	__( 'Run Performance Test', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:853
+	// Reference: _src/react/views/setup/wizard.jsx:903
 	__( 'Checking status', 'wphb' ),
 
-	// Reference: _src/react/views/setup/wizard.jsx:853
+	// Reference: _src/react/views/setup/wizard.jsx:903
 	__( 'Saving settings', 'wphb' )
 );
 /* THIS IS THE END OF THE GENERATED FILE */

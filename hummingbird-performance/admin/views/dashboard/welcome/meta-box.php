@@ -151,7 +151,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 			<?php else : ?>
 				<span class="sui-list-label"><?php esc_html_e( 'Scheduled Reporting', 'wphb' ); ?></span>
 				<span class="sui-list-detail">
-					<a class="sui-button sui-button-blue" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_dash_summary_schedule_connect_tag' ) ); ?>">
+					<a class="sui-button wphb-hub-connector-upsell-button" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_dash_summary_schedule_connect_tag' ) ); ?>">
 						<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
 					</a>
 				</span>
@@ -161,7 +161,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 			<span class="sui-list-label"><?php esc_html_e( 'Last Down Time', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
 				<?php if ( ! Utils::has_access_to_hub() ) : ?>
-					<a class="sui-button sui-button-blue" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-uptime', 'hummingbird_dash_summary_down_connect_tag' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'dash_summary', 'cta_clicked', this.href, 'hb_uptime_upsell' );">
+					<a class="sui-button wphb-hub-connector-upsell-button" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-uptime', 'hummingbird_dash_summary_down_connect_tag' ) ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'dash_summary', 'cta_clicked', this.href, 'hb_uptime_upsell' );">
 						<?php esc_html_e( 'Connect site', 'wphb' ); ?>
 					</a>
 				<?php elseif ( is_wp_error( $uptime_report ) || ( ! $uptime_active ) ) : ?>

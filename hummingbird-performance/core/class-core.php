@@ -49,13 +49,14 @@ class Core {
 		$this->init_integrations();
 		$this->load_modules();
 
+		SafeMode::instance()->init_safe_mode_box();
+
 		// Return is user has no proper permissions.
 		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
 			return;
 		}
 
 		$this->add_menu_bar_actions();
-		$this->init_ao_safe_mode();
 	}
 
 	/**
@@ -66,7 +67,6 @@ class Core {
 	private function init() {
 		// Register private policy text.
 		add_action( 'admin_init', array( $this, 'privacy_policy_content' ) );
-		add_action( 'admin_init', array( $this, 'upsell_notice' ), 9 );
 		add_filter( 'wpmudev_notices_is_disabled', array( $this, 'wpmudev_remove_email_from_disabled_list' ), 10, 3 );
 
 		Hub_Connector::get_instance();
@@ -106,6 +106,7 @@ class Core {
 		new Integration\Elementor();
 		new Integration\The_Events_Calendar();
 		new Integration\Forminator();
+		new Integration\Breakdance();
 	}
 
 	/**
@@ -282,10 +283,14 @@ class Core {
 			'wphb-global',
 			'wphbGlobal',
 			array(
-				'ajaxurl'    => admin_url( 'admin-ajax.php' ),
-				'nonce'      => wp_create_nonce( 'wphb-fetch' ),
-				'minify_url' => admin_url( 'admin.php?page=wphb-minification' ),
-				'is_hb_page' => $is_hb_page,
+				'ajaxurl'          => admin_url( 'admin-ajax.php' ),
+				'nonce'            => wp_create_nonce( 'wphb-fetch' ),
+				'minify_url'       => admin_url( 'admin.php?page=wphb-minification' ),
+				'is_hb_page'       => $is_hb_page,
+				'copyText'         => esc_html__( 'Link copied', 'wphb' ),
+				'previewLink'      => SafeMode::instance()->get_safe_mode_preview_url(),
+				'hb_dashboard_url' => admin_url( 'admin.php?page=wphb' ),
+				'publishing'       => esc_html__( 'Publishing...', 'wphb' ),
 			)
 		);
 
@@ -363,256 +368,6 @@ class Core {
 		}
 
 		return $is_disabled;
-	}
-
-	/**
-	 * Show upsell notice for the newsletter.
-	 *
-	 * @since 2.5.0
-	 */
-	public function upsell_notice() {
-		if ( ! defined( 'WPHB_WPORG' ) || ! WPHB_WPORG ) {
-			return;
-		}
-
-		if ( ! file_exists( WPHB_DIR_PATH . 'core/externals/free-dashboard/module.php' ) ) {
-			return;
-		}
-
-		// If dash plugin exists, no need to upsell.
-		if ( class_exists( 'WPMUDEV_Dashboard' ) || file_exists( WP_PLUGIN_DIR . '/wpmudev-updates/update-notifications.php' ) ) {
-			return;
-		}
-
-		/* @noinspection PhpIncludeInspection */
-		require_once WPHB_DIR_PATH . 'core/externals/free-dashboard/module.php';
-
-		// Add the Mailchimp group value.
-		add_action(
-			'frash_subscribe_form_fields',
-			function ( $mc_list_id ) {
-				if ( '4b14b58816' === $mc_list_id ) {
-					echo '<input type="hidden" id="mce-group[53]-53-1" name="group[53][4]" value="4" />';
-				}
-			}
-		);
-
-		$free_installation = get_site_option( 'wphb-free-install-date' );
-
-		// Register the current plugin.
-		do_action(
-			'wpmudev_register_notices',
-			'hummingbird', // Required: plugin id. Get from the below list.
-			array(
-				'basename'     => WPHB_BASENAME, // Required: Plugin basename (for backward compat).
-				'title'        => 'Hummingbird', // Plugin title.
-				'wp_slug'      => 'hummingbird-performance', // Plugin slug on wp.org
-				'cta_email'    => __( 'Get Fast!', 'wphb' ), // Email button CTA.
-				'mc_list_id'   => '4b14b58816', // Mailchimp list id for the plugin - e.g. 4b14b58816 is list id for Smush.
-				'installed_on' => $free_installation ?: time(), // Plugin installed time (timestamp). Default to current time.
-				'screens'      => array( // Screen IDs of plugin pages.
-					'toplevel_page_wphb',
-				),
-			)
-		);
-
-		// The email message contains 1 variable: plugin-name.
-		add_filter(
-			'wdev_email_message_' . WPHB_BASENAME,
-			function () {
-				return "You're awesome for installing %s! Make sure you get the most out of it, boost your Google PageSpeed score with these tips and tricks - just for users of Hummingbird!";
-			}
-		);
-	}
-
-	/**
-	 * Init safe mode.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return void
-	 */
-	private function init_ao_safe_mode() {
-		$status = filter_input( INPUT_GET, 'minify-safe', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-
-		if ( true !== $status ) {
-			return;
-		}
-
-		if ( ! Minify::get_safe_mode_status() ) {
-			return;
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		add_action( 'wp_body_open', array( $this, 'display_safe_mode_box' ) );
-	}
-
-	/**
-	 * Display safe mode DIV on front-end.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return void
-	 */
-	public function display_safe_mode_box() {
-		?>
-		<div id="wphb-ao-safe-mode">
-			<div id="wphb-ao-safe-mode-actions">
-				<a role="button" href="<?php echo admin_url( 'admin.php?page=wphb-minification' ); ?>"
-				   id="wphb-ao-safe-mode-back"><?php esc_html_e( 'Go Back', 'wphb' ); ?></a>
-
-				<div>
-					<a href="#" id="wphb-ao-safe-mode-copy">
-						<span><?php esc_html_e( 'Copy Test Link', 'wphb' ); ?></span>
-						<span><?php esc_html_e( 'Link Copied', 'wphb' ); ?></span>
-					</a>
-					<button role="button" id="wphb-ao-safe-mode-save"><?php esc_html_e( 'Publish', 'wphb' ); ?></button>
-				</div>
-			</div>
-			<p><?php esc_html_e( "You are currently viewing the frontend of your website in Safe Mode preview. Check for any errors in your browser's console or broken UI. You can also test with page speed tools in order to see how the changes affected the score. When ready, publish your changes to live.", 'wphb' ); ?></p>
-			<style>
-				#wphb-ao-safe-mode {
-					z-index: 99999;
-					position: sticky;
-					top: 32px;
-					left: 0;
-					width: 100%;
-					min-width: 600px;
-					background: #FFFFFF;
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					padding: 30px 80px;
-					font-weight: 400;
-					font-size: 15px;
-					line-height: 30px;
-					letter-spacing: -0.25px;
-					color: #333333;
-					box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-					box-sizing: border-box;
-				}
-
-				#wphb-ao-safe-mode p {
-					margin: 0;
-					font-size: 13px;
-					line-height: 22px;
-				}
-
-				#wphb-ao-safe-mode-actions {
-					display: flex;
-					justify-content: space-between;
-					width: 100%;
-					margin-bottom: 15px;
-				}
-
-				@media screen and ( max-width: 385px ) {
-					#wphb-ao-safe-mode-actions {
-						flex-direction: column;
-						align-items: flex-start;
-					}
-
-					#wphb-ao-safe-mode-actions > div {
-						display: flex;
-						flex-direction: column;
-						align-items: flex-start;
-					}
-
-					#wphb-ao-safe-mode-copy {
-						padding: 10px 0;
-					}
-				}
-
-				#wphb-ao-safe-mode-copy {
-					font-size: 13px;
-					font-weight: 500;
-					line-height: 22px;
-					color: #17A8E3;
-					margin-right: 21px;
-					text-decoration: none;
-					position: relative;
-				}
-
-				#wphb-ao-safe-mode-copy span:first-child {
-					display: inline;
-				}
-
-				#wphb-ao-safe-mode-copy span:last-child {
-					display: none;
-				}
-
-				#wphb-ao-safe-mode-copy.wphb-ao-safe-mode-copy-success:after {
-					font-family: dashicons;
-					content: '\f15e';
-					vertical-align: middle;
-					left: 103%;
-					position: absolute;
-					top: -1px;
-				}
-
-				#wphb-ao-safe-mode-copy.wphb-ao-safe-mode-copy-success span:first-child {
-					display: none;
-				}
-
-				#wphb-ao-safe-mode-copy.wphb-ao-safe-mode-copy-success span:last-child {
-					display: inline;
-				}
-
-				#wphb-ao-safe-mode [role="button"] {
-					border: 2px solid #DDDDDD;
-					border-radius: 4px;
-					background: #FFFFFF;
-					padding: 7px 16px;
-					text-transform: uppercase;
-					font-weight: 700;
-					font-size: 12px;
-					line-height: 16px;
-					letter-spacing: -0.25px;
-					color: #888888;
-					text-decoration: none;
-				}
-
-				#wphb-ao-safe-mode [role="button"]:hover {
-					text-decoration: none;
-				}
-
-				#wphb-ao-safe-mode [role="button"]:before {
-					font-family: dashicons;
-					font-size: 18px;
-					line-height: 16px;
-					margin-right: 5px;
-					vertical-align: bottom;
-					content: '\f341';
-				}
-
-				#wphb-ao-safe-mode [role="button"]:hover { cursor: pointer; }
-				#wphb-ao-safe-mode-actions div [role="button"]:before { content: '\f15e'; }
-
-				#wphb-ao-safe-mode-actions div [role="button"] {
-					background: #17A8E3;
-					border-color: #17A8E3;
-					color: #FFFFFF;
-				}
-
-				#wphb-ao-safe-mode-actions div [role="button"][disabled] {
-					background: #DDDDDD;
-					border-color: #DDDDDD;
-					cursor: default;
-				}
-
-				@media screen and ( max-width: 782px ) {
-					#wphb-ao-safe-mode {
-						display: block;
-						padding: 20px 20px;
-						min-width: 240px;
-						top: 46px;
-					}
-				}
-			</style>
-		</div>
-		<?php
 	}
 
 	/**

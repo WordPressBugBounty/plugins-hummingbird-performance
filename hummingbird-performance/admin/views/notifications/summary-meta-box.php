@@ -36,7 +36,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 		<ul class="sui-list">
 			<li>
 				<span class="sui-list-label"><?php esc_html_e( 'Next scheduled reporting', 'wphb' ); ?></span>
-				<a href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications' ) ); ?>" class="sui-button sui-button-blue">
+				<a href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications' ) ); ?>" class="sui-button wphb-hub-connector-upsell-button">
 					<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
 				</a>
 			</li>

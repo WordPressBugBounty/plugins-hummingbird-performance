@@ -37,6 +37,29 @@ import { getString } from '../utils/helpers';
 				}
 			);
 
+			$( '#safe_mode' ).on( 'click', function( e ) {
+				e.preventDefault();
+				const willBeChecked = ! this.checked; // This is the state after click
+				const modalId = willBeChecked ? 'wphb-safe-mode-confirmation-modal' : 'wphb-safe-mode-modal';
+
+				if ( willBeChecked ) {
+					Fetcher.common
+						.call( 'wphb_safemode_has_changes', true )
+						.then( ( response ) => {
+							if ( response.hasChanges ) {
+								window.SUI.openModal( modalId, 'wpbody-content' );
+							} else {
+								const safeModeCheckbox = document.getElementById( 'safe_mode' );
+								if ( safeModeCheckbox ) {
+									safeModeCheckbox.checked = false;
+								}
+							}
+						} );
+				} else {
+					window.SUI.openModal( modalId, 'wpbody-content' );
+				}
+			} );
+
 			/**
 			 * Clear log button clicked.
 			 *
@@ -75,7 +98,7 @@ import { getString } from '../utils/helpers';
 			$( '#performance-run-test, #performance-scan-website, #run-performance-test' ).on(
 				'click',
 				function() {
-					const location = $(this).attr('data-location');
+					const location = $( this ).attr( 'data-location' );
 					wphbMixPanel.track( 'plugin_scan_started', {
 						score_mobile_previous: getString(
 							'previousScoreMobile'
@@ -86,10 +109,17 @@ import { getString } from '../utils/helpers';
 						'AO Status': getString(
 							'aoStatus'
 						),
-						'Location': typeof location !== 'undefined' ? location : 'unknown',
+						Location: typeof location !== 'undefined' ? location : 'unknown',
 					} );
 				}
 			);
+
+			const urlParams = new URLSearchParams( window.location.search );
+			if ( urlParams.has( 'wphb_safemode_published' ) ) {
+				WPHB_Admin.notices.show( getString( 'safeModePublished' ), 'success' );
+				urlParams.delete( 'wphb_safemode_published' );
+				window.history.replaceState( {}, document.title, window.location.pathname + '?' + urlParams.toString() );
+			}
 		},
 
 		initModule( module ) {
@@ -99,6 +129,52 @@ import { getString } from '../utils/helpers';
 			}
 
 			return {};
+		},
+
+		toggleSafeMode( button ) {
+			button.classList.add( 'disabled' );
+			Fetcher.common
+				.callWithParams( 'wphb_toggle_safe_mode', true )
+				.then( ( response ) => {
+					// Check the checkbox before closing modal and reloading
+					const safeModeCheckbox = document.getElementById( 'safe_mode' );
+					if ( safeModeCheckbox ) {
+						safeModeCheckbox.checked = true;
+					}
+					window.SUI.closeModal();
+					WPHB_Admin.notices.show( response.message );
+					setTimeout( () => {
+						window.location.reload();
+					}, 500 );
+					button.classList.remove( 'disabled' );
+				} );
+		},
+
+		discardSafeMode( button ) {
+			button.classList.add( 'disabled' );
+			Fetcher.common
+				.callWithParams( 'wphb_discard_safe_mode', true )
+				.then( ( ) => {
+					button.classList.remove( 'disabled' );
+					window.SUI.closeModal();
+					window.location.reload();
+				} );
+		},
+
+		publishSafeMode( button ) {
+			button.classList.add( 'disabled' );
+			const clearAllCache = document.getElementById( 'wphb-safe-mode-clear-all-cache' );
+			const clearAllCacheValue = clearAllCache ? clearAllCache.checked : false;
+			Fetcher.common
+				.callWithParams( 'wphb_publish_safe_mode', clearAllCacheValue )
+				.then( ( response ) => {
+					button.classList.remove( 'disabled' );
+					WPHB_Admin.notices.show( response.message );
+					setTimeout( () => {
+						window.location.reload();
+					}, 500 );
+					window.SUI.closeModal();
+				} );
 		},
 
 		getModule( module ) {
@@ -129,6 +205,11 @@ import { getString } from '../utils/helpers';
 					$( '.wphb-box-notice' ).slideUp();
 				} );
 			}
+
+			const rateButtons = document.querySelectorAll( '.wphb-rate-buttons>a' );
+			rateButtons.forEach( ( button ) => {
+				button.addEventListener( 'click', ( e ) => this.rateActions( e ) );
+			} );
 		},
 
 		/**
@@ -193,7 +274,57 @@ import { getString } from '../utils/helpers';
 			cloudFlareDashNotice.slideUp();
 			cloudFlareDashNotice.parent().addClass( 'no-background-image' );
 		},
+
+		/**
+		 * Handle rate notice actions.
+		 *
+		 * @since 3.18.0
+		 *
+		 * @param {Object} e Event object.
+		 */
+		rateActions( e ) {
+			const action = e.currentTarget.getAttribute( 'data-Action' );
+			if ( 'rate' !== action ) {
+				e.preventDefault();
+			}
+
+			const rateNotice = $( '.notice-free-rated' );
+			let noticeType;
+			if ( rateNotice.hasClass( 'notice-perf-rate' ) ) {
+				noticeType = 'performance_score';
+			} else {
+				noticeType = 'seven_days';
+			}
+
+			const pageMap = {
+				wphb: 'Dashboard',
+				'wphb-performance': 'Performance Test',
+				'wphb-caching': 'Caching',
+				'wphb-minification': 'Asset Optimization',
+				'wphb-advanced': 'Advanced Tools',
+				'wphb-uptime': 'Uptime',
+				'wphb-notifications': 'Notifications',
+				'wphb-settings': 'Settings',
+			};
+			let location = 'Unknown';
+			const urlParams = new URLSearchParams( window.location.search );
+			const pageSlug = urlParams.get( 'page' );
+			if ( pageSlug && pageMap[ pageSlug ] ) {
+				location = pageMap[ pageSlug ];
+			}
+
+			wphbMixPanel.track( 'Rating Notice', {
+				Action: action,
+				'Notice Type': noticeType,
+				Location: location,
+			} );
+
+			rateNotice.slideUp();
+
+			Fetcher.common.dismissNotice( 'free-rated', action );
+		},
+
 	};
 
 	window.WPHB_Admin = WPHB_Admin;
-} )( jQuery );
+}( jQuery ) );

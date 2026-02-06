@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
- import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 /**
  * WordPress dependencies
@@ -22,7 +22,7 @@ import Tag from '../../components/sui-tag';
 import Toggle from '../../components/sui-toggle';
 import Button from '../../components/sui-button';
 import HBAPIFetch from '../../api';
-import useSummaryUpdate from './utils/summaryUpdate'
+import useSummaryUpdate from './utils/summaryUpdate';
 
 /**
  * MinifySummary functional component.
@@ -69,33 +69,33 @@ export const MinifySummary = ( props ) => {
 
 	useEffect( () => {
 		if ( didMount.current ) {
-			let viewDelayJs = document.getElementById("view_delay_js");
+			const viewDelayJs = document.getElementById( 'view_delay_js' );
 			if ( viewDelayJs ) {
-				if ( viewDelayJs.checked !== delayJs  ) {
+				if ( viewDelayJs.checked !== delayJs ) {
 					viewDelayJs.checked = delayJs;
-					jQuery(viewDelayJs).trigger("change");
-				}			
+					jQuery( viewDelayJs ).trigger( 'change' );
+				}
 			}
 
-			let viewCriticalCss = document.getElementById("critical_css_toggle");
+			const viewCriticalCss = document.getElementById( 'critical_css_toggle' );
 			if ( viewCriticalCss ) {
-				if ( viewCriticalCss.checked !== criticalCss  ) {
+				if ( viewCriticalCss.checked !== criticalCss ) {
 					viewCriticalCss.checked = criticalCss;
-					jQuery(viewCriticalCss).trigger("change");
-				}			
+					jQuery( viewCriticalCss ).trigger( 'change' );
+				}
 			}
 		} else {
 			didMount.current = true;
-		}				
+		}
 	}, [ delayJs, criticalCss ] );
 
 	useEffect( () => {
-		let preValue       = aoQueueRef.current;
+		const preValue = aoQueueRef.current;
 		aoQueueRef.current = aoQueue;
 		if ( preValue?.aoQueueCount > 0 && aoQueueRef?.current?.aoQueueCount <= 0 ) {
 			dispatch( STORE_NAME ).invalidateResolution( 'getAssets' );
 		}
-	}, [aoQueue]);
+	}, [ aoQueue ] );
 
 	useEffect( () => {
 		const intervalAOQueue = setInterval( () => {
@@ -103,14 +103,12 @@ export const MinifySummary = ( props ) => {
 			if ( currentAoQueue?.aoQueueCount > 0 ) {
 				dispatch( STORE_NAME ).invalidateResolution( 'getOptions' );
 			} else {
-				clearInterval(intervalAOQueue);
+				clearInterval( intervalAOQueue );
 			}
-		}, 15000);
+		}, 15000 );
 		// Cleanup function to clear the interval when the component unmounts or the dependencies change
 		return () => clearInterval( intervalAOQueue );
-		
-	}, [loading]);
-
+	}, [ loading ] );
 
 	/**
 	 * Get original/compressed sizes.
@@ -139,7 +137,7 @@ export const MinifySummary = ( props ) => {
 	 */
 	const getCompressedSize = () => {
 		const sizes = getSizes();
-		return  sizes[ 1 ];
+		return sizes[ 1 ];
 	};
 
 	/**
@@ -188,7 +186,6 @@ export const MinifySummary = ( props ) => {
 	 * @param {Object} e
 	 */
 	const toggleCDN = ( e ) => {
-
 		api.post( 'minify_toggle_cdn', e.target.checked )
 			.then( ( response ) => {
 				if ( response.cdn ) {
@@ -210,14 +207,13 @@ export const MinifySummary = ( props ) => {
 	 * @param {Object} e
 	 */
 	const toggleDelay = ( e ) => {
-
 		api.post( 'minify_toggle_delay_js', e.target.checked )
 			.then( ( response ) => {
 				window.wphbMixPanel.trackDelayJSEvent( {
-					'update_type': (response.delay_js) ? 'activate' : 'deactivate',
-					'Location': 'ao_summary',
-					'Timeout': response.delay_js_timeout,
-					'Excluded Files': (response.delay_js_exclude) ? 'yes' : 'no',
+					update_type: ( response.delay_js ) ? 'activate' : 'deactivate',
+					Location: 'ao_summary',
+					Timeout: response.delay_js_timeout,
+					'Excluded Files': ( response.delay_js_exclude ) ? 'yes' : 'no',
 				} );
 
 				dispatch( STORE_NAME ).invalidateResolution( 'getOptions' );
@@ -233,7 +229,6 @@ export const MinifySummary = ( props ) => {
 	 * @param {Object} e
 	 */
 	const toggleCritical = ( e ) => {
-
 		api.post( 'minify_toggle_critical_css', e.target.checked )
 			.then( ( response ) => {
 				window.wphbMixPanel.trackCriticalCSSEvent( {
@@ -261,6 +256,7 @@ export const MinifySummary = ( props ) => {
 	/**
 	 * Get summary segment content.
 	 *
+	 * @param  aoQueue
 	 * @return {JSX.Element} Summary segment
 	 */
 	const getSummarySegmentLeft = ( aoQueue ) => {
@@ -279,21 +275,21 @@ export const MinifySummary = ( props ) => {
 					<span className="sui-summary-large">
 						{ percentage }%
 					</span> }
-				<span className="sui-summary-sub" style={{ marginBottom: 20 }}> { __( 'Compression savings', 'wphb' ) } </span>
+				<span className="sui-summary-sub" style={ { marginBottom: 20 } }> { __( 'Compression savings', 'wphb' ) } </span>
 				<span classes={ [ 'sui-summary-detail wphb-summary-detail-total-files' ] }>
-						{ __( 'Total Files', 'wphb' ) }
-					{aoQueue?.aoQueueCount ? (
-						<Tooltip text={__('Optimizing assets, this could take a while, please hold on.', 'wphb')} classes={['wphb_progress_tag sui-tag sui-tag-blue sui-tooltip-constrained']}>
-							<span className={['sui-icon-loader sui-loading']} aria-hidden="true"></span>
-							{__('Optimizing', 'wphb')}
+					{ __( 'Total Files', 'wphb' ) }
+					{ aoQueue?.aoQueueCount ? (
+						<Tooltip text={ __( 'Optimizing assets, this could take a while, please hold on.', 'wphb' ) } classes={ [ 'wphb_progress_tag sui-tag sui-tag-blue sui-tooltip-constrained' ] }>
+							<span className={ [ 'sui-icon-loader sui-loading' ] } aria-hidden="true"></span>
+							{ __( 'Optimizing', 'wphb' ) }
 						</Tooltip>
 					) : aoQueue?.aoCompletedTime ? (
 						<Tooltip
-							text={__('Last Generated:', 'wphb') + (aoQueue.aoCompletedTime ? ` ${aoQueue.aoCompletedTime}` : '')}
-							classes={['wphb_progress_tag sui-tag sui-tag-green sui-tooltip-constrained']}
+							text={ __( 'Last Generated:', 'wphb' ) + ( aoQueue.aoCompletedTime ? ` ${ aoQueue.aoCompletedTime }` : '' ) }
+							classes={ [ 'wphb_progress_tag sui-tag sui-tag-green sui-tooltip-constrained' ] }
 						>
 							<span className="sui-icon-info" aria-hidden="true"></span>
-							{__('Optimized', 'wphb')}
+							{ __( 'Optimized', 'wphb' ) }
 						</Tooltip>
 					) : null
 					}
@@ -306,15 +302,29 @@ export const MinifySummary = ( props ) => {
 	/**
 	 * Returns unlock pro upsell link.
 	 *
-	 * @param {string} utm
+	 * @param {string}          utm
+	 * @param {string}          eventname
+	 * @param {Function | null} actionCall Action call on click. Optional. trackMPEvent used if not provided.
+	 * @param {string}          tooltip    Tooltip text. Optional.
+	 * @return {JSX.Element} Upsell link
 	 */
-	const getUnlockUpsellLink = ( utm, eventname ) => {
-		return (
-			<a target="_blank" data-location="ao_summary" data-eventname={ eventname } href={ utm } className="wphb-upsell-link wphb-upsell-eo" onClick={ trackMPEvent }>
-				{ __( 'Unlock now  ', 'wphb' ) }
+	const getUnlockUpsellLink = ( utm, eventname, actionCall = null, tooltip = null ) => {
+		const linkElement = (
+			<a target="_blank" data-location="ao_summary" data-eventname={ eventname } href={ utm } className="wphb-upsell-link wphb-upsell-eo" onClick={ actionCall ? actionCall : trackMPEvent } rel="noreferrer">
+				{ __( 'Unlock now', 'wphb' ) + '  ' }
 				<span className="sui-icon-open-new-window" aria-hidden="true"></span>
 			</a>
 		);
+
+		if ( tooltip ) {
+			return (
+				<Tooltip text={ tooltip } classes={ [ 'sui-tooltip-top-right', 'sui-tooltip-constrained' ] }>
+					{ linkElement }
+				</Tooltip>
+			);
+		}
+
+		return linkElement;
 	};
 
 	/**
@@ -325,7 +335,7 @@ export const MinifySummary = ( props ) => {
 	 * @param {Object} e
 	 */
 	const trackMPEvent = ( e ) => {
-		WPHB_Admin.minification.hbTrackEoMPEvent( e.target )
+		WPHB_Admin.minification.hbTrackEoMPEvent( e.target );
 
 		return false;
 	};
@@ -356,10 +366,7 @@ export const MinifySummary = ( props ) => {
 						<Toggle id="use_cdn" checked={ cdn && props.wphbData.isMember } disabled={ ! props.wphbData.isMember } onChange={ toggleCDN } />
 					</Tooltip>;
 			} else {
-				cdnDetails =
-					<Tooltip text={ __( 'Host your files on WPMU DEV’s blazing-fast CDN', 'wphb' ) } classes={ [ 'sui-tooltip-top-right' ] }>
-						<Button url={ props.wphbData.links.cdnUpsell } onClick={ trackCDNUpsell } target="blank" text={ __( 'UPGRADE TO PRO', 'wphb' ) } classes={ [ 'sui-button', 'sui-button-purple' ] } />
-					</Tooltip>;
+				cdnDetails = getUnlockUpsellLink( props.wphbData.links.cdnUpsell, 'hb_cdn_upsell', trackCDNUpsell );
 			}
 		} else if ( cdn && props.wphbData.isMember ) {
 			cdnDetails =
@@ -381,7 +388,7 @@ export const MinifySummary = ( props ) => {
 					<Toggle id="delay_js" checked={ delayJs } onChange={ toggleDelay } />
 				</Tooltip>;
 		} else {
-			delayDetails = getUnlockUpsellLink( props.wphbData.links.delayUpsell, 'delayjs' );
+			delayDetails = getUnlockUpsellLink( props.wphbData.links.delayUpsell, 'delayjs', null );
 		}
 
 		let criticalCssDetails;
@@ -392,7 +399,7 @@ export const MinifySummary = ( props ) => {
 					<Toggle id="critical_css" checked={ criticalCss } onChange={ toggleCritical } />
 				</Tooltip>;
 		} else {
-			criticalCssDetails = getUnlockUpsellLink( props.wphbData.links.criticalUpsell, 'critical_css' );
+			criticalCssDetails = getUnlockUpsellLink( props.wphbData.links.criticalUpsell, 'critical_css', null );
 		}
 
 		let elements = [
@@ -403,7 +410,9 @@ export const MinifySummary = ( props ) => {
 			{
 				label: <React.Fragment>
 					{ __( 'WPMU DEV CDN', 'wphb' ) }
-					{ ! props.wphbData.isMember && <Tag type="pro" value={ __( 'Pro', 'wphb' ) } /> }
+					{ ! props.wphbData.isMember && <Tooltip classes="sui-tooltip-top-right sui-tooltip-constrained" text={ __( 'Boost your speed globally. Serve your files from our optimized network for maximum performance.' ) }>
+						<Icon classes="sui-icon-info sui-md" />
+					</Tooltip> }
 				</React.Fragment>,
 				details: cdnDetails,
 			},
@@ -414,20 +423,24 @@ export const MinifySummary = ( props ) => {
 				{
 					label: <React.Fragment>
 						{ __( 'Delay JavaScript Execution', 'wphb' ) }
-						{ ! props.wphbData.isMember && <Tag type="pro" value={ __( 'Pro', 'wphb' ) } /> }
+						{ ! props.wphbData.isMember && <Tooltip classes="sui-tooltip-top-right sui-tooltip-constrained" text={ __( 'Unlock immediate speed. Visible content loads first, so your site feels faster.' ) }>
+							<Icon classes="sui-icon-info sui-md" />
+						</Tooltip> }
 					</React.Fragment>,
 					details: delayDetails,
 				},
 				{
 					label: <React.Fragment>
 						{ __( 'Generate Critical CSS', 'wphb' ) }
-						{ ! props.wphbData.isMember && <Tag type="pro" value={ __( 'Pro', 'wphb' ) } /> }
+						{ ! props.wphbData.isMember && <Tooltip classes="sui-tooltip-top-right sui-tooltip-constrained" text={ __( 'Instantly visible pages. Prioritize essential CSS above the fold for no lag.' ) }>
+							<Icon classes="sui-icon-info sui-md" />
+						</Tooltip> }
 					</React.Fragment>,
 					details: criticalCssDetails,
 				},
 			];
 
-			elements = [...elements, ...eoElements ];
+			elements = [ ...elements, ...eoElements ];
 		}
 
 		return <List elements={ elements } />;
@@ -454,7 +467,6 @@ export const MinifySummary = ( props ) => {
 				summarySegmentRight={ getSummarySegmentRight() }
 			/>
 		);
-	} else {
-		return null;
 	}
+	return null;
 };

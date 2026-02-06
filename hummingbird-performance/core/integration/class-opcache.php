@@ -90,6 +90,10 @@ class Opcache {
 			return false;
 		}
 
+		if ( ini_get( 'opcache.restrict_api' ) ) {
+			return false;
+		}
+
 		try {
 			$opcache = opcache_get_status();
 			if ( isset( $opcache['opcache_enabled'] ) ) {

@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</h3>
 
 				<p class="sui-description" id="dialogDescription">
-					<?php esc_html_e( 'Manual mode gives you full control over your files but can easily break your website if configured incorrectly.', 'wphb' ); ?>
+					<?php esc_html_e( 'Dev mode gives you full control over your files but can easily break your website if configured incorrectly.', 'wphb' ); ?>
 				</p>
 
 				<p class="sui-description" style="font-weight: 500">

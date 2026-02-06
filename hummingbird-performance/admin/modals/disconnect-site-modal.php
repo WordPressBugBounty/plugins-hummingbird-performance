@@ -12,43 +12,64 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="sui-modal sui-modal-sm">
+<div id="wphb-disconnect-modal-wrapper" class="sui-modal sui-modal-sm">
 	<div role="dialog" class="sui-modal-content" id="wphb-disconnect-site-modal" aria-modal="true" aria-labelledby="disconnectSite" aria-describedby="dialogDescription">
 		<div class="sui-box">
 			<div class="sui-box-header sui-flatten sui-content-center sui-spacing-top--60">
-				<button class="sui-button-icon sui-button-float--right" id="dialog-close-div" data-modal-close="">
-					<span class="sui-icon-close sui-md" aria-hidden="true"></span>
-					<span class="sui-screen-reader-text"><?php esc_attr_e( 'Close this dialog window', 'wphb' ); ?></span>
-				</button>
-
 				<h3 class="sui-box-title sui-lg" id="disconnectSite">
 					<?php esc_html_e( 'Disconnect Site?', 'wphb' ); ?>
 				</h3>
-
-				<p class="sui-description" id="dialogDescription">
-					<?php esc_html_e( 'Do you want to disconnect your site from WPMU DEV?', 'wphb' ); ?>
-				</p>
 			</div>
 
 			<div class="sui-box-body">
 				<div class="sui-notice sui-notice-yellow" >
+					<p class="sui-description" style="text-align: center;">
+					<?php
+						esc_html_e( 'Disconnecting this site will disable key Hummingbird features and other connected WPMU DEV tools and services.', 'wphb' );
+					?>
+					</p>
 					<div class="sui-notice-content">
 						<div class="sui-notice-message">
-							<span class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></span>
-							<p class="sui-description" style="color:#888888">
+
+							<p class="sui-description">
 								<?php
-								printf(
-									/* translators: %s: Hub name */
-									esc_html__( 'Note that disconnecting your site from %s will disable other services that rely on this connection.', 'wphb' ),
-									'<strong style="color:#888888">WPMU DEV</strong>'
-								);
+									esc_html_e( 'You’ll lose the following key Hummingbird features', 'wphb' );
 								?>
+								<ul>
+									<li>
+										<span class="cross-icon">+</span>
+										<div>
+										<?php esc_html_e( 'Scheduled Performance Reports', 'wphb' ); ?>
+										</div>
+									</li>
+									<li>
+										<span class="cross-icon">+</span>
+										<div>
+										<?php esc_html_e( 'Uptime Monitoring & Alerts', 'wphb' ); ?>
+										</div>
+									</li>
+									<li>
+										<span class="cross-icon">+</span>
+										<div>
+										<?php esc_html_e( 'Automated Database Cleanup', 'wphb' ); ?>
+										</div>
+									</li>
+									<li>
+										<span class="cross-icon">+</span>
+										<div>
+										<?php esc_html_e( 'Premium WPMU DEV services and site management tools.', 'wphb' ); ?>
+										</div>
+									</li>
+								</ul>
 							</p>
 						</div>
 					</div>
+					<div>
+						<input id="wphb-disconnect-reason-input" type="text" placeholder="<?php esc_attr_e( 'Mind sharing why you’re disconnecting?', 'wphb' ); ?>" class="sui-form-control wphb-disconnect-reason-input" aria-labelledby="wphb-disconnect-reason-input" />
+					</div>
 				</div>
 				<div class="sui-block-content-center">
-					<button type="button" class="sui-button sui-button-ghost" data-modal-close="">
+					<button id="cancel-disconnect" type="button" class="sui-button sui-button-ghost" data-modal-close="">
 						<?php esc_html_e( 'Cancel', 'wphb' ); ?>
 					</button>
 

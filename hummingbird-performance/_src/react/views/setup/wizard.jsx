@@ -23,7 +23,7 @@ import SettingsRow from '../../components/sui-box-settings/row';
 import Button from '../../components/sui-button';
 import Tabs from '../../components/sui-tabs';
 import Tooltip from '../../components/sui-tooltip';
-import {createInterpolateElement} from "@wordpress/element";
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Wizard module, extends React.Component.
@@ -145,12 +145,14 @@ export default class Wizard extends React.Component {
 	 * @return {JSX.Element} Header block
 	 */
 	getHeader() {
-		let title = this.state.steps[ this.props.step ];
+		let title = 1 === this.props.step ? __( 'Ready to Boost Your Site’s Speed?', 'wphb' ) : this.state.steps[ this.props.step ];
 		let name = this.state.steps[ this.props.step ].replace( /\s+/g, '-' ).toLowerCase();
 
 		if ( 1 === this.props.step && this.props.showConflicts ) {
 			name = ! this.props.issues.advCacheFile ? 'success' : 'failed';
 			title = __( 'Plugin Conflict', 'wphb' );
+		} else if ( 3 === this.props.step ) {
+			title = __( 'Uptime Monitoring', 'wphb' );
 		} else if ( 6 === this.props.step ) {
 			name = 'success';
 			title = __( 'Wizard Completed!', 'wphb' );
@@ -197,15 +199,15 @@ export default class Wizard extends React.Component {
 			icon = 'warning-alert sui-error';
 
 			const message = createInterpolateElement(
-				__('Hummingbird has detected an advanced-cache.php file in your site’s wp-content directory. <a>Manage your plugins</a> and disable any other active caching plugins to ensure Hummingbird’s page caching works properly.', 'wphb'),
+				__( 'Hummingbird has detected an advanced-cache.php file in your site’s wp-content directory. <a>Manage your plugins</a> and disable any other active caching plugins to ensure Hummingbird’s page caching works properly.', 'wphb' ),
 				{
-					a: <a href={getLink('plugins')}/>
+					a: <a href={ getLink( 'plugins' ) } />
 				}
 			);
 
 			description = (
 				<React.Fragment>
-					<p className="sui-description">{message}</p>
+					<p className="sui-description">{ message }</p>
 					<p className="sui-description">
 						{ __( 'If no other caching plugins are active, the advanced-cache.php may have been left by a previously used caching plugin. You can remove the file from the wp-content directory, or remove it via your file manager or FTP.', 'wphb' ) }
 					</p>
@@ -286,12 +288,12 @@ export default class Wizard extends React.Component {
 		];
 
 		if ( this.props.step === 4 && this.props.settings.isFastCGISupported ) {
-			sideTabs.unshift({
+			sideTabs.unshift( {
 				title: __( 'Static Server Cache', 'wphb' ),
 				checked: this.props.settings.isFastCGISupported && this.props.settings.fastCGI,
 				id: 'ssc',
 				onClick: () => this.props.toggleModule( 'enable', 'fastCGI' )
-			});
+			} );
 		}
 
 		return <Tabs sideTabs="true" menu={ sideTabs } />;
@@ -303,124 +305,129 @@ export default class Wizard extends React.Component {
 	 * @return {JSX.Element} Tab content.
 	 */
 	assetOptimizationSettings() {
+		const cdnRow = () => {
+			return (
+				<SettingsRow
+					classes="sui-flushed"
+					content={
+						<Toggle
+							id="aoCdn"
+							onChange={ this.props.updateSettings }
+							text={ this.props.isMember ? __( 'WPMU DEV CDN', 'wphb' ) : createInterpolateElement(
+								__( 'WPMU DEV CDN <span>PRO</span>', 'wphb' ),
+								{
+									span: <span className="sui-tag sui-tag-pro" />
+								}
+							) }
+							checked={ this.props.settings.aoCdn }
+							disabled={ ! this.props.isMember }
+							description={ __( 'WPMU DEV CDN will serve your CSS, JS and other compatible files from our external CDN, effectively taking the load off your server so that pages load faster for your visitors.', 'wphb' ) }
+							layout="right" />
+					} />
+			);
+		};
+
 		return (
 			<React.Fragment>
 				{ this.props.settings.aoEnable &&
 					<div className={ classNames( 'sui-border-frame', { 'sui-hidden': ( this.props.isNetworkAdmin && ! this.props.isMember ) } ) }>
 						{ ! this.props.isNetworkAdmin &&
 							<>
-								<SettingsRow
-									classes="sui-flushed"
-									content={
-										<Toggle
-											id="aoCompress"
-											onChange={ this.props.updateSettings }
-											text={ __( 'Compress', 'wphb' ) }
-											checked={ this.props.settings.aoCompress }
-											description={ __( 'Compresses your files for faster delivery while improving site speed by decluttering CSS and JavaScript.', 'wphb' ) } />
-									} />
-								<SettingsRow
-									classes="sui-flushed"
-									content={
-										<Toggle
-											id="aoCombine"
-											onChange={ this.props.updateSettings }
-											text={ __( 'Combine', 'wphb' ) }
-											checked={ this.props.settings.aoCombine }
-											description={ __( 'Combines multiple JS and CSS files into fewer files, reducing the number of requests made when a page is loaded.', 'wphb' ) } />
-									} />
+								<div className="wrap-setting-rows">
+									<SettingsRow
+										classes="sui-flushed"
+										content={
+											<Toggle
+												id="aoCompress"
+												onChange={ this.props.updateSettings }
+												text={ __( 'Compress files & clean code', 'wphb' ) }
+												checked={ this.props.settings.aoCompress }
+												description={ __( 'Compresses your files for faster delivery while improving site speed by decluttering CSS and JavaScript.', 'wphb' ) }
+												layout="right" />
+										} />
+									<SettingsRow
+										classes="sui-flushed"
+										content={
+											<Toggle
+												id="aoCombine"
+												onChange={ this.props.updateSettings }
+												text={ __( 'Combine JavaScript & CSS', 'wphb' ) }
+												checked={ this.props.settings.aoCombine }
+												description={ __( 'Combines multiple JS and CSS files into fewer files, reducing the number of requests made when a page is loaded.', 'wphb' ) }
+												layout="right" />
+										} />
+								</div>
+								<div className="wrap-setting-rows">
+									<SettingsRow
+										classes="sui-flushed"
+										content={
+											<Toggle
+												id="fontSwap"
+												onChange={ this.props.updateSettings }
+												text={ __( 'Swap web fonts', 'wphb' ) }
+												checked={ this.props.settings.fontSwap }
+												description={ __( 'Apply a similar fallback font that visitors will temporarily see until the primary font loads, to improve text visibility.', 'wphb' ) }
+												layout="right" />
+										} />
+									<SettingsRow
+										classes="sui-flushed"
+										content={
+											<Toggle
+												id="delayJS"
+												onChange={ this.props.updateSettings }
+												text={ this.props.isMember ? __( 'Delay JavaScript execution', 'wphb' ) : createInterpolateElement(
+													__( 'Delay JavaScript execution <span>PRO</span>', 'wphb' ),
+													{
+														span: <span className="sui-tag sui-tag-pro" />
+													}
+												) }
+												checked={ this.props.settings.delayJS }
+												disabled={ ! this.props.isMember }
+												description={ __( 'Improve performance by delaying the loading of non-critical JavaScript files above the fold until user interaction (e.g. scroll, click).', 'wphb' ) }
+												layout="right" />
+										} />
+								</div>
+								<div className="wrap-setting-rows">
+									<SettingsRow
+										classes="sui-flushed"
+										content={
+											<Toggle
+												id="criticalCSS"
+												onChange={ this.props.updateSettings }
+												text={ this.props.isMember ? __( 'Generate critical CSS', 'wphb' ) : createInterpolateElement(
+													__( 'Generate critical CSS <span>PRO</span>', 'wphb' ),
+													{
+														span: <span className="sui-tag sui-tag-pro" />
+													}
+												) }
+												checked={ this.props.settings.criticalCSS }
+												disabled={ ! this.props.isMember }
+												description={ __( 'Drastically reduce your page load time and eliminate render-blocking resources by automatically generating the critical CSS required to load your above-the-fold content.', 'wphb' ) }
+												layout="right" />
+										} />
+									{ cdnRow() }
+								</div>
 							</> }
-						<SettingsRow
-							classes="sui-flushed"
-							content={
-								<Toggle
-									id="aoCdn"
-									onChange={ this.props.updateSettings }
-									text={ this.props.isMember ? __( 'WPMU DEV CDN', 'wphb' ) : createInterpolateElement(
-										__( 'WPMU DEV CDN <span>PRO</span>', 'wphb' ),
-										{
-											span: <span className="sui-tag sui-tag-pro" />
-										}
-									) }
-									checked={ this.props.settings.aoCdn }
-									disabled={ ! this.props.isMember }
-									description={ __( 'WPMU DEV CDN will serve your CSS, JS and other compatible files from our external CDN, effectively taking the load off your server so that pages load faster for your visitors.', 'wphb' ) } />
-							} />
-					</div> }
-				{ this.eoSettings() }
-			</React.Fragment>
-		);
-	}
-
-	/**
-	 * Extra optimization settings tab.
-	 *
-	 * @return {JSX.Element} Tab content.
-	 */
-	eoSettings() {
-		if ( ! this.props.settings.aoEnable || this.props.isNetworkAdmin ) {
-			return null;
-		}
-
-		return (
-			<>
-			<p className='sui-description' style={{ textAlign: 'left', marginTop: '15px', fontWeight: 700 }}>
-				{ __( 'Extra Optimization', 'wphb' ) }
-			</p>
-			<div className='sui-border-frame' style={{ marginTop: '15px' }}>
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="delayJS"
-							onChange={ this.props.updateSettings }
-							text={ this.props.isMember ? __( 'Delay JavaScript Execution', 'wphb' ) : createInterpolateElement(
-								__( 'Delay JavaScript Execution <span>PRO</span>', 'wphb' ),
-								{
-									span: <span className="sui-tag sui-tag-pro" />
-								}
-							) }
-							checked={ this.props.settings.delayJS }
-							disabled={ ! this.props.isMember }
-							description={ __( 'Improve performance by delaying the loading of non-critical JavaScript files above the fold until user interaction (e.g. scroll, click).', 'wphb' ) } />
-					} />
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="criticalCSS"
-							onChange={ this.props.updateSettings }
-							text={ this.props.isMember ? __( 'Generate Critical CSS', 'wphb' ) : createInterpolateElement(
-								__( 'Generate Critical CSS <span>PRO</span>', 'wphb' ),
-								{
-									span: <span className="sui-tag sui-tag-pro" />
-								}
-							) }
-							checked={ this.props.settings.criticalCSS }
-							disabled={ ! this.props.isMember }
-							description={ __( 'Drastically reduce your page load time and eliminate render-blocking resources by automatically generating the critical CSS required to load your above-the-fold content.', 'wphb' ) } />
-					} />
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="fontSwap"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Swap Web Fonts', 'wphb' ) }
-							checked={ this.props.settings.fontSwap }
-							description={ __( 'Apply a similar fallback font that visitors will temporarily see until the primary font loads, to improve text visibility.', 'wphb' ) } />
-					} />
-			</div>
-			<p className='sui-description' style={{ textAlign: 'left', marginTop: '10px' }}>
-				{
-					createInterpolateElement(
-						__( "<strong>Note:</strong> You can tweak these settings further under Assets Optimization > Extra Optimization.", 'wphb' ),
-						{
-							strong: <strong />
+						{ this.props.isNetworkAdmin &&
+						<>
+							<div className="wrap-setting-rows">
+								{ cdnRow() }
+							</div>
+						</>
 						}
-					) 
-				}
-			</p></>
+						{ ! this.props.isNetworkAdmin &&
+						<p className="sui-description" style={ { textAlign: 'left', marginTop: '10px' } }>
+							{
+								createInterpolateElement(
+									__( '<strong>Note:</strong> You can tweak these settings further under Assets Optimization > Extra Optimization.', 'wphb' ),
+									{
+										strong: <strong />
+									}
+								)
+							}
+						</p> }
+					</div> }
+			</React.Fragment>
 		);
 	}
 
@@ -437,6 +444,72 @@ export default class Wizard extends React.Component {
 		if ( this.props.settings.isFastCGISupported && this.props.settings.fastCGI ) {
 			return (
 				<div className="sui-border-frame">
+					<div className="wrap-setting-rows">
+						<SettingsRow
+							classes="sui-flushed"
+							content={
+								<Toggle
+									id="clearOnComment"
+									onChange={ this.props.updateSettings }
+									text={ __( 'Clear cache after new comment', 'wphb' ) }
+									checked={ this.props.settings.clearOnComment }
+									description={ __( 'The page cache will be cleared after each comment made on a post.', 'wphb' ) }
+									layout="right" />
+							} />
+						<SettingsRow
+							classes="sui-flushed"
+							content={
+								<Toggle
+									id="clearCacheButton"
+									onChange={ this.props.updateSettings }
+									text={ __( 'Show clear cache button in admin bar', 'wphb' ) }
+									checked={ this.props.settings.clearCacheButton }
+									description={ __( 'Add a shortcut to Hummingbird settings in the top WordPress Admin bar. Clicking the Clear Cache button in the WordPress Admin Bar will clear all active cache types.', 'wphb' ) }
+									layout="right" />
+							} />
+					</div>
+				</div>
+			);
+		}
+
+		return (
+			<div className="sui-border-frame">
+				<div className="wrap-setting-rows">
+					<SettingsRow
+						classes="sui-flushed"
+						content={
+							<Toggle
+								id="clearOnComment"
+								onChange={ this.props.updateSettings }
+								text={ __( 'Clear cache after new comment', 'wphb' ) }
+								checked={ this.props.settings.clearOnComment }
+								description={ __( 'The page cache will be cleared after each comment made on a post.', 'wphb' ) }
+								layout="right" />
+						} />
+					<SettingsRow
+						classes="sui-flushed"
+						content={
+							<Toggle
+								id="cacheOnMobile"
+								onChange={ this.props.updateSettings }
+								text={ __( 'Cache on mobile devices', 'wphb' ) }
+								checked={ this.props.settings.cacheOnMobile }
+								description={ __( "By default, page caching is enabled for mobile devices. If you don't want to use mobile caching, simply disable this setting.", 'wphb' ) }
+								layout="right" />
+						} />
+				</div>
+				<div className="wrap-setting-rows">
+					<SettingsRow
+						classes="sui-flushed"
+						content={
+							<Toggle
+								id="cacheHeader"
+								onChange={ this.props.updateSettings }
+								text={ __( 'Cache HTTP headers', 'wphb' ) }
+								checked={ this.props.settings.cacheHeader }
+								description={ __( "By default, Hummingbird won't cache HTTP headers. Enable this feature to include them.", 'wphb' ) }
+								layout="right" />
+						} />
 					<SettingsRow
 						classes="sui-flushed"
 						content={
@@ -445,64 +518,10 @@ export default class Wizard extends React.Component {
 								onChange={ this.props.updateSettings }
 								text={ __( 'Show clear cache button in admin bar', 'wphb' ) }
 								checked={ this.props.settings.clearCacheButton }
-								description={ __( 'Add a shortcut to Hummingbird settings in the top WordPress Admin bar. Clicking the Clear Cache button in the WordPress Admin Bar will clear all active cache types.', 'wphb' ) } />
-						} />
-					<SettingsRow
-						classes="sui-flushed"
-						content={
-							<Toggle
-								id="clearOnComment"
-								onChange={ this.props.updateSettings }
-								text={ __( 'Clear cache on comment post', 'wphb' ) }
-								checked={ this.props.settings.clearOnComment }
-								description={ __( 'The page cache will be cleared after each comment made on a post.', 'wphb' ) } />
+								description={ __( 'Add a shortcut to Hummingbird settings in the top WordPress Admin bar. Clicking the Clear Cache button in the WordPress Admin Bar will clear all active cache types.', 'wphb' ) }
+								layout="right" />
 						} />
 				</div>
-			);
-		}
-
-		return (
-			<div className="sui-border-frame">
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="cacheOnMobile"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Cache on mobile devices', 'wphb' ) }
-							checked={ this.props.settings.cacheOnMobile }
-							description={ __( "By default, page caching is enabled for mobile devices. If you don't want to use mobile caching, simply disable this setting.", 'wphb' ) } />
-					} />
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="clearOnComment"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Clear cache on comment post', 'wphb' ) }
-							checked={ this.props.settings.clearOnComment }
-							description={ __( 'The page cache will be cleared after each comment made on a post.', 'wphb' ) } />
-					} />
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="cacheHeader"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Cache HTTP headers', 'wphb' ) }
-							checked={ this.props.settings.cacheHeader }
-							description={ __( "By default, Hummingbird won't cache HTTP headers. Enable this feature to include them.", 'wphb' ) } />
-					} />
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="clearCacheButton"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Show clear cache button in admin bar', 'wphb' ) }
-							checked={ this.props.settings.clearCacheButton }
-							description={ __( 'Add a shortcut to Hummingbird settings in the top WordPress Admin bar. Clicking the Clear Cache button in the WordPress Admin Bar will clear all active cache types.', 'wphb' ) } />
-					} />
 			</div>
 		);
 	}
@@ -515,39 +534,72 @@ export default class Wizard extends React.Component {
 	advancedSettings() {
 		return (
 			<div className="sui-border-frame">
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="queryStrings"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Remove query strings from my assets', 'wphb' ) }
-							checked={ this.props.settings.queryStrings }
-							description={ __( 'Some of your resource URLs can end with something like “?x=y”, these are the query strings of the URL. Some servers, CDNs or caching systems don’t like query strings and removing them can help to increase speed.', 'wphb' ) } />
-					} />
-				{ this.props.hasWoo &&
+				<div className="wrap-setting-rows">
 					<SettingsRow
 						classes="sui-flushed"
 						content={
 							<Toggle
-								id="cartFragments"
+								id="queryStrings"
 								onChange={ this.props.updateSettings }
-								text={ __( 'Disable cart fragments', 'wphb' ) }
-								checked={ this.props.settings.cartFragments }
-								description={ __( 'WooCommerce uses ajax calls to update cart totals without refreshing the page. These ajax calls run on every page and can drastically increase page load times. We recommend disabling cart fragments on all non-WooCommerce pages.', 'wphb' ) } />
-						} /> }
-				<SettingsRow
-					classes="sui-flushed"
-					content={
-						<Toggle
-							id="removeEmoji"
-							onChange={ this.props.updateSettings }
-							text={ __( 'Remove the default Emoji JS & CSS files', 'wphb' ) }
-							checked={ this.props.settings.removeEmoji }
-							description={ __( 'WordPress adds Javascript and CSS files to convert common symbols like “:)” to visual emojis. If you don’t need emojis this will remove two unnecessary assets.', 'wphb' ) } />
-					} />
+								text={ __( 'Remove query strings from my assets', 'wphb' ) }
+								checked={ this.props.settings.queryStrings }
+								description={ __( 'Some of your resource URLs can end with something like “?x=y”, these are the query strings of the URL. Some servers, CDNs or caching systems don’t like query strings and removing them can help to increase speed.', 'wphb' ) }
+								layout="right" />
+						} />
+					<SettingsRow
+						classes="sui-flushed"
+						content={
+							<Toggle
+								id="removeEmoji"
+								onChange={ this.props.updateSettings }
+								text={ __( 'Remove default Emoji JS & CSS files', 'wphb' ) }
+								checked={ this.props.settings.removeEmoji }
+								description={ __( 'WordPress adds Javascript and CSS files to convert common symbols like “:)” to visual emojis. If you don’t need emojis this will remove two unnecessary assets.', 'wphb' ) }
+								layout="right" />
+						} />
+				</div>
+				{ this.props.hasWoo &&
+				<>
+					<div className="wrap-setting-rows">
+						<SettingsRow
+							classes="sui-flushed"
+							content={
+								<Toggle
+									id="cartFragments"
+									onChange={ this.props.updateSettings }
+									text={ __( 'Disable cart fragments', 'wphb' ) }
+									checked={ this.props.settings.cartFragments }
+									description={ __( 'WooCommerce uses ajax calls to update cart totals without refreshing the page. These ajax calls run on every page and can drastically increase page load times. We recommend disabling cart fragments on all non-WooCommerce pages.', 'wphb' ) }
+									layout="right" />
+							} />
+					</div>
+				</> }
 			</div>
 		);
+	}
+
+	/**
+	 * Get optimization type label based on settings.
+	 *
+	 * @return {string} Optimization type label.
+	 */
+	getOptimizationLabel() {
+		const { aoCombine, aoCompress } = this.props.settings;
+		const defaultLabel = __( 'Combine & Compress Optimization', 'wphb' );
+
+		if ( aoCombine && aoCompress ) {
+			return defaultLabel;
+		}
+
+		if ( aoCombine ) {
+			return __( 'Combine Optimization', 'wphb' );
+		}
+
+		if ( aoCompress ) {
+			return __( 'Compress Optimization', 'wphb' );
+		}
+
+		return defaultLabel;
 	}
 
 	/**
@@ -571,15 +623,19 @@ export default class Wizard extends React.Component {
 						<tr>
 							<td className="sui-table-item-title">{ __( 'Asset Optimization', 'wphb' ) }</td>
 							<td>
-								{ ! this.props.isNetworkAdmin && this.props.settings.aoCombine && __( 'Speedy Optimization', 'wphb' ) }
-								{ ! this.props.isNetworkAdmin && ! this.props.settings.aoCombine && __( 'Basic Optimization', 'wphb' ) }
+								{ ! this.props.isNetworkAdmin && this.getOptimizationLabel() }
 								{ this.props.isNetworkAdmin && __( 'Active on subsites', 'wphb' ) }
 								{ this.props.isMember && <br /> }
 								{ this.props.isMember &&
 									<React.Fragment>{ __( 'CDN', 'wphb' ) }</React.Fragment> }
 							</td>
 							<td>
-								<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } />
+								{ ! this.props.isNetworkAdmin && ( this.props.settings.aoCombine || this.props.settings.aoCompress ) &&
+									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
+								{ ! this.props.isNetworkAdmin && ! this.props.settings.aoCombine && ! this.props.settings.aoCompress &&
+									<Tag type="grey sui-tag-sm" value={ __( 'Disabled', 'wphb' ) } /> }
+								{ this.props.isNetworkAdmin &&
+									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
 								{ this.props.settings.aoCdn && this.props.isMember &&
 									<Tag type="blue sui-tag-sm" value={ __( 'Enabled', 'wphb' ) } /> }
 								{ ! this.props.settings.aoCdn && this.props.isMember &&
@@ -705,7 +761,7 @@ export default class Wizard extends React.Component {
 		let description;
 
 		if ( 1 === this.props.step ) {
-			description = __( 'Get started by activating all our features with recommended default settings, then fine-tune them to suit your specific needs. Alternately you can skip this process if you’d prefer to start customizing.', 'wphb' );
+			description = __( 'Let’s walk through a few quick steps to fine-tune your site’s performance and keep it running lightning-fast.', 'wphb' );
 			if ( this.props.showConflicts ) {
 				description = __( 'Any issue reported here may cause issues while we set up the plugin.', 'wphb' );
 				if ( ! this.props.issues.advCacheFile ) {
@@ -715,7 +771,7 @@ export default class Wizard extends React.Component {
 		} else if ( 2 === this.props.step ) {
 			description = __( "Hummingbird's Asset Optimization engine can combine and minify the files your website outputs when a user visits your website. The fewer requests your visitors have to make to your server, the better.", 'wphb' );
 		} else if ( 3 === this.props.step ) {
-			description = __( "Uptime monitors your server response time and lets you know when your website is down or too slow for your visitors. Monitor your site every minute to make sure it's up and graph your site speed so you can make sure everything is running super smooth.", 'wphb' );
+			description = __( 'Never get caught off guard by downtime again. Hummingbird checks your site every few minutes and alerts you if it goes down or slows, helping you keep things running at top speed.', 'wphb' );
 		} else if ( 4 === this.props.step ) {
 			description = __( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time. We will activate the default and basic settings and you can then fine-tune them to suit your specific needs.', 'wphb' );
 		} else if ( 5 === this.props.step ) {
@@ -736,7 +792,7 @@ export default class Wizard extends React.Component {
 							id="tracking"
 							onChange={ this.props.updateSettings }
 							text={ createInterpolateElement(
-								__( "Help us Optimize your site for better Performance<span>Recommended</span>", 'wphb' ),
+								__( 'Help improve Hummingbird with anonymous usage data<span>Recommended</span>', 'wphb' ),
 								{
 									span: <span className="sui-tag sui-tag-sm" />
 								}
@@ -744,9 +800,9 @@ export default class Wizard extends React.Component {
 							checked={ this.props.settings.tracking }
 							description={
 								createInterpolateElement(
-									__( "Help us improve Hummingbird, minimize errors, and enhance the user experience by sharing anonymous, and non-sensitive usage data. You can change this option in the settings anytime. See <a>more</a> info about the data we collect.", 'wphb' ),
+									__( 'Join 18,000+ users helping us improve with anonymous data. No personal info collected. <a>Learn more</a>.', 'wphb' ),
 									{
-										a: <a href={getLink('tracking')} target="_blank"/>
+										a: <a href={ getLink( 'tracking' ) } target="_blank" rel="noreferrer" />
 									}
 								) } />
 					</div> }
@@ -774,12 +830,6 @@ export default class Wizard extends React.Component {
 	getFooter() {
 		return (
 			<React.Fragment>
-				{ 1 === this.props.step && ! this.props.showConflicts &&
-					<span className="sui-description">
-						<Button
-							onClick={ () => this.props.finish( 'configs' ) }
-							text={ __( 'Skip wizard and apply a config', 'wphb' ) } />
-					</span> }
 				{ 1 !== this.props.step &&
 					<Button
 						onClick={ this.props.prevStep }

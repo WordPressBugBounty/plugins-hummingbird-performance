@@ -9,6 +9,7 @@ namespace Hummingbird\Core\Api\Service;
 
 use Hummingbird\Core\Api\Exception;
 use Hummingbird\Core\Api\Request\WPMUDEV;
+use Hummingbird\Core\SafeMode;
 use WP_Error;
 
 if ( ! defined( 'ABSPATH' ) ) {

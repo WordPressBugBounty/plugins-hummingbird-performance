@@ -69,7 +69,7 @@
     width: 100%;
 }
 
-.wpmud .wphb-notice {
+.wphb-notice {
     &.notice-info {
         padding-right: 38px;
         position: relative;
@@ -97,9 +97,97 @@
         margin: 10px 0;
     }
 
-    p {
-        color: #333;
+    &.notice-free-rated {
+        border-left-color: #2271B1;
+
+        a {
+            display: flex;
+            width: 117px;
+            height: 24px;
+            opacity: 1;
+            border-width: 1px;
+            padding-right: 10px;
+            padding-left: 10px;
+            border-radius: 2px;
+            font-weight: 400;
+            font-size: 11px;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .wphb-rate-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+
+            a {
+                color: #007CBA;
+
+                &.sui-button-blue {
+                    background-color: #007CBA;
+                    color: white;
+                }
+
+                &.sui-button-ghost {
+                    border: 1px solid #007CBA;
+                    color: #007CBA;
+                    background: transparent;
+                }
+
+            }
+        }
+
+        p {
+            color: #333;
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+            letter-spacing: -0.25px;
+            padding: 0;
+        }
     }
+
+    &.notice-perf-rate {
+        border-color: #DDDDDD;
+        border-left: 3px solid #1E8CBE;
+
+        .sui-notice-message {
+            display: flex;
+            gap: 20px;
+            padding-left: 8px;
+
+            .wphb-rate-image {
+                opacity: 1;
+                padding: 10px;
+                border-radius: 28px;
+                box-shadow: 0px 0.82px 12.35px 0px #00000024;
+                height: fit-content;
+                margin-top: 12px;
+
+                .sui-image {
+                    max-width: 64px;
+                    margin: 0;
+                    vertical-align: middle;
+                }
+            }
+
+            h3 {
+                font-family: Roboto;
+                font-weight: 700;
+                font-size: 15px;
+                line-height: 100%;
+                margin-top: 12px;
+                margin-bottom: 5px;
+
+                span {
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+
 }
 
 .wpmud .wphb-notice:not(.notice) p,
@@ -153,6 +241,28 @@
                 max-width: 65px;
                 margin-right: 47px;
                 margin-left: 37px;
+            }
+        }
+    }
+
+    #wrap-wphb-configs {
+        .sui-notice-upsell {
+            .sui-notice-content {
+                box-shadow: inset 2px 0 0 0 #0059FF, inset 0 0 0 1px #E6E6E6;
+
+                .sui-notice-icon {
+                    color: #0059FF;
+                }
+
+                .sui-button-purple {
+                    background-color: #0059FF;
+                    border-color: #0059FF;
+
+                    &:hover {
+                        background-color: darken(#0059FF, 10%);
+                        border-color: darken(#0059FF, 10%);
+                    }
+                }
             }
         }
     }

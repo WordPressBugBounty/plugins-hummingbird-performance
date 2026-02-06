@@ -344,6 +344,10 @@ class Rest {
 		);
 
 		if ( $ao_queue_count ) {
+			// we need error controller atleast if not all module actions.
+			if ( is_null( $minify_module->errors_controller ) ) {
+				$minify_module->errors_controller = new Minify\Errors_Controller();
+			}
 			$minify_module->process_queue();
 		}
 

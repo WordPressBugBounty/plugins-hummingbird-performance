@@ -76,7 +76,7 @@ function Fetcher() {
 			 * Save fastCGI settings method.
 			 *
 			 * @since 3.9.0
-			 * @param {string} data   Serialized form data.
+			 * @param {string} data Serialized form data.
 			 */
 			saveFastCGISettings: ( data ) => {
 				return request(
@@ -177,7 +177,7 @@ function Fetcher() {
 						return response;
 					} );
 			},
-			
+
 			/**
 			 * Switch cache method.
 			 *
@@ -359,11 +359,12 @@ function Fetcher() {
 					return response;
 				} );
 			},
-			
+
 			/**
 			 * Create CSS files from gutenberg.
 			 *
 			 * @since 3.6.0
+			 * @param          postId
 			 * @param {string} postID
 			 */
 			createCSSForPost: ( postId ) => {
@@ -373,11 +374,12 @@ function Fetcher() {
 					'POST'
 				);
 			},
-			
+
 			/**
 			 * Re Create CSS files from gutenberg.
 			 *
 			 * @since 3.6.0
+			 * @param          postId
 			 * @param {string} postID
 			 */
 			reCreateCSSForPost: ( postId ) => {
@@ -387,11 +389,12 @@ function Fetcher() {
 					'POST'
 				);
 			},
-			
+
 			/**
 			 * Revert CSS files from gutenberg.
 			 *
 			 * @since 3.6.0
+			 * @param          postId
 			 * @param {string} postID
 			 */
 			revertCSSForPost: ( postId ) => {
@@ -406,6 +409,7 @@ function Fetcher() {
 			 * Get critical css status for single post.
 			 *
 			 * @since 3.6.0
+			 * @param          postId
 			 * @param {string} postID
 			 */
 			 getCriticalStatusForSinglePost: ( postId ) => {
@@ -575,11 +579,12 @@ function Fetcher() {
 			 * Dismiss notice.
 			 *
 			 * @param {string} id
+			 * @param {string} SubAction
 			 */
-			dismissNotice: ( id ) => {
+			dismissNotice: ( id, SubAction = '' ) => {
 				return request(
 					actionPrefix + 'notice_dismiss',
-					{ id },
+					{ id, SubAction },
 					'POST'
 				);
 			},
@@ -613,6 +618,17 @@ function Fetcher() {
 			},
 
 			/**
+			 * Do a POST request to an AJAX endpoint with parameters.
+			 *
+			 * @param {string} endpoint AJAX endpoint.
+			 */
+			callWithParams: ( endpoint, data ) => {
+				return request( endpoint, { data }, 'POST' ).then( ( response ) => {
+					return response;
+				} );
+			},
+
+			/**
 			 * Clear selected module cache.
 			 *
 			 * @since 2.7.1
@@ -640,7 +656,7 @@ function Fetcher() {
 			 *
 			 * @since 3.9.4
 			 * @param {string} event
-			 * @param {object} properties
+			 * @param {Object} properties
 			 */
 			trackMixpanelEvent: ( event, properties ) => {
 				const action = actionPrefix + 'analytics_track_event';

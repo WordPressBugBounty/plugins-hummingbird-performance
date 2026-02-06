@@ -122,6 +122,7 @@ export default class Configurations extends React.Component {
 
 		return (
 			<Select
+				key={ JSON.stringify( exclusions ) }
 				selectId="wphb-auto-exclude"
 				classes="sui-select-lg"
 				selected={ exclusions }

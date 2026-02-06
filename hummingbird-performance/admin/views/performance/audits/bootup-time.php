@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 ?>
-<?php if ( isset( $audit->score ) && 1 === $audit->score ) : ?>
+<?php if ( ! isset( $audit->score ) || 1 === $audit->score ) : ?>
 	<?php
 	$message = esc_html__( 'Nice! Your page has a very low JavaScript bootup time.', 'wphb' );
 	if ( isset( $audit->displayValue ) ) {

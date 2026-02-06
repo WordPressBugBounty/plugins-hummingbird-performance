@@ -183,7 +183,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 			<li>
 				<span class="sui-list-label"><?php esc_html_e( 'Scheduled Reporting', 'wphb' ); ?></span>
 				<span class="sui-list-detail">
-					<a class="sui-button sui-button-blue" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_performance-test_summary_notifications' ) ); ?>">
+					<a class="sui-button wphb-hub-connector-upsell-button" href="<?php echo esc_url( Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_performance-test_summary_notifications' ) ); ?>">
 						<?php esc_html_e( 'CONNECT SITE', 'wphb' ); ?>
 					</a>
 				</span>

@@ -62,8 +62,11 @@ if ( $force_all_audit_fail ) {
 		</div>
 		<div>
 			<?php if ( ! in_array( $rule, $informative_audits, true ) ) : ?>
-				<?php $gray_class = ! isset( $rule_result->score ) || ( isset( $rule_result->score ) && 0 === $rule_result->score ) ? 'wphb-gray-color' : ''; ?>
-				<div class="sui-circle-score sui-grade-<?php echo esc_attr( $impact_score_class ) . ' ' . esc_attr( $gray_class ); ?>" data-score="<?php echo isset( $rule_result->score ) ? absint( $rule_result->score * 100 ) : 0; ?>"></div>
+				<?php
+					$score      = ! isset( $rule_result->score ) ? 100 : absint( $rule_result->score * 100 );
+					$gray_class = 0 === $score ? 'wphb-gray-color' : '';
+				?>
+				<div class="sui-circle-score sui-grade-<?php echo esc_attr( $impact_score_class ) . ' ' . esc_attr( $gray_class ); ?>" data-score="<?php echo esc_attr( $score ); ?>"></div>
 			<?php endif; ?>
 		</div>
 		<div>

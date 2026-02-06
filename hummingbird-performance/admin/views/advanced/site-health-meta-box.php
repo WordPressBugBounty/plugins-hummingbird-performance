@@ -5,7 +5,7 @@
  * @since 2.7.0
  * @package Hummingbird
  *
- * @var array  $minify_groups   Array of wphb_minify_group posts.
+ * @var array  $minify_groups_ids   Array of wphb_minify_group posts ids.
  * @var int    $orphaned_metas  Orphaned rows in wp_postmeta.
  * @var bool   $preloading      Is preloading active.
  * @var int    $queue_size      Number of items in preloader queue.
@@ -112,7 +112,7 @@ $this->admin_notices->show_inline( $text, 'warning' );
 					</p>
 				</div>
 				<div class="sui-col-sm-3">
-					<button role="button" class="sui-button sui-button-ghost sui-button-red" <?php disabled( ! count( $minify_groups ) ); ?> id="btn-minify-purge" aria-live="polite">
+					<button role="button" class="sui-button sui-button-ghost sui-button-red" <?php disabled( ! count( $minify_groups_ids ) ); ?> id="btn-minify-purge" aria-live="polite">
 						<span class="sui-button-text-default">
 							<span class="sui-icon-trash sui-sm" aria-hidden="true"></span>
 							<?php esc_html_e( 'Delete', 'wphb' ); ?>
@@ -129,7 +129,7 @@ $this->admin_notices->show_inline( $text, 'warning' );
 				<tr>
 					<td><?php esc_html_e( 'Field Name', 'wphb' ); ?> &mdash; <strong>wphb_minify_group</strong></td>
 					<td>
-						<?php esc_html_e( 'Rows', 'wphb' ); ?> &mdash; <span id="count-minify"><?php echo count( $minify_groups ); ?></span>
+						<?php esc_html_e( 'Rows', 'wphb' ); ?> &mdash; <span id="count-minify"><?php echo count( $minify_groups_ids ); ?></span>
 					</td>
 				</tr>
 			</table>

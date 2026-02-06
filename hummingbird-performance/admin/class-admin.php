@@ -76,6 +76,7 @@ class Admin {
 		add_action( 'admin_head', array( $this, 'wphb_style_upgrade_pro_upsell' ) );
 
 		add_filter( 'submenu_file', array( $this, 'remove_submenu_item' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		if ( Hub_Connector::is_connection_flow() ) {
 			return;
@@ -112,7 +113,6 @@ class Admin {
 
 		// Deactivation survey.
 		add_action( 'admin_footer-plugins.php', array( $this, 'load_deactivation_survey_modal' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		// Triggered when Hummingbird Admin is loaded.
 		do_action( 'wphb_admin_loaded' );
@@ -129,7 +129,7 @@ class Admin {
 		// Upgrade link.
 		if ( ! Utils::is_member() ) {
 			if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG ) {
-				$actions['wphb-plugins-upgrade'] = '<a href="' . Utils::get_link( 'plugin', 'hummingbird_pluginlist_upgrade' ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hummingbird Pro', 'wphb' ) ) . '" target="_blank" style="color: #8D00B1;" onclick="window.wphbMixPanel.trackHBUpsell( \'pro_general\', \'plugins_list\', \'cta_clicked\', this.href, \'hb_pro_upsell\' );">' . esc_html__( 'SALE - Limited Offer', 'wphb' ) . '</a>';
+				$actions['wphb-plugins-upgrade'] = '<a href="' . Utils::get_link( 'plugin', 'hummingbird_pluginlist_upgrade' ) . '" aria-label="' . esc_attr( __( 'Upgrade to Hummingbird Pro', 'wphb' ) ) . '" target="_blank" style="color: #8D00B1;" onclick="window.wphbMixPanel.trackHBUpsell( \'pro_general\', \'plugins_list\', \'cta_clicked\', this.href, \'hb_pro_upsell\' );">' . esc_html__( 'Get Hummingbird Pro', 'wphb' ) . '</a>';
 			} elseif ( ! Utils::is_hosted_site_connected_to_free_hub() ) {
 				$actions['wphb-plugins-upgrade'] = '<a href="' . Utils::get_link( 'plugin', 'hummingbird_pluginlist_renew' ) . '" aria-label="' . esc_attr( __( 'Renew Membership', 'wphb' ) ) . '" target="_blank" style="color: #8D00B1;" onclick="window.wphbMixPanel.trackHBUpsell( \'pro_general\', \'plugins_list\', \'cta_clicked\', this.href, \'hb_pro_upsell\' );">' . esc_html__( 'Renew Membership', 'wphb' ) . '</a>';
 			}
@@ -167,7 +167,7 @@ class Admin {
 		}
 
 		if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG ) {
-			$links[] = '<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/#new-post" target="_blank" title="' . esc_attr__( 'Rate Hummingbird', 'wphb' ) . '">' . esc_html__( 'Rate Hummingbird', 'wphb' ) . '</a>';
+			$links[] = '<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/#new-post" target="_blank" title="' . esc_attr__( 'Rate Hummingbird', 'wphb' ) . '" onclick="if(window.wphbMixPanel){window.wphbMixPanel.track(\'Rating Notice\', {Action:\'rate\',\'Notice Type\':\'wordpress_admin\',Location:\'WordPress admin\'});}" >' . esc_html__( 'Rate Hummingbird', 'wphb' ) . '</a>';
 			$links[] = '<a href="https://wordpress.org/support/plugin/hummingbird-performance/" target="_blank" title="' . esc_attr__( 'Support', 'wphb' ) . '">' . esc_html__( 'Support', 'wphb' ) . '</a>';
 		} else {
 			if ( isset( $links[2] ) && false !== strpos( $links[2], 'project/wp-hummingbird' ) ) {
@@ -223,7 +223,7 @@ class Admin {
 		$minify = Settings::get_setting( 'enabled', 'minify' );
 
 		if ( ! is_multisite() || ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify ) ) ) {
-			$this->pages['wphb-minification'] = new Pages\Minification( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ) . $this->get_status_tag_html(), 'wphb' );
+			$this->pages['wphb-minification'] = new Pages\Minification( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ), 'wphb' );
 		} elseif ( isset( $current_page ) && 'wphb-minification' === $current_page ) {
 			// Asset optimization is off, and is a network, let's redirect to network admin.
 			$url = add_query_arg( 'minify-instructions', 'true', network_admin_url( 'admin.php?page=wphb#wphb-box-dashboard-minification-network-module' ) );
@@ -243,12 +243,12 @@ class Admin {
 			$this->pages['wphb-settings'] = new Pages\Settings( 'wphb-settings', __( 'Settings', 'wphb' ), __( 'Settings', 'wphb' ), 'wphb' );
 		}
 
-		if ( ! Utils::is_member() && ! is_multisite() ) {
+		if ( ! Utils::is_member() ) {
 			$this->pages['wphb-upgrade'] = new Pages\Upgrade( 'wphb-upgrade', __( 'Hummingbird Pro', 'wphb' ), __( 'Hummingbird Pro', 'wphb' ), 'wphb' );
 		}
 
 		if ( $this->wphb_should_add_service_submenu() && ! is_multisite() ) {
-			$this->pages['wphb-services'] = new Pages\Services( 'wphb-services', __( 'Expert Services', 'wphb' ), __( 'Expert Services', 'wphb' ) . $this->get_new_tag_html(), 'wphb' );
+			$this->pages['wphb-services'] = new Pages\Services( 'wphb-services', __( 'Expert Services', 'wphb' ), __( 'Expert Services', 'wphb' ), 'wphb' );
 		}
 
 		$this->pages['wphb-setup'] = new Pages\React\Setup( 'wphb-setup', __( 'Setup Wizard', 'wphb' ), null, 'wphb' );
@@ -303,7 +303,7 @@ class Admin {
 		$this->pages['wphb-dashboard']     = new Pages\Dashboard( 'wphb', __( 'Dashboard', 'wphb' ), __( 'Dashboard', 'wphb' ), 'wphb' );
 		$this->pages['wphb-performance']   = new Pages\Performance( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb' );
 		$this->pages['wphb-caching']       = new Pages\Caching( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
-		$this->pages['wphb-minification']  = new Pages\Minification( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ) . $this->get_status_tag_html(), 'wphb' );
+		$this->pages['wphb-minification']  = new Pages\Minification( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ), 'wphb' );
 		$this->pages['wphb-advanced']      = new Pages\Advanced( 'wphb-advanced', __( 'Advanced Tools', 'wphb' ), __( 'Advanced Tools', 'wphb' ), 'wphb' );
 		$this->pages['wphb-uptime']        = new Pages\Uptime( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 		$this->pages['wphb-notifications'] = new Pages\Notifications( 'wphb-notifications', __( 'Notifications', 'wphb' ), __( 'Notifications', 'wphb' ), 'wphb' );
@@ -314,7 +314,7 @@ class Admin {
 		}
 
 		if ( $this->wphb_should_add_service_submenu() ) {
-			$this->pages['wphb-services'] = new Pages\Services( 'wphb-services', __( 'Expert Services', 'wphb' ), __( 'Expert Services', 'wphb' ) . $this->get_new_tag_html(), 'wphb' );
+			$this->pages['wphb-services'] = new Pages\Services( 'wphb-services', __( 'Expert Services', 'wphb' ), __( 'Expert Services', 'wphb' ), 'wphb' );
 		}
 
 		$this->pages['wphb-setup'] = new Pages\React\Setup( 'wphb-setup', __( 'Setup Wizard', 'wphb' ), null, 'wphb' );
@@ -412,6 +412,7 @@ class Admin {
 		Utils::get_module( 'cloudflare' )->toggle_apo( false );
 
 		if ( 'all' === $wphb_clear ) {
+			$tracking_value = Settings::get_setting( 'tracking', 'settings' );
 			Settings::reset_to_defaults();
 			Minify::save_css( '', 'manual-critical' );
 
@@ -453,6 +454,10 @@ class Admin {
 					restore_current_blog();
 					$offset += $limit;
 				}
+			}
+
+			if ( $tracking_value ) {
+				do_action( 'wphb_mixpanel_usage_tracking_value_update', true, false, 'reset' );
 			}
 		}
 
@@ -535,7 +540,7 @@ class Admin {
 	 * @param string $hook  Hook from where the call is made.
 	 */
 	public function enqueue_scripts( $hook ) {
-		if ( 'plugins.php' !== $hook ) {
+		if ( 'plugins.php' !== $hook && ! Hub_Connector::is_connection_flow() ) {
 			return;
 		}
 
@@ -550,5 +555,11 @@ class Admin {
 			WPHB_VERSION,
 			true
 		);
+
+		if ( Hub_Connector::is_connection_flow() ) {
+			if ( ! wp_script_is( 'wphb-admin' ) ) {
+				Utils::enqueue_admin_scripts( WPHB_VERSION );
+			}
+		}
 	}
 }

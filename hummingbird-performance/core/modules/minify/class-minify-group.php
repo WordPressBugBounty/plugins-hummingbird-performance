@@ -176,13 +176,12 @@ class Minify_Group {
 	/**
 	 * Get an instance of Minify_Group based on wphb_minify_group CPT ID
 	 *
-	 * @param int $post_id  Post ID.
+	 * @param int $post_id  wphb_minify_group CPT ID.
 	 *
 	 * @return Minify_Group|false
 	 */
-	public static function get_instance_by_post_id( $post_id ) {
-		$post = get_post( $post_id );
-		if ( ! $post || get_post_type( $post ) !== 'wphb_minify_group' ) {
+	public static function get_instance_by_post_id( int $post_id ) {
+		if ( ! in_array( $post_id, self::get_minify_groups_ids(), true ) ) {
 			return false;
 		}
 
@@ -203,9 +202,12 @@ class Minify_Group {
 	/**
 	 * Return a list of WP_Posts with post_type = wphb_minify_group
 	 *
+	 * @deprecated 3.15.0 Use get_minify_groups_ids() instead.
 	 * @return array
 	 */
 	public static function get_minify_groups() {
+		_deprecated_function( __METHOD__, '3.15.0', 'Hummingbird\Core\Modules\Minify\Minify_Group::get_minify_groups_ids' );
+
 		$posts = wp_cache_get( 'wphb_minify_groups' );
 
 		if ( false === $posts ) {
@@ -223,6 +225,105 @@ class Minify_Group {
 	}
 
 	/**
+	 * Query a list of Ids for post_type = wphb_minify_group
+	 *
+	 * @return array
+	 */
+	public static function get_minify_groups_ids() {
+		$posts_ids = wp_cache_get( 'wphb_minify_groups_ids' );
+
+		if ( false === $posts_ids ) {
+			$posts_ids = get_posts(
+				array(
+					'post_type'      => 'wphb_minify_group',
+					'post_status'    => 'publish',
+					'posts_per_page' => -1,
+					'fields'         => 'ids',
+				)
+			);
+
+			wp_cache_set( 'wphb_minify_groups_ids', $posts_ids );
+		}
+
+		return $posts_ids;
+	}
+
+	/**
+	 * Get the titles of the minify groups with group ID as value
+	 *
+	 * @return array
+	 */
+	public static function get_minify_groups_titles() {
+		global $wpdb;
+
+		$posts_titles = wp_cache_get( 'wphb_minify_groups_titles' );
+		if ( false === $posts_titles ) {
+			$posts_ids    = self::get_minify_groups_ids();
+			$posts_titles = array();
+
+			if ( ! empty( $posts_ids ) ) {
+				$placeholders = implode( ',', array_fill( 0, count( $posts_ids ), '%d' ) );
+
+				$query   = $wpdb->prepare(
+					"SELECT ID, post_title FROM $wpdb->posts WHERE ID IN ($placeholders)", //phpcs:ignore 
+					$posts_ids
+				);
+				$results = $wpdb->get_results( $query, ARRAY_A ); //phpcs:ignore
+
+				foreach ( $results as $row ) {
+					$posts_titles[ $row['post_title'] ] = $row['ID'];
+				}
+			}
+
+			wp_cache_set( 'wphb_minify_groups_titles', $posts_titles );
+		}
+
+		return $posts_titles;
+	}
+
+	/**
+	 * Query all IDs with post_type = wphb_minify_group.
+	 * This is a direct query to avoid any cache or hook conflict.
+	 * Thus return array of IDs(string) instead of int.
+	 *
+	 * @return array List of post IDs.
+	 */
+	public static function query_minify_post_ids() {
+		/*
+		Though the purpose is served by the get_minify_groups_ids() method,
+		but based on PR review, team previously observed homepage deleted so
+		we are using this direct method to avoid cache or hook conflict causing so.
+		*/
+		static $posts_ids = null;
+
+		if ( null === $posts_ids ) {
+			global $wpdb;
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			$posts_ids = $wpdb->get_col(
+				"
+				SELECT ID 
+				FROM {$wpdb->posts} 
+				WHERE post_type = 'wphb_minify_group'
+			"
+			);
+		}
+
+		return $posts_ids;
+	}
+
+
+	/**
+	 * Clear the cache for the minify groups
+	 *
+	 * @return void
+	 */
+	public static function clear_groups_cache() {
+		wp_cache_delete( 'wphb_minify_groups_ids' );
+		wp_cache_delete( 'wphb_minify_groups_titles' );
+	}
+
+	/**
 	 * Get the groups where a handle is
 	 *
 	 * @param string $handle  Handle.
@@ -231,10 +332,10 @@ class Minify_Group {
 	 * @return array list of Minify_Group items
 	 */
 	public static function get_groups_from_handle( $handle, $type ) {
-		$groups = array();
-		$posts  = self::get_minify_groups();
-		foreach ( $posts as $post ) {
-			$group = self::get_instance_by_post_id( $post->ID );
+		$groups    = array();
+		$posts_ids = self::get_minify_groups_ids();
+		foreach ( $posts_ids as $post_id ) {
+			$group = self::get_instance_by_post_id( $post_id );
 			if ( $group && $type === $group->type && in_array( $handle, $group->get_handles(), true ) ) {
 				$groups[] = $group;
 			}
@@ -1298,7 +1399,7 @@ class Minify_Group {
 		);
 
 		if ( $post_id ) {
-			wp_cache_delete( 'wphb_minify_groups' );
+			self::clear_groups_cache();
 
 			$group->file_id = $post_id;
 
@@ -1351,7 +1452,8 @@ class Minify_Group {
 					// Save error and delete post.
 					Utils::get_module( 'minify' )->log( 'Deleting (in insert_group function on upload error) the minify group file id : ' . $post_id );
 					wp_delete_post( $post_id, true );
-					wp_cache_delete( 'wphb_minify_groups' );
+					self::clear_groups_cache();
+
 					return false;
 				}
 
@@ -1424,12 +1526,12 @@ class Minify_Group {
 	 * Delete the minified/combine file for this group
 	 */
 	public function delete_file() {
-		if ( get_post( $this->file_id ) && 'wphb_minify_group' === get_post_type( $this->file_id ) ) {
+		if ( in_array( (string) $this->file_id, self::query_minify_post_ids(), true ) ) {
 			Utils::get_module( 'minify' )->log( 'Deleting (in delete_file function) the minify group file id : ' . $this->file_id );
 			// This will also delete the file. See Hummingbird\Core\Modules\Minify::on_delete_post().
 			wp_delete_post( $this->file_id, true );
 			$this->file_id = 0;
-			wp_cache_delete( 'wphb_minify_groups' );
+			self::clear_groups_cache();
 		}
 	}
 
@@ -1487,18 +1589,18 @@ class Minify_Group {
 			return false;
 		}
 
-		$posts = self::get_minify_groups();
+		$groups_titles = self::get_minify_groups_titles();
 
-		if ( empty( $posts ) ) {
+		if ( empty( $groups_titles ) ) {
 			return false;
 		}
 
-		foreach ( $posts as $post ) {
-			if ( $post->post_title === $this->get_sources_hash() . '-' . $this->type ) {
-				$this->file_id = $post->ID;
-				return true;
-			}
+		$hash_title = $this->get_sources_hash() . '-' . $this->type;
+		if ( isset( $groups_titles[ $hash_title ] ) ) {
+			$this->file_id = $groups_titles[ $hash_title ];
+			return true;
 		}
+
 		return false;
 	}
 

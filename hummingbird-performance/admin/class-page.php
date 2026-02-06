@@ -10,6 +10,7 @@ namespace Hummingbird\Admin;
 use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\SafeMode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -107,7 +108,7 @@ abstract class Page {
 			$this->page_id = add_submenu_page(
 				$parent,
 				$page_title,
-				__( 'SALE - Limited Offer', 'wphb' ),
+				__( 'Get Hummingbird Pro', 'wphb' ),
 				Utils::get_admin_capability(),
 				esc_url( Utils::get_link( 'plugin', 'hummingbird_submenu_upsell' ) ),
 			);
@@ -430,15 +431,29 @@ abstract class Page {
 	 * From WPMU DEV Dashboard
 	 */
 	protected function render_header() {
+		$safe_mode = SafeMode::instance()->get_status();
 		?>
 		<div class="sui-header">
 			<h1 class="sui-header-title"><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<div class="sui-actions-right">
+				<?php if ( ! is_network_admin() ) { ?>
+					<div class="sui-form-field-safe-mode">
+						<label for="safe_mode" class="sui-toggle sui-tooltip sui-tooltip-left sui-tooltip-constrained" data-tooltip="<?php echo esc_attr__( "Test different settings in a safe environment without affecting visitors' experience. The changes done in the safe mode will be only visible to you (as an admin)", 'wphb' ); ?>">
+							<input type="hidden" name="safe_mode" value="0">
+							<input type="checkbox" id="safe_mode" name="safe_mode" aria-labelledby="safe_mode-label" aria-describedby="safe_mode-description"<?php checked( $safe_mode ); ?>>
+							<span class="sui-toggle-slider" aria-hidden="true"></span>
+							<span id="safe_mode-label" class="sui-toggle-label">
+								<?php esc_html_e( 'Safe mode', 'wphb' ); ?>
+							</span>
+						</label>
+						<span class="safe-mode-seperator"></span>
+					</div>
+				<?php } ?>
 				<?php do_action( 'wphb_sui_header_sui_actions_right' ); ?>
 				<?php if ( ! apply_filters( 'wpmudev_branding_hide_doc_link', false ) ) : ?>
 					<a href="<?php echo esc_url( Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
 						<span class="sui-icon-academy" aria-hidden="true"></span>
-						<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+						<?php esc_html_e( 'Documentation', 'wphb' ); ?>
 					</a>
 				<?php endif; ?>
 			</div>
@@ -560,6 +575,9 @@ abstract class Page {
 		if ( is_multisite() && ( is_network_admin() || is_super_admin() ) ) {
 			$this->modal( 'clear-cache-network-wide' );
 		}
+
+		$this->modal( 'safe-mode' );
+		$this->modal( 'safe-mode-confirmation' );
 
 		if ( 'wphb-minification' !== $this->slug ) {
 			return;

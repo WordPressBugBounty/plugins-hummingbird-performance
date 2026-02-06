@@ -60,10 +60,10 @@ import Fetcher from './utils/fetcher';
 		 */
 		trackEoUpsell( eventName, location ) {
 			const mpEventName = 'delayjs' === eventName ? 'js_delay_upsell' : 'critical_css_upsell';
-	
+
 			this.track( mpEventName, {
 				'Modal Action': 'direct_cta',
-				'Location': location,
+				Location: location,
 			} );
 		},
 
@@ -87,7 +87,7 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track Delay JS Upsell event.
 		 *
-		 * @param {object} properties Properties.
+		 * @param {Object} properties Properties.
 		 */
 		 trackDelayJSEvent( properties ) {
 			if ( 'activate' === properties.update_type ) {
@@ -120,7 +120,7 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track Critical Upsell event.
 		 *
-		 * @param {object} properties Properties.
+		 * @param {Object} properties Properties.
 		 */
 		trackCriticalCSSEvent( properties ) {
 			if ( 'activate' === properties.update_type ) {
@@ -137,7 +137,7 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track AO updated event.
 		 *
-		 * @param {object} properties Properties.
+		 * @param {Object} properties Properties.
 		 */
 		 trackAOUpdated( properties ) {
 			this.track( 'ao_updated', properties );
@@ -146,7 +146,7 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track AO updated event.
 		 *
-		 * @param {object} feature Feature.
+		 * @param {Object} feature Feature.
 		 */
 		 trackGutenbergEvent( feature ) {
 			this.track( 'critical_css_gutenberg', { feature } );
@@ -178,11 +178,11 @@ import Fetcher from './utils/fetcher';
 			}
 
 			this.track( 'page_caching_updated', {
-				'update_type': updateType,
-				'Method': method,
-				'Location': location,
-				'modified_settings': settingsModified,
-				'preload_homepage': preloadHomepage,
+				update_type: updateType,
+				Method: method,
+				Location: location,
+				modified_settings: settingsModified,
+				preload_homepage: preloadHomepage,
 			} );
 		},
 
@@ -195,7 +195,7 @@ import Fetcher from './utils/fetcher';
 		 */
 		trackProUpsell( eventName, action, location = 'submenu' ) {
 			this.track( eventName, {
-				'Location': location,
+				Location: location,
 				'User Action': action,
 			} );
 		},
@@ -212,13 +212,14 @@ import Fetcher from './utils/fetcher';
 		/**
 		 * Track an event.
 		 *
-		 * @param {string} event                Event ID.
-		 * @param {Object} data                 Event data.
+		 * @param {string}  event      Event ID.
+		 * @param {Object}  data       Event data.
+		 * @param {boolean} forceTrack Force tracking even if user has opted out.
 		 */
-		track( event, data = {} ) {
+		track( event, data = {}, forceTrack = false ) {
 			if (
 				'undefined' === typeof wphb.mixpanel ||
-				! wphb.mixpanel.enabled
+				( ! wphb.mixpanel.enabled && ! forceTrack )
 			) {
 				return;
 			}

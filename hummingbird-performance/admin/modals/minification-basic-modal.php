@@ -28,26 +28,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<p class="sui-description" id="dialogDescription">
 					<?php
-					if ( 'speedy' === Settings::get_setting( 'type', 'minify' ) ) {
-						printf( /* translators: %1$s - opening <strong> tag, %2$s - closing </strong> tag */
-							esc_html__( 'The automatic %1$sSpeedy%2$s preset rules will be applied which will auto-compress and auto-combine your assets. This mode will inherit configurations from the current manual mode.', 'wphb' ),
-							'<strong>',
-							'</strong>'
-						);
-					} else {
-						printf( /* translators: %1$s - opening <strong> tag, %2$s - closing </strong> tag */
-							esc_html__( 'The automatic %1$sBasic%2$s preset rules will be applied which will auto-compress your assets. This mode will inherit configurations from the current manual mode.', 'wphb' ),
-							'<strong>',
-							'</strong>'
-						);
-					}
+					printf( /* translators: %1$s - opening <strong> tag, %2$s - closing </strong> tag */
+						esc_html__( 'Switching back to Automatic mode will restore your %1$slast optimization choice%2$s — Combine, Compress, or both — just as you set them before. This mode will inherit configurations from the current Dev mode.', 'wphb' ),
+						'<strong>',
+						'</strong>'
+					);
 					?>
 				</p>
 
 				<p class="sui-description">
 					<?php
 					printf( /* translators: %1$s - opening <strong> tag, %2$s - closing </strong> tag */
-						esc_html__( 'Configurations that are unique to the manual mode (defer/inline etc.) will be discarded with this change and %1$swon’t be saved%2$s if you decide to switch back to manual.', 'wphb' ),
+						esc_html__( 'Configurations that are unique to the Dev mode (defer/inline etc.) will be discarded with this change and %1$swon’t be saved%2$s if you decide to switch back to Dev mode.', 'wphb' ),
 						'<strong>',
 						'</strong>'
 					);

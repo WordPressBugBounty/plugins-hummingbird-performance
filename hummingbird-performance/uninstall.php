@@ -9,7 +9,6 @@ use Hummingbird\Core\Filesystem;
 use Hummingbird\Core\Logger;
 use Hummingbird\Core\Settings;
 
-
 // If uninstall not called from WordPress exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit();
@@ -28,7 +27,7 @@ if ( ! class_exists( 'Hummingbird\\Core\\Settings' ) ) {
 	include_once plugin_dir_path( __FILE__ ) . '/core/class-settings.php';
 }
 
-$settings = Settings::get_settings( 'settings' );
+$settings = Settings::get_settings( 'settings', 'wphb_settings' );
 
 if ( $settings['remove_settings'] ) {
 	$options = array(
@@ -42,9 +41,11 @@ if ( $settings['remove_settings'] ) {
 		'wphb-minification-show-config_modal',
 		'wphb-minify-server-errors',
 		'wphb-notice-cache-cleaned-show',
+		'wphb-notice-cache-global-cleared-show',
 		'wphb-notice-free-deactivated-dismissed',
 		'wphb-notice-free-deactivated-show',
 		'wphb-notice-free-rated-show',
+		'wphb-notice-free-rated-later_date',
 		'wphb-notice-http2-info-show',
 		'wphb-notice-minification-optimized-show',
 		'wphb-notice-uptime-info-show',
@@ -57,7 +58,8 @@ if ( $settings['remove_settings'] ) {
 		'wphb-stop-report',
 		'wphb_styles_collection',
 		'wphb_version',
-		'wphb_safe_mode',
+		'wphb_safe_mode_status',
+		'wphb_safe_mode_settings',
 	);
 
 	// Clear cron at first.
@@ -91,6 +93,7 @@ if ( $settings['remove_settings'] ) {
 		delete_option( $option );
 		delete_site_option( $option );
 	}
+	
 }
 
 
@@ -103,6 +106,7 @@ if ( $settings['remove_data'] ) {
 
 	delete_option( 'wphb-last-report' );
 	delete_site_option( 'wphb-last-report' );
+	delete_site_option( 'wphb-notice-free-rated-last-score' );
 
 	delete_site_transient( 'wphb-fast-cgi-enabled' );
 

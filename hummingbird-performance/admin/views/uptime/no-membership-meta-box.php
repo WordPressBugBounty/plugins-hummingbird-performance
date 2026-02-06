@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
 		</p>
 
-		<a class="sui-button sui-button-blue" role="button" href="<?php echo esc_url( Hub_Connector::get_connect_site_url() ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'uptime_page', 'cta_clicked', this.href, 'hb_uptime_upsell' );">
+		<a class="sui-button wphb-hub-connector-upsell-button" role="button" href="<?php echo esc_url( Hub_Connector::get_connect_site_url() ); ?>" onclick="window.wphbMixPanel.trackHBUpsell( 'uptime', 'uptime_page', 'cta_clicked', this.href, 'hb_uptime_upsell' );">
 			<span class="sui-icon-plug-connected" aria-hidden="true"></span>
 			<?php esc_html_e( 'CONNECT SITE FOR INSTANT ALERTS', 'wphb' ); ?>
 		</a>

@@ -95,6 +95,24 @@ class Performance extends Module {
 	}
 
 	/**
+	 * Get last report scores.
+	 *
+	 * @since 3.18.0
+	 * @return array|false
+	 */
+	public static function get_last_report_scores() {
+		$report = self::get_last_report();
+		if ( ! $report || is_wp_error( $report ) ) {
+			return false;
+		}
+
+		return array(
+			'mobile'  => isset( $report->data->mobile->score ) ? $report->data->mobile->score : 0,
+			'desktop' => isset( $report->data->desktop->score ) ? $report->data->desktop->score : 0,
+		);
+	}
+
+	/**
 	 * Check if WP Hummingbird is currently doing a Performance Scan
 	 *
 	 * @return false|int Timestamp when the report started, false if there's no report being executed

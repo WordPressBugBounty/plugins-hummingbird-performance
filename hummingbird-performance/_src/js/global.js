@@ -15,6 +15,80 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 			this.registerSafeModeActions();
 			this.registerSwitchCriticalCSS();
 			this.registerDeactivationSurvey();
+			this.registerCopyText();
+			this.registerPublishSafeModeChanges();
+		},
+
+		/**
+		 * Register copy text button.
+		 *
+		 * @since 3.18.0
+		 */
+		registerCopyText() {
+			const btn = document.getElementById(
+				'wphb-copy-test-link'
+			);
+
+			if ( ! btn ) {
+				return;
+			}
+
+			btn.addEventListener( 'click', () => {
+				navigator.clipboard.writeText( wphbGlobal.previewLink ).then( () => {
+					const originalText = btn.innerText;
+					const copiedText = wphbGlobal.copyText;
+
+					btn.innerText = copiedText;
+					btn.disabled = true;
+
+					setTimeout( () => {
+						btn.innerText = originalText;
+						btn.disabled = false;
+					}, 2000 );
+				} );
+			} );
+		},
+
+		/**
+		 * Register publish safe mode changes button.
+		 *
+		 * @since 3.18.0
+		 */
+		registerPublishSafeModeChanges() {
+			const btn = document.getElementById(
+				'wphb-publish-safe-mode-changes'
+			);
+
+			if ( btn ) {
+				btn.addEventListener( 'click', () => {
+					btn.disabled = true;
+					btn.textContent = wphbGlobal.publishing;
+					jQuery
+						.ajax( {
+							url: wphbGlobal.ajaxurl,
+							method: 'POST',
+							data: {
+								nonce: wphbGlobal.nonce,
+								action: 'wphb_publish_safe_mode',
+							},
+						} )
+						.done( function() {
+							// Redirect to a response page
+							window.location.href = wphbGlobal.hb_dashboard_url + '&wphb_safemode_published=1';
+						} );
+				} );
+			}
+
+			const dismissBtn = document.querySelector( '.safe-mode-dashboard-notice .wphb-dismiss' );
+			if ( dismissBtn ) {
+				dismissBtn.addEventListener( 'click', function( e ) {
+					e.preventDefault();
+					const parent = dismissBtn.closest( '.safe-mode-dashboard-notice' );
+					if ( parent ) {
+						parent.style.display = 'none';
+					}
+				} );
+			}
 		},
 
 		/**
@@ -48,18 +122,18 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 
 			btn.addEventListener( 'click', () =>
 				jQuery
-				.ajax( {
-					url: wphbGlobal.ajaxurl,
-					method: 'POST',
-					data: {
-						nonce: wphbGlobal.nonce,
-						action: 'wphb_switch_to_critical_css_from_legacy',
-					},
-				} )
-				.done( function() {
-					// Redirect to a response page
-					window.location.href = wphbGlobal.minify_url + '&view=tools';
-				} )
+					.ajax( {
+						url: wphbGlobal.ajaxurl,
+						method: 'POST',
+						data: {
+							nonce: wphbGlobal.nonce,
+							action: 'wphb_switch_to_critical_css_from_legacy',
+						},
+					} )
+					.done( function() {
+						// Redirect to a response page
+						window.location.href = wphbGlobal.minify_url + '&view=tools';
+					} )
 			);
 		},
 
@@ -100,8 +174,10 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 				return;
 			}
 
-			btn.addEventListener( 'click', () =>
-				this.post( 'wphb_global_clear_cache' )
+			btn.addEventListener( 'click', function() {
+				const action = 'wphb_global_clear_cache';
+				this.post( action + '&all_clear=1' );
+			}.bind( this )
 			);
 		},
 
@@ -127,7 +203,7 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 
 			upsellSubmenuLink.addEventListener( 'click', ( event ) => {
 				window.wphbMixPanel.trackHBUpsell( 'pro_general', 'submenu', 'cta_clicked', event.currentTarget.href, 'hb_pro_upsell' );
-			});
+			} );
 		},
 
 		/**
@@ -193,26 +269,26 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 			);
 		},
 
-		copyTextToClipboard: (text) => {
-			const textArea = document.createElement("textarea");
+		copyTextToClipboard: ( text ) => {
+			const textArea = document.createElement( 'textarea' );
 			textArea.value = text;
 
 			// Avoid scrolling to bottom
-			textArea.style.top = "0";
-			textArea.style.left = "0";
-			textArea.style.position = "fixed";
+			textArea.style.top = '0';
+			textArea.style.left = '0';
+			textArea.style.position = 'fixed';
 
-			document.body.appendChild(textArea);
+			document.body.appendChild( textArea );
 			textArea.focus();
 			textArea.select();
 
 			try {
-				document.execCommand('copy');
-			} catch (err) {
-				console.error('Oops, unable to copy', err);
+				document.execCommand( 'copy' );
+			} catch ( err ) {
+				console.error( 'Oops, unable to copy', err );
 			}
 
-			document.body.removeChild(textArea);
+			document.body.removeChild( textArea );
 		},
 
 		/**
@@ -223,57 +299,62 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 		registerSafeModeActions() {
 			const saveButton = document.getElementById( 'wphb-ao-safe-mode-save' );
 			if ( saveButton ) {
-				saveButton.addEventListener('click', () => {
+				saveButton.addEventListener( 'click', () => {
 					saveButton.disabled = true;
-					this.request('wphb_react_minify_publish_safe_mode')
-						.then(() => {
+					this.request( 'wphb_react_minify_publish_safe_mode' )
+						.then( () => {
 							window.location.href = wphbGlobal.minify_url + '&safe_mode_status=published';
-						});
-				});
+						} );
+				} );
 			}
 
-			const copyButton = document.getElementById('wphb-ao-safe-mode-copy');
-			if (copyButton) {
-				copyButton.addEventListener('click', (e) => {
+			const copyButton = document.getElementById( 'wphb-ao-safe-mode-copy' );
+			if ( copyButton ) {
+				copyButton.addEventListener( 'click', ( e ) => {
 					e.preventDefault();
-					this.copyTextToClipboard(window.location.href);
+					this.copyTextToClipboard( window.location.href );
 
 					const successClass = 'wphb-ao-safe-mode-copy-success';
-					copyButton.classList.add(successClass);
-					setTimeout(() => {
-						copyButton.classList.remove(successClass);
-					}, 3000);
-				});
+					copyButton.classList.add( successClass );
+					setTimeout( () => {
+						copyButton.classList.remove( successClass );
+					}, 3000 );
+				} );
 			}
 		},
 
 		/**
 		 * Send AJAX request.
 		 *
-		 * @param {string}  action
-		 * @param {boolean} reload
+		 * @param {string}          action
+		 * @param {boolean}         reload
+		 * @param {Function | null} callback
 		 */
-		post(action, reload = true) {
-			this.request(action)
-				.then(() => {
-					if (reload) {
-						location.reload(action)
+		post( action, reload = true, callback = null ) {
+			this.request( action )
+				.then( ( response ) => {
+					if ( callback && typeof callback === 'function' ) {
+						callback( response );
 					}
-				});
+
+					if ( reload ) {
+						location.reload( action );
+					}
+				} );
 		},
 
-		request(action) {
-			return new Promise(resolve => {
+		request( action ) {
+			return new Promise( ( resolve ) => {
 				const xhr = new XMLHttpRequest();
-				xhr.open('POST', wphbGlobal.ajaxurl + '?action=' + action + '&_ajax_nonce=' + wphbGlobal.nonce);
-				xhr.onload = function () {
-					if (xhr.status === 200) {
+				xhr.open( 'POST', wphbGlobal.ajaxurl + '?action=' + action + '&_ajax_nonce=' + wphbGlobal.nonce );
+				xhr.onload = function() {
+					if ( xhr.status === 200 ) {
 						resolve();
 					}
 				};
 
 				xhr.send();
-			});
+			} );
 		}
 	};
 

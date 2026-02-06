@@ -10,6 +10,8 @@ namespace Hummingbird\Admin;
 use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\SafeMode;
+use Hummingbird\Core\Modules\Performance;
 use WPMUDEV_Dashboard;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -81,6 +83,8 @@ class Notices {
 		// This will show notice on both multisite and single site.
 		add_action( 'admin_notices', array( $this, 'clear_cache' ) );
 		add_action( 'network_admin_notices', array( $this, 'clear_cache' ) );
+		add_action( 'admin_notices', array( $this, 'safe_mode_notice' ) );
+		add_action( 'admin_notices', array( $this, 'cache_global_cleared' ) );
 
 		// Only show notices to users who can do something about it (update, for example).
 		$cap = is_multisite() ? 'manage_network_plugins' : 'update_plugins';
@@ -254,8 +258,9 @@ class Notices {
 	 * @param  string $message        Notice message.
 	 * @param  bool   $additional     Additional content that goes after the message text.
 	 * @param  bool   $only_hb_pages  Show message only on Hummingbird pages.
+	 * @param  string $notice_class    Notice class: info, warning, error, success.
 	 */
-	private function show_notice( $id = '', $message = '', $additional = false, $only_hb_pages = false ) {
+	private function show_notice( $id = '', $message = '', $additional = false, $only_hb_pages = false, $notice_class = 'info', $dismiss_icon_class = '' ) {
 		// Only run on HB pages.
 		if ( $only_hb_pages && ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
 			return;
@@ -263,9 +268,9 @@ class Notices {
 
 		$dismiss_url = wp_nonce_url( add_query_arg( 'wphb-dismiss', $id ), 'wphb-dismiss-notice' );
 		?>
-		<div class="notice-info notice wphb-notice">
+		<div class="notice-<?php echo esc_attr( $notice_class ); ?> notice wphb-notice">
 			<a class="wphb-dismiss" href="<?php echo esc_url( $dismiss_url ); ?>">
-				<span class="dashicons dashicons-dismiss"></span>
+				<span class="dashicons <?php echo esc_attr( $dismiss_icon_class ? $dismiss_icon_class : 'dashicons-dismiss' ); ?>"></span>
 				<span class="screen-reader-text">
 					<?php esc_html_e( 'Dismiss this notice.', 'wphb' ); ?>
 				</span>
@@ -340,12 +345,16 @@ class Notices {
 			'cache-cleaned',
 			'legacy-critical-css',
 			'connect-for-site-monitoring',
+			'cache-global-cleared',
 		);
 
 		if ( in_array( $notice, $user_notices, true ) ) {
 			update_user_meta( get_current_user_id(), 'wphb-' . $notice . '-dismissed', true );
 		} elseif ( in_array( $notice, $options_notices, true ) ) {
 			delete_option( 'wphb-notice-' . $notice . '-show' );
+			if ( 'free-rated' === $notice ) {
+				update_option( 'wphb-notice-free-rated-later_date', 'never' );
+			}
 		}
 
 		$redirect = remove_query_arg( array( 'wphb-dismiss', '_wpnonce' ) );
@@ -607,9 +616,6 @@ class Notices {
 	 * @since 1.5.4
 	 */
 	public function free_version_rate() {
-		if ( Utils::is_member() ) {
-			return;
-		}
 
 		if ( Utils::is_admin_dashboard() ) {
 			return;
@@ -618,20 +624,75 @@ class Notices {
 		if ( $this->is_dismissed( 'free-rated', 'option' ) ) {
 			return;
 		}
-
-		// Show only if at least 7 days have past after installation of the free version.
-		$free_installation = get_site_option( 'wphb-free-install-date' );
-		if ( ( time() - (int) $free_installation ) < 604800 ) {
+		if ( ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
 			return;
 		}
 
-		$text            = '<p>' . esc_html__( "We've spent countless hours developing Hummingbird and making it free for you to use. We would really appreciate it if you dropped us a quick rating!", 'wphb' ) . '</p>';
-		$additional_text = '<p><a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/" class="sui-button sui-button-blue" target="_blank">' . __( 'Rate Hummingbird', 'wphb' ) . '</a></p>';
-		$this->show_notice(
-			'free-rated',
-			$text,
-			$additional_text
-		);
+		$minify_module = Utils::get_module( 'minify' );
+		$is_scanning   = $minify_module->scanner->is_scanning();
+		if ( $is_scanning ) {
+			return;
+		}
+
+		// Show only if at least 7 days have past after installation of the free version.
+		$rate_later = get_site_option( 'wphb-notice-free-rated-later_date' );
+		if ( ( time() < (int) $rate_later ) ) {
+			return;
+		}
+
+		$text = '<p>' . esc_html__( 'We\'ve spent countless hours developing Hummingbird and making it free for you to use. We would really appreciate it if you dropped us a quick rating!', 'wphb' ) . '</p>';
+		$id   = 'free-rated';
+
+		$saved_scores         = get_site_option( 'wphb-notice-free-rated-last-score', false );
+		$last_report_scores   = Performance::get_last_report_scores();
+		$performance_improved = false;
+
+		$minify_module = Utils::get_module( 'minify' );
+
+		if ( $minify_module->is_active() && $last_report_scores && $saved_scores ) {
+			$types = array( 'mobile', 'desktop' );
+			foreach ( $types as $type ) {
+				if ( 0 !== $last_report_scores[ $type ] && 0 !== $saved_scores[ $type ] && $last_report_scores[ $type ] - $saved_scores[ $type ] >= 10 ) {
+					$performance_improved = $last_report_scores[ $type ] > $performance_improved ? $last_report_scores[ $type ] : $performance_improved;
+				}
+			}
+		}
+		if ( $performance_improved ) {
+			$perf_class = ' notice-perf-rate';
+			$image_part = sprintf(
+				'<img class="sui-image" aria-hidden="true" alt="" src="%1$s" srcset="%1$s 1x, %2$s 2x" />',
+				esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-icon.png' ),
+				esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-icon@2x.png' )
+			);
+			// Translators: %s: performance score.
+			$heading = '<h3><span">&#128640;</span>' . sprintf( esc_html__( 'Performance improved! Your site’s score is now %s.', 'wphb' ), $performance_improved ) . '</h3>';
+			$text    = '<p>' . esc_html__( 'Your site is now faster and more efficient thanks to Hummingbird’s optimizations. Enjoying the results? Share your experience with a review on WordPress.org.', 'wphb' ) . '</p>';
+		}
+
+		$dismiss_url = wp_nonce_url( add_query_arg( 'wphb-dismiss', $id ), 'wphb-dismiss-notice' );
+		?>
+		<div class="notice-info notice wphb-notice notice-<?php echo esc_attr( $id . ( $performance_improved ? $perf_class : '' ) ); ?>">
+			<div class="sui-notice-content">
+				<div class="sui-notice-message">
+					<?php if ( $performance_improved ) : ?>
+					<div class="wphb-rate-image">
+						<?php echo wp_kses_post( $image_part ?? '' ); ?>
+					</div>
+					<?php endif; ?>
+					<div>
+						<?php echo wp_kses_post( $heading ?? '' ); ?>
+						<?php echo wp_kses_post( $text ); ?>
+						<div class="wphb-rate-buttons">
+							<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/" class="sui-button sui-button-blue" target="_blank" data-Action="rate"><?php esc_html_e( 'Rate Hummingbird', 'wphb' ); ?></a>
+							<a href="#" class="sui-button  sui-button-ghost" target="_blank" data-Action="remind_later"><?php esc_html_e( 'Remind me later', 'wphb' ); ?></a>
+							<a href="<?php echo esc_url( $dismiss_url ); ?>" data-Action="dismiss" style="justify-content: flex-start;"><?php esc_html_e( 'I already did', 'wphb' ); ?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+
 	}
 
 	/**
@@ -697,21 +758,22 @@ class Notices {
 	 * @return string Text message to be displayed
 	 */
 	public static function plugin_incompat_message( $incompat_plugins ) {
-		$text = '<p>' . esc_html__( 'You have multiple WordPress performance plugins installed. This may cause unpredictable behavior and can even break your site. For best results, use only one performance plugin at a time. ', 'wphb' );
 
 		if ( count( $incompat_plugins ) > 1 ) {
-			$text .= esc_html__( 'These plugins may cause issues with Hummingbird:', 'wphb' ) . '</p>';
+			$text  = '<p>' . esc_html__( 'Multiple performance plugins are active alongside Hummingbird, which can cause conflicts or unpredictable behavior. ', 'wphb' );
+			$text .= esc_html__( 'The following plugins may interfere with Hummingbird:', 'wphb' ) . '</p>';
 
 			$text .= '<ul id="wphb-incompat-plugin-list">';
 
 			foreach ( $incompat_plugins as $plugin ) {
 				$text .= "<li><strong>$plugin</strong></li>";
 			}
+			$text .= '<p>' . esc_html__( 'For best results, we recommend keeping Hummingbird as your primary performance plugin and disabling the others.', 'wphb' ) . '</p>';
 
-			$text .= '</ul>';
+			$text .= '</ul> </p>';
 		} else {
-			$text .= sprintf( /* translators: %s - plugin name */
-				esc_html__( '%s plugin may cause issues with Hummingbird.', 'wphb' ),
+			$text = '<p>' . sprintf( /* translators: %s - plugin name */
+				esc_html__( '%s is active alongside Hummingbird. Running multiple performance plugins can cause conflicts or unexpected results, so for the best performance and stability, we recommend using Hummingbird as your only performance plugin and disabling other caching or optimization plugins.', 'wphb' ),
 				'<strong>' . $incompat_plugins[ key( $incompat_plugins ) ] . '</strong>'
 			) . '</p>';
 		}
@@ -761,6 +823,9 @@ class Notices {
 		if ( ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
 			return;
 		}
+		if ( get_transient( 'wphb-doing-report' ) ) {
+			return;
+		}
 
 		$message = Utils::get_ao_background_processing_completion_message();
 		if ( empty( $message ) ) {
@@ -768,5 +833,144 @@ class Notices {
 		}
 
 		$this->show_floating( $message, 'success', false );
+	}
+
+	/**
+	 * Show safe mode notice.
+	 *
+	 * @since 3.18.0
+	 */
+	public function safe_mode_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		if ( ! SafeMode::instance()->get_status() || Hub_Connector::is_connection_flow() ) {
+			return;
+		}
+
+		$message = sprintf(
+			/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
+			esc_html__( '%1$sSafe Mode%2$s is active. Adjust your Hummingbird settings and preview the changes, then publish them live or disable Safe Mode. Extended use may slow your live site.', 'wphb' ),
+			'<strong>',
+			'</strong>'
+		);
+
+		$preview_changes = SafeMode::instance()->get_safe_mode_preview_url();
+		$learn_more      = esc_url( Utils::get_documentation_url( 'wphb-dev-mode' ) );
+
+		$buttons = sprintf(
+			'<a href="%1$s" class="button button-primary" style="margin-right:10px">%2$s</a>
+			<a href="#" class="button" id="wphb-copy-test-link" style="margin-right:10px">%3$s</a>
+			<a href="%4$s" class="button-link" target="_blank">%5$s</a>',
+			esc_url( $preview_changes ),
+			esc_html__( 'Preview Changes', 'wphb' ),
+			esc_html__( 'Copy test link', 'wphb' ),
+			esc_url( $learn_more ),
+			esc_html__( 'Learn more', 'wphb' )
+		);
+
+		// Show WordPress style notice on WP dashboard page.
+		if ( Utils::is_admin_dashboard( true ) ) {
+			$this->show_notice(
+				'safe-mode-active',
+				sprintf( '<p>%s</p>', $message ),
+				$buttons,
+				false,
+				'warning safe-mode-dashboard-notice'
+			);
+		}
+
+		// Show SUI notice on HB pages.
+		if ( ! $this->is_hb_admin_page() ) {
+			return;
+		}
+
+		$additional  = '<p style="padding-left: 26px;"><a href="' . esc_url( $preview_changes ) . '" class="sui-button sui-button-blue">' . esc_html__( 'Preview Changes', 'wphb' ) . '</a>';
+		$additional .= '<a role="button" href="#" id="wphb-copy-test-link" class="sui-button sui-button-ghost">' . esc_html__( 'Copy test link', 'wphb' ) . '</a>';
+		$additional .= '<a href="' . esc_url( $learn_more ) . '" target="_blank" class="sui-link" style="color: #888888;margin-left: 16px;font-size: 12px;">' . esc_html__( 'LEARN MORE', 'wphb' ) . '</a></p>';
+		$message     = '<p><span class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></span>' . $message . '</p>';
+
+		$this->show_sui_notice( 'wphb-safe-mode', $message, $additional, true, 'warning' );
+	}
+
+	/**
+	 * Check if we are on Hummingbird admin page.
+	 *
+	 * @since 3.18.0
+	 *
+	 * @return bool
+	 */
+	public function is_hb_admin_page() {
+		return preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id );
+	}
+
+	/**
+	 * Show cache global cleared notice.
+	 *
+	 * @since 3.19.0
+	 */
+	public function cache_global_cleared() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$timestamp = get_option( 'wphb-notice-cache-global-cleared-show', 0 );
+		if ( ! $timestamp ) {
+			return;
+		}
+
+		$date    = gmdate( 'F j, Y', (int) $timestamp + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+		$time    = gmdate( 'g:i a', (int) $timestamp + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+		$message = sprintf(
+			/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
+			esc_html__( 'Hummingbird cleared the cache on %1$s at %2$s.', 'wphb' ),
+			'<strong>' . $date . '</strong>',
+			'<strong>' . $time . '</strong>'
+		);
+
+		$message = '<span class="dashicons dashicons-yes-alt" aria-hidden="true"></span>' . $message;
+		// Show WordPress style notice on WP dashboard page.
+		if ( Utils::is_admin_dashboard( true ) || $this->is_hb_admin_page() ) {
+			$this->show_notice(
+				'cache-global-cleared',
+				sprintf( '<p>%s</p>', $message ),
+				false,
+				false,
+				'success wphb-cache-global-cleared ',
+				'dashicons-saved'
+			);
+		}
+		?>
+		<style>
+			.notice.wphb-cache-global-cleared {
+				border-left-color: #1ABC9C;
+			}
+			.notice.wphb-cache-global-cleared a.wphb-dismiss {
+				position: relative;
+				padding: 10px 0;
+			}
+			.notice.wphb-cache-global-cleared a.wphb-dismiss:focus {
+				box-shadow: none;
+			}
+			.notice.wphb-cache-global-cleared p {
+				margin: 7px 0;
+			}
+			.notice.wphb-cache-global-cleared .dashicons-yes-alt {
+				color: #1ABC9C;
+				font-size: 20px;
+				vertical-align: middle;
+				margin-right: 8px;
+			}
+			.notice.wphb-cache-global-cleared span.dashicons-saved::before {
+				color: #AAAAAA;
+				background-color: #F8F8F8;
+				padding: 3px;
+			}
+			.notice.wphb-cache-global-cleared span.dashicons-saved:hover::before {
+				background-color: #a3a3a34a;
+			}
+		</style>
+		<?php
 	}
 }

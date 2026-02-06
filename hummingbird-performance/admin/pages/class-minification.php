@@ -90,7 +90,7 @@ class Minification extends Page {
 			$collector = $minify_module->sources_collector;
 			$collector::clear_collection();
 
-			$minify_module->scanner->init_scan();
+			$minify_module->start_process();
 			$redirect = true;
 		}
 
@@ -216,7 +216,7 @@ class Minification extends Page {
 						'delayUpsell'    => Utils::get_link( 'plugin', 'hummingbird_delay_js_ao_summary' ),
 						'criticalUpsell' => Utils::get_link( 'plugin', 'hummingbird_criticalcss_ao_summary' ),
 						'isEoPage'       => 'tools' === $current_page ? true : false,
-						'safeMode'       => site_url() . '?minify-safe=true',
+						'safeMode'       => site_url() . '?wphb_preview_safe_mode=true',
 					),
 				)
 			);
@@ -353,11 +353,11 @@ class Minification extends Page {
 					<span class="sui-summary-sub sui-no-margin-bottom">
 						<?php
 						if ( isset( $_SERVER['WPMUDEV_HOSTED'] ) ) {
-							esc_attr_e( 'Your server is running the HTTP/2 protocol which automatically optimizes the delivery of your assets for you. You can still combine, and move your files, though this may not always improve performance.', 'wphb' );
+							esc_attr_e( 'Your server is running the HTTP/3 (with QUIC) protocol which automatically optimizes the delivery of your assets for you. You can still combine, and move your files, though this may not always improve performance.', 'wphb' );
 						} else {
 							printf(
 								/* translators: %1$s - opening <a> tag, %2$s - closing </a> tag */
-								esc_html__( 'Did you know WPMU DEV Hosting runs the HTTP/2 protocol, which automatically optimizes the delivery of your assets for you? Improve your site speed and performance by hosting your site with WPMU DEV. You can learn more about WPMU DEV Hosting %1$shere%2$s.', 'wphb' ),
+								esc_html__( 'Did you know WPMU DEV Hosting runs the HTTP/3 (with QUIC) protocol, which automatically optimizes the delivery of your assets for you? Improve your site speed and performance by hosting your site with WPMU DEV. You can learn more about WPMU DEV Hosting %1$shere%2$s.', 'wphb' ),
 								'<a href="' . esc_url( Utils::get_link( 'hosting', 'AO_hosting_upsell' ) ) . '" target="_blank">',
 								'</a>'
 							);

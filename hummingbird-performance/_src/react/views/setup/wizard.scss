@@ -1,7 +1,10 @@
+$hummingbird-font-path: '../../../fonts/';
+
 @import "~@wpmudev/shared-ui/scss/functions";
 @import "~@wpmudev/shared-ui/scss/colors";
 @import "~@wpmudev/shared-ui/scss/variables";
 @import "~@wpmudev/shared-ui/scss/mixins";
+@import "../../../scss/common/icons";
 
 @import "~@wpmudev/shared-ui/scss/sidenav";
 @import "~@wpmudev/shared-ui/scss/modals";
@@ -50,9 +53,11 @@
   .sui-sidenav {
     padding-top: 50px;
 
-    svg > line { stroke-width: 4px; }
+    svg>line {
+      stroke-width: 4px;
+    }
 
-    & > svg {
+    &>svg {
       width: 100%;
       height: 4px;
       margin-bottom: -14px;
@@ -67,14 +72,16 @@
     ul {
       margin: 0;
 
-      svg > line { stroke: #D8D8D8; }
+      svg>line {
+        stroke: #D8D8D8;
+      }
 
       li {
         line-height: 24px;
         margin-bottom: 0;
         color: #333333;
 
-        & > span {
+        &>span {
           display: inline-block;
           margin-right: 20px;
           text-align: center;
@@ -98,7 +105,7 @@
         &.disabled {
           color: #AAAAAA;
 
-          & > span:first-of-type {
+          &>span:first-of-type {
             color: #AAAAAA;
           }
 
@@ -112,13 +119,14 @@
 
         &.current {
           font-weight: 700;
-          & > span {
+
+          &>span {
             color: #333333;
             border-color: #333333;
           }
         }
 
-        &.done > span {
+        &.done>span {
           background-color: #1ABC9C;
           border-color: #1ABC9C;
 
@@ -127,11 +135,11 @@
           }
         }
 
-        &.done + svg > line {
+        &.done+svg>line {
           stroke: #1ABC9C;
         }
 
-        &.done.disabled > span {
+        &.done.disabled>span {
           background-color: #AAAAAA;
           border-color: #AAAAAA;
           color: #FFFFFF;
@@ -176,7 +184,7 @@
     justify-content: center;
     text-align: center;
 
-    & > .sui-box-body {
+    &>.sui-box-body {
       padding: 60px 100px;
       width: 100%;
 
@@ -190,9 +198,11 @@
         margin-bottom: 0;
       }
 
-      h2 { margin-top: 0; }
+      h2 {
+        margin-top: 0;
+      }
 
-      & > .sui-description {
+      &>.sui-description {
         max-width: 600px;
         margin: 0 auto;
       }
@@ -207,13 +217,67 @@
         margin: 30px auto 0;
         text-align: left;
 
+        &:not([class*=wphb-getting-started-setup]) {
+          max-width: 800px;
+          padding-top: 0px;
+          padding-bottom: 0px;
+          border: none;
+
+          .wrap-setting-rows {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+
+            .sui-box-settings-row {
+              padding: 15px 20px;
+              margin-bottom: 0px;
+              flex: 1;
+              border: 1px solid #E6E6E6;
+              margin: 0;
+
+              .wphb-toggle-right {
+                width: 100%;
+
+                label {
+                  flex-direction: row;
+                  opacity: unset;
+                  pointer-events: auto;
+                  align-items: center;
+
+                  .sui-toggle-label {
+                    color: #333333;
+                    font-weight: 400;
+                    letter-spacing: 0px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                  }
+
+                  .sui-tooltip {
+                    width: 14px;
+                    height: 14px;
+                    margin-left: 8px;
+                    margin-right: auto;
+                  }
+                }
+              }
+            }
+
+            @include media(max-width, lg) {
+              flex-direction: column;
+            }
+          }
+        }
+
         .with-love {
           margin-top: -20px;
           margin-left: 44px;
           display: flex;
           align-items: center;
 
-          .sui-icon-heart { margin-right: 10px; }
+          .sui-icon-heart {
+            margin-right: 10px;
+          }
         }
       }
 
@@ -226,31 +290,48 @@
         padding: 60px 100px;
         width: 100%;
 
-        .sui-progress-block { max-width: 440px; }
+        .sui-progress-block {
+          max-width: 440px;
+        }
 
         .sui-box {
           width: 100%;
           margin-bottom: 10px;
 
-          .sui-box-header { cursor: pointer; }
+          .sui-box-header {
+            cursor: pointer;
+          }
 
           .sui-box-title {
             font-size: 13px;
-            [class*=sui-icon-]:before { font-size: 16px; }
+
+            [class*=sui-icon-]:before {
+              font-size: 16px;
+            }
           }
 
           .sui-box-body {
             text-align: left;
+
             p {
               max-width: 100%;
               color: $gray-alt;
-              &:last-of-type { margin-top: 10px; }
+
+              &:last-of-type {
+                margin-top: 10px;
+              }
             }
           }
 
           &:not(.open) {
-            .sui-icon-chevron-up:before { content: "ı"; }
-            .sui-box-body, .sui-box-footer { display: none; }
+            .sui-icon-chevron-up:before {
+              content: "ı";
+            }
+
+            .sui-box-body,
+            .sui-box-footer {
+              display: none;
+            }
           }
         }
 
@@ -270,8 +351,13 @@
         margin: 30px auto 0;
 
         thead th {
-          &:first-of-type { width: 170px; }
-          &:last-of-type { width: 110px; }
+          &:first-of-type {
+            width: 170px;
+          }
+
+          &:last-of-type {
+            width: 110px;
+          }
         }
 
         tbody td {
@@ -309,6 +395,7 @@
       margin-left: 10px;
     }
   }
+
   .sui-border-frame.wphb-getting-started-setup {
     background-color: #f8f8f8;
   }

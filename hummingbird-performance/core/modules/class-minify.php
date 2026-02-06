@@ -7,8 +7,10 @@
 
 namespace Hummingbird\Core\Modules;
 
+use Calotes\Model\Setting;
 use Hummingbird\Core\Filesystem;
 use Hummingbird\Core\Module;
+use Hummingbird\Core\SafeMode;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use WP_Customize_Manager;
@@ -147,8 +149,7 @@ class Minify extends Module {
 		add_filter( 'wphb_async_resource', array( $this, 'filter_resource_async' ), 10, 3 );
 		add_filter( 'wphb_send_resource_to_footer', array( $this, 'filter_resource_to_footer' ), 10, 3 );
 		add_filter( 'wphb_cdn_resource', array( $this, 'filter_resource_cdn' ), 10, 3 );
-		add_filter( 'wphb_minify_scan_url', array( $this, 'maybe_append_safe_mode_query_arg' ) );
-		add_filter( 'wphb_get_settings_for_module_minify', array( $this, 'maybe_serve_safe_mode_minify_settings' ) );
+		add_filter( 'wphb_minify_scan_url', array( SafeMode::instance(), 'maybe_append_query_arg' ) );
 
 		// Remove files from AO UI.
 		add_filter( 'wphb_minification_display_enqueued_file', array( $this, 'exclude_from_ao_ui' ), 10, 3 );
@@ -167,8 +168,6 @@ class Minify extends Module {
 			add_filter( 'wphb_minify_resource', array( $this, 'exclude_essential_safe_mode_scripts' ), 10, 2 );
 			add_filter( 'wphb_combine_resource', array( $this, 'exclude_essential_safe_mode_scripts' ), 10, 2 );
 		}
-
-		add_action( 'admin_notices', array( $this, 'safe_mode_notice' ) );
 	}
 
 	/**
@@ -194,7 +193,8 @@ class Minify extends Module {
 			if ( $group->get_file_path() && file_exists( $group->get_file_path() ) ) {
 				wp_delete_file( $group->get_file_path() );
 			}
-			wp_cache_delete( 'wphb_minify_groups' );
+
+			Minify\Minify_Group::clear_groups_cache();
 		}
 	}
 
@@ -1264,20 +1264,25 @@ class Minify extends Module {
 			return true;
 		}
 
-		// Skip if URL has query parameters.
-		if ( strpos( $src, '?' ) !== false ) {
-			return true;
-		}
+		$pattern = '/\d{9,10}/';
 
-		// Skip if handle contains realistic timestamp (9–10 digits, between 2010 and 2200).
-		if ( preg_match( '/\d{9,10}/', $handle, $match ) ) {
+		// Skip if handle has unix timestamp.
+		if ( preg_match( $pattern, $handle, $match ) ) {
 			$timestamp = (int) $match[0];
 			if ( $timestamp >= 1262304000 && $timestamp <= 7258118400 ) {
 				return true;
 			}
 		}
 
-		return false;
+		// Skip if src has unix timestamp.
+		if ( preg_match( $pattern, $src, $match ) ) {
+			$timestamp = (int) $match[0];
+			if ( $timestamp >= 1262304000 && $timestamp <= 7258118400 ) {
+				return true;
+			}
+		}
+
+			return false;
 	}
 
 
@@ -1532,10 +1537,10 @@ class Minify extends Module {
 		$groups = Minify\Minify_Group::get_groups_from_handle( $handle, $type );
 
 		foreach ( $groups as $group ) {
-            if ( 'wphb_minify_group' === get_post_type( $group->file_id ) ) {
-	            Utils::get_module( 'minify' )->log( 'Deleting (in clear_file function) the minify group file id : ' . $group->file_id );
-                wp_delete_post( $group->file_id );
-            }
+			if ( in_array( (string) $group->file_id, Minify\Minify_Group::query_minify_post_ids(), true ) ) {
+				Utils::get_module( 'minify' )->log( 'Deleting (in clear_file function) the minify group file id : ' . $group->file_id );
+				wp_delete_post( $group->file_id );
+			}
 		}
 	}
 
@@ -1543,17 +1548,17 @@ class Minify extends Module {
 	 * Clear minified group files
 	 */
 	public function clear_files() {
-		$groups = Minify\Minify_Group::get_minify_groups();
+		$groups_ids = Minify\Minify_Group::get_minify_groups_ids();
 
-		foreach ( $groups as $group ) {
+		foreach ( $groups_ids as $group_id ) {
 			// This will also delete the file. See WP_Hummingbird\Core\Modules\Minify::on_delete_post().
-			if ( 'wphb_minify_group' === get_post_type( $group->ID ) ) {
-				Utils::get_module( 'minify' )->log( 'Deleting (in clear_files function) the minify group ID : ' . $group->ID );
-                wp_delete_post( $group->ID );   
+			if ( in_array( (string) $group_id, Minify\Minify_Group::query_minify_post_ids(), true ) ) {
+				Utils::get_module( 'minify' )->log( 'Deleting (in clear_files function) the minify group ID : ' . $group_id );
+				wp_delete_post( $group_id );
 			}
 		}
 
-		wp_cache_delete( 'wphb_minify_groups' );
+		Minify\Minify_Group::clear_groups_cache();
 
 		// Clear all the page cache.
 		do_action( 'wphb_clear_page_cache' );
@@ -1566,9 +1571,9 @@ class Minify extends Module {
 	 */
 	public function get_resources_collection() {
 		$collection = Minify\Sources_Collector::get_collection();
-		$posts      = Minify\Minify_Group::get_minify_groups();
-		foreach ( $posts as $post ) {
-			$group = Minify\Minify_Group::get_instance_by_post_id( $post->ID );
+		$posts_ids  = Minify\Minify_Group::get_minify_groups_ids();
+		foreach ( $posts_ids as $post_id ) {
+			$group = Minify\Minify_Group::get_instance_by_post_id( $post_id );
 			if ( ! $group ) {
 				continue;
 			}
@@ -1576,7 +1581,7 @@ class Minify extends Module {
 				if ( isset( $collection[ $group->type ][ $handle ] ) ) {
 					$collection[ $group->type ][ $handle ]['original_size']   = $group->get_handle_original_size( $handle );
 					$collection[ $group->type ][ $handle ]['compressed_size'] = $group->get_handle_compressed_size( $handle );
-					$collection[ $group->type ][ $handle ]['file_url'] = $group->get_file_url();
+					$collection[ $group->type ][ $handle ]['file_url']        = $group->get_file_url();
 				}
 			}
 		}
@@ -1612,8 +1617,8 @@ class Minify extends Module {
 				$options['enabled'] = $value;
 				// If deactivated for whole network, also deactivate CDN.
 				if ( false === $value ) {
-					$options['use_cdn']  = false;
-					$options['log']      = false;
+					$options['use_cdn'] = false;
+					$options['log']     = false;
 				}
 			} else {
 				// Updating on subsite.
@@ -1891,7 +1896,7 @@ class Minify extends Module {
 	 * @return array
 	 */
 	private function get_disabled_switchers( $asset, $type ) {
-		$error = $this->errors_controller->get_handle_error( $asset['handle'], $type );
+		$error = isset( $this->errors_controller ) ? $this->errors_controller->get_handle_error( $asset['handle'], $type ) : null;
 
 		$disable_switchers = $error ? $error['disable'] : array();
 
@@ -1945,7 +1950,7 @@ class Minify extends Module {
 						unset( $collection[ $type ][ $handle ] );
 						continue;
 					}
-	
+
 					// Remove unused fields.
 					unset( $asset['args'] );
 					unset( $asset['deps'] );
@@ -1953,22 +1958,22 @@ class Minify extends Module {
 					unset( $asset['textdomain'] );
 					unset( $asset['translations_path'] );
 					unset( $asset['ver'] );
-	
+
 					$settings = array(
 						'component' => '',
 						'extension' => 'OTHER',
 						'filter'    => '',
 						'isLocal'   => Minify\Minify_Group::is_src_local( $asset['src'] ),
 					);
-	
+
 					$asset['compressedSize'] = isset( $asset['compressed_size'] ) ? $asset['compressed_size'] : false;
 					unset( $asset['compressed_size'] );
-	
+
 					// Get original file size for local files that don't have it set for some reason.
 					if ( ! isset( $asset['original_size'] ) && file_exists( Utils::src_to_path( $asset['src'] ) ) ) {
 						$asset['original_size'] = number_format_i18n( filesize( Utils::src_to_path( $asset['src'] ) ) / 1000, 1 );
 					}
-	
+
 					// With remote assets we can't easily get the file size without doing extra remote queries.
 					if ( isset( $asset['original_size'] ) ) {
 						$asset['originalSize'] = $asset['original_size'];
@@ -1976,16 +1981,16 @@ class Minify extends Module {
 					} else {
 						$asset['originalSize'] = false;
 					}
-	
+
 					if ( isset( $asset['file_url'] ) ) {
 						$asset['fileUrl'] = empty( $asset['file_url'] )
 							? ''
 							: $asset['file_url'];
 						unset( $asset['file_url'] );
 					}
-	
+
 					$settings['disableSwitchers'] = $this->get_disabled_switchers( $asset, $type );
-	
+
 					if ( preg_match( '/wp-content\/themes\/(.*)\//', $asset['src'], $matches ) ) {
 						$settings['component'] = 'theme';
 						$settings['filter']    = $theme->get( 'Name' );
@@ -1993,7 +1998,7 @@ class Minify extends Module {
 						if ( ! function_exists( 'get_plugin_data' ) ) {
 							include_once ABSPATH . 'wp-admin/includes/plugin.php';
 						}
-	
+
 						// The source comes from a plugin.
 						foreach ( $plugins as $active_plugin ) {
 							if ( stristr( $active_plugin, $matches[1] ) ) {
@@ -2006,10 +2011,10 @@ class Minify extends Module {
 								break;
 							}
 						}
-	
+
 						$settings['component'] = 'plugin';
 					}
-	
+
 					$extension = pathinfo( $asset['src'], PATHINFO_EXTENSION );
 					if ( false !== strpos( $asset['src'], 'fonts.googleapis.com' ) ) {
 						$settings['extension'] = 'FONT';
@@ -2018,10 +2023,10 @@ class Minify extends Module {
 					} elseif ( $extension && preg_match( '/(js)\??[a-zA-Z=0-9]*/', $extension ) ) {
 						$settings['extension'] = 'JS';
 					}
-	
+
 					// Add settings to the asset.
 					$asset['settings'] = $settings;
-	
+
 					// If this is a Google font - move to fonts section.
 					if ( 'FONT' === $settings['extension'] ) {
 						unset( $collection[ $type ][ $handle ] );
@@ -2041,66 +2046,35 @@ class Minify extends Module {
 	}
 
 	/**
-	 * Returns true if safe mode is active, and we are *not* in the safe mode preview.
+	 * Returns true if safe mode is active, and we are *not* expected to serve safemode.
 	 *
 	 * @since 3.4.0
 	 *
 	 * @return bool
 	 */
 	private function disable_minify_for_safe_mode() {
-		if ( is_admin() ) {
-			return false;
-		}
-
-		if ( ! self::get_safe_mode_status() ) {
-			return false;
-		}
-
-		$status = $this->previewing_safe_mode();
-		return true !== $status;
-	}
-
-	public function maybe_append_safe_mode_query_arg( $url ) {
-		if ( self::get_safe_mode_status() ) {
-			$url = add_query_arg( 'minify-safe', 'true', $url );
-		}
-
-		return $url;
-	}
-
-	public function maybe_serve_safe_mode_minify_settings( $settings ) {
-		if ( $this->previewing_safe_mode() ) {
-			return array_merge( $settings, $this->get_safe_mode_settings() );
-		}
-
-		return $settings;
+		return SafeMode::instance()->get_status() && ! SafeMode::instance()->is_safemode_call();
 	}
 
 	public static function get_safe_mode_status() {
-		$value = self::get_safe_mode_option_value();
-
-		return $value['status'];
+		return SafeMode::instance()->get_status();
 	}
 
 	public function set_safe_mode_status( $status ) {
-		$value           = self::get_safe_mode_option_value();
-		$value['status'] = $status;
-		$this->set_safe_mode_option_value( $value );
+		SafeMode::instance()->set_status( $status );
 	}
 
 	/**
 	 * @return array
 	 */
 	public function get_safe_mode_settings() {
-		$value = self::get_safe_mode_option_value();
+		$settings = Settings::get_settings( $this->get_slug() );
 
-		return $value['settings'];
+		return $settings;
 	}
 
 	public function set_safe_mode_settings( $settings ) {
-		$value             = self::get_safe_mode_option_value();
-		$value['settings'] = $settings;
-		$this->set_safe_mode_option_value( $value );
+		Settings::update_settings( $settings, $this->get_slug() );
 	}
 
 	public function delete_safe_mode() {
@@ -2108,42 +2082,15 @@ class Minify extends Module {
 	}
 
 	public function reset_safe_mode() {
-		$this->set_safe_mode_option_value( array(
-			'status'   => false,
-			'settings' => array(),
-		) );
-	}
-
-	private function set_safe_mode_option_value( $value ) {
-		Settings::update( 'wphb_safe_mode', $value );
-
-		return $value;
-	}
-
-	private static function get_safe_mode_option_value() {
-		$raw_value = Settings::get( 'wphb_safe_mode', array() );
-
-		$value             = array();
-		$value['status']   = ! empty( $raw_value['status'] );
-		$value['settings'] = empty( $raw_value['settings'] ) || ! is_array( $raw_value['settings'] )
-			? array()
-			: $raw_value['settings'];
-
-		return $value;
+		SafeMode::instance()->reset_safe_mode_settings();
+		SafeMode::instance()->set_status( false );
 	}
 
 	/**
 	 * @return mixed
 	 */
 	private function previewing_safe_mode() {
-		if ( null === $this->previewing_safe_mode ) {
-			$safe_mode_status  = self::get_safe_mode_status();
-			$query_param_value = filter_input( INPUT_GET, 'minify-safe', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-
-			$this->previewing_safe_mode = $safe_mode_status && true === $query_param_value;
-		}
-
-		return $this->previewing_safe_mode;
+		return SafeMode::instance()->previewing_safe_mode();
 	}
 
 	public function add_safe_mode_param_to_links( $content ) {
@@ -2163,7 +2110,7 @@ class Minify extends Module {
 			$link_pattern      = "$delimiter" . preg_quote( $link, $delimiter ) . "(?=\s*[\"'])$delimiter";
 			$links[]           = $link_pattern;
 			$safe_mode_links[] = $this->is_frontend_link( $link )
-				? esc_url_raw( add_query_arg( 'minify-safe', 'true', $link ) )
+				? esc_url_raw( add_query_arg( 'wphb_preview_safe_mode', 'true', $link ) )
 				: $link;
 		}
 
@@ -2220,7 +2167,7 @@ class Minify extends Module {
 
 	private function is_frontend_link( $link ) {
 		return ! $this->is_admin_link( $link )
-		       && ! $this->is_asset_link( $link );
+			   && ! $this->is_asset_link( $link );
 	}
 
 	private function is_admin_link( $link ) {
@@ -2264,33 +2211,6 @@ class Minify extends Module {
 		}
 
 		return $block;
-	}
-
-	public function safe_mode_notice() {
-		if ( ! self::get_safe_mode_status() || ! current_user_can( Utils::get_admin_capability() ) ) {
-			return;
-		}
-
-		$current_screen = get_current_screen();
-		if ( $current_screen && str_ends_with( $current_screen->id, 'wphb-minification' ) ) {
-			// Don't show on the minification page itself 
-			return;
-		}
-
-		$message                = esc_html__( "We've noticed that you have Safe Mode active in Hummingbird Asset Optimization. Keeping safe mode active for a long period of time may cause page load delays on your live site. We recommend that you review your changes and publish them to live, or disable safe mode.", 'wphb' );
-		$disable_safe_mode_url = admin_url( 'admin.php?page=wphb-minification&action=disable_safe_mode' );
-
-		?>
-		<div class="notice notice-warning">
-			<p><?php echo wp_kses_post( $message ); ?></p>
-			<div style="margin-bottom: 10px; display:flex; align-items:center;">
-				<a class="button button-primary"
-				   href="<?php echo esc_attr( $disable_safe_mode_url ); ?>">
-					<?php esc_html_e( 'Disable safe mode', 'wphb' ); ?>
-				</a>
-			</div>
-		</div>
-		<?php
 	}
 
 	/**

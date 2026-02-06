@@ -221,10 +221,10 @@ class Utils {
 				'awaitingConfirmation'    => __( 'Awaiting confirmation', 'wphb' ),
 				'resendInvite'            => __( 'Resend invite email', 'wphb' ),
 				'addRecipient'            => __( 'Add recipient', 'wphb' ),
-				'successCriticalCssPurge' => __( 'Cache purged. Regenerating Critical CSS, this could take about a minute.', 'wphb' ),
+				'successCriticalCssPurge' => __( 'Cache purged. Regenerating Critical CSS, this could take a few minutes depending on the number of site assets that need to be checked.', 'wphb' ),
 				'criticalGeneratedNotice' => __( 'Critical CSS generated. Please visit the site and let the cache build up before running a test.', 'wphb' ),
 				'errorCriticalCssPurge'   => __( 'There was an error during the critical css files purge. Check folder permissions are 755 for /wp-content/wphb-cache/critical-css or delete directory manually.', 'wphb' ),
-				'enableCriticalCss'       => __( 'Settings updated. Generating Critical CSS, this could take about a minute.', 'wphb' ),
+				'enableCriticalCss'       => __( 'Settings updated. Generating Critical CSS, this could take a few minutes depending on the number of site assets that need to be checked.', 'wphb' ),
 				'select2Tags'             => __( 'Please type any keywords and press Enter', 'wphb' ),
 				'exclusionFiles'          => __( 'Files', 'wphb' ),
 				'exclusionPostTypes'      => __( 'Post Types', 'wphb' ),
@@ -235,6 +235,7 @@ class Utils {
 				'exclusionAds'            => __( 'Ads/Trackers', 'wphb' ),
 				'exclusionAll'            => __( 'All Exclusion', 'wphb' ),
 				'exclusionWpFile'         => __( 'WP File', 'wphb' ),
+				'safeModePublished'       => __( 'Safe Mode changes have been published successfully.', 'wphb' ),
 			),
 			'links'      => array(
 				'audits'         => self::get_admin_menu_url( 'performance' ),
@@ -837,6 +838,10 @@ class Utils {
 	 */
 	public static function get_documentation_url( $page, $view = '' ) {
 		switch ( $page ) {
+			case 'wphb':
+				$anchor       = '#dashboard';
+				$utm_campaign = 'dashboard';
+				break;
 			case 'wphb-performance':
 				if ( 'reports' === $view ) {
 					$anchor = '#reporting';
@@ -845,33 +850,46 @@ class Utils {
 				} else {
 					$anchor = '#performance-test';
 				}
+				$utm_campaign = 'performance_test';
 				break;
 			case 'wphb-caching':
-				$anchor = '#caching';
+				$anchor       = '#caching';
+				$utm_campaign = 'caching';
 				break;
 			case 'wphb-gzip':
-				$anchor = '#gzip-compression';
+				$anchor       = '#gzip-compression';
+				$utm_campaign = 'gzip_compression';
 				break;
 			case 'wphb-minification':
-				$anchor = '#asset-optimization';
+				$anchor       = '#asset-optimization';
+				$utm_campaign = 'asset_optimization';
 				break;
 			case 'wphb-advanced':
-				$anchor = '#advanced-tools';
+				$anchor       = '#advanced-tools';
+				$utm_campaign = 'advanced_tools';
 				break;
 			case 'wphb-uptime':
-				$anchor = '#uptime';
+				$anchor       = '#uptime';
+				$utm_campaign = 'uptime';
 				break;
 			case 'wphb-settings':
-				$anchor = '#settings';
+				$anchor       = '#settings';
+				$utm_campaign = 'settings';
 				break;
 			case 'wphb-notifications':
-				$anchor = '#notifications';
+				$anchor       = '#notifications';
+				$utm_campaign = 'notifications';
+				break;
+			case 'wphb-dev-mode':
+				$anchor       = '#assets-dev-mode-configs';
+				$utm_campaign = 'dev-mode';
 				break;
 			default:
-				$anchor = '';
+				$anchor       = '';
+				$utm_campaign = '';
 		}
 
-		return 'https://wpmudev.com/docs/wpmu-dev-plugins/hummingbird/' . $anchor;
+		return self::get_link( 'docs', $utm_campaign ) . $anchor;
 	}
 
 	/**
@@ -1093,10 +1111,12 @@ class Utils {
 	/**
 	 * Checks if current page is admin dashboard.
 	 *
+	 * @param bool $show_on_subsite_admin  Show noticce on subsite.
+	 *
 	 * @return boolean
 	 */
-	public static function is_admin_dashboard() {
-		if ( is_network_admin() || is_main_site() ) {
+	public static function is_admin_dashboard( $show_on_subsite_admin = false ) {
+		if ( is_network_admin() || is_main_site() || $show_on_subsite_admin ) {
 			return function_exists( 'get_current_screen' ) && in_array( get_current_screen()->id, array( 'dashboard', 'dashboard-network' ), true );
 		}
 
@@ -1165,6 +1185,12 @@ class Utils {
 			'wp-performance-score-booster/wp-performance-score-booster.php' => 'WP Performance Score Booster',
 			'wp-performance/wp-performance.php'         => 'WP Performance',
 			'wp-super-cache/wp-cache.php'               => 'WP Super Cache',
+			'wp-rocket/wp-rocket.php'                   => 'WP Rocket',
+			'wp-speed-of-light/wp-speed-of-light.php'   => 'WP Speed of Light',
+			'jetpack-boost/jetpack-boost.php'           => 'Jetpack Boost',
+			'tenweb-speed-optimizer/tenweb_speed_optimizer.php' => '10Web Booster',
+			'sg-cachepress/sg-cachepress.php'           => 'SiteGround Optimizer',
+			'wp-cloudflare-page-cache/wp-cloudflare-super-page-cache.php' => 'Super Page Cache',
 		);
 
 		foreach ( $caching_plugins as $plugin => $plugin_name ) {
@@ -1469,13 +1495,13 @@ class Utils {
 	public static function unlock_now_link( $location, $utm, $event_name, $display = true, $is_eo_link = false ) {
 
 		if ( $is_eo_link ) {
-			$bolt_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 36 36" style="vertical-align: middle;">
+			$bolt_svg    = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 36 36" style="vertical-align: middle;">
 			<path fill="#FFAC33" stroke="#000" stroke-width="1" stroke-linejoin="round"
 				d="M17.578 1.047L4.5 21h9l-5 14 20.922-20h-9l5.156-13.953z"/>
 			</svg>';
 			$upsell_link = ( 'delayjs' === $event_name )
-			? esc_html__( 'Boost Performance with Pro – On Sale Now ', 'wphb' ) . $bolt_svg
-			: esc_html__( 'Unlock Faster Load Times – On Sale Now ', 'wphb' ) . $bolt_svg;
+			? esc_html__( 'Boost Performance — Get Hummingbird Pro ', 'wphb' ) . $bolt_svg
+			: esc_html__( 'Unlock Faster Load Times — Get Hummingbird Pro  ', 'wphb' ) . $bolt_svg;
 		} else {
 			$upsell_link = esc_html__( 'Unlock now', 'wphb' );
 		}
@@ -1827,5 +1853,23 @@ class Utils {
 		}
 
 		return $mode;
+	}
+
+	/**
+	 * Get mobile user agent.
+	 *
+	 * @return string
+	 */
+	public static function get_mobile_user_agent() {
+		$mobile_user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1';
+
+		/**
+		 * Filter the user agent used for preloading, ensuring the HTTP request is detected as coming from a mobile device.
+		 *
+		 * @param string $mobile_user_agent The mobile user agent.
+		 */
+		$mobile_user_agent = apply_filters( 'wphb_mobile_user_agent', $mobile_user_agent );
+
+		return 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader ' . $mobile_user_agent;
 	}
 }

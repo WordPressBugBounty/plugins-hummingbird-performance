@@ -11,6 +11,7 @@ namespace Hummingbird\Admin\Ajax;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Modules\Caching\Fast_CGI;
+use Hummingbird\Core\Modules\Performance;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -295,7 +296,7 @@ class Setup {
 
 		if ( $tracking_value !== $tracking ) {
 			Settings::update_setting( 'tracking', $tracking, 'settings' );
-			do_action( 'wphb_mixpanel_usage_tracking_value_update', true, $tracking );
+			do_action( 'wphb_mixpanel_usage_tracking_value_update', true, $tracking, 'wizard' );
 		}
 
 		wp_send_json_success();

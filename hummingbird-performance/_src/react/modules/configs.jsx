@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -17,6 +17,39 @@ const { __, sprintf } = wp.i18n;
 import { Presets } from '@wpmudev/shared-presets';
 
 export const ConfigsPage = ( { isWidget, wphbData } ) => {
+	useEffect( () => {
+		// presets forcing action link to open in new tab, we need to remove that.
+		const root = document.getElementById( 'wrap-wphb-configs' );
+		if ( ! root ) {
+			return;
+		}
+
+		let attempts = 0;
+		const maxAttempts = 40; // 30s
+		const timer = setInterval( () => {
+			attempts++;
+			if ( attempts > maxAttempts ) {
+				clearInterval( timer );
+				return;
+			}
+
+			if ( root.querySelector( '.sui-loading' ) ) {
+				return;
+			}
+
+			const link = root.querySelector(
+				'.sui-notice-upsell a.sui-button'
+			);
+			if ( link ) {
+				link.removeAttribute( 'target' );
+				link.removeAttribute( 'rel' );
+				clearInterval( timer );
+			}
+		}, 750 );
+
+		return () => clearInterval( timer );
+	}, [] );
+
 	const proDescription = (
 		<React.Fragment>
 			{ __(
@@ -32,6 +65,18 @@ export const ConfigsPage = ( { isWidget, wphbData } ) => {
 			</a>
 		</React.Fragment>
 	);
+
+	const freeNoticeMessage = <React.Fragment>
+		{
+			<strong> { __( 'Connect now to apply configs across all your sites', 'wphb' ) } </strong>
+		}
+		<br />
+		{
+			__(
+				'Tired of saving, downloading, and uploading your configs across sites? Connect your site to WPMU DEV to apply your Hummingbird configs to multiple sites in just a few clicks. It’s free and takes less than a minute to set up.',
+				'wphb'
+			) }
+	</React.Fragment>;
 
 	const closeIcon = __( 'Close this dialog window', 'wphb' ),
 		cancelButton = __( 'Cancel', 'wphb' );
@@ -68,7 +113,8 @@ export const ConfigsPage = ( { isWidget, wphbData } ) => {
 		edit: __( 'Name and Description', 'wphb' ),
 		delete: __( 'Delete', 'wphb' ),
 		notificationDismiss: __( 'Dismiss notice', 'wphb' ),
-		freeButtonLabel: __( 'Try The Hub', 'wphb' ),
+		freeButtonLabel: __( 'CONNECT MY SITE', 'wphb' ),
+		freeNoticeMessage,
 		defaultRequestError: sprintf(
 			/* translators: %s request status */
 			__(

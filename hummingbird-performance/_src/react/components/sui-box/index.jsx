@@ -44,7 +44,7 @@ export default class Box extends React.Component {
 	 *
 	 * @return {*} Content.
 	 */
-	 renderContent() {
+	renderContent() {
 		const boxHeader = Box.boxHeader(
 			this.props.title,
 			this.props.icon,
@@ -54,9 +54,9 @@ export default class Box extends React.Component {
 		let classesArray;
 
 		if ( this.props.stickyType ) {
-			classesArray = ['sui-box','sui-box-header', this.props.boxClass];
+			classesArray = [ 'sui-box', 'sui-box-header', this.props.boxClass ];
 		} else {
-			classesArray = ['sui-box-header'];
+			classesArray = [ 'sui-box-header' ];
 		}
 
 		return (
@@ -92,20 +92,19 @@ export default class Box extends React.Component {
 	 */
 	render() {
 		const boxRender = this.renderContent();
-		
+
 		if ( this.props.stickyType ) {
 			return (
 				<React.Fragment>
 					{ boxRender }
 				</React.Fragment>
 			);
-		} else {
-			return (
-				<div className={ classNames( 'sui-box', this.props.boxClass ) }>
-					{ boxRender }
-				</div>
-			);
 		}
+		return (
+			<div className={ classNames( 'sui-box', this.props.boxClass ) } data-tab="flushed">
+				{ boxRender }
+			</div>
+		);
 	}
 }
 

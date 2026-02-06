@@ -57,7 +57,7 @@ class Preload extends Background_Process {
 		$args = array(
 			'timeout'    => 0.01,
 			'blocking'   => false,
-			'user-agent' => $is_mobile ? $this->get_mobile_user_agent() : 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader',
+			'user-agent' => $is_mobile ? Utils::get_mobile_user_agent() : 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader',
 			'sslverify'  => false,
 		);
 
@@ -65,24 +65,6 @@ class Preload extends Background_Process {
 		usleep( 500000 );
 
 		return false;
-	}
-
-	/**
-	 * Get mobile user agent.
-	 *
-	 * @return string
-	 */
-	private function get_mobile_user_agent() {
-		$mobile_user_agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1';
-
-		/**
-		 * Filter the user agent used for preloading, ensuring the HTTP request is detected as coming from a mobile device.
-		 *
-		 * @param string $mobile_user_agent The mobile user agent.
-		 */
-		$mobile_user_agent = apply_filters( 'wphb_mobile_user_agent', $mobile_user_agent );
-
-		return 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader ' . $mobile_user_agent;
 	}
 
 	/**

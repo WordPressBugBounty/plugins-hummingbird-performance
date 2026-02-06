@@ -7,6 +7,7 @@
 
 namespace Hummingbird\Core\Modules\Minify;
 
+use Hummingbird\Core\SafeMode;
 use WP_Http_Cookie;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -189,6 +190,9 @@ class Scanner {
 		}
 
 		$urls = array_unique( $urls );
+		if ( SafeMode::instance()->get_status() ) {
+			$urls = array_map( array( SafeMode::instance(), 'maybe_append_query_arg' ), $urls );
+		}
 
 		$urls_list = array();
 		// Duplicate every URL multiple times. This will be enough to generate all the files for most of the sites.

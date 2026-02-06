@@ -319,7 +319,7 @@ abstract class Request {
 
 		$this->logger->log( "WPHB API: Sending request to $url", 'api' );
 		$this->logger->log( 'WPHB API: Arguments:', 'api' );
-		$this->logger->log( $args, 'api' );
+		$this->logger->log( $this->sanitize_args_for_logging( $args ), 'api' );
 
 		switch ( strtolower( $method ) ) {
 			case 'patch':
@@ -357,4 +357,46 @@ abstract class Request {
 	 */
 	protected function sign_request() {}
 
+	/**
+	 * Sanitize arguments for logging by redacting sensitive headers.
+	 *
+	 * @since 3.18.1
+	 *
+	 * @param array $args Request arguments to sanitize.
+	 * @return array Sanitized arguments safe for logging.
+	 */
+	private function sanitize_args_for_logging( $args ) {
+		// Nothing to sanitize.
+		if ( empty( $args['headers'] ) || ! is_array( $args['headers'] ) ) {
+			return $args;
+		}
+
+		/**
+		 * Filter the list of sensitive headers to redact from logs.
+		 *
+		 * @since 3.18.1
+		 *
+		 * @param array $sensitive_headers Array of header names to redact.
+		 */
+		$sensitive_headers = apply_filters(
+			'wphb_sensitive_headers',
+			array(
+				'X-Auth-Key',
+				'X-Auth-Email',
+				'Authorization',
+			)
+		);
+
+		// Build case-insensitive lookup map for performance.
+		$sensitive_lookup = array_fill_keys( array_map( 'strtolower', $sensitive_headers ), true );
+
+		// Redact sensitive headers.
+		foreach ( $args['headers'] as $header => $value ) {
+			if ( isset( $sensitive_lookup[ strtolower( $header ) ] ) ) {
+				$args['headers'][ $header ] = '*** REDACTED PER SECURITY POLICY ***';
+			}
+		}
+
+		return $args;
+	}
 }

@@ -30,7 +30,7 @@ $url = \Hummingbird\Core\Utils::get_admin_menu_url( 'minification' );
 	return;
 }
 ?>
-<?php if ( isset( $audit->score ) && 1 === $audit->score ) : ?>
+<?php if ( ! isset( $audit->score ) || 1 === $audit->score ) : ?>
 	<?php $this->admin_notices->show_inline( esc_html__( 'Nice! you have passed the audit.', 'wphb' ) ); ?>
 <?php else : ?>
 	<?php

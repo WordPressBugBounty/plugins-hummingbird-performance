@@ -10,6 +10,7 @@ namespace Hummingbird\Admin\Ajax;
 
 use Hummingbird\Core\Modules\Minify\Minify_Group;
 use Hummingbird\Core\Modules\Minify\Sources_Collector;
+use Hummingbird\Core\SafeMode;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 
@@ -33,7 +34,6 @@ class Minify {
 			'minify_reset_settings',
 			'minify_auto_save_settings',
 			'minify_manual_save_settings',
-			'minify_activate_safe_mode',
 			'minify_save_safe_mode_settings',
 			'minify_save_and_publish_safe_mode',
 			'minify_publish_safe_mode',
@@ -55,7 +55,6 @@ class Minify {
 			 * @uses minify_reset_settings()
 			 * @uses minify_auto_save_settings()
 			 * @uses minify_manual_save_settings()
-			 * @uses minify_activate_safe_mode()
 			 * @uses minify_save_safe_mode_settings()
 			 * @uses minify_publish_safe_mode()
 			 * @uses minify_save_and_publish_safe_mode()
@@ -347,7 +346,7 @@ class Minify {
 		$settings = filter_input( INPUT_POST, 'data', FILTER_DEFAULT, FILTER_UNSAFE_RAW );
 		$settings = json_decode( html_entity_decode( $settings ), true );
 
-		$minify      = Utils::get_module( 'minify' );
+		$minify = Utils::get_module( 'minify' );
 		$this->save_manual_settings( $settings, array( $minify, 'update_options' ) );
 
 		$this->minify_manual_status();
@@ -408,7 +407,7 @@ class Minify {
 		$settings = json_decode( html_entity_decode( $settings ), true );
 
 		$this->save_manual_settings(
-			$this->filter_asset_options( $settings ),
+			SafeMode::filter_options( $settings, 'minify' ),
 			array( $this, 'save_safe_mode_settings' )
 		);
 
@@ -430,10 +429,9 @@ class Minify {
 
 	public function minify_publish_safe_mode() {
 		check_ajax_referer( 'wphb-fetch' );
-
 		$minify   = Utils::get_module( 'minify' );
 		$settings = array_merge( $minify->get_options(), $minify->get_safe_mode_settings() );
-		$settings = $this->filter_asset_options( $settings );
+		$settings = SafeMode::filter_options( $settings, 'minify' );
 
 		$this->save_manual_settings( $settings, array( $minify, 'update_options' ) );
 		$minify->reset_safe_mode();
@@ -450,7 +448,7 @@ class Minify {
 
 	private function save_safe_mode_settings( $settings ) {
 		$minify = Utils::get_module( 'minify' );
-		$minify->set_safe_mode_settings( $this->filter_asset_options( $settings ) );
+		$minify->set_safe_mode_settings( SafeMode::filter_options( $settings, 'minify' ) );
 	}
 
 	/**
@@ -489,8 +487,8 @@ class Minify {
 	public function minify_manual_status() {
 		check_ajax_referer( 'wphb-fetch' );
 
-		$minify  = Utils::get_module( 'minify' );
-		$options = $this->filter_asset_options( $minify->get_options() );
+		$minify            = Utils::get_module( 'minify' );
+		$options           = SafeMode::filter_options( $minify->get_options(), 'minify' );
 		$safe_mode_options = array_merge( $options, $minify->get_safe_mode_settings() );
 
 		wp_send_json_success(
@@ -514,21 +512,41 @@ class Minify {
 	 *
 	 * @param array $arr  Input array.
 	 *
-	 * @return array
+	 * @return mixed
 	 */
 	public function flatten_array( $arr ) {
-		if ( is_array( $arr ) ) {
-			foreach ( $arr as $type => $values ) {
-				if ( in_array( $type, array( 'scripts', 'styles' ), true ) ) {
-					$arr[ $type ] = array_values( $values );
-				} else {
-					$arr = array_values( $arr );
-				}
-			}
+		if ( ! is_array( $arr ) ) {
+			return $arr;
+		}
+
+		// Recurse into children first.
+		foreach ( $arr as $key => $value ) {
+			$arr[ $key ] = $this->flatten_array( $value );
+		}
+
+		// If all keys are integers, reindex them.
+		if ( $this->has_all_integer_keys( $arr ) ) {
+			$arr = array_values( $arr );
 		}
 
 		return $arr;
 	}
+
+	/**
+	 * Check if all keys in an array are integers.
+	 *
+	 * @param array $arr Input array.
+	 * @return bool
+	 */
+	private function has_all_integer_keys( array $arr ): bool {
+		foreach ( array_keys( $arr ) as $key ) {
+			if ( ! is_int( $key ) ) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 	/**
 	 * Reset individual file.
@@ -581,82 +599,6 @@ class Minify {
 				'notice' => $notice,
 			)
 		);
-	}
-
-	/**
-	 * Toggle safe mode.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return void
-	 */
-	public function minify_activate_safe_mode() {
-		check_ajax_referer( 'wphb-fetch' );
-
-		$minify = Utils::get_module( 'minify' );
-		$minify->set_safe_mode_status( true );
-
-		// Reset the options to the DB value
-		$saved_options = $this->filter_asset_options( $minify->get_options() );
-		$saved_options = array_map( array( $this, 'flatten_array' ), $saved_options );
-
-		// Use the settings sent in the request as the safe mode options
-		$unsaved_options = filter_input( INPUT_POST, 'data', FILTER_DEFAULT, FILTER_UNSAFE_RAW );
-		$unsaved_options = json_decode( html_entity_decode( $unsaved_options ), true );
-
-		wp_send_json_success(
-			array(
-				'options'           => $saved_options,
-				'safe_mode_options' => $unsaved_options,
-				'mode'              => Utils::get_minification_mode(),
-			)
-		);
-	}
-
-	/**
-	 * @param array $options
-	 *
-	 * @return array
-	 */
-	private function filter_asset_options( array $options ) {
-		unset( $options['do_assets'] );
-		unset( $options['enabled'] );
-		unset( $options['file_path'] );
-		unset( $options['log'] );
-		unset( $options['minify_blog'] );
-		unset( $options['nocdn'] );
-		unset( $options['type'] );
-		unset( $options['use_cdn'] );
-		unset( $options['view'] );
-		unset( $options['delay_js'] );
-		unset( $options['delay_js_exclusions'] );
-		unset( $options['delay_js_timeout'] );
-		unset( $options['delay_js_exclusion_list'] );
-		unset( $options['delay_js_files_exclusion'] );
-		unset( $options['delay_js_post_types_exclusion'] );
-		unset( $options['delay_js_post_urls_exclusion'] );
-		unset( $options['delay_js_plugins_themes_exclusion'] );
-		unset( $options['delay_js_ads_tracker_exclusion'] );
-		unset( $options['delay_js_exclude_inline_js'] );
-		unset( $options['delay_js_keywords_advanced_view'] );
-		unset( $options['critical_css'] );
-		unset( $options['critical_css_type'] );
-		unset( $options['critical_css_remove_type'] );
-		unset( $options['critical_css_mode'] );
-		unset( $options['critical_page_types'] );
-		unset( $options['critical_skipped_custom_post_types'] );
-		unset( $options['above_fold_load_stylesheet_method'] );
-		unset( $options['critical_css_files_exclusion'] );
-		unset( $options['critical_css_post_urls_exclusion'] );
-		unset( $options['critical_css_plugins_themes_exclusion'] );
-		unset( $options['critical_css_keywords'] );
-		unset( $options['font_optimization'] );
-		unset( $options['preload_fonts'] );
-		unset( $options['preload_fonts_mode'] );
-		unset( $options['font_swap'] );
-		unset( $options['font_display_value'] );
-		unset( $options['ao_completed_time'] );
-		return $options;
 	}
 
 	/**

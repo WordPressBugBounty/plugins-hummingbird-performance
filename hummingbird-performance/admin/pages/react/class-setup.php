@@ -9,6 +9,7 @@
 namespace Hummingbird\Admin\Pages\React;
 
 use Hummingbird\Admin\Page;
+use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Modules\Caching\Fast_CGI;
@@ -56,26 +57,31 @@ class Setup extends Page {
 		$run_url = wp_nonce_url( $run_url, 'wphb-run-performance-test' );
 		$run_url = str_replace( '&amp;', '&', $run_url );
 
-		$args     = array(
+		$args = array(
 			'isMember'           => Utils::is_member(),
 			'isNetworkAdmin'     => is_network_admin(),
 			'hasUptime'          => Utils::get_module( 'uptime' )->has_access(),
 			'isFastCGISupported' => Fast_CGI::is_fast_cgi_supported(),
 			'links'              => array(
-				'configs'    => Utils::get_admin_menu_url( 'settings' ) . '&view=configs',
-				'wphbDirUrl' => WPHB_DIR_URL,
-				'plugins'    => network_admin_url( 'plugins.php' ),
-				'docs'       => Utils::get_link( 'docs', 'onboarding' ),
-				'upsell'     => Utils::get_link( 'plugin', 'onboarding' ),
-				'pluginDash' => Utils::get_admin_menu_url(),
-				'tracking'   => Utils::get_link( 'tracking', 'onboarding' ),
-				'runPerf'    => $run_url,
+				'configs'       => Utils::get_admin_menu_url( 'settings' ) . '&view=configs',
+				'wphbDirUrl'    => WPHB_DIR_URL,
+				'plugins'       => network_admin_url( 'plugins.php' ),
+				'docs'          => Utils::get_link( 'docs', 'onboarding' ),
+				'upsell'        => Utils::get_link( 'plugin', 'onboarding' ),
+				'pluginDash'    => Utils::get_admin_menu_url(),
+				'tracking'      => Utils::get_link( 'tracking', 'onboarding' ),
+				'runPerf'       => $run_url,
+				'defaultAvatar' => get_avatar_url( 0 ),
+				'hubConnect'    => Hub_Connector::get_connect_site_url( 'wphb-notifications', 'hummingbird_onboarding_connect_link' ),
 			),
 			'hasWoo'             => class_exists( 'woocommerce' ),
 			'minifySteps'        => Utils::get_module( 'minify' )->scanner->get_scan_steps(),
 			'nonces'             => array(
 				'HBFetchNonce' => wp_create_nonce( 'wphb-fetch' ),
 			),
+			'isConnected'        => Utils::has_access_to_hub(),
+			'getTimezone'        => Utils::get_timezone_string(),
+			'isWhiteLabeled'     => apply_filters( 'wpmudev_branding_hide_branding', false ),
 		);
 
 		$args = array_merge_recursive( $args, Utils::get_tracking_data() );

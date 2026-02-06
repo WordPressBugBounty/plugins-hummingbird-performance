@@ -12,7 +12,7 @@
  * Plugin Name:       Hummingbird
  * Plugin URI:        https://wpmudev.com/project/wp-hummingbird/
  * Description:       Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
- * Version:           3.16.0
+ * Version:           3.19.0
  * Requires PHP:      7.4
  * Author:            WPMU DEV
  * Author URI:        https://wpmudev.com/
@@ -43,8 +43,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 namespace Hummingbird;
 
+use Hummingbird\Core\Modules\Performance;
+use Hummingbird\Core\Utils;
+
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '3.16.0' );
+	define( 'WPHB_VERSION', '3.19.0' );
 }
 
 if ( ! defined( 'WPHB_SUI_VERSION' ) ) {
@@ -157,6 +160,7 @@ if ( ! class_exists( 'Hummingbird\\WP_Hummingbird' ) ) {
 			require __DIR__ . '/vendor/autoload.php';
 
 			$this->maybe_disable_free_version();
+			$this->init_rate_notices();
 
 			add_action( 'init', array( $this, 'init' ), 0 );
 			add_action( 'init', array( $this, 'init_pro' ), 0 );
@@ -258,6 +262,42 @@ if ( ! class_exists( 'Hummingbird\\WP_Hummingbird' ) ) {
 		}
 
 		/**
+		 * Initialize rate notices for free version.
+		 *
+		 * @since 3.18.0
+		 */
+		private function init_rate_notices() {
+			if ( ! defined( 'WPHB_WPORG' ) || ! WPHB_WPORG ) {
+				return;
+			}
+
+			$rate_later = get_site_option( 'wphb-notice-free-rated-later_date', false );
+			if ( ! $rate_later && 'never' !== $rate_later ) {
+				$rate_later = time() + ( 7 * DAY_IN_SECONDS );
+				update_site_option( 'wphb-notice-free-rated-later_date', $rate_later );
+			}
+
+			$recorded_scores = get_site_option( 'wphb-notice-free-rated-last-score', false );
+			$last_scores     = Performance::get_last_report_scores();
+			$update_needed   = false;
+
+			if ( is_array( $recorded_scores ) && is_array( $last_scores ) && ( $recorded_scores['mobile'] > $last_scores['mobile'] || $recorded_scores['desktop'] > $last_scores['desktop'] ) ) {
+				$update_needed = true;
+			}
+
+			if ( ! $recorded_scores || $update_needed ) {
+				if ( $last_scores ) {
+					update_site_option( 'wphb-notice-free-rated-last-score', $last_scores );
+				}
+			}
+
+			if ( 'never' !== $rate_later && time() > (int) $rate_later ) {
+				add_site_option( 'wphb-notice-free-rated-show', 'yes' );
+				update_site_option( 'wphb-notice-free-rated-later_date', 'never' );
+			}
+		}
+
+		/**
 		 * Moved from above to class.
 		 *
 		 * Checks if HB has both the free and Pro versions installed and disables the Free version.
@@ -275,7 +315,6 @@ if ( ! class_exists( 'Hummingbird\\WP_Hummingbird' ) ) {
 			// Add notice to rate the free version.
 			$free_installation = get_site_option( 'wphb-free-install-date' );
 			if ( empty( $free_installation ) ) {
-				update_site_option( 'wphb-notice-free-rated-show', 'yes' );
 				update_site_option( 'wphb-free-install-date', time() );
 			}
 

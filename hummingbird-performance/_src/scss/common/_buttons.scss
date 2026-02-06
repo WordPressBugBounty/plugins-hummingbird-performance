@@ -27,6 +27,13 @@
         border: 1px solid #0059FF;
         border-radius: 12px;
     }
+
+    .wphb-hub-connector-upsell-button {
+        background: #0059ff !important;
+        &:hover {
+            background: #0047CC !important;
+        }
+    }
 }
 #delay-js-non-pro-member-modal {
     .sui-box {

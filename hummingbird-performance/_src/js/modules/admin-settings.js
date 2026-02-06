@@ -164,6 +164,15 @@ import { getLink } from '../utils/helpers';
 				$( '.cache-control-options' ).toggle();
 			} );
 
+			$( '#cancel-disconnect' ).on( 'click', function() {
+				WPHB_Admin.settings.disconnectEvents( 'cancel' );
+			} );
+			$( '#wphb-disconnect-modal-wrapper' ).on( 'click', function( e ) {
+				if ( e.target.classList?.contains( 'sui-modal-overlay' ) ) {
+					WPHB_Admin.settings.disconnectEvents( 'skip' );
+				}
+			} );
+
 			return this;
 		},
 
@@ -180,6 +189,35 @@ import { getLink } from '../utils/helpers';
 		},
 
 		/**
+		 * Track disconnect events.
+		 *
+		 * @param {string} actionType The action type.
+		 * @since 3.18.0
+		 */
+		disconnectEvents: ( actionType = 'submit' ) => {
+			if ( window.wphbMixPanel ) {
+				if ( 'submit' !== actionType && ! wphb.mixpanel.enabled ) {
+					return;
+				}
+
+				const reasonInput = document.getElementById(
+					'wphb-disconnect-reason-input'
+				);
+				const reason = reasonInput && reasonInput.value ? reasonInput.value : 'na';
+
+				wphbMixPanel.track(
+					'Disconnect Site',
+					{
+						'Modal Action': actionType,
+						Message: reason,
+						'Tracking Status': ( 'undefined' === typeof wphb.mixpanel || wphb.mixpanel.enabled ) ? 'opted_in' : 'opted_out',
+					},
+					( 'submit' === actionType ) ? true : false,
+				);
+			}
+		},
+
+		/**
 		 * Parse confirm disconnect site from the modal.
 		 *
 		 * @param {HTMLElement} btn The button that triggered the action.
@@ -190,8 +228,12 @@ import { getLink } from '../utils/helpers';
 				btn.classList.add( 'sui-button-onload-text' );
 			}
 
-			Fetcher.common.call( 'wphb_disconnect_site' ).then( () => {
-				window.location.reload();
+			WPHB_Admin.settings.disconnectEvents();
+			Fetcher.common.call( 'wphb_disconnect_site' ).then( ( response ) => {
+				WPHB_Admin.notices.show( response.message );
+				setTimeout( () => {
+					window.location.reload();
+				}, 2000 );
 			} );
 		},
 	};

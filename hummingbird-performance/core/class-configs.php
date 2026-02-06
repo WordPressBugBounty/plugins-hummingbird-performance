@@ -56,7 +56,7 @@ class Configs {
 					'hubConfigs'    => Utils::get_link( 'configs' ),
 					'hubWelcome'    => Utils::get_link( 'hub-welcome', 'config' ),
 					'configsPage'   => Utils::get_admin_menu_url( 'settings' ) . '&view=configs',
-					'freeNoticeHub' => Utils::get_link( 'hub-welcome', 'hummingbird_hub_config' ),
+					'freeNoticeHub' => Hub_Connector::get_connect_site_url( 'wphb-settings', 'hummingbird_settings_configs' ),
 				),
 				'module'       => array(
 					'isMember'       => Utils::has_access_to_hub(),

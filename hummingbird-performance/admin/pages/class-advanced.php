@@ -259,10 +259,10 @@ class Advanced extends Page {
 		$this->view(
 			'advanced/site-health-meta-box',
 			array(
-				'minify_groups'  => Minify_Group::get_minify_groups(),
-				'orphaned_metas' => Utils::get_module( 'advanced' )->get_orphaned_ao_complex(),
-				'preloading'     => Settings::get_setting( 'preload', 'page_cache' ) || $preloader->is_process_running(),
-				'queue_size'     => $preloader->get_queue_size(),
+				'minify_groups_ids' => Minify_Group::get_minify_groups_ids(),
+				'orphaned_metas'    => Utils::get_module( 'advanced' )->get_orphaned_ao_complex(),
+				'preloading'        => Settings::get_setting( 'preload', 'page_cache' ) || $preloader->is_process_running(),
+				'queue_size'        => $preloader->get_queue_size(),
 			)
 		);
 	}

@@ -130,7 +130,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php
 				$this->admin_notices->show_inline(
 					sprintf( /* translators: %1$s - opening a tag, %2$s - closing a tag */
-						esc_html__( 'After disabling cart fragments, be sure to enable the %1$sRedirect to the cart page after successful addition%2$s option in your Woocommerce Settings to redirect your customers to the main cart page instead of waiting for an item to be added to the cart.', 'wphb' ),
+						esc_html__( 'After disabling cart fragments, be sure to enable the %1$sRedirect to the cart page after successful addition%2$s option in your WooCommerce Settings to redirect your customers to the main cart page instead of waiting for an item to be added to the cart.', 'wphb' ),
 						'<a href="' . esc_url( $woo_link ) . '" target="_blank">',
 						'</a>'
 					),

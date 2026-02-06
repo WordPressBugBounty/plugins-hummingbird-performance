@@ -21,6 +21,7 @@ use Hummingbird\Core\Modules\Caching\Preload;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Modules\Caching\Fast_CGI;
+use Hummingbird\Core\SafeMode;
 use stdClass;
 use WP_Error;
 use WP_Post;
@@ -132,6 +133,12 @@ class Page_Cache extends Module {
 
 		// Clear cache when menu updated through Block editor.
 		add_action( 'save_post_wp_navigation', array( $this, 'wphb_save_post_wp_navigation_menu' ), 10, 3 );
+
+		// Clear cache on WordPress appearance changes.
+		add_action( 'customize_save_after', array( $this, 'clear_cache_after_customizer_save' ) );
+		add_filter( 'widget_update_callback', array( $this, 'clear_cache_on_widget_change' ), 10, 4 );
+		add_action( 'update_option_theme_mods_' . get_option( 'stylesheet' ), array( $this, 'clear_cache_after_theme_mods_update' ), 10, 2 );
+		add_action( 'save_post_wp_global_styles', array( $this, 'clear_cache_after_global_styles_save' ), 10, 3 );
 
 		// Only cache pages when there are no errors.
 		if ( ! is_wp_error( $this->error ) ) {
@@ -460,6 +467,7 @@ class Page_Cache extends Module {
 		$wphb_cache_config->exclude_url     = isset( $settings['exclude']['url_strings'] ) && is_array( $settings['exclude']['url_strings'] ) ? $settings['exclude']['url_strings'] : array();
 		$wphb_cache_config->exclude_agents  = isset( $settings['exclude']['user_agents'] ) && is_array( $settings['exclude']['user_agents'] ) ? $settings['exclude']['user_agents'] : array();
 		$wphb_cache_config->exclude_cookies = isset( $settings['exclude']['cookies'] ) && is_array( $settings['exclude']['cookies'] ) ? $settings['exclude']['cookies'] : array();
+		$wphb_cache_config->safemode_status = isset( $settings['safemode_status'] ) ? (bool) $settings['safemode_status'] : false;
 	}
 
 	/**
@@ -839,7 +847,7 @@ class Page_Cache extends Module {
 			return true;
 		} elseif ( is_page() && ! in_array( 'page', $wphb_cache_config->page_types, true ) ) {
 			return true;
-		} elseif ( is_single() && ! in_array( 'single', $wphb_cache_config->page_types, true ) ) {
+		} elseif ( is_single() && 'post' === get_post_type() && ! in_array( 'single', $wphb_cache_config->page_types, true ) ) {
 			return true;
 		} elseif ( is_archive() ) {
 			if ( in_array( 'archive', $wphb_cache_config->page_types, true ) ) {
@@ -1112,6 +1120,7 @@ class Page_Cache extends Module {
 		$config_file = $wphb_fs->basedir . 'wphb-cache.php';
 
 		self::log_msg( 'Writing configuration to: ' . $config_file );
+		$settings['safemode_status'] = SafeMode::instance()->get_status();
 		$this->write_file( $config_file, wp_json_encode( $settings ) );
 
 		$this->clear_cache();
@@ -1221,7 +1230,7 @@ class Page_Cache extends Module {
 		} elseif ( isset( $_GET['preview'] ) ) { // Input var okay.
 			self::log_msg( 'Do not cache preview post pages.' );
 			return false;
-		} elseif ( false === empty( $_GET ) && ! $wphb_cache_config->cache_with_get_params ) { // Input var ok.
+		} elseif ( false === empty( $_GET ) && ( ! $wphb_cache_config->cache_with_get_params && ! self::should_cache_safemode( $wphb_cache_config->safemode_status ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			self::log_msg( 'Skipping page with GET params.' );
 			return false;
 		} elseif ( preg_match( '/^\/wp.*php$/', strtok( $request_uri, '?' ) ) ) {
@@ -1243,6 +1252,9 @@ class Page_Cache extends Module {
 			return false;
 		} elseif ( ! isset( $_SERVER['HTTP_HOST'] ) ) { // Input var ok.
 			self::log_msg( 'Page can not be cached, no HTTP_HOST set.' );
+			return false;
+		} elseif ( $wphb_cache_config->safemode_status && ! isset( $_GET['wphb_preview_safe_mode'] ) && ( ! isset( $_SERVER['HTTP_USER_AGENT'] ) || strpos( $_SERVER['HTTP_USER_AGENT'], 'Lighthouse' ) === false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			self::log_msg( 'Do not serve safemode cache for logged out users.' );
 			return false;
 		}
 
@@ -1673,14 +1685,22 @@ class Page_Cache extends Module {
 
 		$count = Settings::get_setting( 'pages_cached', 'page_cache' );
 
-		if ( $wphb_fs->purge( 'cache/mobile/' . $http_host . $directory, $skip_sub_dirs ) ) {
-			self::log_msg( 'Mobile cache has been cleared.' );
-			$count--;
+		if ( is_dir( wp_normalize_path( $wphb_fs->cache_dir . '/mobile/' . $cache_dir ) ) ) {
+			if ( ! $skip_sub_dirs ) {
+				$files_purged = $wphb_fs->count_files( $wphb_fs->cache_dir . '/mobile/' . $cache_dir );
+			}
+			if ( $wphb_fs->purge( 'cache/mobile/' . $http_host . $directory, $skip_sub_dirs ) ) {
+				self::log_msg( 'Mobile cache has been cleared.' );
+				( ! $skip_sub_dirs ) ? $count -= $files_purged : $count--;
+			}
 		}
 
+		if ( ! $skip_sub_dirs ) {
+			$files_purged = $wphb_fs->count_files( $full_path );
+		}
 		$status = $wphb_fs->purge( 'cache/' . $cache_dir, $skip_sub_dirs );
 		if ( $status ) {
-			$count--;
+			( ! $skip_sub_dirs ) ? $count -= $files_purged : $count--;
 		}
 
 		Settings::update_setting( 'pages_cached', $count, 'page_cache' );
@@ -2289,4 +2309,86 @@ class Page_Cache extends Module {
 	public function wphb_save_post_wp_navigation_menu( $post_id, $post, $update ) {
 		$this->clear_cache();
 	}
+
+	/**
+	 * Clear page cache when widget settings change.
+	 *
+	 * This method is called when any widget is updated, ensuring that
+	 * cached pages reflect the new widget configuration.
+	 *
+	 * @since 3.17.0
+	 *
+	 * @param array     $instance     The current widget instance's settings.
+	 * @param array     $new_instance Array of new widget settings.
+	 * @param array     $old_instance Array of old widget settings.
+	 * @param WP_Widget $widget       The current widget instance.
+	 *
+	 * @return array The widget instance.
+	 */
+	public function clear_cache_on_widget_change( $instance, $new_instance, $old_instance, $widget ) {
+		// Only clear cache if widget settings actually changed.
+		if ( $new_instance !== $old_instance ) {
+			$this->clear_cache();
+		}
+
+		return $instance;
+	}
+
+	/**
+	 * Clear cache after customizer save with error handling.
+	 *
+	 * @since 3.17.0
+	 *
+	 * @param WP_Customize_Manager $wp_customize WP_Customize_Manager instance.
+	 */
+	public function clear_cache_after_customizer_save( $wp_customize ) {
+		$this->clear_cache();
+	}
+
+	/**
+	 * Clear cache after theme mods update.
+	 *
+	 * @since 3.17.0
+	 *
+	 * @param mixed $old_value The old option value.
+	 * @param mixed $value     The new option value.
+	 */
+	public function clear_cache_after_theme_mods_update( $old_value, $value ) {
+		$this->clear_cache();
+	}
+
+	/**
+	 * Clear Hummingbird cache after block theme global styles are updated.
+	 *
+	 * @since 3.17.0
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an existing post being updated.
+	 */
+	public function clear_cache_after_global_styles_save( $post_id, $post, $update ) {
+		if ( 'publish' !== $post->post_status ) {
+			return;
+		}
+
+		$this->clear_cache();
+	}
+
+	/**
+	 * Determine if we should cache the request for safemode is enabled.
+	 *
+	 * @since 3.18.0
+	 *
+	 * @param bool $safemode_status Current safemode status.
+	 *
+	 * @return bool
+	 */
+	private static function should_cache_safemode( $safemode_status ) :bool {
+		$preview = filter_input( INPUT_GET, 'wphb_preview_safe_mode', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		if ( $safemode_status && $preview ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

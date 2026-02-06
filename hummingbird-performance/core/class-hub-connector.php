@@ -96,12 +96,17 @@ class Hub_Connector {
 	 */
 	private function init() :void {
 		$hub_connector_lib = WPHB_DIR_PATH . 'core/externals/hub-connector/connector.php';
-		if ( file_exists( $hub_connector_lib ) ) {
+		if ( file_exists( $hub_connector_lib ) && ! class_exists( '\WPMUDEV\Hub\Connector' ) ) {
 			include_once $hub_connector_lib;
 		}
 
+		$page = filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW );
+		if ( empty( $page ) || strpos( $page, 'wphb-' ) !== 0 ) {
+			return;
+		}
+
 		if ( class_exists( 'WPMUDEV\Hub\Connector' ) ) {
-			$this->allowed_screens = array( 'wphb-uptime', 'wphb-notifications' );
+			$this->allowed_screens = array( 'wphb-uptime', 'wphb-notifications', 'wphb-settings' );
 
 			// verify valid request.
 			if ( self::is_connection_flow() && ! wp_verify_nonce( filter_input( INPUT_GET, '_wpnonce' ), self::CONNECTION_ACTION ) ) {
@@ -112,7 +117,6 @@ class Hub_Connector {
 				);
 			}
 
-			$page = filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW );
 			if ( in_array( $page, $this->allowed_screens, true ) ) {
 				self::$valid_screen = str_replace( 'wphb-', '', $page );
 			}

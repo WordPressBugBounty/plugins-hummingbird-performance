@@ -12,7 +12,6 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 			this.registerClearNetworkCache();
 			this.registerClearCacheFromNotice();
 			this.registerClearCloudflare();
-			this.registerSafeModeActions();
 			this.registerSwitchCriticalCSS();
 			this.registerDeactivationSurvey();
 			this.registerCopyText();
@@ -246,7 +245,7 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 			}
 
 			btn.addEventListener( 'click', () =>
-				this.post( 'wphb_global_clear_cache' )
+				this.post( 'wphb_global_clear_cache' + '&all_clear=1' )
 			);
 		},
 
@@ -267,60 +266,6 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 			btn.addEventListener( 'click', () =>
 				this.post( 'wphb_front_clear_cloudflare' )
 			);
-		},
-
-		copyTextToClipboard: ( text ) => {
-			const textArea = document.createElement( 'textarea' );
-			textArea.value = text;
-
-			// Avoid scrolling to bottom
-			textArea.style.top = '0';
-			textArea.style.left = '0';
-			textArea.style.position = 'fixed';
-
-			document.body.appendChild( textArea );
-			textArea.focus();
-			textArea.select();
-
-			try {
-				document.execCommand( 'copy' );
-			} catch ( err ) {
-				console.error( 'Oops, unable to copy', err );
-			}
-
-			document.body.removeChild( textArea );
-		},
-
-		/**
-		 * Regsiter safe mode actions.
-		 *
-		 * @since 3.4.0
-		 */
-		registerSafeModeActions() {
-			const saveButton = document.getElementById( 'wphb-ao-safe-mode-save' );
-			if ( saveButton ) {
-				saveButton.addEventListener( 'click', () => {
-					saveButton.disabled = true;
-					this.request( 'wphb_react_minify_publish_safe_mode' )
-						.then( () => {
-							window.location.href = wphbGlobal.minify_url + '&safe_mode_status=published';
-						} );
-				} );
-			}
-
-			const copyButton = document.getElementById( 'wphb-ao-safe-mode-copy' );
-			if ( copyButton ) {
-				copyButton.addEventListener( 'click', ( e ) => {
-					e.preventDefault();
-					this.copyTextToClipboard( window.location.href );
-
-					const successClass = 'wphb-ao-safe-mode-copy-success';
-					copyButton.classList.add( successClass );
-					setTimeout( () => {
-						copyButton.classList.remove( successClass );
-					}, 3000 );
-				} );
-			}
 		},
 
 		/**

@@ -3,19 +3,19 @@
 /**
  * External dependencies
  */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import './assets-manual.scss';
-import {createInterpolateElement} from "@wordpress/element";
-import {dispatch, useSelect} from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
+import { dispatch, useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import {STORE_NAME} from '../../data/minify';
-import {getString} from '../../../js/utils/helpers';
+import { STORE_NAME } from '../../data/minify';
+import { getString } from '../../../js/utils/helpers';
 import Assets from './assets';
-import {MinifyAsset} from '../../components/minify-asset';
+import { MinifyAsset } from '../../components/minify-asset';
 import Notice from '../../components/sui-notice';
 import Button from '../../components/sui-button';
 import SupportLink from '../../components/support-link';
@@ -27,8 +27,8 @@ import Select from '../../components/sui-select';
 import Input from '../../components/sui-input';
 import Modal from '../../components/sui-modal';
 import Tooltip from '../../components/sui-tooltip';
-import Icon from "../../components/sui-icon";
-import Toggle from "../../components/sui-toggle";
+import Icon from '../../components/sui-icon';
+import Toggle from '../../components/sui-toggle';
 import RecheckFilesButton from './recheck-files-button';
 
 const cloneDeep = require( 'clone-deep' );
@@ -69,13 +69,11 @@ export const ManualAssets = ( props ) => {
 	const [ loading, setLoading ] = useState( props.loading );
 	const [ hasOptions, setHasOptions ] = useState( false );
 	const [ options, setOptions ] = useState( defaultOptions );
-	const [ safeModeOptions, setSafeModeOptions ] = useState( defaultOptions );
 	const [ bulk, setBulk ] = useState( defaultBulkOptions );
 	const [ selected, setSelected ] = useState( defaultSelection );
 	const [ showFilters, setShowFilters ] = useState( false );
 	const [ filters, setFilters ] = useState( defaultFilters );
 	const [ selectedOptions, setSelectedOptions ] = useState( {} );
-	const [ initialized, setInitialized ] = useState( false );
 	const { safeMode, collection, hasResolved, isResolving, aoQueue } = useSelect( ( select ) => {
 		return {
 			safeMode: select( STORE_NAME ).getOption( 'safeMode' ),
@@ -96,44 +94,6 @@ export const ManualAssets = ( props ) => {
 			.catch( window.console.log );
 	}, [] );
 
-	useEffect(() => {
-		if (getQueryParam('safe_mode_status') === 'published') {
-			WPHB_Admin.notices.show(__('Your safe mode changes have been published and are now live!', 'wphb'), 'success');
-			removeQueryParam('safe_mode_status');
-		}
-
-		if (!loading && getQueryParam('action') === 'disable_safe_mode') {
-			if (hasSafeModeChanges()) {
-				showSafeModeConfirmationModal();
-			} else {
-				discardSafeModeSettings().then(() => {
-					WPHB_Admin.notices.show(__('Safe mode has been disabled!', 'wphb'), 'success');
-				});
-			}
-			removeQueryParam('action');
-		}
-
-	}, [initialized, loading]);
-
-	const getQueryParam = (name) => {
-		const searchParams = location.search;
-		const params = new URLSearchParams(searchParams);
-		return params.get(name);
-	}
-
-	const removeQueryParam = (name) => {
-		const searchParams = location.search;
-		const params = new URLSearchParams(searchParams);
-		if (!params.get(name)) {
-			return;
-		}
-
-		params.delete(name);
-		const newURL = location.href.replace(searchParams, '?' + params.toString());
-
-		history.replaceState({}, "", newURL);
-	}
-
 	/**
 	 * Set loading state, when data store data has resolved.
 	 */
@@ -144,18 +104,14 @@ export const ManualAssets = ( props ) => {
 	}, [ hasResolved, hasOptions, isResolving ] );
 
 	function getOptions() {
-		return safeMode ? safeModeOptions : options;
+		return options;
 	}
 
-	function updateOptions(options) {
-		if (safeMode) {
-			setSafeModeOptions(options);
-		} else {
-			setOptions(options);
-		}
+	function updateOptions( options ) {
+		setOptions( options );
 	}
 
-	const saveSettings = (action) => {
+	const saveSettings = ( action ) => {
 		setLoading( true );
 		return props.api
 			.post( action, getOptions() )
@@ -169,27 +125,11 @@ export const ManualAssets = ( props ) => {
 			.catch( window.console.log );
 	};
 
-	const publishLiveSettings = () => {
-		saveSettings('minify_manual_save_settings').then(() => {
-			window.scrollTo(0, 0);
-			WPHB_Admin.notices.show(getString('aoSettingsSaved')); // eslint-disable-line camelcase
-		});
-	};
-
-	const saveSafeModeSettings = () => {
-		saveSettings('minify_save_safe_mode_settings');
-	}
-
-	const discardSafeModeSettings = () => {
-		return saveSettings('minify_discard_safe_mode').then(() => {
-			dispatch(STORE_NAME).invalidateResolution('getOptions');
-		});
-	};
-
-	const publishSafeModeSettings = () => {
-		return saveSettings('minify_save_and_publish_safe_mode').then(() => {
-			dispatch(STORE_NAME).invalidateResolution('getOptions');
-		});
+	const publishSettings = () => {
+		saveSettings( 'minify_manual_save_settings' ).then( () => {
+			window.scrollTo( 0, 0 );
+			WPHB_Admin.notices.show( getString( 'aoSettingsSaved' ) ); // eslint-disable-line camelcase
+		} );
 	};
 
 	/**
@@ -199,7 +139,6 @@ export const ManualAssets = ( props ) => {
 	 */
 	const updateStateFromApiResponse = ( response ) => {
 		setOptions( response.options );
-		setSafeModeOptions(response.safe_mode_options);
 		setSelectedOptions( response.options );
 		setHasOptions( true );
 	};
@@ -213,25 +152,12 @@ export const ManualAssets = ( props ) => {
 		return JSON.stringify( selectedOptions ) !== JSON.stringify( getOptions() );
 	};
 
-	const hasSafeModeChanges = () => {
-		return JSON.stringify(options) !== JSON.stringify(safeModeOptions);
-	}
-
 	/**
 	 * Show bulk update modal.
 	 */
 	const showBulkModal = () => {
 		window.SUI.openModal(
 			'modal-bulk-update',
-			'wrap-wphb-minify',
-			undefined,
-			true
-		);
-	};
-
-	const showSafeModeConfirmationModal = () => {
-		window.SUI.openModal(
-			'modal-safe-mode-confirmation',
 			'wrap-wphb-minify',
 			undefined,
 			true
@@ -359,44 +285,6 @@ export const ManualAssets = ( props ) => {
 		);
 	};
 
-	const safeModeConfirmationModal = () => {
-		const footer = <>
-			<Button
-				onClick={() => {
-					discardSafeModeSettings().then(() => {
-						window.SUI.closeModal();
-					});
-				}}
-				type="button"
-				classes="sui-button sui-button-ghost sui-button-red"
-				icon="sui-icon-undo"
-				disabled={loading}
-				text={__('Discard', 'wphb')}/>
-
-			<Button
-				onClick={() => {
-					publishSafeModeSettings().then(() => {
-						window.SUI.closeModal();
-					});
-				}}
-				type="button"
-				classes="sui-button sui-button-blue"
-				icon="sui-icon-check"
-				disabled={loading}
-				text={__('Publish', 'wphb')}/>
-		</>;
-
-		return (
-			<Modal
-				id="safe-mode-confirmation"
-				size="sm"
-				title={__('Unpublished changes', 'wphb')}
-				description={__('There are unpublished changes made in safe mode. Do you want to publish the changes to live or discard them?', 'wphb')}
-				footer={footer}
-			/>
-		);
-	};
-
 	/**
 	 * Process settings update for a selected asse.
 	 *
@@ -437,7 +325,7 @@ export const ManualAssets = ( props ) => {
 			newOption = { ...options[ action ], [ type ]: newOption };
 		}
 
-		updateOptions({...options, [action]: newOption});
+		updateOptions( { ...options, [ action ]: newOption } );
 	};
 
 	/**
@@ -467,13 +355,6 @@ export const ManualAssets = ( props ) => {
 		const noStyles = 0 === Object.entries( collection.styles ).length;
 
 		return noScripts && noStyles;
-	};
-
-	/**
-	 * Show safe mode.
-	 */
-	const showSafeMode = () => {
-		window.location.href = props.links.safeMode;
 	};
 
 	/**
@@ -532,45 +413,6 @@ export const ManualAssets = ( props ) => {
 		setFilters( defaultFilters );
 	};
 
-	function activateSafeMode() {
-		setLoading(true);
-		props.api.post('minify_activate_safe_mode', getOptions())
-			.then((response) => {
-				dispatch(STORE_NAME).invalidateResolution('getOptions');
-				window.wphbMixPanel.trackAOUpdated( {
-					'Mode': response.mode,
-					'assets_found': wphb.stats.assetsFound,
-					'total_files': wphb.stats.totalFiles,
-					'filesize_reductions': wphb.stats.filesizeReductions,
-					location: 'ao_settings',
-				} );
-				updateStateFromApiResponse( response );
-				setLoading(false);
-			})
-			.catch(window.console.log);
-	}
-
-	/**
-	 * Toggle safe mode.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param {Object} e
-	 */
-	const toggleSafeMode = ( e ) => {
-		const enableMode = e.target.checked;
-
-		if(enableMode) {
-			activateSafeMode();
-		} else {
-			if (hasSafeModeChanges()) {
-				showSafeModeConfirmationModal();
-			} else {
-				discardSafeModeSettings();
-			}
-		}
-	};
-
 	/**
 	 * Sticky header.
 	 *
@@ -607,26 +449,26 @@ export const ManualAssets = ( props ) => {
 
 		const safeModeSaveButton =
 			<Tooltip classes="sui-tooltip-right sui-tooltip-constrained"
-				text={__("Preview your changes on the front-end, then publish to live if no errors are found.", 'wphb')}>
+				text={ __( 'Save and preview your changes on the front-end, then publish to live if no errors are found.', 'wphb' ) }>
 				<Button
-					onClick={saveSafeModeSettings}
+					onClick={ publishSettings }
 					type="button"
 					icon="sui-icon-eye"
-					classes={['sui-button save-safe-mode-ao']}
-					text={__('Save Safe mode changes', 'wphb')}
+					classes={ [ 'sui-button save-safe-mode-ao', { disabled: ! hasUpdates() } ] }
+					text={ __( 'Save Safe mode changes', 'wphb' ) }
 				/>
 			</Tooltip>;
 		const publishButton = <Button
-			onClick={publishLiveSettings}
+			onClick={ publishSettings }
 			type="button"
-			classes={['sui-button', 'sui-button-blue', {disabled: !hasUpdates()}]}
-			text={__('Publish changes', 'wphb')}
+			classes={ [ 'sui-button', 'sui-button-blue', { disabled: ! hasUpdates() } ] }
+			text={ __( 'Publish changes', 'wphb' ) }
 		/>;
 		const reCheckFiles = <RecheckFilesButton />;
 		return (
 			<Box
-				stickyType = { true }	
-				showFilters = { showFilters }
+				stickyType={ true }
+				showFilters={ showFilters }
 				boxClass={ classNames( 'sui-box-sticky', { 'wphb-expanded': showFilters } ) }
 				headerActions={
 					<React.Fragment>
@@ -637,8 +479,8 @@ export const ManualAssets = ( props ) => {
 								classes={ classNames( 'sui-button sui-button-ghost', { disabled: ! hasSelection() } ) }
 								text={ __( 'Bulk update', 'wphb' ) } />
 
-							{safeMode && safeModeSaveButton}
-							{!safeMode && publishButton}
+							{ safeMode && safeModeSaveButton }
+							{ ! safeMode && publishButton }
 							{ reCheckFiles }
 						</div>
 						<Action type="right" content={
@@ -696,7 +538,10 @@ export const ManualAssets = ( props ) => {
 	 */
 	const filterAsset = ( asset ) => {
 		// Primary filters (search box).
-		if ( filters.primary && ! asset.handle.includes( filters.primary ) ) {
+		const name = ( asset.handle || '' ).toLowerCase();
+		const src = ( asset.src || asset.url || '' ).toLowerCase();
+
+		if ( filters.primary && ! name.includes( filters.primary ) && ! src.endsWith( filters.primary ) && ! src.includes( `.${ filters.primary }` ) ) {
 			return false;
 		}
 
@@ -777,11 +622,11 @@ export const ManualAssets = ( props ) => {
 	 * @param {string} handle
 	 * @param {string} type
 	 * @param {string} option
-	 * @param {{}} options
+	 * @param {{}}     options
 	 *
 	 * @return {boolean} Option status.
 	 */
-	const isOptionSet = (handle, type, option, options) => {
+	const isOptionSet = ( handle, type, option, options ) => {
 		if ( 'fonts' === type && 'fonts' === option ) {
 			return options.fonts.includes( handle );
 		}
@@ -798,16 +643,16 @@ export const ManualAssets = ( props ) => {
 		return window.lodash.includes( options[ option ][ type ], handle );
 	};
 
-	function assetSelectedOptions(asset, type) {
-		const optionsSelected = Object.keys(getOptions())
-			.filter((option) => {
-				return actionAllowedForType(option, type);
-			})
-			.map((option) => {
-				return [option, isOptionSet(asset.handle, type, option, getOptions())];
-			});
+	function assetSelectedOptions( asset, type ) {
+		const optionsSelected = Object.keys( getOptions() )
+			.filter( ( option ) => {
+				return actionAllowedForType( option, type );
+			} )
+			.map( ( option ) => {
+				return [ option, isOptionSet( asset.handle, type, option, getOptions() ) ];
+			} );
 
-		return window.lodash.fromPairs(optionsSelected);
+		return window.lodash.fromPairs( optionsSelected );
 	}
 
 	/**
@@ -821,8 +666,7 @@ export const ManualAssets = ( props ) => {
 		const selectedAssets = window.lodash.includes( selected[ type ], asset.handle );
 
 		// Get options only for the selected asset.
-		const optionsSelected = assetSelectedOptions(asset, type);
-		const highlightedActions = assetHighlightedActions(asset, type);
+		const optionsSelected = assetSelectedOptions( asset, type );
 
 		return (
 			<MinifyAsset
@@ -831,37 +675,17 @@ export const ManualAssets = ( props ) => {
 				src={ asset.src }
 				originalSize={ asset.originalSize }
 				compressedSize={ asset.compressedSize }
-				fileUrl={asset.fileUrl}
+				fileUrl={ asset.fileUrl }
 				onSettingChange={ onSettingChange }
 				onRegenerateClick={ onRegenerateClick }
 				selected={ selectedAssets }
 				onAssetSelect={ selectAsset }
 				settings={ asset.settings }
-				highlighted={highlightedActions}
 				options={ optionsSelected }
 				type={ type }
 				safeMode={ safeMode } />
 		);
 	};
-
-	const assetHighlightedActions = (asset, type) => {
-		if (!safeMode) {
-			return {};
-		}
-
-		let safeModeChanges = Object.keys(options)
-			.filter((option) => {
-				return actionAllowedForType(option, type);
-			})
-			.map((option) => {
-				const setInOptions = isOptionSet(asset.handle, type, option, options);
-				const setInSafeModeOptions = isOptionSet(asset.handle, type, option, safeModeOptions);
-
-				return [option, setInOptions !== setInSafeModeOptions];
-			});
-
-		return window.lodash.fromPairs(safeModeChanges);
-	}
 
 	let content;
 
@@ -914,16 +738,16 @@ export const ManualAssets = ( props ) => {
 		content = <React.Fragment>
 			{ stickyHeader() }
 
-			{safeMode &&
+			{ safeMode &&
 				<Notice
 					classes="sui-notice-warning"
-					content={createInterpolateElement(__("You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitor's experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser's console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you've made as soon as possible to avoid page load issues.</span>", 'wphb'), {
-						'strong': <strong/>,
-						'span': <span style={{marginTop: "10px", display: "block"}} />,
-					})}
+					content={ createInterpolateElement( __( "You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitor's experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser's console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you've made as soon as possible to avoid page load issues.</span>", 'wphb' ), {
+						strong: <strong />,
+						span: <span style={ { marginTop: '10px', display: 'block' } } />,
+					} ) }
 				/>
 			}
-			
+
 			<Checkbox
 				id="bulk-file-css"
 				label="CSS"
@@ -953,8 +777,7 @@ export const ManualAssets = ( props ) => {
 
 	return (
 		<React.Fragment>
-			{bulkUpdateModal()}
-			{safeModeConfirmationModal()}
+			{ bulkUpdateModal() }
 			<Assets
 				loading={ loading }
 				mode={ props.mode }

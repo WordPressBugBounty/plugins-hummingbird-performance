@@ -37,6 +37,11 @@ import { getLink } from '../utils/helpers';
 
 				Fetcher.settings.saveSettings( form_data ).then( ( response ) => {
 					WPHB_Admin.notices.show();
+					if ( response.isControlValueUpdated ) {
+						setTimeout( () => {
+							window.location.reload();
+						}, 2000 );
+					}
 				} );
 
 				return false;

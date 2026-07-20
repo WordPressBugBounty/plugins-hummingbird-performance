@@ -41,7 +41,7 @@ $this->admin_notices->show_inline_dismissible(
 <strong><?php esc_html_e( 'Logs', 'wphb' ); ?></strong>
 
 <ul class="dev-list-stats dev-list-stats-standalone">
-	<?php if ( ! count( $uptime_stats->events ) ) : ?>
+	<?php if ( empty( $uptime_stats->events ) || ! is_countable( $uptime_stats->events ) ) : ?>
 		<?php $this->admin_notices->show_inline( esc_html__( 'No downtime has been reported during the reporting period.', 'wphb' ), 'grey' ); ?>
 	<?php else : ?>
 		<?php foreach ( $uptime_stats->events as $event ) : ?>

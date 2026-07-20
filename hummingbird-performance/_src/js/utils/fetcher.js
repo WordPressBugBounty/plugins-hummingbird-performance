@@ -312,17 +312,6 @@ function Fetcher() {
 			},
 
 			/**
-			 * Update custom asset path
-			 *
-			 * @since 1.9
-			 * @param {string} value
-			 */
-			updateAssetPath: ( value ) => {
-				const action = actionPrefix + 'minification_update_asset_path';
-				return request( action, { value }, 'POST' );
-			},
-
-			/**
 			 * Save settings in network admin.
 			 *
 			 * @since 2.0.0

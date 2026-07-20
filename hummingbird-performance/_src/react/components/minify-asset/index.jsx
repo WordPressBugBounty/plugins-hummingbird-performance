@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import {getFilename} from '@wordpress/url';
+import { getFilename } from '@wordpress/url';
 
 /**
  * Internal dependencies
@@ -14,7 +14,7 @@ import Checkbox from '../sui-checkbox';
 import Button from '../sui-button';
 import Tooltip from '../sui-tooltip';
 import Toggle from '../sui-toggle';
-import {createInterpolateElement} from "@wordpress/element";
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * WordPress dependencies
@@ -115,14 +115,6 @@ export const MinifyAsset = ( props ) => {
 		return window.lodash.includes( props.settings.disableSwitchers, type );
 	};
 
-	const getHighlighted = () => {
-		return props.highlighted || {};
-	};
-
-	const hasSafeModeChanges = () => {
-		return Object.values(getHighlighted()).filter(value => value).length;
-	};
-
 	/**
 	 * Get asset status.
 	 *
@@ -136,29 +128,27 @@ export const MinifyAsset = ( props ) => {
 		let icon;
 		let tooltip;
 
-		if( props.safeMode ) {
-			if (hasSafeModeChanges()) {
+		if ( props.safeMode ) {
+			if ( pendingUpdates ) {
 				icon = 'sui-icon-info wphb-asset-status-safe-mode';
-				tooltip = __('Preview your changes in Safe Mode and check for any errors on the front-end. If none are found, click Publish to make your changes live.', 'wphb');
+				tooltip = __( 'Save and Preview your changes in Safe Mode and check for any errors on the front-end. If none are found, click Publish to make your changes live.', 'wphb' );
 			} else {
 				return null;
 			}
+		} else if ( loading ) {
+			icon = 'sui-icon-loader sui-loading';
+			tooltip = __( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' );
+		} else if ( pendingUpdates ) {
+			icon = 'sui-icon-update';
+			tooltip = __( 'You need to publish your changes for your new settings to take effect', 'wphb' );
+		} else if ( isCompressed() || hasNoSavings() || hasMinifiedExtension() ) {
+			icon = 'sui-icon-check-tick';
+			tooltip = __( 'This file has been optimized', 'wphb' );
+		} else if ( 'OTHER' === props.settings.extension ) {
+			icon = 'sui-icon-info';
+			tooltip = __( 'This file has no linked URL, it will not be combined/minified', 'wphb' );
 		} else {
-			if ( loading ) {
-				icon = 'sui-icon-loader sui-loading';
-				tooltip = __( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' );
-			} else if ( pendingUpdates ) {
-				icon = 'sui-icon-update';
-				tooltip = __( 'You need to publish your changes for your new settings to take effect', 'wphb' );
-			} else if ( isCompressed() || hasNoSavings() || hasMinifiedExtension() ) {
-				icon = 'sui-icon-check-tick';
-				tooltip = __( 'This file has been optimized', 'wphb' );
-			} else if ( 'OTHER' === props.settings.extension ) {
-				icon = 'sui-icon-info';
-				tooltip = __( 'This file has no linked URL, it will not be combined/minified', 'wphb' );
-			} else {
-				return null;
-			}
+			return null;
 		}
 
 		return (
@@ -244,39 +234,39 @@ export const MinifyAsset = ( props ) => {
 					</span> }
 				<Button url={ props.src } target="blank" text={ getFilename( props.src ) } />
 
-				{props.fileUrl ?
-					<div className="wphb-ao-asset-file-url">
-						<span>{__('Optimized Version -', 'wphb')}</span>
-						<a href={props.fileUrl} target="_blank">{getTruncatedFileName(props.fileUrl)}</a>
+				{ props.fileUrl
+					? <div className="wphb-ao-asset-file-url">
+						<span>{ __( 'Optimized Version -', 'wphb' ) }</span>
+						<a href={ props.fileUrl } target="_blank" rel="noreferrer">{ getTruncatedFileName( props.fileUrl ) }</a>
 					</div>
-					: null}
+					: null }
 			</div>
 		);
 	};
 
-	const getTruncatedFileName = (fileUrl) => {
-		const fileName = getFilename(fileUrl);
-		if (!fileName) {
+	const getTruncatedFileName = ( fileUrl ) => {
+		const fileName = getFilename( fileUrl );
+		if ( ! fileName ) {
 			return '';
 		}
 
-		const parts = fileName.split('.');
-		if (!parts || parts.length < 2) {
+		const parts = fileName.split( '.' );
+		if ( ! parts || parts.length < 2 ) {
 			return '';
 		}
 
-		const exceptExtension = parts[0];
-		const extension = parts[1];
+		const exceptExtension = parts[ 0 ];
+		const extension = parts[ 1 ];
 		const keepLength = 5;
 		const removeLength = exceptExtension.length - keepLength - keepLength;
-		const html = '<span>' + exceptExtension.substring(0, keepLength) + '</span>'
-			+ '<span>' + exceptExtension.substring(keepLength, removeLength + keepLength) + '</span>'
-			+ '<span>' + exceptExtension.substring(removeLength + keepLength, exceptExtension.length) + '</span>'
-			+ "." + extension;
+		const html = '<span>' + exceptExtension.substring( 0, keepLength ) + '</span>' +
+			'<span>' + exceptExtension.substring( keepLength, removeLength + keepLength ) + '</span>' +
+			'<span>' + exceptExtension.substring( removeLength + keepLength, exceptExtension.length ) + '</span>' +
+			'.' + extension;
 
-		return createInterpolateElement(html, {
-			span: <span className="wphb-file-name-part"/>
-		});
+		return createInterpolateElement( html, {
+			span: <span className="wphb-file-name-part" />
+		} );
 	};
 
 	/**
@@ -433,19 +423,6 @@ export const MinifyAsset = ( props ) => {
 
 	const type = getType( props.type );
 
-	const highlightClass = 'wphb-asset-action-highlighted';
-	const hasHighlightSwitch = (action) => {
-		const highlighted = getHighlighted();
-
-		return highlighted.hasOwnProperty(action) && !!highlighted[action];
-	};
-
-	function getActionToggleClassName(action) {
-		return classNames({
-			[highlightClass]: hasHighlightSwitch(action)
-		});
-	}
-
 	return (
 		<div
 			className={ classNames( 'sui-builder-field', 'sui-react', 'wphb-ao-asset', { disabled: props.options.block } ) }
@@ -469,7 +446,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'minify' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-arrows-in" /> }
-							className={getActionToggleClassName('dont_minify')}
 							checked={ ! props.options.dont_minify }
 							disabled={ hasDisableSwitch() || hasMinifiedExtension() }
 							hideToggle="true"
@@ -484,7 +460,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'font-optimize' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-arrows-compress" /> }
-							className={getActionToggleClassName('fonts')}
 							checked={ props.options.fonts }
 							hideToggle="true"
 							onChange={ props.onSettingChange }
@@ -498,7 +473,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'combine' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-combine" /> }
-							className={getActionToggleClassName('dont_combine')}
 							checked={ ! props.options.dont_combine }
 							disabled={ hasDisableSwitch( 'combine' ) }
 							hideToggle="true"
@@ -512,7 +486,6 @@ export const MinifyAsset = ( props ) => {
 					<Toggle
 						id={ 'position' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 						text={ <Icon classes="sui-icon-movefooter" /> }
-						className={getActionToggleClassName('position')}
 						checked={ props.options.position }
 						disabled={ hasDisableSwitch( 'position' ) }
 						hideToggle="true"
@@ -527,7 +500,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'defer' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-defer" /> }
-							className={getActionToggleClassName('defer')}
 							checked={ props.options.defer }
 							disabled={ hasDisableSwitch( 'defer' ) }
 							hideToggle="true"
@@ -542,7 +514,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'async' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-async" /> }
-							className={getActionToggleClassName('async')}
 							checked={ props.options.async }
 							disabled={ hasDisableSwitch( 'async' ) }
 							hideToggle="true"
@@ -557,7 +528,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'inline' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-inlinecss" /> }
-							className={getActionToggleClassName('inline')}
 							checked={ props.options.inline }
 							disabled={ hasDisableSwitch( 'inline' ) }
 							hideToggle="true"
@@ -572,7 +542,6 @@ export const MinifyAsset = ( props ) => {
 						<Toggle
 							id={ 'preload' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 							text={ <Icon classes="sui-icon-update" /> }
-							className={getActionToggleClassName('preload')}
 							checked={ props.options.preload }
 							disabled={ hasDisableSwitch( 'preload' ) }
 							hideToggle="true"
@@ -586,7 +555,6 @@ export const MinifyAsset = ( props ) => {
 					<Toggle
 						id={ 'block' + '-' + props.settings.extension.toLowerCase() + '-' + props.handle }
 						text={ <Icon classes={ props.options.block ? 'sui-icon-eye' : 'sui-icon-eye-hide' } /> }
-						className={getActionToggleClassName('block')}
 						checked={ props.options.block }
 						hideToggle="true"
 						onChange={ props.onSettingChange }

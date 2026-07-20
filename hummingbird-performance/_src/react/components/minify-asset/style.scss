@@ -194,20 +194,6 @@
             color: palette( gray, lighter );
           }
         }
-
-        .wphb-asset-action-highlighted {
-          input[type=checkbox] {
-            &:not(:disabled) {
-              & + span {
-                border: 2px solid #888888;
-              }
-
-              &:checked + span {
-                border-color: #17A8E3;
-              }
-            }
-          }
-        }
       }
 
       // Exclude selector.

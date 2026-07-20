@@ -30,10 +30,10 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 		<span class="sui-summary-large">
 			<?php
 			if ( $uptime_stats && ! is_wp_error( $uptime_stats ) ) :
-				if ( 0 === round( (int) $uptime_stats->availability, 1 ) || null === $uptime_stats->response_time ) :
+				if ( ( isset( $uptime_stats->availability ) && 0 === round( (int) $uptime_stats->availability, 1 ) ) || ( isset( $uptime_stats->response_time ) && null === $uptime_stats->response_time ) ) :
 					echo esc_html( '100%' );
 				else :
-					echo esc_html( round( (int) $uptime_stats->availability, 1 ) ) . '%';
+					echo isset( $uptime_stats->availability ) ? esc_html( round( (int) $uptime_stats->availability, 1 ) ) . '%' : esc_html( '100%' );
 				endif;
 			endif;
 			?>
@@ -42,7 +42,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 		<span class="sui-summary-detail">
 			<?php
 			if ( $uptime_stats && ! is_wp_error( $uptime_stats ) ) :
-				echo $uptime_stats->response_time ? esc_html( $uptime_stats->response_time ) : esc_html( 'Waiting on data...' );
+				echo isset( $uptime_stats->response_time ) && $uptime_stats->response_time ? esc_html( $uptime_stats->response_time ) : esc_html( 'Waiting on data...' );
 			endif;
 			?>
 		</span>
@@ -54,7 +54,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 		<li>
 			<span class="sui-list-label"><?php esc_html_e( 'Outages', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
-				<?php if ( is_object( $uptime_stats ) && (int) $uptime_stats->outages > 0 ) : ?>
+				<?php if ( is_object( $uptime_stats ) && isset( $uptime_stats->outages ) && (int) $uptime_stats->outages > 0 ) : ?>
 					<?php echo (int) $uptime_stats->outages; ?>
 				<?php else : ?>
 					<?php esc_html_e( 'None', 'wphb' ); ?>
@@ -76,7 +76,7 @@ $branded_image = apply_filters( 'wpmudev_branding_hero_image', '' );
 			<span class="sui-list-detail">
 				<?php
 				$site_date = '';
-				if ( is_object( $uptime_stats ) && $uptime_stats->up_since ) {
+				if ( is_object( $uptime_stats ) && isset( $uptime_stats->up_since ) && $uptime_stats->up_since ) {
 					$gmt_date  = date( 'Y-m-d H:i:s', $uptime_stats->up_since );
 					$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
 				}

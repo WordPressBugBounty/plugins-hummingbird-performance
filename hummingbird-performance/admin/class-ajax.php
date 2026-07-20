@@ -154,8 +154,6 @@ class AJAX {
 		add_action( 'wp_ajax_wphb_minification_finish_scan', array( $this, 'minification_finish_scan' ) );
 		// Save critical css file.
 		add_action( 'wp_ajax_wphb_minification_save_extra_optimization_data', array( $this, 'minification_save_extra_optimization_data' ) );
-		// Update custom asset path.
-		add_action( 'wp_ajax_wphb_minification_update_asset_path', array( $this, 'minification_update_asset_path' ) );
 		// Update settings in network admin.
 		add_action( 'wp_ajax_wphb_minification_update_network_settings', array( $this, 'minification_update_network_settings' ) );
 		// Save settings.
@@ -270,7 +268,7 @@ class AJAX {
 	 */
 	public function clear_global_cache() {
 		check_ajax_referer( 'wphb-fetch', 'nonce' );
-		$all_clear = filter_input( INPUT_GET, 'all_clear', FILTER_SANITIZE_NUMBER_INT);
+		$all_clear = filter_input( INPUT_GET, 'all_clear', FILTER_SANITIZE_NUMBER_INT );
 		// Check permission.
 		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
 			die();
@@ -295,7 +293,13 @@ class AJAX {
 		// Remove notice.
 		delete_option( 'wphb-notice-cache-cleaned-show' );
 		if ( (bool) $all_clear ) {
-			update_option( 'wphb-notice-cache-global-cleared-show', time() );
+			update_option(
+				'wphb-notice-cache-global-cleared-show',
+				array(
+					'time'    => time(),
+					'modules' => '',
+				)
+			);
 		}
 
 		wp_send_json_success();
@@ -346,6 +350,25 @@ class AJAX {
 			}
 		}
 
+		$string_for_notice = '';
+
+		if ( $modules ) {
+			$strings_map = array(
+				'page_cache' => 'Page',
+				'minify'     => 'Asset Optimization',
+				'rss_cache'  => 'RSS',
+				'opcache'    => 'OPcache',
+				'fast_cgi'   => 'FastCGI ',
+				'varnish'    => 'Varnish',
+				'gravatar'   => 'Gravatar',
+			);
+			$mapped      = array();
+			foreach ( $modules as $module ) {
+				$mapped[] = isset( $strings_map[ $module ] ) ? $strings_map[ $module ] : ucfirst( $module );
+			}
+			$string_for_notice = implode( ', ', $mapped );
+		}
+
 		foreach ( $modules as $module ) {
 			$mod = Utils::get_module( $module );
 
@@ -359,6 +382,14 @@ class AJAX {
 				$mod->clear_cache();
 			}
 		}
+
+		update_option(
+			'wphb-notice-cache-global-cleared-show',
+			array(
+				'time'    => time(),
+				'modules' => $string_for_notice,
+			)
+		);
 
 		wp_send_json_success(
 			array(
@@ -385,6 +416,14 @@ class AJAX {
 		if ( ! $status ) {
 			wp_send_json_error();
 		}
+
+		update_option(
+			'wphb-notice-cache-global-cleared-show',
+			array(
+				'time'    => time(),
+				'modules' => 'Cloudflare',
+			)
+		);
 
 		wp_send_json_success();
 	}
@@ -1841,35 +1880,6 @@ class AJAX {
 	}
 
 	/**
-	 * Parse custom asset path directory.
-	 *
-	 * @since 1.9
-	 */
-	public function minification_update_asset_path() {
-		check_ajax_referer( 'wphb-fetch', 'nonce' );
-
-		if ( ! current_user_can( Utils::get_admin_capability() ) || ! isset( $_POST['value'] ) ) { // Input var ok.
-			die();
-		}
-
-		$path = sanitize_text_field( wp_unslash( $_POST['value'] ) ); // Input var ok.
-
-		Utils::get_module( 'minify' )->clear_cache( false );
-
-		Filesystem::instance()->purge_ao_cache();
-
-		// Update to new setting value.
-		Settings::update_setting( 'file_path', $path, 'minify' );
-
-		wp_send_json_success(
-			array(
-				'success' => true,
-				'message' => '',
-			)
-		);
-	}
-
-	/**
 	 * Reset individual file.
 	 *
 	 * @since 1.9.2
@@ -1974,8 +1984,16 @@ class AJAX {
 
 		Settings::update_setting( 'nocdn', $exclude_assets, 'minify' );
 		Settings::update_setting( 'log', $debug_log, 'minify' );
+
 		// This will require a clear cache call.
 		Utils::get_module( 'minify' )->clear_cache( false );
+
+		$existing_path = Settings::get_setting( 'file_path', 'minify' );
+		if ( isset( $data['filePath'] ) && $existing_path !== $data['filePath'] ) {
+			Filesystem::instance()->purge_ao_cache();
+			$file_path = sanitize_text_field( $data['filePath'] );
+			Settings::update_setting( 'file_path', $file_path, 'minify' );
+		}
 
 		wp_send_json_success();
 	}
@@ -2311,6 +2329,7 @@ class AJAX {
 
 		$prev_mixpanel_value = Settings::get_setting( 'tracking', 'settings' );
 		$settings            = Settings::get_settings( 'settings' );
+		$prev_control_value  = Settings::get_setting( 'control', 'settings' );
 
 		foreach ( $data as $setting => $value ) {
 			if ( ! isset( $settings[ $setting ] ) ) {
@@ -2326,12 +2345,13 @@ class AJAX {
 
 		Settings::update_settings( $settings, 'settings' );
 		$is_mixpanel_value_updated = $prev_mixpanel_value !== $settings['tracking'] ? true : false;
-
+		$is_control_value_updated  = $prev_control_value !== $settings['control'] ? true : false;
 		do_action( 'wphb_mixpanel_usage_tracking_value_update', $is_mixpanel_value_updated, $settings['tracking'] );
 
 		wp_send_json_success(
 			array(
 				'isMixpanelValueUpdated' => $is_mixpanel_value_updated,
+				'isControlValueUpdated'  => $is_control_value_updated,
 				'notice'                 => esc_html__( 'Settings updated', 'wphb' ),
 			)
 		);

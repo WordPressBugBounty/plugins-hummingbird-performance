@@ -259,6 +259,7 @@ class Notices {
 	 * @param  bool   $additional     Additional content that goes after the message text.
 	 * @param  bool   $only_hb_pages  Show message only on Hummingbird pages.
 	 * @param  string $notice_class    Notice class: info, warning, error, success.
+	 * @param  string $dismiss_icon_class  Dashicon class for the dismiss icon.
 	 */
 	private function show_notice( $id = '', $message = '', $additional = false, $only_hb_pages = false, $notice_class = 'info', $dismiss_icon_class = '' ) {
 		// Only run on HB pages.
@@ -915,32 +916,31 @@ class Notices {
 			return;
 		}
 
-		$timestamp = get_option( 'wphb-notice-cache-global-cleared-show', 0 );
-		if ( ! $timestamp ) {
+		$notice_data = get_option( 'wphb-notice-cache-global-cleared-show', array() );
+		if ( empty( $notice_data['time'] ) ) {
 			return;
 		}
 
-		$date    = gmdate( 'F j, Y', (int) $timestamp + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
-		$time    = gmdate( 'g:i a', (int) $timestamp + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );
+		$gmt     = get_option( 'gmt_offset' );
+		$date    = gmdate( 'F j, Y', (int) $notice_data['time'] + ( $gmt * HOUR_IN_SECONDS ) );
+		$time    = gmdate( 'g:i a', (int) $notice_data['time'] + ( $gmt * HOUR_IN_SECONDS ) );
 		$message = sprintf(
 			/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
-			esc_html__( 'Hummingbird cleared the cache on %1$s at %2$s.', 'wphb' ),
+			esc_html__( 'Hummingbird cleared the%1$s cache on %2$s at %3$s.', 'wphb' ),
+			'<strong> ' . $notice_data['modules'] . '</strong>',
 			'<strong>' . $date . '</strong>',
 			'<strong>' . $time . '</strong>'
 		);
 
 		$message = '<span class="dashicons dashicons-yes-alt" aria-hidden="true"></span>' . $message;
-		// Show WordPress style notice on WP dashboard page.
-		if ( Utils::is_admin_dashboard( true ) || $this->is_hb_admin_page() ) {
-			$this->show_notice(
-				'cache-global-cleared',
-				sprintf( '<p>%s</p>', $message ),
-				false,
-				false,
-				'success wphb-cache-global-cleared ',
-				'dashicons-saved'
-			);
-		}
+		$this->show_notice(
+			'cache-global-cleared',
+			sprintf( '<p>%s</p>', $message ),
+			false,
+			false,
+			'success wphb-cache-global-cleared ',
+			'dashicons-saved'
+		);
 		?>
 		<style>
 			.notice.wphb-cache-global-cleared {

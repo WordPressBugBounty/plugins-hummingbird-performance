@@ -1,14 +1,14 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.19.0
+Version: 3.20.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
 Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.19.0
+Stable tag: 3.20.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -209,6 +209,30 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 5. Custom performance optimizations using Advanced Tools.
 
 == Changelog ==
+
+= 3.20.0 ( 2026-07-20 ) =
+- New: Improved error messaging when generating Critical CSS while site is in maintenance mode
+- Improvement: Refactored Safe Mode architecture with a centralized Safe Mode controller
+- Improvement: Improved Clear Cache button UX in admin area
+- Improvement: PHP 8.5 compatibility
+- Improvement: Prevent WordPress assets (e.g. dashicons) from loading in Asset Optimization when only needed for logged-in users
+- Improvement: Improved Asset Optimization compatibility with TranslatePress frontend editor
+- Improvement: Improved Critical CSS exclusion handling for Elementor
+- Improvement: Show confirmation notice when clearing individual cache types from the admin bar
+- Improvement: Show success message when "Clear Cache" is triggered from file change detection notice
+- Fix: Enable WPMU DEV CDN toggle in Settings not changing state
+- Fix: File location in Asset Optimization Settings saves after adding input
+- Fix: Asset Optimization including non-existent CSS files
+- Fix: Asset Optimization filters displaying assets incorrectly when WooCommerce and Advanced Coupons for WooCommerce are active together
+- Fix: Configs not including all Asset Optimization and Exclusion Optimization settings and exclusions
+- Fix: Outdated Defender bot trap URL being cached, causing 404 errors and bypassing bot protection
+- Fix: Incorrect script loading order and Asset Optimization not detecting some scripts
+- Fix: Extension search feature in Asset Optimization Dev Mode filter not functioning correctly
+- Fix: Error shown after regenerating Critical CSS
+- Fix: "Instant site health alerts and notifications" incorrectly shown in Hummingbird Pro Widget
+- Fix: PHP deprecated warnings for curl_close() in PHP 8.5
+- Fix: PHP warnings when reloading the Hummingbird Uptime page
+- Fix: PHP warnings after removing SmartCrawl or Defender while Hummingbird is active
 
 = 3.19.0 ( 2026-01-26 ) =
 - New: Success notification when cache is cleared from the admin bar

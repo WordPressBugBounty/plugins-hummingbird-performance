@@ -19,150 +19,150 @@ msgstr ""
 msgid "Fetching latest data..."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:142
+#: _src/react/components/minify-asset/index.jsx:134
 msgid ""
-"Preview your changes in Safe Mode and check for any errors on the "
+"Save and Preview your changes in Safe Mode and check for any errors on the "
 "front-end. If none are found, click Publish to make your changes live."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:149
+#: _src/react/components/minify-asset/index.jsx:140
 msgid ""
 "This file is queued for compression. It will get optimized when someone "
 "visits a page that requires it."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:152
+#: _src/react/components/minify-asset/index.jsx:143
 msgid "You need to publish your changes for your new settings to take effect"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:155
+#: _src/react/components/minify-asset/index.jsx:146
 msgid "This file has been optimized"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:158
+#: _src/react/components/minify-asset/index.jsx:149
 msgid "This file has no linked URL, it will not be combined/minified"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:189
+#: _src/react/components/minify-asset/index.jsx:179
 msgid ""
 "If you’ve made changes to this file, you can recompress it without "
 "resetting your file structure."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:221
+#: _src/react/components/minify-asset/index.jsx:211
 msgid "Filesize Unknown"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:224
+#: _src/react/components/minify-asset/index.jsx:214
 #. %s - number of saved kb
 msgid "This assets file size has been reduced by %sKB"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:249
+#: _src/react/components/minify-asset/index.jsx:239
 msgid "Optimized Version -"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:289
+#: _src/react/components/minify-asset/index.jsx:279
 msgid "This file type cannot be compressed and will be left alone"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:291
+#: _src/react/components/minify-asset/index.jsx:281
 msgid "This file is already compressed"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:293
+#: _src/react/components/minify-asset/index.jsx:283
 msgid "Compression is on for this file, which aims to reduce its size"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:296
+#: _src/react/components/minify-asset/index.jsx:286
 msgid "Compression is off for this file. Turn it on to reduce its size"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:306
+#: _src/react/components/minify-asset/index.jsx:296
 msgid "Font is optimized."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:309
+#: _src/react/components/minify-asset/index.jsx:299
 msgid "Font optimization is off for this file. Turn it on to optimize it."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:319
+#: _src/react/components/minify-asset/index.jsx:309
 msgid "This file can’t be combined"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:321
+#: _src/react/components/minify-asset/index.jsx:311
 msgid "Combine is on for this file, which aims to reduce server requests."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:324
+#: _src/react/components/minify-asset/index.jsx:314
 msgid "Combine is off for this file. Turn it on to combine smaller files together."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:334
+#: _src/react/components/minify-asset/index.jsx:324
 msgid "Move to footer is on for this file, which aims to speed up page load."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:337
+#: _src/react/components/minify-asset/index.jsx:327
 msgid "Move to footer is off for this file. Turn it on to load it from the footer."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:347
+#: _src/react/components/minify-asset/index.jsx:337
 msgid "This file will be loaded only after the page has rendered."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:350
+#: _src/react/components/minify-asset/index.jsx:340
 msgid "Click to turn on the force-loading of this file after the page has rendered."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:360
+#: _src/react/components/minify-asset/index.jsx:350
 msgid ""
 "Async is enabled for this file, which will download the file asynchronously "
 "and execute it as soon as it’s ready. HTML parsing will be paused while the "
 "file is executed."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:363
+#: _src/react/components/minify-asset/index.jsx:353
 msgid ""
 "Async is off for this file. Turn it on to download the file asynchronously "
 "and execute it as soon as it’s ready. HTML parsing will be paused while the "
 "file is executed."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:373
+#: _src/react/components/minify-asset/index.jsx:363
 msgid ""
 "This file is too large to be inlined. Limits can be overwritten with a "
 "\"wphb_inline_limit_kb\" filter."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:375
+#: _src/react/components/minify-asset/index.jsx:365
 msgid ""
 "Inline CSS is on for this file, which will add the style attributes to an "
 "HTML tag."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:378
+#: _src/react/components/minify-asset/index.jsx:368
 msgid ""
 "Inline CSS is off for this file. Turn it on to add the style attributes to "
 "an HTML tag."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:388
+#: _src/react/components/minify-asset/index.jsx:378
 msgid ""
 "Preload is on for this file, which will download and cache the file so it "
 "is immediately available when the site is loaded."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:391
+#: _src/react/components/minify-asset/index.jsx:381
 msgid ""
 "Preload is off for this file. Turn it on to download and cache the file so "
 "it is immediately available when the site is loaded."
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:401
+#: _src/react/components/minify-asset/index.jsx:391
 msgid "Click to re-include"
 msgstr ""
 
-#: _src/react/components/minify-asset/index.jsx:404
+#: _src/react/components/minify-asset/index.jsx:394
 msgid "Don't load this file"
 msgstr ""
 
@@ -521,7 +521,7 @@ msgid ""
 msgstr ""
 
 #: _src/react/modules/configs.jsx:154
-#: _src/react/views/minify/assets-manual.jsx:347
+#: _src/react/views/minify/assets-manual.jsx:273
 msgid "Apply"
 msgstr ""
 
@@ -1123,7 +1123,7 @@ msgid ""
 msgstr ""
 
 #: _src/react/views/minify/assets-auto.jsx:267
-#: _src/react/views/minify/assets-manual.jsx:326
+#: _src/react/views/minify/assets-manual.jsx:252
 msgid "Compress"
 msgstr ""
 
@@ -1135,7 +1135,7 @@ msgid ""
 msgstr ""
 
 #: _src/react/views/minify/assets-auto.jsx:274
-#: _src/react/views/minify/assets-manual.jsx:327
+#: _src/react/views/minify/assets-manual.jsx:253
 msgid "Combine"
 msgstr ""
 
@@ -1161,110 +1161,84 @@ msgstr ""
 msgid "Settings restored to defaults"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:101
-msgid "Your safe mode changes have been published and are now live!"
-msgstr ""
-
-#: _src/react/views/minify/assets-manual.jsx:110
-msgid "Safe mode has been disabled!"
-msgstr ""
-
-#: _src/react/views/minify/assets-manual.jsx:328
+#: _src/react/views/minify/assets-manual.jsx:254
 msgid "Inline"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:329
+#: _src/react/views/minify/assets-manual.jsx:255
 msgid "Async"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:334
+#: _src/react/views/minify/assets-manual.jsx:260
 msgid "Move to Footer"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:335
+#: _src/react/views/minify/assets-manual.jsx:261
 msgid "Preload"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:336
+#: _src/react/views/minify/assets-manual.jsx:262
 msgid "Defer"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:355
+#: _src/react/views/minify/assets-manual.jsx:281
 msgid ""
 "Choose what bulk update actions you’d like to apply to the selected files. "
 "You still have to publish your changes before they will be set live."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:374
-msgid "Discard"
-msgstr ""
-
-#: _src/react/views/minify/assets-manual.jsx:386
-msgid "Publish"
-msgstr ""
-
-#: _src/react/views/minify/assets-manual.jsx:393
-msgid "Unpublished changes"
-msgstr ""
-
-#: _src/react/views/minify/assets-manual.jsx:394
-msgid ""
-"There are unpublished changes made in safe mode. Do you want to publish the "
-"changes to live or discard them?"
-msgstr ""
-
-#: _src/react/views/minify/assets-manual.jsx:589
+#: _src/react/views/minify/assets-manual.jsx:431
 msgid "All"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:595
+#: _src/react/views/minify/assets-manual.jsx:437
 msgid "Hosted"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:601
+#: _src/react/views/minify/assets-manual.jsx:443
 msgid "External"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:610
+#: _src/react/views/minify/assets-manual.jsx:452
 msgid ""
-"Preview your changes on the front-end, then publish to live if no errors "
-"are found."
+"Save and preview your changes on the front-end, then publish to live if no "
+"errors are found."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:616
+#: _src/react/views/minify/assets-manual.jsx:458
 msgid "Save Safe mode changes"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:623
+#: _src/react/views/minify/assets-manual.jsx:465
 #: _src/react/views/minify/configurations.jsx:54
 msgid "Publish changes"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:638
+#: _src/react/views/minify/assets-manual.jsx:480
 msgid "Bulk update"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:654
+#: _src/react/views/minify/assets-manual.jsx:496
 msgid "Display files"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:667
+#: _src/react/views/minify/assets-manual.jsx:509
 msgid "Sort by"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:668
+#: _src/react/views/minify/assets-manual.jsx:510
 msgid "Choose plugin or theme"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:675
+#: _src/react/views/minify/assets-manual.jsx:517
 msgid "Search by name or extension"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:685
+#: _src/react/views/minify/assets-manual.jsx:527
 msgid "Clear filters"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:877
+#: _src/react/views/minify/assets-manual.jsx:701
 msgid ""
 "We've completed the file check but haven't been able to load the files. "
 "Please try clearing your object cache, refresh the page and wait a few "
@@ -1272,11 +1246,11 @@ msgid ""
 "to show."
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:893
+#: _src/react/views/minify/assets-manual.jsx:717
 msgid "Visit homepage"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:920
+#: _src/react/views/minify/assets-manual.jsx:744
 msgid ""
 "You are currently using <strong>safe mode</strong> which enables you to "
 "test different settings without affecting your website visitor's "
@@ -1289,7 +1263,7 @@ msgid ""
 "to avoid page load issues.</span>"
 msgstr ""
 
-#: _src/react/views/minify/assets-manual.jsx:946
+#: _src/react/views/minify/assets-manual.jsx:770
 #: _src/react/views/minify/configurations.jsx:90
 msgid "Fonts"
 msgstr ""
@@ -1462,90 +1436,90 @@ msgid ""
 "before re-checking files."
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:268
+#: _src/react/views/minify/summary.jsx:273
 msgid "All assets are auto-compressed"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:278
+#: _src/react/views/minify/summary.jsx:283
 msgid "Compression savings"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:280
+#: _src/react/views/minify/summary.jsx:285
 msgid "Total Files"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:282
+#: _src/react/views/minify/summary.jsx:287
 msgid "Optimizing assets, this could take a while, please hold on."
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:284
+#: _src/react/views/minify/summary.jsx:289
 msgid "Optimizing"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:288
+#: _src/react/views/minify/summary.jsx:293
 msgid "Last Generated:"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:292
+#: _src/react/views/minify/summary.jsx:297
 msgid "Optimized"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:314
+#: _src/react/views/minify/summary.jsx:319
 msgid "Unlock now"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:355
+#: _src/react/views/minify/summary.jsx:360
 msgid "Files are compressed"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:365
+#: _src/react/views/minify/summary.jsx:370
 msgid "Enable WPMU DEV CDN"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:373
+#: _src/react/views/minify/summary.jsx:378
 msgid "The Network Admin has the WPMU DEV CDN turned on"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:378
+#: _src/react/views/minify/summary.jsx:383
 msgid "The Network Admin has the WPMU DEV CDN turned off"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:379
+#: _src/react/views/minify/summary.jsx:384
 #: _src/react/views/setup/wizard.jsx:747
 msgid "Disabled"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:407
+#: _src/react/views/minify/summary.jsx:412
 msgid "Filesize reductions"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:412
+#: _src/react/views/minify/summary.jsx:417
 #: _src/react/views/setup/wizard.jsx:316
 msgid "WPMU DEV CDN"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:413
+#: _src/react/views/minify/summary.jsx:418
 msgid ""
 "Boost your speed globally. Serve your files from our optimized network for "
 "maximum performance."
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:425
+#: _src/react/views/minify/summary.jsx:430
 msgid "Delay JavaScript Execution"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:426
+#: _src/react/views/minify/summary.jsx:431
 msgid ""
 "Unlock immediate speed. Visible content loads first, so your site feels "
 "faster."
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:434
+#: _src/react/views/minify/summary.jsx:439
 #: _src/react/views/setup/wizard.jsx:650
 msgid "Generate Critical CSS"
 msgstr ""
 
-#: _src/react/views/minify/summary.jsx:435
+#: _src/react/views/minify/summary.jsx:440
 msgid "Instantly visible pages. Prioritize essential CSS above the fold for no lag."
 msgstr ""
 

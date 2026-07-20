@@ -364,7 +364,6 @@ class Settings {
 	 */
 	public static function reset_to_defaults() {
 		Utils::get_module( 'redis' )->disable();
-		Utils::get_module( 'minify' )->delete_safe_mode();
 
 		$defaults = self::get_default_settings();
 
@@ -383,6 +382,7 @@ class Settings {
 	 * @param bool|string $for_module  Module to fetch options for.
 	 *
 	 * @return array  Hummingbird settings.
+	 * @param bool|string $force_setting_name  Force a specific setting name.
 	 */
 	public static function get_settings( $for_module = false, $force_setting_name = false ) {
 		$setting_name = $force_setting_name ? $force_setting_name : self::get_setting_name();
@@ -419,6 +419,7 @@ class Settings {
 	 *
 	 * @param array       $new_settings  New settings.
 	 * @param bool|string $for_module    Module to update settings for.
+	 * @param bool|string $force_setting_name  Force a specific setting name.
 	 */
 	public static function update_settings( $new_settings, $for_module = false, $force_setting_name = false ) {
 		$setting_name = $force_setting_name ? $force_setting_name : self::get_setting_name();
@@ -582,14 +583,11 @@ class Settings {
 	 *
 	 * @return string The appropriate settings option name.
 	 */
-	public static function get_setting_name() : string {
-		$is_safe_mode_call = SafeMode::instance()->is_safemode_call();
-
-		if ( $is_safe_mode_call ) {
+	public static function get_setting_name(): string {
+		if ( class_exists( SafeMode::class ) && SafeMode::instance()->is_safemode_call() ) {
 			return 'wphb_safe_mode_settings';
 		}
 
 		return 'wphb_settings';
 	}
-
 }

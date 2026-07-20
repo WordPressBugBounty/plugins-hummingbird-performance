@@ -64,7 +64,7 @@ $this->modal( 'reset-exclusions' );
 		<div class="sui-form-field">
 			<?php if ( $is_member ) : ?>
 				<label for="view_delay_js" class="sui-toggle">
-					<input type="checkbox" name="delay_js" id="view_delay_js" aria-labelledby="view_delay_js-label" <?php checked( $is_site_delay_js_enabled ); ?>>
+					<input type="checkbox" name="delay_js" id="view_delay_js" aria-labelledby="view_delay_js-label" <?php checked( $is_site_delay_js_enabled ); ?> disabled>
 					<span class="sui-toggle-slider" aria-hidden="true"></span>
 					<span id="view_delay_js-label" class="sui-toggle-label">
 						<?php esc_html_e( 'Enable Delay JavaScript', 'wphb' ); ?>
@@ -240,7 +240,7 @@ script id"><?php echo esc_html( $delay_js_excludes ); ?></textarea>
 	</div>
 </div>
 
-<div class="sui-accordion" id="critical_display_error_message" style="display: <?php echo ! empty( $critical_css_status['error_message'] ) ? esc_attr( 'block' ) : esc_attr( 'none' ); ?>;">
+<div class="sui-accordion" id="critical_display_error_message" style="display: <?php echo ! empty( $critical_css_status['error_message'] ) && 'COMPLETE' !== $critical_css_status['result'] ? esc_attr( 'block' ) : esc_attr( 'none' ); ?>;">
 	<div class="sui-accordion-item sui-warning">
 		<div class="sui-accordion-item-header">
 			<div class="sui-accordion-item-title sui-accordion-col-4"><span aria-hidden="true" class="sui-icon-warning-alert sui-warning"></span> <?php esc_html_e( 'Critical CSS encounter an issue!', 'wphb' ); ?></div>

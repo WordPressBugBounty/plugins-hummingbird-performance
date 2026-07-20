@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'incsub/wp-hummingbird',
-        'pretty_version' => 'dev-release/3.19.0-without-HUM-2064',
-        'version' => 'dev-release/3.19.0-without-HUM-2064',
-        'reference' => '870342c2b94b31a1daf1cc064867a20845b0b123',
+        'pretty_version' => 'dev-release/3.20.0',
+        'version' => 'dev-release/3.20.0',
+        'reference' => '94d295347960ceea571f72567cd7c800e00c9c74',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'incsub/wp-hummingbird' => array(
-            'pretty_version' => 'dev-release/3.19.0-without-HUM-2064',
-            'version' => 'dev-release/3.19.0-without-HUM-2064',
-            'reference' => '870342c2b94b31a1daf1cc064867a20845b0b123',
+            'pretty_version' => 'dev-release/3.20.0',
+            'version' => 'dev-release/3.20.0',
+            'reference' => '94d295347960ceea571f72567cd7c800e00c9c74',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

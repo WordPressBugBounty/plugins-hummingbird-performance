@@ -14,6 +14,7 @@ use Hummingbird\Core\Utils;
 use Hummingbird\WP_Hummingbird;
 use Hummingbird\Core\Modules\Page_Cache;
 use Hummingbird\Core\Module_Server;
+use Hummingbird\Core\SafeMode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -616,7 +617,7 @@ class Minification extends Page {
 					'wphb-log-action'
 				),
 				'path_url'     => $path_url,
-				'safe_mode'    => Minify::get_safe_mode_status(),
+				'safe_mode'    => SafeMode::instance()->get_status(),
 			)
 		);
 	}

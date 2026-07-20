@@ -122,13 +122,6 @@ class Minify extends Module {
 	const AO_TRANSIENT_NAME = 'wphb-processing';
 
 	/**
-	 * Cached result of the safe mode preview check.
-	 *
-	 * @var bool|null
-	 */
-	private $previewing_safe_mode = null;
-
-	/**
 	 * Initializes the module. Always executed even if the module is deactivated.
 	 *
 	 * We need the scanner module to be always active, because HB uses is_scanning to detect
@@ -139,7 +132,7 @@ class Minify extends Module {
 
 		add_filter( 'wp_hummingbird_is_active_module_minify', array( $this, 'minify_module_status' ) );
 
-		add_filter( 'wphb_dont_add_handle_to_collection', array( $this, 'filter_assets_bloating'), 9, 3 );
+		add_filter( 'wphb_dont_add_handle_to_collection', array( $this, 'filter_assets_bloating' ), 9, 3 );
 		add_filter( 'wphb_block_resource', array( $this, 'filter_resource_block' ), 10, 5 );
 		add_filter( 'wphb_minify_resource', array( $this, 'filter_resource_minify' ), 10, 4 );
 		add_filter( 'wphb_combine_resource', array( $this, 'filter_resource_combine' ), 10, 3 );
@@ -157,7 +150,7 @@ class Minify extends Module {
 		// Remove -rtl from CDN links.
 		add_filter( 'style_loader_tag', array( $this, 'remove_rtl_prefix_on_cdn' ) );
 
-		if ( $this->previewing_safe_mode() ) {
+		if ( SafeMode::instance()->previewing_safe_mode() ) {
 			add_action(
 				'template_redirect',
 				function () {
@@ -336,6 +329,10 @@ class Minify extends Module {
 			return $handles;
 		}
 
+		// Keep a copy of the original handles order so we can
+		// preserve the enqueue sequence when returning the list.
+		$original_handles = $handles;
+
 		if ( 'styles' === $type ) {
 			global $wp_styles;
 			$wp_dependencies = $wp_styles;
@@ -389,6 +386,15 @@ class Minify extends Module {
 
 			// Only show items that have a handle and a source.
 			if ( ! empty( $wp_dependencies->registered[ $handle ]->src ) ) {
+				// Check if the file exists before adding to collection.
+				$file_path = Utils::src_to_path( $wp_dependencies->registered[ $handle ]->src );
+				if ( $file_path && ! file_exists( $file_path ) ) {
+					// File doesn't exist, skip this handle and return to WP.
+					$return_to_wp = array_merge( $return_to_wp, array( $handle ) );
+					unset( $handles[ $key ] );
+					continue;
+				}
+
 				$this->sources_collector->add_to_collection( $wp_dependencies->registered[ $handle ], $type );
 			}
 
@@ -457,6 +463,10 @@ class Minify extends Module {
 		// Watch out! Groups must not be changed after this point!
 		$groups_list->preprocess_groups();
 
+		// Track which original handles belong to each "ready" group so we can
+		// later preserve the relative order of groups and individual handles.
+		$ready_groups = array(); // group_id => array( handles ).
+
 		/**
 		 * Minify group.
 		 *
@@ -470,6 +480,7 @@ class Minify extends Module {
 			if ( 'ready' === $group_status ) {
 				$group->enqueue( self::is_in_footer(), $deps );
 				$return_to_wp = array_merge( $return_to_wp, array( $group->group_id ) );
+				$ready_groups[ $group->group_id ] = $group->get_handles();
 			} else {
 				// The group has not yet a file attached, or it cannot be processed for some reason.
 				foreach ( $group->get_handles() as $handle ) {
@@ -486,7 +497,56 @@ class Minify extends Module {
 			}
 		}
 
-		return $return_to_wp;
+		// Rebuild the list of handles to return preserving the original
+		// enqueue order as much as possible. This avoids reordering
+		// excluded handles (for example Elementor per-post styles) around
+		// minified groups, gtranslate gt_widget_script_* and any dynamic handle with timestamp bloating AO.
+		$final       = array();
+		$used        = array();
+		$return_flip = array_flip( $return_to_wp );
+
+		// Map each original handle to its ready group ID, if any.
+		$handle_to_group = array();
+		foreach ( $ready_groups as $group_id => $group_handles ) {
+			foreach ( $group_handles as $h ) {
+				$handle_to_group[ $h ] = $group_id;
+			}
+		}
+
+		// Walk the original handles list and emit either the handle itself
+		// or the corresponding group ID the first time we encounter a handle
+		// that belongs to that group.
+		foreach ( $original_handles as $handle ) {
+			if ( isset( $handle_to_group[ $handle ] ) ) {
+				$group_id = $handle_to_group[ $handle ];
+				if ( isset( $used[ $group_id ] ) ) {
+					continue;
+				}
+				if ( isset( $return_flip[ $group_id ] ) ) {
+					$final[]             = $group_id;
+					$used[ $group_id ]    = true;
+				}
+				continue;
+			}
+
+			if ( isset( $return_flip[ $handle ] ) && ! isset( $used[ $handle ] ) ) {
+				$final[]          = $handle;
+				$used[ $handle ] = true;
+			}
+		}
+
+		// Append any remaining handles/groups that were not emitted during
+		// the ordered pass above, preserving their original relative order
+		// in $return_to_wp.
+		foreach ( $return_to_wp as $handle ) {
+			if ( isset( $used[ $handle ] ) ) {
+				continue;
+			}
+			$final[]          = $handle;
+			$used[ $handle ] = true;
+		}
+
+		return $final;
 	}
 
 	/**
@@ -1175,7 +1235,6 @@ class Minify extends Module {
 	public function disable() {
 		$this->toggle_service( false );
 		$this->clear_cache();
-		$this->delete_safe_mode();
 
 		// Delete notices if they are there.
 		delete_option( 'wphb-minification-files-scanned' );
@@ -1264,6 +1323,11 @@ class Minify extends Module {
 			return true;
 		}
 
+		// Skip WordPress logged-in user assets.
+		if ( $this->is_logged_in_asset( $handle, $src ) ) {
+			return true;
+		}
+
 		$pattern = '/\d{9,10}/';
 
 		// Skip if handle has unix timestamp.
@@ -1285,6 +1349,52 @@ class Minify extends Module {
 			return false;
 	}
 
+	/**
+	 * Detect if an asset is a WordPress logged-in user asset.
+	 *
+	 * Checks handle names to identify assets that are only
+	 * loaded for logged-in users (admin bar, dashicons, customizer, etc.).
+	 *
+	 * @since 3.20.0
+	 *
+	 * @param string $handle Resource handle.
+	 * @param string $src    Source URL.
+	 *
+	 * @return bool True if asset is a logged-in user asset.
+	 */
+	private function is_logged_in_asset( $handle, $src ) {
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
+		static $base_handles = array(
+			'admin-bar',
+			'dashicons',
+			'wp-auth-check',
+			'customize-',
+		);
+
+		/**
+		 * Allow filtering of logged-in asset handles.
+		 *
+		 * @since 3.20.0
+		 *
+		 * @param array  $base_handles Default handles prefixed with logged-in assets.
+		 * @param string $handle       Current asset handle.
+		 * @param string $src          Current asset source URL.
+		 */
+		$logged_in_handles = apply_filters( 'wphb_logged_in_asset_handles', $base_handles, $handle, $src );
+
+		if ( ! empty( $handle ) ) {
+			foreach ( $logged_in_handles as $logged_in_handle ) {
+				if ( 0 === strpos( $handle, $logged_in_handle ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 
 	/**
 	 * Filter blocker resources.
@@ -2001,7 +2111,7 @@ class Minify extends Module {
 
 						// The source comes from a plugin.
 						foreach ( $plugins as $active_plugin ) {
-							if ( stristr( $active_plugin, $matches[1] ) ) {
+							if ( 0 === stripos( $active_plugin, trailingslashit( $matches[1] ) )  ) {
 								// It seems that we found the plugin but let's double-check.
 								$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $active_plugin );
 								if ( $plugin_data['Name'] ) {
@@ -2054,43 +2164,6 @@ class Minify extends Module {
 	 */
 	private function disable_minify_for_safe_mode() {
 		return SafeMode::instance()->get_status() && ! SafeMode::instance()->is_safemode_call();
-	}
-
-	public static function get_safe_mode_status() {
-		return SafeMode::instance()->get_status();
-	}
-
-	public function set_safe_mode_status( $status ) {
-		SafeMode::instance()->set_status( $status );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_safe_mode_settings() {
-		$settings = Settings::get_settings( $this->get_slug() );
-
-		return $settings;
-	}
-
-	public function set_safe_mode_settings( $settings ) {
-		Settings::update_settings( $settings, $this->get_slug() );
-	}
-
-	public function delete_safe_mode() {
-		Settings::delete( 'wphb_safe_mode' );
-	}
-
-	public function reset_safe_mode() {
-		SafeMode::instance()->reset_safe_mode_settings();
-		SafeMode::instance()->set_status( false );
-	}
-
-	/**
-	 * @return mixed
-	 */
-	private function previewing_safe_mode() {
-		return SafeMode::instance()->previewing_safe_mode();
 	}
 
 	public function add_safe_mode_param_to_links( $content ) {

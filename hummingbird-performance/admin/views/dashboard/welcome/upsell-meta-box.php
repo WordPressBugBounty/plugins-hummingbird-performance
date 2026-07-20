@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'Delay JavaScript Execution', 'wphb' ); ?></li>
 	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'Prioritize Critical CSS for more page speed ', 'wphb' ); ?></li>
 	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'Smush Pro for the best image optimization', 'wphb' ); ?></li>
-	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'Instant site health alerts and notifications', 'wphb' ); ?></li>
 	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'White label automated reporting', 'wphb' ); ?></li>
 	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'Premium WordPress plugins', 'wphb' ); ?></li>
 	<li><span class="sui-icon-check sui-md" aria-hidden="true"></span> <?php esc_html_e( 'Manage unlimited WordPress sites', 'wphb' ); ?></li>

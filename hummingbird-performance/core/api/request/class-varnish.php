@@ -128,7 +128,9 @@ class Varnish extends Request {
 			);
 
 			curl_exec( $ch );
-			curl_close( $ch );
+			if ( function_exists( 'curl_close' ) && PHP_VERSION_ID < 80500 ) {
+				curl_close( $ch );
+			}
 		} catch ( \Exception $e ) {
 			error_log( 'Error purging varnish cache: ' . $e->getMessage() );
 		}

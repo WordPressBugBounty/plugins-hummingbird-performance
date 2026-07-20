@@ -156,11 +156,30 @@ class Critical_Css extends Module {
 	 * @return bool
 	 */
 	public function wphb_dont_combine_handles( $result, $handles, $type ) {
+		// Only process styles.
+		if ( 'styles' !== $type ) {
+			return $result;
+		}
+
 		$options           = Utils::get_module( 'minify' )->get_options();
 		$critical_css_type = $options['critical_css_type'];
 
-		if ( 'styles' === $type && 'remove' === $critical_css_type ) {
+		// Don't combine any styles when critical CSS type is 'remove'.
+		if ( 'remove' === $critical_css_type ) {
 			return true;
+		}
+
+		// Check if any handle matches the combined exclusions list.
+		$combined_exclusions = $this->get_combined_exclusions();
+		if ( empty( $combined_exclusions ) ) {
+			return $result;
+		}
+
+		// Check each exclusion pattern against the handles string.
+		foreach ( $combined_exclusions as $exclusion ) {
+			if ( stripos( $handles, $exclusion ) !== false ) {
+				return true; // Don't combine - handle found in exclusions.
+			}
 		}
 
 		return $result;
@@ -1683,6 +1702,14 @@ class Critical_Css extends Module {
 
 			if ( $update_css_log ) {
 				update_option( self::QUEUE_OPTION_ID, $wphb_cs_created_css_log_update );
+				if ( Utils::is_maintenance_mode() ) {
+					$message = sprintf(
+					// translators: %1$s = error message.
+						__( '<br />%1$s', 'wphb' ),
+						'<strong>' . __( 'Critical CSS doesn’t run while your site is in maintenance mode, so a 503 error is expected. It will work normally again once maintenance mode is disabled.', 'wphb' ) . '</strong>'
+					);
+				}
+
 				// If all the statuses are completed.
 				if ( ! empty( $message ) ) {
 					$message = sprintf(

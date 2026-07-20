@@ -1515,6 +1515,11 @@ class Minify_Group {
 			return $upload;
 		}
 
+		// Check for errorType and errorMessage in the response body.
+		if ( isset( $upload->errorType ) && isset( $upload->errorMessage ) ) {
+			return new WP_Error( 2001, sprintf( __( 'API Error: %s - %s', 'wphb' ), $upload->errorType, $upload->errorMessage ) );
+		}
+
 		if ( false !== $upload->files[0]->error && ! empty( $upload->files[0]->message ) ) {
 			return new WP_Error( '2001', $upload->files[0]->message );
 		}

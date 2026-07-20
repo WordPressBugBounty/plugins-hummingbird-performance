@@ -95,6 +95,8 @@ class WPMUDev {
 		);
 
 		curl_exec( $ch );
-		curl_close( $ch );
+		if ( function_exists( 'curl_close' ) && PHP_VERSION_ID < 80500 ) {
+			curl_close( $ch );
+		}
 	}
 }

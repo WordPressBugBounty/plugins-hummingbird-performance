@@ -10,6 +10,7 @@ namespace Hummingbird\Core\Api;
 use Hummingbird\Core\Configs;
 use Hummingbird\Core\Modules\Minify;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\SafeMode;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -355,7 +356,7 @@ class Rest {
 			'cdn'          => $options['use_cdn'],
 			'modal'        => (bool) get_option( 'wphb-minification-show-advanced_modal' ),
 			'mode'         => $options['view'],
-			'safeMode'     => Minify::get_safe_mode_status(),
+			'safeMode'     => SafeMode::instance()->get_status(),
 			'delay_js'     => $options['delay_js'],
 			'critical_css' => $options['critical_css'],
 			'ao_queue'     => $ao_queue,

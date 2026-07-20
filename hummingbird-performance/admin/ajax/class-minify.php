@@ -34,10 +34,6 @@ class Minify {
 			'minify_reset_settings',
 			'minify_auto_save_settings',
 			'minify_manual_save_settings',
-			'minify_save_safe_mode_settings',
-			'minify_save_and_publish_safe_mode',
-			'minify_publish_safe_mode',
-			'minify_discard_safe_mode',
 			'minify_manual_status',
 			'minify_regenerate_asset',
 			'minify_toggle_cdn',
@@ -55,10 +51,6 @@ class Minify {
 			 * @uses minify_reset_settings()
 			 * @uses minify_auto_save_settings()
 			 * @uses minify_manual_save_settings()
-			 * @uses minify_save_safe_mode_settings()
-			 * @uses minify_publish_safe_mode()
-			 * @uses minify_save_and_publish_safe_mode()
-			 * @uses minify_discard_safe_mode()
 			 * @uses minify_manual_status()
 			 * @uses minify_regenerate_asset()
 			 * @uses minify_toggle_cdn()
@@ -400,57 +392,6 @@ class Minify {
 		return isset( $data[ $key ] ) && is_array( $data[ $key ] ) ? $data[ $key ] : array();
 	}
 
-	public function minify_save_safe_mode_settings() {
-		check_ajax_referer( 'wphb-fetch' );
-
-		$settings = filter_input( INPUT_POST, 'data', FILTER_DEFAULT, FILTER_UNSAFE_RAW );
-		$settings = json_decode( html_entity_decode( $settings ), true );
-
-		$this->save_manual_settings(
-			SafeMode::filter_options( $settings, 'minify' ),
-			array( $this, 'save_safe_mode_settings' )
-		);
-
-		$this->minify_manual_status();
-	}
-
-	public function minify_save_and_publish_safe_mode() {
-		check_ajax_referer( 'wphb-fetch' );
-
-		$settings = filter_input( INPUT_POST, 'data', FILTER_DEFAULT, FILTER_UNSAFE_RAW );
-		$settings = json_decode( html_entity_decode( $settings ), true );
-
-		$minify = Utils::get_module( 'minify' );
-		$this->save_manual_settings( $settings, array( $minify, 'update_options' ) );
-		$minify->reset_safe_mode();
-
-		$this->minify_manual_status();
-	}
-
-	public function minify_publish_safe_mode() {
-		check_ajax_referer( 'wphb-fetch' );
-		$minify   = Utils::get_module( 'minify' );
-		$settings = array_merge( $minify->get_options(), $minify->get_safe_mode_settings() );
-		$settings = SafeMode::filter_options( $settings, 'minify' );
-
-		$this->save_manual_settings( $settings, array( $minify, 'update_options' ) );
-		$minify->reset_safe_mode();
-
-		$this->minify_manual_status();
-	}
-
-	public function minify_discard_safe_mode() {
-		check_ajax_referer( 'wphb-fetch' );
-
-		Utils::get_module( 'minify' )->reset_safe_mode();
-		$this->minify_manual_status();
-	}
-
-	private function save_safe_mode_settings( $settings ) {
-		$minify = Utils::get_module( 'minify' );
-		$minify->set_safe_mode_settings( SafeMode::filter_options( $settings, 'minify' ) );
-	}
-
 	/**
 	 * Clear out groups for assets, where settings have changed.
 	 *
@@ -487,14 +428,12 @@ class Minify {
 	public function minify_manual_status() {
 		check_ajax_referer( 'wphb-fetch' );
 
-		$minify            = Utils::get_module( 'minify' );
-		$options           = SafeMode::filter_options( $minify->get_options(), 'minify' );
-		$safe_mode_options = array_merge( $options, $minify->get_safe_mode_settings() );
+		$minify  = Utils::get_module( 'minify' );
+		$options = SafeMode::filter_options( $minify->get_options(), 'minify' );
 
 		wp_send_json_success(
 			array(
-				'options'           => array_map( array( $this, 'flatten_array' ), $options ),
-				'safe_mode_options' => $safe_mode_options,
+				'options' => array_map( array( $this, 'flatten_array' ), $options ),
 			)
 		);
 	}

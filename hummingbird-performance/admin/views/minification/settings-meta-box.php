@@ -94,10 +94,10 @@ $is_site_cdn_enabled = $cdn_status && $is_member;
 				<?php endif; ?>
 			<?php else : ?>
 				<div class="sui-form-field">
-					<label for="use_cdn" class="sui-toggle">
-						<input type="checkbox" name="use_cdn" id="use_cdn" aria-labelledby="use_cdn-label" <?php checked( $is_site_cdn_enabled ); ?> <?php disabled( ! $is_member ); ?>>
+					<label for="use_cdn_setting" class="sui-toggle">
+						<input type="checkbox" name="use_cdn_setting" id="use_cdn_setting" aria-labelledby="use_cdn_setting-label" <?php checked( $is_site_cdn_enabled ); ?> <?php disabled( ! $is_member ); ?>>
 						<span class="sui-toggle-slider" aria-hidden="true"></span>
-						<span id="use_cdn-label" class="sui-toggle-label">
+						<span id="use_cdn_setting-label" class="sui-toggle-label">
 							<?php esc_html_e( 'Host my files on the WPMU DEV CDN', 'wphb' ); ?>
 						</span>
 					</label>

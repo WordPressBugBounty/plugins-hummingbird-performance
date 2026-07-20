@@ -9,7 +9,7 @@
  */
 
 import Fetcher from '../utils/fetcher';
-import { getString, getLink } from '../utils/helpers';
+import { getString, getLink, toggleCDNHelper } from '../utils/helpers';
 import MinifyScanner from '../scanners/MinifyScanner';
 
 /**
@@ -88,21 +88,11 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 				self.scanner.start();
 			} );
 
-			// CDN checkbox update status
-			const checkboxes = $( 'input[type=checkbox][name=use_cdn]' );
-			checkboxes.on( 'change', function() {
-				$( '#cdn_file_exclude' ).toggleClass( 'sui-hidden' );
-				const cdnValue = $( this ).is( ':checked' );
-
-				// Handle two CDN checkboxes on Asset Optimization page
-				checkboxes.each( function() {
-					this.checked = cdnValue;
-				} );
-
-				// Update CDN status
-				Fetcher.minification.toggleCDN( cdnValue ).then( () => {
-					WPHB_Admin.notices.show();
-				} );
+			const checkbox = $( 'input#use_cdn_setting' );
+			checkbox.on( 'click', function() {
+				const toggledValue = $( this ).is( ':checked' );
+				document.getElementById( 'use_cdn_summary' ).checked = toggledValue;
+				toggleCDNHelper( toggledValue );
 			} );
 
 			$( '#delay_js_keywords_advanced_view' ).on( 'change', () => this.toggleAdvancedKeywordsView() );
@@ -141,7 +131,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 			$( 'input[type=radio][name=font_display_value]' ).on(
 				'change',
 				function() {
-					const fontDisplayValue = $(this).val();
+					const fontDisplayValue = $( this ).val();
 					$( '.font_display_safe_helper' ).toggle( fontDisplayValue === 'swap' );
 					$( '.font_display_performant_helper' ).toggle( fontDisplayValue === 'optional' );
 				}
@@ -167,7 +157,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 			$( 'input[type=radio][name=preload_fonts_mode]' ).on(
 				'change',
 				function() {
-					const fontDisplayValue = $(this).val();
+					const fontDisplayValue = $( this ).val();
 					$( '.preload_fonts_mode_automatic_helper' ).toggle( fontDisplayValue === 'automatic' );
 					$( '.preload_fonts_mode_manuel_helper' ).toggle( fontDisplayValue === 'manual' );
 				}
@@ -257,27 +247,6 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 			} );
 
 			/**
-			 * Parse custom asset dir input
-			 *
-			 * @since 1.9
-			 */
-			const textField = document.getElementById( 'file_path' );
-			if ( null !== textField ) {
-				textField.onchange = function( e ) {
-					e.preventDefault();
-					Fetcher.minification
-						.updateAssetPath( $( this ).val() )
-						.then( ( response ) => {
-							if ( response.message ) {
-								WPHB_Admin.notices.show( response.message, 'error' );
-							} else {
-								WPHB_Admin.notices.show();
-							}
-						} );
-				};
-			}
-
-			/**
 			 * Asset optimization network settings page.
 			 *
 			 * @since 2.0.0
@@ -341,9 +310,11 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 
 				const data = self.getMultiSelectValues( 'cdn_exclude' );
 				const debugLog = $( 'input[name=debug_log]' ).is( ':checked' );
+				const filePath = $( '#file_path' ).val();
 				const requestData = {
 					excludeAssets: data,
-					debugLog
+					debugLog,
+					filePath,
 				};
 
 				Fetcher.minification
@@ -858,22 +829,22 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 						WPHB_Admin.minification.criticalUpdateStatusTag( response.htmlForStatusTag );
 						const criticalDisplayError = 'critical_display_error_message';
 
-					if ( 'COMPLETE' === response.criticalStatusForQueue.result ) {
-						WPHB_Admin.notices.show( getString( 'criticalGeneratedNotice' ), 'success', false );
-						WPHB_Admin.minification.hbToggleElement( criticalDisplayError, 'none' );
-					} else if ( 'ERROR' === response.criticalStatusForQueue.result ) {
-						window.SUI.closeNotice( 'wphb-ajax-update-notice' );
-						const errorMessage = response.criticalStatusForQueue.error_message;
-						window.wphbMixPanel.track( 'critical_css_error', {
-							mode: response.criticalMode,
-							'Error Type': response.errorCode,
-							'Error Message': errorMessage.length > 256 ? errorMessage.substring( 0, 256 ) + '...' : errorMessage
-						} );
-						WPHB_Admin.minification.hbToggleElement( criticalDisplayError, 'block' );
-						document.getElementById( 'critical_error_message_tag' ).innerHTML = response.criticalErrorMessage;
+						if ( 'COMPLETE' === response.criticalStatusForQueue.result ) {
+							WPHB_Admin.notices.show( getString( 'criticalGeneratedNotice' ), 'success', false );
+							WPHB_Admin.minification.hbToggleElement( criticalDisplayError, 'none' );
+						} else if ( 'ERROR' === response.criticalStatusForQueue.result ) {
+							window.SUI.closeNotice( 'wphb-ajax-update-notice' );
+							const errorMessage = response.criticalStatusForQueue.error_message;
+							window.wphbMixPanel.track( 'critical_css_error', {
+								mode: response.criticalMode,
+								'Error Type': response.errorCode,
+								'Error Message': errorMessage.length > 256 ? errorMessage.substring( 0, 256 ) + '...' : errorMessage
+							} );
+							WPHB_Admin.minification.hbToggleElement( criticalDisplayError, 'block' );
+							document.getElementById( 'critical_error_message_tag' ).innerHTML = response.criticalErrorMessage;
+						}
 					}
-				}
-			});
+				} );
 		},
 
 		/**
@@ -888,6 +859,9 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 
 		/**
 		 * Toggle an element.
+		 *
+		 * @param  elementId
+		 * @param  styleType
 		 */
 		hbToggleElement( elementId, styleType ) {
 			if ( '' === styleType ) {
@@ -901,7 +875,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 		/**
 		 * Track MP event for delay js and critical css.
 		 *
-		 * @param {object} element
+		 * @param {Object} element
 		 */
 		hbTrackEoMPEvent( element ) {
 			window.wphbMixPanel.trackEoUpsell( element.dataset.eventname, element.dataset.location );
@@ -1040,7 +1014,7 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 					} );
 
 					WPHB_Admin.minification.triggerCriticalStatusUpdateAjax( response.htmlForStatusTag );
-					$( '.box-caching-summary span.sui-summary-large' ).html( '0' ); 
+					$( '.box-caching-summary span.sui-summary-large' ).html( '0' );
 					WPHB_Admin.notices.show( getString( 'successCriticalCssPurge' ), 'blue', false );
 				} else {
 					WPHB_Admin.notices.show( getString( 'errorCriticalCssPurge' ), 'error' );
@@ -1049,13 +1023,13 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 		},
 
 		criticalCSSSwitchMode( mode ) {
-			$('#critical_css_mode').val( mode )
+			$( '#critical_css_mode' ).val( mode );
 			if ( 'manual_css' === mode ) {
-				$("#manual_css_delivery_box").removeClass('sui-hidden');
-				$("#critical_css_delivery_box").addClass('sui-hidden');
+				$( '#manual_css_delivery_box' ).removeClass( 'sui-hidden' );
+				$( '#critical_css_delivery_box' ).addClass( 'sui-hidden' );
 			} else {
-				$("#manual_css_delivery_box").addClass('sui-hidden');
-				$("#critical_css_delivery_box").removeClass('sui-hidden');
+				$( '#manual_css_delivery_box' ).addClass( 'sui-hidden' );
+				$( '#critical_css_delivery_box' ).removeClass( 'sui-hidden' );
 				const manualCriticalBox = document.getElementById( 'manual_critical_css' ).value;
 				const advancedCriticalBox = document.getElementById( 'critical_css_advanced' ).value;
 

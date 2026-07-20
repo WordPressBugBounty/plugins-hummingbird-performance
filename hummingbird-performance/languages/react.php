@@ -13,98 +13,98 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/components/loader/index.jsx:28
 	__( 'Fetching latest data...', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:142
-	__( 'Preview your changes in Safe Mode and check for any errors on the front-end. If none are found, click Publish to make your changes live.', 'wphb' ),
+	// Reference: _src/react/components/minify-asset/index.jsx:134
+	__( 'Save and Preview your changes in Safe Mode and check for any errors on the front-end. If none are found, click Publish to make your changes live.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:149
+	// Reference: _src/react/components/minify-asset/index.jsx:140
 	__( 'This file is queued for compression. It will get optimized when someone visits a page that requires it.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:152
+	// Reference: _src/react/components/minify-asset/index.jsx:143
 	__( 'You need to publish your changes for your new settings to take effect', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:155
+	// Reference: _src/react/components/minify-asset/index.jsx:146
 	__( 'This file has been optimized', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:158
+	// Reference: _src/react/components/minify-asset/index.jsx:149
 	__( 'This file has no linked URL, it will not be combined/minified', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:189
+	// Reference: _src/react/components/minify-asset/index.jsx:179
 	__( 'If you’ve made changes to this file, you can recompress it without resetting your file structure.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:221
+	// Reference: _src/react/components/minify-asset/index.jsx:211
 	__( 'Filesize Unknown', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:224
+	// Reference: _src/react/components/minify-asset/index.jsx:214
 	/* translators: %s - number of saved kb */
 	__( 'This assets file size has been reduced by %sKB', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:249
+	// Reference: _src/react/components/minify-asset/index.jsx:239
 	__( 'Optimized Version -', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:289
+	// Reference: _src/react/components/minify-asset/index.jsx:279
 	__( 'This file type cannot be compressed and will be left alone', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:291
+	// Reference: _src/react/components/minify-asset/index.jsx:281
 	__( 'This file is already compressed', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:293
+	// Reference: _src/react/components/minify-asset/index.jsx:283
 	__( 'Compression is on for this file, which aims to reduce its size', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:296
+	// Reference: _src/react/components/minify-asset/index.jsx:286
 	__( 'Compression is off for this file. Turn it on to reduce its size', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:306
+	// Reference: _src/react/components/minify-asset/index.jsx:296
 	__( 'Font is optimized.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:309
+	// Reference: _src/react/components/minify-asset/index.jsx:299
 	__( 'Font optimization is off for this file. Turn it on to optimize it.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:319
+	// Reference: _src/react/components/minify-asset/index.jsx:309
 	__( 'This file can’t be combined', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:321
+	// Reference: _src/react/components/minify-asset/index.jsx:311
 	__( 'Combine is on for this file, which aims to reduce server requests.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:324
+	// Reference: _src/react/components/minify-asset/index.jsx:314
 	__( 'Combine is off for this file. Turn it on to combine smaller files together.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:334
+	// Reference: _src/react/components/minify-asset/index.jsx:324
 	__( 'Move to footer is on for this file, which aims to speed up page load.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:337
+	// Reference: _src/react/components/minify-asset/index.jsx:327
 	__( 'Move to footer is off for this file. Turn it on to load it from the footer.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:347
+	// Reference: _src/react/components/minify-asset/index.jsx:337
 	__( 'This file will be loaded only after the page has rendered.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:350
+	// Reference: _src/react/components/minify-asset/index.jsx:340
 	__( 'Click to turn on the force-loading of this file after the page has rendered.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:360
+	// Reference: _src/react/components/minify-asset/index.jsx:350
 	__( 'Async is enabled for this file, which will download the file asynchronously and execute it as soon as it’s ready. HTML parsing will be paused while the file is executed.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:363
+	// Reference: _src/react/components/minify-asset/index.jsx:353
 	__( 'Async is off for this file. Turn it on to download the file asynchronously and execute it as soon as it’s ready. HTML parsing will be paused while the file is executed.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:373
+	// Reference: _src/react/components/minify-asset/index.jsx:363
 	__( 'This file is too large to be inlined. Limits can be overwritten with a "wphb_inline_limit_kb" filter.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:375
+	// Reference: _src/react/components/minify-asset/index.jsx:365
 	__( 'Inline CSS is on for this file, which will add the style attributes to an HTML tag.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:378
+	// Reference: _src/react/components/minify-asset/index.jsx:368
 	__( 'Inline CSS is off for this file. Turn it on to add the style attributes to an HTML tag.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:388
+	// Reference: _src/react/components/minify-asset/index.jsx:378
 	__( 'Preload is on for this file, which will download and cache the file so it is immediately available when the site is loaded.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:391
+	// Reference: _src/react/components/minify-asset/index.jsx:381
 	__( 'Preload is off for this file. Turn it on to download and cache the file so it is immediately available when the site is loaded.', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:401
+	// Reference: _src/react/components/minify-asset/index.jsx:391
 	__( 'Click to re-include', 'wphb' ),
 
-	// Reference: _src/react/components/minify-asset/index.jsx:404
+	// Reference: _src/react/components/minify-asset/index.jsx:394
 	__( 'Don\'t load this file', 'wphb' ),
 
 	// Reference: _src/react/components/steps-bar/index.jsx:27
@@ -342,7 +342,7 @@ $generated_i18n_strings = array(
 	__( 'Are you sure you want to apply the %s config to this site? We recommend you have a backup available as your existing settings configuration will be overridden.', 'wphb' ),
 
 	// Reference: _src/react/modules/configs.jsx:154
-	// Reference: _src/react/views/minify/assets-manual.jsx:347
+	// Reference: _src/react/views/minify/assets-manual.jsx:273
 	__( 'Apply', 'wphb' ),
 
 	// Reference: _src/react/modules/configs.jsx:157
@@ -722,7 +722,7 @@ $generated_i18n_strings = array(
 	__( 'Optimizing your assets will compress and organize them in a way that improves page load times.', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:267
-	// Reference: _src/react/views/minify/assets-manual.jsx:326
+	// Reference: _src/react/views/minify/assets-manual.jsx:252
 	__( 'Compress', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:271
@@ -730,7 +730,7 @@ $generated_i18n_strings = array(
 	__( 'Compresses your files for faster delivery while improving site speed by decluttering CSS and JavaScript.', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:274
-	// Reference: _src/react/views/minify/assets-manual.jsx:327
+	// Reference: _src/react/views/minify/assets-manual.jsx:253
 	__( 'Combine', 'wphb' ),
 
 	// Reference: _src/react/views/minify/assets-auto.jsx:278
@@ -747,89 +747,71 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/assets-auto.jsx:93
 	__( 'Settings restored to defaults', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:101
-	__( 'Your safe mode changes have been published and are now live!', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:110
-	__( 'Safe mode has been disabled!', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:328
+	// Reference: _src/react/views/minify/assets-manual.jsx:254
 	__( 'Inline', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:329
+	// Reference: _src/react/views/minify/assets-manual.jsx:255
 	__( 'Async', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:334
+	// Reference: _src/react/views/minify/assets-manual.jsx:260
 	__( 'Move to Footer', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:335
+	// Reference: _src/react/views/minify/assets-manual.jsx:261
 	__( 'Preload', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:336
+	// Reference: _src/react/views/minify/assets-manual.jsx:262
 	__( 'Defer', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:355
+	// Reference: _src/react/views/minify/assets-manual.jsx:281
 	__( 'Choose what bulk update actions you’d like to apply to the selected files. You still have to publish your changes before they will be set live.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:374
-	__( 'Discard', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:386
-	__( 'Publish', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:393
-	__( 'Unpublished changes', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:394
-	__( 'There are unpublished changes made in safe mode. Do you want to publish the changes to live or discard them?', 'wphb' ),
-
-	// Reference: _src/react/views/minify/assets-manual.jsx:589
+	// Reference: _src/react/views/minify/assets-manual.jsx:431
 	__( 'All', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:595
+	// Reference: _src/react/views/minify/assets-manual.jsx:437
 	__( 'Hosted', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:601
+	// Reference: _src/react/views/minify/assets-manual.jsx:443
 	__( 'External', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:610
-	__( 'Preview your changes on the front-end, then publish to live if no errors are found.', 'wphb' ),
+	// Reference: _src/react/views/minify/assets-manual.jsx:452
+	__( 'Save and preview your changes on the front-end, then publish to live if no errors are found.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:616
+	// Reference: _src/react/views/minify/assets-manual.jsx:458
 	__( 'Save Safe mode changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:623
+	// Reference: _src/react/views/minify/assets-manual.jsx:465
 	// Reference: _src/react/views/minify/configurations.jsx:54
 	__( 'Publish changes', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:638
+	// Reference: _src/react/views/minify/assets-manual.jsx:480
 	__( 'Bulk update', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:654
+	// Reference: _src/react/views/minify/assets-manual.jsx:496
 	__( 'Display files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:667
+	// Reference: _src/react/views/minify/assets-manual.jsx:509
 	__( 'Sort by', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:668
+	// Reference: _src/react/views/minify/assets-manual.jsx:510
 	__( 'Choose plugin or theme', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:675
+	// Reference: _src/react/views/minify/assets-manual.jsx:517
 	__( 'Search by name or extension', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:685
+	// Reference: _src/react/views/minify/assets-manual.jsx:527
 	__( 'Clear filters', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:877
+	// Reference: _src/react/views/minify/assets-manual.jsx:701
 	__( 'We\'ve completed the file check but haven\'t been able to load the files. Please try clearing your object cache, refresh the page and wait a few seconds to load the files, or visit your homepage to trigger the file list to show.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:893
+	// Reference: _src/react/views/minify/assets-manual.jsx:717
 	__( 'Visit homepage', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:920
+	// Reference: _src/react/views/minify/assets-manual.jsx:744
 	__( 'You are currently using <strong>safe mode</strong> which enables you to test different settings without affecting your website visitor\'s experience. You can update the assets, and preview the changes in the frontend of your website to check for any errors in your browser\'s console or broken UI. When no issues are found, publish your changes to live.<span><strong>Note:</strong> Asset minification is disabled while safe mode is active, which can cause slower page load times. We recommend exiting safe mode or publishing the changes you\'ve made as soon as possible to avoid page load issues.</span>', 'wphb' ),
 
-	// Reference: _src/react/views/minify/assets-manual.jsx:946
+	// Reference: _src/react/views/minify/assets-manual.jsx:770
 	// Reference: _src/react/views/minify/configurations.jsx:90
 	__( 'Fonts', 'wphb' ),
 
@@ -935,67 +917,67 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/recheck-files-button.jsx:185
 	__( 'Background processing is currently running. Please wait for it to complete before re-checking files.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:268
+	// Reference: _src/react/views/minify/summary.jsx:273
 	__( 'All assets are auto-compressed', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:278
+	// Reference: _src/react/views/minify/summary.jsx:283
 	__( 'Compression savings', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:280
+	// Reference: _src/react/views/minify/summary.jsx:285
 	__( 'Total Files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:282
+	// Reference: _src/react/views/minify/summary.jsx:287
 	__( 'Optimizing assets, this could take a while, please hold on.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:284
+	// Reference: _src/react/views/minify/summary.jsx:289
 	__( 'Optimizing', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:288
+	// Reference: _src/react/views/minify/summary.jsx:293
 	__( 'Last Generated:', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:292
+	// Reference: _src/react/views/minify/summary.jsx:297
 	__( 'Optimized', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:314
+	// Reference: _src/react/views/minify/summary.jsx:319
 	__( 'Unlock now', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:355
+	// Reference: _src/react/views/minify/summary.jsx:360
 	__( 'Files are compressed', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:365
+	// Reference: _src/react/views/minify/summary.jsx:370
 	__( 'Enable WPMU DEV CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:373
+	// Reference: _src/react/views/minify/summary.jsx:378
 	__( 'The Network Admin has the WPMU DEV CDN turned on', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:378
+	// Reference: _src/react/views/minify/summary.jsx:383
 	__( 'The Network Admin has the WPMU DEV CDN turned off', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:379
+	// Reference: _src/react/views/minify/summary.jsx:384
 	// Reference: _src/react/views/setup/wizard.jsx:747
 	__( 'Disabled', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:407
+	// Reference: _src/react/views/minify/summary.jsx:412
 	__( 'Filesize reductions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:412
+	// Reference: _src/react/views/minify/summary.jsx:417
 	// Reference: _src/react/views/setup/wizard.jsx:316
 	__( 'WPMU DEV CDN', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:413
+	// Reference: _src/react/views/minify/summary.jsx:418
 	__( 'Boost your speed globally. Serve your files from our optimized network for maximum performance.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:425
+	// Reference: _src/react/views/minify/summary.jsx:430
 	__( 'Delay JavaScript Execution', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:426
+	// Reference: _src/react/views/minify/summary.jsx:431
 	__( 'Unlock immediate speed. Visible content loads first, so your site feels faster.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:434
+	// Reference: _src/react/views/minify/summary.jsx:439
 	// Reference: _src/react/views/setup/wizard.jsx:650
 	__( 'Generate Critical CSS', 'wphb' ),
 
-	// Reference: _src/react/views/minify/summary.jsx:435
+	// Reference: _src/react/views/minify/summary.jsx:440
 	__( 'Instantly visible pages. Prioritize essential CSS above the fold for no lag.', 'wphb' ),
 
 	// Reference: _src/react/views/setup/wizard.jsx:148

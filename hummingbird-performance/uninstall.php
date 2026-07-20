@@ -29,6 +29,15 @@ if ( ! class_exists( 'Hummingbird\\Core\\Settings' ) ) {
 
 $settings = Settings::get_settings( 'settings', 'wphb_settings' );
 
+if ( $settings['remove_settings'] || $settings['remove_data'] ) {
+	if ( ! class_exists( 'Hummingbird\\Core\\Filesystem' ) ) {
+		/* @noinspection PhpIncludeInspection */
+		include_once plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php';
+	}
+
+	$fs = Filesystem::instance();
+}
+
 if ( $settings['remove_settings'] ) {
 	$options = array(
 		'wphb-caching-api-checked',
@@ -82,6 +91,10 @@ if ( $settings['remove_settings'] ) {
 
 			if ( $settings['remove_data'] ) {
 				delete_option( 'wphb-last-report' );
+
+				if ( ! is_wp_error( $fs->status ) ) {
+					$fs->purge_ao_cache();
+				}
 			}
 
 			restore_current_blog();
@@ -93,7 +106,6 @@ if ( $settings['remove_settings'] ) {
 		delete_option( $option );
 		delete_site_option( $option );
 	}
-	
 }
 
 
@@ -115,12 +127,6 @@ if ( $settings['remove_data'] ) {
 	delete_site_transient( 'wphb_critical_css_log' );
 	delete_site_transient( 'wphb-cs-processing' );
 
-	if ( ! class_exists( 'Hummingbird\\Core\\Filesystem' ) ) {
-		/* @noinspection PhpIncludeInspection */
-		include_once plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php';
-	}
-
-	$fs = Filesystem::instance();
 	if ( ! is_wp_error( $fs->status ) ) {
 		$fs->clean_up();
 		$fs->purge_manual_critical_css();

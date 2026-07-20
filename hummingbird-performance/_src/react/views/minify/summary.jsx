@@ -23,6 +23,7 @@ import Toggle from '../../components/sui-toggle';
 import Button from '../../components/sui-button';
 import HBAPIFetch from '../../api';
 import useSummaryUpdate from './utils/summaryUpdate';
+import { toggleCDNHelper } from '../../../js/utils/helpers';
 
 /**
  * MinifySummary functional component.
@@ -71,7 +72,9 @@ export const MinifySummary = ( props ) => {
 		if ( didMount.current ) {
 			const viewDelayJs = document.getElementById( 'view_delay_js' );
 			if ( viewDelayJs ) {
-				if ( viewDelayJs.checked !== delayJs ) {
+				if ( viewDelayJs.disabled ) {
+					viewDelayJs.disabled = false;
+				} else if ( viewDelayJs.checked !== delayJs ) {
 					viewDelayJs.checked = delayJs;
 					jQuery( viewDelayJs ).trigger( 'change' );
 				}
@@ -186,17 +189,19 @@ export const MinifySummary = ( props ) => {
 	 * @param {Object} e
 	 */
 	const toggleCDN = ( e ) => {
-		api.post( 'minify_toggle_cdn', e.target.checked )
-			.then( ( response ) => {
-				if ( response.cdn ) {
-					window.wphbMixPanel.enableFeature( 'CDN' );
-				} else {
-					window.wphbMixPanel.disableFeature( 'CDN' );
-				}
+		const checked = e.target.checked;
 
-				dispatch( STORE_NAME ).invalidateResolution( 'getOptions' );
-			} )
-			.catch( window.console.log );
+		toggleCDNHelper( checked, true );
+
+		// Keep legacy setting checkbox in sync.
+		const setting = document.getElementById( 'use_cdn_setting' );
+		if ( setting ) {
+			setting.checked = checked;
+		}
+
+		setTimeout( () => {
+			dispatch( STORE_NAME ).invalidateResolution( 'getOptions' );
+		}, 250 );
 	};
 
 	/**
@@ -363,7 +368,7 @@ export const MinifySummary = ( props ) => {
 			if ( props.wphbData.isMember ) {
 				cdnDetails =
 					<Tooltip text={ __( 'Enable WPMU DEV CDN', 'wphb' ) } classes={ [ 'sui-tooltip-top-right' ] }>
-						<Toggle id="use_cdn" checked={ cdn && props.wphbData.isMember } disabled={ ! props.wphbData.isMember } onChange={ toggleCDN } />
+						<Toggle name="use_cdn_summary" id="use_cdn_summary" checked={ cdn && props.wphbData.isMember } disabled={ ! props.wphbData.isMember } onChange={ toggleCDN } />
 					</Tooltip>;
 			} else {
 				cdnDetails = getUnlockUpsellLink( props.wphbData.links.cdnUpsell, 'hb_cdn_upsell', trackCDNUpsell );

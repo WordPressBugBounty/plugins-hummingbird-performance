@@ -1454,6 +1454,8 @@ class Utils {
 				'tve', // Thrive.
 				'app', // flatsome.
 				'uxb_iframe',
+				'trp-edit-translation', // translatepress.
+				'trp-string-translation', // translatepress.
 				'fb-edit', // fusion builder.
 				'builder',
 				'bricks', // bricks.
@@ -1846,7 +1848,7 @@ class Utils {
 				break;
 			case 'advanced':
 				$mode = array( 'manual' );
-				if ( Minify::get_safe_mode_status() ) {
+				if ( SafeMode::instance()->get_status() ) {
 					$mode[] = 'safe';
 				}
 				break;
@@ -1871,5 +1873,30 @@ class Utils {
 		$mobile_user_agent = apply_filters( 'wphb_mobile_user_agent', $mobile_user_agent );
 
 		return 'Hummingbird ' . WPHB_VERSION . '/Cache Preloader ' . $mobile_user_agent;
+	}
+
+	/**
+	 * Check if site is in maintenance mode.
+	 *
+	 * @return bool
+	 */
+	public static function is_maintenance_mode() {
+		if ( apply_filters( 'wphb_maintenance_mode', false ) ) {
+			return true;
+		}
+
+		// Check Branda (Ultimate Branding) maintenance/coming soon mode.
+		if ( class_exists( 'Brenda_Maintenance' ) ) {
+			$branda_option = get_site_option( 'ub_maintenance' );
+			if ( ! empty( $branda_option ) && isset( $branda_option['mode']['mode'] ) ) {
+				$branda_mode = $branda_option['mode']['mode'];
+				// Branda modes: 'off', 'coming-soon', 'maintenance'.
+				if ( 'coming-soon' === $branda_mode || 'maintenance' === $branda_mode ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

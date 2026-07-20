@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 3.19.0\n"
+"Project-Id-Version: Hummingbird 3.20.0\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2026-01-26 11:23:04+00:00\n"
+"POT-Creation-Date: 2026-07-13 12:50:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,19 +17,19 @@ msgstr ""
 msgid "Error updating .htaccess file"
 msgstr ""
 
-#: admin/ajax/class-minify.php:296
+#: admin/ajax/class-minify.php:288
 msgid "Combine and Compress optimizations are"
 msgstr ""
 
-#: admin/ajax/class-minify.php:298
+#: admin/ajax/class-minify.php:290
 msgid "Compress optimization is"
 msgstr ""
 
-#: admin/ajax/class-minify.php:300
+#: admin/ajax/class-minify.php:292
 msgid "None optimization is"
 msgstr ""
 
-#: admin/ajax/class-minify.php:304
+#: admin/ajax/class-minify.php:296
 #. translators: %1$s - optimization mode, %2$s - opening <a> tag, %3$s -
 #. closing </a> tag
 msgid ""
@@ -39,17 +39,17 @@ msgid ""
 "Does It Work%3$s section."
 msgstr ""
 
-#: admin/ajax/class-minify.php:570 admin/class-ajax.php:1905
+#: admin/ajax/class-minify.php:509 admin/class-ajax.php:1915
 msgid "Error removing asset file."
 msgstr ""
 
-#: admin/ajax/class-minify.php:594 admin/class-ajax.php:1609
-#: admin/class-ajax.php:2335 admin/class-ajax.php:2810 core/class-utils.php:201
-#: core/modules/class-minify.php:1755
+#: admin/ajax/class-minify.php:533 admin/class-ajax.php:1648
+#: admin/class-ajax.php:2355 admin/class-ajax.php:2830 core/class-utils.php:201
+#: core/modules/class-minify.php:1865
 msgid "Settings updated"
 msgstr ""
 
-#: admin/ajax/class-minify.php:628
+#: admin/ajax/class-minify.php:567
 msgid ""
 "Hummingbird is running a file check to see what files can be optimized. "
 "Feel free to close this page while Hummingbird works its magic in the "
@@ -87,7 +87,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: admin/class-admin.php:170 admin/class-notices.php:686
+#: admin/class-admin.php:170 admin/class-notices.php:687
 msgid "Rate Hummingbird"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 #: admin/pages/class-dashboard.php:434 admin/pages/class-dashboard.php:450
 #: admin/pages/class-dashboard.php:459
 #: admin/views/dashboard/welcome/subsite-meta-box.php:120
-#: languages/react.php:1131
+#: languages/react.php:1113
 msgid "Asset Optimization"
 msgstr ""
 
@@ -173,9 +173,9 @@ msgstr ""
 
 #: admin/class-admin.php:243 admin/class-admin.php:310
 #: admin/pages/class-caching.php:186 admin/pages/class-caching.php:329
-#: admin/pages/class-minification.php:246
-#: admin/pages/class-minification.php:457
-#: admin/pages/class-minification.php:507 admin/pages/class-performance.php:146
+#: admin/pages/class-minification.php:247
+#: admin/pages/class-minification.php:458
+#: admin/pages/class-minification.php:508 admin/pages/class-performance.php:146
 #: admin/pages/class-performance.php:287 admin/pages/class-uptime.php:131
 #: admin/pages/class-uptime.php:146
 #: admin/views/caching/page/fast-cgi-meta-box.php:73
@@ -197,118 +197,118 @@ msgstr ""
 msgid "NEW"
 msgstr ""
 
-#: admin/class-ajax.php:365
+#: admin/class-ajax.php:396
 msgid "Cache purged."
 msgstr ""
 
-#: admin/class-ajax.php:1174
+#: admin/class-ajax.php:1213
 msgid ""
 "Cannot process the form. Please define either the Email/API key or the API "
 "token."
 msgstr ""
 
-#: admin/class-ajax.php:1589
+#: admin/class-ajax.php:1628
 #. translators: %s - number of assets
 msgid "%s assets found!"
 msgstr ""
 
-#: admin/class-ajax.php:1770 core/class-utils.php:227
+#: admin/class-ajax.php:1809 core/class-utils.php:227
 msgid ""
 "Settings updated. Generating Critical CSS, this could take a few minutes "
 "depending on the number of site assets that need to be checked."
 msgstr ""
 
-#: admin/class-ajax.php:2047
+#: admin/class-ajax.php:2065
 msgid "Invalid type specified."
 msgstr ""
 
-#: admin/class-ajax.php:2058
+#: admin/class-ajax.php:2076
 msgid "Error deleting data."
 msgstr ""
 
-#: admin/class-ajax.php:2066
+#: admin/class-ajax.php:2084
 #. translators: %d: number of database entries
 msgid "%d database entries were deleted successfully."
 msgstr ""
 
-#: admin/class-ajax.php:2270
+#: admin/class-ajax.php:2288
 msgid "Module not found"
 msgstr ""
 
-#: admin/class-ajax.php:2281
+#: admin/class-ajax.php:2299
 msgid "Log file not found or empty"
 msgstr ""
 
-#: admin/class-ajax.php:2289
+#: admin/class-ajax.php:2307
 msgid "Log file purged"
 msgstr ""
 
-#: admin/class-ajax.php:2451
+#: admin/class-ajax.php:2471
 msgid "Import failed - No settings file has been submitted."
 msgstr ""
 
-#: admin/class-ajax.php:2460
+#: admin/class-ajax.php:2480
 msgid "Import failed - Something went wrong on uploading settings file."
 msgstr ""
 
-#: admin/class-ajax.php:2468 admin/class-ajax.php:2476
+#: admin/class-ajax.php:2488 admin/class-ajax.php:2496
 msgid "Import failed - You selected wrong settings file."
 msgstr ""
 
-#: admin/class-ajax.php:2485
+#: admin/class-ajax.php:2505
 msgid "Import failed - Settings data is empty."
 msgstr ""
 
-#: admin/class-ajax.php:2494
+#: admin/class-ajax.php:2514
 msgid "Import failed - Asset optimization settings data not found."
 msgstr ""
 
-#: admin/class-ajax.php:2503
+#: admin/class-ajax.php:2523
 msgid "Settings imported and configured successfully."
 msgstr ""
 
-#: admin/class-ajax.php:2525
+#: admin/class-ajax.php:2545
 msgid "You are not connected to the Hub."
 msgstr ""
 
-#: admin/class-ajax.php:2532
+#: admin/class-ajax.php:2552
 msgid "Your site has been disconnected successfully!"
 msgstr ""
 
-#: admin/class-ajax.php:2599
+#: admin/class-ajax.php:2619
 msgid "Missing config ID"
 msgstr ""
 
-#: admin/class-ajax.php:2660 admin/class-ajax.php:2700
+#: admin/class-ajax.php:2680 admin/class-ajax.php:2720
 msgid "There was some error in generating Critical CSS"
 msgstr ""
 
-#: admin/class-ajax.php:2662
+#: admin/class-ajax.php:2682
 msgid "Critical CSS is being generated"
 msgstr ""
 
-#: admin/class-ajax.php:2664
+#: admin/class-ajax.php:2684
 msgid "Critical CSS generated"
 msgstr ""
 
-#: admin/class-ajax.php:2696
+#: admin/class-ajax.php:2716
 msgid "Critical CSS is being re-generated"
 msgstr ""
 
-#: admin/class-ajax.php:2702
+#: admin/class-ajax.php:2722
 msgid "Critical CSS re-generated"
 msgstr ""
 
-#: admin/class-ajax.php:2732
+#: admin/class-ajax.php:2752
 msgid "Critical CSS file deleted successfully"
 msgstr ""
 
-#: admin/class-ajax.php:2917
+#: admin/class-ajax.php:2937
 #. translators: %1$s and %2$s - strong tags for Safe mode
 msgid "%1$sSafe mode%2$s is successfully enabled."
 msgstr ""
 
-#: admin/class-ajax.php:2980
+#: admin/class-ajax.php:3000
 #. translators: %1$s and %2$s - strong tags for Safe mode
 msgid "%1$sSafe mode%2$s changes successfully published."
 msgstr ""
@@ -332,113 +332,113 @@ msgstr ""
 msgid "I Understand, Remove This Notice"
 msgstr ""
 
-#: admin/class-notices.php:236 admin/class-notices.php:275
+#: admin/class-notices.php:236 admin/class-notices.php:276
 msgid "Dismiss this notice."
 msgstr ""
 
-#: admin/class-notices.php:499 admin/class-notices.php:810
-#: admin/pages/class-minification.php:375 core/class-utils.php:209
+#: admin/class-notices.php:500 admin/class-notices.php:811
+#: admin/pages/class-minification.php:376 core/class-utils.php:209
 #: core/externals/plugin-notice/notice.php:485
 #: core/pro/admin/modals/template-recipients.php:22
 msgid "Dismiss"
 msgstr ""
 
-#: admin/class-notices.php:543
+#: admin/class-notices.php:544
 #. translators: %s: Upgrade URL
 msgid ""
 "Awww yeah! You’ve got access to Hummingbird Pro! Let’s upgrade your free "
 "version so you can start using premium features. <a href=\"%s\">Upgrade</a>"
 msgstr ""
 
-#: admin/class-notices.php:568
+#: admin/class-notices.php:569
 msgid ""
 "We noticed you’re running both the free and pro versions of Hummingbird. No "
 "biggie! We’ve deactivated the free version for you. Enjoy the pro features!"
 msgstr ""
 
-#: admin/class-notices.php:600
+#: admin/class-notices.php:601
 msgid ""
 "Get notified instantly when your site is down or too slow — and act fast to "
 "keep visitors happy. All you need is a free WPMU DEV account."
 msgstr ""
 
-#: admin/class-notices.php:601
+#: admin/class-notices.php:602
 msgid "Free 24/7 Site Monitoring"
 msgstr ""
 
-#: admin/class-notices.php:602
+#: admin/class-notices.php:603
 msgid "Connect Site to Activate"
 msgstr ""
 
-#: admin/class-notices.php:643
+#: admin/class-notices.php:644
 msgid ""
 "We've spent countless hours developing Hummingbird and making it free for "
 "you to use. We would really appreciate it if you dropped us a quick rating!"
 msgstr ""
 
-#: admin/class-notices.php:668
+#: admin/class-notices.php:669
 #. Translators: %s: performance score.
 msgid "Performance improved! Your site’s score is now %s."
 msgstr ""
 
-#: admin/class-notices.php:669
+#: admin/class-notices.php:670
 msgid ""
 "Your site is now faster and more efficient thanks to Hummingbird’s "
 "optimizations. Enjoying the results? Share your experience with a review on "
 "WordPress.org."
 msgstr ""
 
-#: admin/class-notices.php:687
+#: admin/class-notices.php:688
 msgid "Remind me later"
 msgstr ""
 
-#: admin/class-notices.php:688
+#: admin/class-notices.php:689
 msgid "I already did"
 msgstr ""
 
-#: admin/class-notices.php:717
+#: admin/class-notices.php:718
 msgid ""
 "We've noticed you've made changes to your website. We recommend you clear "
 "Hummingbird's page cache to avoid any issues."
 msgstr ""
 
-#: admin/class-notices.php:730
+#: admin/class-notices.php:731
 msgid ""
 "We've noticed you've made changes to your website. If you’ve installed new "
 "plugins or themes, we recommend you re-check Hummingbird's Asset "
 "Optimization configuration to ensure those new files are added\tcorrectly."
 msgstr ""
 
-#: admin/class-notices.php:733
+#: admin/class-notices.php:734
 msgid "Re-check Asset Optimization"
 msgstr ""
 
-#: admin/class-notices.php:737 admin/modals/clear-cache-modal.php:47
+#: admin/class-notices.php:738 admin/modals/clear-cache-modal.php:47
 #: admin/pages/class-dashboard.php:191 languages/react.php:571
 msgid "Clear Cache"
 msgstr ""
 
-#: admin/class-notices.php:741
+#: admin/class-notices.php:742
 msgid "Adjust notification settings"
 msgstr ""
 
-#: admin/class-notices.php:763
+#: admin/class-notices.php:764
 msgid ""
 "Multiple performance plugins are active alongside Hummingbird, which can "
 "cause conflicts or unpredictable behavior. "
 msgstr ""
 
-#: admin/class-notices.php:764
+#: admin/class-notices.php:765
 msgid "The following plugins may interfere with Hummingbird:"
 msgstr ""
 
-#: admin/class-notices.php:771
+#: admin/class-notices.php:772
 msgid ""
 "For best results, we recommend keeping Hummingbird as your primary "
 "performance plugin and disabling the others."
 msgstr ""
 
-#: admin/class-notices.php:776
+#: admin/class-notices.php:777
 #. translators: %s - plugin name
 msgid ""
 "%s is active alongside Hummingbird. Running multiple performance plugins "
@@ -447,11 +447,11 @@ msgid ""
 "and disabling other caching or optimization plugins."
 msgstr ""
 
-#: admin/class-notices.php:809
+#: admin/class-notices.php:810
 msgid "Manage plugins"
 msgstr ""
 
-#: admin/class-notices.php:854
+#: admin/class-notices.php:855
 #. translators: %1$s - Opening strong tag, %2$s - Closing strong tag
 msgid ""
 "%1$sSafe Mode%2$s is active. Adjust your Hummingbird settings and preview "
@@ -459,26 +459,26 @@ msgid ""
 "slow your live site."
 msgstr ""
 
-#: admin/class-notices.php:867 admin/class-notices.php:889
+#: admin/class-notices.php:868 admin/class-notices.php:890
 msgid "Preview Changes"
 msgstr ""
 
-#: admin/class-notices.php:868 admin/class-notices.php:890
+#: admin/class-notices.php:869 admin/class-notices.php:891
 #: core/class-safemode.php:425
 msgid "Copy test link"
 msgstr ""
 
-#: admin/class-notices.php:870
+#: admin/class-notices.php:871
 msgid "Learn more"
 msgstr ""
 
-#: admin/class-notices.php:891
+#: admin/class-notices.php:892
 msgid "LEARN MORE"
 msgstr ""
 
-#: admin/class-notices.php:927
+#: admin/class-notices.php:929
 #. translators: %1$s - Opening strong tag, %2$s - Closing strong tag
-msgid "Hummingbird cleared the cache on %1$s at %2$s."
+msgid "Hummingbird cleared the%1$s cache on %2$s at %3$s."
 msgstr ""
 
 #: admin/class-page.php:441
@@ -1160,7 +1160,7 @@ msgstr ""
 
 #: admin/modals/membership-modal.php:46
 #: admin/views/dashboard/minification/network-module-meta-box.php:39
-#: languages/react.php:983
+#: languages/react.php:965
 msgid "WPMU DEV CDN"
 msgstr ""
 
@@ -1365,15 +1365,15 @@ msgid ""
 "defaults?"
 msgstr ""
 
-#: admin/modals/reset-settings-modal.php:41 languages/react.php:906
+#: admin/modals/reset-settings-modal.php:41 languages/react.php:888
 msgid "Reset settings"
 msgstr ""
 
-#: admin/modals/safe-mode-confirmation-modal.php:34 languages/react.php:781
+#: admin/modals/safe-mode-confirmation-modal.php:34
 msgid "Unpublished changes"
 msgstr ""
 
-#: admin/modals/safe-mode-confirmation-modal.php:38 languages/react.php:784
+#: admin/modals/safe-mode-confirmation-modal.php:38
 msgid ""
 "There are unpublished changes made in safe mode. Do you want to publish the "
 "changes to live or discard them?"
@@ -1383,11 +1383,11 @@ msgstr ""
 msgid "Clear cache after publishing change."
 msgstr ""
 
-#: admin/modals/safe-mode-confirmation-modal.php:56 languages/react.php:775
+#: admin/modals/safe-mode-confirmation-modal.php:56
 msgid "Discard"
 msgstr ""
 
-#: admin/modals/safe-mode-confirmation-modal.php:60 languages/react.php:778
+#: admin/modals/safe-mode-confirmation-modal.php:60
 msgid "Publish"
 msgstr ""
 
@@ -1407,7 +1407,7 @@ msgstr ""
 #: admin/views/minification/network-settings-meta-box.php:98
 #: core/pro/admin/views/notifications/configure-meta-box.php:157
 #: core/pro/admin/views/notifications/configure-meta-box.php:159
-#: languages/react.php:1038
+#: languages/react.php:1020
 msgid "Enable"
 msgstr ""
 
@@ -1552,7 +1552,7 @@ msgstr ""
 #: admin/pages/class-caching.php:324
 #: admin/views/dashboard/welcome/meta-box.php:115
 #: admin/views/dashboard/welcome/subsite-meta-box.php:112
-#: core/class-utils.php:1669 languages/react.php:399
+#: core/class-utils.php:1671 languages/react.php:399
 msgid "Page Caching"
 msgstr ""
 
@@ -1590,18 +1590,18 @@ msgid "Clear cache"
 msgstr ""
 
 #: admin/pages/class-caching.php:832
-#: admin/views/caching/gravatar/meta-box-header.php:27 languages/react.php:873
+#: admin/views/caching/gravatar/meta-box-header.php:27 languages/react.php:855
 msgid "Clearing cache"
 msgstr ""
 
-#: admin/pages/class-dashboard.php:163 admin/pages/class-minification.php:293
-#: languages/react.php:867
+#: admin/pages/class-dashboard.php:163 admin/pages/class-minification.php:294
+#: languages/react.php:849
 msgid ""
 "Your cache has been successfully cleared. Your assets will regenerate the "
 "next time someone visits your website."
 msgstr ""
 
-#: admin/pages/class-dashboard.php:167 admin/pages/class-minification.php:297
+#: admin/pages/class-dashboard.php:167 admin/pages/class-minification.php:298
 msgid ""
 "Your local and Cloudflare caches have been successfully cleared. Your "
 "assets will regenerate the next time someone visits your website."
@@ -1642,7 +1642,7 @@ msgstr ""
 #: admin/pages/class-dashboard.php:512 admin/pages/class-dashboard.php:521
 #: admin/pages/class-dashboard.php:530 admin/pages/class-dashboard.php:539
 #: admin/pages/class-dashboard.php:864 admin/pages/class-uptime.php:84
-#: languages/react.php:1008
+#: languages/react.php:990
 msgid "Uptime Monitoring"
 msgstr ""
 
@@ -1679,39 +1679,39 @@ msgid ""
 "scan."
 msgstr ""
 
-#: admin/pages/class-minification.php:243 languages/react.php:849
+#: admin/pages/class-minification.php:244 languages/react.php:831
 msgid "Assets Optimization"
 msgstr ""
 
-#: admin/pages/class-minification.php:244
-#: admin/pages/class-minification.php:495
+#: admin/pages/class-minification.php:245
+#: admin/pages/class-minification.php:496
 #: admin/views/dashboard/minification/module-meta-box.php:68
-#: languages/react.php:1140
+#: languages/react.php:1122
 msgid "Extra Optimization"
 msgstr ""
 
-#: admin/pages/class-minification.php:245
+#: admin/pages/class-minification.php:246
 msgid "Gzip Compression"
 msgstr ""
 
-#: admin/pages/class-minification.php:251
-#: admin/pages/class-minification.php:524 admin/pages/class-settings.php:34
+#: admin/pages/class-minification.php:252
+#: admin/pages/class-minification.php:525 admin/pages/class-settings.php:34
 #: admin/pages/class-settings.php:55
 msgid "Import / Export"
 msgstr ""
 
-#: admin/pages/class-minification.php:326
+#: admin/pages/class-minification.php:327
 msgid "Take a Tour"
 msgstr ""
 
-#: admin/pages/class-minification.php:356
+#: admin/pages/class-minification.php:357
 msgid ""
 "Your server is running the HTTP/3 (with QUIC) protocol which automatically "
 "optimizes the delivery of your assets for you. You can still combine, and "
 "move your files, though this may not always improve performance."
 msgstr ""
 
-#: admin/pages/class-minification.php:360
+#: admin/pages/class-minification.php:361
 #. translators: %1$s - opening <a> tag, %2$s - closing </a> tag
 msgid ""
 "Did you know WPMU DEV Hosting runs the HTTP/3 (with QUIC) protocol, which "
@@ -1720,22 +1720,22 @@ msgid ""
 "learn more about WPMU DEV Hosting %1$shere%2$s."
 msgstr ""
 
-#: admin/pages/class-minification.php:369
+#: admin/pages/class-minification.php:370
 msgid "Host with us"
 msgstr ""
 
-#: admin/pages/class-minification.php:395
+#: admin/pages/class-minification.php:396
 msgid "Issues processing queue. Hummingbird performance can be degraded."
 msgstr ""
 
-#: admin/pages/class-minification.php:416
+#: admin/pages/class-minification.php:417
 #. translators: %d: Time left before another retry.
 msgid ""
 "It seems that we are having problems in our servers. Asset optimization "
 "will be turned off for %d minutes"
 msgstr ""
 
-#: admin/pages/class-minification.php:439
+#: admin/pages/class-minification.php:440
 #. translators: %1$s - opening a link <a>, %2$s - Close the link </a>,%3$s -
 #. Link to HB health page
 msgid ""
@@ -1745,7 +1745,7 @@ msgid ""
 "more information check the %3$sPlugins Health%2$s page."
 msgstr ""
 
-#: admin/pages/class-minification.php:471 admin/pages/class-uptime.php:66
+#: admin/pages/class-minification.php:472 admin/pages/class-uptime.php:66
 msgid "Get Started"
 msgstr ""
 
@@ -1990,7 +1990,7 @@ msgstr ""
 msgid "Saving changes"
 msgstr ""
 
-#: admin/views/advanced/general-meta-box.php:28 languages/react.php:1197
+#: admin/views/advanced/general-meta-box.php:28 languages/react.php:1179
 msgid ""
 "Here are a few additional tweaks you can make to further reduce your page "
 "load times."
@@ -2021,7 +2021,7 @@ msgid ""
 "speeds."
 msgstr ""
 
-#: admin/views/advanced/general-meta-box.php:65 languages/react.php:1167
+#: admin/views/advanced/general-meta-box.php:65 languages/react.php:1149
 msgid "Remove query strings from my assets"
 msgstr ""
 
@@ -2046,7 +2046,7 @@ msgstr ""
 msgid "WooCommerce Cart Fragments"
 msgstr ""
 
-#: admin/views/advanced/general-meta-box.php:95 languages/react.php:1113
+#: admin/views/advanced/general-meta-box.php:95 languages/react.php:1095
 msgid ""
 "WooCommerce uses ajax calls to update cart totals without refreshing the "
 "page. These ajax calls run on every page and can drastically increase page "
@@ -2054,7 +2054,7 @@ msgid ""
 "pages."
 msgstr ""
 
-#: admin/views/advanced/general-meta-box.php:103 languages/react.php:1170
+#: admin/views/advanced/general-meta-box.php:103 languages/react.php:1152
 msgid "Disable cart fragments"
 msgstr ""
 
@@ -2093,14 +2093,14 @@ msgstr ""
 msgid "Emojis"
 msgstr ""
 
-#: admin/views/advanced/general-meta-box.php:161 languages/react.php:1110
+#: admin/views/advanced/general-meta-box.php:161 languages/react.php:1092
 msgid ""
 "WordPress adds Javascript and CSS files to convert common symbols like “:)” "
 "to visual emojis. If you don’t need emojis this will remove two unnecessary "
 "assets."
 msgstr ""
 
-#: admin/views/advanced/general-meta-box.php:169 languages/react.php:1173
+#: admin/views/advanced/general-meta-box.php:169 languages/react.php:1155
 msgid "Remove the default Emoji JS & CSS files"
 msgstr ""
 
@@ -2601,12 +2601,12 @@ msgid "Fine tune page caching to work how you want it to."
 msgstr ""
 
 #: admin/views/caching/page/fast-cgi-meta-box.php:85
-#: admin/views/caching/page/meta-box.php:399 languages/react.php:1158
+#: admin/views/caching/page/meta-box.php:399 languages/react.php:1140
 msgid "Clear cache on comment post"
 msgstr ""
 
 #: admin/views/caching/page/fast-cgi-meta-box.php:88
-#: admin/views/caching/page/meta-box.php:402 languages/react.php:1089
+#: admin/views/caching/page/meta-box.php:402 languages/react.php:1071
 msgid "The page cache will be cleared after each comment made on a post."
 msgstr ""
 
@@ -2730,12 +2730,12 @@ msgid ""
 "visitors."
 msgstr ""
 
-#: admin/views/caching/page/meta-box-header.php:34 languages/react.php:1035
+#: admin/views/caching/page/meta-box-header.php:34 languages/react.php:1017
 msgid "Local Page Cache"
 msgstr ""
 
 #: admin/views/caching/page/meta-box-header.php:34
-#: admin/views/caching/summary-meta-box.php:37 languages/react.php:1152
+#: admin/views/caching/summary-meta-box.php:37 languages/react.php:1134
 msgid "Static Server Cache"
 msgstr ""
 
@@ -2968,21 +2968,21 @@ msgstr ""
 msgid "Note: Gzip compression already enabled on the server."
 msgstr ""
 
-#: admin/views/caching/page/meta-box.php:385 languages/react.php:1155
+#: admin/views/caching/page/meta-box.php:385 languages/react.php:1137
 msgid "Cache on mobile devices"
 msgstr ""
 
-#: admin/views/caching/page/meta-box.php:388 languages/react.php:1095
+#: admin/views/caching/page/meta-box.php:388 languages/react.php:1077
 msgid ""
 "By default, page caching is enabled for mobile devices. If you don't want "
 "to use mobile caching, simply disable this setting."
 msgstr ""
 
-#: admin/views/caching/page/meta-box.php:413 languages/react.php:1161
+#: admin/views/caching/page/meta-box.php:413 languages/react.php:1143
 msgid "Cache HTTP headers"
 msgstr ""
 
-#: admin/views/caching/page/meta-box.php:416 languages/react.php:1098
+#: admin/views/caching/page/meta-box.php:416 languages/react.php:1080
 msgid ""
 "By default, Hummingbird won't cache HTTP headers. Enable this feature to "
 "include them."
@@ -3006,7 +3006,7 @@ msgid ""
 msgstr ""
 
 #: admin/views/caching/page/meta-box.php:448
-#: admin/views/minification/tools-meta-box.php:119 languages/react.php:897
+#: admin/views/minification/tools-meta-box.php:119 languages/react.php:879
 msgid "Exclusions"
 msgstr ""
 
@@ -3332,7 +3332,7 @@ msgstr ""
 #: core/pro/admin/views/dashboard/reports-meta-box.php:105
 #: core/pro/admin/views/dashboard/reports-meta-box.php:134
 #: core/pro/admin/views/notifications/configure-meta-box.php:69
-#: languages/react.php:976
+#: languages/react.php:958
 msgid "Disabled"
 msgstr ""
 
@@ -3510,14 +3510,14 @@ msgstr ""
 #: admin/views/dashboard/minification/module-meta-box.php:78
 #: admin/views/dashboard/welcome/upsell-meta-box.php:23
 #: admin/views/minification/tools-meta-box.php:78
-#: admin/views/wphb-upgrade-page.php:54 languages/react.php:989
+#: admin/views/wphb-upgrade-page.php:54 languages/react.php:971
 msgid "Delay JavaScript Execution"
 msgstr ""
 
 #: admin/views/dashboard/minification/module-meta-box.php:96
 #: admin/views/minification/tools-meta-box.php:283
 #: admin/views/minification/tools-meta-box.php:291
-#: admin/views/wphb-upgrade-page.php:49 languages/react.php:996
+#: admin/views/wphb-upgrade-page.php:49 languages/react.php:978
 msgid "Generate Critical CSS"
 msgstr ""
 
@@ -3559,7 +3559,7 @@ msgstr ""
 #: core/pro/admin/views/dashboard/reports-meta-box.php:103
 #: core/pro/admin/views/dashboard/reports-meta-box.php:132
 #: core/pro/admin/views/notifications/configure-meta-box.php:67
-#: languages/react.php:1176
+#: languages/react.php:1158
 msgid "Enabled"
 msgstr ""
 
@@ -3902,34 +3902,30 @@ msgid "Smush Pro for the best image optimization"
 msgstr ""
 
 #: admin/views/dashboard/welcome/upsell-meta-box.php:26
-msgid "Instant site health alerts and notifications"
-msgstr ""
-
-#: admin/views/dashboard/welcome/upsell-meta-box.php:27
 #: admin/views/wphb-upgrade-page.php:69
 msgid "White label automated reporting"
 msgstr ""
 
-#: admin/views/dashboard/welcome/upsell-meta-box.php:28
+#: admin/views/dashboard/welcome/upsell-meta-box.php:27
 #: admin/views/wphb-upgrade-page.php:79
 msgid "Premium WordPress plugins"
 msgstr ""
 
-#: admin/views/dashboard/welcome/upsell-meta-box.php:29
+#: admin/views/dashboard/welcome/upsell-meta-box.php:28
 #: admin/views/wphb-upgrade-page.php:84
 msgid "Manage unlimited WordPress sites"
 msgstr ""
 
-#: admin/views/dashboard/welcome/upsell-meta-box.php:30
+#: admin/views/dashboard/welcome/upsell-meta-box.php:29
 #: admin/views/wphb-upgrade-page.php:89
 msgid "24/7 live WordPress support"
 msgstr ""
 
-#: admin/views/dashboard/welcome/upsell-meta-box.php:31
+#: admin/views/dashboard/welcome/upsell-meta-box.php:30
 msgid "Zero risk, 30-day money-back guarantee"
 msgstr ""
 
-#: admin/views/dashboard/welcome/upsell-meta-box.php:37
+#: admin/views/dashboard/welcome/upsell-meta-box.php:36
 msgid "UNLOCK NOW WITH PRO"
 msgstr ""
 
@@ -3988,7 +3984,7 @@ msgstr ""
 #: admin/views/minification/network-settings-meta-box.php:82
 #: admin/views/minification/network-settings-meta-box.php:103
 #: core/pro/admin/views/notifications/configure-meta-box.php:151
-#: languages/react.php:1041
+#: languages/react.php:1023
 msgid "Disable"
 msgstr ""
 
@@ -4055,7 +4051,7 @@ msgstr ""
 msgid "Exclude files from using CDN "
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:82 languages/react.php:966
+#: admin/views/minification/settings-meta-box.php:82 languages/react.php:948
 msgid "Enable WPMU DEV CDN"
 msgstr ""
 
@@ -4150,7 +4146,7 @@ msgstr ""
 msgid "Delay JavaScript"
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:59 languages/react.php:1068
+#: admin/views/minification/tools-meta-box.php:59 languages/react.php:1050
 msgid ""
 "Improve performance by delaying the loading of non-critical JavaScript "
 "files above the fold until user interaction (e.g. scroll, click)."
@@ -4387,7 +4383,7 @@ msgid ""
 "fonts and enabling fallbacks."
 msgstr ""
 
-#: admin/views/minification/tools-meta-box.php:577 languages/react.php:1146
+#: admin/views/minification/tools-meta-box.php:577 languages/react.php:1128
 msgid "Swap Web Fonts"
 msgstr ""
 
@@ -6548,7 +6544,7 @@ msgstr ""
 msgid "Display audits relevant to"
 msgstr ""
 
-#: admin/views/performance/audits-meta-box.php:29 languages/react.php:787
+#: admin/views/performance/audits-meta-box.php:29 languages/react.php:769
 msgid "All"
 msgstr ""
 
@@ -7336,11 +7332,11 @@ msgstr ""
 
 #: core/api/class-hub.php:364 core/api/class-hub.php:434
 #: core/api/class-hub.php:485 core/api/class-hub.php:563
-#: core/api/class-rest.php:240
+#: core/api/class-rest.php:241
 msgid "The requested module was invalid."
 msgstr ""
 
-#: core/api/class-hub.php:494 core/api/class-rest.php:251
+#: core/api/class-hub.php:494 core/api/class-rest.php:252
 msgid "The requested module is inactive."
 msgstr ""
 
@@ -7356,19 +7352,19 @@ msgstr ""
 msgid "Missing config data"
 msgstr ""
 
-#: core/api/class-rest.php:186
+#: core/api/class-rest.php:187
 msgid "Not enough permissions to access the endpoint."
 msgstr ""
 
-#: core/api/class-rest.php:205
+#: core/api/class-rest.php:206
 msgid "The requested module status was invalid."
 msgstr ""
 
-#: core/api/class-rest.php:309
+#: core/api/class-rest.php:310
 msgid "Missing configs data"
 msgstr ""
 
-#: core/api/class-rest.php:316 core/class-configs.php:240
+#: core/api/class-rest.php:317 core/class-configs.php:240
 msgid "Undefined"
 msgstr ""
 
@@ -7635,7 +7631,7 @@ msgstr ""
 msgid "Invalid request. Please go back and retry"
 msgstr ""
 
-#: core/class-hub-connector.php:115 core/modules/class-critical-css.php:1774
+#: core/class-hub-connector.php:115 core/modules/class-critical-css.php:1801
 msgid "Error"
 msgstr ""
 
@@ -7830,7 +7826,7 @@ msgid "Please type any keywords and press Enter"
 msgstr ""
 
 #: core/class-utils.php:229 core/modules/class-exclusions.php:118
-#: languages/react.php:894
+#: languages/react.php:876
 msgid "Files"
 msgstr ""
 
@@ -7950,40 +7946,40 @@ msgstr ""
 msgid "Redis Cache"
 msgstr ""
 
-#: core/class-utils.php:1503
+#: core/class-utils.php:1505
 msgid "Boost Performance — Get Hummingbird Pro "
 msgstr ""
 
-#: core/class-utils.php:1504
+#: core/class-utils.php:1506
 msgid "Unlock Faster Load Times — Get Hummingbird Pro  "
 msgstr ""
 
-#: core/class-utils.php:1506 languages/react.php:960
+#: core/class-utils.php:1508 languages/react.php:942
 msgid "Unlock now"
 msgstr ""
 
-#: core/class-utils.php:1666
+#: core/class-utils.php:1668
 msgid "Page Caching - Static Server Cache"
 msgstr ""
 
-#: core/class-utils.php:1669
+#: core/class-utils.php:1671
 msgid "Page Caching - Local Page Cache"
 msgstr ""
 
-#: core/class-utils.php:1769
+#: core/class-utils.php:1771
 msgid ""
 "Page Caching stores static HTML copies of your pages and posts to decrease "
 "page load time. Server-side page caching allows for an average of 10 times "
 "more concurrent visitors than regular page caching."
 msgstr ""
 
-#: core/class-utils.php:1769
+#: core/class-utils.php:1771
 msgid ""
 "Hummingbird stores static HTML copies of your pages and posts to decrease "
 "page load time."
 msgstr ""
 
-#: core/class-utils.php:1809
+#: core/class-utils.php:1811
 #. translators: %s - number of assets
 msgid ""
 "Found %s assets for optimization. These assets are now being optimized in "
@@ -8658,55 +8654,63 @@ msgstr ""
 msgid "2 hours"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1144
+#: core/modules/class-critical-css.php:1163
 #. translators: %1$s - page type, %2$s - Used css content, %3$s - manual
 #. critical css
 msgid "HB critical unknown error"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1665
+#: core/modules/class-critical-css.php:1684
 msgid "<em> Error: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1668
+#: core/modules/class-critical-css.php:1687
+#: core/modules/class-critical-css.php:1708
 #. translators: %1$s = error message.
 msgid "<br />%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1690
+#: core/modules/class-critical-css.php:1709
+msgid ""
+"Critical CSS doesn’t run while your site is in maintenance mode, so a 503 "
+"error is expected. It will work normally again once maintenance mode is "
+"disabled."
+msgstr ""
+
+#: core/modules/class-critical-css.php:1717
 #. translators: %1$s = message.
 msgid ""
 "Critical CSS generation failed. Please review the below error to "
 "troubleshoot.%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1768
+#: core/modules/class-critical-css.php:1795
 msgid "Optimizing "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1771
+#: core/modules/class-critical-css.php:1798
 msgid ""
 "Generating Critical CSS. This could take a few minutes depending on the "
 "number of site assets that need to be checked."
 msgstr ""
 
-#: core/modules/class-critical-css.php:1774 languages/react.php:957
+#: core/modules/class-critical-css.php:1801 languages/react.php:939
 msgid "Optimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1777
+#: core/modules/class-critical-css.php:1804
 msgid "Last Generated: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1779
+#: core/modules/class-critical-css.php:1806
 msgid "Unoptimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1782
+#: core/modules/class-critical-css.php:1809
 msgid "Select settings and saves changes to generate Critical CSS"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1787
+#: core/modules/class-critical-css.php:1814
 #. translators: %1$s = tooltip text, %2$s = sui tag, %3$s = info icon, %4$s =
 #. text for tag.
 msgid ""
@@ -8851,11 +8855,11 @@ msgstr ""
 msgid "Error fetching Gravatar. Gravatar not found."
 msgstr ""
 
-#: core/modules/class-minify.php:1723
+#: core/modules/class-minify.php:1833
 msgid "Unsupported content"
 msgstr ""
 
-#: core/modules/class-minify.php:1732
+#: core/modules/class-minify.php:1842
 msgid "Error saving file"
 msgstr ""
 
@@ -9013,6 +9017,10 @@ msgstr ""
 msgid "Minify callback does not exist"
 msgstr ""
 
+#: core/modules/minify/class-minify-group.php:1520
+msgid "API Error: %s - %s"
+msgstr ""
+
 #: core/pro/admin/class-pro-admin.php:226
 msgid "Notification enabled successfully."
 msgstr ""
@@ -9042,7 +9050,7 @@ msgid "Choose how often you want this notification to run."
 msgstr ""
 
 #: core/pro/admin/modals/add-notification.php:39
-#: core/pro/admin/modals/add-notification.php:70 languages/react.php:1221
+#: core/pro/admin/modals/add-notification.php:70 languages/react.php:1203
 msgid "Continue"
 msgstr ""
 
@@ -9594,7 +9602,7 @@ msgstr ""
 
 #: languages/react.php:17
 msgid ""
-"Preview your changes in Safe Mode and check for any errors on the "
+"Save and Preview your changes in Safe Mode and check for any errors on the "
 "front-end. If none are found, click Publish to make your changes live."
 msgstr ""
 
@@ -10531,86 +10539,78 @@ msgid "Settings restored to defaults"
 msgstr ""
 
 #: languages/react.php:751
-msgid "Your safe mode changes have been published and are now live!"
-msgstr ""
-
-#: languages/react.php:754
-msgid "Safe mode has been disabled!"
-msgstr ""
-
-#: languages/react.php:757
 msgid "Inline"
 msgstr ""
 
-#: languages/react.php:760
+#: languages/react.php:754
 msgid "Async"
 msgstr ""
 
-#: languages/react.php:763
+#: languages/react.php:757
 msgid "Move to Footer"
 msgstr ""
 
-#: languages/react.php:766
+#: languages/react.php:760
 msgid "Preload"
 msgstr ""
 
-#: languages/react.php:769
+#: languages/react.php:763
 msgid "Defer"
 msgstr ""
 
-#: languages/react.php:772
+#: languages/react.php:766
 msgid ""
 "Choose what bulk update actions you’d like to apply to the selected files. "
 "You still have to publish your changes before they will be set live."
 msgstr ""
 
-#: languages/react.php:790
+#: languages/react.php:772
 msgid "Hosted"
 msgstr ""
 
-#: languages/react.php:793
+#: languages/react.php:775
 msgid "External"
 msgstr ""
 
-#: languages/react.php:796
+#: languages/react.php:778
 msgid ""
-"Preview your changes on the front-end, then publish to live if no errors "
-"are found."
+"Save and preview your changes on the front-end, then publish to live if no "
+"errors are found."
 msgstr ""
 
-#: languages/react.php:799
+#: languages/react.php:781
 msgid "Save Safe mode changes"
 msgstr ""
 
-#: languages/react.php:803
+#: languages/react.php:785
 msgid "Publish changes"
 msgstr ""
 
-#: languages/react.php:806
+#: languages/react.php:788
 msgid "Bulk update"
 msgstr ""
 
-#: languages/react.php:809
+#: languages/react.php:791
 msgid "Display files"
 msgstr ""
 
-#: languages/react.php:812
+#: languages/react.php:794
 msgid "Sort by"
 msgstr ""
 
-#: languages/react.php:815
+#: languages/react.php:797
 msgid "Choose plugin or theme"
 msgstr ""
 
-#: languages/react.php:818
+#: languages/react.php:800
 msgid "Search by name or extension"
 msgstr ""
 
-#: languages/react.php:821
+#: languages/react.php:803
 msgid "Clear filters"
 msgstr ""
 
-#: languages/react.php:824
+#: languages/react.php:806
 msgid ""
 "We've completed the file check but haven't been able to load the files. "
 "Please try clearing your object cache, refresh the page and wait a few "
@@ -10618,11 +10618,11 @@ msgid ""
 "to show."
 msgstr ""
 
-#: languages/react.php:827
+#: languages/react.php:809
 msgid "Visit homepage"
 msgstr ""
 
-#: languages/react.php:830
+#: languages/react.php:812
 msgid ""
 "You are currently using <strong>safe mode</strong> which enables you to "
 "test different settings without affecting your website visitor's "
@@ -10635,11 +10635,11 @@ msgid ""
 "to avoid page load issues.</span>"
 msgstr ""
 
-#: languages/react.php:834
+#: languages/react.php:816
 msgid "Fonts"
 msgstr ""
 
-#: languages/react.php:837
+#: languages/react.php:819
 msgid ""
 "In Dev Mode, you can manually optimize (compress, combine, move, inline, "
 "defer, async, and preload) individual files. With this amount of freedom "
@@ -10648,450 +10648,450 @@ msgid ""
 "Work?</a> guide."
 msgstr ""
 
-#: languages/react.php:840
+#: languages/react.php:822
 msgid "How Does it Work?"
 msgstr ""
 
-#: languages/react.php:843
+#: languages/react.php:825
 msgid ""
 "Manually configure your optimization settings (compress, combine, move, "
 "inline, defer, async, and preload) and then publish your changes."
 msgstr ""
 
-#: languages/react.php:846
+#: languages/react.php:828
 msgid ""
 "Optimizing your assets will compress and organize them in a way that "
 "improves page load times. You can choose to use our automated options, or "
 "manually configure each file yourself."
 msgstr ""
 
-#: languages/react.php:852
+#: languages/react.php:834
 msgid ""
 "Optimize your assets and improve page load times based on our automated "
 "options."
 msgstr ""
 
-#: languages/react.php:855
+#: languages/react.php:837
 msgid ""
 "Manually configure each file yourself to achieve the exact setup for your "
 "site. If you're unfamiliar with manual optimization, check the "
 "documentation first."
 msgstr ""
 
-#: languages/react.php:858
+#: languages/react.php:840
 msgid "Switch to <a></a>"
 msgstr ""
 
-#: languages/react.php:861
+#: languages/react.php:843
 msgid "Automatic Mode"
 msgstr ""
 
-#: languages/react.php:864
+#: languages/react.php:846
 msgid "Dev Mode"
 msgstr ""
 
-#: languages/react.php:870
+#: languages/react.php:852
 msgid "Clears all local or hosted assets and recompresses files that need it"
 msgstr ""
 
-#: languages/react.php:876
+#: languages/react.php:858
 msgid "file: "
 msgstr ""
 
-#: languages/react.php:879
+#: languages/react.php:861
 msgid "File exclusions"
 msgstr ""
 
-#: languages/react.php:882
+#: languages/react.php:864
 msgid "Type the filename and click on the filename to add it to the list."
 msgstr ""
 
-#: languages/react.php:885
+#: languages/react.php:867
 msgid "Start typing the files to exclude..."
 msgstr ""
 
-#: languages/react.php:888
+#: languages/react.php:870
 msgid "Choose which files you want to automatically optimize."
 msgstr ""
 
-#: languages/react.php:891
+#: languages/react.php:873
 msgid ""
 "By default, we'll optimize all the CSS and JS files we can find. If you "
 "have specific files you want to leave as-is, list them here, and we'll "
 "exclude them."
 msgstr ""
 
-#: languages/react.php:900
+#: languages/react.php:882
 msgid ""
 "The configurations will be applied to the enabled automatic optimization "
 "option."
 msgstr ""
 
-#: languages/react.php:903
+#: languages/react.php:885
 msgid "Configurations"
 msgstr ""
 
-#: languages/react.php:909
+#: languages/react.php:891
 msgid "CSS files"
 msgstr ""
 
-#: languages/react.php:912
+#: languages/react.php:894
 msgid ""
 "Hummingbird will minify your CSS files, generating a version that loads "
 "faster. It will remove unnecessary characters or lines of code from your "
 "file to make it more compact."
 msgstr ""
 
-#: languages/react.php:915
+#: languages/react.php:897
 msgid "JavaScript files"
 msgstr ""
 
-#: languages/react.php:918
+#: languages/react.php:900
 msgid ""
 "JavaScript minification is the process of removing whitespace and any code "
 "that is not necessary to create a smaller but valid code."
 msgstr ""
 
-#: languages/react.php:921
+#: languages/react.php:903
 msgid ""
 "Enable this option to optimize the delivery of your fonts so they don't "
 "trigger the \"Eliminate render-blocking resources\" recommendation in your "
 "performance tests."
 msgstr ""
 
-#: languages/react.php:924
+#: languages/react.php:906
 msgid "Error while starting AO scan. Please try again."
 msgstr ""
 
-#: languages/react.php:927
+#: languages/react.php:909
 msgid "Re-Check Files"
 msgstr ""
 
-#: languages/react.php:930
+#: languages/react.php:912
 msgid "Scanning..."
 msgstr ""
 
-#: languages/react.php:933
+#: languages/react.php:915
 msgid "Starting Scan"
 msgstr ""
 
-#: languages/react.php:936
+#: languages/react.php:918
 msgid ""
 "Background processing is currently running. Please wait for it to complete "
 "before re-checking files."
 msgstr ""
 
-#: languages/react.php:939
+#: languages/react.php:921
 msgid "All assets are auto-compressed"
 msgstr ""
 
-#: languages/react.php:942
+#: languages/react.php:924
 msgid "Compression savings"
 msgstr ""
 
-#: languages/react.php:945
+#: languages/react.php:927
 msgid "Total Files"
 msgstr ""
 
-#: languages/react.php:948
+#: languages/react.php:930
 msgid "Optimizing assets, this could take a while, please hold on."
 msgstr ""
 
-#: languages/react.php:951
+#: languages/react.php:933
 msgid "Optimizing"
 msgstr ""
 
-#: languages/react.php:954
+#: languages/react.php:936
 msgid "Last Generated:"
 msgstr ""
 
-#: languages/react.php:963
+#: languages/react.php:945
 msgid "Files are compressed"
 msgstr ""
 
-#: languages/react.php:969
+#: languages/react.php:951
 msgid "The Network Admin has the WPMU DEV CDN turned on"
 msgstr ""
 
-#: languages/react.php:972
+#: languages/react.php:954
 msgid "The Network Admin has the WPMU DEV CDN turned off"
 msgstr ""
 
-#: languages/react.php:979
+#: languages/react.php:961
 msgid "Filesize reductions"
 msgstr ""
 
-#: languages/react.php:986
+#: languages/react.php:968
 msgid ""
 "Boost your speed globally. Serve your files from our optimized network for "
 "maximum performance."
 msgstr ""
 
-#: languages/react.php:992
+#: languages/react.php:974
 msgid ""
 "Unlock immediate speed. Visible content loads first, so your site feels "
 "faster."
 msgstr ""
 
-#: languages/react.php:999
+#: languages/react.php:981
 msgid "Instantly visible pages. Prioritize essential CSS above the fold for no lag."
 msgstr ""
 
-#: languages/react.php:1002
+#: languages/react.php:984
 msgid "Ready to Boost Your Site’s Speed?"
 msgstr ""
 
-#: languages/react.php:1005
+#: languages/react.php:987
 msgid "Plugin Conflict"
 msgstr ""
 
-#: languages/react.php:1011
+#: languages/react.php:993
 msgid "Wizard Completed!"
 msgstr ""
 
-#: languages/react.php:1014
+#: languages/react.php:996
 msgid "Hummingbird Setup"
 msgstr ""
 
-#: languages/react.php:1017
+#: languages/react.php:999
 msgid "No other caching plugin is detected"
 msgstr ""
 
-#: languages/react.php:1020
+#: languages/react.php:1002
 msgid "No other caching plugin is detected. You can proceed with the setup."
 msgstr ""
 
-#: languages/react.php:1023
+#: languages/react.php:1005
 msgid "Another caching plugin is detected"
 msgstr ""
 
-#: languages/react.php:1026
+#: languages/react.php:1008
 msgid ""
 "Hummingbird has detected an advanced-cache.php file in your site’s "
 "wp-content directory. <a>Manage your plugins</a> and disable any other "
 "active caching plugins to ensure Hummingbird’s page caching works properly."
 msgstr ""
 
-#: languages/react.php:1029
+#: languages/react.php:1011
 msgid ""
 "If no other caching plugins are active, the advanced-cache.php may have "
 "been left by a previously used caching plugin. You can remove the file from "
 "the wp-content directory, or remove it via your file manager or FTP."
 msgstr ""
 
-#: languages/react.php:1032
+#: languages/react.php:1014
 msgid "Remove file"
 msgstr ""
 
-#: languages/react.php:1044
+#: languages/react.php:1026
 msgid "WPMU DEV CDN <span>PRO</span>"
 msgstr ""
 
-#: languages/react.php:1047
+#: languages/react.php:1029
 msgid ""
 "WPMU DEV CDN will serve your CSS, JS and other compatible files from our "
 "external CDN, effectively taking the load off your server so that pages "
 "load faster for your visitors."
 msgstr ""
 
-#: languages/react.php:1050
+#: languages/react.php:1032
 msgid "Compress files & clean code"
 msgstr ""
 
-#: languages/react.php:1053
+#: languages/react.php:1035
 msgid "Combine JavaScript & CSS"
 msgstr ""
 
-#: languages/react.php:1056
+#: languages/react.php:1038
 msgid "Swap web fonts"
 msgstr ""
 
-#: languages/react.php:1059
+#: languages/react.php:1041
 msgid ""
 "Apply a similar fallback font that visitors will temporarily see until the "
 "primary font loads, to improve text visibility."
 msgstr ""
 
-#: languages/react.php:1062
+#: languages/react.php:1044
 msgid "Delay JavaScript execution"
 msgstr ""
 
-#: languages/react.php:1065
+#: languages/react.php:1047
 msgid "Delay JavaScript execution <span>PRO</span>"
 msgstr ""
 
-#: languages/react.php:1071
+#: languages/react.php:1053
 msgid "Generate critical CSS"
 msgstr ""
 
-#: languages/react.php:1074
+#: languages/react.php:1056
 msgid "Generate critical CSS <span>PRO</span>"
 msgstr ""
 
-#: languages/react.php:1077
+#: languages/react.php:1059
 msgid ""
 "Drastically reduce your page load time and eliminate render-blocking "
 "resources by automatically generating the critical CSS required to load "
 "your above-the-fold content."
 msgstr ""
 
-#: languages/react.php:1080
+#: languages/react.php:1062
 msgid ""
 "<strong>Note:</strong> You can tweak these settings further under Assets "
 "Optimization > Extra Optimization."
 msgstr ""
 
-#: languages/react.php:1083
+#: languages/react.php:1065
 msgid "Getting Started"
 msgstr ""
 
-#: languages/react.php:1086
+#: languages/react.php:1068
 msgid "Clear cache after new comment"
 msgstr ""
 
-#: languages/react.php:1092
+#: languages/react.php:1074
 msgid "Finish"
 msgstr ""
 
-#: languages/react.php:1101
+#: languages/react.php:1083
 msgid ""
 "Add a shortcut to Hummingbird settings in the top WordPress Admin bar. "
 "Clicking the Clear Cache button in the WordPress Admin Bar will clear all "
 "active cache types."
 msgstr ""
 
-#: languages/react.php:1104
+#: languages/react.php:1086
 msgid ""
 "Some of your resource URLs can end with something like “?x=y”, these are "
 "the query strings of the URL. Some servers, CDNs or caching systems don’t "
 "like query strings and removing them can help to increase speed."
 msgstr ""
 
-#: languages/react.php:1107
+#: languages/react.php:1089
 msgid "Remove default Emoji JS & CSS files"
 msgstr ""
 
-#: languages/react.php:1116
+#: languages/react.php:1098
 msgid "Combine & Compress Optimization"
 msgstr ""
 
-#: languages/react.php:1119
+#: languages/react.php:1101
 msgid "Combine Optimization"
 msgstr ""
 
-#: languages/react.php:1122
+#: languages/react.php:1104
 msgid "Compress Optimization"
 msgstr ""
 
-#: languages/react.php:1125
+#: languages/react.php:1107
 msgid "Modules"
 msgstr ""
 
-#: languages/react.php:1128
+#: languages/react.php:1110
 msgid "Settings applied"
 msgstr ""
 
-#: languages/react.php:1134
+#: languages/react.php:1116
 msgid "Active on subsites"
 msgstr ""
 
-#: languages/react.php:1137
+#: languages/react.php:1119
 msgid "CDN"
 msgstr ""
 
-#: languages/react.php:1143
+#: languages/react.php:1125
 msgid "Delay JS Executions"
 msgstr ""
 
-#: languages/react.php:1149
+#: languages/react.php:1131
 msgid "Default settings"
 msgstr ""
 
-#: languages/react.php:1164
+#: languages/react.php:1146
 msgid "Show clear cache button in admin bar"
 msgstr ""
 
-#: languages/react.php:1179
+#: languages/react.php:1161
 msgid ""
 "Let’s walk through a few quick steps to fine-tune your site’s performance "
 "and keep it running lightning-fast."
 msgstr ""
 
-#: languages/react.php:1182
+#: languages/react.php:1164
 msgid "Any issue reported here may cause issues while we set up the plugin."
 msgstr ""
 
-#: languages/react.php:1185
+#: languages/react.php:1167
 msgid "There are no more potential issues. You can proceed with the setup."
 msgstr ""
 
-#: languages/react.php:1188
+#: languages/react.php:1170
 msgid ""
 "Hummingbird's Asset Optimization engine can combine and minify the files "
 "your website outputs when a user visits your website. The fewer requests "
 "your visitors have to make to your server, the better."
 msgstr ""
 
-#: languages/react.php:1191
+#: languages/react.php:1173
 msgid ""
 "Never get caught off guard by downtime again. Hummingbird checks your site "
 "every few minutes and alerts you if it goes down or slows, helping you keep "
 "things running at top speed."
 msgstr ""
 
-#: languages/react.php:1194
+#: languages/react.php:1176
 msgid ""
 "Hummingbird stores static HTML copies of your pages and posts to decrease "
 "page load time. We will activate the default and basic settings and you can "
 "then fine-tune them to suit your specific needs."
 msgstr ""
 
-#: languages/react.php:1200
+#: languages/react.php:1182
 msgid ""
 "The setup is complete. We have activated the main features with the default "
 "settings. You can proceed to run a Performance Test or go directly to the "
 "Dashboard page."
 msgstr ""
 
-#: languages/react.php:1203
+#: languages/react.php:1185
 msgid "Help improve Hummingbird with anonymous usage data<span>Recommended</span>"
 msgstr ""
 
-#: languages/react.php:1206
+#: languages/react.php:1188
 msgid ""
 "Join 18,000+ users helping us improve with anonymous data. No personal info "
 "collected. <a>Learn more</a>."
 msgstr ""
 
-#: languages/react.php:1209
+#: languages/react.php:1191
 msgid "Back"
 msgstr ""
 
-#: languages/react.php:1212
+#: languages/react.php:1194
 msgid "Get started"
 msgstr ""
 
-#: languages/react.php:1215
+#: languages/react.php:1197
 msgid "We advise to check the recommendations before proceeding."
 msgstr ""
 
-#: languages/react.php:1218
+#: languages/react.php:1200
 msgid "Continue anyway"
 msgstr ""
 
-#: languages/react.php:1224
+#: languages/react.php:1206
 msgid "Go to Dashboard"
 msgstr ""
 
-#: languages/react.php:1227
+#: languages/react.php:1209
 msgid "Run Performance Test"
 msgstr ""
 
-#: languages/react.php:1230
+#: languages/react.php:1212
 msgid "Checking status"
 msgstr ""
 
-#: languages/react.php:1233
+#: languages/react.php:1215
 msgid "Saving settings"
 msgstr ""
 

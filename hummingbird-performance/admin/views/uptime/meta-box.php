@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		);
 		?>
 	</p>
-	<?php if ( null === $uptime_stats->response_time && ! is_wp_error( $uptime_stats ) ) : ?>
+	<?php if ( ! is_wp_error( $uptime_stats ) && ( ! isset( $uptime_stats->response_time ) || null === $uptime_stats->response_time ) ) : ?>
 		<?php $this->admin_notices->show_inline( esc_html__( 'We don’t have any data feeding in yet. It can take an hour or two for this graph to populate with data so feel free to check back soon!', 'wphb' ), 'info' ); ?>
 	<?php endif; ?>
 

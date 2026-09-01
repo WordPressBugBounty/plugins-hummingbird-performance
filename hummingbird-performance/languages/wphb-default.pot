@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 3.20.0\n"
+"Project-Id-Version: Hummingbird 3.21.2\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2026-07-13 12:50:22+00:00\n"
+"POT-Creation-Date: 2026-08-26 13:01:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -464,7 +464,7 @@ msgid "Preview Changes"
 msgstr ""
 
 #: admin/class-notices.php:869 admin/class-notices.php:891
-#: core/class-safemode.php:425
+#: core/class-safemode.php:422
 msgid "Copy test link"
 msgstr ""
 
@@ -1585,7 +1585,7 @@ msgstr ""
 
 #: admin/pages/class-caching.php:826
 #: admin/views/caching/gravatar/meta-box-header.php:21
-#: core/modules/class-page-cache.php:1995 languages/react.php:296
+#: core/modules/class-page-cache.php:1998 languages/react.php:296
 msgid "Clear cache"
 msgstr ""
 
@@ -7344,11 +7344,11 @@ msgstr ""
 msgid "No recipients defined."
 msgstr ""
 
-#: core/api/class-hub.php:596
+#: core/api/class-hub.php:598
 msgid "Recipients updated"
 msgstr ""
 
-#: core/api/class-hub.php:709
+#: core/api/class-hub.php:711
 msgid "Missing config data"
 msgstr ""
 
@@ -7406,7 +7406,7 @@ msgstr ""
 msgid "Unknown Error"
 msgstr ""
 
-#: core/class-configs.php:106 core/class-installer.php:643
+#: core/class-configs.php:106 core/class-installer.php:647
 msgid "Default config"
 msgstr ""
 
@@ -7631,7 +7631,7 @@ msgstr ""
 msgid "Invalid request. Please go back and retry"
 msgstr ""
 
-#: core/class-hub-connector.php:115 core/modules/class-critical-css.php:1801
+#: core/class-hub-connector.php:115 core/modules/class-critical-css.php:1806
 msgid "Error"
 msgstr ""
 
@@ -7648,18 +7648,18 @@ msgstr ""
 msgid "Log in with your WPMU DEV account credentials to activate %s."
 msgstr ""
 
-#: core/class-safemode.php:418
+#: core/class-safemode.php:415
 msgid ""
 "You’re viewing your site’s frontend in Safe Mode. Check your pages for "
 "visual or functional issues, inspect the browser console for errors, test "
 "with page speed tools, and publish when ready."
 msgstr ""
 
-#: core/class-safemode.php:422
+#: core/class-safemode.php:419
 msgid "Publish Changes"
 msgstr ""
 
-#: core/class-safemode.php:428 core/pro/admin/modals/template-header.php:25
+#: core/class-safemode.php:425 core/pro/admin/modals/template-header.php:25
 msgid "Go back"
 msgstr ""
 
@@ -7986,7 +7986,7 @@ msgid ""
 "the background."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:470
+#: core/externals/hub-connector/inc/class-admin.php:476
 #. translators: %s Account detail URL.
 msgid ""
 "You are currently using your Google account as your preferred login method. "
@@ -7995,7 +7995,7 @@ msgid ""
 "target=\"_blank\">your WPMU DEV account</a>."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:480
+#: core/externals/hub-connector/inc/class-admin.php:486
 #. translators: %s Account detail URL.
 msgid ""
 "You are currently using your WPMU DEV email & password as your preferred "
@@ -8004,7 +8004,7 @@ msgid ""
 "target=\"_blank\">your WPMU DEV account</a>."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:490
+#: core/externals/hub-connector/inc/class-admin.php:496
 #. translators: %1$s Account detail URL, %2$s Reset URL.
 msgid ""
 "Due to security improvements, you will need to re-link your Google account "
@@ -8014,17 +8014,17 @@ msgid ""
 "<a href=\"%2$s\" target=\"_blank\">reset it here</a>."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:502
+#: core/externals/hub-connector/inc/class-admin.php:508
 msgid ""
 "Your login details were incorrect. Please make sure you're using your WPMU "
 "DEV email and password and try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:504
+#: core/externals/hub-connector/inc/class-admin.php:510
 msgid "Forgot your password?"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:515
+#: core/externals/hub-connector/inc/class-admin.php:521
 #. translators: %1$s Rest URL, %2$s Upgrade URL, %3$s Trial URL.
 msgid ""
 "This domain has previously been registered with us by the user %1$s. To use "
@@ -8035,11 +8035,11 @@ msgid ""
 "target=\"_blank\" href=\"%4$s\">here's why</a>."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:525
+#: core/externals/hub-connector/inc/class-admin.php:531
 msgid "Contact support if you need further assistance &raquo;"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:531
+#: core/externals/hub-connector/inc/class-admin.php:537
 #. translators: %1$d Account name, %2$s Security info, %3$s Hub URL, %4$s
 #. Support URL.
 msgid ""
@@ -8051,143 +8051,159 @@ msgid ""
 "href=\"%4$s\">contact support for assistance</a>."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:544
+#: core/externals/hub-connector/inc/class-admin.php:550
 #. translators: %s Support URL.
 msgid ""
 "This domain cannot be registered to your WPMU DEV account.<br><a "
 "href=\"%s\">Contact Accounts & Billing if you need further assistance »</a>"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:552
+#: core/externals/hub-connector/inc/class-admin.php:557
+#: core/externals/hub-connector/inc/class-api.php:618
+#. translators: %1$s Hub Account URL, %2$s: Switch to Free URL.
+msgid ""
+"Login failed — your WPMU DEV membership has expired. Renew now to regain "
+"full access, or switch to our free plan to continue managing all your site "
+"in the Hub.<br/><br/><a class=\"sui-button sui-button-blue\" href=\"%1$s\" "
+"target=\"_blank\">Renew Membership</a>&nbsp;<a class=\"sui-button "
+"sui-button-ghost\" href=\"%2$s\" target=\"_blank\">Switch to Free</a>"
+msgstr ""
+
+#: core/externals/hub-connector/inc/class-admin.php:569
 msgid "Google login failed. Please try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:556
+#: core/externals/hub-connector/inc/class-admin.php:573
 msgid "Unknown error. Please update the WPMU DEV Dashboard plugin and try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:564
+#: core/externals/hub-connector/inc/class-admin.php:581
 msgid "Your server had a problem connecting to WPMU DEV. Please try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:565
+#: core/externals/hub-connector/inc/class-admin.php:582
 msgid ""
 "If this problem continues, please contact your host with this error message "
 "and ask:"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:568
+#: core/externals/hub-connector/inc/class-admin.php:585
 #. translators: url to API.
 msgid ""
 "\"Is PHP on my server properly configured to be able to contact %s with a "
 "POST HTTP request via fsockopen or CURL?\""
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:574
+#: core/externals/hub-connector/inc/class-admin.php:591
 msgid "Your API Key was invalid. Please try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:658
+#: core/externals/hub-connector/inc/class-admin.php:675
 msgid "Let’s connect your site"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:659
+#: core/externals/hub-connector/inc/class-admin.php:676
 msgid ""
 "To manage your site from The Hub, log in with your WPMU DEV account email "
 "and password."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:660
-msgid "Could not sync with Hub. Please try again."
+#: core/externals/hub-connector/inc/class-admin.php:677
+msgid "Could not sync with The Hub. Please try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:661
+#: core/externals/hub-connector/inc/class-admin.php:678
 msgid ""
 "The Hub connects WPMU DEV to your website and unlocks all the power of our "
 "all-in-one platform services."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:662
+#: core/externals/hub-connector/inc/class-admin.php:679
 msgid ""
-"Once your website is connected to the Hub, you will be able to perform "
-"updates, managing services - all from one place."
+"Once your website is connected to The Hub, you will be able to perform "
+"updates, manage services - all from one place."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:663
+#: core/externals/hub-connector/inc/class-admin.php:680
 msgid "Please wait a few moments while we connect your website."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:664
+#: core/externals/hub-connector/inc/class-admin.php:681
 msgid "Choose The Hub Team"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:665
+#: core/externals/hub-connector/inc/class-admin.php:682
 msgid ""
 "We've noticed that you are a member of multiple teams in The Hub. Which "
 "team would you like to connect to this site?"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:666
+#: core/externals/hub-connector/inc/class-admin.php:683
 msgid "Unknown API error occurred. Please try again."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:667
+#: core/externals/hub-connector/inc/class-admin.php:684
 msgid ""
 "Create a free account to connect your site to WPMU DEV and activate "
 "cloud-based link checker. <i>It's fast, seamless, and free.</i>"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:668
+#: core/externals/hub-connector/inc/class-admin.php:685
 msgid "You do not have the permission to view this page."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:669
+#: core/externals/hub-connector/inc/class-admin.php:686
 msgid "Sign in with Google"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:670
+#: core/externals/hub-connector/inc/class-admin.php:687
 msgid "Forgot password?"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:671
+#: core/externals/hub-connector/inc/class-admin.php:688
 msgid "Keep me logged in"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:672
+#: core/externals/hub-connector/inc/class-admin.php:689
 msgid "Login"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:673
+#: core/externals/hub-connector/inc/class-admin.php:690
 msgid "I am a new user"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:674
+#: core/externals/hub-connector/inc/class-admin.php:691
 msgid "I am an existing user"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:675
+#: core/externals/hub-connector/inc/class-admin.php:692
 msgid "OR continue with email"
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-admin.php:676
+#: core/externals/hub-connector/inc/class-admin.php:693
 msgid "Create a free account"
 msgstr ""
 
 #: core/externals/hub-connector/inc/class-api.php:175
-#: core/externals/hub-connector/inc/class-api.php:314
-#: core/externals/hub-connector/inc/class-api.php:384
+#: core/externals/hub-connector/inc/class-api.php:323
+#: core/externals/hub-connector/inc/class-api.php:358
+#: core/externals/hub-connector/inc/class-api.php:422
 msgid "Not logged in."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-api.php:261
+#: core/externals/hub-connector/inc/class-api.php:250
+msgid "Invalid API Key or Expired membership."
+msgstr ""
+
+#: core/externals/hub-connector/inc/class-api.php:270
 msgid "Invalid remote API response."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-api.php:410
+#: core/externals/hub-connector/inc/class-api.php:448
 msgid "Error unserializing remote response."
 msgstr ""
 
-#: core/externals/hub-connector/inc/class-api.php:574
+#: core/externals/hub-connector/inc/class-api.php:612
 #. translators: %s Support URL.
 msgid ""
 "This site is currently registered to a different user. Please <a "
@@ -8397,7 +8413,7 @@ msgstr ""
 
 #: core/integration/class-gutenberg.php:138
 #: core/modules/class-page-cache.php:1909
-#: core/modules/class-page-cache.php:2011
+#: core/modules/class-page-cache.php:2014
 #. translators: %s - Cache expiration time, %s - Cache old time
 msgid "Cache for post has been cleared."
 msgstr ""
@@ -8654,63 +8670,63 @@ msgstr ""
 msgid "2 hours"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1163
+#: core/modules/class-critical-css.php:1168
 #. translators: %1$s - page type, %2$s - Used css content, %3$s - manual
 #. critical css
 msgid "HB critical unknown error"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1684
+#: core/modules/class-critical-css.php:1689
 msgid "<em> Error: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1687
-#: core/modules/class-critical-css.php:1708
+#: core/modules/class-critical-css.php:1692
+#: core/modules/class-critical-css.php:1713
 #. translators: %1$s = error message.
 msgid "<br />%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1709
+#: core/modules/class-critical-css.php:1714
 msgid ""
 "Critical CSS doesn’t run while your site is in maintenance mode, so a 503 "
 "error is expected. It will work normally again once maintenance mode is "
 "disabled."
 msgstr ""
 
-#: core/modules/class-critical-css.php:1717
+#: core/modules/class-critical-css.php:1722
 #. translators: %1$s = message.
 msgid ""
 "Critical CSS generation failed. Please review the below error to "
 "troubleshoot.%1$s"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1795
+#: core/modules/class-critical-css.php:1800
 msgid "Optimizing "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1798
+#: core/modules/class-critical-css.php:1803
 msgid ""
 "Generating Critical CSS. This could take a few minutes depending on the "
 "number of site assets that need to be checked."
 msgstr ""
 
-#: core/modules/class-critical-css.php:1801 languages/react.php:939
+#: core/modules/class-critical-css.php:1806 languages/react.php:939
 msgid "Optimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1804
+#: core/modules/class-critical-css.php:1809
 msgid "Last Generated: "
 msgstr ""
 
-#: core/modules/class-critical-css.php:1806
+#: core/modules/class-critical-css.php:1811
 msgid "Unoptimized"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1809
+#: core/modules/class-critical-css.php:1814
 msgid "Select settings and saves changes to generate Critical CSS"
 msgstr ""
 
-#: core/modules/class-critical-css.php:1814
+#: core/modules/class-critical-css.php:1819
 #. translators: %1$s = tooltip text, %2$s = sui tag, %3$s = info icon, %4$s =
 #. text for tag.
 msgid ""

@@ -226,7 +226,7 @@ class Notices {
 
 		$dismiss_url = wp_nonce_url( add_query_arg( 'wphb-dismiss', $id ), 'wphb-dismiss-notice' );
 		?>
-		<div class="sui-wrap notice-<?php echo esc_attr( $id ); ?>">
+		<div id="<?php echo esc_attr( $id ); ?>-active-notice" class="sui-wrap notice-<?php echo esc_attr( $id ); ?>">
 			<div class="sui-notice sui-notice-<?php echo esc_attr( $sui_class ); ?>">
 				<div class="sui-notice-content">
 					<div class="sui-notice-message">

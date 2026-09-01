@@ -9,6 +9,7 @@
 namespace Hummingbird\Core\Modules\Caching;
 
 use Hummingbird\Core\Filesystem;
+use Hummingbird\Core\SafeMode;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 
@@ -168,6 +169,10 @@ class Preload extends Background_Process {
 	 * @param bool   $is_mobile  Is preload for mobile device.
 	 */
 	public function get_preload_request( $url, $is_mobile = false ) {
+		if ( SafeMode::instance()->get_status() ) {
+			$url = add_query_arg( 'wphb_preview_safe_mode', 'true', $url );
+		}
+
 		return array(
 			'url'       => $url,
 			'is_mobile' => $is_mobile,

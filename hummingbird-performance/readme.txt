@@ -1,6 +1,6 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.20.0
+Version: 3.21.2
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
 Requires at least: 6.4
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.20.0
+Stable tag: 3.21.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -209,6 +209,22 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 5. Custom performance optimizations using Advanced Tools.
 
 == Changelog ==
+
+= 3.21.2 ( 2026-09-01 ) =
+- Fix: Performance Test Notification Report is not sent
+- Fix: Security hardening
+
+= 3.21.1 ( 2026-09-01 ) =
+- Fix: Network-scoped option writable by a subsite administrator
+
+= 3.21.0 ( 2026-09-01 ) =
+- Improvement: Improved Safe Mode UX and stability
+- Fix: JavaScript delay exclusion list not working as expected
+- Fix: Disabling Safe Mode after changing Advanced Tools settings does not refresh or clear active state
+- Fix: Divi hamburger menu unresponsive when Delay JS is enabled
+- Fix: Divi blog post featured image failing to load
+- Fix: Safe Mode notice incorrectly shown when the feature is not enabled
+- Fix: Console error when removing a file from Asset Optimization exclusions
 
 = 3.20.0 ( 2026-07-20 ) =
 - New: Improved error messaging when generating Critical CSS while site is in maintenance mode

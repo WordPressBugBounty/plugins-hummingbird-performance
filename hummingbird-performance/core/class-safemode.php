@@ -270,12 +270,9 @@ class SafeMode {
 
 		static $modules_to_skip = array(
 			'uptime',
-			'advanced',
 			'settings',
 			'redis',
 			'database',
-			'delayjs',
-			'critical_css',
 			'mixpanel_analytics',
 			'background_processing',
 			'reports-performance',

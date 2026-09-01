@@ -857,31 +857,31 @@ $generated_i18n_strings = array(
 	// Reference: _src/react/views/minify/configurations.jsx:112
 	__( 'file: ', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:131
+	// Reference: _src/react/views/minify/configurations.jsx:130
 	__( 'File exclusions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:132
+	// Reference: _src/react/views/minify/configurations.jsx:131
 	__( 'Type the filename and click on the filename to add it to the list.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:136
+	// Reference: _src/react/views/minify/configurations.jsx:135
 	__( 'Start typing the files to exclude...', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:154
+	// Reference: _src/react/views/minify/configurations.jsx:153
 	__( 'Choose which files you want to automatically optimize.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:163
+	// Reference: _src/react/views/minify/configurations.jsx:162
 	__( 'By default, we\'ll optimize all the CSS and JS files we can find. If you have specific files you want to leave as-is, list them here, and we\'ll exclude them.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:180
+	// Reference: _src/react/views/minify/configurations.jsx:179
 	__( 'Files', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:185
+	// Reference: _src/react/views/minify/configurations.jsx:184
 	__( 'Exclusions', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:193
+	// Reference: _src/react/views/minify/configurations.jsx:192
 	__( 'The configurations will be applied to the enabled automatic optimization option.', 'wphb' ),
 
-	// Reference: _src/react/views/minify/configurations.jsx:217
+	// Reference: _src/react/views/minify/configurations.jsx:216
 	__( 'Configurations', 'wphb' ),
 
 	// Reference: _src/react/views/minify/configurations.jsx:36

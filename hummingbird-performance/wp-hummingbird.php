@@ -12,7 +12,7 @@
  * Plugin Name:       Hummingbird
  * Plugin URI:        https://wpmudev.com/project/wp-hummingbird/
  * Description:       Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
- * Version:           3.20.0
+ * Version:           3.21.2
  * Requires PHP:      7.4
  * Author:            WPMU DEV
  * Author URI:        https://wpmudev.com/
@@ -47,7 +47,7 @@ use Hummingbird\Core\Modules\Performance;
 use Hummingbird\Core\Utils;
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '3.20.0' );
+	define( 'WPHB_VERSION', '3.21.2' );
 }
 
 if ( ! defined( 'WPHB_SUI_VERSION' ) ) {

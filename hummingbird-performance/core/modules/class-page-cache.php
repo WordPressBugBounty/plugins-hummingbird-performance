@@ -1962,22 +1962,25 @@ class Page_Cache extends Module {
 			$message = print_r( $message, true );
 		}
 
-		$message = '[' . date( 'c' ) . '] ' . $message . PHP_EOL;
+		$file         = WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php';
+		$guard        = '<?php die(); ?>' . PHP_EOL;
+		$guard_prefix = '<?php die();';
+		$needs_guard  = ! file_exists( $file ) || $guard_prefix !== @file_get_contents( $file, false, null, 0, strlen( $guard_prefix ) );
 
-		$file = WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php';
-
-		// If file does not exist, we need to create it and add the die() header.
-		if ( ! file_exists( $file ) ) {
+		// If the file is missing or unguarded, create it with the die() header.
+		if ( $needs_guard ) {
 			global $wphb_fs;
 
-			if ( ! $wphb_fs && class_exists( 'Filesystem' ) ) {
+			if ( ! $wphb_fs && class_exists( Filesystem::class ) ) {
 				$wphb_fs = Filesystem::instance();
 			}
 
-			if ( $wphb_fs ) {
-				$wphb_fs->write( $file, '<?php die(); ?>' . PHP_EOL );
+			if ( ! $wphb_fs || true !== $wphb_fs->write( $file, $guard ) ) {
+				return;
 			}
 		}
+
+		$message = '[' . date( 'c' ) . '] ' . $message . PHP_EOL;
 
 		error_log( $message, 3, $file );
 	}

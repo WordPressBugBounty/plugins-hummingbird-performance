@@ -1341,44 +1341,44 @@ msgstr ""
 msgid "file: "
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:131
+#: _src/react/views/minify/configurations.jsx:130
 msgid "File exclusions"
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:132
+#: _src/react/views/minify/configurations.jsx:131
 msgid "Type the filename and click on the filename to add it to the list."
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:136
+#: _src/react/views/minify/configurations.jsx:135
 msgid "Start typing the files to exclude..."
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:154
+#: _src/react/views/minify/configurations.jsx:153
 msgid "Choose which files you want to automatically optimize."
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:163
+#: _src/react/views/minify/configurations.jsx:162
 msgid ""
 "By default, we'll optimize all the CSS and JS files we can find. If you "
 "have specific files you want to leave as-is, list them here, and we'll "
 "exclude them."
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:180
+#: _src/react/views/minify/configurations.jsx:179
 msgid "Files"
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:185
+#: _src/react/views/minify/configurations.jsx:184
 msgid "Exclusions"
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:193
+#: _src/react/views/minify/configurations.jsx:192
 msgid ""
 "The configurations will be applied to the enabled automatic optimization "
 "option."
 msgstr ""
 
-#: _src/react/views/minify/configurations.jsx:217
+#: _src/react/views/minify/configurations.jsx:216
 msgid "Configurations"
 msgstr ""
 

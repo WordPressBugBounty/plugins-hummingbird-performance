@@ -496,6 +496,10 @@ const ajaxExecutionInterval = 10000; // The interval set to 10 seconds
 				// Remove the value if it exists
 				const updatedValues = currentValues.filter( ( val ) => val !== value );
 				$box.val( updatedValues ).trigger( 'change.select2' );
+
+				if ( exclusionType === 'keywords' && this.isAdvancedViewChecked() ) {
+					this.copySelect2ToTextarea();
+				}
 			}
 		},
 

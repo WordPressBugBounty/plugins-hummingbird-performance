@@ -330,7 +330,7 @@ class Performance extends Module {
 	 * Triggered when a performance scan is initialized
 	 */
 	public function on_init_performance_scan() {
-		if ( Utils::is_member() ) {
+		if ( Utils::has_access_to_hub() ) {
 			return;
 		}
 

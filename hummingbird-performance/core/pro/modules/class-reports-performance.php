@@ -93,7 +93,7 @@ class Reports_Performance extends Reports {
 		$options = Settings::get_settings( 'performance' );
 
 		// Don't do any reports if they are not set in the options.
-		if ( ! $options['reports']['enabled'] ) {
+		if ( ! isset( $options['reports']['enabled'] ) || ! $options['reports']['enabled'] ) {
 			return;
 		}
 

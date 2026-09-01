@@ -15,6 +15,7 @@ use Hummingbird\Core\Modules\Caching\Fast_CGI;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Settings;
+use Hummingbird\Core\SafeMode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -206,6 +207,10 @@ class Critical_Css extends Module {
 			$url
 		);
 
+		if ( SafeMode::instance()->get_status() ) {
+			$url = add_query_arg( 'wphb_preview_safe_mode', 'true', $url );
+		}
+
 		$queue = array(
 			'url'            => $url,
 			'type'           => $type,
@@ -376,7 +381,7 @@ class Critical_Css extends Module {
 			return false;
 		}
 
-		if ( is_user_logged_in() ) {
+		if ( ( is_user_logged_in() && ! SafeMode::instance()->is_safemode_call() ) || ( SafeMode::instance()->get_status() && ! SafeMode::instance()->is_safemode_call() ) ) {
 			return false;
 		}
 

@@ -587,6 +587,8 @@ class Hub {
 				$options[ $module ]['recipients'] = $recipients;
 			} else {
 				$options['reports']['recipients'] = $recipients;
+				// Sync the enabled flag with recipients: having recipients means reports are active.
+				$options['reports']['enabled'] = ! empty( $recipients );
 			}
 
 			Settings::update_settings( $options, $available_modules[ $module ] );

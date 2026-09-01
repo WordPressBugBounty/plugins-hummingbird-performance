@@ -1,5 +1,6 @@
 /* global wphb */
 import Fetcher from './utils/fetcher';
+import { currentPage } from './utils/helpers';
 
 ( function() {
 	'use strict';
@@ -207,6 +208,21 @@ import Fetcher from './utils/fetcher';
 		 */
 		disableFeature( feature ) {
 			this.track( 'plugin_feature_deactivate', { feature } );
+		},
+
+		/**
+		 * Track safe mode event.
+		 *
+		 * @param {string} mode    Mode.
+		 * @param {string} changes Changes.
+		 */
+		trackSafeMode( mode, changes ) {
+			const location = currentPage();
+			this.track( 'Safe Mode', {
+				Mode: mode,
+				Changes: changes,
+				Location: location === 'external' ? 'na' : location,
+			} );
 		},
 
 		/**

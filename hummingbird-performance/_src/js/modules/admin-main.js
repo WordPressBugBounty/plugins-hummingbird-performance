@@ -52,7 +52,13 @@ import { getString } from '../utils/helpers';
 								const safeModeCheckbox = document.getElementById( 'safe_mode' );
 								if ( safeModeCheckbox ) {
 									safeModeCheckbox.checked = false;
+									const safeModeNotice = document.getElementById( 'wphb-safe-mode-active-notice' );
+									if ( safeModeNotice ) {
+										safeModeNotice.style.display = 'none';
+									}
 								}
+
+								wphbMixPanel.trackSafeMode( safeModeCheckbox.checked ? 'enabled' : 'disabled', 'na' );
 							}
 						} );
 				} else {
@@ -117,6 +123,7 @@ import { getString } from '../utils/helpers';
 			const urlParams = new URLSearchParams( window.location.search );
 			if ( urlParams.has( 'wphb_safemode_published' ) ) {
 				WPHB_Admin.notices.show( getString( 'safeModePublished' ), 'success' );
+				wphbMixPanel.trackSafeMode( 'disabled', 'publish_frontend' );
 				urlParams.delete( 'wphb_safemode_published' );
 				window.history.replaceState( {}, document.title, window.location.pathname + '?' + urlParams.toString() );
 			}
@@ -143,6 +150,7 @@ import { getString } from '../utils/helpers';
 					}
 					window.SUI.closeModal();
 					WPHB_Admin.notices.show( response.message );
+					wphbMixPanel.trackSafeMode( safeModeCheckbox.checked ? 'enabled' : 'disabled', 'na' );
 					setTimeout( () => {
 						window.location.reload();
 					}, 500 );
@@ -152,6 +160,7 @@ import { getString } from '../utils/helpers';
 
 		discardSafeMode( button ) {
 			button.classList.add( 'disabled' );
+			wphbMixPanel.trackSafeMode( 'disabled', 'discard' );
 			Fetcher.common
 				.callWithParams( 'wphb_discard_safe_mode', true )
 				.then( ( ) => {
@@ -165,6 +174,7 @@ import { getString } from '../utils/helpers';
 			button.classList.add( 'disabled' );
 			const clearAllCache = document.getElementById( 'wphb-safe-mode-clear-all-cache' );
 			const clearAllCacheValue = clearAllCache ? clearAllCache.checked : false;
+			wphbMixPanel.trackSafeMode( 'disabled', 'publish_plugin' );
 			Fetcher.common
 				.callWithParams( 'wphb_publish_safe_mode', clearAllCacheValue )
 				.then( ( response ) => {

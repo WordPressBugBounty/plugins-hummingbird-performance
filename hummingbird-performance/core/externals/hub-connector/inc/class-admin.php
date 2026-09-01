@@ -193,6 +193,10 @@ class Admin {
 	 * @param string $plugin Plugin identifier.
 	 */
 	public function render( $plugin = 'default' ) {
+		// only render on appropriate capability.
+		if ( ! ( is_multisite() ? current_user_can( 'manage_network_options' ) : current_user_can( 'manage_options' ) ) ) {
+			return;
+		}
 		if ( ! empty( $plugin ) ) {
 			$this->plugin = $plugin;
 		}
@@ -286,7 +290,9 @@ class Admin {
 		// Prepare redirect URL.
 		$redirect_url = add_query_arg( array( 'hub_connector_callback' => 1 ), $current_url );
 
-		$auth_nonce = wp_create_nonce( 'auth_nonce' );
+		// fool-proof, in normal condition this enqueue_assets method won't be called without access.
+		$has_access = is_multisite() ? current_user_can( 'manage_network_options' ) : current_user_can( 'manage_options' );
+		$auth_nonce = $has_access ? wp_create_nonce( 'auth_nonce' ) : '';
 
 		// Extra arguments.
 		$extra_args = $this->get_plugin_extra_args_from_screen();
@@ -307,7 +313,7 @@ class Admin {
 			'nonce'             => wp_create_nonce( 'wp_rest' ),
 			'is_syncing'        => false,
 			'is_team_selection' => false,
-			'has_access'        => current_user_can( 'manage_options' ),
+			'has_access'        => $has_access,
 			'is_logged_in'      => API::get()->is_logged_in(),
 			// Not being used for literal output / DB insert.
 			// phpcs:disable WordPress.Security.NonceVerification.Recommended
@@ -376,7 +382,7 @@ class Admin {
 		}
 
 		// Should be capable to perform the actions.
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! ( is_multisite() ? current_user_can( 'manage_network_options' ) : current_user_can( 'manage_options' ) ) ) {
 			return $this->update_vars( array( 'has_access' => false ) );
 		}
 
@@ -545,6 +551,17 @@ class Admin {
 							Data::get()->server_url( 'hub2/#ask-question' )
 						);
 						break;
+					case 'expired_membership':
+						$error = sprintf(
+						// translators: %1$s Hub Account URL, %2$s: Switch to Free URL.
+							__(
+								'Login failed — your WPMU DEV membership has expired. Renew now to regain full access, or switch to our free plan to continue managing all your site in the Hub.<br/><br/><a class="sui-button sui-button-blue" href="%1$s" target="_blank">Renew Membership</a>&nbsp;<a class="sui-button sui-button-ghost" href="%2$s" target="_blank">Switch to Free</a>',
+								'wpmudev'
+							),
+							Data::get()->server_url( 'hub2/account/ ' ),
+							Data::get()->server_url( 'hub2/?switch-free=1 ' )
+						);
+						break;
 					case 'invalid_nonce':
 					case 'invalid_double_submit_cookie':
 					case 'invalid_google_creds':
@@ -657,9 +674,9 @@ class Admin {
 		$strings = array(
 			'login_title'         => __( 'Let’s connect your site', 'wpmudev' ),
 			'login_desc'          => __( 'To manage your site from The Hub, log in with your WPMU DEV account email and password.', 'wpmudev' ),
-			'sync_error'          => __( 'Could not sync with Hub. Please try again.', 'wpmudev' ),
+			'sync_error'          => __( 'Could not sync with The Hub. Please try again.', 'wpmudev' ),
 			'sync_desc1'          => __( 'The Hub connects WPMU DEV to your website and unlocks all the power of our all-in-one platform services.', 'wpmudev' ),
-			'sync_desc2'          => __( 'Once your website is connected to the Hub, you will be able to perform updates, managing services - all from one place.', 'wpmudev' ),
+			'sync_desc2'          => __( 'Once your website is connected to The Hub, you will be able to perform updates, manage services - all from one place.', 'wpmudev' ),
 			'sync_loading'        => __( 'Please wait a few moments while we connect your website.', 'wpmudev' ),
 			'team_title'          => __( 'Choose The Hub Team', 'wpmudev' ),
 			'team_desc'           => __( 'We\'ve noticed that you are a member of multiple teams in The Hub. Which team would you like to connect to this site?', 'wpmudev' ),

@@ -45,3 +45,30 @@ export const toggleCDNHelper = ( value ) => {
 			return response;
 		} );
 };
+
+export const currentPage = () => {
+	const url = window.location.href;
+	const urlparse = new URL( url );
+	const page = urlparse.searchParams.get( 'page' );
+	if ( page ) {
+		switch ( page ) {
+			case 'wphb':
+				return 'Dashboard';
+			case 'wphb-performance':
+				return 'Performance Test';
+			case 'wphb-caching':
+				return 'Caching';
+			case 'wphb-minification':
+				return 'Asset Optimization';
+			case 'wphb-advanced':
+				return 'Advanced Tools';
+			case 'wphb-uptime':
+				return 'Uptime';
+			case 'wphb-notifications':
+				return 'Notifications';
+			case 'wphb-settings':
+				return 'Settings';
+		}
+	}
+	return 'External';
+};

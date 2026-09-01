@@ -237,6 +237,10 @@ class Installer {
 				self::upgrade_3_16_0();
 			}
 
+			if ( version_compare( $version, '3.21.2', '<' ) ) {
+				self::upgrade_3_21_2();
+			}
+
 			update_site_option( 'wphb_version', WPHB_VERSION );
 		}
 	}
@@ -822,5 +826,14 @@ class Installer {
 		}
 
 		$minify->update_options( $options );
+	}
+
+	/**
+	 * Remove the legacy page-caching log so it is recreated with the security guard.
+	 *
+	 * @since 3.21.2
+	 */
+	private static function upgrade_3_21_2() {
+		Logger::get_instance()->clear( 'page_cache' );
 	}
 }

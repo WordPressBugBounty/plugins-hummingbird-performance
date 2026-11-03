@@ -12,6 +12,7 @@ use Hummingbird\Core\Module;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Admin\Ajax\Notices;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -187,7 +188,7 @@ class Delayjs extends Module {
 		}
 
 		$options          = Utils::get_module( 'minify' )->get_options();
-		$delay_js_file    = WPHB_DIR_PATH . 'admin/assets/js/wphb-add-delay.min.js';
+		$delay_js_file    = WPHB_DIR_PATH . 'admin/assets/ui/js/wphb-add-delay.min.js';
 		$delay_js_content = file_get_contents( $delay_js_file );
 
 		if ( ! empty( $delay_js_content ) ) {
@@ -213,12 +214,6 @@ class Delayjs extends Module {
 	 */
 	public function is_delay_enable() {
 		if ( ! Utils::is_member() ) {
-			return false;
-		}
-
-		$options = Utils::get_module( 'minify' )->get_options();
-
-		if ( ! Utils::get_module( 'minify' )->is_active() ) {
 			return false;
 		}
 
@@ -399,5 +394,34 @@ class Delayjs extends Module {
 		}
 
 		return $delay_js_exclude_inline_js || apply_filters( 'wphb_do_not_delay_inline_scripts', false );
+	}
+
+	/**
+	 * Build the Delay JS status payload for the React Asset Optimization
+	 * panel.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function get_react_settings() {
+		$options = Utils::get_module( 'minify' )->get_options();
+
+		return array(
+			'delay_js'                   => $options['delay_js'],
+			'delay_js_timeout'           => $options['delay_js_timeout'],
+			'delay_js_exclude_inline_js' => $options['delay_js_exclude_inline_js'],
+			'notice_dismissed'           => Notices::is_dismissed( 'delay-js-info' ),
+			'exclusions'                 => array(
+				'files'      => $options['delay_js_files_exclusion'],
+				'post_types' => $options['delay_js_post_types_exclusion'],
+				'post_urls'  => $options['delay_js_post_urls_exclusion'],
+				'plugins'    => $options['delay_js_plugins_themes_exclusion'],
+				'ads'        => $options['delay_js_ads_tracker_exclusion'],
+				// Free-typed keyword strings, not picked from a browsable
+				// list — normalizes the legacy string-or-array storage shape.
+				'keywords'   => Utils::get_module( 'exclusions' )->get_manually_excluded_keywords(),
+			),
+		);
 	}
 }

@@ -8,6 +8,7 @@
 namespace Hummingbird\Core\Modules;
 
 use Calotes\Model\Setting;
+use Hummingbird\Admin\Ajax\Notices;
 use Hummingbird\Core\Filesystem;
 use Hummingbird\Core\Module;
 use Hummingbird\Core\SafeMode;
@@ -141,14 +142,10 @@ class Minify extends Module {
 		add_filter( 'wphb_preload_resource', array( $this, 'filter_resource_preload' ), 10, 3 );
 		add_filter( 'wphb_async_resource', array( $this, 'filter_resource_async' ), 10, 3 );
 		add_filter( 'wphb_send_resource_to_footer', array( $this, 'filter_resource_to_footer' ), 10, 3 );
-		add_filter( 'wphb_cdn_resource', array( $this, 'filter_resource_cdn' ), 10, 3 );
 		add_filter( 'wphb_minify_scan_url', array( SafeMode::instance(), 'maybe_append_query_arg' ) );
 
 		// Remove files from AO UI.
 		add_filter( 'wphb_minification_display_enqueued_file', array( $this, 'exclude_from_ao_ui' ), 10, 3 );
-
-		// Remove -rtl from CDN links.
-		add_filter( 'style_loader_tag', array( $this, 'remove_rtl_prefix_on_cdn' ) );
 
 		if ( SafeMode::instance()->previewing_safe_mode() ) {
 			add_action(
@@ -225,8 +222,6 @@ class Minify extends Module {
 		add_filter( 'print_styles_array', array( $this, 'filter_styles' ), 5 );
 		add_filter( 'print_scripts_array', array( $this, 'filter_scripts' ), 5 );
 		add_action( 'wp_footer', array( $this, 'trigger_process_queue_cron' ), 10000 );
-
-		add_filter( 'wp_resource_hints', array( $this, 'prefetch_cdn_dns' ), 99, 2 );
 
 		// Google fonts optimization.
 		$this->fonts = Settings::get_setting( 'fonts', 'minify' );
@@ -1141,7 +1136,9 @@ class Minify extends Module {
 	 * Get the list of groups that are yet pending to be processed
 	 */
 	public function get_pending_persistent_queue() {
-		return get_option( 'wphb_process_queue', array() );
+		$queue = get_option( 'wphb_process_queue', array() );
+
+		return is_array( $queue ) ? $queue : array();
 	}
 
 	/**
@@ -1231,10 +1228,13 @@ class Minify extends Module {
 	}
 	/**
 	 * Disable minification module.
+	 *
+	 * @param bool $keep_collection Keep the scanned file list, so turning it back on needs no new scan.
+	 * @param bool $reset_settings  Also reset exclusions and per-file settings to their defaults.
 	 */
-	public function disable() {
+	public function disable( $keep_collection = false, $reset_settings = true ) {
 		$this->toggle_service( false );
-		$this->clear_cache();
+		$this->clear_cache( $reset_settings, true, $keep_collection );
 
 		// Delete notices if they are there.
 		delete_option( 'wphb-minification-files-scanned' );
@@ -1543,28 +1543,6 @@ class Minify extends Module {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Filter out assets from using CDN.
-	 *
-	 * @since 2.4.0
-	 *
-	 * @param bool   $value    Current CDN status.
-	 * @param array  $handles  Array of handles (or single handle).
-	 * @param string $type     Scripts or styles.
-	 *
-	 * @return bool
-	 */
-	public function filter_resource_cdn( $value, $handles, $type ) {
-		$options = Settings::get_setting( 'nocdn', 'minify' );
-		foreach ( $handles as $handle ) {
-			if ( in_array( $handle, $options[ $type ], true ) ) {
-				$value = false;
-			}
-		}
-
-		return $value;
 	}
 
 	/**
@@ -1899,29 +1877,6 @@ class Minify extends Module {
 	}
 
 	/**
-	 * CDN does not support -rtl suffixes, so we remove those from style links
-	 *
-	 * @since 2.7.2
-	 *
-	 * @param string $rtl_tag  Style tag.
-	 *
-	 * @return string
-	 */
-	public function remove_rtl_prefix_on_cdn( $rtl_tag ) {
-		// If not from Hummingbird CDN - skip.
-		if ( false === strpos( $rtl_tag, 'hb.wpmucdn.com' ) ) {
-			return $rtl_tag;
-		}
-
-		// If does not contain -rtl prefix - skip.
-		if ( false === strpos( $rtl_tag, '-rtl.' ) ) {
-			return $rtl_tag;
-		}
-
-		return str_replace( '-rtl.', '.', $rtl_tag );
-	}
-
-	/**
 	 * Replace Google fonts with a preloaded version.
 	 *
 	 * @since 3.0.0
@@ -1941,25 +1896,6 @@ class Minify extends Module {
 		$fonts .= str_replace( "media='all'", "media='print' onload='this.media=&#34;all&#34;'", $tag );
 
 		return $fonts;
-	}
-
-	/**
-	 * Add CDN URL to header for better speed.
-	 *
-	 * @since 3.1.0
-	 *
-	 * @param array  $hints          URLs to print for resource hints.
-	 * @param string $relation_type  The relation type the URLs are printed.
-	 *
-	 * @return array
-	 */
-	public function prefetch_cdn_dns( $hints, $relation_type ) {
-		// Add only if CDN active.
-		if ( 'dns-prefetch' === $relation_type && $this->get_cdn_status() ) {
-			$hints[] = '//hb.wpmucdn.com';
-		}
-
-		return $hints;
 	}
 
 	/**
@@ -2335,5 +2271,82 @@ class Minify extends Module {
 	public function start_process() {
 		// Start AO scan.
 		Utils::get_module( 'background_processing' )->maybe_start_scan();
+	}
+
+	/**
+	 * Data localized at page load for the Asset Optimization React page.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function data_frontend() {
+		return array(
+			'enabled'          => Utils::get_module( 'minify' )->is_active(),
+			'delayJs'          => Utils::get_module( 'delayjs' )->get_react_settings(),
+			'criticalCss'      => Utils::get_module( 'critical_css' )->get_react_settings(),
+			'fontOptimization' => Minify\Fonts::get_react_settings(),
+			'autoOptimize'     => $this->get_auto_optimize_settings(),
+		);
+	}
+
+	/**
+	 * Build the Combine & compress status payload for the React Asset
+	 * Optimization card.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function get_auto_optimize_settings() {
+		$options = $this->get_options();
+
+		list( $excluded_styles, $excluded_scripts ) = $this->get_auto_exclusions( $options );
+
+		// Compress and Combine are what switch the module on, so report them as
+		// off while it's off (fresh installs and upgraded sites where Asset
+		// Optimization was off still store them as on).
+		$active = (bool) $this->is_active();
+
+		return array(
+			'assets'                           => Minify\Sources_Collector::get_collection(),
+			'enabled'                          => array(
+				'styles'  => isset( $options['do_assets']['styles'] ) ? $options['do_assets']['styles'] : false,
+				'scripts' => isset( $options['do_assets']['scripts'] ) ? $options['do_assets']['scripts'] : false,
+				'fonts'   => isset( $options['do_assets']['fonts'] ) ? $options['do_assets']['fonts'] : false,
+			),
+			'exclusions'                       => array(
+				'styles'  => $excluded_styles,
+				'scripts' => $excluded_scripts,
+			),
+			'compress'                         => $active && $options['compress'],
+			'combine'                          => $active && $options['combine'],
+			'notice_dismissed'                 => Notices::is_dismissed( 'asset-optimization-info' ),
+			'exclusion_modal_notice_dismissed' => Notices::is_dismissed( 'combine-compress-exclusion-modal-info' ),
+		);
+	}
+
+	/**
+	 * Handles excluded from automatic optimization.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param array $options  Asset optimization module options.
+	 *
+	 * @return array Excluded styles and excluded scripts.
+	 */
+	public function get_auto_exclusions( $options ) {
+		if ( ! $options['combine'] ) {
+			$excluded_styles  = $options['dont_minify']['styles'];
+			$excluded_scripts = $options['dont_minify']['scripts'];
+		} else {
+			$excluded_styles  = array_unique( array_merge( $options['dont_minify']['styles'], $options['dont_combine']['styles'] ) );
+			$excluded_scripts = array_unique( array_merge( $options['dont_minify']['scripts'], $options['dont_combine']['scripts'] ) );
+
+			$excluded_styles  = array_values( $excluded_styles );
+			$excluded_scripts = array_values( $excluded_scripts );
+		}
+
+		return array( (array) $excluded_styles, (array) $excluded_scripts );
 	}
 }

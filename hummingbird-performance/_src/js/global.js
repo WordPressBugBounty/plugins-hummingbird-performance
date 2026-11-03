@@ -1,9 +1,11 @@
-/* global wphbGlobal */
+/* global wphb, wphbGlobal */
 
 import HBDeactivationSurvey from './hb-deactivation-survey';
 
 ( function() {
 	'use strict';
+
+	const COPY_TOOLTIP_DURATION = 2000;
 
 	const WPHBGlobal = {
 		init() {
@@ -15,11 +17,14 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 			this.registerSwitchCriticalCSS();
 			this.registerDeactivationSurvey();
 			this.registerCopyText();
-			this.registerPublishSafeModeChanges();
 		},
 
 		/**
 		 * Register copy text button.
+		 *
+		 * The button is the dashboard notice's, and the label it swaps to is the only feedback
+		 * available: the notice has no tooltip styles, unlike the front-end bar's button of the
+		 * same id.
 		 *
 		 * @since 3.18.0
 		 */
@@ -32,62 +37,52 @@ import HBDeactivationSurvey from './hb-deactivation-survey';
 				return;
 			}
 
-			btn.addEventListener( 'click', () => {
-				navigator.clipboard.writeText( wphbGlobal.previewLink ).then( () => {
-					const originalText = btn.innerText;
-					const copiedText = wphbGlobal.copyText;
+			const originalLabel = btn.textContent;
+			let labelTimer;
 
-					btn.innerText = copiedText;
-					btn.disabled = true;
+			btn.addEventListener( 'click', ( event ) => {
+				event.preventDefault();
 
-					setTimeout( () => {
-						btn.innerText = originalText;
-						btn.disabled = false;
-					}, 2000 );
+				this.copyTextToClipboard( wphbGlobal.previewLink ).then( () => {
+					btn.textContent = wphbGlobal.copiedLabel;
+					window.clearTimeout( labelTimer );
+					labelTimer = window.setTimeout( () => {
+						btn.textContent = originalLabel;
+					}, COPY_TOOLTIP_DURATION );
 				} );
 			} );
 		},
 
 		/**
-		 * Register publish safe mode changes button.
+		 * Copy text to the clipboard, including non-secure frontend contexts.
 		 *
-		 * @since 3.18.0
+		 * @param {string} text Text to copy.
+		 *
+		 * @return {Promise<void>} Resolves after the text is copied.
 		 */
-		registerPublishSafeModeChanges() {
-			const btn = document.getElementById(
-				'wphb-publish-safe-mode-changes'
-			);
-
-			if ( btn ) {
-				btn.addEventListener( 'click', () => {
-					btn.disabled = true;
-					btn.textContent = wphbGlobal.publishing;
-					jQuery
-						.ajax( {
-							url: wphbGlobal.ajaxurl,
-							method: 'POST',
-							data: {
-								nonce: wphbGlobal.nonce,
-								action: 'wphb_publish_safe_mode',
-							},
-						} )
-						.done( function() {
-							// Redirect to a response page
-							window.location.href = wphbGlobal.hb_dashboard_url + '&wphb_safemode_published=1';
-						} );
-				} );
+		copyTextToClipboard( text ) {
+			if ( navigator.clipboard?.writeText ) {
+				return navigator.clipboard.writeText( text );
 			}
 
-			const dismissBtn = document.querySelector( '.safe-mode-dashboard-notice .wphb-dismiss' );
-			if ( dismissBtn ) {
-				dismissBtn.addEventListener( 'click', function( e ) {
-					e.preventDefault();
-					const parent = dismissBtn.closest( '.safe-mode-dashboard-notice' );
-					if ( parent ) {
-						parent.style.display = 'none';
-					}
-				} );
+			const textarea = document.createElement( 'textarea' );
+			textarea.value = text;
+			textarea.setAttribute( 'readonly', '' );
+			textarea.style.position = 'fixed';
+			textarea.style.top = '-9999px';
+			document.body.appendChild( textarea );
+			textarea.select();
+
+			let copied = false;
+			try {
+				copied = document.execCommand( 'copy' );
+			} finally {
+				textarea.remove();
 			}
+
+			return copied
+				? Promise.resolve()
+				: Promise.reject( new Error( 'Unable to copy text.' ) );
 		},
 
 		/**

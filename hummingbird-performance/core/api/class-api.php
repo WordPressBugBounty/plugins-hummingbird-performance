@@ -7,9 +7,11 @@
 
 namespace Hummingbird\Core\Api;
 
+use Hummingbird\Core\Api\Service\CDN;
 use Hummingbird\Core\Api\Service\Cloudflare;
 use Hummingbird\Core\Api\Service\Hosting;
 use Hummingbird\Core\Api\Service\Minify;
+use Hummingbird\Core\Api\Service\Package_Configs;
 use Hummingbird\Core\Api\Service\Performance;
 use Hummingbird\Core\Api\Service\Uptime;
 use Hummingbird\Core\Api\Service\Varnish;
@@ -89,15 +91,31 @@ class API {
 	public $critical_css;
 
 	/**
+	 * CDN API.
+	 *
+	 * @var CDN
+	 */
+	public $cdn;
+
+	/**
+	 * Package Configs API (Hub sync for Settings > Configs).
+	 *
+	 * @var Package_Configs
+	 */
+	public $package_configs;
+
+	/**
 	 * API constructor.
 	 */
 	public function __construct() {
-		$this->uptime       = new Uptime();
-		$this->performance  = new Performance();
-		$this->cloudflare   = new Cloudflare();
-		$this->minify       = new Minify();
-		$this->varnish      = new Varnish();
-		$this->critical_css = new CriticalCss();
+		$this->uptime          = new Uptime();
+		$this->performance     = new Performance();
+		$this->cloudflare      = new Cloudflare();
+		$this->minify          = new Minify();
+		$this->varnish         = new Varnish();
+		$this->critical_css    = new CriticalCss();
+		$this->cdn             = new CDN();
+		$this->package_configs = new Package_Configs();
 
 		// Init Hub endpoints.
 		$this->hub = new Hub();

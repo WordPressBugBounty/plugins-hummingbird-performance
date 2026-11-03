@@ -56,11 +56,10 @@ class Reports_Uptime extends Reports {
 		$options = Settings::get_setting( 'reports', self::$module );
 
 		return array(
-			'FULL_REPORT_URL' => network_admin_url( 'admin.php?page=wphb-uptime' ),
+			'FULL_REPORT_URL' => network_admin_url( 'admin.php?page=wphb-advanced&view=uptime' ),
 			'SITE_MANAGE_URL' => network_site_url( 'wp-admin/admin.php?page=wphb' ),
 			'SHOW_PING'       => isset( $options['show_ping'] ) ? $options['show_ping'] : true,
 		);
-
 	}
 
 	/**
@@ -69,56 +68,63 @@ class Reports_Uptime extends Reports {
 	 * @since 1.9.4
 	 */
 	public function process_report() {
-		// Clean all cron.
+		$lock_key = 'wphb_uptime_report_lock';
+		if ( get_transient( $lock_key ) ) {
+			return;
+		}
+		set_transient( $lock_key, true, 3 * MINUTE_IN_SECONDS );
+
+		// Clean pending duplicates only after this runner acquires the lock.
 		wp_clear_scheduled_hook( 'wphb_uptime_report' );
 
-		if ( ! Utils::has_access_to_hub() ) {
-			return;
-		}
+		try {
+			if ( ! Utils::has_access_to_hub() ) {
+				return;
+			}
 
-		$options = Settings::get_setting( 'reports', 'uptime' );
+			$options = Settings::get_setting( 'reports', 'uptime' );
 
-		// Don't do any reports if they are not set in the options.
-		if ( ! $options['enabled'] ) {
-			return;
-		}
+			// Don't do any reports if they are not set in the options.
+			if ( ! $options['enabled'] ) {
+				return;
+			}
 
-		switch ( $options['frequency'] ) {
-			case 1:
-				$period = 'day';
-				break;
-			case 7:
-			default:
-				$period = 'week';
-				break;
-			case 30:
-				$period = 'month';
-				break;
-		}
+			switch ( $options['frequency'] ) {
+				case 1:
+					$period = 'day';
+					break;
+				case 7:
+				default:
+					$period = 'week';
+					break;
+				case 30:
+					$period = 'month';
+					break;
+			}
 
-		// Refresh the report and get the data.
-		$last_report = Utils::get_module( 'uptime' )->get_last_report( $period, true );
+			// Refresh the report and get the data.
+			$last_report = Utils::get_module( 'uptime' )->get_last_report( $period, true );
 
-		// Check to see it the email has been sent already.
-		$last_sent_report = isset( $options['last_sent'] ) ? (int) $options['last_sent'] : 0;
-		$next_send_time   = (int) parent::get_scheduled_time( self::$module, false );
+			// Check to see it the email has been sent already.
+			$last_sent_report = isset( $options['last_sent'] ) ? (int) $options['last_sent'] : 0;
+			$next_send_time   = (int) parent::get_scheduled_time( self::$module, false );
 
-		// Schedule next test.
-		if ( isset( $last_report ) && ! is_wp_error( $last_report ) && ( $next_send_time - $last_sent_report ) > 3600 ) {
-			// Send the report.
-			$this->send_email_report( $last_report );
+			// Schedule next test.
+			if ( isset( $last_report ) && ! is_wp_error( $last_report ) && ( $next_send_time - $last_sent_report ) > 3600 ) {
+				// Send the report.
+				$this->send_email_report( $last_report );
 
-			// Store the last send time.
-			$options['last_sent'] = time();
+				// Store the last send time.
+				$options['last_sent'] = time();
 
-			Settings::update_setting( 'reports', $options, 'uptime' );
-		}
-
-		// Reschedule.
-		$next_scan_time = parent::get_scheduled_time( self::$module );
-		if ( $next_scan_time ) {
-			wp_schedule_single_event( $next_scan_time, 'wphb_uptime_report' );
+				Settings::update_setting( 'reports', $options, 'uptime' );
+			}
+		} finally {
+			// Reschedule.
+			$next_scan_time = parent::get_scheduled_time( self::$module );
+			if ( $next_scan_time ) {
+				wp_schedule_single_event( $next_scan_time, 'wphb_uptime_report' );
+			}
 		}
 	}
-
 }

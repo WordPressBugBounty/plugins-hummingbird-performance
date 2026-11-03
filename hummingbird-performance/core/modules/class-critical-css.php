@@ -16,6 +16,7 @@ use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\SafeMode;
+use Hummingbird\Admin\Ajax\Notices;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -136,11 +137,10 @@ class Critical_Css extends Module {
 			return false;
 		}
 
-		$options           = Settings::get_settings( 'minify' );
-		$critical_css      = $options['critical_css'];
-		$critical_css_mode = $options['critical_css_mode'];
+		$options      = Settings::get_settings( 'minify' );
+		$critical_css = $options['critical_css'];
 
-		if ( ! $options['enabled'] || ! $critical_css || ( 'critical_css' !== $critical_css_mode ) ) {
+		if ( ! $critical_css ) {
 			return false;
 		}
 
@@ -680,7 +680,6 @@ class Critical_Css extends Module {
 	 * @return string
 	 */
 	public function get_critical_css_path() {
-
 		if ( is_multisite() ) {
 			$blog = get_blog_details();
 
@@ -1309,10 +1308,9 @@ class Critical_Css extends Module {
 			$is_network_admin = preg_match( '#^' . network_admin_url() . '#i', $_SERVER['HTTP_REFERER'] );
 		}
 
-		// For multisite we need to set this to null.
+		// Purge only this site's folder, otherwise the main site deletes every subsite's files.
 		if ( is_multisite() && ! $is_network_admin ) {
-			$current_blog = get_site( get_current_blog_id() );
-			$directory    .= $current_blog->path;
+			$directory = substr( $this->get_critical_css_path(), strlen( $wphb_fs->basedir ) );
 		}
 
 		return $wphb_fs->purge( $directory );
@@ -1783,44 +1781,60 @@ class Critical_Css extends Module {
 	}
 
 	/**
-	 * Get html data for status tag.
+	 * Machine-readable generation status for the React Asset Optimization panel.
 	 *
-	 * @return bool|string
-	 * @since 3.6.0
+	 * @since 4.0.0
+	 *
+	 * @return string One of 'optimizing', 'optimised', 'error', 'unoptimized'.
 	 */
-	public function get_html_for_status_tag() {
-		if ( ! Utils::is_member() || ! $this->is_active() ) {
-			return '<span id="critical_progress_tag"></span>';
+	public function get_react_status() {
+		if ( ! $this->is_active() ) {
+			return 'unoptimized';
 		}
 
 		$critical_css_log = $this->get_log_option();
+		$status           = isset( $critical_css_log['status'] ) ? $critical_css_log['status'] : '';
 
-		$status = isset( $critical_css_log['status'] ) ? $critical_css_log['status'] : '';
-		if ( $this->is_active() && ( 'processing' === $status || 'pending' === $status ) ) {
-			$tag_display_value = esc_html__( 'Optimizing ', 'wphb' );
-			$sui_tag           = 'sui-tag sui-tag-blue sui-tooltip sui-tooltip-constrained';
-			$sui_icon          = 'sui-icon-loader sui-loading';
-			$tooltip_text      = esc_html__( 'Generating Critical CSS. This could take a few minutes depending on the number of site assets that need to be checked.', 'wphb' );
-		} elseif ( $this->is_active() && 'complete' === $status ) {
-			$is_result_complete = 'COMPLETE' === $critical_css_log['result'];
-			$tag_display_value  = $is_result_complete ? esc_html__( 'Optimized', 'wphb' ) : esc_html__( 'Error', 'wphb' );
-			$sui_tag            = $is_result_complete ? 'sui-tag sui-tag-green sui-tooltip sui-tooltip-constrained' : 'sui-tag sui-tag-yellow';
-			$sui_icon           = $is_result_complete ? 'sui-icon-info' : 'sui-icon-info sui-icon-error';
-			$tooltip_text       = $is_result_complete ? esc_html__( 'Last Generated: ', 'wphb' ) . $critical_css_log['last_updated'] : '';
-		} else {
-			$tag_display_value = esc_html__( 'Unoptimized', 'wphb' );
-			$sui_tag           = 'sui-tag sui-tag-grey sui-tooltip sui-tooltip-constrained';
-			$sui_icon          = 'sui-icon-info';
-			$tooltip_text      = esc_html__( 'Select settings and saves changes to generate Critical CSS', 'wphb' );
+		if ( in_array( $status, array( 'processing', 'pending' ), true ) ) {
+			return 'optimizing';
 		}
 
-		return sprintf(
-		// translators: %1$s = tooltip text, %2$s = sui tag, %3$s = info icon, %4$s = text for tag.
-			__( '<span id="critical_progress_tag" data-tooltip="%1$s" class="wphb_progress_tag %2$s"><span class="%3$s" aria-hidden="true"></span>%4$s</span>', 'wphb' ),
-			$tooltip_text,
-			$sui_tag,
-			$sui_icon,
-			$tag_display_value
+		if ( 'complete' === $status ) {
+			return 'COMPLETE' === $critical_css_log['result'] ? 'optimised' : 'error';
+		}
+
+		return 'unoptimized';
+	}
+
+	/**
+	 * Build the Critical CSS status payload for the React Asset Optimization panel.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function get_react_settings() {
+		$options = Utils::get_module( 'minify' )->get_options();
+		$status  = $this->get_react_status();
+
+		return array(
+			'critical_css'                      => $options['critical_css'],
+			'critical_css_type'                 => $options['critical_css_type'],
+			'critical_css_remove_type'          => $options['critical_css_remove_type'],
+			'above_fold_load_stylesheet_method' => $options['above_fold_load_stylesheet_method'],
+			'status'                            => $status,
+			'error_message'                     => 'error' === $status ? (string) ( $this->get_log_option()['error_message'] ?? '' ) : '',
+			'notice_dismissed'                  => Notices::is_dismissed( 'critical-css-info' ),
+			'exclusions'                        => array(
+				'files'      => $options['critical_css_files_exclusion'],
+				'post_urls'  => $options['critical_css_post_urls_exclusion'],
+				'plugins'    => $options['critical_css_plugins_themes_exclusion'],
+				// Combines `critical_page_types` + `critical_skipped_custom_post_types`
+				// into one flat list — see Exclusions::get_critical_css_excluded_post_types().
+				'post_types' => Utils::get_module( 'exclusions' )->get_critical_css_excluded_post_types(),
+				// Free-typed keyword strings, not picked from a browsable list.
+				'keywords'   => (array) $options['critical_css_keywords'],
+			),
 		);
 	}
 

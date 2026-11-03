@@ -1,0 +1,71 @@
+/* ****************************************************************************
+ * MAIN APP SCSS FILE
+ */
+$sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';
+
+@import "common/variables";
+
+// Share UI styles
+@import "~@wpmudev/shared-ui/scss/functions";
+@import "~@wpmudev/shared-ui/scss/colors";
+@import "~@wpmudev/shared-ui/scss/variables";
+@import "~@wpmudev/shared-ui/scss/mixins";
+@import "~@wpmudev/shared-ui/scss/accessibility";
+@import "~@wpmudev/shared-ui/scss/animations";
+@import "~@wpmudev/shared-ui/scss/typography";
+@import "~@wpmudev/shared-ui/scss/icons";
+@import "~@wpmudev/shared-ui/scss/buttons";
+@import "~@wpmudev/shared-ui/scss/boxes";
+@import "~@wpmudev/shared-ui/scss/box-settings";
+@import "~@wpmudev/shared-ui/scss/layout";
+@import "~@wpmudev/shared-ui/scss/forms";
+@import "~@wpmudev/shared-ui/scss/modals";
+@import "~@wpmudev/shared-ui/scss/utility";
+@import "~@wpmudev/shared-ui/scss/radio-checkbox";
+// Box Selectors
+@import "~@wpmudev/shared-ui/scss/_box-selectors";
+
+// Deactivation survey RTL layout fixes.
+.wphb-deactivation-survey-modal .wphb-deactivation-field-row {
+    margin-bottom: 5px;
+}
+[dir='rtl'] {
+	.sui-modal {
+		left: auto;
+		right: var( --wpmudev-wp-admin-menu-width, 160px );
+	}
+
+	.sui-modal .sui-modal-overlay {
+		left: 20px;
+		right: var( --wpmudev-wp-admin-menu-width, 160px );
+
+
+		@media (max-width: 782px) {
+			left: 0;
+		}
+	}
+
+	.wphb-deactivation-survey-modal {
+		.sui-box-header {
+			.sui-actions-right {
+				margin-left: 0;
+				margin-right: auto;
+			}
+		}
+
+		.sui-radio {
+            margin-right: 0px;
+			span:first-of-type {
+				margin-right: 0;
+                margin-left: 10px;
+			}
+		}
+
+		.sui-box-footer {
+			.sui-actions-right {
+				margin-left: 0;
+				margin-right: auto;
+			}
+		}
+	}
+}

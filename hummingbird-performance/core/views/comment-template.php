@@ -47,49 +47,7 @@ if ( 0 === $page_comments && 'newest' === $comments_page_order && 1 === $cpage )
 	<div id="wphb-comments-container"><!-- Comments will be loaded here --></div>
 	<?php
 	if ( 'click' === $method ) {
-		$height = $options['button']['dimensions']['height'] ? 'height: ' . $options['button']['dimensions']['height'] . 'px;' : '';
-		$width  = $options['button']['dimensions']['width'] ? 'width: ' . $options['button']['dimensions']['width'] . 'px;' : '';
-		$radius = $options['button']['dimensions']['radius'] ? 'border-radius: ' . $options['button']['dimensions']['radius'] . 'px;' : '';
-
-		$background   = $options['button']['color']['background'] ? 'background-color: ' . $options['button']['color']['background'] . ';' : '';
-		$border_color = $options['button']['color']['border'] ? 'border-color: ' . $options['button']['color']['border'] . ';' : '';
-		$hover        = $options['button']['color']['hover'] ? 'background-color: ' . $options['button']['color']['hover'] . ';' : '';
-
-		$left   = isset( $options['button']['alignment']['left'] ) ? 'margin-left: ' . $options['button']['alignment']['left'] . 'px;' : '';
-		$right  = isset( $options['button']['alignment']['right'] ) ? 'margin-right: ' . $options['button']['alignment']['right'] . 'px;' : '';
-		$top    = isset( $options['button']['alignment']['top'] ) ? 'margin-top: ' . $options['button']['alignment']['top'] . 'px;' : '';
-		$bottom = isset( $options['button']['alignment']['bottom'] ) ? 'margin-bottom: ' . $options['button']['alignment']['bottom'] . 'px;' : '';
 		?>
-		<style>
-			.wphb-load-comments-wrap {
-				text-align: <?php echo esc_attr( $options['button']['alignment']['align'] ); ?>;
-			}
-			button#wphb-load-comments {
-			<?php
-				echo esc_attr( $background );
-				echo esc_attr( $border_color );
-				echo esc_attr( $height );
-				echo esc_attr( $width );
-				echo esc_attr( $radius );
-				echo esc_attr( $left );
-				echo esc_attr( $right );
-				echo esc_attr( $bottom );
-				echo esc_attr( $top );
-			?>
-			}
-			button#wphb-load-comments:hover:enabled {
-			<?php
-				echo esc_attr( $hover );
-			?>
-			}
-			button#wphb-load-comments:hover:disabled {
-				cursor: initial;
-				text-decoration: none;
-			}
-			button#wphb-load-comments:disabled {
-				background: #cccccc;
-			}
-		</style>
 		<div id="wphb-load-comments-button-wrap" class='wphb-load-comments-wrap'>
 			<button type='button' id='wphb-load-comments' disabled="disabled"><?php esc_html_e( 'Load comments', 'wphb' ); ?></button>
 		</div>
@@ -97,6 +55,11 @@ if ( 0 === $page_comments && 'newest' === $comments_page_order && 1 === $cpage )
 	}
 	?>
 	<style>
+		#wphb-load-comments-button-wrap {
+			text-align: center;
+			margin-top: 10px;
+		}
+
 		#wphb-load-comments-spinner-wrap{
 			text-align: center;
 			margin: 10px auto;

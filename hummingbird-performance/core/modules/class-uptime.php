@@ -8,6 +8,7 @@
 namespace Hummingbird\Core\Modules;
 
 use Hummingbird\Core\Module;
+use Hummingbird\Core\Pro\Modules\Reports;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Hub_Connector;
@@ -158,30 +159,38 @@ class Uptime extends Module {
 	 * Enable locally.
 	 */
 	public function enable_locally() {
-		$options            = $this->get_options();
-		$options['enabled'] = true;
-		$this->update_options( $options );
-		// Save for 3 minutes.
-		set_site_transient( 'wphb-uptime-remotely-enabled', 'yes', 3 * MINUTE_IN_SECONDS );
+		$this->set_local_status( true );
 	}
 
 	/**
 	 * Disable locally.
 	 */
 	public function disable_locally() {
+		$this->set_local_status( false );
+	}
+
+	/**
+	 * Set the local Uptime status and synchronize its report cron.
+	 *
+	 * @param bool $enabled Whether Uptime should be enabled locally.
+	 */
+	private function set_local_status( $enabled ) {
 		$options            = $this->get_options();
-		$options['enabled'] = false;
+		$options['enabled'] = $enabled;
 
-		// Disable reports and notifications.
-		$options['notifications']['enabled'] = false;
-		$options['reports']['enabled']       = false;
-
-		// Clean all cron.
-		wp_clear_scheduled_hook( 'wphb_uptime_report' );
+		if ( $enabled && ! empty( $options['reports']['enabled'] ) && Utils::has_access_to_hub() ) {
+			$next_scan_time = Reports::get_scheduled_time( 'uptime' );
+			if ( $next_scan_time ) {
+				wp_schedule_single_event( $next_scan_time, 'wphb_uptime_report' );
+			}
+		} else {
+			// Pause reports while Uptime is disabled, preserving their saved state.
+			wp_clear_scheduled_hook( 'wphb_uptime_report' );
+		}
 
 		$this->update_options( $options );
 		// Save for 3 minutes.
-		set_site_transient( 'wphb-uptime-remotely-enabled', 'no', 3 * MINUTE_IN_SECONDS );
+		set_site_transient( 'wphb-uptime-remotely-enabled', $enabled ? 'yes' : 'no', 3 * MINUTE_IN_SECONDS );
 	}
 
 	/**

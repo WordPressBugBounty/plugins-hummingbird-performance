@@ -78,7 +78,7 @@ class SiteGround {
 		$url = isset( $path ) ? get_option( 'home' ) . $path : '';
 
 		if ( function_exists( 'sg_cachepress_purge_cache' ) ) {
-			sg_cachepress_purge_cache( $url );
+			\sg_cachepress_purge_cache( $url );
 		}
 
 		if ( class_exists( '\\SiteGround_Optimizer\\Supercacher\\Supercacher' ) ) {
@@ -118,15 +118,23 @@ class SiteGround {
 			$disable_switchers[] = 'defer';
 		}
 
-		add_action(
-			'wphb_asset_optimization_notice',
-			function() use ( $notice ) {
+		add_filter(
+			'wphb_asset_optimization_notices',
+			function ( $notices ) use ( $notice ) {
 				if ( ! $notice ) {
-					return;
+					return $notices;
 				}
 
-				$notice = __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset optimization features have been disabled for compatibility.', 'wphb' );
-				Notices::get_instance()->show_floating( $notice, 'info' );
+				if ( ! is_array( $notices ) ) {
+					$notices = array();
+				}
+
+				$notices['sg_optimizer_compatibility'] = array(
+					'title'       => __( 'SG Optimizer Compatibility', 'wphb' ),
+					'description' => __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset optimization features have been disabled for compatibility.', 'wphb' ),
+				);
+
+				return $notices;
 			}
 		);
 
@@ -155,12 +163,11 @@ class SiteGround {
 		if ( $sg_query_strings || $sg_disable_emojis ) {
 			add_action(
 				'wphb_advanced_tools_notice',
-				function() {
+				function () {
 					$notice = __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset settings have been disabled for compatibility.', 'wphb' );
 					Notices::get_instance()->show_inline( $notice, 'info' );
 				}
 			);
 		}
 	}
-
 }

@@ -24,6 +24,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Logger {
 
 	/**
+	 * Modules whose log file can be downloaded and cleared from the admin.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @var array
+	 */
+	const DOWNLOADABLE_MODULES = array( 'page_cache', 'minify' );
+
+	/**
 	 * Plugin instance
 	 *
 	 * @since 1.9.2
@@ -337,6 +346,44 @@ class Logger {
 	 */
 	public function get_file( $module ) {
 		return $this->files[ $module ];
+	}
+
+	/**
+	 * Absolute path of a module's log file.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $module  Module slug.
+	 *
+	 * @return string  Empty when the module was never registered.
+	 */
+	public function get_log_path( $module ) {
+		if ( 'page_cache' === $module ) {
+			return WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php';
+		}
+
+		return isset( $this->files[ $module ] ) ? $this->files[ $module ] : '';
+	}
+
+	/**
+	 * Which of the admin-facing logs currently exist on disk.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array  Module slugs, in DOWNLOADABLE_MODULES order.
+	 */
+	public function get_existing_logs() {
+		$existing = array();
+
+		foreach ( self::DOWNLOADABLE_MODULES as $module ) {
+			$path = $this->get_log_path( $module );
+
+			if ( $path && file_exists( $path ) ) {
+				$existing[] = $module;
+			}
+		}
+
+		return $existing;
 	}
 
 	/**

@@ -1,3 +1,10 @@
+/**
+ * This runs inside the block editor, so use its React (wp.element), not ours.
+ *
+ * @jsxRuntime classic
+ * @jsx wp.element.createElement
+ * @jsxFrag wp.element.Fragment
+ */
 import Fetcher from './utils/fetcher';
 import { getString } from './utils/helpers';
 

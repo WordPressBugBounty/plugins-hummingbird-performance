@@ -8,6 +8,7 @@
 
 namespace Hummingbird\Admin\Ajax\Caching;
 
+use Hummingbird\Admin\Ajax\Activity_Log;
 use Hummingbird\Core\Module_Server;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
@@ -20,6 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Browser.
  */
 class Browser {
+
+	/**
+	 * Activity log module slug.
+	 *
+	 * @var string
+	 */
+	const ACTIVITY_MODULE = 'caching';
 
 	/**
 	 * Browser constructor.
@@ -106,8 +114,10 @@ class Browser {
 			'expiry_media'      => isset( $data['expires']['Media'] ) ? sanitize_text_field( $data['expires']['Media'] ) : '1y/A31536000',
 			'expiry_images'     => isset( $data['expires']['Images'] ) ? sanitize_text_field( $data['expires']['Images'] ) : '1y/A31536000',
 		);
+		$submitted_expiry_times = $expiry_times;
 
-		$options = Utils::get_module( 'caching' )->get_options();
+		$options          = Utils::get_module( 'caching' )->get_options();
+		$previous_options = $options;
 
 		// Do not update our database values if we're adjusting for Cloudflare, because the format is different.
 		if ( isset( $data['server'] ) && 'cloudflare' === $data['server'] ) {
@@ -148,6 +158,12 @@ class Browser {
 				'nginx'  => Module_Server::get_code_snippet( 'caching', 'nginx' ),
 				'iis'    => Module_Server::get_code_snippet( 'caching', 'iis' ),
 			),
+			'expires'  => array(
+				'CSS'        => $options['expiry_css'],
+				'JavaScript' => $options['expiry_javascript'],
+				'Media'      => $options['expiry_media'],
+				'Images'     => $options['expiry_images'],
+			),
 		);
 
 		if ( isset( $data['server'] ) && in_array( $data['server'], array( 'apache', 'cloudflare' ), true ) ) {
@@ -166,7 +182,77 @@ class Browser {
 			$response['human']  = array_map( array( 'Hummingbird\\Core\\Utils', 'human_read_time_diff' ), $response['status'] );
 		}
 
+		$file_type_labels = array(
+			'expiry_javascript' => __( 'JavaScript', 'wphb' ),
+			'expiry_css'        => __( 'CSS', 'wphb' ),
+			'expiry_media'      => __( 'Media', 'wphb' ),
+			'expiry_images'     => __( 'Images', 'wphb' ),
+		);
+
+		foreach ( $file_type_labels as $key => $label ) {
+			$previous_value = isset( $previous_options[ $key ] ) ? (string) $previous_options[ $key ] : '';
+			$current_value  = isset( $submitted_expiry_times[ $key ] ) ? (string) $submitted_expiry_times[ $key ] : '';
+
+			if ( $previous_value === $current_value ) {
+				continue;
+			}
+
+			Activity_Log::record(
+				self::ACTIVITY_MODULE,
+				sprintf(
+					/* translators: 1: asset type (JavaScript/CSS/Media/Images), 2: duration string. */
+					__( '%1$s browser caching expiry set to %2$s.', 'wphb' ),
+					$label,
+					self::format_expiry_for_log( $current_value )
+				)
+			);
+		}
+
+		if ( isset( $data['server'] ) ) {
+			$server_labels = array(
+				'apache'     => __( 'Apache', 'wphb' ),
+				'nginx'      => __( 'Nginx', 'wphb' ),
+				'litespeed'  => __( 'LiteSpeed', 'wphb' ),
+				'iis'        => __( 'IIS', 'wphb' ),
+				'cloudflare' => __( 'Cloudflare', 'wphb' ),
+			);
+
+			$server = sanitize_key( $data['server'] );
+			Activity_Log::record(
+				self::ACTIVITY_MODULE,
+				sprintf(
+					/* translators: %s: server type. */
+					__( 'Browser caching configured for %s server type.', 'wphb' ),
+					$server_labels[ $server ] ?? ucfirst( $server )
+				)
+			);
+		}
+
 		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Convert an expiry token (for example `1y/A31536000`) into readable text.
+	 *
+	 * @param string $expiry_value Expiry token.
+	 *
+	 * @return string
+	 */
+	private static function format_expiry_for_log( $expiry_value ) {
+		if ( preg_match( '/^(\\d+)([hdMy])\\/A\\d+$/', $expiry_value, $matches ) ) {
+			$value = (int) $matches[1];
+			$unit  = $matches[2];
+			$labels = array(
+				'h' => _n( 'hour', 'hours', $value, 'wphb' ),
+				'd' => _n( 'day', 'days', $value, 'wphb' ),
+				'M' => _n( 'month', 'months', $value, 'wphb' ),
+				'y' => _n( 'year', 'years', $value, 'wphb' ),
+			);
+
+			return sprintf( '%1$d %2$s', $value, $labels[ $unit ] ?? '' );
+		}
+
+		return $expiry_value;
 	}
 
 	/**
@@ -176,6 +262,12 @@ class Browser {
 	 */
 	public function clear_cache() {
 		check_ajax_referer( 'wphb-fetch' );
+
+		// Check permission.
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
 		Utils::get_module( 'cloudflare' )->clear_cache();
 		wp_send_json_success();
 	}

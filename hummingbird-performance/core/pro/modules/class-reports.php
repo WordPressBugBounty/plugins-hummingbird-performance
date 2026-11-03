@@ -35,16 +35,35 @@ abstract class Reports extends Module {
 	protected static $module;
 
 	/**
+	 * Tracks initialized cron hooks by module to avoid duplicate callbacks.
+	 *
+	 * @var array<string,bool>
+	 */
+	private static $cron_hooks_initialized = array();
+
+	/**
 	 * Initialize the module
 	 *
 	 * @since 1.9.4
 	 */
 	public function init() {
 		add_action( 'wphb_activate', array( $this, 'maybe_enable_cron_jobs' ) );
-		add_action( 'wphb_admin_do_meta_boxes_wphb-notifications', array( $this, 'maybe_enable_cron_jobs' ) );
+
+		// Self-healing safety net: re-check/reschedule whenever the Alerts &
+		// Reports settings (Advanced Tools page) load, in case the cron got
+		// lost outside of the explicit enable/disable save flow
+		// Used to be wired to the legacy 'wphb_admin_do_meta_boxes_wphb-notifications'
+		// meta box hook; that hook no longer exists now that the page is
+		// fully React-rendered, so hook into the page's load action instead.
+		add_action( 'wphb_load_admin_page_wphb-advanced', array( $this, 'maybe_enable_cron_jobs' ) );
+
+		if ( isset( self::$cron_hooks_initialized[ $this::$module ] ) ) {
+			return;
+		}
 
 		// Process report cron task.
 		add_action( 'wphb_' . $this::$module . '_report', array( $this, 'process_report' ) );
+		self::$cron_hooks_initialized[ $this::$module ] = true;
 	}
 
 	/**
@@ -133,10 +152,15 @@ abstract class Reports extends Module {
 			wp_clear_scheduled_hook( "wphb_{$module}_report" );
 		}
 
-		$settings = Settings::get_setting( 'reports', $module );
-		$time_str = Utils::pro()->module( 'notifications' )->get_reports_time_string( $settings );
+		$settings         = Settings::get_setting( 'reports', $module );
+		$pro_notification = Utils::pro()->module( 'notifications' );
+		if ( false !== $pro_notification && is_object( $pro_notification ) ) {
+			$time_str = $pro_notification->get_reports_time_string( $settings );
 
-		return self::local_to_utc( $time_str );
+			return self::local_to_utc( $time_str );
+		}
+
+		return false;
 	}
 
 	/**
@@ -200,6 +224,104 @@ abstract class Reports extends Module {
 	}
 
 	/**
+	 * Refresh recipient Hub confirmation status before sending a report.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array $recipients  Recipients currently stored for this report module.
+	 *
+	 * @return array Recipients with refreshed is_pending/is_subscribed/is_can_resend_confirmation flags.
+	 */
+	private function refresh_recipient_confirmation_status( array $recipients ) {
+		if ( is_multisite() && get_current_blog_id() !== get_main_site_id() ) {
+			return $recipients;
+		}
+
+		if ( ! Utils::has_access_to_hub() ) {
+			return $recipients;
+		}
+
+		$has_pending = false;
+		foreach ( $recipients as $recipient ) {
+			if ( ! empty( $recipient['is_pending'] ) ) {
+				$has_pending = true;
+				break;
+			}
+		}
+
+		if ( ! $has_pending ) {
+			return $recipients;
+		}
+
+		// Only ever ask the Hub about recipients that still need a confirmation.
+		$needs_check = static function ( $recipient ) {
+			return ! empty( $recipient['is_pending'] ) || empty( $recipient['is_subscribed'] );
+		};
+
+		$notifications     = Settings::get_setting( 'notifications', 'uptime' );
+		$master_recipients = ( is_array( $notifications ) && ! empty( $notifications['recipients'] ) && is_array( $notifications['recipients'] ) )
+			? array_filter( $notifications['recipients'], $needs_check )
+			: array();
+
+		$merged       = array_values( $master_recipients );
+		$known_emails = wp_list_pluck( $merged, 'email' );
+		foreach ( $recipients as $recipient ) {
+			if ( empty( $recipient['email'] ) || in_array( $recipient['email'], $known_emails, true ) || ! $needs_check( $recipient ) ) {
+				continue;
+			}
+			$merged[]       = $recipient;
+			$known_emails[] = $recipient['email'];
+		}
+
+		if ( empty( $merged ) ) {
+			return $recipients;
+		}
+
+		try {
+			$response = Utils::get_api()->uptime->sync_hub(
+				array(
+					'notification' => array(
+						'recipients' => $merged,
+					),
+				)
+			);
+		} catch ( Exception $e ) {
+			return $recipients;
+		}
+
+		if ( is_wp_error( $response ) || empty( $response->notification->recipients ) ) {
+			return $recipients;
+		}
+
+		$hub_recipients = json_decode( wp_json_encode( $response->notification->recipients ), true );
+		$hub_by_email   = array();
+		foreach ( $hub_recipients as $hub_recipient ) {
+			if ( ! empty( $hub_recipient['email'] ) ) {
+				$hub_by_email[ strtolower( $hub_recipient['email'] ) ] = $hub_recipient;
+			}
+		}
+
+		foreach ( $recipients as $index => $recipient ) {
+			if ( empty( $recipient['email'] ) ) {
+				continue;
+			}
+
+			$hub_match = isset( $hub_by_email[ strtolower( $recipient['email'] ) ] ) ? $hub_by_email[ strtolower( $recipient['email'] ) ] : null;
+			if ( ! $hub_match ) {
+				continue;
+			}
+
+			foreach ( array( 'is_pending', 'is_subscribed', 'is_can_resend_confirmation' ) as $flag ) {
+				if ( isset( $hub_match[ $flag ] ) ) {
+					$recipients[ $index ][ $flag ] = (bool) $hub_match[ $flag ];
+				}
+			}
+		}
+
+		return $recipients;
+	}
+
+	/**
 	 * Send out an email report.
 	 *
 	 * @since 1.4.5
@@ -212,12 +334,22 @@ abstract class Reports extends Module {
 		}
 
 		$options = Settings::get_setting( 'reports', $this::$module );
-
 		if ( empty( $options['recipients'] ) ) {
 			return;
 		}
 
+		$options['recipients'] = $this->refresh_recipient_confirmation_status( $options['recipients'] );
+		Settings::update_setting( 'reports', $options, $this::$module );
+
 		foreach ( $options['recipients'] as $recipient ) {
+			if ( isset( $recipient['is_pending'] ) && $recipient['is_pending'] ) {
+				continue;
+			}
+
+			if ( isset( $recipient['is_subscribed'] ) && ! $recipient['is_subscribed'] ) {
+				continue;
+			}
+
 			$params = array(
 				'REPORT_TYPE' => $this::$module,
 				'USER_NAME'   => $recipient['name'],
@@ -280,5 +412,4 @@ abstract class Reports extends Module {
 			}
 		}
 	}
-
 }

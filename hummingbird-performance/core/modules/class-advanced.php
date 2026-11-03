@@ -13,7 +13,6 @@ namespace Hummingbird\Core\Modules;
 
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Settings;
-use Hummingbird\Core\Utils;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use stdClass;
 
@@ -272,10 +271,6 @@ class Advanced extends Module {
 		$urls = Settings::get_setting( 'preconnect', 'advanced' );
 		if ( ! is_array( $urls ) ) {
 			$url = array();
-		}
-
-		if ( Utils::get_module( 'minify' )->get_cdn_status() && ! in_array( '//hb.wpmucdn.com', $urls, true ) ) {
-			$urls[] = '//hb.wpmucdn.com';
 		}
 
 		if ( $this->font_awesome_domain && ! in_array( '//' . $this->font_awesome_domain, $urls, true ) ) {
@@ -924,7 +919,7 @@ class Advanced extends Module {
 
 		wp_enqueue_script(
 			'wphb-lazy-load',
-			WPHB_DIR_URL . 'admin/assets/js/wphb-lazy-load.min.js',
+			WPHB_DIR_URL . 'admin/assets/ui/js/wphb-lazy-load.min.js',
 			array(),
 			WPHB_VERSION,
 			true
@@ -1046,15 +1041,18 @@ class Advanced extends Module {
 			$lazy_load = false;
 		}
 
+		// Read once; 0 is the "no threshold" case, and the null coalesce covers a missing key.
+		$threshold = (int) ( $options['lazy_load']['threshold'] ?? 0 );
+
 		$comment_count = get_comments_number();
 
 		if ( ! $comment_count ) {
 			// If there are no comments.
 			$lazy_load = false;
-		} elseif ( (int) $options['lazy_load']['threshold'] > $comment_count ) {
+		} elseif ( $threshold > $comment_count ) {
 			// if threshold is lower than total comment count.
 			$lazy_load = false;
-		} elseif ( ! empty( $wp_query->comment_count ) && (int) $options['lazy_load']['threshold'] > $wp_query->comment_count ) {
+		} elseif ( ! empty( $wp_query->comment_count ) && $threshold > $wp_query->comment_count ) {
 			// If there is a comment pagination, and the comment_count for the page < threshold.
 			$lazy_load = false;
 		}

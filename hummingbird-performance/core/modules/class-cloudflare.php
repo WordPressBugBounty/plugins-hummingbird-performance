@@ -7,6 +7,7 @@
 
 namespace Hummingbird\Core\Modules;
 
+use Hummingbird\Admin\Ajax\Activity_Log;
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Traits\Module as ModuleContract;
@@ -279,8 +280,8 @@ class Cloudflare extends Module {
 		}
 
 		$this->register_caching_page_rule( $result->result->id, $filetype );
-		return $result->result->id;
 
+		return $result->result->id;
 	}
 
 	/**
@@ -648,6 +649,11 @@ class Cloudflare extends Module {
 		$options['apo']       = '';
 
 		$this->update_options( $options );
+
+		Activity_Log::record(
+			'cloudflare',
+			__( 'Cloudflare disconnected.', 'wphb' )
+		);
 	}
 
 	/**
@@ -755,6 +761,8 @@ class Cloudflare extends Module {
 	 * @since 3.0.0
 	 *
 	 * @param bool $status  New service status.
+	 *
+	 * @return bool|WP_Error  True on success, WP_Error if the Cloudflare API call failed.
 	 */
 	public function toggle_apo( $status ) {
 		$options = $this->get_options();
@@ -786,13 +794,15 @@ class Cloudflare extends Module {
 		$apo = Utils::get_api()->cloudflare->set_apo_settings( $apo_settings );
 
 		if ( is_wp_error( $apo ) ) {
-			return;
+			return $apo;
 		}
 
 		if ( isset( $apo->result->value ) ) {
 			$options['apo'] = (array) $apo->result->value;
 			$this->update_options( $options );
 		}
+
+		return true;
 	}
 
 	/**
@@ -801,6 +811,8 @@ class Cloudflare extends Module {
 	 * @since 3.0.0
 	 *
 	 * @param bool $status  New value.
+	 *
+	 * @return bool|WP_Error  True on success, WP_Error if the Cloudflare API call failed.
 	 */
 	public function toggle_cache_by_device( $status ) {
 		$options = $this->get_options();
@@ -816,13 +828,15 @@ class Cloudflare extends Module {
 		$apo = Utils::get_api()->cloudflare->set_apo_settings( $apo_settings );
 
 		if ( is_wp_error( $apo ) ) {
-			return;
+			return $apo;
 		}
 
 		if ( isset( $apo->result->value ) ) {
 			$options['apo'] = (array) $apo->result->value;
 			$this->update_options( $options );
 		}
+
+		return true;
 	}
 
 	/**
@@ -1038,4 +1052,30 @@ class Cloudflare extends Module {
 		return $urls;
 	}
 
+	/**
+	 * Get Cloudflare UI data.
+	 *
+	 * @since 4.0.0
+	 * @return array Cloudflare UI data.
+	 */
+	public function get_cf_ui_data(): array {
+		$options     = $this->get_options();
+		$expiry      = $this->get_caching_expiration();
+		$frequencies = self::get_frequencies();
+
+		$cf_data = array(
+			'accountId'          => $options['account_id'],
+			'connected'          => $this->is_connected(),
+			'dnsSet'             => $this->has_cloudflare(),
+			'expiry'             => $expiry,
+			'human'              => $frequencies[ $expiry ],
+			'zone'               => $options['zone'],
+			'zoneName'           => $options['zone_name'],
+			'apoEnabled'         => $this->is_apo_enabled(),
+			'apoPurchased'       => $options['apo_paid'],
+			'apoSettings'        => $options['apo'],
+		);
+
+		return $cf_data;
+	}
 }

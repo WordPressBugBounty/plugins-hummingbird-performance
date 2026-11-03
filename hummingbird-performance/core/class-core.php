@@ -76,9 +76,6 @@ class Core {
 
 		// Init logger.
 		$this->logger = Logger::get_instance();
-
-		// Load the cross sell module.
-		add_action( 'init', array( $this, 'load_cross_sell_module' ), 9 );
 	}
 
 	/**
@@ -118,7 +115,7 @@ class Core {
 		 */
 		$modules = apply_filters(
 			'wp_hummingbird_modules',
-			array( 'minify', 'gzip', 'caching', 'performance', 'uptime', 'cloudflare', 'gravatar', 'page_cache', 'advanced', 'rss', 'redis', 'delayjs', 'critical_css', 'mixpanel_analytics', 'exclusions', 'background_processing' )
+			array( 'minify', 'gzip', 'caching', 'performance', 'uptime', 'cloudflare', 'gravatar', 'page_cache', 'advanced', 'rss', 'delayjs', 'critical_css', 'mixpanel_analytics', 'exclusions', 'background_processing', 'cdn' )
 		);
 
 		array_walk( $modules, array( $this, 'load_module' ) );
@@ -271,7 +268,7 @@ class Core {
 	public function enqueue_global() {
 		wp_enqueue_script(
 			'wphb-global',
-			WPHB_DIR_URL . 'admin/assets/js/wphb-global.min.js',
+			WPHB_DIR_URL . 'admin/assets/ui/js/wphb-global.min.js',
 			array( 'underscore', 'jquery' ),
 			WPHB_VERSION,
 			true
@@ -287,8 +284,8 @@ class Core {
 				'nonce'            => wp_create_nonce( 'wphb-fetch' ),
 				'minify_url'       => admin_url( 'admin.php?page=wphb-minification' ),
 				'is_hb_page'       => $is_hb_page,
-				'copyText'         => esc_html__( 'Link copied', 'wphb' ),
 				'previewLink'      => SafeMode::instance()->get_safe_mode_preview_url(),
+				'copiedLabel'      => esc_html__( 'Link copied', 'wphb' ),
 				'hb_dashboard_url' => admin_url( 'admin.php?page=wphb' ),
 				'publishing'       => esc_html__( 'Publishing...', 'wphb' ),
 			)
@@ -368,40 +365,5 @@ class Core {
 		}
 
 		return $is_disabled;
-	}
-
-	/**
-	 * Load cross sell module.
-	 *
-	 * @return bool
-	 */
-	public function load_cross_sell_module() {
-		if ( Utils::is_member() ) {
-			return;
-		}
-
-		$cross_sell_plugin_file = WPHB_DIR_PATH . 'core/externals/plugins-cross-sell-page/plugin-cross-sell.php';
-		if ( ! file_exists( $cross_sell_plugin_file ) ) {
-			return;
-		}
-
-		static $cross_sell_handler = null;
-		if ( ! is_null( $cross_sell_handler ) ) {
-			return;
-		}
-
-		if ( ! class_exists( '\WPMUDEV\Modules\Plugin_Cross_Sell' ) ) {
-			require_once $cross_sell_plugin_file;
-		}
-
-		$submenu_params = array(
-			'slug'            => 'hummingbird-performance',
-			'parent_slug'     => 'wphb',
-			'menu_slug'       => 'wphb-cross-sell',
-			'position'        => 8,
-			'translation_dir' => WPHB_DIR_PATH . 'languages',
-		);
-
-		$cross_sell_handler = new \WPMUDEV\Modules\Plugin_Cross_Sell( $submenu_params );
 	}
 }

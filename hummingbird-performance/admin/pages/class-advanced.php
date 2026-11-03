@@ -10,10 +10,16 @@ namespace Hummingbird\Admin\Pages;
 
 use Hummingbird\Admin\Page;
 use Hummingbird\Core\Modules\Advanced as Advanced_Module;
+use Hummingbird\Core\Settings as Settings_Module;
 use Hummingbird\Core\Modules\Caching\Preload;
 use Hummingbird\Core\Modules\Minify\Minify_Group;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Hub_Connector;
+use Hummingbird\Admin\Ajax\Notices;
+use Hummingbird\Admin\Ajax\Alerts_Reports;
+use Hummingbird\Admin\Ajax\Uptime as Ajax_Uptime;
+use Hummingbird\Admin\Ajax\Advanced\Tools as Ajax_Tools;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -29,242 +35,76 @@ class Advanced extends Page {
 	use \Hummingbird\Core\Traits\Smush;
 
 	/**
-	 * Function triggered when the page is loaded before render any content.
+	 * Extra data localized for the Settings page's React shell.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
 	 */
-	public function on_load() {
-		// Init the tabs.
-		$this->tabs = array(
-			'main'   => __( 'General', 'wphb' ),
-			'db'     => __( 'Database Cleanup', 'wphb' ),
-			'lazy'   => __( 'Lazy Load', 'wphb' ),
-			'system' => __( 'System Information', 'wphb' ),
-			'health' => __( 'Plugin Health', 'wphb' ),
-		);
-	}
+	protected function get_ui_page_data() {
+		$advanced   = Settings_Module::get_settings( 'advanced' );
+		$lazy       = isset( $advanced['lazy_load'] ) && is_array( $advanced['lazy_load'] ) ? $advanced['lazy_load'] : array();
+		$woo_active = function_exists( 'WC' ) || class_exists( 'WooCommerce' );
 
-	/**
-	 * Register meta boxes.
-	 */
-	public function register_meta_boxes() {
-		/**
-		 * General meta box.
-		 */
-		$this->add_meta_box( 'advanced/general', __( 'General', 'wphb' ), array( $this, 'advanced_general_metabox' ) );
+		$db_schedule = Settings_Module::get_setting( 'reports', 'database' );
+		if ( ! empty( $db_schedule['recipients'] ) && is_array( $db_schedule['recipients'] ) ) {
+			foreach ( $db_schedule['recipients'] as $index => $db_recipient ) {
+				if ( empty( $db_recipient['email'] ) ) {
+					continue;
+				}
 
-		/**
-		 * Database cleanup meta boxes.
-		 */
-		$this->add_meta_box(
-			'advanced/db',
-			__( 'Database Cleanup', 'wphb' ),
-			array( $this, 'advanced_db_metabox' ),
-			null,
-			null,
-			'db',
-			array(
-				'box_footer_class' => Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
-			)
-		);
-
-		/**
-		 * Lazy load meta boxes.
-		 *
-		 * @since 2.5.0
-		 */
-		$this->add_meta_box(
-			'advanced/lazy',
-			__( 'Lazy Load', 'wphb' ),
-			array( $this, 'advanced_lazy_metabox' ),
-			null,
-			function() {
-				$this->view( 'advanced/general-meta-box-footer' );
-			},
-			'lazy'
-		);
-
-		/**
-		 * System information meta box.
-		 */
-		$this->add_meta_box(
-			'advanced/system-info',
-			__( 'System Information', 'wphb' ),
-			array( $this, 'system_info_metabox' ),
-			null,
-			null,
-			'system'
-		);
-
-		/**
-		 * Plugin health meta box.
-		 *
-		 * @since 2.7.0
-		 */
-		$this->add_meta_box(
-			'advanced/site-health',
-			__( 'Plugin Health', 'wphb' ),
-			array( $this, 'site_health_metabox' ),
-			null,
-			null,
-			'health'
-		);
-	}
-
-	/**
-	 * *************************
-	 * Advanced General page meta boxes.
-	 ***************************/
-
-	/**
-	 * Advanced general meta box.
-	 */
-	public function advanced_general_metabox() {
-		$options = Settings::get_settings( 'advanced' );
-
-		$prefetch = '';
-		foreach ( $options['prefetch'] as $url ) {
-			$prefetch .= $url . "\r\n";
-		}
-
-		$preconnect = '';
-		foreach ( $options['preconnect'] as $url ) {
-			$preconnect .= $url . "\r\n";
-		}
-
-		$query_string = $options['query_string'];
-		$remove_emoji = $options['emoji'];
-
-		if ( ( $options['query_strings_global'] || $options['emoji_global'] ) && is_multisite() && ! is_network_admin() ) {
-			$network_options = get_blog_option( get_main_site_id(), 'wphb_settings' );
-
-			// See if we need to fetch the network value for query strings option.
-			if ( $options['query_strings_global'] && isset( $network_options['advanced'] ) && isset( $network_options['advanced']['query_string'] ) ) {
-				$query_string = $network_options['advanced']['query_string'];
-				add_filter( 'wphb_query_strings_disabled', '__return_true' );
-			}
-
-			// See if we need to fetch the network value for emoji option.
-			if ( $options['emoji_global'] && isset( $network_options['advanced'] ) && isset( $network_options['advanced']['emoji'] ) ) {
-				$remove_emoji = $network_options['advanced']['emoji'];
-				add_filter( 'wphb_emojis_disabled', '__return_true' );
+				$db_schedule['recipients'][ $index ]['avatar'] = get_avatar_url( $db_recipient['email'] );
 			}
 		}
 
-		$this->view(
-			'advanced/general-meta-box',
-			array(
-				'woo_active'           => class_exists( 'woocommerce' ),
-				'woo_link'             => self_admin_url( 'admin.php?page=wc-settings&tab=products' ),
-				'query_stings'         => $query_string,
-				'query_strings_global' => $options['query_strings_global'],
-				'cart_fragments'       => $options['cart_fragments'],
-				'emoji'                => $remove_emoji,
-				'post_revisions'       => $options['post_revisions'],
-				'viewport_meta'        => $options['viewport_meta'],
-				'emoji_global'         => $options['emoji_global'],
-				'prefetch'             => trim( $prefetch ),
-				'preconnect'           => trim( $preconnect ),
-			)
-		);
-	}
-
-	/**
-	 * *************************
-	 * Advanced Database cleanup page meta boxes.
-	 ***************************/
-
-	/**
-	 * Database cleanup meta box.
-	 */
-	public function advanced_db_metabox() {
-		$fields = Advanced_Module::get_db_fields();
-		$data   = Advanced_Module::get_db_count();
-
-		foreach ( $fields as $type => $field ) {
-			$fields[ $type ]['value'] = $data->$type;
-		}
-
-		$this->view( 'advanced/db-meta-box', compact( 'fields' ) );
-	}
-
-	/**
-	 * *************************
-	 * System Information page meta boxes.
-	 ***************************/
-
-	/**
-	 * System Information meta box.
-	 */
-	public function system_info_metabox() {
-		$this->view(
-			'advanced/system-info-meta-box',
-			array(
-				'system_info' => array(
-					'php'    => Advanced_Module::get_php_info(),
-					'db'     => Advanced_Module::get_db_info(),
-					'wp'     => Advanced_Module::get_wp_info(),
-					'server' => Advanced_Module::get_server_info(),
+		return array(
+			'settingsTools' => array(
+				'viewportMeta'       => ! empty( $advanced['viewport_meta'] ),
+				'queryStrings'       => ! empty( $advanced['query_string'] ),
+				'queryStringsLocked' => apply_filters( 'wphb_query_strings_disabled', false ),
+				'removeEmoji'        => ! empty( $advanced['emoji'] ),
+				'emojiLocked'        => apply_filters( 'wphb_emojis_disabled', false ),
+				'postRevisions'      => isset( $advanced['post_revisions'] ) ? (string) $advanced['post_revisions'] : '',
+				'cartFragments'      => isset( $advanced['cart_fragments'] ) ? $advanced['cart_fragments'] : false,
+				'wooActive'          => $woo_active,
+				'wooLink'            => self_admin_url( 'admin.php?page=wc-settings&tab=products' ),
+				'prefetch'           => isset( $advanced['prefetch'] ) && is_array( $advanced['prefetch'] ) ? array_values( $advanced['prefetch'] ) : array(),
+				'preconnect'         => isset( $advanced['preconnect'] ) && is_array( $advanced['preconnect'] ) ? array_values( $advanced['preconnect'] ) : array(),
+				'lazyLoad'           => array(
+					'enabled'   => ! empty( $lazy['enabled'] ),
+					'method'    => isset( $lazy['method'] ) ? $lazy['method'] : 'click',
+					'button'    => isset( $lazy['button'] ) && is_array( $lazy['button'] ) ? $lazy['button'] : array(),
+					'preload'   => ! empty( $lazy['preload'] ),
+					'threshold' => isset( $lazy['threshold'] ) ? (int) $lazy['threshold'] : 0,
 				),
-			)
+				'commentLimit'       => (int) get_option( 'comments_per_page' ),
+				'gravatarUrl'        => admin_url( 'admin.php?page=wphb-caching&view=others' ),
+				'rules'              => Ajax_Tools::get_rules(),
+			),
+			'databaseCleanup'        => array(
+				'counts'          => Advanced_Module::get_db_count(),
+				'schedule'        => $db_schedule,
+				'isHubConnected'  => Utils::has_access_to_hub(),
+				'hubConnectUrl'   => Hub_Connector::get_connect_site_url( 'wphb-settings', 'hummingbird_db_cleanup_connect' ),
+				'noticeDismissed' => Notices::is_dismissed( 'database-cleanup-info' ),
+			),
+			'alertsReports'   => Alerts_Reports::get_page_data(),
+			'uptime'          => Ajax_Uptime::get_page_data( $this->get_uptime_data_range() ),
 		);
 	}
 
 	/**
-	 * *************************
-	 * Lazy load page meta boxes.
+	 * Sanitized reporting range for the Uptime tab.
 	 *
-	 * @since 2.5.0
-	 ***************************/
-
-	/**
-	 * Lazy load meta box.
+	 * @since 4.0.0
 	 *
-	 * @since 2.5.0
+	 * @return string
 	 */
-	public function advanced_lazy_metabox() {
-		$options = Settings::get_settings( 'advanced' );
+	private function get_uptime_data_range() {
+		$range = filter_input( INPUT_GET, 'data-range', FILTER_UNSAFE_RAW );
+		$range = sanitize_key( $range );
 
-		$this->view(
-			'advanced/lazy-load-meta-box',
-			array(
-				'is_enabled'                      => $options['lazy_load']['enabled'],
-				'method'                          => $options['lazy_load']['method'],
-				'button'                          => $options['lazy_load']['button'],
-				'preload'                         => isset( $options['lazy_load']['preload'] ) ? $options['lazy_load']['preload'] : false,
-				'threshold'                       => $options['lazy_load']['threshold'],
-				'smush_activate_url'              => $this->smush_activation_url(),
-				'activate_smush_lazy_load_url'    => self_admin_url( 'admin.php?page=smush&view=lazy_load' ),
-				'is_smush_lazy_load_configurable' => $this->is_lazy_load_configurable(),
-				'is_smush_active'                 => $this->is_smush_enabled(),
-				'is_smush_installed'              => $this->is_smush_installed(),
-				'is_smush_pro'                    => $this->is_smush_pro,
-				'smush_lazy_load'                 => $this->is_lazy_load_enabled(),
-			)
-		);
-	}
-
-	/**
-	 * *************************
-	 * Plugin health page meta boxes.
-	 *
-	 * @since 2.7.0
-	 ***************************/
-
-	/**
-	 * Plugin health meta box.
-	 *
-	 * @since 2.7.0
-	 */
-	public function site_health_metabox() {
-		$preloader = new Preload();
-		$this->view(
-			'advanced/site-health-meta-box',
-			array(
-				'minify_groups_ids' => Minify_Group::get_minify_groups_ids(),
-				'orphaned_metas'    => Utils::get_module( 'advanced' )->get_orphaned_ao_complex(),
-				'preloading'        => Settings::get_setting( 'preload', 'page_cache' ) || $preloader->is_process_running(),
-				'queue_size'        => $preloader->get_queue_size(),
-			)
-		);
+		return in_array( $range, array( 'day', 'week', 'month' ), true ) ? $range : 'day';
 	}
 
 }

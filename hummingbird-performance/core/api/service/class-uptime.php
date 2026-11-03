@@ -133,11 +133,15 @@ class Uptime extends Service {
 			)
 		);
 
-		if ( true !== $results ) {
-			return new WP_Error( 500, __( 'Unknown Error', 'wphb' ) );
+		if ( is_wp_error( $results ) ) {
+			return $results;
 		}
 
-		return $results;
+		if ( isset( $results->code ) && isset( $results->message ) ) {
+			return new WP_Error( 500, $results->message );
+		}
+
+		return true;
 	}
 
 	/**

@@ -95,10 +95,6 @@ class Page_Cache extends Module {
 
 		add_action( 'admin_init', array( $this, 'maybe_update_advanced_cache' ) );
 
-		add_action( 'init', array( $this, 'init_preloader' ) );
-		// Preload page cache on post/page update.
-		add_action( 'wphb_page_cache_preload_page', array( new Preload(), 'preload_page_on_purge' ) );
-
 		/**
 		 * Trigger a cache clear.
 		 *
@@ -152,6 +148,8 @@ class Page_Cache extends Module {
 	 * @since 1.7.0
 	 */
 	public function init() {
+		// Register preload schedules even when page caching is disabled.
+		add_action( 'wphb_page_cache_preload_page', array( new Preload(), 'preload_page_on_purge' ) );
 		add_filter( 'wp_hummingbird_is_active_module_page_cache', array( $this, 'module_status' ) );
 		add_action( 'template_redirect', array( $this, 'wphb_maybe_start_buffer' ), 2 );
 	}
@@ -210,7 +208,6 @@ class Page_Cache extends Module {
 	 * check_plugin_compatibility()
 	 * check_minification_queue()
 	 * init_filesystem()
-	 * init_preloader()
 	 * maybe_update_advanced_cache()
 	 ***************************/
 
@@ -334,20 +331,6 @@ class Page_Cache extends Module {
 	}
 
 	/**
-	 * Init page caching preloader.
-	 *
-	 * @since 2.1.0
-	 */
-	public function init_preloader() {
-		$options = $this->get_options();
-		if ( ! isset( $options['preload'] ) || ! $options['preload'] ) {
-			return;
-		}
-
-		new Preload();
-	}
-
-	/**
 	 * Make sure advanced-cache.php file is always up-to-date in between updates.
 	 *
 	 * @since 2.7.1
@@ -468,6 +451,46 @@ class Page_Cache extends Module {
 		$wphb_cache_config->exclude_agents  = isset( $settings['exclude']['user_agents'] ) && is_array( $settings['exclude']['user_agents'] ) ? $settings['exclude']['user_agents'] : array();
 		$wphb_cache_config->exclude_cookies = isset( $settings['exclude']['cookies'] ) && is_array( $settings['exclude']['cookies'] ) ? $settings['exclude']['cookies'] : array();
 		$wphb_cache_config->safemode_status = isset( $settings['safemode_status'] ) ? (bool) $settings['safemode_status'] : false;
+	}
+
+	/**
+	 * Get the number of pages currently held in the cache.
+	 *
+	 * Stored as a network option to match how the counter behaved inside `wphb_settings`:
+	 * `filter_multisite_options()` puts `pages_cached` in the network half (it is not in
+	 * `get_blog_option_names( 'page_cache' )`, which allows only `cache_blog`), so every subsite
+	 * has always read one shared count.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return int
+	 */
+	public static function get_cached_pages_count(): int {
+		return (int) get_site_option( Settings::PAGES_CACHED_OPTION, 0 );
+	}
+
+	/**
+	 * Set the number of pages currently held in the cache.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param int $count New count. Values below zero are stored as zero.
+	 *
+	 * @return void
+	 */
+	public static function set_cached_pages_count( int $count ): void {
+		update_site_option( Settings::PAGES_CACHED_OPTION, max( 0, $count ) );
+	}
+
+	/**
+	 * Increment the cached pages count by one.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return void
+	 */
+	public static function increment_cached_pages_count(): void {
+		self::set_cached_pages_count( self::get_cached_pages_count() + 1 );
 	}
 
 	/**
@@ -608,7 +631,7 @@ class Page_Cache extends Module {
 		}
 
 		return array(
-			'frontpage' => __( 'Frontpage', 'wphb' ),
+			'frontpage' => __( 'Front page', 'wphb' ),
 			'home'      => __( 'Blog', 'wphb' ),
 			'page'      => __( 'Pages', 'wphb' ),
 			'single'    => __( 'Posts', 'wphb' ),
@@ -809,16 +832,24 @@ class Page_Cache extends Module {
 		global $wphb_cache_config;
 
 		// Remove empty values.
-		$agent_pattern = array_filter( $wphb_cache_config->exclude_agents );
-		if ( empty( $agent_pattern ) ) {
+		$agent_patterns = array_filter( $wphb_cache_config->exclude_agents );
+		if ( empty( $agent_patterns ) ) {
 			return false;
 		}
 
 		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? stripslashes( $_SERVER['HTTP_USER_AGENT'] ) : ''; // Input var ok.
 
-		// In case no user agent or agent is in exclude list, we do not cache the page.
-		if ( empty( $agent ) || in_array( $agent, $agent_pattern, true ) ) {
+		// No user agent sent at all - don't cache to be safe.
+		if ( empty( $agent ) ) {
 			return true;
+		}
+
+		// Match exact agents as well as agents that merely contain one of the patterns (case-insensitive).
+		foreach ( $agent_patterns as $pattern ) {
+			$pattern = trim( $pattern );
+			if ( '' !== $pattern && false !== stripos( $agent, $pattern ) ) {
+				return true;
+			}
 		}
 
 		return false;
@@ -1175,7 +1206,7 @@ class Page_Cache extends Module {
 		}
 
 		// Reset cached pages count to 0.
-		Settings::update_setting( 'pages_cached', 0, 'page_cache' );
+		self::set_cached_pages_count( 0 );
 	}
 
 	/**
@@ -1367,8 +1398,7 @@ class Page_Cache extends Module {
 			}
 
 			// Update cached pages count.
-			$count = Settings::get_setting( 'pages_cached', 'page_cache' );
-			Settings::update_setting( 'pages_cached', ++$count, 'page_cache' );
+			self::increment_cached_pages_count();
 		}
 
 		return $buffer;
@@ -1633,7 +1663,7 @@ class Page_Cache extends Module {
 		// Purge whole cache directory.
 		if ( ! $directory ) {
 			// Reset cached pages count.
-			Settings::update_setting( 'pages_cached', 0, 'page_cache' );
+			self::set_cached_pages_count( 0 );
 
 			self::log_msg( 'Cache directory purged' );
 			$status = $wphb_fs->purge();
@@ -1683,7 +1713,7 @@ class Page_Cache extends Module {
 			return true;
 		}
 
-		$count = Settings::get_setting( 'pages_cached', 'page_cache' );
+		$count = self::get_cached_pages_count();
 
 		if ( is_dir( wp_normalize_path( $wphb_fs->cache_dir . '/mobile/' . $cache_dir ) ) ) {
 			if ( ! $skip_sub_dirs ) {
@@ -1703,7 +1733,7 @@ class Page_Cache extends Module {
 			( ! $skip_sub_dirs ) ? $count -= $files_purged : $count--;
 		}
 
-		Settings::update_setting( 'pages_cached', $count, 'page_cache' );
+		self::set_cached_pages_count( $count );
 
 		do_action( 'wphb_clear_cache_url', $directory_origin ); // Clear integrations cache.
 
@@ -1878,7 +1908,7 @@ class Page_Cache extends Module {
 				$this->clear_cache();
 
 				// Reset cached pages count.
-				Settings::update_setting( 'pages_cached', 0, 'page_cache' );
+				self::set_cached_pages_count( 0 );
 
 				return;
 			}
@@ -1932,7 +1962,7 @@ class Page_Cache extends Module {
 			$this->clear_cache();
 
 			// Reset cached pages count.
-			Settings::update_setting( 'pages_cached', 0, 'page_cache' );
+			self::set_cached_pages_count( 0 );
 		} else {
 			// Delete category and tag cache.
 			// Delete page cache.
@@ -2048,13 +2078,15 @@ class Page_Cache extends Module {
 	 * @param bool $network Value for network. Default: false.
 	 */
 	public function toggle_service( $value, $network = false ) {
-		$options = parent::get_options();
+		$options        = parent::get_options();
+		$network_action = false;
 
 		if ( is_multisite() ) {
 			// We need to use this `define` for calls from Hub.
 			$is_network_admin = defined( 'WPHB_IS_NETWORK_ADMIN' ) && WPHB_IS_NETWORK_ADMIN;
 			if ( $network && ( is_network_admin() || Utils::is_ajax_network_admin() || $is_network_admin ) ) {
 				// Updating for the whole network.
+				$network_action        = true;
 				$options['enabled']    = $value;
 				$options['cache_blog'] = $value;
 			} else {
@@ -2071,6 +2103,14 @@ class Page_Cache extends Module {
 		}
 
 		$this->update_options( $options );
+		if ( ! $value ) {
+			if ( $network_action ) {
+				Preload::cleanup_network();
+			} else {
+				$preloader = new Preload();
+				$preloader->cleanup();
+			}
+		}
 
 		// Do not disable global cache, when disabled on subsite.
 		if ( is_multisite() && ! is_network_admin() ) {

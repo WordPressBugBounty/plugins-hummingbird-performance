@@ -109,7 +109,7 @@ class Gutenberg {
 		// Gutenberg block scripts.
 		wp_enqueue_script(
 			'wphb-gutenberg',
-			WPHB_DIR_URL . 'admin/assets/js/wphb-gb-block.min.js',
+			WPHB_DIR_URL . 'admin/assets/ui/js/wphb-gb-block.min.js',
 			array(),
 			WPHB_VERSION,
 			true

@@ -35,13 +35,6 @@ class Pro {
 	public $modules = array();
 
 	/**
-	 * Admin instance
-	 *
-	 * @var null|Admin\Pro_Admin
-	 */
-	public $admin;
-
-	/**
 	 * Return the plugin instance
 	 *
 	 * @return Pro
@@ -60,25 +53,17 @@ class Pro {
 	 * @since 1.5.0
 	 */
 	public function init() {
-		// Load dashboard notice.
-		global $wpmudev_notices;
-		$wpmudev_notices[] = array(
-			'id'      => 1081721,
-			'name'    => 'Hummingbird',
-			'screens' => \Hummingbird\Admin\Admin::$admin_pages,
-		);
-
 		if ( ! function_exists( 'is_plugin_active' ) || ! function_exists( 'is_plugin_active_for_network' ) ) {
 			include_once ABSPATH . 'wp-includes/plugin.php';
 		}
 
+		// No `$wpmudev_notices` screens: the Dashboard-required modal replaces the legacy banner on
+		// Hummingbird pages. The library is still needed for the modal's one-click install link.
 		/* @noinspection PhpIncludeInspection */
 		if ( ! defined( 'WPHB_WPORG' ) ) {
 			include_once WPHB_DIR_PATH . 'core/externals/dash-notice/wpmudev-dash-notification.php';
 		}
 
-		$this->admin = new Admin\Pro_Admin();
-		$this->admin->init();
 		$this->load_modules();
 	}
 

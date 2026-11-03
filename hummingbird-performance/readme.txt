@@ -1,14 +1,14 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 3.21.2
+Version: 4.0.0
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
-Tags: Cache, Caching, Performance, Critical CSS, Minify CSS, Javascript Delay
+Tags: Cache, Caching, Performance, Critical CSS, Minify CSS
 Requires at least: 6.4
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 3.21.2
+Stable tag: 4.0.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Hummingbird is brought to you by the WordPress speed specialists that created [S
 
 **Enjoy top-tier performance and PageSpeed optimization from the start with [Hummingbird Pro](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-above-the-fold&utm_content=wp_hummingbird_pro ).**
 
-Level up immediately with exclusive Pro features like Delay JavaScript Execution, Critical CSS Generation, Brotli file compression, and 119-point global asset CDN with unlimited bandwidth. [Learn more about Pro](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-above-the-fold&utm_content=wp_hummingbird_pro).
+Level up immediately with exclusive Pro features like Delay JavaScript Execution, Critical CSS Generation, and 119-point global asset CDN with unlimited bandwidth. [Learn more about Pro](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-above-the-fold&utm_content=wp_hummingbird_pro).
 
 ### If PageSpeed Insights is making these speed recommendations Hummingbird can help:
 
@@ -35,29 +35,28 @@ Level up immediately with exclusive Pro features like Delay JavaScript Execution
 - Minify CSS - Strip unused code from your CSS.
 - Minify JavaScript - Speed up the time it takes to parse your JS files.
 - Eliminate render-blocking resources - Move critical CSS and JS inline and defer all non-critical JS/CSS.
-- Delay JavaScript execution (Pro only) - Increase performance by delaying the loading of non-critical JS files and scripts until user interaction.
-- Automatically generate Critical CSS (Pro only) - Substantially boost page speed and UX by prioritizing above-the-fold content.
+- Delay JavaScript execution ([Pro only](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-delayjs)) - Increase performance by delaying the loading of non-critical JS files and scripts until user interaction.
+- Automatically generate Critical CSS ([Pro only](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-criticalcs)) - Substantially boost page speed and UX by prioritizing above-the-fold content.
 - Defer unused CSS - Defer the loading of CSS not used for above-the-fold content.
 - Lazy Load offscreen images ([Smush free](https://wordpress.org/plugins/wp-smushit/) integration).
 
 Hummingbird scans your site and provides one-click fixes to speed up WordPress in a flash.
 
-You’ll get faster loading pages, higher search rankings (SERP) and PageSpeed scores, and happier visitors with Hummingbird’s WordPress speed optimization. Optimizing the speed of your site has never been easier!
+Enjoy faster page loading, better search engine rankings (SERP), higher PageSpeed scores, and a smoother experience for your visitors. Optimizing your website’s performance has never been easier!
 
-### Features Available in Hummingbird Include:
+### Hummingbird Key Features Include:
 
-- Scan and Fix – Get a scan of your site, find out what’s slowing it down, and use one-click performance improvements to make critical speed improvements.
-- World-class caching – A full caching suite to load pages faster with full-page, Gravatar, and browser cache tool.
-- Performance Reports – Pro tips for running your site at super speed.
+- Scan and Fix – Scan your site to view detailed reports on Google PageSpeed Insights, and apply one-click optimization to improve loading speed and overall performance.
+- World-class caching – A full caching suite to load pages faster with full-page, Gravatar, RSS and Browser cache tool.
 - Asset Optimization – Combine, compress and position Javascript, CSS, and Google Font files for top performance.
 - Safe Mode — Test Hummingbird settings without affecting your visitors' experience, only logged-in admins see the optimized version.
 - Better Rankings – Improve scores on Google PageSpeed Insights (SEO ranking factor), YSlow, Pingdom, and GTmetrix.
 - Increase Your Conversion Rate - Don’t keep visitors waiting: faster sites convert better.
-- GZIP Compression – Blazing-fast HTML, JavaScript, and stylesheet (CSS) transfer.
+- Text Compression – Blazing-fast HTML, JavaScript, and stylesheet (CSS) transfer.
 - Configs – Set your preferred performance settings, save them as config, and instantly upload to any other site.
 - Font Optimization - Improve site speed, Core Web Vitals, and visual stability by preloading critical fonts and enabling fallbacks.
 - Uptime Monitoring & Alerts - Get instant notifications if your site ever goes down.
-- Scheduled Performance Reports - Stay on top of site speed with regular insights.
+- Reports and Alerts - Stay on top of site speed with regular insights.
 
 ### Learn The Ropes With These Hands-On Hummingbird Tutorials
 
@@ -77,9 +76,9 @@ Hummingbird even has one-click improvements like a full cache suite, one-click m
 
 ### World-Class Caching
 
-You’ll get a world-class caching suite, including full-page, browser, and Gravatar cache.
+You’ll get a world-class caching suite, including full-page, browser, RSS, and Gravatar cache.
 
-Make your site load even faster with Hummingbird’s complete set of cache tools that give your visitors a faster browsing experience. Including full-page, browser and Gravatar caching.
+Make your site load even faster with Hummingbird’s complete set of cache tools that give your visitors a faster browsing experience. Including full-page, RSS, browser and Gravatar caching.
 
 ### Asset Optimization
 
@@ -109,13 +108,13 @@ Compress, optimize (optimise), and fix PageSpeed performance with properly sized
 
 Configs allow you to save your preferred Hummingbird configuration settings and apply them to your other sites in a few clicks. You can create unlimited configs.
 
-### Delay Javascript Resources (Pro Only)
+### Delay Javascript Resources ([Pro Only](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-delayjs))
 
 Boost site performance dramatically by delaying the loading of JS files and third-party scripts until direct user interaction (e.g. scroll or click). Enjoy faster loading pages, improve web vitals, and ace your PageSpeed scores. 
 
 Activate in one click, includes user interaction timeout and the option to exclude critical files from being delayed. A paid WPMU DEV account (the developers of Hummingbird) is required to access this feature. You can check out our affordable plans [here](https://wpmudev.com/pricing/).
 
-### Generate Critical CSS (Pro Only)
+### Generate Critical CSS ([Pro Only](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-criticalcs))
 
 Maximize site speed and user experience by prioritizing only the CSS that matters most. The Generate Critical CSS feature intelligently generates and embeds critical CSS in the head of each page, giving priority to above-the-fold content and significantly improving loading speed. Updates to your critical CSS are automated with every site design change, and you can enable/disable with a click.
 
@@ -156,6 +155,7 @@ Hey! This is Hummingbird, your trusted solution to speed up WordPress. I’m par
 
 - [Smush](https://wordpress.org/plugins/wp-smushit/) - Image Compression and Optimization
 - [Forminator](https://wordpress.org/plugins/forminator/) - Form, Quiz, Poll and Survey Builder
+- [Defender](https://wordpress.org/plugins/defender-security/) - Malware Scanner, Login Security & Firewall
 - [Hustle](https://wordpress.org/plugins/wordpress-popup/) - Pop-ups, Slide-ins and Email Opt-ins
 
 And if you need ALL our Pro plugins AND 24/7 WordPress support, [get WPMU DEV membership!](https://wpmudev.com/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme&utm_content=link_wpmudev)
@@ -202,13 +202,27 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 
 == Screenshots ==
 
-1. Performance test.
-2. Full-page, browser and gravatar caching.
-3. Minify and combine files to speed up your site.
-4. Save space and speed things up.
-5. Custom performance optimizations using Advanced Tools.
+1. Run a quick performance test to start optimizing instantly.
+2. Track your PageSpeed score and optimize Core Web Vitals.
+3. Configure advanced page caching rules for lightning-fast load times.
+4. Clean unnecessary database bloat to keep your server fast.
+5. Schedule automated performance reports and instant uptime alerts easily.
+6. Track website uptime and server response times in real-time.
 
 == Changelog ==
+
+= 4.0.0 ( 2026-11-03 ) =
+- New: A fresh new look! Hummingbird has been completely redesigned for a cleaner, faster and more intuitive experience
+- New: Activity Logs
+- New: Settings are now saved automatically
+- Improvement: Improved Safe Mode flow
+- Improvement: Improved Clear Cache shortcut UI
+- Improvement: Added "Last name" field for email recipients
+- Improvement: CDN now serves your files automatically on demand instead of waiting for the asset optimization flow
+- Improvement: CDN now uses a new domain, assetcdn.net
+- Improvement: Security hardening
+- Fix: Performance test cooldown being bypassed, causing the test to get stuck at 99%
+- Fix: PHP notice when permanently deleting entries in Database Cleanup
 
 = 3.21.2 ( 2026-09-01 ) =
 - Fix: Performance Test Notification Report is not sent

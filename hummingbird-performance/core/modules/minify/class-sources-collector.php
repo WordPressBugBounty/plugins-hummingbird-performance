@@ -87,9 +87,48 @@ class Sources_Collector {
 	 */
 	public static function get_collection() {
 		return array(
-			'styles'  => get_option( self::$styles_option, array() ),
-			'scripts' => get_option( self::$scripts_option, array() ),
+			'styles'  => self::decode_collection_value( get_option( self::$styles_option, array() ) ),
+			'scripts' => self::decode_collection_value( get_option( self::$scripts_option, array() ) ),
 		);
+	}
+
+	/**
+	 * Decode a stored collection value.
+	 *
+	 * 4.0.0 stores a handle => asset array. 4.1.0 stores a JSON object whose
+	 * values are JSON-encoded assets.
+	 *
+	 * @param mixed $value  Stored option value.
+	 *
+	 * @return array
+	 */
+	private static function decode_collection_value( $value ) {
+		if ( is_array( $value ) ) {
+			return $value;
+		}
+
+		if ( ! is_string( $value ) ) {
+			return array();
+		}
+
+		$collection = json_decode( $value, true );
+		if ( ! is_array( $collection ) ) {
+			return array();
+		}
+
+		$decoded = array();
+		foreach ( $collection as $handle => $asset ) {
+			if ( ! is_string( $asset ) ) {
+				continue;
+			}
+
+			$asset = json_decode( $asset, true );
+			if ( is_array( $asset ) ) {
+				$decoded[ $handle ] = $asset;
+			}
+		}
+
+		return $decoded;
 	}
 
 	/**
@@ -106,13 +145,12 @@ class Sources_Collector {
 	 * @return array
 	 */
 	public static function get_handles() {
-		$styles  = get_option( self::$styles_option, array() );
-		$scripts = get_option( self::$scripts_option, array() );
-		$handles = array();
-		foreach ( $styles as $style ) {
+		$collection = self::get_collection();
+		$handles    = array();
+		foreach ( $collection['styles'] as $style ) {
 			$handles[] = $style['handle'];
 		}
-		foreach ( $scripts as $script ) {
+		foreach ( $collection['scripts'] as $script ) {
 			$handles[] = $script['handle'];
 		}
 

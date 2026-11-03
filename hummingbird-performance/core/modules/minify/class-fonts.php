@@ -77,6 +77,28 @@ class Fonts {
 	}
 
 	/**
+	 * Build the Font Optimization status payload for the React Asset Optimization panel.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public static function get_react_settings() {
+		$options = Settings::get_settings( 'minify' );
+
+		return array(
+			'font_optimization'  => $options['font_optimization'],
+			'preload_fonts'      => $options['preload_fonts'],
+			'font_swap'          => $options['font_swap'],
+			'font_display_value' => $options['font_display_value'],
+			'preload_fonts_mode' => self::get_preload_fonts_mode(),
+			'rules'              => array(
+				'fontPattern' => '\.(' . implode( '|', array_map( 'preg_quote', self::get_allowed_fonts() ) ) . ')$',
+			),
+		);
+	}
+
+	/**
 	 * Check if font preloading is enabled.
 	 *
 	 * @return bool
@@ -88,7 +110,7 @@ class Fonts {
 
 		$options = Settings::get_settings( 'minify' );
 
-		return $this->is_minify_enabled() && $options['font_optimization'];
+		return $options['font_optimization'];
 	}
 
 	/**
@@ -99,7 +121,7 @@ class Fonts {
 	public function is_font_swap_enabled() {
 		$options = Settings::get_settings( 'minify' );
 
-		return $this->is_minify_enabled() && $options['font_swap'];
+		return $options['font_swap'];
 	}
 
 	/**
@@ -221,13 +243,13 @@ class Fonts {
 	 *
 	 * @return string|bool
 	 */
-	public function is_valid_font_url( $font_url ) {
+	public static function is_valid_font_url( $font_url ) {
 		$font_url = trim( $font_url );
 		$font_ext = wp_parse_url( $font_url, PHP_URL_PATH );
 
 		$font_ext = strtolower( pathinfo( $font_ext, PATHINFO_EXTENSION ) );
 
-		if ( ! in_array( $font_ext, $this->get_allowed_fonts(), true ) ) {
+		if ( ! in_array( $font_ext, self::get_allowed_fonts(), true ) ) {
 			return false;
 		}
 
@@ -247,7 +269,7 @@ class Fonts {
 			return $html;
 		}
 
-		$preload_fonts_mode = $this->get_preload_fonts_mode();
+		$preload_fonts_mode = self::get_preload_fonts_mode();
 		if ( 'automatic' !== $preload_fonts_mode ) {
 			return $html;
 		}
@@ -424,7 +446,7 @@ class Fonts {
 	 *
 	 * @return array
 	 */
-	public function get_allowed_fonts() {
+	public static function get_allowed_fonts() {
 		$fonts = array(
 			'otf',
 			'ttf',
@@ -661,13 +683,19 @@ class Fonts {
 	}
 
 	/**
-	 * Get the preload fonts mode.
+	 * Get the effective preload fonts mode.
+	 *
+	 * @since 4.0.0 Static; applies the free / Critical CSS restriction.
 	 *
 	 * @return string
 	 */
-	public function get_preload_fonts_mode() {
-		$preload_fonts_mode = Settings::get_setting( 'preload_fonts_mode', 'minify' );
+	public static function get_preload_fonts_mode() {
+		$options = Settings::get_settings( 'minify' );
 
-		return ! empty( $preload_fonts_mode ) ? $preload_fonts_mode : 'automatic';
+		if ( ! Utils::is_member() || empty( $options['critical_css'] ) ) {
+			return 'manual';
+		}
+
+		return ! empty( $options['preload_fonts_mode'] ) ? $options['preload_fonts_mode'] : 'automatic';
 	}
 }

@@ -12,7 +12,7 @@
  * Plugin Name:       Hummingbird
  * Plugin URI:        https://wpmudev.com/project/wp-hummingbird/
  * Description:       Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
- * Version:           3.21.2
+ * Version:           4.0.0
  * Requires PHP:      7.4
  * Author:            WPMU DEV
  * Author URI:        https://wpmudev.com/
@@ -46,8 +46,17 @@ namespace Hummingbird;
 use Hummingbird\Core\Modules\Performance;
 use Hummingbird\Core\Utils;
 
+/**
+ * Release date, stamped by Grunt with the build date when the package is
+ * created. In a source checkout it stays the literal placeholder, which
+ * strtotime() rejects, so consumers fall back to hiding the value.
+ */
+if ( ! defined( 'WPHB_RELEASE_DATE' ) ) {
+	define( 'WPHB_RELEASE_DATE', '2026-11-03' );
+}
+
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '3.21.2' );
+	define( 'WPHB_VERSION', '4.0.0' );
 }
 
 if ( ! defined( 'WPHB_SUI_VERSION' ) ) {

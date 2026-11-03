@@ -9,6 +9,7 @@
 namespace Hummingbird\Core;
 
 use Hummingbird\WP_Hummingbird;
+use Hummingbird\Admin\Feature_Modal;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,6 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Installer
+ *
+ * @todo This class mixes activation, deactivation and one-shot version migrations, and the
+ *       migrations now dominate it. Extract them into a dedicated `Core\Migrate` before adding
+ *       the next one.
  */
 class Installer {
 
@@ -48,6 +53,52 @@ class Installer {
 		if ( isset( $wphb_settings['settings'] ) && ! empty( $wphb_settings['settings']['tracking'] ) ) {
 			update_site_option( 'wphb-track-plugin-activation', true );
 		}
+
+		// Only a real activation redirects, not upgrade()'s fallback call when wphb_version is missing.
+		if ( doing_action( 'activate_' . WPHB_BASENAME ) ) {
+			self::set_activation_redirect();
+		}
+	}
+
+	/**
+	 * Flag a one-time redirect to Hummingbird after activation.
+	 *
+	 * @since 4.0.0
+	 */
+	public static function set_activation_redirect() {
+		if ( is_admin() && ! wp_doing_ajax() ) {
+			update_site_option( 'wphb_activation_redirect', true );
+		}
+	}
+
+	/**
+	 * Redirect to Hummingbird on the first admin request after activation, while the setup wizard is pending.
+	 *
+	 * Runs on admin_init, not during activation, so WordPress finishes the activation first.
+	 *
+	 * @since 4.0.0
+	 */
+	public static function maybe_redirect_after_activation() {
+		global $pagenow;
+
+		if ( ! get_site_option( 'wphb_activation_redirect' ) ) {
+			return;
+		}
+
+		delete_site_option( 'wphb_activation_redirect' );
+
+		// Only from the Plugins screen WordPress returns to after activating; bulk activation (activate-multi) stays there.
+		if ( 'plugins.php' !== $pagenow || isset( $_GET['activate-multi'] ) || ! current_user_can( Utils::get_admin_capability() ) ) { // Input var ok.
+			return;
+		}
+
+		// Setup wizard already completed: stay on Plugins. Otherwise the dashboard opens the wizard.
+		if ( ! get_option( 'wphb_run_onboarding' ) ) {
+			return;
+		}
+
+		wp_safe_redirect( Utils::get_admin_menu_url() );
+		exit;
 	}
 
 	/**
@@ -142,6 +193,10 @@ class Installer {
 
 				if ( version_compare( $version, '3.0.0', '<' ) ) {
 					self::upgrade_3_0_0_multi();
+				}
+
+				if ( version_compare( $blog_version, '4.0', '<' ) ) {
+					self::upgrade_4_0_0_multi();
 				}
 			}
 		}
@@ -239,6 +294,10 @@ class Installer {
 
 			if ( version_compare( $version, '3.21.2', '<' ) ) {
 				self::upgrade_3_21_2();
+			}
+
+			if ( version_compare( $version, '4.0', '<' ) ) {
+				self::upgrade_4_0_0();
 			}
 
 			update_site_option( 'wphb_version', WPHB_VERSION );
@@ -835,5 +894,131 @@ class Installer {
 	 */
 	private static function upgrade_3_21_2() {
 		Logger::get_instance()->clear( 'page_cache' );
+	}
+
+	/**
+	 * Migrate CDN settings from AO to the CDN module.
+	 *
+	 * @since 4.0
+	 */
+	private static function upgrade_4_0_0() {
+		Modules\Caching\Preload::migrate_legacy();
+		add_site_option( Feature_Modal::FEATURE_SLUG, true );
+		// Runs before the CDN guard below: the count has to move whatever else this upgrade does.
+		self::migrate_pages_cached_to_own_option();
+
+		// On multisite the CDN is a per-site setting: upgrade_4_0_0_multi() migrates each site, main site included.
+		if ( is_multisite() ) {
+			return;
+		}
+
+		$minify_options = Utils::get_module( 'minify' )->get_options();
+
+		if ( ! $minify_options['enabled'] || ! $minify_options['use_cdn'] ) {
+			return;
+		}
+
+		self::maybe_migrate_cdn_settings( $minify_options );
+	}
+
+	/**
+	 * Move the cached pages counter out of the settings option.
+	 *
+	 * The counter used to live in `wphb_settings` > `page_cache` > `pages_cached`. It is runtime
+	 * state, so every cache hit rewrote the whole settings option from the copy that request had
+	 * loaded - reverting any setting saved by another request in the meantime. It now has its own
+	 * option (see `Settings::PAGES_CACHED_OPTION`); this moves the existing value across so the
+	 * count does not read as zero until the next cache hit.
+	 *
+	 * Reads `wphb_settings` by name rather than through `Settings::get_setting_name()`, which
+	 * resolves to the safe copy while Safe Mode is on. `SafeMode::init_settings()` runs this
+	 * before it mirrors the option, so it sees an already-clean copy and needs no migration of
+	 * its own.
+	 *
+	 * @todo Extract the migrations from this class into a dedicated `Core\Migrate` when the next
+	 *       one lands.
+	 *
+	 * @since 4.0
+	 *
+	 * @return void
+	 */
+	public static function migrate_pages_cached_to_own_option() {
+		$setting_name = 'wphb_settings';
+
+		// On multisite this option is split: `filter_multisite_options()` keeps only the keys in
+		// `get_blog_option_names()`, and `page_cache` allows just `cache_blog`. `pages_cached` is
+		// therefore network data in wp_sitemeta, so `get_option()` would never find it.
+		$is_multisite = is_multisite();
+		$settings     = $is_multisite
+			? get_site_option( $setting_name, array() )
+			: get_option( $setting_name, array() );
+
+		// The read above goes through the object cache on purpose. This runs from `upgrade_4_0_0()`
+		// and from `SafeMode::init_settings()`, so on an already-migrated install it is reached on
+		// every Safe Mode init - clearing `alloptions` unconditionally here would force a full
+		// reload of every autoloaded option each time on sites with a persistent cache. Only once
+		// the key is known to be present is it worth paying for an uncached read.
+		if ( ! is_array( $settings ) || ! isset( $settings['page_cache']['pages_cached'] ) ) {
+			return;
+		}
+
+		if ( $is_multisite ) {
+			wp_cache_delete( $setting_name, 'site-options' );
+			$settings = get_site_option( $setting_name, array() );
+		} else {
+			wp_cache_delete( $setting_name, 'options' );
+			wp_cache_delete( 'alloptions', 'options' );
+			$settings = get_option( $setting_name, array() );
+		}
+
+		// Re-check: the cached copy said the key was there, the fresh read is the one we trust.
+		if ( ! is_array( $settings ) || ! isset( $settings['page_cache']['pages_cached'] ) ) {
+			return;
+		}
+
+		update_site_option( Settings::PAGES_CACHED_OPTION, absint( $settings['page_cache']['pages_cached'] ) );
+
+		unset( $settings['page_cache']['pages_cached'] );
+
+		if ( $is_multisite ) {
+			update_site_option( $setting_name, $settings );
+		} else {
+			update_option( $setting_name, $settings );
+		}
+	}
+
+	/**
+	 * Migrate CDN settings for multisite installations.
+	 *
+	 * @since 4.0
+	 */
+	private static function upgrade_4_0_0_multi() {
+		$minify_options = Utils::get_module( 'minify' )->get_options();
+
+		// If not enabled on subsites - skip.
+		if ( ! $minify_options['enabled'] || ! $minify_options['minify_blog'] || ! $minify_options['use_cdn'] ) {
+			return;
+		}
+
+		self::maybe_migrate_cdn_settings( $minify_options );
+	}
+
+	/**
+	 * Shared logic to migrate CDN settings from Minify to CDN module.
+	 *
+	 * @since 4.0
+	 *
+	 * @param array $minify_options The minify module options.
+	 */
+	private static function maybe_migrate_cdn_settings( $minify_options ) {
+		$cdn_excludes = $minify_options['nocdn'] ?? array();
+
+		$excluded_files = array_merge(
+			! empty( $cdn_excludes['styles'] ) && is_array( $cdn_excludes['styles'] ) ? $cdn_excludes['styles'] : array(),
+			! empty( $cdn_excludes['scripts'] ) && is_array( $cdn_excludes['scripts'] ) ? $cdn_excludes['scripts'] : array()
+		);
+
+		Utils::get_module( 'cdn' )->toggle_cdn( true );
+		Settings::update_setting( 'excluded_files', $excluded_files, 'cdn' );
 	}
 }

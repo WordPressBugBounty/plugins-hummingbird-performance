@@ -50,6 +50,7 @@ class Mixpanel_Analytics extends Module {
 		add_action( 'wp_ajax_wphb_track_deactivation', array( $this, 'wphb_track_deactivation' ) );
 		add_action( 'admin_init', array( $this, 'wphb_track_plugin_activation' ) );
 		add_action( 'wp_ajax_wphb_analytics_track_event', array( $this, 'wphb_handle_track_request_for_mixpanel' ) );
+		add_action( 'wp_ajax_wphb_react_ui_error', array( $this, 'wphb_track_react_ui_error' ) );
 	}
 
 	/**
@@ -274,6 +275,43 @@ class Mixpanel_Analytics extends Module {
 		$this->track(
 			$event_name,
 			$this->get_event_properties( $event_name )
+		);
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Track an uncaught React UI error.
+	 *
+	 * @return void
+	 */
+	public function wphb_track_react_ui_error() {
+		check_ajax_referer( 'wphb-fetch' );
+
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient permissions', 'wphb' ) ), 403 );
+		}
+
+		if ( ! $this->is_active() ) {
+			wp_send_json_success();
+		}
+
+		$code            = isset( $_POST['code'] ) ? sanitize_text_field( wp_unslash( $_POST['code'] ) ) : 'UnknownError';
+		$message         = isset( $_POST['message'] ) ? sanitize_text_field( wp_unslash( $_POST['message'] ) ) : '';
+		$stack           = isset( $_POST['stack'] ) ? sanitize_textarea_field( wp_unslash( $_POST['stack'] ) ) : '';
+		$component_stack = isset( $_POST['component_stack'] ) ? sanitize_textarea_field( wp_unslash( $_POST['component_stack'] ) ) : '';
+		$page            = isset( $_POST['page'] ) ? sanitize_text_field( wp_unslash( $_POST['page'] ) ) : '';
+
+		$this->track(
+			'hb_error_encountered',
+			array(
+				'Error Type'      => 'react_ui',
+				'Error Code'      => $code,
+				'Error Message'   => $message,
+				'Stack Trace'     => $stack,
+				'Component Stack' => $component_stack,
+				'Page'            => $page,
+			)
 		);
 
 		wp_send_json_success();

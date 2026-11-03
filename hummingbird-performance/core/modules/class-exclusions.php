@@ -8,6 +8,7 @@
 
 namespace Hummingbird\Core\Modules;
 
+use Hummingbird\Admin\Ajax\Notices;
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Traits\Module as ModuleContract;
 use Hummingbird\Core\Settings;
@@ -394,7 +395,7 @@ class Exclusions extends Module {
 		foreach ( $post_urls_exclusion as $post_id ) {
 			$post = get_post( $post_id );
 			if ( $post ) {
-				$post_id_name_map[ $post_id ] = $post->post_title . ' (' . get_permalink( $post->ID ) . ')';
+				$post_id_name_map[ $post_id ] = $post->post_title;
 			}
 		}
 
@@ -423,7 +424,7 @@ class Exclusions extends Module {
 				$query->the_post();
 				$results[] = array(
 					'id'    => get_the_ID(),
-					'name'  => get_the_title() . ' (' . get_permalink() . ')',
+					'name'  => get_the_title(),
 					'label' => 'urls',
 				);
 			}
@@ -780,5 +781,112 @@ class Exclusions extends Module {
 		 * @param array $ignored_files An array of ignored files.
 		 */
 		return apply_filters( 'wphb_ignored_files_for_critical_api', $ignored_files );
+	}
+
+	/**
+	 * Everything the Delay JS exclusions modal needs to render.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function get_delay_js_react_options() {
+		return array(
+			'files'            => $this->format_handle_options( $this->get_assets( 'scripts' ) ),
+			'post_types'       => $this->format_label_options( $this->get_post_types() ),
+			'plugins'          => $this->format_label_options( $this->get_active_theme_and_plugins() ),
+			'ads'              => $this->format_ads_options( $this->get_ads_tracker_exclusion() ),
+			'post_urls'        => $this->format_label_options( $this->get_formatted_post_urls( 'delay_js_post_urls_exclusion' ) ),
+			'notice_dismissed' => Notices::is_dismissed( 'delay-js-exclusion-modal-info' ),
+		);
+	}
+
+	/**
+	 * Everything the Critical CSS exclusions modal needs to render.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function get_critical_css_react_options() {
+		return array(
+			'files'                      => $this->format_handle_options( $this->get_assets( 'styles' ) ),
+			'post_types'                 => $this->format_label_options( $this->get_post_types() ),
+			'plugins'                    => $this->format_label_options( $this->get_active_theme_and_plugins() ),
+			'post_urls'                  => $this->format_label_options( $this->get_formatted_post_urls( 'critical_css_post_urls_exclusion' ) ),
+			'inclusion_css'              => Utils::get_module( 'minify' )->get_css( 'manual-critical' ),
+			'notice_dismissed'           => Notices::is_dismissed( 'critical-css-exclusion-modal-info' ),
+			'inclusion_notice_dismissed' => Notices::is_dismissed( 'critical-css-inclusion-modal-warning' ),
+		);
+	}
+
+	/**
+	 * Shape a value => label map into the { value, label } list the React
+	 * exclusion pickers expect.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array $map  Value => label map.
+	 *
+	 * @return array
+	 */
+	private function format_label_options( array $map ) {
+		$options = array();
+
+		foreach ( $map as $value => $label ) {
+			$options[] = array(
+				'value' => (string) $value,
+				'label' => $label,
+			);
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Shape an asset collection into { value, label } pairs keyed by handle.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array $files  Handle => file map.
+	 *
+	 * @return array
+	 */
+	private function format_handle_options( array $files ) {
+		$options = array();
+
+		foreach ( $files as $handle => $file ) {
+			$src = isset( $file['src'] ) ? (string) $file['src'] : '';
+
+			$options[] = array(
+				'value'   => $handle,
+				'label'   => '' === $src ? $handle : "{$handle} ({$src})",
+				'is_core' => '' !== $src && 1 === preg_match( '#/(wp-includes|wp-admin)/#', $src ),
+			);
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Shape the ads/trackers list into { value, label } pairs.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param array $ads  Ads/trackers definitions.
+	 *
+	 * @return array
+	 */
+	private function format_ads_options( array $ads ) {
+		$options = array();
+
+		foreach ( $ads as $key => $item ) {
+			$options[] = array(
+				'value' => $key,
+				'label' => $item['title'],
+			);
+		}
+
+		return $options;
 	}
 }

@@ -6,7 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'Hummingbird\\Core\\' => array($baseDir . '/core'),
     'Hummingbird\\Admin\\' => array($baseDir . '/admin'),
 );

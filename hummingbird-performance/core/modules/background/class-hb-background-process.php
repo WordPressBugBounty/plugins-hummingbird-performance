@@ -37,7 +37,7 @@ abstract class HB_Background_Process extends HB_Async_Request {
 	 *
 	 * @var string
 	 */
-	private $cron_hook_identifier;
+	protected $cron_hook_identifier;
 
 	/**
 	 * Cron interval identifier
@@ -162,20 +162,7 @@ abstract class HB_Background_Process extends HB_Async_Request {
 	 * @param mixed $task Task to remove.
 	 */
 	private function remove_task_from_queue( $task ) {
-		$queue_key = $this->get_queue_key();
-		$this->log( "Atomically removing task $task from queue using Thread_Safe_Options" );
-
-		try {
-			// Use atomic remove_from_array operation directly on tasks array.
-			$result = $this->thread_safe_options->remove_from_array( $queue_key, $task );
-			if ( $result ) {
-				$this->log( "Task $task successfully removed from queue atomically" );
-			} else {
-				$this->log( "Task $task not found in queue for removal" );
-			}
-		} catch ( Exception $e ) {
-			$this->log( 'Exception during atomic task removal: ' . $e->getMessage() );
-		}
+		return $this->thread_safe_options->remove_first_from_array( $this->get_queue_key(), $task );
 	}
 
 	/**
@@ -309,8 +296,7 @@ abstract class HB_Background_Process extends HB_Async_Request {
 		$processed_tasks_count = 0;
 
 		foreach ( $queue as $key => $value ) {
-			$this->log( "Executing task $value." );
-
+			$this->log( 'Executing task ' . wp_json_encode( $value ) );
 			$task_result = $this->task( $value );
 
 			if ( $task_result ) {
@@ -320,11 +306,8 @@ abstract class HB_Background_Process extends HB_Async_Request {
 				$this->status->task_failed();
 			}
 
-			// Remove task from queue.
-			$this->remove_task_from_queue( $value );
-
-			if ( $this->status->is_cancelled() ) {
-				$this->log( "While we were busy doing the task $value, the process got cancelled. Clean up and stop." );
+			// UPDATE-only acknowledgement cannot recreate a queue deleted by cancellation.
+			if ( ! $this->remove_task_from_queue( $value ) || $this->status->is_cancelled() ) {
 				return;
 			}
 
@@ -395,7 +378,7 @@ abstract class HB_Background_Process extends HB_Async_Request {
 		$current_memory = memory_get_usage( true );
 		$return         = false;
 
-		if ( $current_memory >= $memory_limit ) {
+		if ( $memory_limit > 0 && $current_memory >= $memory_limit ) {
 			$return = true;
 		}
 
@@ -451,34 +434,44 @@ abstract class HB_Background_Process extends HB_Async_Request {
 	 * Handle cron healthcheck
 	 */
 	public function handle_cron_healthcheck() {
+		$this->run_cron_healthcheck();
+		exit;
+	}
+
+	/**
+	 * Run cron healthcheck logic.
+	 *
+	 * @return string Action result key.
+	 */
+	public function run_cron_healthcheck() {
 		$this->log( 'Running scheduled health check.' );
 
 		if ( $this->is_process_running() ) {
 			$this->log( 'Health check: Process seems healthy, no action required.' );
-			exit;
+			return 'healthy';
 		}
 
 		if ( $this->is_queue_empty() ) {
 			$this->log( 'Health check: Process not in progress but the queue is empty, no action required.' );
 			$this->clear_scheduled_event();
-			exit;
+			return 'queue_empty';
 		}
 
 		if ( $this->status->is_cancelled() ) {
 			$this->log( 'Health check: Process has been cancelled already, no action required.' );
 			$this->clear_scheduled_event();
-			exit;
+			return 'cancelled';
 		}
 
 		if ( ! $this->is_revival_limit_reached() ) {
 			$this->log( 'Health check: Process instance seems to have died. Spawn a new instance.' );
 			$this->revive_process();
+			return 'revived';
 		} else {
 			$this->log( 'Health check: Process instance seems to have died. Restart disabled, marking the process as dead.' );
 			$this->mark_as_dead();
+			return 'dead';
 		}
-
-		exit;
 	}
 
 	/**
@@ -676,7 +669,7 @@ abstract class HB_Background_Process extends HB_Async_Request {
 	 *
 	 * @return int
 	 */
-	private function get_time_limit() {
+	protected function get_time_limit() {
 		return apply_filters( $this->identifier . '_default_time_limit', 20 ); // 20 seconds
 	}
 
@@ -766,7 +759,7 @@ abstract class HB_Background_Process extends HB_Async_Request {
 	 *
 	 * @return int
 	 */
-	private function get_cron_interval_seconds() {
+	protected function get_cron_interval_seconds() {
 		$minutes = property_exists( $this, 'cron_interval' ) ? $this->cron_interval : 5;
 
 		$interval = apply_filters( $this->identifier . '_cron_interval', $minutes );

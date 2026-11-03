@@ -7,6 +7,7 @@
 
 namespace Hummingbird\Core\Modules;
 
+use Hummingbird\Admin\Ajax\Notices;
 use Hummingbird\Core\Module_Server;
 use Hummingbird\Core\Utils;
 use SimplePie_File;
@@ -107,6 +108,53 @@ class Gzip extends Module_Server {
 		update_option( 'wphb_compression_type', $compression );
 
 		return $results;
+	}
+
+	/**
+	 * React-friendly status payload for the Asset Optimization page.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param bool $force  Re-run detection (including the remote check) instead
+	 *                     of reading the cached analysis.
+	 *
+	 * @return array
+	 */
+	public function get_react_settings( $force = false ) {
+		return array(
+			'status'            => $this->get_analysis_data( $force, $force ),
+			'compression_type'  => get_option( 'wphb_compression_type' ),
+			'htaccess_writable' => Module_Server::is_htaccess_writable(),
+			'htaccess_written'  => Module_Server::is_htaccess_written( 'gzip' ),
+			'cdn'               => Utils::get_module( 'cdn' )->is_active(),
+			'is_wpmu_hosting'   => Utils::is_site_hosted_on_wpmudev(),
+		);
+	}
+
+	/**
+	 * Everything the "Configure Compression" modal needs to render.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	public function get_configure_react_settings() {
+		// Cloudflare has its own, unrelated configuration flow — not part of this modal.
+		$servers = Module_Server::get_servers();
+		unset( $servers['cloudflare'] );
+
+		return array(
+			'server_name'       => Module_Server::get_server_type(),
+			'servers'           => $servers,
+			'htaccess_writable' => Module_Server::is_htaccess_writable(),
+			'htaccess_written'  => Module_Server::is_htaccess_written( 'gzip' ),
+			'snippets'          => array(
+				'apache' => Module_Server::get_code_snippet( 'gzip', 'apache' ),
+				'nginx'  => Module_Server::get_code_snippet( 'gzip', 'nginx' ),
+				'iis'    => Module_Server::get_code_snippet( 'gzip', 'iis' ),
+			),
+			'notice_dismissed'  => Notices::is_dismissed( 'gzip-configure-modal-info' ),
+		);
 	}
 
 	/**

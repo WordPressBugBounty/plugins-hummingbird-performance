@@ -101,6 +101,7 @@ class Uptime {
 			__( 'Uptime enabled.', 'wphb' ),
 			__( 'Uptime disabled.', 'wphb' )
 		);
+		Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'Uptime', $was_active, $is_active_now );
 
 		wp_send_json_success( self::get_page_data( $this->get_requested_range() ) );
 	}

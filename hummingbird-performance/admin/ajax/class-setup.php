@@ -43,7 +43,15 @@ class Setup {
 			die();
 		}
 
+		$params = filter_input( INPUT_POST, 'data', FILTER_UNSAFE_RAW );
+		$params = json_decode( html_entity_decode( (string) $params ), true );
+
 		update_option( 'wphb_run_onboarding', null );
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_setup_wizard(
+			isset( $params['reason'] ) && 'skip' === $params['reason'] ? 'skip' : 'quit'
+		);
+
 		wp_send_json_success();
 	}
 
@@ -85,7 +93,7 @@ class Setup {
 		$params = json_decode( html_entity_decode( $params ), true );
 
 		if ( 'runPerf' === $params ) {
-			Utils::get_module( 'mixpanel_analytics' )->track_event_for_setup_performance_test();
+			Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_setup_wizard( 'performance_test' );
 		}
 
 		update_option( 'wphb_run_onboarding', null );

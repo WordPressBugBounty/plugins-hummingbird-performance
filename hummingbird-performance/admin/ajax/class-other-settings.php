@@ -156,7 +156,8 @@ class Other_Settings {
 		}
 
 		if ( $prev_tracking !== $settings['tracking'] ) {
-			do_action( 'wphb_mixpanel_usage_tracking_value_update', true, $settings['tracking'] );
+			$location = isset( $data['tracking_source'] ) && 'share_usage_notice' === $data['tracking_source'] ? 'Share Usage Notice' : 'settings';
+			do_action( 'wphb_mixpanel_usage_tracking_value_update', true, $settings['tracking'], $location );
 		}
 
 		if ( array_key_exists( 'debug_log', $data ) ) {
@@ -164,6 +165,7 @@ class Other_Settings {
 
 			$page_cache          = Utils::get_module( 'page_cache' );
 			$page_cache_settings = $page_cache->get_settings();
+			$previous_settings   = $page_cache_settings;
 
 			$was_debug_log_enabled = (bool) $page_cache_settings['settings']['debug_log'] || (bool) Settings::get_setting( 'log', 'minify' );
 
@@ -179,6 +181,8 @@ class Other_Settings {
 				__( 'Debug log enabled.', 'wphb' ),
 				__( 'Debug log disabled.', 'wphb' )
 			);
+			// Same page cache setting as the Page Caching tab, so it reports the same event.
+			Utils::get_module( 'mixpanel_analytics' )->events( 'page_cache' )->track_settings_change( $previous_settings, $page_cache_settings );
 		}
 
 		wp_send_json_success( $this->get_state() );
@@ -207,6 +211,10 @@ class Other_Settings {
 			__( 'Dev Mode enabled.', 'wphb' ),
 			__( 'Dev Mode disabled.', 'wphb' )
 		);
+
+		if ( $previous_view !== $current_view ) {
+			Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_ao_updated();
+		}
 	}
 
 	/**

@@ -15,6 +15,7 @@ use Hummingbird\Core\Modules\Performance;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\SafeMode;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -224,7 +225,7 @@ abstract class Page {
 			'wphbPage',
 			array_merge(
 				array(
-					'pluginName'              => __( 'Hummingbird', 'wphb' ),
+					'pluginName'              => Whitelabel::replace_branding_terms( __( 'Hummingbird', 'wphb' ) ),
 					'pageSlug'                => $this->get_slug(),
 					'pageTitle'               => get_admin_page_title(),
 					'isPro'                   => Utils::is_member(),
@@ -233,6 +234,7 @@ abstract class Page {
 					'isMultisite'             => is_multisite(),
 					'isNetworkAdmin'          => is_network_admin(),
 					'canManageNetwork'        => is_multisite() && current_user_can( 'manage_network' ),
+					'trackingEnabled'         => Utils::get_module( 'mixpanel_analytics' )->is_active(),
 					'logoUrl'                 => WPHB_DIR_URL . 'admin/assets/image/hb-icon@2x.png',
 					'wpmudevUrl'              => Utils::get_link( 'wpmudev', 'hummingbird_page_header' ),
 					'supportUrl'              => Utils::get_link( 'support', 'hummingbird_page_header' ),
@@ -254,9 +256,8 @@ abstract class Page {
 					'locale'                  => get_user_locale(),
 					'timeZone'                => Utils::get_timezone_string(),
 					'dismissedInlineWarnings' => $dismissed_inline_warnings,
-					'isWhiteLabeled'          => (bool) apply_filters( 'wpmudev_branding_hide_branding', false ),
+					'whiteLabel'              => Whitelabel::get_data(),
 					'highContrastMode'        => (bool) Settings::get_setting( 'accessible_colors', 'settings' ),
-					'hideDocLink'             => (bool) apply_filters( 'wpmudev_branding_hide_doc_link', false ),
 					'profileData'             => Hub_Connector::get_profile_data_for_ui(),
 					'hubConnector'            => Hub_Connector::data_frontend(),
 					'safeMode'                => array(

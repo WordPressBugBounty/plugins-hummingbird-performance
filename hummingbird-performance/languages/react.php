@@ -10,76 +10,76 @@ $generated_i18n_strings = array(
 	// Reference: front/shared/context/PerformanceScanContext.jsx:30
 	__( 'Performance test in progress', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:138
+	// Reference: front/shared/context/SafeModeContext.jsx:145
 	__( 'Safe Mode could not be updated. Please try again.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:23
+	// Reference: front/shared/context/SafeModeContext.jsx:22
 	// Reference: front/ui/hooks/useHummingbirdApi.js:184
 	__( 'Your session has expired. Reloading...', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:44
+	// Reference: front/shared/context/SafeModeContext.jsx:43
 	// Reference: front/ui/components/SafeMode/SafeModeBanner/SafeModeBanner.jsx:93
 	__( 'Safe Mode is active.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:45
+	// Reference: front/shared/context/SafeModeContext.jsx:44
 	__( 'Your changes are not live yet. Publish them when you\'re ready.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:48
+	// Reference: front/shared/context/SafeModeContext.jsx:47
 	__( 'Safe Mode is off.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:49
+	// Reference: front/shared/context/SafeModeContext.jsx:48
 	__( 'Your live settings are back in use.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:53
+	// Reference: front/shared/context/SafeModeContext.jsx:52
 	__( 'Safe Mode changes are now live.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:54
+	// Reference: front/shared/context/SafeModeContext.jsx:53
 	__( 'The changes you made in Safe Mode are now published to your live site.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:57
+	// Reference: front/shared/context/SafeModeContext.jsx:56
 	__( 'Safe Mode changes discarded.', 'wphb' ),
 
-	// Reference: front/shared/context/SafeModeContext.jsx:58
+	// Reference: front/shared/context/SafeModeContext.jsx:57
 	__( 'The unpublished changes were thrown away and your live settings are unchanged.', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:104
+	// Reference: front/shared/context/usePerformanceScan.js:103
 	__( 'Performance test completed', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:105
+	// Reference: front/shared/context/usePerformanceScan.js:104
 	__( 'Your latest performance results are ready.', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:125
+	// Reference: front/shared/context/usePerformanceScan.js:123
 	__( 'Performance test failed', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:134
+	// Reference: front/shared/context/usePerformanceScan.js:131
 	// Reference: front/ui/components/RecipientsList/RecipientsList.jsx:198
 	__( 'Ok', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:140
+	// Reference: front/shared/context/usePerformanceScan.js:137
 	__( 'Try again', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:185
+	// Reference: front/shared/context/usePerformanceScan.js:182
 	__( 'The performance test timed out. Please try again.', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:221
+	// Reference: front/shared/context/usePerformanceScan.js:218
 	__( 'Could not check the performance test.', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:237
+	// Reference: front/shared/context/usePerformanceScan.js:234
 	__( 'The performance test did not return a report. Please try again.', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:284
+	// Reference: front/shared/context/usePerformanceScan.js:281
 	__( 'Running speed test', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:76
+	// Reference: front/shared/context/usePerformanceScan.js:75
 	__( 'Help us improve by sending anonymous usage data. This is recommended.', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:78
+	// Reference: front/shared/context/usePerformanceScan.js:77
 	__( 'Share Usage Data?', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:82
+	// Reference: front/shared/context/usePerformanceScan.js:81
 	__( 'Do not share', 'wphb' ),
 
-	// Reference: front/shared/context/usePerformanceScan.js:86
+	// Reference: front/shared/context/usePerformanceScan.js:85
 	__( 'Share', 'wphb' ),
 
 	// Reference: front/shared/core-ui/components/ActivityLog/ActivityLog.jsx:35
@@ -129,19 +129,19 @@ $generated_i18n_strings = array(
 	__( 'Auto-save changes', 'wphb' ),
 
 	// Reference: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:35
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:423
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:346
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:424
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:347
 	__( 'Saving...', 'wphb' ),
 
 	// Reference: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:36
 	__( 'All changes saved', 'wphb' ),
 
 	// Reference: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:38
-	// Reference: front/ui/layout/PageHeader.jsx:351
+	// Reference: front/ui/layout/PageHeader.jsx:358
 	__( 'Offline - changes were not saved. Retry when you are back online.', 'wphb' ),
 
 	// Reference: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:39
-	// Reference: front/ui/layout/PageHeader.jsx:352
+	// Reference: front/ui/layout/PageHeader.jsx:359
 	__( 'Changes were not saved. Reload and retry.', 'wphb' ),
 
 	// Reference: front/ui/components/DashboardRequiredModal/DashboardRequiredModal.jsx:32
@@ -163,43 +163,43 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/components/RecipientsList/RecipientPanel.jsx:450
 	// Reference: front/ui/components/RecipientsList/RecipientsList.jsx:350
 	// Reference: front/ui/components/SafeMode/SafeModeDisableModal/SafeModeDisableModal.jsx:102
-	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:71
+	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:73
 	// Reference: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:342
 	// Reference: front/ui/components/SchedulePanel/SchedulePanel.jsx:273
 	// Reference: front/ui/pages/advanced-tools/components/DatabaseCleanup/DatabaseCleanup.jsx:514
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:49
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:51
 	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompressExclusionsModal.jsx:353
 	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:170
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:67
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:687
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:684
 	// Reference: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:737
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:276
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:754
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:562
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:755
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:563
 	// Reference: front/ui/pages/settings/components/Configs/ConfigAction.jsx:560
 	// Reference: front/ui/pages/settings/components/Configs/ConfigList.jsx:395
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:456
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:457
 	__( 'Cancel', 'wphb' ),
 
 	// Reference: front/ui/components/ErrorStatusPanel/ErrorStatusPanel.jsx:37
 	__( 'Error', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:27
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:203
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:211
 	__( 'Connect to WPMU DEV', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:29
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:214
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:222
 	__( 'Create free account', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:30
 	// Reference: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:73
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:230
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:238
 	__( 'Sign in', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:58
 	// Reference: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:61
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:218
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:226
 	__( 'or', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:28
@@ -228,22 +228,22 @@ $generated_i18n_strings = array(
 	__( 'Please enter your email address.', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:77
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:461
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:462
 	__( 'Please enter a valid email address.', 'wphb' ),
 
 	// Reference: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:78
 	__( 'Please enter your password.', 'wphb' ),
 
 	// Reference: front/ui/components/HubSiteConnecting/HubSiteConnecting.jsx:104
-	// Reference: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:29
+	// Reference: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:31
 	__( 'Something went wrong', 'wphb' ),
 
 	// Reference: front/ui/components/HubSiteConnecting/HubSiteConnecting.jsx:106
-	// Reference: front/ui/components/HummingbirdToast/HummingbirdToast.jsx:12
-	// Reference: front/ui/hooks/useHubConnectPrompt.jsx:24
+	// Reference: front/ui/components/HummingbirdToast/HummingbirdToast.jsx:13
+	// Reference: front/ui/hooks/useHubConnectPrompt.jsx:22
 	// Reference: front/ui/hooks/usePageNotices.jsx:90
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:97
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:107
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:96
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:108
 	__( 'OK', 'wphb' ),
 
 	// Reference: front/ui/components/HubSiteConnecting/HubSiteConnecting.jsx:112
@@ -252,12 +252,12 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/components/HubSiteConnecting/HubSiteConnecting.jsx:25
 	__( 'Please reload the page and try again.', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:53
-	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:17
-	__( 'Hummingbird Pro', 'wphb' ),
-
-	// Reference: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:75
+	// Reference: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:61
 	__( 'wpmudev', 'wphb' ),
+
+	// Reference: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:97
+	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:19
+	__( 'Hummingbird Pro', 'wphb' ),
 
 	// Reference: front/ui/components/HummingbirdColorPicker/HummingbirdColorPicker.jsx:275
 	__( 'Color value', 'wphb' ),
@@ -274,77 +274,77 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/components/HummingbirdColorPicker/HummingbirdColorPicker.jsx:404
 	__( 'Opacity', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:109
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:117
 	__( 'Support', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:115
-	// Reference: front/ui/layout/PageHeader.jsx:302
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:123
+	// Reference: front/ui/layout/PageHeader.jsx:304
 	__( 'Documentation', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:121
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:129
 	__( 'Product Roadmap', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:181
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:189
 	__( 'Disconnecting…', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:182
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:190
 	__( 'Disconnect', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:204
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:212
 	// Reference: front/ui/components/WelcomeModal/WelcomeModal.jsx:129
 	__( 'to use all free features', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:251
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:259
 	__( 'Profile menu', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:298
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:306
 	__( 'Disconnect this site?', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:299
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:307
 	__( 'This will stop all WPMU DEV services for this site. Your site will no longer be manageable from the WPMU DEV Hub.', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:303
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:311
 	__( 'Keep site connected', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:314
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:322
 	__( 'Disconnect site', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:67
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:69
 	__( 'Guest', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:77
+	// Reference: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:79
 	__( 'We could not disconnect your site. Please try again.', 'wphb' ),
 
 	// Reference: front/ui/components/InfoModal/InfoModal.jsx:91
 	// Reference: front/ui/components/ProFeatureModal/ProFeatureModal.jsx:51
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:55
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:57
 	// Reference: front/ui/components/SlideInModal/SlideInModal.jsx:149
 	// Reference: front/ui/components/WelcomeModal/WelcomeModal.jsx:149
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/UptimeWelcomeModal.jsx:39
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:525
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:526
 	__( 'Close', 'wphb' ),
 
 	// Reference: front/ui/components/InfoTooltip/InfoTooltip.jsx:42
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:492
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1656
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:493
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1667
 	__( 'More information', 'wphb' ),
 
 	// Reference: front/ui/components/ProFeatureLock/ProFeatureLock.jsx:62
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertCard.jsx:105
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:254
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:380
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:253
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:382
 	// Reference: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:253
 	// Reference: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:69
 	__( 'Learn more', 'wphb' ),
 
 	// Reference: front/ui/components/ProFeatureLock/ProFeatureLock.jsx:73
 	// Reference: front/ui/components/ProFeatureModal/ProFeatureModal.jsx:73
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:195
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:196
 	// Reference: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:76
 	__( 'Upgrade', 'wphb' ),
 
 	// Reference: front/ui/components/ProFeatureModal/ProFeatureModal.jsx:61
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:104
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:106
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/UptimeWelcomeModal.jsx:54
 	__( 'Activate', 'wphb' ),
 
@@ -352,11 +352,11 @@ $generated_i18n_strings = array(
 	__( 'This email address is already added as a recipient. Edit the existing recipient to add more report types.', 'wphb' ),
 
 	// Reference: front/ui/components/RecipientsList/RecipientPanel.jsx:252
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:706
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:705
 	__( 'Performance reports', 'wphb' ),
 
 	// Reference: front/ui/components/RecipientsList/RecipientPanel.jsx:253
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:332
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:331
 	__( 'Uptime report', 'wphb' ),
 
 	// Reference: front/ui/components/RecipientsList/RecipientPanel.jsx:261
@@ -459,7 +459,7 @@ $generated_i18n_strings = array(
 	__( 'Name', 'wphb' ),
 
 	// Reference: front/ui/components/RecipientsList/RecipientsList.jsx:233
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:409
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:411
 	__( 'Status', 'wphb' ),
 
 	// Reference: front/ui/components/RecipientsList/RecipientsList.jsx:238
@@ -502,8 +502,8 @@ $generated_i18n_strings = array(
 
 	// Reference: front/ui/components/RecipientsList/RecipientsList.jsx:45
 	// Reference: front/ui/pages/advanced-tools/AdvancedToolsPage.jsx:28
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:732
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:318
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:731
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:317
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/UptimeWelcomeModal.jsx:47
 	// Reference: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:19
 	__( 'Uptime', 'wphb' ),
@@ -532,34 +532,34 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/components/SafeMode/SafeModeBanner/SafeModeBanner.jsx:73
 	__( 'Copy a preview link to test your Safe Mode changes in tools like PageSpeed Insights.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:13
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:14
 	__( 'Make changes safely', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:14
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:15
 	__( 'Keep optimization updates unpublished while testing.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:17
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:18
 	__( 'Preview your site', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:18
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:19
 	__( 'See your changes on the front end before they go live.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:21
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:22
 	__( 'Publish when ready', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:22
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:23
 	__( 'Review your changes and apply them to the live site.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:61
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:63
 	__( 'Safe Mode', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:62
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:64
 	__( 'Test before you publish', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:63
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:65
 	__( 'Preview Hummingbird optimization changes before publishing them to your live site.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:87
+	// Reference: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:89
 	__( 'Changes are only visible to logged-in admins and anyone using the Safe Mode preview link.', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeDisableModal/SafeModeDisableModal.jsx:101
@@ -569,7 +569,7 @@ $generated_i18n_strings = array(
 	__( 'Discard & disable Safe Mode', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeDisableModal/SafeModeDisableModal.jsx:113
-	// Reference: front/ui/layout/PageHeader.jsx:245
+	// Reference: front/ui/layout/PageHeader.jsx:247
 	__( 'Disable Safe Mode', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeDisableModal/SafeModeDisableModal.jsx:127
@@ -589,7 +589,7 @@ $generated_i18n_strings = array(
 	_n_noop( 'You have %d unpublished change. Turning off Safe Mode will discard it and keep your current live configuration unchanged.', 'You have %d unpublished changes. Turning off Safe Mode will discard them and keep your current live configuration unchanged.', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeIntroModal/SafeModeIntroModal.jsx:118
-	// Reference: front/ui/layout/PageHeader.jsx:246
+	// Reference: front/ui/layout/PageHeader.jsx:248
 	__( 'Enable Safe Mode', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeIntroModal/SafeModeIntroModal.jsx:127
@@ -601,16 +601,16 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/components/SafeMode/SafeModeIntroModal/SafeModeIntroModal.jsx:98
 	__( 'Safe Mode lets you test and preview optimization changes without affecting your live site.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:42
+	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:44
 	__( 'Safe mode is active. Hummingbird\'s in-plugin performance test runs on your live site only.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:51
+	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:53
 	__( 'To test your unpublished Safe Mode changes, run your Safe Mode preview link directly in <previewLink>PageSpeed Insights<openNewWindow /></previewLink>.', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:75
+	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:77
 	__( 'Run live site test', 'wphb' ),
 
-	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:86
+	// Reference: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:88
 	__( 'Run performance test on live site?', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:117
@@ -649,7 +649,7 @@ $generated_i18n_strings = array(
 
 	// Reference: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:300
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/EventLogs.jsx:8
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:281
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:282
 	// Reference: front/ui/pages/settings/components/Configs/ConfigStatus.jsx:93
 	__( 'STATUS', 'wphb' ),
 
@@ -660,7 +660,7 @@ $generated_i18n_strings = array(
 	__( 'Clear cache after publishing changes.', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:351
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:540
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:537
 	__( 'Publish changes', 'wphb' ),
 
 	// Reference: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:361
@@ -814,20 +814,20 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/components/WelcomeModal/WelcomeModal.jsx:67
 	__( 'Quicker CDN integration - Serve CSS, JS, and fonts globally—with exclusions when needed.', 'wphb' ),
 
-	// Reference: front/ui/hooks/useCacheClearedToast.jsx:21
-	// Reference: front/ui/hooks/useHummingbirdToast.jsx:23
+	// Reference: front/ui/hooks/useCacheClearedToast.jsx:19
+	// Reference: front/ui/hooks/useHummingbirdToast.jsx:22
 	// Reference: front/ui/pages/advanced-tools/components/DatabaseCleanup/CleanupCard.jsx:48
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:637
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:638
 	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompressExclusionsModal.jsx:222
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:372
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:374
 	// Reference: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:245
 	// Reference: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:464
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:164
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:208
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:662
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:209
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:663
 	// Reference: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:231
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:486
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2024
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2035
 	// Reference: front/ui/pages/cdn/components/CdnExclusions.jsx:158
 	// Reference: front/ui/pages/settings/components/OtherSettings/DebugLogSetting.jsx:86
 	__( 'Dismiss', 'wphb' ),
@@ -842,7 +842,7 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/hooks/useDraft.js:99
 	__( 'Enter a whole number.', 'wphb' ),
 
-	// Reference: front/ui/hooks/useHubConnectPrompt.jsx:20
+	// Reference: front/ui/hooks/useHubConnectPrompt.jsx:19
 	__( 'Need Network Admin access', 'wphb' ),
 
 	// Reference: front/ui/hooks/useHummingbirdApi.js:191
@@ -851,17 +851,17 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/hooks/useHummingbirdApi.js:195
 	__( 'Request failed.', 'wphb' ),
 
-	// Reference: front/ui/hooks/useRateNotice.jsx:35
+	// Reference: front/ui/hooks/useRateNotice.jsx:36
 	__( 'Rate Hummingbird', 'wphb' ),
 
-	// Reference: front/ui/hooks/useRateNotice.jsx:43
+	// Reference: front/ui/hooks/useRateNotice.jsx:44
 	__( 'Remind me later', 'wphb' ),
 
-	// Reference: front/ui/hooks/useRateNotice.jsx:48
+	// Reference: front/ui/hooks/useRateNotice.jsx:49
 	__( 'I already did', 'wphb' ),
 
 	// Reference: front/ui/layout/ActivityLogPanel.jsx:38
-	// Reference: front/ui/layout/PageHeader.jsx:320
+	// Reference: front/ui/layout/PageHeader.jsx:322
 	__( 'Activity Log', 'wphb' ),
 
 	// Reference: front/ui/layout/ActivityLogPanel.jsx:47
@@ -870,32 +870,32 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/layout/ActivityLogPanel.jsx:51
 	__( 'Close Activity Log panel', 'wphb' ),
 
-	// Reference: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:39
+	// Reference: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:41
 	__( 'Refresh page', 'wphb' ),
 
-	// Reference: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:50
+	// Reference: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:52
 	__( 'Contact support', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:142
+	// Reference: front/ui/layout/PageHeader.jsx:144
 	__( 'Click to disable Safe Mode', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:144
+	// Reference: front/ui/layout/PageHeader.jsx:146
 	__( 'Enable Safe Mode to preview and test optimization changes before publishing them to your live site. <link>Learn more</link>', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:191
-	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:36
+	// Reference: front/ui/layout/PageHeader.jsx:193
+	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:38
 	__( 'WPMU DEV', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:280
+	// Reference: front/ui/layout/PageHeader.jsx:282
 	__( 'Help & Support', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:329
+	// Reference: front/ui/layout/PageHeader.jsx:331
 	__( 'Hide Activity Log', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:330
+	// Reference: front/ui/layout/PageHeader.jsx:332
 	__( 'Show Activity Log', 'wphb' ),
 
-	// Reference: front/ui/layout/PageHeader.jsx:398
+	// Reference: front/ui/layout/PageHeader.jsx:405
 	__( 'Pro Features', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/AdvancedToolsPage.jsx:35
@@ -906,7 +906,7 @@ $generated_i18n_strings = array(
 	__( 'Tools', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/AdvancedToolsPage.jsx:59
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:329
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:328
 	__( 'Reports & Alerts', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/AdvancedToolsPage.jsx:75
@@ -917,7 +917,7 @@ $generated_i18n_strings = array(
 	__( 'Enable Uptime Threshold to send uptime notifications to your recipients when the selected threshold is reached.', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertCard.jsx:44
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:336
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:335
 	__( 'Uptime alert', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertCard.jsx:45
@@ -983,67 +983,67 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:335
 	__( 'Activate Uptime first', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:338
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:337
 	// Reference: front/ui/pages/dashboard/DashboardPage.jsx:76
-	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:52
+	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:51
 	__( 'Not now', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:341
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:340
 	__( 'Go to Uptime', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:36
 	__( 'All devices', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:37
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:121
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:132
 	__( 'Desktop', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:38
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:127
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:138
 	__( 'Mobile', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:424
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:423
 	__( 'Failed to save Alerts & Reports settings. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:461
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:58
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:460
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:60
 	__( 'to turn on Performance Reports.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:462
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:59
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:461
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:61
 	__( 'Contact your Network Admin to enable Performance Reports.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:486
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:485
 	__( 'to turn on Uptime Reports.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:504
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:503
 	__( 'to turn on Uptime Threshold.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:698
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:697
 	__( 'No recipients added. Add at least one recipient to receive your enabled reports and alerts.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:707
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:706
 	__( 'Schedule and configure performance report delivery.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:708
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:707
 	__( 'Test', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:730
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:729
 	__( 'Uptime reports', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:731
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:730
 	__( 'Send scheduled uptime monitoring summaries to your recipients.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:796
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:795
 	__( 'Schedule Report', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:796
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:795
 	__( 'Schedule Scan', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:805
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:804
 	__( 'Instant Alerts', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:806
+	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:805
 	__( 'Know the moment your site goes down with instant email alerts.', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/AlertsReports/ReportScheduleCard.jsx:41
@@ -1173,7 +1173,7 @@ $generated_i18n_strings = array(
 	__( 'Delete permanently', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/DatabaseCleanup/DatabaseCleanup.jsx:70
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:322
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:323
 	__( 'Post revisions', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/DatabaseCleanup/DatabaseCleanup.jsx:71
@@ -1215,109 +1215,109 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/advanced-tools/components/DatabaseCleanup/ScheduledCleanupCard.jsx:62
 	__( 'Add recipients to receive scheduled cleanup reports by email.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:203
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:204
 	__( 'Enter the maximum number of revisions to keep, or enter 0 to disable revisions.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:266
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:267
 	__( 'Performance tweaks', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:267
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:268
 	__( 'Here are a few additional tweaks you can make to further reduce your page load times.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:275
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:276
 	__( 'Viewport meta optimization', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:276
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:277
 	__( 'Automatically set the viewport meta tag on your site for improved mobile responsiveness and Core Web Vitals scores.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:283
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:284
 	__( 'Remove URL query strings', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:284
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:285
 	__( 'Some proxy caching servers and even some CDNs cannot cache static assets with query strings, resulting in a large missed opportunity for increased speeds.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:303
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:304
 	__( 'Remove default emoji files', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:304
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:305
 	__( 'WordPress adds Javascript and CSS files to convert common symbols like “:)” to visual emojis. If you don’t need emojis this will remove two unnecessary assets.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:316
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:317
 	__( 'This option is overwritten by global network settings.', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:32
 	__( 'Disable cart fragments to reduce AJAX requests, then choose where to apply it.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:325
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:326
 	__( 'WordPress post revisions track and save every content edit, allowing for easy comparison, restoration, and collaboration by storing each change.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:346
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:347
 	__( 'WooCommerce cart fragments', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:396
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:397
 	__( 'Non-WooCommerce', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:407
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:408
 	__( 'All pages', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:414
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:415
 	__( 'After disabling, enable', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:428
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:429
 	__( 'Redirect to the cart page after successful addition', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:430
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:431
 	__( 'in WooCommerce settings so customers are sent directly to the cart.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:432
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:433
 	__( 'This option requires WooCommerce to be installed and activated.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:443
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:444
 	__( 'Lazy load comments', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:454
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:455
 	__( 'Choose when comments load', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:469
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:470
 	__( 'On scroll', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:470
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:471
 	__( 'This method will automatically load the comments section when it scrolls into view. The new comment section will appear at the top of the comments to make adding comment easier.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:490
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:491
 	__( 'On click', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:491
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:492
 	__( 'This method will require the visitor to click a button to load up the comments and is the most supported method for most websites.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:501
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:502
 	__( 'Comment limit', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:504
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:505
 	__( 'Limit comments loaded from the database to reduce query time.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:504
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:505
 	__( 'Change this in', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:506
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:507
 	__( 'Discussion Settings.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:514
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:515
 	__( 'limit', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:519
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:520
 	__( 'Preload comments', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:520
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:521
 	__( 'Enable this option to preload the first page of comments.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:531
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:532
 	__( 'Threshold', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:532
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:533
 	__( 'In addition to choosing how many comments to lazy load each time, you can also prevent lazy loading if there are only a few comments. Set this value here as the minimum number of comments before engaging lazy loading.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:538
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:539
 	/* translators: %s is the Gravatar Caching text, which links to the Gravatar Caching settings. */
 	__( 'Enable <link>Gravatar Caching</link> to store local copies of avatars used in comments and your theme.', 'wphb' ),
 
@@ -1325,58 +1325,58 @@ $generated_i18n_strings = array(
 	/* translators: %s: the rejected entries, comma separated. */
 	__( 'These entries aren’t valid hosts: %s', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:545
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:546
 	__( 'Gravatar Caching', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:571
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:572
 	__( 'DNS tweaks', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:577
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:578
 	__( 'DNS prefetch', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:588
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:589
 	__( 'Use defaults', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:597
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:598
 	__( 'Resolve external domains early to speed up connections.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:617
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:618
 	__( 'Enter one host per line using // instead of http:// or https://.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:622
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:623
 	__( 'Preconnect', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:633
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:634
 	__( 'Connect to external domains early for faster loading.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:653
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:654
 	__( 'Enter one host per line without http:// or https://.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:655
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:656
 	__( 'Preconnect requests exclude the crossorigin attribute by default.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:658
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:661
 	__( 'See <a>the documentation</a> before enabling it.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:660
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:663
 	__( 'documentation', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:670
+	// Reference: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:675
 	__( 'Saving tools settings.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:174
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:173
 	__( 'Uptime activation failed', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:174
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:173
 	__( 'Uptime deactivation failed', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:209
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:208
 	__( 'Couldn’t load Uptime data', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:219
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:218
 	__( 'Down', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:219
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:218
 	__( 'Up', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:22
@@ -1385,46 +1385,46 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:23
 	__( 'Last 7 days', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:236
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:235
 	__( 'About Uptime', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:24
 	__( 'Last 30 days', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:245
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:244
 	__( 'Uptime monitors your server response time and lets you know when your website is down or too slow for your visitors.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:270
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:269
 	__( 'Reporting period', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:277
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:276
 	__( 'Enable Uptime', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:291
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:290
 	__( 'Website status', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:305
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:304
 	__( 'Up since', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:322
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:321
 	__( 'Downtime', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:347
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:346
 	__( 'Response time', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:349
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:348
 	__( 'About response time', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:351
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:350
 	__( 'The amount of time it takes for a web server to respond to a request from a browser.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:357
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:356
 	__( 'Maximum', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:358
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:357
 	__( 'Minimum', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:359
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:358
 	__( 'Average', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:87
@@ -1439,16 +1439,16 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:29
 	__( 'Are you sure want to disable Uptime? You won’t be able to track your site’s downtime and uptime, as well as your server response times.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:36
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:37
 	__( 'Deactivation of Uptime is not recommended if the ', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:43
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:44
 	__( 'Proactive Monitoring', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:45
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:46
 	__( ' service is enabled.', 'wphb' ),
 
-	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:53
+	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:55
 	__( 'Disable Uptime', 'wphb' ),
 
 	// Reference: front/ui/pages/advanced-tools/components/Uptime/components/EventLogs.jsx:10
@@ -1506,96 +1506,96 @@ $generated_i18n_strings = array(
 	__( 'Automatic', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/AssetOptimizationPage.jsx:59
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:383
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:380
 	__( 'Dev Mode', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:32
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:33
 	__( 'CSS files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:33
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:34
 	__( 'Hummingbird will minify your CSS files, generating a version that loads faster. It will remove unnecessary characters or lines of code from your file to make it more compact.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:339
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:340
 	__( 'Error while starting the file check. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:356
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:357
 	__( 'Combine & compress', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:357
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:358
 	__( 'Optimizing your assets will compress and organize them in a way that improves page load times.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:371
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:372
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:15
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevModeAsset.jsx:35
 	__( 'Compress', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:372
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:373
 	__( 'Compresses your files for faster delivery while improving site speed by decluttering CSS and JavaScript', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:386
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:387
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:17
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevModeAsset.jsx:36
 	__( 'Combine', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:387
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:388
 	__( 'Combines multiple JS and CSS files into fewer files, reducing the number of requests made when a page is loaded.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:396
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:397
 	__( 'Choose files to optimize automatically.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:398
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:399
 	__( 'Added/removed plugins or themes? Update your file list to include new files, and remove old ones.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:416
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:417
 	__( 'Scanning…', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:417
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:418
 	// Reference: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:295
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:406
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:407
 	__( 'Re-check', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:42
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:43
 	__( 'JavaScript files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:43
-	__( 'JavaScript minification is the process of removing whitespace and any code that is not necessary to create a smaller but valid code.', 'wphb' ),
-
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:435
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:436
 	// Reference: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:329
 	// Reference: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:36
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1993
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2004
 	// Reference: front/ui/pages/cdn/components/CdnExclusions.jsx:139
 	__( 'Exclusions', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:436
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:437
 	__( 'By default, we\'ll optimize all the CSS and JS files we can find. If you have specific files you want to leave as-is, list them here, and we\'ll exclude them.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:446
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:454
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:44
+	__( 'JavaScript minification is the process of removing whitespace and any code that is not necessary to create a smaller but valid code.', 'wphb' ),
+
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:447
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:456
 	// Reference: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:341
 	__( 'Manage', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:453
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:454
 	__( 'Clear Cache', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:456
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:457
 	__( 'Clear all local or hosted assets and recompress files that need it.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:468
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:520
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:469
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:517
 	// Reference: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:277
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:592
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1285
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1296
 	__( 'Clear cache', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:481
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:482
 	__( 'Dev mode is enabled.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:52
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:216
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:53
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:215
 	__( 'Fonts', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:53
+	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:54
 	__( 'Enable this option to optimize the delivery of your fonts so they don\'t trigger the "Eliminate render-blocking resources" recommendation in your performance tests.', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompressExclusionsModal.jsx:237
@@ -1649,93 +1649,93 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/dashboard/components/CombineCompressCard.jsx:34
 	__( 'Combine & Compress', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:106
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:108
 	__( 'Optimized', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:107
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:109
 	__( 'Critical CSS has been generated for your pages.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:115
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:117
 	__( 'Optimizing', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:116
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:118
 	__( 'Generating Critical CSS. This could take a few minutes depending on the number of site assets that need to be checked.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:126
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:128
 	__( 'Critical CSS generation failed. Click for details.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:127
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:129
 	__( 'An unknown error occurred while generating Critical CSS.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:137
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:187
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:139
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:188
 	__( 'Contact Support', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:229
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:231
 	__( 'Error while regenerating Critical CSS. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:245
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:247
 	__( 'Failed to save Critical CSS settings. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:25
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:26
 	// Reference: front/ui/pages/dashboard/components/CriticalCSSCard.jsx:46
 	// Reference: front/ui/pages/settings/components/Configs/ConfigStatus.jsx:16
 	__( 'Critical CSS', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:28
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:29
 	__( 'Automatically optimize CSS delivery for faster page loads and better performance scores.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:31
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:32
 	__( 'Boost page performance', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:32
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:33
 	__( 'Auto-optimize CSS delivery to help pages load faster and improve performance scores.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:36
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:37
 	__( 'Critical CSS generation', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:37
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:38
 	__( 'Reduce CSS-related delays.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:40
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:41
 	__( 'Choose your method', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:41
-	__( 'Optimize the Full-page or above-the-fold only.', 'wphb' ),
-
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:410
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:412
 	__( 'Whether critical CSS has been generated for your pages.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:417
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:419
 	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:120
 	__( 'CSS loading mode', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:418
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:42
+	__( 'Optimize the Full-page or above-the-fold only.', 'wphb' ),
+
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:420
 	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:122
 	__( 'How to handle the Unused CSS', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:44
-	__( 'Manage exclusions', 'wphb' ),
-
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:444
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:446
 	__( 'Exclusions & inclusions', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:445
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:447
 	__( 'Manage which pages are included or excluded from critical CSS generation.', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:45
+	__( 'Manage exclusions', 'wphb' ),
+
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:46
 	__( 'Skip selected URLs, post types, plugins, themes, and more.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:464
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:466
 	__( 'Clears all local or hosted assets and regenerates all required ones. Homepage assets will be automatically regenerated.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:477
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:479
 	__( 'Regenerate Critical CSS', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:48
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:49
 	__( 'Add manual rules', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:49
+	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:50
 	__( 'Add CSS rules that should always be included.', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:10
@@ -1858,149 +1858,149 @@ $generated_i18n_strings = array(
 	__( 'Inline', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:32
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:560
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:557
 	__( 'Bulk update', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:41
 	__( 'Choose what bulk update actions you’d like to apply to the selected files. You still have to publish your changes before they will be set live.', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:71
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:432
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:433
 	// Reference: front/ui/pages/settings/components/Configs/ConfigAction.jsx:424
 	__( 'Apply', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:125
 	__( 'File check completed.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:175
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:174
 	__( 'All plugins and themes', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:209
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:208
 	__( 'No assets found yet. Select Recheck files to scan this site.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:211
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:210
 	__( 'No assets match your filters. Try adjusting or clearing them.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:214
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:213
 	// Reference: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:480
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:15
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:86
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:28
 	__( 'CSS', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:215
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:214
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:14
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:84
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:22
 	__( 'JavaScript', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:222
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:221
 	__( 'Select all CSS assets', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:223
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:222
 	__( 'Select all JavaScript assets', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:224
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:223
 	__( 'Font assets cannot be selected in bulk', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:302
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:301
 	__( 'Unable to publish the asset settings. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:314
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:313
 	__( 'Your changes have been published.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:316
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:315
 	__( 'Files queued for compression will generate once someone visits your homepage.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:335
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:333
 	__( 'File check started.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:345
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:342
 	__( 'Unable to start the file check. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:357
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:354
 	__( 'Unable to disable Dev Mode. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:372
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:369
 	__( 'Recheck files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:392
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:389
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevModeAsset.jsx:47
 	__( 'Disable', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:396
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:393
 	__( 'Manually configure your optimization settings (compress, combine, move, inline, defer, async, and preload) and then publish your changes.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:411
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:408
 	__( 'Search by name or extensions', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:429
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:426
 	__( 'Open filter options', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:431
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:428
 	__( 'Filter', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:441
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:438
 	__( 'Display files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:454
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:704
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:451
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:705
 	__( 'All files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:455
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:452
 	__( 'Hosted locally', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:456
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:453
 	__( 'External files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:466
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:463
 	__( 'Sort by', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:475
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:472
 	__( 'Search plugins and themes', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:491
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:488
 	__( 'Apply filter', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:505
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:502
 	__( 'Clear filter', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:524
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:521
 	__( 'Fetching latest data', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:547
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:544
 	__( 'Bulk update selected files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:551
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:548
 	/* translators: %d: number of selected assets. */
 	__( '%d items selected', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:557
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:554
 	__( 'Deselect all', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:582
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:579
 	__( 'Loading assets…', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:632
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:629
 	// Reference: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:52
 	__( 'Files', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:633
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:630
 	__( 'Optimization Options', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:672
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:669
 	__( 'Disable Dev Mode?', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:676
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:673
 	__( 'Are you sure you want to disable Dev Mode? You can enable it again from ', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:682
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:679
 	__( 'Settings > Others', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:684
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:681
 	__( ' page.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:691
+	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:688
 	__( 'Disable Dev Mode', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:90
@@ -2225,11 +2225,11 @@ $generated_i18n_strings = array(
 	__( 'These entries aren’t font files: %s', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:129
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:403
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:404
 	__( 'Copied!', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:130
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:404
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:405
 	__( 'Copy', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:149
@@ -2265,68 +2265,68 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:31
 	__( 'Manual', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:100
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:101
 	__( 'Gzip rules deactivated.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:101
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:102
 	__( 'Gzip rules applied.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:120
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:121
 	__( 'Active', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:120
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:121
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:126
 	// Reference: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:27
 	__( 'Disabled', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:128
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:129
 	__( 'Brotli', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:128
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:129
 	__( 'GZip', 'wphb' ),
 
 	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:13
 	__( 'HTML', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:131
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:132
 	__( 'Brotli compression is active via your CDN/hosting. Unsupported browsers automatically use GZip.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:132
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:133
 	__( 'The compression algorithm detected on your server.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:161
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:162
 	__( 'Text compression', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:162
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:163
 	__( 'Enable server-side text compression for faster file delivery.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:167
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:168
 	__( 'Gzip is not working properly. Click for details.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:171
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:172
 	__( 'Gzip is not working properly:', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:174
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:175
 	__( 'Your server may not have the "deflate" module enabled (mod_deflate for Apache, ngx_http_gzip_module for NGINX). Contact your host. If deflate is enabled, ask why all .htaccess or nginx.conf compression rules are not being applied. If re-checking and restarting does not resolve, please check with your host or open a support ticket.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:217
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:218
 	/* translators: %d - number of inactive compression types */
 	_n_noop( '<b>Warning:</b> %d compression type is inactive. Configure compression for all file types below.', '<b>Warning:</b> %d compression types are inactive. Configure compression for all file types below.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:258
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:259
 	__( 'Detected compression type', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:278
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:279
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:494
 	__( 'FILE TYPE', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:312
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:313
 	__( 'Advanced settings', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:313
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:314
 	__( 'Configure advanced compression options per file type.', 'wphb' ),
 
-	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:322
+	// Reference: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:323
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:531
 	__( 'Configure', 'wphb' ),
 
@@ -2334,9 +2334,9 @@ $generated_i18n_strings = array(
 	__( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/CachingPage.jsx:16
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1302
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1313
 	// Reference: front/ui/pages/dashboard/components/PageCachingCard.jsx:31
-	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:50
+	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:51
 	__( 'Page Caching', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/CachingPage.jsx:23
@@ -2370,53 +2370,53 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:36
 	__( 'Apache web server', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:408
-	__( 'Server', 'wphb' ),
-
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:409
-	__( 'Nginx', 'wphb' ),
+	__( 'Server', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:41
 	__( 'LiteSpeed', 'wphb' ),
 
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:410
+	__( 'Nginx', 'wphb' ),
+
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:42
 	__( 'Built-in caching server', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:420
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:421
 	__( 'the selected duration', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:421
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:422
 	__( 'Next', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:427
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:428
 	__( 'Finish', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:429
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:430
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:42
 	__( 'Checking...', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:429
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:430
 	__( 'Check', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:432
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:433
 	__( 'Applying...', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:44
 	__( 'LiteSpeed web server', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:440
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:441
 	/* translators: %s: selected web server name */
 	__( '%s is now configured with custom cache durations for your selected file types.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:446
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:447
 	/* translators: 1: selected web server name, 2: selected cache duration */
 	__( '%1$s is now configured to cache assets for %2$s, the recommended duration.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:453
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:454
 	/* translators: 1: selected web server name, 2: selected cache duration */
 	__( '%1$s is now configured to cache assets for %2$s.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:478
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:479
 	__( 'Browser caching is ready', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:49
@@ -2425,20 +2425,20 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:50
 	__( 'Microsoft web server', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:511
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:512
 	__( 'Configure Browser Caching', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:516
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:517
 	/* translators: 1: current step number, 2: total step count */
 	__( 'Step %1$d of %2$d', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:52
 	__( 'IIS web server', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:537
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:538
 	__( 'Configuration steps', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:573
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:574
 	/* translators: %s: detected web server name. */
 	__( '%s was detected as your web server. If this is incorrect, select another server to generate the correct Hummingbird configuration.', 'wphb' ),
 
@@ -2456,10 +2456,10 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:61
 	__( '5 hours', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:610
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:611
 	__( 'Copy the generated code into your nginx.conf (usually located at /etc/nginx/nginx.conf or /usr/local/nginx/conf/nginx.conf), add it to the http or server section, and then reload or restart NGINX.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:613
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:614
 	/* translators: %s: selected cache duration e.g. 1 year */
 	__( 'Configure Cache-Control in the LiteSpeed WebAdmin Console using the OpenLiteSpeed guide and set Expires by Type to %s. Alternatively, copy the generated code into your .htaccess file, save, and restart/reload LiteSpeed.', 'wphb' ),
 
@@ -2476,10 +2476,10 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:65
 	__( '20 hours', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:655
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:656
 	__( 'Choose how long browsers cache each file type.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:657
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:658
 	__( 'Google recommends at least one year.', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:66
@@ -2488,22 +2488,22 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:67
 	__( '2 days', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:677
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:678
 	__( 'For IIS 7 servers and above,', 'wphb' ),
-
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:679
-	__( 'visit Microsoft TechNet', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:68
 	__( '3 days', 'wphb' ),
 
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:680
+	__( 'visit Microsoft TechNet', 'wphb' ),
+
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:69
 	__( '4 days', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:693
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:694
 	__( 'Customize expiry times', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:694
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:695
 	__( 'Choose how long browsers cache each file type. Google recommends at least one year.', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:70
@@ -2524,7 +2524,7 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:75
 	__( '2 months', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:754
+	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:755
 	__( 'Back', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:76
@@ -2560,7 +2560,7 @@ $generated_i18n_strings = array(
 	__( 'Cloudflare is not connected', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:214
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:348
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:349
 	__( 'Connect', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:226
@@ -2611,68 +2611,68 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:73
 	__( 'Cloudflare was disconnected successfully.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:288
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:289
 	__( 'Cloudflare is connected, but no active zones were found for this domain. Make sure your domain is added to Cloudflare.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:329
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:330
 	__( 'An error occurred while connecting to Cloudflare.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:343
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:344
 	__( 'Continue', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:374
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:375
 	__( 'Connect Cloudflare', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:376
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:377
 	__( 'Manage your Cloudflare in Hummingbird', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:425
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:426
 	__( 'Global API key', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:430
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:431
 	__( 'API token', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:448
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:449
 	__( 'Cloudflare email account', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:457
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:458
 	__( 'Email address is required.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:471
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:472
 	__( 'Cloudflare global API key', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:478
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:479
 	__( 'Global API key is required.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:497
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:498
 	__( 'Cloudflare API token', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:501
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:502
 	__( 'API token must be at least 40 characters.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:505
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:506
 	__( 'Enter 40 or more digit API code here', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:508
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:509
 	/* translators: %d: number of characters entered. */
 	__( '%d chars (min. 40)', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:525
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:526
 	__( 'Zone', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:526
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:527
 	__( 'The Cloudflare zone associated with your account.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:535
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:536
 	__( 'Select zone', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:570
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:571
 	__( 'Need help getting an API token?', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:575
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:576
 	__( 'In Cloudflare, go to My Profile → API Tokens → Create Token. Use the Edit zone DNS template or create a custom token with the required permissions.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:586
+	// Reference: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:588
 	__( 'View documentation', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:470
@@ -2715,205 +2715,208 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:658
 	__( 'Choose how long WordPress caches RSS feeds, or turn feed caching off.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1274
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1285
 	__( 'Clear the cached version of all pages so visitors receive the latest content and changes.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1330
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1341
 	__( 'Stores static HTML copies of your pages and posts to improve load times.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1344
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1355
 	__( 'Page caching is currently active.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1360
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1371
 	__( 'Cached files', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1360
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1371
 	__( 'Pages are cached when someone first visits them. This number is the total count of static files being cached (not pages) and can be larger than the total number of physical pages you have.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1361
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1372
 	__( 'files', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1366
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1377
 	__( 'Hummingbird stores static HTML copies to speed up page loading. Server-side caching stores static pages for faster loading and supports up to 10× more concurrent visitors.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1370
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1377
+	__( 'Hummingbird stores static HTML copies to speed up page loading.', 'wphb' ),
+
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1381
 	__( 'Cache method', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1401
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1412
 	__( 'Serves pre-built static HTML through Nginx or Apache, bypassing PHP for maximum performance. Requires server-level configuration.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1402
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1413
 	__( 'Stores cached pages on your server using PHP. Works with any server setup, needs minimal configuration, and suits most WordPress sites.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1406
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1417
 	__( 'Preload cache', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1422
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1433
 	__( 'Choose which pages to preload. We recommend always including the homepage.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1471
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1482
 	__( 'Cache coverage', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1497
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1508
 	__( 'Select the page types to cache.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1506
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1517
 	__( 'Page Types', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1519
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1530
 	__( 'Your blog is your front page', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1523
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1534
 	__( 'More information about Blog', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1574
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1585
 	__( 'Cache on mobile devices', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1575
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1586
 	__( 'By default, page caching is enabled for mobile devices. If you don\'t want to use mobile caching, simply disable this setting.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1582
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1593
 	__( 'Cache for logged-in users', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1583
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1594
 	__( 'Caching pages for logged in users can reduce load on your server, but can cause strange behavior with some themes/plugins.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1590
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
 	__( 'Use', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1590
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
 	__( 'define (\'DONOTCACHEPAGE\', true);', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1590
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
 	__( 'to exclude specific pages or templates from caching.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1612
 	__( 'File change detection', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1613
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1624
 	__( 'Choose how the system responds when changes to your file structure are detected.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1623
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1634
 	__( 'File change detection mode', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1680
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1691
 	__( 'Caching rules', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1696
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1707
 	__( 'Advanced rules', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1707
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1718
 	__( 'Choose which requests are cached and how cached pages are served.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1718
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1729
 	__( 'Cache URL queries', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1718
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1729
 	__( 'You can turn on caching pages with GET parameters (?x=y at the end of a url), though generally this isn\'t a good idea if those pages are dynamic.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1721
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1732
 	__( 'Cache HTTP headers', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1721
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1732
 	__( 'By default, Hummingbird won\'t cache HTTP headers. Enable this feature to include them.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1724
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1735
 	__( 'Cache 404 requests', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1724
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1735
 	__( 'Even though 404s are bad and you will want to avoid them with redirects, you can still choose to cache your 404 page to avoid additional load on your server.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1727
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1738
 	__( 'Identify cached pages', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1727
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1738
 	__( 'Hummingbird will insert a comment into your page\'s «head» tag to easily identify if it\'s cached or not.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1739
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1750
 	__( 'Serve compressed cached files', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1739
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1750
 	__( 'Improves performance on servers, where gzip compression is disabled or not available.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1749
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1760
 	__( 'Note: Gzip compression already enabled on the server.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1757
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1768
 	__( 'Purge rules', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1781
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1792
 	__( 'Clear cache at set intervals', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1782
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1793
 	__( 'A cache cleanup will occur following page or post updates at the interval you set.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1845
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1856
 	__( 'Purge Varnish cache', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1845
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1856
 	__( 'Varnish caching increases response to HTTP requests and reduces server workload, significantly accelerating delivery. When enabled it will purge Varnish cache when you publish posts, pages or comments.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1857
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1868
 	__( 'Purge OPcache', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1857
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1868
 	__( 'OPcache stores script bytecode in memory so PHP scripts don\'t have to be loaded and parsed with every request. OPcache cache will be cleared when you click "Clear cache" button located in the admin bar.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1864
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1875
 	__( 'OPcache is already enabled and optimally preconfigured in our servers. It will automatically detect and recache any php file changes.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1865
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1876
 	__( 'Note: OpCache is only available if you have the service setup on your server.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1898
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1909
 	__( 'Cache lifetime', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1899
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1910
 	__( 'Adjust the static server cache expiry as needed.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1914
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1925
 	__( 'Caching Purge rules', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1926
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1937
 	__( 'Choose when cached pages are cleared automatically.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1938
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1949
 	__( 'Clear full cache after a post or page update', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1939
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1950
 	__( 'If one of your pages or posts gets updated, turning this setting on will also regenerate all cached archives and taxonomies for all post types.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1944
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1955
 	__( 'Clear cache after a comment is posted', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1945
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1956
 	__( 'The page cache will be cleared after each comment made on a post.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1952
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1963
 	__( 'Query String (Params)', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1964
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1975
 	__( 'Specify any query string you want to cache.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2019
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2030
 	__( 'Specify any URLs you don\'t want to cache.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2030
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2041
 	__( 'Exclude URL strings', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2031
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2042
 	__( 'You can tell Hummingbird not to cache specific URLs, or any URLs that contain strings. Add one entry per line.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2052
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2063
 	__( 'Exclude user agent', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2053
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2064
 	__( 'Specify any user agents you don\'t want to send cached pages to like bots, spiders and crawlers. We\'ve added a couple of common ones for you.', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2070
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2081
 	__( 'Exclude cookies', 'wphb' ),
 
-	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2071
+	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2082
 	__( 'Specify the cookie IDs you don\'t want cached. Add one ID per line.', 'wphb' ),
 
 	// Reference: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:23
@@ -3000,21 +3003,21 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/cdn/components/CdnExclusions.jsx:33
 	__( 'Enter any file paths or partial URLs you want to exclude from CDN rewriting.', 'wphb' ),
 
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:143
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:144
 	__( 'CDN could not be updated. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:180
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:181
 	__( 'Global CDN map preview', 'wphb' ),
 
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:223
-	// Reference: front/ui/pages/dashboard/components/CDNCard.jsx:19
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:224
+	// Reference: front/ui/pages/dashboard/components/CDNCard.jsx:21
 	// Reference: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:14
 	__( 'CDN', 'wphb' ),
 
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:224
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:225
 	__( 'Faster CSS & JS files', 'wphb' ),
 
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:225
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:226
 	__( 'Serve files from 119 CDN locations worldwide.', 'wphb' ),
 
 	// Reference: front/ui/pages/cdn/components/MainContent.jsx:29
@@ -3053,7 +3056,7 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/cdn/components/MainContent.jsx:50
 	__( 'Combines duplicate requests so your server handles less traffic.', 'wphb' ),
 
-	// Reference: front/ui/pages/cdn/components/MainContent.jsx:87
+	// Reference: front/ui/pages/cdn/components/MainContent.jsx:88
 	__( 'Serve your CSS, JS, and fonts from 119 global locations. <link>Learn more</link>', 'wphb' ),
 
 	// Reference: front/ui/pages/dashboard/DashboardPage.jsx:73
@@ -3066,10 +3069,10 @@ $generated_i18n_strings = array(
 	/* translators: %s: plugin name */
 	__( 'Welcome to %s.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/CDNCard.jsx:23
+	// Reference: front/ui/pages/dashboard/components/CDNCard.jsx:25
 	__( 'Serve your files from 119 global locations', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/CDNCard.jsx:26
+	// Reference: front/ui/pages/dashboard/components/CDNCard.jsx:28
 	// Reference: front/ui/pages/dashboard/components/CriticalCSSCard.jsx:52
 	// Reference: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:77
 	// Reference: front/ui/pages/dashboard/components/DelayJavascriptCard.jsx:29
@@ -3081,60 +3084,65 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/dashboard/components/CriticalCSSCard.jsx:50
 	__( 'Load essential CSS first for faster rendering.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:103
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:114
 	__( 'No test yet', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:11
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:12
 	__( 'Largest Contentful Paint measures when the main content becomes visible.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:115
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:126
 	__( 'Run Performance Test', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:12
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:13
 	__( 'Total Blocking Time measures how long the page is blocked from responding to input.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:13
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:14
 	__( 'Cumulative Layout Shift measures unexpected movement of content on the page.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:138
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:149
 	__( 'Performance summary', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:14
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:15
 	__( 'First Contentful Paint measures when the first piece of content appears.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:143
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:154
 	__( 'Clear all active cache types from one place.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:15
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:16
 	__( 'Speed Index measures how quickly the visible parts of the page are displayed.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:150
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:161
 	__( 'Clear all cache', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:16
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:17
 	__( 'Time to First Byte measures how quickly the server starts responding.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:170
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:181
 	__( 'PageSpeed', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:172
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:183
 	__( 'Your PageSpeed score is based on the latest performance test for the selected device.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:208
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:219
 	__( 'View on PageSpeed Insights', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:233
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:244
 	__( 'Set up a scheduled report', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:248
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:259
 	__( 'N/A', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:76
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:182
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:79
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:185
 	/* translators: %d: Number of minutes until another performance test can be run. */
 	_n_noop( 'Hummingbird is catching her breath - you can run another test in %d minute.', 'Hummingbird is catching her breath - you can run another test in %d minutes.', 'wphb' ),
 
-	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:87
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:86
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:192
+	/* translators: %d: Number of minutes until another performance test can be run. */
+	_n_noop( 'You can run another test in %d minute.', 'You can run another test in %d minutes.', 'wphb' ),
+
+	// Reference: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:98
 	__( 'Performance tests are unavailable while Critical CSS is generating. Try again once it’s finished.', 'wphb' ),
 
 	// Reference: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:48
@@ -3306,51 +3314,57 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:13
 	__( 'Use default configs', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:14
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:15
 	__( 'Start with WPMU DEV’s recommended Hummingbird setup, optimized for performance out of the box', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:17
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:16
+	__( 'Start with the recommended Hummingbird setup, optimized for performance out of the box', 'wphb' ),
+
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:20
 	__( 'Create your own', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:18
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:21
 	__( 'Build custom configs and roll them out across all your sites', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:21
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:24
 	__( 'Scale across every site', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:22
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:25
 	__( 'Keep Hummingbird settings consistent and skip repetitive setups', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:25
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:29
 	__( 'Works with all WPMU DEV plugins', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:26
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:30
+	__( 'Works with all plugins', 'wphb' ),
+
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:32
 	__( 'Create and deploy configs for every plugin from one place', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:41
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:47
 	__( 'Configuration', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:42
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:48
 	__( 'Set up Hummingbird once. Apply it everywhere.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:59
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:439
+	// Reference: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:65
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:440
 	__( 'Got it', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:108
+	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:107
 	__( 'Config details', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:45
+	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:44
 	__( 'Manage and apply configs to multiple sites from The Hub', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:48
+	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:47
 	__( 'Tips', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:55
+	// Reference: front/ui/pages/settings/components/Configs/Configs.jsx:54
 	__( 'Try Now', 'wphb' ),
 
 	// Reference: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:15
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:87
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:94
 	__( 'Asset Optimization', 'wphb' ),
 
 	// Reference: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:16
@@ -3437,181 +3451,184 @@ $generated_i18n_strings = array(
 	// Reference: front/ui/pages/settings/components/OtherSettings/DebugLogSetting.jsx:60
 	__( 'More information about the debug log', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:21
+	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:23
 	__( 'Version', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:28
+	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:30
 	__( 'Release date', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:35
+	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:37
 	__( 'Developer', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:42
+	// Reference: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:44
 	__( 'Hummingbird plugin information', 'wphb' ),
 
 	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:120
 	// Reference: front/ui/pages/settings/components/Permissions/usePermissionSave.js:75
 	__( 'Failed to save settings. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:231
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:232
 	__( 'Log file cleared.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:236
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:237
 	__( 'Failed to clear the log file. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:252
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:253
 	__( 'Failed to reset settings. Please try again.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:262
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:263
 	__( 'Clear log file?', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:268
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:269
 	/* translators: %s: log file name. */
 	__( 'Are you sure you want to clear the %s? This can’t be undone.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:278
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:279
 	__( 'Clear log file', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:390
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:391
 	__( 'Just be Careful!', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:394
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:395
 	__( 'Manual mode offers full control but can break your site. Make one change at a time and check your frontend.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:411
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:412
 	__( 'Switch to Dev Mode', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:420
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:421
 	__( 'Preset configuration will be applied.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:424
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:425
 	__( 'Automatic restores your last optimization choice and inherits current Dev settings. Dev-only settings (e.g., defer/inline) will be discarded and not saved if you switch back.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:430
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:431
 	__( 'Don\'t show me this again.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:447
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:448
 	__( 'Reset to factory settings?', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:450
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:451
 	__( 'Are you sure you want to reset Hummingbird\'s settings back to the factory defaults?', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:465
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:466
 	__( 'Reset settings', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:104
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:105
 	__( 'Enable developer controls for individual scripts and styles in Asset Optimization.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:108
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:109
 	__( 'More information about Asset Optimization Dev Mode', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:112
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:113
 	__( 'Take granular control of individual assets. Disable, defer, or inline scripts and styles on a per-file basis.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:118
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:119
 	__( 'Asset Optimization Dev Mode', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:125
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:126
 	__( 'To access this feature, navigate to ', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:127
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:128
 	__( 'Asset Optimization > Dev mode.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:140
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:141
 	__( 'Reset to factory settings', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:150
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:151
 	__( 'Reset', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:55
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:56
 	__( 'Share usage data', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:59
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:60
 	__( 'Help make Hummingbird better by letting our designers learn how you’re using the plugin.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:63
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:64
 	__( 'More information about usage data sharing', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:67
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:68
 	__( 'Help us improve by sharing anonymous usage data. Recommended.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:79
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:80
 	__( 'Preserve settings', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:82
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:83
 	__( 'Choose whether to save your settings for next time, or reset them.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:86
+	// Reference: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:87
 	__( 'More information about preserving settings', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:100
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:107
 	__( 'Subsites', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:103
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:110
 	__( 'Enable the Asset Optimization module for your subsites and further configure it as per your liking.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:127
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:134
 	__( 'Minimum user role', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:130
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:137
 	__( 'Choose the minimum user role required to configure the Asset Optimization module in your subsites.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:154
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:161
 	__( 'File location', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:169
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:175
 	__( 'Choose where Hummingbird should store your modified assets. Leave this blank to use the default folder, or define your own as a relative path. Note: changing the directory will clear out all the generated assets.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:21
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:22
 	__( 'Super Admin', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:22
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:23
 	__( 'Subsite Admin', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:10
+	// Reference: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:59
+	__( 'Choose a folder inside your site, or leave this blank to use the default folder.', 'wphb' ),
+
+	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:11
 	__( 'This setting adds the Page Caching tab to Hummingbird and allows a network or subsite admin to disable Page Caching if they wish to. Note: It does not allow them to modify your network settings.', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:63
+	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:64
 	__( 'Allow subsites to disable page caching', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:68
+	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:69
 	__( 'More information about letting subsites disable page caching', 'wphb' ),
 
-	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:87
+	// Reference: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:88
 	__( 'Page caching is turned off for the whole network. Turn it on from the Caching page to choose what subsites can do with it.', 'wphb' ),
 
 	// Reference: front/ui/pages/setup-wizard/components/SetupWizardSubHeader.jsx:31
 	__( 'Close Wizard', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:123
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:125
 	__( 'Run performance test', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:15
-	__( 'Test complete!', 'wphb' ),
-
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:155
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:157
 	/* translators: %s: plugin name */
 	__( 'Welcome to %s', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:166
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:16
+	__( 'Test complete!', 'wphb' ),
+
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:168
 	__( 'Run a performance test to see how your site is performing and start improving its speed.', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:20
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:21
 	__( 'Taking a little longer. Hang in there...', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:204
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:215
 	__( 'Skip for now', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:24
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:25
 	__( 'Finishing up soon', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:27
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:28
 	__( 'This won’t take long', 'wphb' ),
 
-	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:85
+	// Reference: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:87
 	__( 'Running performance test', 'wphb' ),
 
-	// Reference: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:68
+	// Reference: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:54
 	_x( 'by', 'Made by', 'wphb' )
 );
 /* THIS IS THE END OF THE GENERATED FILE */

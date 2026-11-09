@@ -15,100 +15,100 @@ msgstr ""
 msgid "Performance test in progress"
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:138
+#: front/shared/context/SafeModeContext.jsx:145
 msgid "Safe Mode could not be updated. Please try again."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:23
+#: front/shared/context/SafeModeContext.jsx:22
 #: front/ui/hooks/useHummingbirdApi.js:184
 msgid "Your session has expired. Reloading..."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:44
+#: front/shared/context/SafeModeContext.jsx:43
 #: front/ui/components/SafeMode/SafeModeBanner/SafeModeBanner.jsx:93
 msgid "Safe Mode is active."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:45
+#: front/shared/context/SafeModeContext.jsx:44
 msgid "Your changes are not live yet. Publish them when you're ready."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:48
+#: front/shared/context/SafeModeContext.jsx:47
 msgid "Safe Mode is off."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:49
+#: front/shared/context/SafeModeContext.jsx:48
 msgid "Your live settings are back in use."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:53
+#: front/shared/context/SafeModeContext.jsx:52
 msgid "Safe Mode changes are now live."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:54
+#: front/shared/context/SafeModeContext.jsx:53
 msgid "The changes you made in Safe Mode are now published to your live site."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:57
+#: front/shared/context/SafeModeContext.jsx:56
 msgid "Safe Mode changes discarded."
 msgstr ""
 
-#: front/shared/context/SafeModeContext.jsx:58
+#: front/shared/context/SafeModeContext.jsx:57
 msgid ""
 "The unpublished changes were thrown away and your live settings are "
 "unchanged."
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:104
+#: front/shared/context/usePerformanceScan.js:103
 msgid "Performance test completed"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:105
+#: front/shared/context/usePerformanceScan.js:104
 msgid "Your latest performance results are ready."
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:125
+#: front/shared/context/usePerformanceScan.js:123
 msgid "Performance test failed"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:134
+#: front/shared/context/usePerformanceScan.js:131
 #: front/ui/components/RecipientsList/RecipientsList.jsx:198
 msgid "Ok"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:140
+#: front/shared/context/usePerformanceScan.js:137
 msgid "Try again"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:185
+#: front/shared/context/usePerformanceScan.js:182
 msgid "The performance test timed out. Please try again."
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:221
+#: front/shared/context/usePerformanceScan.js:218
 msgid "Could not check the performance test."
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:237
+#: front/shared/context/usePerformanceScan.js:234
 msgid "The performance test did not return a report. Please try again."
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:284
+#: front/shared/context/usePerformanceScan.js:281
 msgid "Running speed test"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:76
+#: front/shared/context/usePerformanceScan.js:75
 msgid "Help us improve by sending anonymous usage data. This is recommended."
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:78
+#: front/shared/context/usePerformanceScan.js:77
 msgid "Share Usage Data?"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:82
+#: front/shared/context/usePerformanceScan.js:81
 msgid "Do not share"
 msgstr ""
 
-#: front/shared/context/usePerformanceScan.js:86
+#: front/shared/context/usePerformanceScan.js:85
 msgid "Share"
 msgstr ""
 
@@ -172,8 +172,8 @@ msgid "Auto-save changes"
 msgstr ""
 
 #: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:35
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:423
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:346
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:424
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:347
 msgid "Saving..."
 msgstr ""
 
@@ -182,12 +182,12 @@ msgid "All changes saved"
 msgstr ""
 
 #: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:38
-#: front/ui/layout/PageHeader.jsx:351
+#: front/ui/layout/PageHeader.jsx:358
 msgid "Offline - changes were not saved. Retry when you are back online."
 msgstr ""
 
 #: front/ui/components/AutoSaveIndicator/AutoSaveIndicator.jsx:39
-#: front/ui/layout/PageHeader.jsx:352
+#: front/ui/layout/PageHeader.jsx:359
 msgid "Changes were not saved. Reload and retry."
 msgstr ""
 
@@ -215,22 +215,22 @@ msgstr ""
 #: front/ui/components/RecipientsList/RecipientPanel.jsx:450
 #: front/ui/components/RecipientsList/RecipientsList.jsx:350
 #: front/ui/components/SafeMode/SafeModeDisableModal/SafeModeDisableModal.jsx:102
-#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:71
+#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:73
 #: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:342
 #: front/ui/components/SchedulePanel/SchedulePanel.jsx:273
 #: front/ui/pages/advanced-tools/components/DatabaseCleanup/DatabaseCleanup.jsx:514
-#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:49
+#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:51
 #: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompressExclusionsModal.jsx:353
 #: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:170
 #: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:67
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:687
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:684
 #: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:737
 #: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:276
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:754
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:562
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:755
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:563
 #: front/ui/pages/settings/components/Configs/ConfigAction.jsx:560
 #: front/ui/pages/settings/components/Configs/ConfigList.jsx:395
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:456
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:457
 msgid "Cancel"
 msgstr ""
 
@@ -239,24 +239,24 @@ msgid "Error"
 msgstr ""
 
 #: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:27
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:203
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:211
 msgid "Connect to WPMU DEV"
 msgstr ""
 
 #: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:29
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:214
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:222
 msgid "Create free account"
 msgstr ""
 
 #: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:30
 #: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:73
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:230
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:238
 msgid "Sign in"
 msgstr ""
 
 #: front/ui/components/HubConnectInfoModal/HubConnectInfoModal.jsx:58
 #: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:61
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:218
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:226
 msgid "or"
 msgstr ""
 
@@ -294,7 +294,7 @@ msgid "Please enter your email address."
 msgstr ""
 
 #: front/ui/components/HubConnectionFlow/HubConnectionFlow.jsx:77
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:461
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:462
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -303,16 +303,16 @@ msgid "Please enter your password."
 msgstr ""
 
 #: front/ui/components/HubSiteConnecting/HubSiteConnecting.jsx:104
-#: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:29
+#: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:31
 msgid "Something went wrong"
 msgstr ""
 
 #: front/ui/components/HubSiteConnecting/HubSiteConnecting.jsx:106
-#: front/ui/components/HummingbirdToast/HummingbirdToast.jsx:12
-#: front/ui/hooks/useHubConnectPrompt.jsx:24
+#: front/ui/components/HummingbirdToast/HummingbirdToast.jsx:13
+#: front/ui/hooks/useHubConnectPrompt.jsx:22
 #: front/ui/hooks/usePageNotices.jsx:90
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:97
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:107
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:96
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:108
 msgid "OK"
 msgstr ""
 
@@ -324,13 +324,13 @@ msgstr ""
 msgid "Please reload the page and try again."
 msgstr ""
 
-#: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:53
-#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:17
-msgid "Hummingbird Pro"
+#: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:61
+msgid "wpmudev"
 msgstr ""
 
-#: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:75
-msgid "wpmudev"
+#: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:97
+#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:19
+msgid "Hummingbird Pro"
 msgstr ""
 
 #: front/ui/components/HummingbirdColorPicker/HummingbirdColorPicker.jsx:275
@@ -353,82 +353,82 @@ msgstr ""
 msgid "Opacity"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:109
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:117
 msgid "Support"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:115
-#: front/ui/layout/PageHeader.jsx:302
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:123
+#: front/ui/layout/PageHeader.jsx:304
 msgid "Documentation"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:121
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:129
 msgid "Product Roadmap"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:181
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:189
 msgid "Disconnecting…"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:182
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:190
 msgid "Disconnect"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:204
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:212
 #: front/ui/components/WelcomeModal/WelcomeModal.jsx:129
 msgid "to use all free features"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:251
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:259
 msgid "Profile menu"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:298
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:306
 msgid "Disconnect this site?"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:299
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:307
 msgid ""
 "This will stop all WPMU DEV services for this site. Your site will no "
 "longer be manageable from the WPMU DEV Hub."
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:303
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:311
 msgid "Keep site connected"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:314
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:322
 msgid "Disconnect site"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:67
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:69
 msgid "Guest"
 msgstr ""
 
-#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:77
+#: front/ui/components/HummingbirdProfileMenu/HummingbirdProfileMenu.jsx:79
 msgid "We could not disconnect your site. Please try again."
 msgstr ""
 
 #: front/ui/components/InfoModal/InfoModal.jsx:91
 #: front/ui/components/ProFeatureModal/ProFeatureModal.jsx:51
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:55
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:57
 #: front/ui/components/SlideInModal/SlideInModal.jsx:149
 #: front/ui/components/WelcomeModal/WelcomeModal.jsx:149
 #: front/ui/pages/advanced-tools/components/Uptime/components/UptimeWelcomeModal.jsx:39
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:525
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:526
 msgid "Close"
 msgstr ""
 
 #: front/ui/components/InfoTooltip/InfoTooltip.jsx:42
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:492
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1656
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:493
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1667
 msgid "More information"
 msgstr ""
 
 #: front/ui/components/ProFeatureLock/ProFeatureLock.jsx:62
 #: front/ui/pages/advanced-tools/components/AlertsReports/AlertCard.jsx:105
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:254
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:380
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:253
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:382
 #: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:253
 #: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:69
 msgid "Learn more"
@@ -436,13 +436,13 @@ msgstr ""
 
 #: front/ui/components/ProFeatureLock/ProFeatureLock.jsx:73
 #: front/ui/components/ProFeatureModal/ProFeatureModal.jsx:73
-#: front/ui/pages/cdn/components/MainContent.jsx:195
+#: front/ui/pages/cdn/components/MainContent.jsx:196
 #: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:76
 msgid "Upgrade"
 msgstr ""
 
 #: front/ui/components/ProFeatureModal/ProFeatureModal.jsx:61
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:104
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:106
 #: front/ui/pages/advanced-tools/components/Uptime/components/UptimeWelcomeModal.jsx:54
 msgid "Activate"
 msgstr ""
@@ -454,12 +454,12 @@ msgid ""
 msgstr ""
 
 #: front/ui/components/RecipientsList/RecipientPanel.jsx:252
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:706
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:705
 msgid "Performance reports"
 msgstr ""
 
 #: front/ui/components/RecipientsList/RecipientPanel.jsx:253
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:332
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:331
 msgid "Uptime report"
 msgstr ""
 
@@ -594,7 +594,7 @@ msgid "Name"
 msgstr ""
 
 #: front/ui/components/RecipientsList/RecipientsList.jsx:233
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:409
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:411
 msgid "Status"
 msgstr ""
 
@@ -651,8 +651,8 @@ msgstr ""
 
 #: front/ui/components/RecipientsList/RecipientsList.jsx:45
 #: front/ui/pages/advanced-tools/AdvancedToolsPage.jsx:28
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:732
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:318
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:731
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:317
 #: front/ui/pages/advanced-tools/components/Uptime/components/UptimeWelcomeModal.jsx:47
 #: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:19
 msgid "Uptime"
@@ -694,45 +694,45 @@ msgid ""
 "Insights."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:13
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:14
 msgid "Make changes safely"
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:14
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:15
 msgid "Keep optimization updates unpublished while testing."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:17
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:18
 msgid "Preview your site"
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:18
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:19
 msgid "See your changes on the front end before they go live."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:21
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:22
 msgid "Publish when ready"
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:22
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:23
 msgid "Review your changes and apply them to the live site."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:61
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:63
 msgid "Safe Mode"
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:62
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:64
 msgid "Test before you publish"
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:63
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:65
 msgid ""
 "Preview Hummingbird optimization changes before publishing them to your "
 "live site."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:87
+#: front/ui/components/SafeMode/SafeModeBenefitsModal/SafeModeBenefitsModal.jsx:89
 msgid ""
 "Changes are only visible to logged-in admins and anyone using the Safe Mode "
 "preview link."
@@ -747,7 +747,7 @@ msgid "Discard & disable Safe Mode"
 msgstr ""
 
 #: front/ui/components/SafeMode/SafeModeDisableModal/SafeModeDisableModal.jsx:113
-#: front/ui/layout/PageHeader.jsx:245
+#: front/ui/layout/PageHeader.jsx:247
 msgid "Disable Safe Mode"
 msgstr ""
 
@@ -783,7 +783,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: front/ui/components/SafeMode/SafeModeIntroModal/SafeModeIntroModal.jsx:118
-#: front/ui/layout/PageHeader.jsx:246
+#: front/ui/layout/PageHeader.jsx:248
 msgid "Enable Safe Mode"
 msgstr ""
 
@@ -801,23 +801,23 @@ msgid ""
 "your live site."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:42
+#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:44
 msgid ""
 "Safe mode is active. Hummingbird's in-plugin performance test runs on your "
 "live site only."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:51
+#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:53
 msgid ""
 "To test your unpublished Safe Mode changes, run your Safe Mode preview link "
 "directly in <previewLink>PageSpeed Insights<openNewWindow /></previewLink>."
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:75
+#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:77
 msgid "Run live site test"
 msgstr ""
 
-#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:86
+#: front/ui/components/SafeMode/SafeModePerformanceTestModal/SafeModePerformanceTestModal.jsx:88
 msgid "Run performance test on live site?"
 msgstr ""
 
@@ -868,7 +868,7 @@ msgstr ""
 
 #: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:300
 #: front/ui/pages/advanced-tools/components/Uptime/components/EventLogs.jsx:8
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:281
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:282
 #: front/ui/pages/settings/components/Configs/ConfigStatus.jsx:93
 msgid "STATUS"
 msgstr ""
@@ -882,7 +882,7 @@ msgid "Clear cache after publishing changes."
 msgstr ""
 
 #: front/ui/components/SafeMode/SafeModeReviewPublishModal/SafeModeReviewPublishModal.jsx:351
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:540
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:537
 msgid "Publish changes"
 msgstr ""
 
@@ -1093,20 +1093,20 @@ msgid ""
 "when needed."
 msgstr ""
 
-#: front/ui/hooks/useCacheClearedToast.jsx:21
-#: front/ui/hooks/useHummingbirdToast.jsx:23
+#: front/ui/hooks/useCacheClearedToast.jsx:19
+#: front/ui/hooks/useHummingbirdToast.jsx:22
 #: front/ui/pages/advanced-tools/components/DatabaseCleanup/CleanupCard.jsx:48
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:637
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:638
 #: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompressExclusionsModal.jsx:222
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:372
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:374
 #: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:245
 #: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:464
 #: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:164
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:208
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:662
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:209
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:663
 #: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:231
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:486
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2024
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2035
 #: front/ui/pages/cdn/components/CdnExclusions.jsx:158
 #: front/ui/pages/settings/components/OtherSettings/DebugLogSetting.jsx:86
 msgid "Dismiss"
@@ -1125,7 +1125,7 @@ msgstr ""
 msgid "Enter a whole number."
 msgstr ""
 
-#: front/ui/hooks/useHubConnectPrompt.jsx:20
+#: front/ui/hooks/useHubConnectPrompt.jsx:19
 msgid "Need Network Admin access"
 msgstr ""
 
@@ -1137,20 +1137,20 @@ msgstr ""
 msgid "Request failed."
 msgstr ""
 
-#: front/ui/hooks/useRateNotice.jsx:35
+#: front/ui/hooks/useRateNotice.jsx:36
 msgid "Rate Hummingbird"
 msgstr ""
 
-#: front/ui/hooks/useRateNotice.jsx:43
+#: front/ui/hooks/useRateNotice.jsx:44
 msgid "Remind me later"
 msgstr ""
 
-#: front/ui/hooks/useRateNotice.jsx:48
+#: front/ui/hooks/useRateNotice.jsx:49
 msgid "I already did"
 msgstr ""
 
 #: front/ui/layout/ActivityLogPanel.jsx:38
-#: front/ui/layout/PageHeader.jsx:320
+#: front/ui/layout/PageHeader.jsx:322
 msgid "Activity Log"
 msgstr ""
 
@@ -1162,42 +1162,42 @@ msgstr ""
 msgid "Close Activity Log panel"
 msgstr ""
 
-#: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:39
+#: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:41
 msgid "Refresh page"
 msgstr ""
 
-#: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:50
+#: front/ui/layout/ErrorBoundary/ErrorBoundaryFallback.jsx:52
 msgid "Contact support"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:142
+#: front/ui/layout/PageHeader.jsx:144
 msgid "Click to disable Safe Mode"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:144
+#: front/ui/layout/PageHeader.jsx:146
 msgid ""
 "Enable Safe Mode to preview and test optimization changes before publishing "
 "them to your live site. <link>Learn more</link>"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:191
-#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:36
+#: front/ui/layout/PageHeader.jsx:193
+#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:38
 msgid "WPMU DEV"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:280
+#: front/ui/layout/PageHeader.jsx:282
 msgid "Help & Support"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:329
+#: front/ui/layout/PageHeader.jsx:331
 msgid "Hide Activity Log"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:330
+#: front/ui/layout/PageHeader.jsx:332
 msgid "Show Activity Log"
 msgstr ""
 
-#: front/ui/layout/PageHeader.jsx:398
+#: front/ui/layout/PageHeader.jsx:405
 msgid "Pro Features"
 msgstr ""
 
@@ -1211,7 +1211,7 @@ msgid "Tools"
 msgstr ""
 
 #: front/ui/pages/advanced-tools/AdvancedToolsPage.jsx:59
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:329
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:328
 msgid "Reports & Alerts"
 msgstr ""
 
@@ -1227,7 +1227,7 @@ msgid ""
 msgstr ""
 
 #: front/ui/pages/advanced-tools/components/AlertsReports/AlertCard.jsx:44
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:336
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:335
 msgid "Uptime alert"
 msgstr ""
 
@@ -1315,13 +1315,13 @@ msgstr ""
 msgid "Activate Uptime first"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:338
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:337
 #: front/ui/pages/dashboard/DashboardPage.jsx:76
-#: front/ui/pages/settings/components/Configs/Configs.jsx:52
+#: front/ui/pages/settings/components/Configs/Configs.jsx:51
 msgid "Not now"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:341
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:340
 msgid "Go to Uptime"
 msgstr ""
 
@@ -1330,72 +1330,72 @@ msgid "All devices"
 msgstr ""
 
 #: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:37
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:121
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:132
 msgid "Desktop"
 msgstr ""
 
 #: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:38
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:127
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:138
 msgid "Mobile"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:424
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:423
 msgid "Failed to save Alerts & Reports settings. Please try again."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:461
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:58
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:460
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:60
 msgid "to turn on Performance Reports."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:462
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:59
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:461
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:61
 msgid "Contact your Network Admin to enable Performance Reports."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:486
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:485
 msgid "to turn on Uptime Reports."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:504
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:503
 msgid "to turn on Uptime Threshold."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:698
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:697
 msgid ""
 "No recipients added. Add at least one recipient to receive your enabled "
 "reports and alerts."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:707
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:706
 msgid "Schedule and configure performance report delivery."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:708
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:707
 msgid "Test"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:730
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:729
 msgid "Uptime reports"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:731
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:730
 msgid "Send scheduled uptime monitoring summaries to your recipients."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:796
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:795
 msgid "Schedule Report"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:796
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:795
 msgid "Schedule Scan"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:805
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:804
 msgid "Instant Alerts"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:806
+#: front/ui/pages/advanced-tools/components/AlertsReports/AlertsReports.jsx:805
 msgid "Know the moment your site goes down with instant email alerts."
 msgstr ""
 
@@ -1585,7 +1585,7 @@ msgid "Delete permanently"
 msgstr ""
 
 #: front/ui/pages/advanced-tools/components/DatabaseCleanup/DatabaseCleanup.jsx:70
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:322
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:323
 msgid "Post revisions"
 msgstr ""
 
@@ -1641,55 +1641,55 @@ msgstr ""
 msgid "Add recipients to receive scheduled cleanup reports by email."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:203
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:204
 msgid ""
 "Enter the maximum number of revisions to keep, or enter 0 to disable "
 "revisions."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:266
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:267
 msgid "Performance tweaks"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:267
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:268
 msgid ""
 "Here are a few additional tweaks you can make to further reduce your page "
 "load times."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:275
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:276
 msgid "Viewport meta optimization"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:276
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:277
 msgid ""
 "Automatically set the viewport meta tag on your site for improved mobile "
 "responsiveness and Core Web Vitals scores."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:283
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:284
 msgid "Remove URL query strings"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:284
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:285
 msgid ""
 "Some proxy caching servers and even some CDNs cannot cache static assets "
 "with query strings, resulting in a large missed opportunity for increased "
 "speeds."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:303
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:304
 msgid "Remove default emoji files"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:304
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:305
 msgid ""
 "WordPress adds Javascript and CSS files to convert common symbols like “:)” "
 "to visual emojis. If you don’t need emojis this will remove two unnecessary "
 "assets."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:316
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:317
 msgid "This option is overwritten by global network settings."
 msgstr ""
 
@@ -1699,109 +1699,109 @@ msgid ""
 "it."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:325
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:326
 msgid ""
 "WordPress post revisions track and save every content edit, allowing for "
 "easy comparison, restoration, and collaboration by storing each change."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:346
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:347
 msgid "WooCommerce cart fragments"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:396
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:397
 msgid "Non-WooCommerce"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:407
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:408
 msgid "All pages"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:414
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:415
 msgid "After disabling, enable"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:428
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:429
 msgid "Redirect to the cart page after successful addition"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:430
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:431
 msgid "in WooCommerce settings so customers are sent directly to the cart."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:432
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:433
 msgid "This option requires WooCommerce to be installed and activated."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:443
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:444
 msgid "Lazy load comments"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:454
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:455
 msgid "Choose when comments load"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:469
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:470
 msgid "On scroll"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:470
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:471
 msgid ""
 "This method will automatically load the comments section when it scrolls "
 "into view. The new comment section will appear at the top of the comments "
 "to make adding comment easier."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:490
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:491
 msgid "On click"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:491
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:492
 msgid ""
 "This method will require the visitor to click a button to load up the "
 "comments and is the most supported method for most websites."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:501
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:502
 msgid "Comment limit"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:504
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:505
 msgid "Limit comments loaded from the database to reduce query time."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:504
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:505
 msgid "Change this in"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:506
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:507
 msgid "Discussion Settings."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:514
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:515
 msgid "limit"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:519
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:520
 msgid "Preload comments"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:520
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:521
 msgid "Enable this option to preload the first page of comments."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:531
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:532
 msgid "Threshold"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:532
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:533
 msgid ""
 "In addition to choosing how many comments to lazy load each time, you can "
 "also prevent lazy loading if there are only a few comments. Set this value "
 "here as the minimum number of comments before engaging lazy loading."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:538
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:539
 #. %s is the Gravatar Caching text, which links to the Gravatar Caching settings.
 msgid ""
 "Enable <link>Gravatar Caching</link> to store local copies of avatars used "
@@ -1813,75 +1813,75 @@ msgstr ""
 msgid "These entries aren’t valid hosts: %s"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:545
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:546
 msgid "Gravatar Caching"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:571
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:572
 msgid "DNS tweaks"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:577
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:578
 msgid "DNS prefetch"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:588
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:589
 msgid "Use defaults"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:597
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:598
 msgid "Resolve external domains early to speed up connections."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:617
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:618
 msgid "Enter one host per line using // instead of http:// or https://."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:622
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:623
 msgid "Preconnect"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:633
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:634
 msgid "Connect to external domains early for faster loading."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:653
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:654
 msgid "Enter one host per line without http:// or https://."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:655
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:656
 msgid "Preconnect requests exclude the crossorigin attribute by default."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:658
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:661
 msgid "See <a>the documentation</a> before enabling it."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:660
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:663
 msgid "documentation"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:670
+#: front/ui/pages/advanced-tools/components/Tools/ToolsTab.jsx:675
 msgid "Saving tools settings."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:174
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:173
 msgid "Uptime activation failed"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:174
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:173
 msgid "Uptime deactivation failed"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:209
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:208
 msgid "Couldn’t load Uptime data"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:219
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:218
 msgid "Down"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:219
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:218
 msgid "Up"
 msgstr ""
 
@@ -1893,7 +1893,7 @@ msgstr ""
 msgid "Last 7 days"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:236
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:235
 msgid "About Uptime"
 msgstr ""
 
@@ -1901,55 +1901,55 @@ msgstr ""
 msgid "Last 30 days"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:245
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:244
 msgid ""
 "Uptime monitors your server response time and lets you know when your "
 "website is down or too slow for your visitors."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:270
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:269
 msgid "Reporting period"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:277
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:276
 msgid "Enable Uptime"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:291
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:290
 msgid "Website status"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:305
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:304
 msgid "Up since"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:322
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:321
 msgid "Downtime"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:347
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:346
 msgid "Response time"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:349
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:348
 msgid "About response time"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:351
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:350
 msgid ""
 "The amount of time it takes for a web server to respond to a request from a "
 "browser."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:357
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:356
 msgid "Maximum"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:358
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:357
 msgid "Minimum"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:359
+#: front/ui/pages/advanced-tools/components/Uptime/Uptime.jsx:358
 msgid "Average"
 msgstr ""
 
@@ -1971,19 +1971,19 @@ msgid ""
 "downtime and uptime, as well as your server response times."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:36
+#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:37
 msgid "Deactivation of Uptime is not recommended if the "
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:43
+#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:44
 msgid "Proactive Monitoring"
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:45
+#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:46
 msgid " service is enabled."
 msgstr ""
 
-#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:53
+#: front/ui/pages/advanced-tools/components/Uptime/components/DisableUptimeModal.jsx:55
 msgid "Disable Uptime"
 msgstr ""
 
@@ -2061,136 +2061,136 @@ msgid "Automatic"
 msgstr ""
 
 #: front/ui/pages/asset-optimization/AssetOptimizationPage.jsx:59
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:383
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:380
 msgid "Dev Mode"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:32
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:33
 msgid "CSS files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:33
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:34
 msgid ""
 "Hummingbird will minify your CSS files, generating a version that loads "
 "faster. It will remove unnecessary characters or lines of code from your "
 "file to make it more compact."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:339
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:340
 msgid "Error while starting the file check. Please try again."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:356
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:357
 msgid "Combine & compress"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:357
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:358
 msgid ""
 "Optimizing your assets will compress and organize them in a way that "
 "improves page load times."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:371
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:372
 #: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:15
 #: front/ui/pages/asset-optimization/components/DevMode/DevModeAsset.jsx:35
 msgid "Compress"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:372
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:373
 msgid ""
 "Compresses your files for faster delivery while improving site speed by "
 "decluttering CSS and JavaScript"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:386
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:387
 #: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:17
 #: front/ui/pages/asset-optimization/components/DevMode/DevModeAsset.jsx:36
 msgid "Combine"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:387
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:388
 msgid ""
 "Combines multiple JS and CSS files into fewer files, reducing the number of "
 "requests made when a page is loaded."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:396
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:397
 msgid "Choose files to optimize automatically."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:398
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:399
 msgid ""
 "Added/removed plugins or themes? Update your file list to include new "
 "files, and remove old ones."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:416
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:417
 msgid "Scanning…"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:417
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:418
 #: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:295
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:406
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:407
 msgid "Re-check"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:42
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:43
 msgid "JavaScript files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:43
-msgid ""
-"JavaScript minification is the process of removing whitespace and any code "
-"that is not necessary to create a smaller but valid code."
-msgstr ""
-
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:435
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:436
 #: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:329
 #: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:36
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1993
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2004
 #: front/ui/pages/cdn/components/CdnExclusions.jsx:139
 msgid "Exclusions"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:436
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:437
 msgid ""
 "By default, we'll optimize all the CSS and JS files we can find. If you "
 "have specific files you want to leave as-is, list them here, and we'll "
 "exclude them."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:446
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:454
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:44
+msgid ""
+"JavaScript minification is the process of removing whitespace and any code "
+"that is not necessary to create a smaller but valid code."
+msgstr ""
+
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:447
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:456
 #: front/ui/pages/asset-optimization/components/DelayJS/DelayJS.jsx:341
 msgid "Manage"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:453
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:454
 msgid "Clear Cache"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:456
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:457
 msgid "Clear all local or hosted assets and recompress files that need it."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:468
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:520
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:469
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:517
 #: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:277
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:592
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1285
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1296
 msgid "Clear cache"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:481
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:482
 msgid "Dev mode is enabled."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:52
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:216
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:53
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:215
 msgid "Fonts"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:53
+#: front/ui/pages/asset-optimization/components/CombineCompress/CombineCompress.jsx:54
 msgid ""
 "Enable this option to optimize the delivery of your fonts so they don't "
 "trigger the \"Eliminate render-blocking resources\" recommendation in your "
@@ -2262,128 +2262,128 @@ msgstr ""
 msgid "Combine & Compress"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:106
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:108
 msgid "Optimized"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:107
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:109
 msgid "Critical CSS has been generated for your pages."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:115
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:117
 msgid "Optimizing"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:116
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:118
 msgid ""
 "Generating Critical CSS. This could take a few minutes depending on the "
 "number of site assets that need to be checked."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:126
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:128
 msgid "Critical CSS generation failed. Click for details."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:127
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:129
 msgid "An unknown error occurred while generating Critical CSS."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:137
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:187
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:139
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:188
 msgid "Contact Support"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:229
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:231
 msgid "Error while regenerating Critical CSS. Please try again."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:245
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:247
 msgid "Failed to save Critical CSS settings. Please try again."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:25
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:26
 #: front/ui/pages/dashboard/components/CriticalCSSCard.jsx:46
 #: front/ui/pages/settings/components/Configs/ConfigStatus.jsx:16
 msgid "Critical CSS"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:28
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:29
 msgid ""
 "Automatically optimize CSS delivery for faster page loads and better "
 "performance scores."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:31
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:32
 msgid "Boost page performance"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:32
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:33
 msgid ""
 "Auto-optimize CSS delivery to help pages load faster and improve "
 "performance scores."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:36
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:37
 msgid "Critical CSS generation"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:37
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:38
 msgid "Reduce CSS-related delays."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:40
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:41
 msgid "Choose your method"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:41
-msgid "Optimize the Full-page or above-the-fold only."
-msgstr ""
-
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:410
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:412
 msgid "Whether critical CSS has been generated for your pages."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:417
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:419
 #: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:120
 msgid "CSS loading mode"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:418
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:42
+msgid "Optimize the Full-page or above-the-fold only."
+msgstr ""
+
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:420
 #: front/ui/pages/asset-optimization/components/CriticalCSS/CssLoadingModeModal.jsx:122
 msgid "How to handle the Unused CSS"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:44
-msgid "Manage exclusions"
-msgstr ""
-
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:444
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:446
 msgid "Exclusions & inclusions"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:445
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:447
 msgid "Manage which pages are included or excluded from critical CSS generation."
 msgstr ""
 
 #: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:45
+msgid "Manage exclusions"
+msgstr ""
+
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:46
 msgid "Skip selected URLs, post types, plugins, themes, and more."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:464
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:466
 msgid ""
 "Clears all local or hosted assets and regenerates all required ones. "
 "Homepage assets will be automatically regenerated."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:477
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:479
 msgid "Regenerate Critical CSS"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:48
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:49
 msgid "Add manual rules"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:49
+#: front/ui/pages/asset-optimization/components/CriticalCSS/CriticalCSS.jsx:50
 msgid "Add CSS rules that should always be included."
 msgstr ""
 
@@ -2551,7 +2551,7 @@ msgid "Inline"
 msgstr ""
 
 #: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:32
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:560
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:557
 msgid "Bulk update"
 msgstr ""
 
@@ -2562,7 +2562,7 @@ msgid ""
 msgstr ""
 
 #: front/ui/pages/asset-optimization/components/DevMode/BulkUpdateModal.jsx:71
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:432
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:433
 #: front/ui/pages/settings/components/Configs/ConfigAction.jsx:424
 msgid "Apply"
 msgstr ""
@@ -2571,19 +2571,19 @@ msgstr ""
 msgid "File check completed."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:175
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:174
 msgid "All plugins and themes"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:209
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:208
 msgid "No assets found yet. Select Recheck files to scan this site."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:211
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:210
 msgid "No assets match your filters. Try adjusting or clearing them."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:214
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:213
 #: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:480
 #: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:15
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:86
@@ -2591,158 +2591,158 @@ msgstr ""
 msgid "CSS"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:215
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:214
 #: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:14
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:84
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:22
 msgid "JavaScript"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:222
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:221
 msgid "Select all CSS assets"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:223
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:222
 msgid "Select all JavaScript assets"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:224
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:223
 msgid "Font assets cannot be selected in bulk"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:302
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:301
 msgid "Unable to publish the asset settings. Please try again."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:314
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:313
 msgid "Your changes have been published."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:316
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:315
 msgid ""
 "Files queued for compression will generate once someone visits your "
 "homepage."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:335
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:333
 msgid "File check started."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:345
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:342
 msgid "Unable to start the file check. Please try again."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:357
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:354
 msgid "Unable to disable Dev Mode. Please try again."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:372
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:369
 msgid "Recheck files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:392
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:389
 #: front/ui/pages/asset-optimization/components/DevMode/DevModeAsset.jsx:47
 msgid "Disable"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:396
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:393
 msgid ""
 "Manually configure your optimization settings (compress, combine, move, "
 "inline, defer, async, and preload) and then publish your changes."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:411
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:408
 msgid "Search by name or extensions"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:429
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:426
 msgid "Open filter options"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:431
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:428
 msgid "Filter"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:441
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:438
 msgid "Display files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:454
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:704
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:451
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:705
 msgid "All files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:455
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:452
 msgid "Hosted locally"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:456
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:453
 msgid "External files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:466
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:463
 msgid "Sort by"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:475
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:472
 msgid "Search plugins and themes"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:491
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:488
 msgid "Apply filter"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:505
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:502
 msgid "Clear filter"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:524
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:521
 msgid "Fetching latest data"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:547
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:544
 msgid "Bulk update selected files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:551
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:548
 #. %d: number of selected assets.
 msgid "%d items selected"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:557
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:554
 msgid "Deselect all"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:582
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:579
 msgid "Loading assets…"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:632
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:629
 #: front/ui/pages/asset-optimization/components/ExclusionsModal/ExclusionsModal.jsx:52
 msgid "Files"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:633
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:630
 msgid "Optimization Options"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:672
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:669
 msgid "Disable Dev Mode?"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:676
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:673
 msgid "Are you sure you want to disable Dev Mode? You can enable it again from "
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:682
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:679
 msgid "Settings > Others"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:684
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:681
 msgid " page."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:691
+#: front/ui/pages/asset-optimization/components/DevMode/DevMode.jsx:688
 msgid "Disable Dev Mode"
 msgstr ""
 
@@ -3076,12 +3076,12 @@ msgid "These entries aren’t font files: %s"
 msgstr ""
 
 #: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:129
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:403
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:404
 msgid "Copied!"
 msgstr ""
 
 #: front/ui/pages/asset-optimization/components/GzipCompression/ConfigureCompressionModal.jsx:130
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:404
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:405
 msgid "Copy"
 msgstr ""
 
@@ -3131,29 +3131,29 @@ msgstr ""
 msgid "Manual"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:100
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:101
 msgid "Gzip rules deactivated."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:101
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:102
 msgid "Gzip rules applied."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:120
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:121
 msgid "Active"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:120
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:121
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:126
 #: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:27
 msgid "Disabled"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:128
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:129
 msgid "Brotli"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:128
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:129
 msgid "GZip"
 msgstr ""
 
@@ -3161,33 +3161,33 @@ msgstr ""
 msgid "HTML"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:131
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:132
 msgid ""
 "Brotli compression is active via your CDN/hosting. Unsupported browsers "
 "automatically use GZip."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:132
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:133
 msgid "The compression algorithm detected on your server."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:161
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:162
 msgid "Text compression"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:162
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:163
 msgid "Enable server-side text compression for faster file delivery."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:167
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:168
 msgid "Gzip is not working properly. Click for details."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:171
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:172
 msgid "Gzip is not working properly:"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:174
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:175
 msgid ""
 "Your server may not have the \"deflate\" module enabled (mod_deflate for "
 "Apache, ngx_http_gzip_module for NGINX). Contact your host. If deflate is "
@@ -3196,7 +3196,7 @@ msgid ""
 "with your host or open a support ticket."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:217
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:218
 #. %d - number of inactive compression types
 msgid ""
 "<b>Warning:</b> %d compression type is inactive. Configure compression for "
@@ -3207,24 +3207,24 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:258
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:259
 msgid "Detected compression type"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:278
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:279
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:494
 msgid "FILE TYPE"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:312
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:313
 msgid "Advanced settings"
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:313
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:314
 msgid "Configure advanced compression options per file type."
 msgstr ""
 
-#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:322
+#: front/ui/pages/asset-optimization/components/GzipCompression/GzipCompression.jsx:323
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:531
 msgid "Configure"
 msgstr ""
@@ -3236,9 +3236,9 @@ msgid ""
 msgstr ""
 
 #: front/ui/pages/caching/CachingPage.jsx:16
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1302
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1313
 #: front/ui/pages/dashboard/components/PageCachingCard.jsx:31
-#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:50
+#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:51
 msgid "Page Caching"
 msgstr ""
 
@@ -3283,44 +3283,44 @@ msgstr ""
 msgid "Apache web server"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:408
-msgid "Server"
-msgstr ""
-
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:409
-msgid "Nginx"
+msgid "Server"
 msgstr ""
 
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:41
 msgid "LiteSpeed"
 msgstr ""
 
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:410
+msgid "Nginx"
+msgstr ""
+
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:42
 msgid "Built-in caching server"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:420
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:421
 msgid "the selected duration"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:421
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:422
 msgid "Next"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:427
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:428
 msgid "Finish"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:429
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:430
 #: front/ui/pages/caching/components/OthersTab/OthersTab.jsx:42
 msgid "Checking..."
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:429
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:430
 msgid "Check"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:432
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:433
 msgid "Applying..."
 msgstr ""
 
@@ -3328,24 +3328,24 @@ msgstr ""
 msgid "LiteSpeed web server"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:440
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:441
 #. %s: selected web server name
 msgid ""
 "%s is now configured with custom cache durations for your selected file "
 "types."
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:446
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:447
 #. 1: selected web server name, 2: selected cache duration
 msgid "%1$s is now configured to cache assets for %2$s, the recommended duration."
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:453
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:454
 #. 1: selected web server name, 2: selected cache duration
 msgid "%1$s is now configured to cache assets for %2$s."
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:478
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:479
 msgid "Browser caching is ready"
 msgstr ""
 
@@ -3357,11 +3357,11 @@ msgstr ""
 msgid "Microsoft web server"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:511
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:512
 msgid "Configure Browser Caching"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:516
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:517
 #. 1: current step number, 2: total step count
 msgid "Step %1$d of %2$d"
 msgstr ""
@@ -3370,11 +3370,11 @@ msgstr ""
 msgid "IIS web server"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:537
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:538
 msgid "Configuration steps"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:573
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:574
 #. %s: detected web server name.
 msgid ""
 "%s was detected as your web server. If this is incorrect, select another "
@@ -3399,14 +3399,14 @@ msgstr ""
 msgid "5 hours"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:610
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:611
 msgid ""
 "Copy the generated code into your nginx.conf (usually located at "
 "/etc/nginx/nginx.conf or /usr/local/nginx/conf/nginx.conf), add it to the "
 "http or server section, and then reload or restart NGINX."
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:613
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:614
 #. %s: selected cache duration e.g. 1 year
 msgid ""
 "Configure Cache-Control in the LiteSpeed WebAdmin Console using the "
@@ -3431,11 +3431,11 @@ msgstr ""
 msgid "20 hours"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:655
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:656
 msgid "Choose how long browsers cache each file type."
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:657
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:658
 msgid "Google recommends at least one year."
 msgstr ""
 
@@ -3447,27 +3447,27 @@ msgstr ""
 msgid "2 days"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:677
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:678
 msgid "For IIS 7 servers and above,"
-msgstr ""
-
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:679
-msgid "visit Microsoft TechNet"
 msgstr ""
 
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:68
 msgid "3 days"
 msgstr ""
 
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:680
+msgid "visit Microsoft TechNet"
+msgstr ""
+
 #: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:69
 msgid "4 days"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:693
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:694
 msgid "Customize expiry times"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:694
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:695
 msgid ""
 "Choose how long browsers cache each file type. Google recommends at least "
 "one year."
@@ -3497,7 +3497,7 @@ msgstr ""
 msgid "2 months"
 msgstr ""
 
-#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:754
+#: front/ui/pages/caching/components/ConfigureCachingModal/ConfigureCachingModal.jsx:755
 msgid "Back"
 msgstr ""
 
@@ -3544,7 +3544,7 @@ msgid "Cloudflare is not connected"
 msgstr ""
 
 #: front/ui/pages/caching/components/OthersTab/CloudflareCard.jsx:214
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:348
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:349
 msgid "Connect"
 msgstr ""
 
@@ -3616,92 +3616,92 @@ msgstr ""
 msgid "Cloudflare was disconnected successfully."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:288
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:289
 msgid ""
 "Cloudflare is connected, but no active zones were found for this domain. "
 "Make sure your domain is added to Cloudflare."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:329
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:330
 msgid "An error occurred while connecting to Cloudflare."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:343
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:344
 msgid "Continue"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:374
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:375
 msgid "Connect Cloudflare"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:376
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:377
 msgid "Manage your Cloudflare in Hummingbird"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:425
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:426
 msgid "Global API key"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:430
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:431
 msgid "API token"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:448
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:449
 msgid "Cloudflare email account"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:457
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:458
 msgid "Email address is required."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:471
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:472
 msgid "Cloudflare global API key"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:478
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:479
 msgid "Global API key is required."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:497
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:498
 msgid "Cloudflare API token"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:501
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:502
 msgid "API token must be at least 40 characters."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:505
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:506
 msgid "Enter 40 or more digit API code here"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:508
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:509
 #. %d: number of characters entered.
 msgid "%d chars (min. 40)"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:525
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:526
 msgid "Zone"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:526
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:527
 msgid "The Cloudflare zone associated with your account."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:535
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:536
 msgid "Select zone"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:570
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:571
 msgid "Need help getting an API token?"
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:575
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:576
 msgid ""
 "In Cloudflare, go to My Profile → API Tokens → Create Token. Use the Edit "
 "zone DNS template or create a custom token with the required permissions."
 msgstr ""
 
-#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:586
+#: front/ui/pages/caching/components/OthersTab/ConfigureCFModal/ConfigureCFModal.jsx:588
 msgid "View documentation"
 msgstr ""
 
@@ -3760,318 +3760,322 @@ msgstr ""
 msgid "Choose how long WordPress caches RSS feeds, or turn feed caching off."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1274
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1285
 msgid ""
 "Clear the cached version of all pages so visitors receive the latest "
 "content and changes."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1330
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1341
 msgid "Stores static HTML copies of your pages and posts to improve load times."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1344
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1355
 msgid "Page caching is currently active."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1360
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1371
 msgid "Cached files"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1360
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1371
 msgid ""
 "Pages are cached when someone first visits them. This number is the total "
 "count of static files being cached (not pages) and can be larger than the "
 "total number of physical pages you have."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1361
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1372
 msgid "files"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1366
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1377
 msgid ""
 "Hummingbird stores static HTML copies to speed up page loading. Server-side "
 "caching stores static pages for faster loading and supports up to 10× more "
 "concurrent visitors."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1370
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1377
+msgid "Hummingbird stores static HTML copies to speed up page loading."
+msgstr ""
+
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1381
 msgid "Cache method"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1401
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1412
 msgid ""
 "Serves pre-built static HTML through Nginx or Apache, bypassing PHP for "
 "maximum performance. Requires server-level configuration."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1402
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1413
 msgid ""
 "Stores cached pages on your server using PHP. Works with any server setup, "
 "needs minimal configuration, and suits most WordPress sites."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1406
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1417
 msgid "Preload cache"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1422
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1433
 msgid "Choose which pages to preload. We recommend always including the homepage."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1471
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1482
 msgid "Cache coverage"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1497
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1508
 msgid "Select the page types to cache."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1506
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1517
 msgid "Page Types"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1519
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1530
 msgid "Your blog is your front page"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1523
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1534
 msgid "More information about Blog"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1574
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1585
 msgid "Cache on mobile devices"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1575
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1586
 msgid ""
 "By default, page caching is enabled for mobile devices. If you don't want "
 "to use mobile caching, simply disable this setting."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1582
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1593
 msgid "Cache for logged-in users"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1583
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1594
 msgid ""
 "Caching pages for logged in users can reduce load on your server, but can "
 "cause strange behavior with some themes/plugins."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1590
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
 msgid "Use"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1590
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
 msgid "define ('DONOTCACHEPAGE', true);"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1590
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
 msgid "to exclude specific pages or templates from caching."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1601
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1612
 msgid "File change detection"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1613
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1624
 msgid ""
 "Choose how the system responds when changes to your file structure are "
 "detected."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1623
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1634
 msgid "File change detection mode"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1680
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1691
 msgid "Caching rules"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1696
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1707
 msgid "Advanced rules"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1707
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1718
 msgid "Choose which requests are cached and how cached pages are served."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1718
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1729
 msgid "Cache URL queries"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1718
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1729
 msgid ""
 "You can turn on caching pages with GET parameters (?x=y at the end of a "
 "url), though generally this isn't a good idea if those pages are dynamic."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1721
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1732
 msgid "Cache HTTP headers"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1721
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1732
 msgid ""
 "By default, Hummingbird won't cache HTTP headers. Enable this feature to "
 "include them."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1724
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1735
 msgid "Cache 404 requests"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1724
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1735
 msgid ""
 "Even though 404s are bad and you will want to avoid them with redirects, "
 "you can still choose to cache your 404 page to avoid additional load on "
 "your server."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1727
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1738
 msgid "Identify cached pages"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1727
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1738
 msgid ""
 "Hummingbird will insert a comment into your page's «head» tag to easily "
 "identify if it's cached or not."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1739
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1750
 msgid "Serve compressed cached files"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1739
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1750
 msgid ""
 "Improves performance on servers, where gzip compression is disabled or not "
 "available."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1749
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1760
 msgid "Note: Gzip compression already enabled on the server."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1757
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1768
 msgid "Purge rules"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1781
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1792
 msgid "Clear cache at set intervals"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1782
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1793
 msgid ""
 "A cache cleanup will occur following page or post updates at the interval "
 "you set."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1845
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1856
 msgid "Purge Varnish cache"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1845
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1856
 msgid ""
 "Varnish caching increases response to HTTP requests and reduces server "
 "workload, significantly accelerating delivery. When enabled it will purge "
 "Varnish cache when you publish posts, pages or comments."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1857
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1868
 msgid "Purge OPcache"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1857
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1868
 msgid ""
 "OPcache stores script bytecode in memory so PHP scripts don't have to be "
 "loaded and parsed with every request. OPcache cache will be cleared when "
 "you click \"Clear cache\" button located in the admin bar."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1864
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1875
 msgid ""
 "OPcache is already enabled and optimally preconfigured in our servers. It "
 "will automatically detect and recache any php file changes."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1865
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1876
 msgid ""
 "Note: OpCache is only available if you have the service setup on your "
 "server."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1898
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1909
 msgid "Cache lifetime"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1899
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1910
 msgid "Adjust the static server cache expiry as needed."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1914
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1925
 msgid "Caching Purge rules"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1926
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1937
 msgid "Choose when cached pages are cleared automatically."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1938
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1949
 msgid "Clear full cache after a post or page update"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1939
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1950
 msgid ""
 "If one of your pages or posts gets updated, turning this setting on will "
 "also regenerate all cached archives and taxonomies for all post types."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1944
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1955
 msgid "Clear cache after a comment is posted"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1945
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1956
 msgid "The page cache will be cleared after each comment made on a post."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1952
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1963
 msgid "Query String (Params)"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1964
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:1975
 msgid "Specify any query string you want to cache."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2019
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2030
 msgid "Specify any URLs you don't want to cache."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2030
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2041
 msgid "Exclude URL strings"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2031
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2042
 msgid ""
 "You can tell Hummingbird not to cache specific URLs, or any URLs that "
 "contain strings. Add one entry per line."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2052
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2063
 msgid "Exclude user agent"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2053
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2064
 msgid ""
 "Specify any user agents you don't want to send cached pages to like bots, "
 "spiders and crawlers. We've added a couple of common ones for you."
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2070
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2081
 msgid "Exclude cookies"
 msgstr ""
 
-#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2071
+#: front/ui/pages/caching/components/PageCachingTab/PageCachingTab.jsx:2082
 msgid "Specify the cookie IDs you don't want cached. Add one ID per line."
 msgstr ""
 
@@ -4195,25 +4199,25 @@ msgstr ""
 msgid "Enter any file paths or partial URLs you want to exclude from CDN rewriting."
 msgstr ""
 
-#: front/ui/pages/cdn/components/MainContent.jsx:143
+#: front/ui/pages/cdn/components/MainContent.jsx:144
 msgid "CDN could not be updated. Please try again."
 msgstr ""
 
-#: front/ui/pages/cdn/components/MainContent.jsx:180
+#: front/ui/pages/cdn/components/MainContent.jsx:181
 msgid "Global CDN map preview"
 msgstr ""
 
-#: front/ui/pages/cdn/components/MainContent.jsx:223
-#: front/ui/pages/dashboard/components/CDNCard.jsx:19
+#: front/ui/pages/cdn/components/MainContent.jsx:224
+#: front/ui/pages/dashboard/components/CDNCard.jsx:21
 #: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:14
 msgid "CDN"
 msgstr ""
 
-#: front/ui/pages/cdn/components/MainContent.jsx:224
+#: front/ui/pages/cdn/components/MainContent.jsx:225
 msgid "Faster CSS & JS files"
 msgstr ""
 
-#: front/ui/pages/cdn/components/MainContent.jsx:225
+#: front/ui/pages/cdn/components/MainContent.jsx:226
 msgid "Serve files from 119 CDN locations worldwide."
 msgstr ""
 
@@ -4265,7 +4269,7 @@ msgstr ""
 msgid "Combines duplicate requests so your server handles less traffic."
 msgstr ""
 
-#: front/ui/pages/cdn/components/MainContent.jsx:87
+#: front/ui/pages/cdn/components/MainContent.jsx:88
 msgid ""
 "Serve your CSS, JS, and fonts from 119 global locations. <link>Learn "
 "more</link>"
@@ -4284,11 +4288,11 @@ msgstr ""
 msgid "Welcome to %s."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/CDNCard.jsx:23
+#: front/ui/pages/dashboard/components/CDNCard.jsx:25
 msgid "Serve your files from 119 global locations"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/CDNCard.jsx:26
+#: front/ui/pages/dashboard/components/CDNCard.jsx:28
 #: front/ui/pages/dashboard/components/CriticalCSSCard.jsx:52
 #: front/ui/pages/dashboard/components/DashboardWidgetCard.jsx:77
 #: front/ui/pages/dashboard/components/DelayJavascriptCard.jsx:29
@@ -4303,85 +4307,93 @@ msgstr ""
 msgid "Load essential CSS first for faster rendering."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:103
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:114
 msgid "No test yet"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:11
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:12
 msgid "Largest Contentful Paint measures when the main content becomes visible."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:115
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:126
 msgid "Run Performance Test"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:12
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:13
 msgid ""
 "Total Blocking Time measures how long the page is blocked from responding "
 "to input."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:13
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:14
 msgid "Cumulative Layout Shift measures unexpected movement of content on the page."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:138
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:149
 msgid "Performance summary"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:14
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:15
 msgid "First Contentful Paint measures when the first piece of content appears."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:143
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:154
 msgid "Clear all active cache types from one place."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:15
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:16
 msgid ""
 "Speed Index measures how quickly the visible parts of the page are "
 "displayed."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:150
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:161
 msgid "Clear all cache"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:16
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:17
 msgid "Time to First Byte measures how quickly the server starts responding."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:170
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:181
 msgid "PageSpeed"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:172
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:183
 msgid ""
 "Your PageSpeed score is based on the latest performance test for the "
 "selected device."
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:208
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:219
 msgid "View on PageSpeed Insights"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:233
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:244
 msgid "Set up a scheduled report"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:248
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:259
 msgid "N/A"
 msgstr ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:76
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:182
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:79
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:185
 #. %d: Number of minutes until another performance test can be run.
 msgid "Hummingbird is catching her breath - you can run another test in %d minute."
 msgid_plural "Hummingbird is catching her breath - you can run another test in %d minutes."
 msgstr[0] ""
 msgstr[1] ""
 
-#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:87
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:86
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:192
+#. %d: Number of minutes until another performance test can be run.
+msgid "You can run another test in %d minute."
+msgid_plural "You can run another test in %d minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: front/ui/pages/dashboard/components/DashboardHeroCard.jsx:98
 msgid ""
 "Performance tests are unavailable while Critical CSS is generating. Try "
 "again once it’s finished."
@@ -4616,67 +4628,77 @@ msgstr ""
 msgid "Use default configs"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:14
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:15
 msgid ""
 "Start with WPMU DEV’s recommended Hummingbird setup, optimized for "
 "performance out of the box"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:17
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:16
+msgid ""
+"Start with the recommended Hummingbird setup, optimized for performance out "
+"of the box"
+msgstr ""
+
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:20
 msgid "Create your own"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:18
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:21
 msgid "Build custom configs and roll them out across all your sites"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:21
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:24
 msgid "Scale across every site"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:22
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:25
 msgid "Keep Hummingbird settings consistent and skip repetitive setups"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:25
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:29
 msgid "Works with all WPMU DEV plugins"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:26
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:30
+msgid "Works with all plugins"
+msgstr ""
+
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:32
 msgid "Create and deploy configs for every plugin from one place"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:41
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:47
 msgid "Configuration"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:42
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:48
 msgid "Set up Hummingbird once. Apply it everywhere."
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:59
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:439
+#: front/ui/pages/settings/components/Configs/ConfigWelcomeModal.jsx:65
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:440
 msgid "Got it"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/Configs.jsx:108
+#: front/ui/pages/settings/components/Configs/Configs.jsx:107
 msgid "Config details"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/Configs.jsx:45
+#: front/ui/pages/settings/components/Configs/Configs.jsx:44
 msgid "Manage and apply configs to multiple sites from The Hub"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/Configs.jsx:48
+#: front/ui/pages/settings/components/Configs/Configs.jsx:47
 msgid "Tips"
 msgstr ""
 
-#: front/ui/pages/settings/components/Configs/Configs.jsx:55
+#: front/ui/pages/settings/components/Configs/Configs.jsx:54
 msgid "Try Now"
 msgstr ""
 
 #: front/ui/pages/settings/components/Configs/ConfigsContext.jsx:15
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:87
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:94
 msgid "Asset Optimization"
 msgstr ""
 
@@ -4800,19 +4822,19 @@ msgstr ""
 msgid "More information about the debug log"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:21
+#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:23
 msgid "Version"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:28
+#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:30
 msgid "Release date"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:35
+#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:37
 msgid "Developer"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:42
+#: front/ui/pages/settings/components/OtherSettings/HummingbirdInfoCard.jsx:44
 msgid "Hummingbird plugin information"
 msgstr ""
 
@@ -4821,195 +4843,201 @@ msgstr ""
 msgid "Failed to save settings. Please try again."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:231
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:232
 msgid "Log file cleared."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:236
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:237
 msgid "Failed to clear the log file. Please try again."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:252
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:253
 msgid "Failed to reset settings. Please try again."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:262
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:263
 msgid "Clear log file?"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:268
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:269
 #. %s: log file name.
 msgid "Are you sure you want to clear the %s? This can’t be undone."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:278
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:279
 msgid "Clear log file"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:390
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:391
 msgid "Just be Careful!"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:394
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:395
 msgid ""
 "Manual mode offers full control but can break your site. Make one change at "
 "a time and check your frontend."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:411
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:412
 msgid "Switch to Dev Mode"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:420
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:421
 msgid "Preset configuration will be applied."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:424
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:425
 msgid ""
 "Automatic restores your last optimization choice and inherits current Dev "
 "settings. Dev-only settings (e.g., defer/inline) will be discarded and not "
 "saved if you switch back."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:430
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:431
 msgid "Don't show me this again."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:447
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:448
 msgid "Reset to factory settings?"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:450
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:451
 msgid ""
 "Are you sure you want to reset Hummingbird's settings back to the factory "
 "defaults?"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:465
+#: front/ui/pages/settings/components/OtherSettings/OtherSettings.jsx:466
 msgid "Reset settings"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:104
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:105
 msgid ""
 "Enable developer controls for individual scripts and styles in Asset "
 "Optimization."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:108
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:109
 msgid "More information about Asset Optimization Dev Mode"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:112
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:113
 msgid ""
 "Take granular control of individual assets. Disable, defer, or inline "
 "scripts and styles on a per-file basis."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:118
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:119
 msgid "Asset Optimization Dev Mode"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:125
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:126
 msgid "To access this feature, navigate to "
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:127
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:128
 msgid "Asset Optimization > Dev mode."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:140
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:141
 msgid "Reset to factory settings"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:150
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:151
 msgid "Reset"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:55
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:56
 msgid "Share usage data"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:59
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:60
 msgid ""
 "Help make Hummingbird better by letting our designers learn how you’re "
 "using the plugin."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:63
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:64
 msgid "More information about usage data sharing"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:67
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:68
 msgid "Help us improve by sharing anonymous usage data. Recommended."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:79
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:80
 msgid "Preserve settings"
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:82
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:83
 msgid "Choose whether to save your settings for next time, or reset them."
 msgstr ""
 
-#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:86
+#: front/ui/pages/settings/components/OtherSettings/OtherSettingsControls.jsx:87
 msgid "More information about preserving settings"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:100
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:107
 msgid "Subsites"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:103
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:110
 msgid ""
 "Enable the Asset Optimization module for your subsites and further "
 "configure it as per your liking."
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:127
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:134
 msgid "Minimum user role"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:130
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:137
 msgid ""
 "Choose the minimum user role required to configure the Asset Optimization "
 "module in your subsites."
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:154
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:161
 msgid "File location"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:169
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:175
 msgid ""
 "Choose where Hummingbird should store your modified assets. Leave this "
 "blank to use the default folder, or define your own as a relative path. "
 "Note: changing the directory will clear out all the generated assets."
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:21
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:22
 msgid "Super Admin"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:22
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:23
 msgid "Subsite Admin"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:10
+#: front/ui/pages/settings/components/Permissions/AssetOptimizationSection.jsx:59
+msgid ""
+"Choose a folder inside your site, or leave this blank to use the default "
+"folder."
+msgstr ""
+
+#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:11
 msgid ""
 "This setting adds the Page Caching tab to Hummingbird and allows a network "
 "or subsite admin to disable Page Caching if they wish to. Note: It does not "
 "allow them to modify your network settings."
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:63
+#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:64
 msgid "Allow subsites to disable page caching"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:68
+#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:69
 msgid "More information about letting subsites disable page caching"
 msgstr ""
 
-#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:87
+#: front/ui/pages/settings/components/Permissions/PageCachingSection.jsx:88
 msgid ""
 "Page caching is turned off for the whole network. Turn it on from the "
 "Caching page to choose what subsites can do with it."
@@ -5019,46 +5047,46 @@ msgstr ""
 msgid "Close Wizard"
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:123
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:125
 msgid "Run performance test"
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:15
-msgid "Test complete!"
-msgstr ""
-
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:155
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:157
 #. %s: plugin name
 msgid "Welcome to %s"
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:166
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:16
+msgid "Test complete!"
+msgstr ""
+
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:168
 msgid ""
 "Run a performance test to see how your site is performing and start "
 "improving its speed."
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:20
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:21
 msgid "Taking a little longer. Hang in there..."
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:204
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:215
 msgid "Skip for now"
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:24
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:25
 msgid "Finishing up soon"
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:27
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:28
 msgid "This won’t take long"
 msgstr ""
 
-#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:85
+#: front/ui/pages/setup-wizard/components/WelcomeStep.jsx:87
 msgid "Running performance test"
 msgstr ""
 
-#: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:68
+#: front/ui/components/HummingbirdBrand/HummingbirdBrand.jsx:54
 msgctxt "Made by"
 msgid "by"
 msgstr ""

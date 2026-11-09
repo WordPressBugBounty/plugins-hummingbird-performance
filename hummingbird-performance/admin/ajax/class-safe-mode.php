@@ -111,6 +111,8 @@ class Safe_Mode {
 
 		$safe_mode->set_status( true );
 
+		Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_safe_mode( 'enabled' );
+
 		wp_send_json_success( array( 'safeMode' => $this->get_safe_mode_payload() ) );
 	}
 
@@ -133,6 +135,8 @@ class Safe_Mode {
 
 		if ( $safe_mode->get_status() ) {
 			$safe_mode->set_status( false );
+
+			Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_safe_mode( 'disabled' );
 		}
 
 		wp_send_json_success( array( 'safeMode' => $this->get_safe_mode_payload() ) );
@@ -153,15 +157,19 @@ class Safe_Mode {
 			die();
 		}
 
-		// `publish()` on the React side posts its argument as JSON, and it is a bare boolean.
+		// `publish()` on the React side posts `{ clearCache, source }`; `source` is 'frontend' when the preview bar's link opened the review.
 		$raw         = filter_input( INPUT_POST, 'data', FILTER_UNSAFE_RAW );
-		$clear_cache = (bool) json_decode( html_entity_decode( (string) $raw ), true );
+		$data        = json_decode( html_entity_decode( (string) $raw ), true );
+		$clear_cache = ! empty( $data['clearCache'] );
+		$change      = isset( $data['source'] ) && 'frontend' === $data['source'] ? 'publish_frontend' : 'publish_plugin';
 
 		$safe_mode = SafeMode::instance();
 
 		$safe_mode->publish_safe_mode_settings();
 		$safe_mode->delete_data( 'published' );
 		$safe_mode->handle_additional_settings_on_publish();
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_safe_mode( 'disabled', $change );
 
 		if ( $clear_cache ) {
 			$modules = Utils::get_active_cache_modules();
@@ -201,6 +209,8 @@ class Safe_Mode {
 
 		$safe_mode->discard_cache_config_file();
 		$safe_mode->delete_data( 'discarded' );
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_safe_mode( 'disabled', 'discard' );
 
 		// The FastCGI re-toggle is an outbound call and the one step here that can fail. It
 		// cannot be inferred from the transients afterwards - a failed toggle and a successful

@@ -12,6 +12,7 @@ use Hummingbird\Core\Hub_Connector;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\SafeMode;
+use Hummingbird\Core\Whitelabel;
 use Hummingbird\Core\Modules\Performance;
 use WPMUDEV_Dashboard;
 
@@ -505,7 +506,7 @@ class Notices {
 		return array(
 			'id'          => 'upgrade-to-pro',
 			'title'       => __( 'Upgrade to Pro', 'wphb' ),
-			'description' => __( 'Awww yeah! You’ve got access to Hummingbird Pro! Let’s upgrade your free version so you can start using premium features.', 'wphb' ),
+			'description' => Whitelabel::replace_branding_terms( __( 'Awww yeah! You’ve got access to Hummingbird Pro! Let’s upgrade your free version so you can start using premium features.', 'wphb' ) ),
 			'scope'       => 'user',
 			'actions'     => array(
 				array(
@@ -570,7 +571,7 @@ class Notices {
 		return array(
 			'id'          => 'free-deactivated',
 			'title'       => __( 'Free version deactivated', 'wphb' ),
-			'description' => __( 'We noticed you’re running both the free and pro versions of Hummingbird. No biggie! We’ve deactivated the free version for you. Enjoy the pro features!', 'wphb' ),
+			'description' => Whitelabel::replace_branding_terms( __( 'We noticed you’re running both the free and pro versions of Hummingbird. No biggie! We’ve deactivated the free version for you. Enjoy the pro features!', 'wphb' ) ),
 			'scope'       => 'site',
 		);
 	}
@@ -710,7 +711,7 @@ class Notices {
 		}
 
 		$title       = '';
-		$description = __( 'We\'ve spent countless hours developing Hummingbird and making it free for you to use. We would really appreciate it if you dropped us a quick rating!', 'wphb' );
+		$description = Whitelabel::replace_branding_terms( __( 'We\'ve spent countless hours developing Hummingbird and making it free for you to use. We would really appreciate it if you dropped us a quick rating!', 'wphb' ) );
 
 		$saved_scores         = get_site_option( 'wphb-notice-free-rated-last-score', false );
 		$last_report_scores   = Performance::get_last_report_scores();
@@ -728,7 +729,7 @@ class Notices {
 		if ( $performance_improved ) {
 			/* translators: %s: performance score. */
 			$title       = sprintf( __( 'Performance improved! Your site’s score is now %s.', 'wphb' ), $performance_improved );
-			$description = __( 'Your site is now faster and more efficient thanks to Hummingbird’s optimizations. Enjoying the results? Share your experience with a review on WordPress.org.', 'wphb' );
+			$description = Whitelabel::replace_branding_terms( __( 'Your site is now faster and more efficient thanks to Hummingbird’s optimizations. Enjoying the results? Share your experience with a review on WordPress.org.', 'wphb' ) );
 		}
 
 		return array(
@@ -785,7 +786,7 @@ class Notices {
 		$actions = array();
 
 		if ( $minify_active ) {
-			$description = __( "We've noticed you've made changes to your website. If you’ve installed new plugins or themes, we recommend you re-check Hummingbird's Asset Optimization configuration to ensure those new files are added	correctly.", 'wphb' );
+			$description = Whitelabel::replace_branding_terms( __( "We've noticed you've made changes to your website. If you’ve installed new plugins or themes, we recommend you re-check Hummingbird's Asset Optimization configuration to ensure those new files are added	correctly.", 'wphb' ) );
 
 			$recheck_url = add_query_arg(
 				array(
@@ -800,7 +801,7 @@ class Notices {
 				'url'   => esc_url( $recheck_url ),
 			);
 		} else {
-			$description = __( "We've noticed you've made changes to your website. We recommend you clear Hummingbird's page cache to avoid any issues.", 'wphb' );
+			$description = Whitelabel::replace_branding_terms( __( "We've noticed you've made changes to your website. We recommend you clear Hummingbird's page cache to avoid any issues.", 'wphb' ) );
 		}
 
 		// Mirrors the legacy notice's always-present "Clear Cache" button
@@ -885,15 +886,19 @@ class Notices {
 		$plugin_list = self::join_plugin_names_with_and( $incompat_plugins );
 
 		if ( count( $incompat_plugins ) > 1 ) {
-			$text = '<p>' . sprintf(
-				/* translators: %s - plugin names, comma-separated with "and" before the last one, bold */
-				esc_html__( 'Multiple performance plugins are active alongside Hummingbird (%s), which can cause conflicts or unpredictable behavior. For best results, we recommend keeping Hummingbird as your primary performance plugin and disabling the others.', 'wphb' ),
-				$plugin_list
+			$text = '<p>' . Whitelabel::replace_branding_terms(
+				sprintf(
+					/* translators: %s - plugin names, comma-separated with "and" before the last one, bold */
+					esc_html__( 'Multiple performance plugins are active alongside Hummingbird (%s), which can cause conflicts or unpredictable behavior. For best results, we recommend keeping Hummingbird as your primary performance plugin and disabling the others.', 'wphb' ),
+					$plugin_list
+				)
 			) . '</p>';
 		} else {
-			$text = '<p>' . sprintf( /* translators: %s - plugin name */
-				esc_html__( '%s is active alongside Hummingbird. Running multiple performance plugins can cause conflicts or unexpected results, so for the best performance and stability, we recommend using Hummingbird as your only performance plugin and disabling other caching or optimization plugins.', 'wphb' ),
-				$plugin_list
+			$text = '<p>' . Whitelabel::replace_branding_terms(
+				sprintf( /* translators: %s - plugin name */
+					esc_html__( '%s is active alongside Hummingbird. Running multiple performance plugins can cause conflicts or unexpected results, so for the best performance and stability, we recommend using Hummingbird as your only performance plugin and disabling other caching or optimization plugins.', 'wphb' ),
+					$plugin_list
+				)
 			) . '</p>';
 		}
 
@@ -956,16 +961,20 @@ class Notices {
 		$plugin_list = self::join_plugin_names_with_and( $incompatible_plugins );
 
 		if ( count( $incompatible_plugins ) > 1 ) {
-			$description = sprintf(
-				/* translators: %s - plugin names, comma-separated with "and" before the last one, bold */
-				__( 'Multiple performance plugins are active alongside Hummingbird (%s), which can cause conflicts or unpredictable behavior. For best results, we recommend keeping Hummingbird as your primary performance plugin and disabling the others.', 'wphb' ),
-				$plugin_list
+			$description = Whitelabel::replace_branding_terms(
+				sprintf(
+					/* translators: %s - plugin names, comma-separated with "and" before the last one, bold */
+					__( 'Multiple performance plugins are active alongside Hummingbird (%s), which can cause conflicts or unpredictable behavior. For best results, we recommend keeping Hummingbird as your primary performance plugin and disabling the others.', 'wphb' ),
+					$plugin_list
+				)
 			);
 		} else {
-			$description = sprintf(
-				/* translators: %s - plugin name */
-				__( '%s is active alongside Hummingbird. Running multiple performance plugins can cause conflicts or unexpected results, so for the best performance and stability, we recommend using Hummingbird as your only performance plugin and disabling other caching or optimization plugins.', 'wphb' ),
-				$plugin_list
+			$description = Whitelabel::replace_branding_terms(
+				sprintf(
+					/* translators: %s - plugin name */
+					__( '%s is active alongside Hummingbird. Running multiple performance plugins can cause conflicts or unexpected results, so for the best performance and stability, we recommend using Hummingbird as your only performance plugin and disabling other caching or optimization plugins.', 'wphb' ),
+					$plugin_list
+				)
 			);
 		}
 
@@ -1040,11 +1049,13 @@ class Notices {
 			return;
 		}
 
-		$message = sprintf(
-			/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
-			esc_html__( '%1$sSafe Mode%2$s is active. Test and preview Hummingbird changes without affecting your live site, then publish when you\'re ready.', 'wphb' ),
-			'<strong>',
-			'</strong>'
+		$message = Whitelabel::replace_branding_terms(
+			sprintf(
+				/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
+				esc_html__( '%1$sSafe Mode%2$s is active. Test and preview Hummingbird changes without affecting your live site, then publish when you\'re ready.', 'wphb' ),
+				'<strong>',
+				'</strong>'
+			)
 		);
 
 		$preview_changes = SafeMode::instance()->get_safe_mode_preview_url();
@@ -1093,12 +1104,14 @@ class Notices {
 
 		return array(
 			'id'          => 'cache-global-cleared',
-			'description' => sprintf(
-				/* translators: %1$s - cleared modules, %2$s - date, %3$s - time */
-				__( 'Hummingbird cleared the %1$s cache on %2$s at %3$s.', 'wphb' ),
-				$notice_data['modules'],
-				$date,
-				$time
+			'description' => Whitelabel::replace_branding_terms(
+				sprintf(
+					/* translators: %1$s - cleared modules, %2$s - date, %3$s - time */
+					__( 'Hummingbird cleared the %1$s cache on %2$s at %3$s.', 'wphb' ),
+					$notice_data['modules'],
+					$date,
+					$time
+				)
 			),
 		);
 	}
@@ -1123,12 +1136,14 @@ class Notices {
 		$gmt     = get_option( 'gmt_offset' );
 		$date    = gmdate( 'F j, Y', (int) $notice_data['time'] + ( $gmt * HOUR_IN_SECONDS ) );
 		$time    = gmdate( 'g:i a', (int) $notice_data['time'] + ( $gmt * HOUR_IN_SECONDS ) );
-		$message = sprintf(
-			/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
-			esc_html__( 'Hummingbird cleared the%1$s cache on %2$s at %3$s.', 'wphb' ),
-			'<strong> ' . $notice_data['modules'] . '</strong>',
-			'<strong>' . $date . '</strong>',
-			'<strong>' . $time . '</strong>'
+		$message = Whitelabel::replace_branding_terms(
+			sprintf(
+				/* translators: %1$s - Opening strong tag, %2$s - Closing strong tag */
+				esc_html__( 'Hummingbird cleared the%1$s cache on %2$s at %3$s.', 'wphb' ),
+				'<strong> ' . $notice_data['modules'] . '</strong>',
+				'<strong>' . $date . '</strong>',
+				'<strong>' . $time . '</strong>'
+			)
 		);
 
 		$message = '<span class="dashicons dashicons-yes-alt" aria-hidden="true"></span>' . $message;
@@ -1209,7 +1224,7 @@ class Notices {
 		return array(
 			'id'          => $id,
 			/* translators: %s: Latest Hummingbird version number. */
-			'title'       => sprintf( __( 'Hummingbird %s is here', 'wphb' ), $latest_version ),
+			'title'       => Whitelabel::replace_branding_terms( sprintf( __( 'Hummingbird %s is here', 'wphb' ), $latest_version ) ),
 			'description' => __( 'Update now for the latest improvements.', 'wphb' ),
 			'scope'       => 'site',
 			'actions'     => array(

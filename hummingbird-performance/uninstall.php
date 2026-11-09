@@ -38,6 +38,19 @@ if ( $settings['remove_settings'] || $settings['remove_data'] ) {
 	$fs = Filesystem::instance();
 }
 
+// The CDN module caches one transient per stylesheet version (wphb_cdn_css_<hash>); sweep them by prefix.
+$wphb_delete_cdn_css_transients = static function () {
+	global $wpdb;
+
+	$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		$wpdb->prepare(
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+			$wpdb->esc_like( '_transient_wphb_cdn_css_' ) . '%',
+			$wpdb->esc_like( '_transient_timeout_wphb_cdn_css_' ) . '%'
+		)
+	);
+};
+
 if ( $settings['remove_settings'] ) {
 	$options = array(
 		'wphb_ao_scan_files_process_status',
@@ -106,6 +119,7 @@ if ( $settings['remove_settings'] ) {
 
 			if ( $settings['remove_data'] ) {
 				delete_option( 'wphb-last-report' );
+				$wphb_delete_cdn_css_transients();
 
 				if ( ! is_wp_error( $fs->status ) ) {
 					$fs->purge_ao_cache();
@@ -148,6 +162,8 @@ if ( $settings['remove_data'] ) {
 	delete_site_option( 'wphb_cs_process_queue' );
 	delete_option( 'wphb_critical_css_log' );
 	delete_site_transient( 'wphb-cs-processing' );
+
+	$wphb_delete_cdn_css_transients();
 
 	if ( ! is_wp_error( $fs->status ) ) {
 		$fs->clean_up();

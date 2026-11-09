@@ -236,7 +236,7 @@ class Core {
 
 		$menu_args = array(
 			'id'    => 'wphb',
-			'title' => __( 'Hummingbird', 'wphb' ),
+			'title' => Whitelabel::replace_branding_terms( __( 'Hummingbird', 'wphb' ) ),
 			'href'  => admin_url( 'admin.php?page=wphb' ),
 		);
 

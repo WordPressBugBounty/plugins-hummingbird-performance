@@ -1166,6 +1166,8 @@ class Critical_Css extends Module {
 		if ( $is_type_error ) {
 			$api_error = is_wp_error( $response ) ? $response->get_error_message() : esc_html__( 'HB critical unknown error', 'wphb' );
 			$this->log( 'Critical CSS API: Request failed with error: ' . $api_error );
+			// No API error code here (the request itself failed), so the event reports the type as unknown.
+			Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_error( '', $api_error );
 
 			// Update the pending queues.
 			foreach ( $urls as $hash => $url ) {
@@ -1244,6 +1246,7 @@ class Critical_Css extends Module {
 				}
 			} elseif ( 'ERROR' === $status && ! empty( $urls ) ) {
 				$this->log( "Critical CSS Fetch: API returned error status with message: $error_message" );
+				Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_error( $error_code, $error_message );
 				foreach ( $urls as $hash => $url_value ) {
 					$hash_object = $this->get_queue_item_by_hash( $hash );
 
@@ -1279,6 +1282,8 @@ class Critical_Css extends Module {
 	 */
 	public function update_item_for_general_api_error( $id, $error_message, $error_code ) {
 		$queue_by_ids = $this->get_queue_items_by_job_id( $id );
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_error( $error_code, $error_message );
 
 		foreach ( $queue_by_ids as $hash => $id_value ) {
 			$singular = ! empty( $id_value->singular ) ? $id_value->singular : '';

@@ -409,11 +409,13 @@ class AJAX {
 			// The React UI distinguishes starting a test from polling one. A poll must
 			// never silently start a new test after an error or timeout.
 			if ( $react_poll && ! $start_scan ) {
+				$stopped_error = __( 'The performance test stopped before a report was available. Please try again.', 'wphb' );
 				Activity_Log::record( 'performance', __( 'Performance test failed.', 'wphb' ) );
+				Utils::get_module( 'mixpanel_analytics' )->events( 'performance' )->track_scan_finished( '-', '-', $stopped_error );
 				wp_send_json_success(
 					array(
 						'finished' => true,
-						'hasError' => __( 'The performance test stopped before a report was available. Please try again.', 'wphb' ),
+						'hasError' => $stopped_error,
 					)
 				);
 			}
@@ -430,13 +432,12 @@ class AJAX {
 					)
 				);
 			}
+			// Must run before init_scan(): that call deletes the previous report, whose scores this event sends.
+			Utils::get_module( 'mixpanel_analytics' )->events( 'performance' )->track_scan_started();
 			Utils::get_module( 'performance' )->init_scan();
 			Activity_Log::record( 'performance', __( 'Performance test started.', 'wphb' ) );
 			wp_send_json_success( array( 'finished' => false ) );
 		}
-
-		$autoloaded_options_size = Utils::get_autoloaded_options_size();
-		$autoloaded_health       = Utils::get_autoloaded_health();
 
 		$now = time();
 		if ( $now >= ( $started_at + 15 ) ) {
@@ -447,21 +448,14 @@ class AJAX {
 			if ( $now >= ( $started_at + 90 ) ) {
 				Performance::set_doing_report( false );
 				Activity_Log::record( 'performance', __( 'Performance test failed.', 'wphb' ) );
+				$timeout_error = $react_poll ? __( 'The performance test returned no results.', 'wphb' ) : 'we’re over 1 minute - timeout';
+				Utils::get_module( 'mixpanel_analytics' )->events( 'performance' )->track_scan_finished( $mobile, $desktop, $timeout_error );
 				wp_send_json_success(
 					array(
-						'finished'             => true,
-						'mobileScore'          => $mobile,
-						'desktopScore'         => $desktop,
-						'HBSmushFeatures'      => Utils::get_active_features(),
-						'hbPerformanceMetric'  => Utils::get_performance_metric_for_mp(),
-						'aoStatus'             => Utils::is_ao_processing() ? 'incomplete' : 'complete',
-						'getLCPSubmetrics'     => Performance::get_lcp_submetrics_for_mp(),
-						'getAudits'            => Performance::get_audits_for_mp(),
-						'coreWebVitalsMobile'  => Performance::core_web_vitals_status( 'mobile' ),
-						'coreWebVitalsDesktop' => Performance::core_web_vitals_status(),
-						'hasError'             => $react_poll ? __( 'The performance test returned no results.', 'wphb' ) : 'we’re over 1 minute - timeout',
-						'autoloaderSize'       => $autoloaded_options_size,
-						'autoloaderHealth'     => $autoloaded_health,
+						'finished'     => true,
+						'mobileScore'  => $mobile,
+						'desktopScore' => $desktop,
+						'hasError'     => $timeout_error,
 					)
 				);
 			}
@@ -518,22 +512,15 @@ class AJAX {
 					: __( 'Performance test completed.', 'wphb' )
 			);
 
+			Utils::get_module( 'mixpanel_analytics' )->events( 'performance' )->track_scan_finished( $mobile, $desktop, $performance_error ? $performance_error : '' );
+
 			wp_send_json_success(
 				array(
-					'finished'             => true,
-					'mobileScore'          => $mobile,
-					'desktopScore'         => $desktop,
-					'HBSmushFeatures'      => Utils::get_active_features(),
-					'hbPerformanceMetric'  => Utils::get_performance_metric_for_mp(),
-					'aoStatus'             => Utils::is_ao_processing() ? 'incomplete' : 'complete',
-					'getLCPSubmetrics'     => Performance::get_lcp_submetrics_for_mp(),
-					'getAudits'            => Performance::get_audits_for_mp(),
-					'coreWebVitalsMobile'  => Performance::core_web_vitals_status( 'mobile' ),
-					'coreWebVitalsDesktop' => Performance::core_web_vitals_status(),
-					'hasError'             => $react_poll && is_wp_error( $report ) ? $report->get_error_message() : $performance_error,
-					'performanceData'      => \Hummingbird\Admin\Pages\Dashboard::get_ui_performance_data(),
-					'autoloaderSize'       => $autoloaded_options_size,
-					'autoloaderHealth'     => $autoloaded_health,
+					'finished'        => true,
+					'mobileScore'     => $mobile,
+					'desktopScore'    => $desktop,
+					'hasError'        => $react_poll && is_wp_error( $report ) ? $report->get_error_message() : $performance_error,
+					'performanceData' => \Hummingbird\Admin\Pages\Dashboard::get_ui_performance_data(),
 				)
 			);
 		}

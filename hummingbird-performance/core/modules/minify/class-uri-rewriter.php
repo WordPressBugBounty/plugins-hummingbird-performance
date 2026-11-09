@@ -146,7 +146,7 @@ class URI_Rewriter {
 					$uri           = $root . self::remove_dots( $root_relative );
 				}
 			}
-		} elseif ( isset( $uri[0] ) && '/' !== $uri[0]                            // root-relative.
+		} elseif ( isset( $uri[0] ) && '/' === $uri[0]                            // root-relative.
 					&& false === strpos( $uri, '//' )  // protocol (non-data).
 					&& 0 !== strpos( $uri, 'data:' )   // data protocol.
 					&& null !== self::$prepend_path

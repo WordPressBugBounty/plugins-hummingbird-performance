@@ -10,11 +10,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$alt_text = sprintf(
-	/* translators: %s - report type */
-	__( 'Hummingbird %s Report', 'wphb' ),
-	ucfirst( $params['REPORT_TYPE'] )
+$alt_text = \Hummingbird\Core\Whitelabel::replace_branding_terms(
+	sprintf(
+		/* translators: %s - report type */
+		__( 'Hummingbird %s Report', 'wphb' ),
+		ucfirst( $params['REPORT_TYPE'] )
+	)
 );
+
+// No logo at all under white label, as in Smush's white label email template.
+$wphb_show_logo = ! \Hummingbird\Core\Whitelabel::is_enabled();
 
 ?>
 
@@ -39,7 +44,9 @@ $alt_text = sprintf(
 												<tbody>
 												<tr>
 													<td>
+														<?php if ( $wphb_show_logo ) : ?>
 														<img height="25" src="<?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/logo@2x.png' ); ?>" srcset="<?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/logo.png' ); ?>, <?php echo esc_url( WPHB_DIR_URL . 'core/pro/modules/reporting/templates/images/logo@2x.png' ); ?> 2x" style="border:0;outline:none;text-decoration:none;height:25px;width:30px;vertical-align:bottom;" width="30" alt="<?php echo esc_attr( $alt_text ); ?>">
+														<?php endif; ?>
 														<span style="color: #FFFFFF;font-family: Roboto, Arial, sans-serif;font-size: 20px;font-weight: 700;text-align: left;margin-left: 10px;line-height:25px">
 															<?php
 															switch ( $params['REPORT_TYPE'] ) {

@@ -112,7 +112,8 @@ class Integrations {
 			wp_send_json_error( array( 'message' => $message ) );
 		}
 
-		$options = Utils::get_module( 'cloudflare' )->get_options();
+		$options       = Utils::get_module( 'cloudflare' )->get_options();
+		$was_connected = ! empty( $options['enabled'] );
 
 		$options_updated = false;
 		if ( ! empty( $email ) && $email !== $options['email'] ) {
@@ -153,6 +154,7 @@ class Integrations {
 
 		if ( $status ) {
 			Activity_Log::record( self::ACTIVITY_MODULE, 'Cloudflare connected.' );
+			Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'Cloudflare_integration', $was_connected, true );
 		}
 
 		// Could not match a zone.
@@ -176,7 +178,11 @@ class Integrations {
 			die();
 		}
 
+		$was_connected = Utils::get_module( 'cloudflare' )->is_connected();
+
 		Utils::get_module( 'cloudflare' )->disconnect();
+
+		Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'Cloudflare_integration', $was_connected, false );
 
 		$this->cloudflare_status();
 	}

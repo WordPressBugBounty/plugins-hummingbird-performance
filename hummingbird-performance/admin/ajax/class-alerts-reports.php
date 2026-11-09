@@ -211,6 +211,8 @@ class Alerts_Reports {
 			$this->sync_uptime_alerts( $uptime_alert_settings );
 		}
 
+		$mixpanel = Utils::get_module( 'mixpanel_analytics' );
+
 		Activity_Log::record_toggle_when_changed(
 			self::ACTIVITY_MODULE,
 			$was_performance_enabled,
@@ -218,6 +220,7 @@ class Alerts_Reports {
 			__( 'Performance reports enabled.', 'wphb' ),
 			__( 'Performance reports disabled.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'Performance reports', $was_performance_enabled, $performance_enabled );
 
 		if ( ! $is_subsite_context ) {
 			Activity_Log::record_toggle_when_changed(
@@ -227,6 +230,7 @@ class Alerts_Reports {
 				__( 'Uptime reports enabled.', 'wphb' ),
 				__( 'Uptime reports disabled.', 'wphb' )
 			);
+			$mixpanel->track_feature_toggle( 'Uptime reports', $was_uptime_report_enabled, $uptime_report_enabled );
 
 			Activity_Log::record_toggle_when_changed(
 				self::ACTIVITY_MODULE,
@@ -235,6 +239,7 @@ class Alerts_Reports {
 				__( 'Uptime alerts enabled.', 'wphb' ),
 				__( 'Uptime alerts disabled.', 'wphb' )
 			);
+			$mixpanel->track_feature_toggle( 'Uptime notifications', $was_uptime_alert_enabled, $uptime_alert_enabled );
 		}
 
 		wp_send_json_success( self::get_page_data() );

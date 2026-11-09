@@ -10,6 +10,7 @@ namespace Hummingbird\Core\Integration;
 
 use Hummingbird\Admin\Notices;
 use Hummingbird\Core\Settings;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -131,7 +132,7 @@ class SiteGround {
 
 				$notices['sg_optimizer_compatibility'] = array(
 					'title'       => __( 'SG Optimizer Compatibility', 'wphb' ),
-					'description' => __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset optimization features have been disabled for compatibility.', 'wphb' ),
+					'description' => Whitelabel::replace_branding_terms( __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset optimization features have been disabled for compatibility.', 'wphb' ) ),
 				);
 
 				return $notices;
@@ -164,7 +165,7 @@ class SiteGround {
 			add_action(
 				'wphb_advanced_tools_notice',
 				function () {
-					$notice = __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset settings have been disabled for compatibility.', 'wphb' );
+					$notice = Whitelabel::replace_branding_terms( __( 'Hummingbird detect that the SG Optimizer plugin with frontend optimization features is enabled. Some asset settings have been disabled for compatibility.', 'wphb' ) );
 					Notices::get_instance()->show_inline( $notice, 'info' );
 				}
 			);

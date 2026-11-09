@@ -15,6 +15,7 @@ use Hummingbird\Core\Modules\Page_Cache;
 use Hummingbird\Core\SafeMode;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -128,7 +129,8 @@ class Minify {
 	 * @param bool $reset_settings When switching off, also reset exclusions and per-file settings.
 	 */
 	private function set_ao_status( $enable, $reset_settings = true ) {
-		$minify = Utils::get_module( 'minify' );
+		$minify     = Utils::get_module( 'minify' );
+		$was_active = $minify->is_active();
 
 		if ( $enable ) {
 			// No scan here: files are collected as visitors load pages, and
@@ -137,6 +139,8 @@ class Minify {
 		} else {
 			$minify->disable( true, $reset_settings );
 		}
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_module_status_change( $was_active, $minify->is_active() );
 	}
 
 	/**
@@ -199,6 +203,10 @@ class Minify {
 		Utils::get_module( 'minify' )->clear_cache( false );
 		Utils::get_module( 'critical_css' )->regenerate_critical_css();
 
+		if ( Utils::get_module( 'critical_css' )->is_active() ) {
+			Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_cache_purge();
+		}
+
 		wp_send_json_success(
 			array(
 				'isCriticalActive' => Utils::get_module( 'critical_css' )->is_active(),
@@ -224,7 +232,9 @@ class Minify {
 		Sources_Collector::clear_collection();
 
 		// Activate minification if is not.
+		$was_active = Utils::get_module( 'minify' )->is_active();
 		Utils::get_module( 'minify' )->toggle_service( true );
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_module_status_change( $was_active, Utils::get_module( 'minify' )->is_active() );
 		Utils::get_module( 'minify' )->scanner->init_scan();
 
 		wp_send_json_success();
@@ -412,6 +422,11 @@ class Minify {
 			__( 'Font files chosen to optimize automatically were disabled.', 'wphb' )
 		);
 
+		// set_ao_status() above reports the module switching on or off; this reports a Compress/Combine change while it stays on.
+		if ( $was_active === $ao_enabled ) {
+			Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_mode_change( $previous, $options );
+		}
+
 		$settings_changed_message = false;
 		if ( $compress_changed || $combine_changed ) {
 			if ( $settings['combine'] ) {
@@ -539,6 +554,8 @@ class Minify {
 					: __( 'Included inline JavaScript in delay.', 'wphb' )
 			);
 		}
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_delay_js_change( $previous, $options );
 
 		wp_send_json_success(
 			array(
@@ -671,6 +688,8 @@ class Minify {
 			);
 		}
 
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_change( $previous, $options );
+
 		wp_send_json_success( Utils::get_module( 'critical_css' )->get_react_settings() );
 	}
 
@@ -690,6 +709,8 @@ class Minify {
 		$critical_css = Utils::get_module( 'critical_css' );
 
 		$critical_css->regenerate_critical_css();
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_cache_purge();
 
 		wp_send_json_success( $critical_css->get_react_settings() );
 	}
@@ -829,6 +850,8 @@ class Minify {
 			__( 'Preload fonts files list updated.', 'wphb' )
 		);
 
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_font_optimization_change( $previous, $options );
+
 		wp_send_json_success( Fonts::get_react_settings() );
 	}
 
@@ -908,8 +931,9 @@ class Minify {
 		$settings = filter_input( INPUT_POST, 'data', FILTER_DEFAULT, FILTER_UNSAFE_RAW );
 		$settings = json_decode( html_entity_decode( $settings ), true );
 
-		$minify  = Utils::get_module( 'minify' );
-		$options = $minify->get_options();
+		$minify   = Utils::get_module( 'minify' );
+		$options  = $minify->get_options();
+		$previous = $options;
 
 		$options['delay_js_files_exclusion']          = isset( $settings['files'] ) ? array_map( 'sanitize_text_field', (array) $settings['files'] ) : array();
 		$options['delay_js_post_types_exclusion']     = isset( $settings['post_types'] ) ? array_map( 'sanitize_key', (array) $settings['post_types'] ) : array();
@@ -922,6 +946,8 @@ class Minify {
 		$minify->clear_cache( false );
 
 		Activity_Log::record( self::ACTIVITY_MODULE, __( 'Delay JavaScript exclusions list updated.', 'wphb' ) );
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_delay_js_change( $previous, $options );
 
 		wp_send_json_success( Utils::get_module( 'delayjs' )->get_react_settings() );
 	}
@@ -961,6 +987,7 @@ class Minify {
 
 		$minify                 = Utils::get_module( 'minify' );
 		$options                = $minify->get_options();
+		$previous               = $options;
 		$previous_inclusion_css = $minify->get_css( 'manual-critical' );
 		$previous_exclusions    = $this->get_critical_css_exclusions_snapshot( $options );
 
@@ -995,6 +1022,13 @@ class Minify {
 			(string) $previous_inclusion_css,
 			(string) $minify->get_css( 'manual-critical' ),
 			__( 'Critical CSS inclusions list updated.', 'wphb' )
+		);
+
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_critical_css_change(
+			$previous,
+			$options,
+			(string) $previous_inclusion_css,
+			(string) $minify->get_css( 'manual-critical' )
 		);
 
 		wp_send_json_success(
@@ -1145,6 +1179,11 @@ class Minify {
 	public function minify_manual_status() {
 		check_ajax_referer( 'wphb-fetch' );
 
+		// Check permission.
+		if ( ! current_user_can( Utils::get_admin_capability() ) ) {
+			die();
+		}
+
 		$minify  = Utils::get_module( 'minify' );
 		$options = SafeMode::filter_options( $minify->get_options(), 'minify' );
 
@@ -1274,7 +1313,7 @@ class Minify {
 
 		wp_send_json_success(
 			array(
-				'notice' => __( 'Hummingbird is running a file check to see what files can be optimized. Feel free to close this page while Hummingbird works its magic in the background.', 'wphb' ),
+				'notice' => Whitelabel::replace_branding_terms( __( 'Hummingbird is running a file check to see what files can be optimized. Feel free to close this page while Hummingbird works its magic in the background.', 'wphb' ) ),
 			)
 		);
 	}
@@ -1303,7 +1342,7 @@ class Minify {
 		// Infinite-loop safety mechanism triggered; consume so it shows once.
 		$infinite_loop_notice = '';
 		if ( get_transient( 'wphb_infinite_loop_warning' ) ) {
-			$infinite_loop_notice = __( 'Issues processing queue. Hummingbird performance can be degraded.', 'wphb' );
+			$infinite_loop_notice = Whitelabel::replace_branding_terms( __( 'Issues processing queue. Hummingbird performance can be degraded.', 'wphb' ) );
 			delete_transient( 'wphb_infinite_loop_warning' );
 		}
 
@@ -1371,9 +1410,14 @@ class Minify {
 		$minify = Utils::get_module( 'minify' );
 
 		if ( array_key_exists( 'filePath', $data ) ) {
-			$options              = $minify->get_options();
-			$options['file_path'] = htmlspecialchars( sanitize_text_field( $data['filePath'] ) );
-			$minify->update_options( $options );
+			$file_path = htmlspecialchars( sanitize_text_field( $data['filePath'] ) );
+
+			// A refused location keeps the stored one; the field never sends it.
+			if ( self::is_allowed_file_path( $file_path ) ) {
+				$options              = $minify->get_options();
+				$options['file_path'] = $file_path;
+				$minify->update_options( $options );
+			}
 		}
 
 		$enabled = false;
@@ -1381,7 +1425,9 @@ class Minify {
 			$enabled = isset( $data['role'] ) && 'super-admins' === $data['role'] ? 'super-admins' : true;
 		}
 
+		$was_active = $minify->is_active();
 		$minify->toggle_service( $enabled, true );
+		Utils::get_module( 'mixpanel_analytics' )->events( 'asset_optimization' )->track_module_status_change( $was_active, $minify->is_active() );
 
 		wp_send_json_success(
 			array(
@@ -1389,5 +1435,22 @@ class Minify {
 				'filePath' => Settings::get_setting( 'file_path', 'minify' ),
 			)
 		);
+	}
+
+	/**
+	 * Whether a custom Asset Optimization folder may be saved.
+	 *
+	 * @since 4.0.2
+	 *
+	 * @param string $file_path Sanitized folder.
+	 *
+	 * @return bool
+	 */
+	private static function is_allowed_file_path( $file_path ) {
+		if ( '' === $file_path ) {
+			return true;
+		}
+
+		return '' !== trim( $file_path, '/.' ) && ! in_array( '..', preg_split( '#[\\\\/]#', $file_path ), true );
 	}
 }

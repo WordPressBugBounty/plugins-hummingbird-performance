@@ -151,12 +151,6 @@ import { currentPage } from './utils/helpers';
 		 */
 		 trackGutenbergEvent( feature ) {
 			this.track( 'critical_css_gutenberg', { feature } );
-
-			if ( 'revert' === feature ) {
-				this.track( 'critical_css_cache_purge', {
-					location: 'gutenberg'
-				} );
-			}
 		},
 
 		/**

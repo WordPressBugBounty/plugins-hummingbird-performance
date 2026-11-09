@@ -198,6 +198,8 @@ class Tools {
 	 * @param array $current  Current advanced options.
 	 */
 	private function record_tools_changes( $previous, $current ) {
+		$mixpanel = Utils::get_module( 'mixpanel_analytics' );
+
 		$prev_viewport = ! empty( $previous['viewport_meta'] );
 		$next_viewport = ! empty( $current['viewport_meta'] );
 		Activity_Log::record_toggle_when_changed(
@@ -207,6 +209,7 @@ class Tools {
 			__( 'Viewport meta optimization enabled.', 'wphb' ),
 			__( 'Viewport meta optimization disabled.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'viewport_meta', $prev_viewport, $next_viewport );
 
 		$prev_query_strings = ! empty( $previous['query_string'] );
 		$next_query_strings = ! empty( $current['query_string'] );
@@ -217,6 +220,7 @@ class Tools {
 			__( 'URL query string removal enabled.', 'wphb' ),
 			__( 'URL query string removal disabled.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'remove_query_strings', $prev_query_strings, $next_query_strings );
 
 		$prev_emoji = ! empty( $previous['emoji'] );
 		$next_emoji = ! empty( $current['emoji'] );
@@ -227,6 +231,7 @@ class Tools {
 			__( 'Default emoji files removal enabled.', 'wphb' ),
 			__( 'Default emoji files removal disabled.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'remove_emojis', $prev_emoji, $next_emoji );
 
 		$prev_post_revisions = isset( $previous['post_revisions'] ) ? max( 0, (int) $previous['post_revisions'] ) : 0;
 		$next_post_revisions = isset( $current['post_revisions'] ) ? max( 0, (int) $current['post_revisions'] ) : 0;
@@ -265,6 +270,7 @@ class Tools {
 				Activity_Log::record( self::ACTIVITY_MODULE, __( 'WooCommerce cart fragments setting disabled.', 'wphb' ) );
 			}
 		}
+		$mixpanel->track_feature_toggle( 'disable_cart_fragments', (bool) $prev_cart_fragments, (bool) $next_cart_fragments );
 
 		$prev_lazy_load = isset( $previous['lazy_load'] ) && is_array( $previous['lazy_load'] ) ? $previous['lazy_load'] : array();
 		$next_lazy_load = isset( $current['lazy_load'] ) && is_array( $current['lazy_load'] ) ? $current['lazy_load'] : array();
@@ -278,6 +284,7 @@ class Tools {
 			__( 'Lazy load comments enabled.', 'wphb' ),
 			__( 'Lazy load comments disabled.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'lazy_comments', $prev_lazy_enabled, $next_lazy_enabled );
 
 		$prev_method = isset( $prev_lazy_load['method'] ) && 'scroll' === $prev_lazy_load['method'] ? 'scroll' : 'click';
 		$next_method = isset( $next_lazy_load['method'] ) && 'scroll' === $next_lazy_load['method'] ? 'scroll' : 'click';
@@ -321,6 +328,7 @@ class Tools {
 			$next_prefetch,
 			__( 'DNS prefetch list updated.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'prefetch_dns', ! empty( $prev_prefetch ), ! empty( $next_prefetch ) );
 
 		$prev_preconnect = isset( $previous['preconnect'] ) && is_array( $previous['preconnect'] ) ? array_values( $previous['preconnect'] ) : array();
 		$next_preconnect = isset( $current['preconnect'] ) && is_array( $current['preconnect'] ) ? array_values( $current['preconnect'] ) : array();
@@ -330,6 +338,7 @@ class Tools {
 			$next_preconnect,
 			__( 'Preconnect list updated.', 'wphb' )
 		);
+		$mixpanel->track_feature_toggle( 'preconnect_domains', ! empty( $prev_preconnect ), ! empty( $next_preconnect ) );
 	}
 
 	/**

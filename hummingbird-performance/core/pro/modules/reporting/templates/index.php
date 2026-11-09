@@ -15,9 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$alt_text = sprintf( /* translators: %s - report type */
-	__( 'Hummingbird %s Report', 'wphb' ),
-	ucfirst( $params['REPORT_TYPE'] )
+$alt_text = \Hummingbird\Core\Whitelabel::replace_branding_terms(
+	sprintf( /* translators: %s - report type */
+		__( 'Hummingbird %s Report', 'wphb' ),
+		ucfirst( $params['REPORT_TYPE'] )
+	)
 );
 
 $args = compact( 'last_test', 'params' );

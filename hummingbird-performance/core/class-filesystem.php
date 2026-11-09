@@ -166,10 +166,14 @@ class Filesystem {
 			if ( ! WP_Filesystem( $credentials ) ) {
 				// Some problems, exit.
 				ob_start();
-				printf( /* translators: %1$s - code tag, %2$s - closing code tag, still having trouble link */
-					esc_html__( "Hummingbird has encountered an unexpected error while writing a file. To find out more, enable the WordPress debug log by adding the following line to your site’s wp-config.php file:%1\$sdefine('WP_DEBUG', true);%2\$s", 'wphb' ),
-					'<br><code>',
-					'</code><br><br>'
+				echo wp_kses_post(
+					Whitelabel::replace_branding_terms(
+						sprintf( /* translators: %1$s - code tag, %2$s - closing code tag, still having trouble link */
+							esc_html__( "Hummingbird has encountered an unexpected error while writing a file. To find out more, enable the WordPress debug log by adding the following line to your site’s wp-config.php file:%1\$sdefine('WP_DEBUG', true);%2\$s", 'wphb' ),
+							'<br><code>',
+							'</code><br><br>'
+						)
+					)
 				);
 				echo esc_html( '&nbsp;' );
 				Utils::still_having_trouble_link();
@@ -384,6 +388,12 @@ class Filesystem {
 			return;
 		}
 
+		// A user-defined location is not ours to empty: it can hold anything, up to the site root.
+		if ( ! empty( Settings::get_setting( 'file_path', 'minify' ) ) ) {
+			$this->purge_ao_files( $path );
+			return;
+		}
+
 		// Use WP_Filesystem API to delete files.
 		if ( $this->fs_api ) {
 			/**
@@ -405,6 +415,36 @@ class Filesystem {
 		} else {
 			// Use direct filesystem php functions.
 			$this->native_dir_delete( $path );
+		}
+	}
+
+	/**
+	 * Delete only the files Asset Optimization wrote to a user-defined folder.
+	 *
+	 * @since 4.0.2
+	 *
+	 * @param string $path Folder path, with a trailing slash.
+	 *
+	 * @return void
+	 */
+	private function purge_ao_files( $path ) {
+		$pattern = '/^(?:wphb-)?[0-9a-f]{32}[A-Za-z0-9._-]*\.(?:css|js)$/';
+
+		$files = scandir( $path );
+		if ( false === $files ) {
+			return;
+		}
+
+		foreach ( $files as $file ) {
+			if ( is_file( $path . $file ) && preg_match( $pattern, $file ) ) {
+				wp_delete_file( $path . $file );
+			}
+		}
+
+		// Remove the folder only if nothing else is left in it.
+		$left = scandir( $path );
+		if ( is_array( $left ) && 2 === count( $left ) ) {
+			rmdir( $path );
 		}
 	}
 

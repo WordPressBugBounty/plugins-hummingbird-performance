@@ -99,6 +99,8 @@ class Hub_Connector {
 			);
 		}
 
+		Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_disconnect_site( 'submit' );
+
 		wp_send_json_success(
 			array(
 				'message' => __( 'Your site has been disconnected successfully!', 'wphb' ),

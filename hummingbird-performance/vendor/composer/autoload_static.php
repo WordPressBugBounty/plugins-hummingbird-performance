@@ -32,6 +32,7 @@ class ComposerStaticInit25a5bea70d4abe72a0ec8848c7ceaf6c
         'Hummingbird\\Admin\\Ajax\\Activity_Log' => __DIR__ . '/../..' . '/admin/ajax/class-activity-log.php',
         'Hummingbird\\Admin\\Ajax\\Advanced\\Tools' => __DIR__ . '/../..' . '/admin/ajax/advanced/class-tools.php',
         'Hummingbird\\Admin\\Ajax\\Alerts_Reports' => __DIR__ . '/../..' . '/admin/ajax/class-alerts-reports.php',
+        'Hummingbird\\Admin\\Ajax\\Analytics' => __DIR__ . '/../..' . '/admin/ajax/class-analytics.php',
         'Hummingbird\\Admin\\Ajax\\Caching\\Browser' => __DIR__ . '/../..' . '/admin/ajax/caching/class-browser.php',
         'Hummingbird\\Admin\\Ajax\\Caching\\Integrations' => __DIR__ . '/../..' . '/admin/ajax/caching/class-integrations.php',
         'Hummingbird\\Admin\\Ajax\\Caching\\Others' => __DIR__ . '/../..' . '/admin/ajax/caching/class-others.php',
@@ -136,6 +137,11 @@ class ComposerStaticInit25a5bea70d4abe72a0ec8848c7ceaf6c
         'Hummingbird\\Core\\Modules\\Minify\\Scanner' => __DIR__ . '/../..' . '/core/modules/minify/class-scanner.php',
         'Hummingbird\\Core\\Modules\\Minify\\Sources_Collector' => __DIR__ . '/../..' . '/core/modules/minify/class-sources-collector.php',
         'Hummingbird\\Core\\Modules\\Minify\\URI_Rewriter' => __DIR__ . '/../..' . '/core/modules/minify/class-uri-rewriter.php',
+        'Hummingbird\\Core\\Modules\\Mixpanel\\Asset_Optimization_Events' => __DIR__ . '/../..' . '/core/modules/mixpanel/class-asset-optimization-events.php',
+        'Hummingbird\\Core\\Modules\\Mixpanel\\Events' => __DIR__ . '/../..' . '/core/modules/mixpanel/class-events.php',
+        'Hummingbird\\Core\\Modules\\Mixpanel\\General_Events' => __DIR__ . '/../..' . '/core/modules/mixpanel/class-general-events.php',
+        'Hummingbird\\Core\\Modules\\Mixpanel\\Page_Caching_Events' => __DIR__ . '/../..' . '/core/modules/mixpanel/class-page-caching-events.php',
+        'Hummingbird\\Core\\Modules\\Mixpanel\\Performance_Events' => __DIR__ . '/../..' . '/core/modules/mixpanel/class-performance-events.php',
         'Hummingbird\\Core\\Modules\\Mixpanel_Analytics' => __DIR__ . '/../..' . '/core/modules/class-mixpanel-analytics.php',
         'Hummingbird\\Core\\Modules\\Page_Cache' => __DIR__ . '/../..' . '/core/modules/class-page-cache.php',
         'Hummingbird\\Core\\Modules\\Performance' => __DIR__ . '/../..' . '/core/modules/class-performance.php',
@@ -155,6 +161,7 @@ class ComposerStaticInit25a5bea70d4abe72a0ec8848c7ceaf6c
         'Hummingbird\\Core\\Traits\\Smush' => __DIR__ . '/../..' . '/core/traits/trait-smush.php',
         'Hummingbird\\Core\\Traits\\WPConfig' => __DIR__ . '/../..' . '/core/traits/trait-wpconfig.php',
         'Hummingbird\\Core\\Utils' => __DIR__ . '/../..' . '/core/class-utils.php',
+        'Hummingbird\\Core\\Whitelabel' => __DIR__ . '/../..' . '/core/class-whitelabel.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

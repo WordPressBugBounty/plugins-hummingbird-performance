@@ -17,6 +17,7 @@ use Exception;
 use Hummingbird\Core\Module;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -89,6 +90,23 @@ abstract class Reports extends Module {
 	 * @return string
 	 */
 	abstract protected function get_subject();
+
+	/**
+	 * Sender name for the report email.
+	 *
+	 * @since 4.0.1
+	 *
+	 * @return string
+	 */
+	protected function get_sender_name() {
+		if ( ! Whitelabel::is_enabled() ) {
+			return 'Hummingbird';
+		}
+
+		$custom_name = Whitelabel::get_plugin_name();
+
+		return $custom_name ? $custom_name : __( 'Reports', 'wphb' );
+	}
 
 	/**
 	 * Get report params for email.
@@ -364,7 +382,7 @@ abstract class Reports extends Module {
 			$email_content  = stripslashes( $email_content );
 			$no_reply_email = 'noreply@' . wp_parse_url( get_site_url(), PHP_URL_HOST );
 			$headers        = array(
-				'From: Hummingbird <' . $no_reply_email . '>',
+				'From: ' . $this->get_sender_name() . ' <' . $no_reply_email . '>',
 				'Content-Type: text/html; charset=UTF-8',
 			);
 

@@ -12,6 +12,7 @@ use Hummingbird\Core\Modules\Background\Thread_Safe_Options;
 use Hummingbird\Core\SafeMode;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -116,9 +117,7 @@ class Activity_Log {
 				'timestamp' => gmdate( 'c' ),
 				'module'    => 'settings',
 				'variant'   => 'default',
-				'content'   => apply_filters( 'wpmudev_branding_hide_branding', false )
-					? __( 'Welcome.', 'wphb' )
-					: __( 'Welcome to Hummingbird', 'wphb' ),
+				'content'   => Whitelabel::replace_branding_terms( __( 'Welcome to Hummingbird', 'wphb' ) ),
 			),
 		);
 	}

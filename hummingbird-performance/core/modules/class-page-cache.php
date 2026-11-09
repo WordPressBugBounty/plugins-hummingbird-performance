@@ -26,6 +26,7 @@ use stdClass;
 use WP_Error;
 use WP_Post;
 use WP_Term;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -242,7 +243,7 @@ class Page_Cache extends Module {
 				$this->error = new WP_Error(
 					'caching-plugin-detected',
 					/* translators: %s: plugin name. */
-					sprintf( __( '%s plugin detected. Please disable it to use Hummingbird page caching functionality.', 'wphb' ), $plugin_name )
+					Whitelabel::replace_branding_terms( sprintf( __( '%s plugin detected. Please disable it to use Hummingbird page caching functionality.', 'wphb' ), $plugin_name ) )
 				);
 				break;
 			}
@@ -253,12 +254,14 @@ class Page_Cache extends Module {
 		if ( file_exists( $adv_cache_file ) && false === strpos( file_get_contents( $adv_cache_file ), 'WPHB_ADVANCED_CACHE' ) ) {
 			$this->error = new WP_Error(
 				'advanced-cache-detected',
-				sprintf( /* translators: %1$s - opening a tag, %2$s - closing a tag, %3$s - button tag, %4$s - closing button tag */
-					__( 'Hummingbird has detected an advanced-cache.php file in your site’s wp-content directory. %1$sManage your plugins%2$s and disable any other active caching plugins to ensure Hummingbird’s page caching works properly.<br>If no other caching plugins are active, the advanced-cache.php may have been left by a previously used caching plugin. You can remove the file from the wp-content directory, or remove it via your file manager or FTP.%3$sRemove file%4$s', 'wphb' ),
-					'<a href="' . esc_url( network_admin_url( 'plugins.php' ) ) . '">',
-					'</a>',
-					'<br><button id="wphb-remove-advanced-cache" style="margin-top: 10px" class="sui-button sui-button-blue" role="button">',
-					'</button>'
+				Whitelabel::replace_branding_terms(
+					sprintf( /* translators: %1$s - opening a tag, %2$s - closing a tag, %3$s - button tag, %4$s - closing button tag */
+						__( 'Hummingbird has detected an advanced-cache.php file in your site’s wp-content directory. %1$sManage your plugins%2$s and disable any other active caching plugins to ensure Hummingbird’s page caching works properly.<br>If no other caching plugins are active, the advanced-cache.php may have been left by a previously used caching plugin. You can remove the file from the wp-content directory, or remove it via your file manager or FTP.%3$sRemove file%4$s', 'wphb' ),
+						'<a href="' . esc_url( network_admin_url( 'plugins.php' ) ) . '">',
+						'</a>',
+						'<br><button id="wphb-remove-advanced-cache" style="margin-top: 10px" class="sui-button sui-button-blue" role="button">',
+						'</button>'
+					)
 				)
 			);
 		}
@@ -279,7 +282,7 @@ class Page_Cache extends Module {
 		if ( Fast_CGI::is_fast_cgi_enabled() ) {
 			$this->error = new WP_Error(
 				'fast-cgi-cache-active',
-				__( 'Hummingbird has halted page caching to prevent any issues with FastCGI cache', 'wphb' )
+				Whitelabel::replace_branding_terms( __( 'Hummingbird has halted page caching to prevent any issues with FastCGI cache', 'wphb' ) )
 			);
 		}
 	}
@@ -584,12 +587,14 @@ class Page_Cache extends Module {
 		if ( ! file_exists( $this->wp_config_file ) ) {
 			$this->error = new WP_Error(
 				'no-wp-config-file',
-				sprintf( /* translators: %1$s - code tag, %2$s - closing code tag, %3$s - button tag, %4$s - closing button tag */
-					__( "Hummingbird could not locate your site’s wp-config.php file. Please ensure the following line has been added to the file:%1\$sdefine('WP_CACHE', true);%2\$sClick Retry to try again.%3\$sRetry%4\$s", 'wphb' ),
-					'<br><code>',
-					'</code><br><br>',
-					'<br><a href="' . esc_url( network_admin_url( 'admin.php?page=wphb-caching' ) ) . '" style="margin-top: 10px" class="sui-button sui-button-blue">',
-					'</a>'
+				Whitelabel::replace_branding_terms(
+					sprintf( /* translators: %1$s - code tag, %2$s - closing code tag, %3$s - button tag, %4$s - closing button tag */
+						__( "Hummingbird could not locate your site’s wp-config.php file. Please ensure the following line has been added to the file:%1\$sdefine('WP_CACHE', true);%2\$sClick Retry to try again.%3\$sRetry%4\$s", 'wphb' ),
+						'<br><code>',
+						'</code><br><br>',
+						'<br><a href="' . esc_url( network_admin_url( 'admin.php?page=wphb-caching' ) ) . '" style="margin-top: 10px" class="sui-button sui-button-blue">',
+						'</a>'
+					)
 				)
 			);
 
@@ -600,11 +605,13 @@ class Page_Cache extends Module {
 		if ( ! is_writable( $this->wp_config_file ) || ! is_writable( dirname( $this->wp_config_file ) ) ) {
 			$this->error = new WP_Error(
 				'wp-config-not-writable',
-				sprintf( /* translators: %1$s - code tag, %2$s - closing code tag, button tag, %3$s - closing button tag */
-					__( "Hummingbird could not write to your site’s wp-config.php file. Click Retry to try again, or manually add the following line to the file:%1\$sdefine('WP_CACHE', true);%2\$sRetry%3\$s", 'wphb' ),
-					'<br><code>',
-					'</code><br><a href="' . esc_url( network_admin_url( 'admin.php?page=wphb-caching' ) ) . '" style="margin-top: 10px" class="sui-button sui-button-blue">',
-					'</a>'
+				Whitelabel::replace_branding_terms(
+					sprintf( /* translators: %1$s - code tag, %2$s - closing code tag, button tag, %3$s - closing button tag */
+						__( "Hummingbird could not write to your site’s wp-config.php file. Click Retry to try again, or manually add the following line to the file:%1\$sdefine('WP_CACHE', true);%2\$sRetry%3\$s", 'wphb' ),
+						'<br><code>',
+						'</code><br><a href="' . esc_url( network_admin_url( 'admin.php?page=wphb-caching' ) ) . '" style="margin-top: 10px" class="sui-button sui-button-blue">',
+						'</a>'
+					)
 				)
 			);
 
@@ -832,24 +839,16 @@ class Page_Cache extends Module {
 		global $wphb_cache_config;
 
 		// Remove empty values.
-		$agent_patterns = array_filter( $wphb_cache_config->exclude_agents );
-		if ( empty( $agent_patterns ) ) {
+		$agent_pattern = array_filter( $wphb_cache_config->exclude_agents );
+		if ( empty( $agent_pattern ) ) {
 			return false;
 		}
 
 		$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? stripslashes( $_SERVER['HTTP_USER_AGENT'] ) : ''; // Input var ok.
 
-		// No user agent sent at all - don't cache to be safe.
-		if ( empty( $agent ) ) {
+		// In case no user agent or agent is in exclude list, we do not cache the page.
+		if ( empty( $agent ) || in_array( $agent, $agent_pattern, true ) ) {
 			return true;
-		}
-
-		// Match exact agents as well as agents that merely contain one of the patterns (case-insensitive).
-		foreach ( $agent_patterns as $pattern ) {
-			$pattern = trim( $pattern );
-			if ( '' !== $pattern && false !== stripos( $agent, $pattern ) ) {
-				return true;
-			}
 		}
 
 		return false;

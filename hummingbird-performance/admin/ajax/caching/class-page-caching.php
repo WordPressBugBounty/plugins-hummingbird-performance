@@ -9,6 +9,7 @@
 namespace Hummingbird\Admin\Ajax\Caching;
 
 use Hummingbird\Admin\Ajax\Activity_Log;
+use Hummingbird\Core\Modules\Mixpanel\Page_Caching_Events;
 use Hummingbird\Core\Modules\Page_Cache;
 use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
@@ -195,6 +196,7 @@ class Page_Caching {
 		$module->save_settings( $current );
 
 		$this->record_page_cache_settings_changes( $previous, $current );
+		Utils::get_module( 'mixpanel_analytics' )->events( 'page_cache' )->track_settings_change( $previous, $current );
 
 		wp_send_json_success(
 			array(
@@ -284,6 +286,7 @@ class Page_Caching {
 		$module->update_options( $options );
 
 		$this->record_page_cache_options_changes( $previous, $options );
+		Utils::get_module( 'mixpanel_analytics' )->events( 'page_cache' )->track_options_change( $previous, $options );
 
 		wp_send_json_success(
 			array(
@@ -433,6 +436,10 @@ class Page_Caching {
 		);
 		$this->record_settings_toggles( $previous_settings, $settings, $settings_toggle_messages );
 
+		if ( ! $fast_cgi_update_failed ) {
+			Utils::get_module( 'mixpanel_analytics' )->events( 'page_cache' )->track_hosting_settings_change( array_unique( $settings_modified ) );
+		}
+
 		if ( ! empty( $settings_modified ) ) {
 			$module->clear_cache();
 		}
@@ -574,6 +581,9 @@ class Page_Caching {
 					? __( 'Cache method set to Static server cache.', 'wphb' )
 					: __( 'Cache method set to Local page cache.', 'wphb' )
 			);
+			Utils::get_module( 'mixpanel_analytics' )->events( 'page_cache' )->track_method_switch(
+				'static' === $method ? Page_Caching_Events::METHOD_HOSTING : Page_Caching_Events::METHOD_LOCAL
+			);
 		}
 
 		wp_send_json_success(
@@ -623,8 +633,11 @@ class Page_Caching {
 			wp_send_json_error( array( 'message' => __( 'Invalid cache method.', 'wphb' ) ) );
 		}
 
+		$page_cache_events = Utils::get_module( 'mixpanel_analytics' )->events( 'page_cache' );
+
 		if ( 'local' === $cache_method ) {
-			$module = Utils::get_module( 'page_cache' );
+			$module     = Utils::get_module( 'page_cache' );
+			$was_active = $module->is_active();
 
 			if ( $enable ) {
 				$module->enable( true );
@@ -638,6 +651,7 @@ class Page_Caching {
 				__( 'Local page caching enabled.', 'wphb' ),
 				__( 'Local page caching disabled.', 'wphb' )
 			);
+			$page_cache_events->track_toggle( $was_active, $module->is_active(), Page_Caching_Events::METHOD_LOCAL );
 		} else {
 			$response = Utils::get_api()->hosting->toggle_fast_cgi( $enable );
 			if ( isset( $response->is_active ) ) {
@@ -650,6 +664,10 @@ class Page_Caching {
 				__( 'Static server caching enabled.', 'wphb' ),
 				__( 'Static server caching disabled.', 'wphb' )
 			);
+
+			if ( $response && ! is_wp_error( $response ) ) {
+				$page_cache_events->track_toggle( ! $enable, $enable, Page_Caching_Events::METHOD_HOSTING );
+			}
 		}
 
 		$file_count = Page_Cache::get_cached_pages_count();

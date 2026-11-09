@@ -11,6 +11,7 @@ use Hummingbird\Core\Settings;
 use Hummingbird\Core\Utils;
 use Hummingbird\Core\Modules\Minify;
 use Hummingbird\Core\Hub_Connector;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -82,6 +83,7 @@ class Admin {
 			new Ajax\Hub_Connector();
 			new Ajax\Feature_Modal();
 			new Ajax\Dashboard();
+			new Ajax\Analytics();
 		}
 
 		add_action( 'admin_init', array( 'Hummingbird\\Core\\Installer', 'maybe_upgrade' ) );
@@ -125,7 +127,9 @@ class Admin {
 		}
 
 		// Documentation link.
-		$actions['wphb-plugins-docs'] = '<a href="' . Utils::get_link( 'docs', 'hummingbird_pluginlist_docs' ) . '" aria-label="' . esc_attr( __( 'View Hummingbird Documentation', 'wphb' ) ) . '" target="_blank">' . esc_html__( 'Docs', 'wphb' ) . '</a>';
+		if ( ! Whitelabel::hide_doc_link() ) {
+			$actions['wphb-plugins-docs'] = '<a href="' . Utils::get_link( 'docs', 'hummingbird_pluginlist_docs' ) . '" aria-label="' . esc_attr( Whitelabel::replace_branding_terms( __( 'View Hummingbird Documentation', 'wphb' ) ) ) . '" target="_blank">' . esc_html__( 'Docs', 'wphb' ) . '</a>';
+		}
 
 		// Settings link.
 		if ( current_user_can( Utils::get_admin_capability() ) ) {
@@ -134,7 +138,7 @@ class Admin {
 			} else {
 				$url = Utils::get_admin_menu_url();
 			}
-			$actions['wphb-plugins-dashboard'] = '<a href="' . $url . '" aria-label="' . esc_attr( __( 'Go to Hummingbird settings', 'wphb' ) ) . '">' . esc_html__( 'Dashboard', 'wphb' ) . '</a>';
+			$actions['wphb-plugins-dashboard'] = '<a href="' . $url . '" aria-label="' . esc_attr( Whitelabel::replace_branding_terms( __( 'Go to Hummingbird settings', 'wphb' ) ) ) . '">' . esc_html__( 'Dashboard', 'wphb' ) . '</a>';
 		}
 
 		return array_reverse( $actions );
@@ -156,9 +160,9 @@ class Admin {
 		}
 
 		if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG ) {
-			$links[] = '<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/#new-post" target="_blank" title="' . esc_attr__( 'Rate Hummingbird', 'wphb' ) . '" onclick="if(window.wphbMixPanel){window.wphbMixPanel.track(\'Rating Notice\', {Action:\'rate\',\'Notice Type\':\'wordpress_admin\',Location:\'WordPress admin\'});}" >' . esc_html__( 'Rate Hummingbird', 'wphb' ) . '</a>';
+			$links[] = '<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/#new-post" target="_blank" title="' . esc_attr__( 'Rate Hummingbird', 'wphb' ) . '">' . esc_html__( 'Rate Hummingbird', 'wphb' ) . '</a>';
 			$links[] = '<a href="https://wordpress.org/support/plugin/hummingbird-performance/" target="_blank" title="' . esc_attr__( 'Support', 'wphb' ) . '">' . esc_html__( 'Support', 'wphb' ) . '</a>';
-		} else {
+		} elseif ( ! Whitelabel::hide_doc_link() ) {
 			if ( isset( $links[2] ) && false !== strpos( $links[2], 'project/wp-hummingbird' ) ) {
 				$links[2] = sprintf( /* translators: %s - Link to Hummingbird project detail page, %s - Text for anchor tag */
 					'<a href="%s" target="_blank">%s</a>',
@@ -168,6 +172,11 @@ class Admin {
 			}
 
 			$links[] = '<a href="https://wpmudev.com/get-support/" target="_blank" title="' . esc_attr__( 'Premium Support', 'wphb' ) . '">' . esc_html__( 'Premium Support', 'wphb' ) . '</a>';
+		}
+
+		// Same cut-off as Smush: no roadmap or review links once documentation links are hidden.
+		if ( Whitelabel::hide_doc_link() ) {
+			return $links;
 		}
 
 		$links[] = '<a href="https://wpmudev.com/roadmap/" target="_blank" title="' . esc_attr__( 'Roadmap', 'wphb' ) . '">' . esc_html__( 'Roadmap', 'wphb' ) . '</a>';

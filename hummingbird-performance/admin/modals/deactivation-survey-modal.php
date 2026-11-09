@@ -4,10 +4,15 @@
  */
 
 use Hummingbird\Core\Utils;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// The icon follows the Dashboard's plugin label while white label is active: custom image, dashicon or
+// none. Without a custom icon (white label off, or on with no plugin label) it is the Hummingbird icon.
+$wphb_survey_icon = Whitelabel::get_plugin_icon();
 ?>
 <div class="<?php echo esc_attr( WPHB_SUI_VERSION ); ?>">
 	<div class="sui-wrap">
@@ -23,8 +28,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="sui-box" role="document">
 					<div class="sui-box-header">
 						<h3 class="sui-box-title" style="white-space: nowrap;">
-							<img style="margin-right:6px" src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-icon.png' ); ?>" width="30" srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-icon.png' ); ?> 2x" alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>" aria-hidden="true" />
-							<?php esc_html_e( 'Deactivate Hummingbird?', 'wphb' ); ?>
+							<?php if ( '' === $wphb_survey_icon['url'] && '' === $wphb_survey_icon['class'] ) : ?>
+								<img style="margin-right:6px" src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-icon.png' ); ?>" width="30" srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-icon.png' ); ?> 2x" alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>" aria-hidden="true" />
+							<?php elseif ( ! empty( $wphb_survey_icon['url'] ) ) : ?>
+								<img style="margin-right:6px;width:30px;height:30px;object-fit:cover;border-radius:50%;" src="<?php echo esc_url( $wphb_survey_icon['url'] ); ?>" width="30" height="30" alt="" aria-hidden="true" />
+							<?php elseif ( ! empty( $wphb_survey_icon['class'] ) ) : ?>
+								<span class="dashicons dashicons-<?php echo esc_attr( $wphb_survey_icon['class'] ); ?>" style="margin-right:6px;font-size:30px;width:30px;height:30px;" aria-hidden="true"></span>
+							<?php endif; ?>
+							<?php echo esc_html( Whitelabel::replace_branding_terms( __( 'Deactivate Hummingbird?', 'wphb' ) ) ); ?>
 						</h3>
 						<div class="sui-actions-right">
 							<button type="button" class="sui-button-icon" onclick="window.SUI?.closeModal( true );">
@@ -39,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							printf(
 								/* translators: %s: Support link */
 								esc_html__( 'Please tell us why. Your feedback helps us improve. %s', 'wphb' ),
-								Utils::is_member() ? '<a id="wphb-support-link" style="text-decoration:underline" target="_blank" href="' . esc_url( Utils::get_link( 'get-support', 'hummingbird_deactivation_survey_help' ) ) . '">' . esc_html__( 'Need Help?', 'wphb' ) . '</a>' : ''
+								Utils::is_member() && ! Whitelabel::hide_doc_link() ? '<a id="wphb-support-link" style="text-decoration:underline" target="_blank" href="' . esc_url( Utils::get_link( 'get-support', 'hummingbird_deactivation_survey_help' ) ) . '">' . esc_html__( 'Need Help?', 'wphb' ) . '</a>' : ''
 							);
 							?>
 						</p>

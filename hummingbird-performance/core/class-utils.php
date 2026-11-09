@@ -1413,14 +1413,12 @@ class Utils {
 	 * Determines whether whitelabel is enabled.
 	 *
 	 * @since 3.8.0
+	 * @since 4.0.1 Delegates to Whitelabel::is_enabled(), which also requires the membership to allow it.
 	 *
 	 * @return bool True if whitelabel is enabled, false otherwise.
 	 */
 	public static function is_whitelabel_enabled() {
-		return class_exists( 'WPMUDEV_Dashboard' ) &&
-			is_object( WPMUDEV_Dashboard::$whitelabel ) &&
-			method_exists( WPMUDEV_Dashboard::$whitelabel, 'is_whitelabel_enabled' ) &&
-			WPMUDEV_Dashboard::$whitelabel->is_whitelabel_enabled();
+		return Whitelabel::is_enabled();
 	}
 
 	public static function get_performance_metrics() {

@@ -77,6 +77,7 @@ class Cdn {
 			__( 'CDN enabled.', 'wphb' ),
 			__( 'CDN disabled.', 'wphb' )
 		);
+		Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'CDN', $was_enabled, $is_enabled );
 
 		$settings = $cdn->get_react_settings();
 

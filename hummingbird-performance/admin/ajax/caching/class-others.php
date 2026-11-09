@@ -88,8 +88,9 @@ class Others {
 			die();
 		}
 
-		$enable   = filter_input( INPUT_POST, 'data', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-		$gravatar = Utils::get_module( 'gravatar' );
+		$enable     = filter_input( INPUT_POST, 'data', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		$gravatar   = Utils::get_module( 'gravatar' );
+		$was_active = $gravatar->is_active();
 
 		if ( $enable ) {
 			$gravatar->enable();
@@ -104,6 +105,7 @@ class Others {
 			__( 'Gravatar caching enabled.', 'wphb' ),
 			__( 'Gravatar caching disabled.', 'wphb' )
 		);
+		Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'Gravatar Caching', $was_active, $gravatar->is_active() );
 
 		do_action( 'wphb_clear_page_cache' );
 
@@ -153,8 +155,9 @@ class Others {
 			die();
 		}
 
-		$enable = filter_input( INPUT_POST, 'data', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-		$rss    = Utils::get_module( 'rss' );
+		$enable     = filter_input( INPUT_POST, 'data', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		$rss        = Utils::get_module( 'rss' );
+		$was_active = $rss->is_active();
 
 		if ( $enable ) {
 			$rss->enable();
@@ -168,6 +171,7 @@ class Others {
 			__( 'RSS caching enabled.', 'wphb' ),
 			__( 'RSS caching disabled.', 'wphb' )
 		);
+		Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'RSS Caching', $was_active, $rss->is_active() );
 
 		do_action( 'wphb_clear_page_cache' );
 

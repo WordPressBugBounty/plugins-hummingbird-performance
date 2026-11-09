@@ -1,6 +1,6 @@
 === Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN ===
 Plugin Name: Hummingbird Performance - Cache & Page Speed Optimization for Core Web Vitals | Critical CSS | Minify CSS | Defer CSS Javascript | CDN
-Version: 4.0.0
+Version: 4.0.2
 Author: WPMU DEV
 Author URI: https://wpmudev.com/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Cache, Caching, Performance, Critical CSS, Minify CSS
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 4.0.0
+Stable tag: 4.0.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -110,7 +110,7 @@ Configs allow you to save your preferred Hummingbird configuration settings and 
 
 ### Delay Javascript Resources ([Pro Only](https://wpmudev.com/project/wp-hummingbird/?utm_source=wordpress.org&utm_medium=readme&utm_campaign=hummingbird-readme-delayjs))
 
-Boost site performance dramatically by delaying the loading of JS files and third-party scripts until direct user interaction (e.g. scroll or click). Enjoy faster loading pages, improve web vitals, and ace your PageSpeed scores. 
+Boost site performance dramatically by delaying the loading of JS files and third-party scripts until direct user interaction (e.g. scroll or click). Enjoy faster loading pages, improve web vitals, and ace your PageSpeed scores.
 
 Activate in one click, includes user interaction timeout and the option to exclude critical files from being delayed. A paid WPMU DEV account (the developers of Hummingbird) is required to access this feature. You can check out our affordable plans [here](https://wpmudev.com/pricing/).
 
@@ -210,6 +210,14 @@ We take plugin security incredibly seriously; if you have a bug or vulnerability
 6. Track website uptime and server response times in real-time.
 
 == Changelog ==
+
+= 4.0.2 ( 2026-11-09 ) =
+- Fix: Improved safety checks during plugin uninstallation when custom file paths are configured.
+
+= 4.0.1 ( 2026-11-09 ) =
+- Improvement: WhiteLabel improvements
+- Fix: Relative URLs in CSS files not working with CDN
+- Fix: Security hardening
 
 = 4.0.0 ( 2026-11-03 ) =
 - New: A fresh new look! Hummingbird has been completely redesigned for a cleaner, faster and more intuitive experience

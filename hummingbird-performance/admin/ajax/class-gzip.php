@@ -71,9 +71,12 @@ class Gzip {
 		$params = filter_input( INPUT_POST, 'data', FILTER_UNSAFE_RAW );
 		$params = json_decode( html_entity_decode( $params ), true );
 
+		$was_enabled = Module_Server::is_htaccess_written( 'gzip' );
+
 		if ( 'add' === $params ) {
 			Module_Server::save_htaccess( 'gzip' );
 			Activity_Log::record( self::ACTIVITY_MODULE, __( 'Gzip compression enabled.', 'wphb' ) );
+			Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'Gzip', $was_enabled, true );
 			wp_send_json_success(
 				array(
 					'status'           => Utils::get_module( 'gzip' )->get_analysis_data( true, true ),
@@ -86,6 +89,7 @@ class Gzip {
 		if ( 'remove' === $params ) {
 			Module_Server::unsave_htaccess( 'gzip' );
 			Activity_Log::record( self::ACTIVITY_MODULE, __( 'Gzip compression disabled.', 'wphb' ) );
+			Utils::get_module( 'mixpanel_analytics' )->track_feature_toggle( 'Gzip', $was_enabled, false );
 			wp_send_json_success(
 				array(
 					'status'           => Utils::get_module( 'gzip' )->get_analysis_data( true, true ),

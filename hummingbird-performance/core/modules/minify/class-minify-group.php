@@ -12,6 +12,7 @@ use Hummingbird\Core\Filesystem;
 use Hummingbird\Core\Utils;
 use stdClass;
 use WP_Error;
+use Hummingbird\Core\Whitelabel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -1273,7 +1274,7 @@ class Minify_Group {
 					$handle,
 					$this->type,
 					'after-compression',
-					__( 'Hummingbird could not parse the content of this file', 'wphb' ),
+					Whitelabel::replace_branding_terms( __( 'Hummingbird could not parse the content of this file', 'wphb' ) ),
 					array( 'minify', 'combine' )
 				);
 			} else {

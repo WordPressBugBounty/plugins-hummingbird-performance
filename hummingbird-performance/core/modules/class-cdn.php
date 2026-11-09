@@ -283,6 +283,11 @@ class Cdn extends Module {
 			return $url;
 		}
 
+		// Relative url() references would resolve against the CDN host, so keep such stylesheets on the origin.
+		if ( $this->has_relative_references( $url ) ) {
+			return $url;
+		}
+
 		$parsed = wp_parse_url( $url );
 
 		// Handle relative URLs (e.g., /wp-content/... or images/foo.jpg).
@@ -431,6 +436,46 @@ class Cdn extends Module {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Whether a stylesheet contains root-relative or file-relative url() or @import references, which keep it on the origin.
+	 *
+	 * @since 4.0.1
+	 *
+	 * @param string $url Matched asset URL.
+	 *
+	 * @return bool
+	 */
+	private function has_relative_references( $url ) {
+		$path = wp_parse_url( $url, PHP_URL_PATH );
+
+		if ( ! $path || 'css' !== strtolower( pathinfo( $path, PATHINFO_EXTENSION ) ) ) {
+			return false;
+		}
+
+		$file = Utils::src_to_path( $url );
+
+		if ( ! is_file( $file ) ) {
+			// Cannot inspect it, keep it on the origin.
+			return true;
+		}
+
+		$key    = 'wphb_cdn_css_' . md5( $file . ':' . filemtime( $file ) . ':' . filesize( $file ) );
+		$cached = get_transient( $key );
+
+		if ( false !== $cached ) {
+			return 'relative' === $cached;
+		}
+
+		$relative = (bool) preg_match(
+			'#(?:url\(\s*["\']?|@import\s+["\'])(?![a-z][a-z0-9+.\-]*:|//|\#)[^"\')\s]#i',
+			file_get_contents( $file ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		);
+
+		set_transient( $key, $relative ? 'relative' : 'absolute', WEEK_IN_SECONDS );
+
+		return $relative;
 	}
 
 	/**

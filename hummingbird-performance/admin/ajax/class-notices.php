@@ -142,6 +142,10 @@ class Notices {
 				update_site_option( 'wphb-notice-free-rated-later_date', 'never' );
 			}
 			delete_option( 'wphb-notice-free-rated-show' );
+
+			Utils::get_module( 'mixpanel_analytics' )->events( 'general' )->track_rating_notice(
+				in_array( $sub_action, array( 'rate', 'remind_later' ), true ) ? $sub_action : 'dismiss'
+			);
 		} else {
 			self::mark_dismissed( $id, $scope );
 		}

@@ -68,6 +68,7 @@ class Core {
 		// Register private policy text.
 		add_action( 'admin_init', array( $this, 'privacy_policy_content' ) );
 		add_filter( 'wpmudev_notices_is_disabled', array( $this, 'wpmudev_remove_email_from_disabled_list' ), 10, 3 );
+		add_action( 'init', array( $this, 'init_black_friday' ) );
 
 		Hub_Connector::get_instance();
 
@@ -365,5 +366,34 @@ class Core {
 		}
 
 		return $is_disabled;
+	}
+
+	/**
+	 * Load the WPMU DEV Black Friday campaign submodule for the Free (wp.org) version only.
+	 *
+	 * @since 4.0.3
+	 */
+	public function init_black_friday() {
+		if ( ! defined( 'WPHB_WPORG' ) || ! WPHB_WPORG ) {
+			return;
+		}
+
+		// Pro members never see the campaign.
+		if ( Utils::is_member() ) {
+			return;
+		}
+
+		// Another WPMU DEV plugin may have loaded it already.
+		if ( class_exists( '\WPMUDEV\Modules\BlackFriday\Campaign' ) ) {
+			return;
+		}
+
+		$campaign = WPHB_DIR_PATH . 'core/externals/blackfriday/campaign.php';
+		if ( ! file_exists( $campaign ) ) {
+			return;
+		}
+
+		require_once $campaign;
+		new \WPMUDEV\Modules\BlackFriday\Campaign();
 	}
 }

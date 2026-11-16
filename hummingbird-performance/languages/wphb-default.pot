@@ -2,9 +2,9 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird 4.0.2\n"
+"Project-Id-Version: Hummingbird 4.0.3\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2026-11-09 15:12:03+00:00\n"
+"POT-Creation-Date: 2026-11-16 15:20:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1340,6 +1340,7 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: admin/class-notices.php:452 admin/class-notices.php:1021
+#: core/externals/blackfriday/includes/class-banner.php:433
 #: languages/react.php:833
 msgid "Dismiss"
 msgstr ""
@@ -2157,44 +2158,44 @@ msgstr ""
 msgid "File change detection"
 msgstr ""
 
-#: core/class-core.php:191 languages/react.php:3115
+#: core/class-core.php:192 languages/react.php:3115
 msgid "Clear all cache"
 msgstr ""
 
-#: core/class-core.php:200
+#: core/class-core.php:201
 msgid "Clear Cloudflare cache"
 msgstr ""
 
-#: core/class-core.php:207 languages/react.php:2589
+#: core/class-core.php:208 languages/react.php:2589
 msgid "Clear"
 msgstr ""
 
-#: core/class-core.php:218
+#: core/class-core.php:219
 msgid "Clear page cache on all subsites"
 msgstr ""
 
-#: core/class-core.php:227
+#: core/class-core.php:228
 msgid "See this page minified"
 msgstr ""
 
-#: core/class-core.php:227
+#: core/class-core.php:228
 msgid "See this page unminified"
 msgstr ""
 
-#: core/class-core.php:288
+#: core/class-core.php:289
 msgid "Link copied"
 msgstr ""
 
-#: core/class-core.php:290
+#: core/class-core.php:291
 msgid "Publishing..."
 msgstr ""
 
-#: core/class-core.php:334
+#: core/class-core.php:335
 #. translators: %1$s - Text, %2$s - Link to privacy policy page
 msgid "Third parties"
 msgstr ""
 
-#: core/class-core.php:337
+#: core/class-core.php:338
 #. translators: %1$s - opening a tag, %2$s - closing a tag
 msgid ""
 "Hummingbird uses the Stackpath Content Delivery Network (CDN). Stackpath "
@@ -2377,6 +2378,37 @@ msgstr ""
 msgid ""
 "Found %s assets for optimization. These assets are now being optimized in "
 "the background."
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-action-links.php:77
+msgid "Get Black Friday Deal"
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-admin-menu.php:86
+msgid "Black Friday"
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-admin-menu.php:87
+msgid "WPMUDEV Black Friday Deal"
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-admin-menu.php:182
+msgid "Sale"
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-banner.php:434
+#: core/externals/blackfriday/includes/class-upsell-widget.php:199
+msgid "Black Friday Special"
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-banner.php:437
+#. translators: %s: The deal price, eg $3.33/m.
+msgid "%s for unlimited sites"
+msgstr ""
+
+#: core/externals/blackfriday/includes/class-banner.php:440
+#: core/externals/blackfriday/includes/class-upsell-widget.php:200
+msgid "See the deal"
 msgstr ""
 
 #: core/externals/hub-connector/inc/class-admin.php:408
